@@ -35,7 +35,7 @@ class TicketController extends Controller
     public function create()
     {
         //
-        
+
 
         // Sell-tickets/setticketprice
 
@@ -84,7 +84,8 @@ class TicketController extends Controller
     public function update(Request $request, $id)
     {
         //
-        
+        dd($request);
+        exit;
         $ticket_details = Ticket::find($id);
         $ticket_details->section = $request->sections;
         $ticket_details->row = $request->row;
@@ -96,7 +97,7 @@ class TicketController extends Controller
         $ticket_details->update();
 
         return back();
-        
+
     }
 
     public function show_price(Currency $currencies, Ticket $tickets, $id, Event $event){
@@ -107,7 +108,7 @@ class TicketController extends Controller
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
         $percentage = $divide * 15;
-       $grand_total = $price - $percentage;
+        $grand_total = $price - $percentage;
         return view('tickets/setticketprice',compact('currencies','tickets','events','price','percentage','grand_total'));
     }
 
@@ -154,7 +155,7 @@ class TicketController extends Controller
         return view('tickets/tickets-home',compact('events','tickets'));
     }
 
-    
+
 
     public function dashboard_add_listing(Request $request){
 
@@ -174,7 +175,7 @@ class TicketController extends Controller
     }
     public function dashboard_listing(Category $category, Event $event, Ticket $ticket){
 
-       
+
         $categories = Category::all();
         $events = Event::all();
         //$activetickets = Ticket::all();
@@ -188,14 +189,14 @@ class TicketController extends Controller
     public function admin_tickets_show(Ticket $ticket){
 
         $tickets = Ticket::all();
-        
+
         return view('Admin/pages/all_tickets',compact('tickets'));
     }
 
     //buyer functions
 
     // public function buyer_tickets_index(Event $event,$id){
-       
+
     //     $events = Event::find($id);
     //     return view('payment-tickets/browse-tickets',compact('events'));
     // }

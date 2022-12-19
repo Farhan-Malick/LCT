@@ -49,6 +49,7 @@
 }
 .select-card{
     border-radius: 10px;
+    cursor:pointer;
 }
 .select-card:hover{
     border: 2px solid #61c3e3;

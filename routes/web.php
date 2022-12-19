@@ -93,7 +93,7 @@ Route::get('/Sell-tickets/ticket-authentication', function () {
 //     return view('tickets/tickets-details');
 // });
 Route::get('/tickets/{id}/tickets-details' , [TicketController::class,'index'])->name('seller.ticket.index');
-Route::post('/-tickets/{id}/tickets-details' , [TicketController::class,'update'])->name('seller.ticket.update');
+Route::post('/tickets/{id}/tickets-details' , [TicketController::class,'update'])->name('seller.ticket.update');
 // Route::get('/Sell-tickets/tickets-home', function () {
 //     return view('tickets/tickets-home');
 // });

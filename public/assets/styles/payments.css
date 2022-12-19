@@ -1,0 +1,459 @@
+.breadcrumb .breadcrumb-item a{
+    color: #7f8081;
+    font-weight: 700;
+}
+.banner{
+    background-image: url('../images/fifaBanner.jpg');
+    /* background-position: top center; */
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 50px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+   }
+.sales-tag{
+    background-color: #37383a;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.sales-tag span {
+    font-size: 14px;
+}
+.tag-content{
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+}
+.banner-title{
+    position: absolute;
+    left: 20px;
+    bottom: 0;
+}
+.search-card{
+    height: 120px;
+    border-radius: 10px;
+}
+.tickets-btns{
+    display: flex;
+    flex-direction: column;
+}
+.success-btn{
+    background-color: #8cc63f;
+    color: #fff;
+}
+.success-btn:hover{
+    background-color: #c1ff6f;
+    color: #fff;
+}
+.carousel-cards .card img{
+border-radius: 10px 10px 0px 0px;
+}
+.carousel-cards a {
+    text-decoration: none;
+}
+
+/* browser-ticket css starts here  */
+
+.tabs-title{
+    padding: 5px;
+}
+.tabs-active{
+    background-color: #8cc63e;
+    color: #fff;
+}
+.tabs-row{
+    border-bottom: 1px solid #dfdfe0;
+}
+.select-ticket .card{
+    background-color: #e3e3e3;
+    justify-content:center;
+    text-align: center;
+    display: flex;
+}
+.ticket-cards{
+    border-left: 5px solid #61c3e3 ;
+}
+/* browser ticket table  */
+.ticket-table .table-bordered{
+border: 5px solid #61c3e3;
+}
+
+/* checkout page starts her  */
+.progress{
+    height: 30px;
+    border-radius: 0;
+    font-size: 20px;
+}
+.progress-bar{
+    /* background-color: #8cc63e; */
+    background-color: #61c3e3;
+}
+.social-link i{
+    font-size: 30px;
+    cursor: pointer;
+}
+.bi-upc{
+    font-size: 50px;
+}
+.my-ticket{
+    background-color: #dfdfe0;
+    border-right: 2px dashed grey;
+}
+.ticket-left{
+    background-color: #dfdfe0;
+    height: 320px;
+}
+.border-right-top{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    top: -16px;
+    left: -12px;
+    border-radius:20px ;
+}
+.border-right-bottom{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    bottom: -16px;
+    left: -12px;
+    border-radius:20px ;
+}
+
+.border-left-top{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    top: -16px;
+    right: -12px;
+    border-radius:20px ;
+}
+.border-left-bottom{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    bottom: -16px;
+    right: -12px;
+    border-radius:20px ;
+}
+
+
+
+@media (max-width: 780px) { 
+    .search-card{
+        height: auto;
+    }
+    .ticket-cards {
+        text-align: center;
+    }
+    .ticket-action-btns{
+        width: 100%;
+    }
+}
+/* ============================== */
+
+#circle {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-animation: rotate 3s infinite linear;
+    animation: rotate 3s infinite linear;
+    transform-box: fill-box;
+  }
+  
+  @-webkit-keyframes rotate {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes rotate {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  .form {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    border-radius: 10px;
+    display: flex;
+    background: #fff;
+  }
+  
+  .form__left {
+    -ms-flex-preferred-size: 40%;
+    flex-basis: 40%;
+    text-align: center;
+  }
+  
+  .form__right {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 10px;
+    font-family: "Lexend Deca";
+    color: #064b8d;
+  }
+  
+  .form__right span {
+    display: block;
+  }
+  
+  .form__right__steps {
+    color: #064b8d75;
+    margin-bottom: 12px;
+  }
+  
+  .form__right__title {
+    margin-bottom: 10px;
+  }
+  
+  .form__right__info {
+    font-size: 17px;
+    margin-bottom: 20px;
+  }
+  
+  .form__right__check {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  .form__right__check input[type="radio"] {
+    display: none;
+  }
+  
+  .form__right__check--creditCard {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background: #fcfdfc;
+    margin-right: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: space-evenly;
+    -ms-flex-pack: space-evenly;
+    justify-content: space-evenly;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid #dfe5ec;
+    position: relative;
+  }
+  
+  .form__right__check--creditCard::after {
+    content: "";
+    border: 3px solid #dfe5ec;
+    height: 20px;
+    width: 20px;
+    display: block;
+    border-radius: 50%;
+  }
+  
+  .form__right__check--creditCard__icon {
+    width: 46px;
+  }
+  
+  .form__right__check--creditCard,
+  .form__right__check--payPal {
+    padding: 10px 0 10px 0;
+    cursor: pointer;
+  }
+  
+  .form__right__check--payPal {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background: #fcfdfc;
+    border: 1px solid #dfe5ec;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: space-evenly;
+    -ms-flex-pack: space-evenly;
+    justify-content: space-evenly;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  .form__right__check--payPal::after {
+    content: "";
+    border: 3px solid #dfe5ec;
+    height: 20px;
+    width: 20px;
+    display: block;
+    border-radius: 50%;
+  }
+  
+  .form__right__check--payPal__icon {
+    width: 136px;
+  }
+  
+  .form__right__form-control {
+    margin-top: 10px;
+  }
+  
+  .form__right__form-control--name {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form__right__form-control--cardNumber {
+    height: 45px;
+    width: 100%;
+    background: #fffffc;
+    border: none;
+    font-size: 18px;
+    padding: 0 10px 0 10px;
+    border: 1px solid #dfe5ec;
+    border-radius: 2px;
+    color: #949393;
+  }
+  
+  .form__right__form-control--cardNumber:focus {
+    outline: none;
+    border-color: blue;
+  }
+  
+  .form__right__form-control--button {
+    width: 60%;
+    margin-top: 10px;
+    padding: 15px 10px;
+    border: none;
+    background: #064b8d;
+    color: #fff;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .form__right__form-control--button:hover {
+    background: #0c3a65;
+  }
+  
+  #option1:checked ~ .form__right__check--creditCard {
+    border-color: blue;
+  }
+  
+  #option1:checked ~ .form__right__check--creditCard::after {
+    border-color: green;
+    outline: 2px solid green;
+    outline-offset: -10px;
+    outline-style: dotted;
+  }
+  
+  #option2:checked ~ .form__right__check--payPal {
+    border-color: blue;
+  }
+  
+  #option2:checked ~ .form__right__check--payPal::after {
+    border-color: green;
+    outline: 2px solid green;
+    outline-offset: -10px;
+    outline-style: dotted;
+  }
+  
+  .form__right__expireDate {
+    -ms-flex-preferred-size: 60%;
+    flex-basis: 60%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  .form__right__expireDate--month {
+    height: 45px;
+    background: #fffffc;
+    border: none;
+    font-size: 18px;
+    padding: 0 10px 0 10px;
+    border: 1px solid #dfe5ec;
+    border-radius: 2px;
+    color: #949393;
+    width: 48%;
+  }
+  
+  .form__right__expireDate--month:focus {
+    outline: none;
+    border-color: blue;
+  }
+  
+  .form__right__expireDate--year {
+    width: 48%;
+    height: 45px;
+    background: #fffffc;
+    border: none;
+    font-size: 18px;
+    padding: 0 10px 0 10px;
+    border: 1px solid #dfe5ec;
+    border-radius: 2px;
+    color: #949393;
+  }
+  
+  .form__right__expireDate--year:focus {
+    outline: none;
+    border-color: blue;
+  }
+  
+  .form__right__expireDate__left {
+    margin-left: 5px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+  
+  .form__right__expireDate__left--cvc {
+    height: 45px;
+    width: 100%;
+    background: #fffffc;
+    border: none;
+    font-size: 18px;
+    padding: 0 10px 0 10px;
+    border: 1px solid #dfe5ec;
+    border-radius: 2px;
+    color: #949393;
+  }
+  
+  .form__right__expireDate__left--cvc:focus {
+    outline: none;
+    border-color: blue;
+  }
+  
+  .expireDateForm {
+    -ms-flex-preferred-size: 60%;
+    flex-basis: 60%;
+  }
+  /*# sourceMappingURL=main.css.map */
+  

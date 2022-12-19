@@ -1,0 +1,148 @@
+body {
+  font-size: 0.875rem;
+}
+.feather {
+  width: 16px;
+  height: 16px;
+}
+/* Sidebar*/
+.sidebar {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 10px 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+.sidebar-sticky {
+  height: calc(100vh - 48px);
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #727272;
+}
+.sidebar .nav-link.active {
+  background-color: #61c3e3;
+  color: #fff;
+}
+.sidebar .nav-link:hover {
+  background-color: #61c3e3;
+  color: #fff;
+}
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+.sidebar-heading {
+  font-size: 0.75rem;
+}
+.user-prfile i {
+  font-size: 40px;
+}
+.user-prfile a {
+  text-decoration: none;
+  color: #212529;
+}
+/* Navbar*/
+.navbar-brand {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+}
+.navbar .navbar-toggler {
+  top: 0.25rem;
+  right: 1rem;
+}
+.navbar .form-control {
+  padding: 0.75rem 1rem;
+}
+.form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+.card {
+  border-radius: 8px;
+  border-left: 3px solid #61c3e3;
+  padding: 10px;
+}
+.card-header {
+  border-radius: 8px !important;
+}
+.card a {
+  text-decoration: none;
+  color: #61c3e3;
+}
+.dropdown-item:hover {
+  background-color: #61c3e3;
+  color: #fff;
+}
+.h2{
+  font-weight: 700;
+}
+@media screen and (max-width: 575px) {
+  .navbar-brand img {
+    height: 25px;
+    width: 170px;
+  }
+}
+
+/* orders pages styles starts here  */
+.orders-tabs .nav-link {
+  color: #61c3e3;
+}
+.Table-toolbar .input-group-text {
+  background-color: #61c3e3;
+  color: #fff;
+}
+
+/* listing css starts here  */
+.filters-icons {
+  color: #61c3e3;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modal-body p,
+label {
+  font-weight: 700;
+}
+.primary-btn {
+  background-color: #61c3e3;
+  border-radius: 50px;
+  color: #fff;
+}
+.primary-btn:hover {
+  background-color: #368099;
+  border-radius: 50px;
+  color: #fff !important;
+}
+.warning-btn {
+  color: #fff;
+  background-color: grey;
+  border-radius: 50px;
+}
+.warning-btn:hover {
+  color: #fff;
+  background-color: rgba(128, 128, 128, 0.692);
+  border-radius: 50px;
+}
+
+/* settings page css starts here  */
+.add-address a{ 
+  text-decoration: none;
+  color: #61c3e3;
+}
+

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,16 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public static function guestLogin()
+    {
+        $randomNumbers = rand(pow(10, 5 - 1), pow(10, 5) - 1);
+        $guest = User::create([
+            'first_name' => "Guest{$randomNumbers}",
+        ]);
+
+        Auth::loginUsingId($guest->id);
+        return $guest->id;
     }
 }

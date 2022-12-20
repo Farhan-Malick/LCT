@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventListing;
 use App\Models\Event;
-use App\Models\Ticket;
+use App\Models\TicketListing;
 use App\Models\Category;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 use App\Models\VanueSections;
 use App\Models\VenueSectionRows;
+use App\Http\Controllers\Auth\LoginController;
 
 class TicketController extends Controller
 {
@@ -17,14 +19,14 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(VanueSections $vanuesections,VenueSectionRows $venuesectionrows, Ticket $ticket,Currency $currency,$id)
+    public function index(VanueSections $vanuesections,VenueSectionRows $venuesectionrows, TicketListing $TicketListing,Currency $currency,$id)
     {
         //
         $currencies = Currency::all();
-        $tickets = Ticket::find($id);
+        $ticketListing = TicketListing::find($id);
         $venue_section_rows = VenueSectionRows::all();
         $venue_sections = VanueSections::all();
-        return view('tickets/tickets-details',compact('venue_section_rows','venue_sections','tickets','currencies'));
+        return view('tickets/tickets-details',compact('venue_section_rows','venue_sections','ticketListing','currencies'));
     }
 
     /**
@@ -47,18 +49,34 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $guestUser = LoginController::guestLogin();
+        $ticketListing = new TicketListing();
+        $ticketListing->user_id = $guestUser;
+        $ticketListing->eventlisting_id = $id;
+        $ticketListing->currency = $request->currency;
+        $ticketListing->section = $request->sections;
+        $ticketListing->row = $request->row;
+        $ticketListing->seat_from = $request->seat_from;
+        $ticketListing->seat_to = $request->seat_to;
+        $ticketListing->price = $request->price;
+        $ticketListing->ticket_restrictions = $request->ticket_restrictions;
+        $ticketListing->ticket_type = $request->ticket_type;
+        $ticketListing->quantity = $request->total_tickets;
+        $ticketListing->reason_seating_unable = $request->reason_seating_unable;
+        $ticketListing->save();
+
+        return redirect()->route('event.ticketlisting.ticket.upload', ['ticket_listing' => $ticketListing->id]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ticket  $ticket
+     * @param  \App\Models\TicketListing  $TicketListing
      * @return \Illuminate\Http\Response
      */
-    public function show(Ticket $ticket)
+    public function show(TicketListing $TicketListing)
     {
         //
     }
@@ -66,10 +84,10 @@ class TicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ticket  $ticket
+     * @param  \App\Models\TicketListing  $TicketListing
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ticket $ticket)
+    public function edit(TicketListing $TicketListing)
     {
         //
     }
@@ -78,7 +96,7 @@ class TicketController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ticket  $ticket
+     * @param  \App\Models\TicketListing  $TicketListing
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -86,7 +104,7 @@ class TicketController extends Controller
         //
         dd($request);
         exit;
-        $ticket_details = Ticket::find($id);
+        $ticket_details = TicketListing::find($id);
         $ticket_details->section = $request->sections;
         $ticket_details->row = $request->row;
         $ticket_details->seat_from = $request->seat_from;
@@ -100,10 +118,10 @@ class TicketController extends Controller
 
     }
 
-    public function show_price(Currency $currencies, Ticket $tickets, $id, Event $event){
+    public function show_price(Currency $currencies, TicketListing $tickets, $id, EventListing $event){
 
-        $events = Event::all();
-        $tickets = Ticket::find($id);
+        $events = EventListing::all();
+        $tickets = TicketListing::find($id);
         $currencies = Currency::all();
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
@@ -112,26 +130,32 @@ class TicketController extends Controller
         return view('tickets/setticketprice',compact('currencies','tickets','events','price','percentage','grand_total'));
     }
 
-    public function show_ticket(Currency $currencies, Ticket $tickets, $id, Event $event){
+    public function show_ticket(Currency $currencies, TicketListing $tickets, $id, EventListing $event){
 
-        $events = Event::all();
-        $tickets = Ticket::find($id);
+        $events = EventListing::all();
+        $tickets = TicketListing::find($id);
         $currencies = Currency::all();
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
         $percentage = $divide * 15;
        $grand_total = $price - $percentage;
-        return view('tickets/upload-ticket',compact('currencies','tickets','events','price','percentage','grand_total'));
+        return view('tickets/upload-TicketListing',compact('currencies','tickets','events','price','percentage','grand_total'));
 
+    }
+
+    public function upload_tickets($ticketlistingid){
+        //dd($ticketlistingid);
+        $ticket_listing = TicketListing::find($ticketlistingid);
+        return view('tickets/upload_Pdf', compact('ticket_listing'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ticket  $ticket
+     * @param  \App\Models\TicketListing  $TicketListing
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ticket $ticket)
+    public function destroy(TicketListing $TicketListing)
     {
         //
     }
@@ -145,14 +169,14 @@ class TicketController extends Controller
         return view('tickets/selltickets',compact('events_sports','events_concert','events_theatre','events_festival'));
     }
 
-    public function event_category_ticket(Ticket $ticket,Event $event,$id){
+    public function event_category_ticket(TicketListing $TicketListing,EventListing $event,$id){
         //return $id;
 
-        $tickets = Ticket::where('event_id',$id)->get();
+        $eventListings = EventListing::where('event_id',$id)->get();
         $events = Event::where('id',$id)->get();
 
 
-        return view('tickets/tickets-home',compact('events','tickets'));
+        return view('tickets/tickets-home',compact('events','eventListings'));
     }
 
 
@@ -161,56 +185,56 @@ class TicketController extends Controller
 
         //return $request;
 
-        // $ticket= new Ticket();
-        // $ticket->user_id=auth()->user()->id;
-        // $ticket->title=$request->title;
-        // $ticket->price=$request->price;
-        // $ticket->quantity=$request->quantity;
-        // $ticket->event_id=$request->event;
-        // $ticket->status=$request->status;
+        // $TicketListing= new TicketListing();
+        // $TicketListing->user_id=auth()->user()->id;
+        // $TicketListing->title=$request->title;
+        // $TicketListing->price=$request->price;
+        // $TicketListing->quantity=$request->quantity;
+        // $TicketListing->event_id=$request->event;
+        // $TicketListing->status=$request->status;
 
-        // $ticket->save();
+        // $TicketListing->save();
         // return back();
 
     }
-    public function dashboard_listing(Category $category, Event $event, Ticket $ticket){
+    public function dashboard_listing(Category $category, EventListing $event, TicketListing $TicketListing){
 
 
         $categories = Category::all();
-        $events = Event::all();
-        //$activetickets = Ticket::all();
-        //$active_tickets = Ticket::where('status',1)->get();
-         $active_tickets =Ticket::where([['user_id',auth()->user()->id],['status',1]])->get();
+        $events = EventListing::all();
+        //$activetickets = TicketListing::all();
+        //$active_tickets = TicketListing::where('status',1)->get();
+         $active_tickets =TicketListing::where([['user_id',auth()->user()->id],['status',1]])->get();
         // dd ($active_tickets);
         return view('dashboard/listings',compact('categories','active_tickets','events'));
 
     }
 
-    public function admin_tickets_show(Ticket $ticket){
+    public function admin_tickets_show(TicketListing $TicketListing){
 
-        $tickets = Ticket::all();
+        $tickets = TicketListing::all();
 
         return view('Admin/pages/all_tickets',compact('tickets'));
     }
 
     //buyer functions
 
-    // public function buyer_tickets_index(Event $event,$id){
+    // public function buyer_tickets_index(EventListing $event,$id){
 
-    //     $events = Event::find($id);
+    //     $events = EventListing::find($id);
     //     return view('payment-tickets/browse-tickets',compact('events'));
     // }
 
-    // public function buyer_ticket_show(Event $event,Ticket $ticket,$id){
+    // public function buyer_ticket_show(EventListing $event,TicketListing $TicketListing,$id){
 
-    //     $events = Event::find($id);
-    //     $tickets = Ticket::where('event_id',$id)->get();
-    //     return view('payment-tickets/browse-ticket',compact('events','tickets'));
+    //     $events = EventListing::find($id);
+    //     $tickets = TicketListing::where('event_id',$id)->get();
+    //     return view('payment-tickets/browse-TicketListing',compact('events','tickets'));
     // }
 
-    public function buyer_ticket_checkout( Ticket $ticket,$id){
+    public function buyer_ticket_checkout( TicketListing $TicketListing,$id){
 
-        $tickets = Ticket::find($id);
+        $tickets = TicketListing::find($id);
         return view('payment-tickets/checkout',compact('tickets'));
     }
 

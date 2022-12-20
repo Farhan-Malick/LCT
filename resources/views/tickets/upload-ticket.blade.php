@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../assets/styles/common.css">
     <link rel="stylesheet" href="../../assets/styles/payments.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <title>set-price</title>
+    <title>Set Price</title>
 </head>
 
 <body>
@@ -61,11 +61,11 @@
                                                 <div class="border-right-top"></div>
                                                 <div class="border-right-bottom"></div>
                                             </div>
-                                          
+
                                         </div>
                                         <h4>Upload You Tickets</h4>
                                     </div>
-                                    
+
                                        <div class="text-center">
                                         <form action="" enctype ="multipart/form-data" method="post">
                                             @csrf
@@ -74,14 +74,14 @@
                                                 <button  type="submit" class=" form-control btn primary-btn" style="width:500px"  >Upload Tickets</button>
                                         </form>
                                        </div>
-                                    
+
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="card p-4 mb-3 shadow-sm main-card br-10">
                         <div class="row">
                             <div class="col-lg-12 text-center">
@@ -107,12 +107,12 @@
                                 <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>{{$tickets->ticket_type}}</span>
                                 <span class="ticket-type p-1 rounded-3 me-2"><strong>Split Type: </strong>any</span>
                             </div>
-                            
+
                             <div class="price-tag d-sm-flex d-block justify-content-between">
                                 <span> <strong>Price/Ticket: </strong></span>
                                 <span><strong> {{$tickets->currency}} {{$tickets->price}}</strong></span>
                             </div>
-                            
+
                             <div class="price-tag d-sm-flex d-block justify-content-between tags">
                                 <span> <strong>Number of Tickets: </strong></span>
                                 <span><strong> × {{$tickets->quantity}}</strong></span>

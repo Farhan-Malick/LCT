@@ -12,7 +12,7 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
         />
-        <title>sell-tickets</title>
+        <title>Sell Tickets</title>
     </head>
 
     <body>
@@ -76,7 +76,7 @@
                             <div class="card-header text-center">
                                 <h3>International Events</h3>
                             </div>
-                            @foreach($tickets as $ticket)
+                            @foreach($eventListings as $eventListing)
                             <div
                                 class="card-body"
                                 style="border-bottom: 3px solid #61c3e3"
@@ -85,10 +85,10 @@
                                     <div class="col-md-2 col-lg-2">
                                         <p>
                                             <br />
-                                            {{$ticket->event->start_time}} <br />
+                                            {{-- {{$eventListing->event->start_time}} <br />
                                             <br />
-                                            {{$ticket->event->start_date}} <br />
-                                            
+                                            {{$eventListing->event->start_date}} <br /> --}}
+
                                         </p>
                                     </div>
                                     <div class="col-md-10 col-lg-10">
@@ -96,7 +96,7 @@
                                             class="card-content d-md-flex justify-content-between"
                                         >
                                             <div class="card-des">
-                                                <h5>{{$ticket->title}}</h5>
+                                                <h5>{{$eventListing->title}}</h5>
                                                 <p></p>
                                                 <div
                                                     class="alert alert-danger"
@@ -104,7 +104,7 @@
                                                 >
                                                     <strong
                                                         >Only
-                                                        {{$ticket->quantity}}
+                                                        {{-- {{$eventListing->quantity}} --}}
                                                         available
                                                         tickets.</strong
                                                     >
@@ -117,9 +117,9 @@
                                                 class="card-action d-flex flex-column text-end"
                                             >
                                                 <span>From</span>
-                                                <span>${{$ticket->price}}</span>
+                                                {{-- <span>${{$ticket->price}}</span> --}}
 
-                                                <a href="{{route('seller.ticket.index',$ticket->id)}}" class="btn primary-btn"> Sell Tickets</a>
+                                                <a href="{{route('seller.ticket.index',$eventListing->id)}}" class="btn primary-btn"> Sell Tickets</a>
                                             </div>
                                         </div>
                                     </div>

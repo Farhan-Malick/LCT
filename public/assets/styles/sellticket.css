@@ -91,3 +91,35 @@
     font-size: 20px;
     color: #61c3e3;
 }
+#etuBox {
+background:#f9f9f9
+}
+.js-preUpload #etuBox {
+padding:24px 0
+}
+.js-preUpload #etuToolStrip {
+display:none!important
+}
+.js-preUpload #etuWorkArea {
+display:none!important
+}
+.js-activeUpload #etuBox {
+padding-bottom:120px
+}
+.js-activeUpload #etuWorkArea {
+display:block
+}
+.js-activeUpload #etuToolStrip {
+display:block
+}
+.js-activeUpload #etuTicketDeets {
+background:#fff;
+padding-top:12px;
+padding-bottom:12px
+}
+.js-activeUpload .etuTip:before {
+display:none!important
+}
+.js-activeUpload .etuTip:after {
+display:none!important
+}

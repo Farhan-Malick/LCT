@@ -19,7 +19,7 @@
         <div class="container my-4">
             <div class="row">
                 <div class="col-lg-9">
-                    <form action="{{route('seller.ticket.update',$tickets->id)}}" method="post">
+                    <form action="{{route('seller.ticketlisting.store',$ticketListing->id)}}" method="post">
                     @csrf
                         <!-- alert start here -->
                         <div class="alert alert-primary d-flex align-items-center" role="alert">
@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <h4 class="fw-700">Choose Ticket Type</h4>
-                                <input type="hidden" id="ticket-type" name="ticket-type" value="paper-ticket" />
+                                <input type="hidden" id="ticket-type" name="ticket_type" value="paper-ticket" />
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="card shadow-sm mb-3 select-card select-active" data-ticket="paper-ticket">
@@ -221,7 +221,7 @@
                                                         <span class="input-group-text">$</span>
                                                         <input type="text" class="form-control"
                                                             aria-label="Amount (to the nearest dollar)"
-                                                            name="price" value="{{$tickets->price}}">
+                                                            name="price" value="{{-- {{$tickets->price}} --}}">
                                                         <span class="input-group-text">.00</span>
                                                     </div>
                                                 </div>
@@ -593,11 +593,11 @@
                     <div class="card shadow-sm mb-3 type-card main-card br-10">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4>{{$tickets->title}}</h4>
+                                <h4>{{$ticketListing->title}}</h4>
                             </div>
                             <p>
-                                <strong>{{$tickets->event->start_time}}</strong><br>
-                                <strong>{{$tickets->event->start_date}}</strong><br>
+                                {{-- <strong>{{$tickets->event->start_time}}</strong><br>
+                                <strong>{{$tickets->event->start_date}}</strong><br> --}}
                                 Singapore National Stadium, Singapore, Singapore
                             </p>
                             <p class="ticket-type p-1 rounded-3">

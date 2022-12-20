@@ -94,7 +94,7 @@ Route::get('/Sell-tickets/ticket-authentication', function () {
 //     return view('tickets/tickets-details');
 // });
 Route::get('/tickets/{id}/tickets-details' , [TicketController::class,'index'])->name('seller.ticket.index');
-Route::post('/tickets/{id}/tickets-details' , [TicketController::class,'update'])->name('seller.ticket.update');
+Route::post('/tickets/{id}/tickets-details' , [TicketController::class,'store'])->name('seller.ticketlisting.store');
 // Route::get('/Sell-tickets/tickets-home', function () {
 //     return view('tickets/tickets-home');
 // });
@@ -102,9 +102,9 @@ Route::post('/tickets/{id}/tickets-details' , [TicketController::class,'update']
 Route::get('/Sell-tickets/tickets-home/{id}' , [TicketController::class,'event_category_ticket'])->name('event.category.ticket');
 Route::get('/Sell-tickets/tickets-home/{id}' , [TicketController::class,'event_category_ticket'])->name('event.category.ticket');
 
-Route::get('/Sell-tickets/upload-ticket', function () {
-    return view('tickets/upload-ticket');
-});
+Route::get('/Sell-tickets/{ticket_listing}/upload-ticket', [TicketController::class,'upload_tickets'])->name('event.ticketlisting.ticket.upload');
+
+
 // Buyer Module Routes
 // Route::get('/tickets/browse', function () {
 //     return view('payment-tickets.browse-tickets');

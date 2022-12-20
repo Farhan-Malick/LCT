@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Event;
+use App\Models\EventListing;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Ticket extends Model
+class TicketListing extends Model
 {
     use HasFactory;
     protected $guarded = [];
@@ -14,7 +14,7 @@ class Ticket extends Model
     public function add_tickets($params = [], $ticket_id = null)
     {
         // if ticket_id exist then update otherwise create
-        return Ticket::updateOrCreate(
+        return TicketListing::updateOrCreate(
             ['id'=> $ticket_id],
             $params
         );
@@ -26,15 +26,15 @@ class Ticket extends Model
 
         if(!empty($params['ticket_ids']))
         {
-            $result = Ticket::with(['taxes'])
+            $result = TicketListing::with(['taxes'])
                     ->whereIn('id', $params['ticket_ids'])
-                    ->where('event_id', $params['event_id'])
+                    ->where('eventlisting_id', $params['eventlisting_id'])
                     ->orderBy('price')
                     ->get();
         }
         else
         {
-            $result = Ticket::with(['taxes'])->where(['event_id' => $params['event_id'] ])
+            $result = TicketListing::with(['taxes'])->where(['eventlisting_id' => $params['eventlisting_id'] ])
                 ->orderBy('price')
                 ->get();
         }
@@ -43,7 +43,7 @@ class Ticket extends Model
     }
 
     public function event(){
-        return $this->hasOne(Event::class,'id','event_id');
+        return $this->hasOne(EventListing::class,'id','eventlisting_id');
     }
 
     public function user(){

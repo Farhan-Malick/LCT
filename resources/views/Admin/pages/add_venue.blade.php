@@ -2,6 +2,7 @@
     @section('title', 'Add Category')
 
     @push('css')
+    
         <link href="{{ asset('AdminAssets/plugins/smartwizard/dist/css/smart_wizard.css') }}" rel="stylesheet" />
         <link href="{{ asset('AdminAssets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}"
             rel="stylesheet" />

@@ -1,331 +1,326 @@
-@extends('Admin.layouts.default')
-@section('title', 'Dashboard V1')
-@push('css')
-    <!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
-    <link href="{{ asset('AdminAssets/plugins/jvectormap-next/jquery-jvectormap.css') }}" rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/bootstrap-calendar/css/bootstrap_calendar.css') }}" rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/gritter/css/jquery.gritter.css') }}" rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/nvd3/build/nv.d3.css') }}" rel="stylesheet" />
-@endpush
-@section('content')
-    <!-- begin breadcrumb -->
-    <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
-        <li class="breadcrumb-item active">Dashboard v2</li>
-    </ol>
-    <!-- end breadcrumb -->
-    <!-- begin page-header -->
-    <h1 class="page-header">Dashboard v2 <small>header small text goes here...</small></h1>
-    <!-- end page-header -->
-    <!-- begin row -->
-    <div class="row">
-        <!-- begin col-3 -->
-        <div class="col-xl-3 col-md-6">
-            <div class="widget widget-stats bg-teal">
-                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-                <div class="stats-content">
-                    <div class="stats-title">TODAY'S VISITS</div>
-                    <div class="stats-number">7,842,900</div>
-                    <div class="stats-progress progress">
-                        <div class="progress-bar" style="width: 70.1%;"></div>
-                    </div>
-                    <div class="stats-desc">Better than last week (70.1%)</div>
-                </div>
-            </div>
-        </div>
-        <!-- end col-3 -->
-        <!-- begin col-3 -->
-        <div class="col-xl-3 col-md-6">
-            <div class="widget widget-stats bg-blue">
-                <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
-                <div class="stats-content">
-                    <div class="stats-title">TODAY'S PROFIT</div>
-                    <div class="stats-number">180,200</div>
-                    <div class="stats-progress progress">
-                        <div class="progress-bar" style="width: 40.5%;"></div>
-                    </div>
-                    <div class="stats-desc">Better than last week (40.5%)</div>
-                </div>
-            </div>
-        </div>
-        <!-- end col-3 -->
-        <!-- begin col-3 -->
-        <div class="col-xl-3 col-md-6">
-            <div class="widget widget-stats bg-indigo">
-                <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
-                <div class="stats-content">
-                    <div class="stats-title">NEW ORDERS</div>
-                    <div class="stats-number">38,900</div>
-                    <div class="stats-progress progress">
-                        <div class="progress-bar" style="width: 76.3%;"></div>
-                    </div>
-                    <div class="stats-desc">Better than last week (76.3%)</div>
-                </div>
-            </div>
-        </div>
-        <!-- end col-3 -->
-        <!-- begin col-3 -->
-        <div class="col-xl-3 col-md-6">
-            <div class="widget widget-stats bg-dark">
-                <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
-                <div class="stats-content">
-                    <div class="stats-title">NEW COMMENTS</div>
-                    <div class="stats-number">3,988</div>
-                    <div class="stats-progress progress">
-                        <div class="progress-bar" style="width: 54.9%;"></div>
-                    </div>
-                    <div class="stats-desc">Better than last week (54.9%)</div>
-                </div>
-            </div>
-        </div>
-        <!-- end col-3 -->
-    </div>
-    <!-- end row -->
-    <!-- begin row -->
-    <div class="row">
-        <!-- begin col-8 -->
-        <div class="col-xl-8">
-            <div class="widget-chart with-sidebar inverse-mode">
-                <div class="widget-chart-content bg-dark">
-                    <h4 class="chart-title">
-                        Visitors Analytics
-                        <small>Where do our visitors come from</small>
-                    </h4>
-                    <div id="visitors-line-chart" class="widget-chart-full-width nvd3-inverse-mode" style="height: 260px;">
-                    </div>
-                </div>
-                <div class="widget-chart-sidebar bg-dark-darker">
-                    <div class="chart-number">
-                        1,225,729
-                        <small>Total visitors</small>
-                    </div>
-                    <div class="flex-grow-1 d-flex align-items-center">
-                        <div id="visitors-donut-chart" class="nvd3-inverse-mode" style="height: 180px"></div>
-                    </div>
-                    <ul class="chart-legend f-s-11">
-                        <li><i class="fa fa-circle fa-fw text-blue f-s-9 m-r-5 t-minus-1"></i> 34.0% <span>New
-                                Visitors</span></li>
-                        <li><i class="fa fa-circle fa-fw text-teal f-s-9 m-r-5 t-minus-1"></i> 56.0% <span>Return
-                                Visitors</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- end col-8 -->
-        <!-- begin col-4 -->
-        <div class="col-xl-4">
-            <div class="panel panel-inverse" data-sortable-id="index-1">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Visitors Origin
-                    </h4>
-                </div>
-                <div id="visitors-map" class="bg-dark-darker" style="height: 179px;"></div>
-                <div class="list-group">
-                    <a href="javascript:;"
-                        class="list-group-item list-group-item-action list-group-item-inverse d-flex justify-content-between align-items-center text-ellipsis">
-                        1. United State
-                        <span class="badge bg-teal f-s-10">20.95%</span>
-                    </a>
-                    <a href="javascript:;"
-                        class="list-group-item list-group-item-action list-group-item-inverse d-flex justify-content-between align-items-center text-ellipsis">
-                        2. India
-                        <span class="badge bg-blue f-s-10">16.12%</span>
-                    </a>
-                    <a href="javascript:;"
-                        class="list-group-item list-group-item-action list-group-item-inverse d-flex justify-content-between align-items-center text-ellipsis">
-                        3. Mongolia
-                        <span class="badge bg-silver-darker f-s-10">14.99%</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- end col-4 -->
-    </div>
-    <!-- end row -->
-    <!-- begin row -->
-    <div class="row">
-        <!-- begin col-4 -->
-        <div class="col-xl-4 col-lg-6">
-            <!-- begin panel -->
-            <div class="panel panel-inverse" data-sortable-id="index-2">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Chat History</h4>
-                    <span class="label label-teal">4 message</span>
-                </div>
-                <div class="panel-body bg-light">
-                    <div class="chats" data-scrollbar="true" data-height="225px">
-                        <div class="left">
-                            <span class="date-time">yesterday 11:23pm</span>
-                            <a href="javascript:;" class="name">Sowse Bawdy</a>
-                            <a href="javascript:;" class="image"><img alt=""
-                                    src="/assets/img/user/user-12.jpg" /></a>
-                            <div class="message">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent mattis interdum
-                                arcu eu feugiat.
-                            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Last-Chance-Ticket Admin | Dashboard V2</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link href="{{asset("AdminAssets/css/google/app.min.css")}}" rel="stylesheet" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
+	<link href="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap.css")}}" rel="stylesheet" />
+	<link href="{{asset("AdminAssets/plugins/bootstrap-calendar/css/bootstrap_calendar.css")}}" rel="stylesheet" />
+	<link href="{{asset("AdminAssets/plugins/gritter/css/jquery.gritter.css")}}"  rel="stylesheet" />
+	<link href="{{asset("AdminAssets/plugins/nvd3/build/nv.d3.css")}}"  rel="stylesheet" />
+</head>
+<body>
+	<!-- begin #page-loader -->
+	<div id="page-loader" class="fade show">
+		<span class="spinner"></span>
+	</div>
+	<!-- end #page-loader -->
+	
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed page-with-wide-sidebar page-with-light-sidebar">
+		<!-- begin #header -->
+		<div id="header" class="header navbar-default">
+			<!-- begin navbar-header -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed navbar-toggle-left" data-click="sidebar-minify">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="index.html" class="navbar-brand">
+					<b class="mr-1">Last-Chance-Ticket</b> 
+					<span class="navbar-logo">
+						<span class="text-blue">G</span>
+						<span class="text-red">o</span>
+						<span class="text-orange">o</span>
+						<span class="text-blue">g</span>
+						<span class="text-green">l</span>
+						<span class="text-red">e</span>
+					</span>
+				</a>
+				<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<!-- end navbar-header --><!-- begin header-nav -->
+			<ul class="navbar-nav d-flex flex-grow-1">
+				<li class="navbar-form flex-grow-1">
+					<form action="" method="POST" name="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder='Try searching "Users Today"' />
+							<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+						</div>
+					</form>
+				</li>
+				<li class="dropdown">
+					<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+						<i class="fa fa-bell"></i>
+						<span class="label label-primary">5</span>
+					</a>
+					<div class="dropdown-menu media-list dropdown-menu-right">
+						<div class="dropdown-header">Notifications (5)</div>
+						<a href="javascript:;" class="dropdown-item media">
+							<div class="media-left">
+								<i class="fa fa-bug media-object bg-silver-darker"></i>
+							</div>
+							<div class="media-body">
+								<h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
+								<div class="text-muted f-s-12">3 minutes ago</div>
+							</div>
+						</a>
+						<a href="javascript:;" class="dropdown-item media">
+							<div class="media-left">
+								<img src="{{asset("AdminAssets/img/user/user-1.jpg")}}" class="media-object" alt="" />
+								<i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
+							</div>
+							<div class="media-body">
+								<h6 class="media-heading">John Smith</h6>
+								<p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+								<div class="text-muted f-s-12">25 minutes ago</div>
+							</div>
+						</a>
+						<a href="javascript:;" class="dropdown-item media">
+							<div class="media-left">
+								<img src="{{asset("AdminAssets/img/user/user-2.jpg")}}" class="media-object" alt="" />
+								<i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
+							</div>
+							<div class="media-body">
+								<h6 class="media-heading">Olivia</h6>
+								<p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+								<div class="text-muted f-s-12">35 minutes ago</div>
+							</div>
+						</a>
+						<a href="javascript:;" class="dropdown-item media">
+							<div class="media-left">
+								<i class="fa fa-plus media-object bg-silver-darker"></i>
+							</div>
+							<div class="media-body">
+								<h6 class="media-heading"> New User Registered</h6>
+								<div class="text-muted f-s-12">1 hour ago</div>
+							</div>
+						</a>
+						<a href="javascript:;" class="dropdown-item media">
+							<div class="media-left">
+								<i class="fa fa-envelope media-object bg-silver-darker"></i>
+								<i class="fab fa-google text-warning media-object-icon f-s-14"></i>
+							</div>
+							<div class="media-body">
+								<h6 class="media-heading"> New Email From John</h6>
+								<div class="text-muted f-s-12">2 hour ago</div>
+							</div>
+						</a>
+						<div class="dropdown-footer text-center">
+							<a href="javascript:;">View more</a>
+						</div>
+					</div>
+				</li>
+				<li class="dropdown navbar-user">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<img src="{{asset("AdminAssets/img/user/user-13.jpg")}}" alt="" /> 
+						<span class="d-none d-md-inline">Farhan Malik</span> <b class="caret"></b>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<a href="javascript:;" class="dropdown-item">Edit Profile</a>
+						<a href="javascript:;" class="dropdown-item"><span class="badge badge-danger pull-right">2</span> Inbox</a>
+						<a href="javascript:;" class="dropdown-item">Calendar</a>
+						<a href="javascript:;" class="dropdown-item">Setting</a>
+						<div class="dropdown-divider"></div>
+						<a href="javascript:;" class="dropdown-item">Log Out</a>
+					</div>
+				</li>
+			</ul>
+			<!-- end header-nav -->
+		</div>
+		<!-- end #header -->
+		
+		<!-- begin #sidebar -->
+		@include('Admin.includes.sidebar')
+		<!-- end #sidebar -->
+		
+		<!-- begin #content -->
+		<div id="content" class="content">
+			<!-- begin breadcrumb -->
+			<ol class="breadcrumb float-xl-right">
+				<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+				<li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
+				<li class="breadcrumb-item active">Last-Chance-Ticket</li>
+			</ol>
+			<!-- end breadcrumb -->
+			<!-- begin page-header -->
+			<h1 class="page-header">Last-Chance-Ticket Dashboard </h1>
+			<!-- end page-header -->
+			<!-- begin row -->
+			<div class="row">
+				<!-- begin col-3 -->
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-blue">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">TODAY'S VISITS</div>
+							<div class="stats-number">7,842,900</div>
+							<div class="stats-progress progress">
+								<div class="progress-bar" style="width: 70.1%;"></div>
+							</div>
+							<div class="stats-desc">Better than last week (70.1%)</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+				<!-- begin col-3 -->
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-blue">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">TODAY'S PROFIT</div>
+							<div class="stats-number">180,200</div>
+							<div class="stats-progress progress">
+								<div class="progress-bar" style="width: 40.5%;"></div>
+							</div>
+							<div class="stats-desc">Better than last week (40.5%)</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+				<!-- begin col-3 -->
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-blue">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">NEW ORDERS</div>
+							<div class="stats-number">38,900</div>
+							<div class="stats-progress progress">
+								<div class="progress-bar" style="width: 76.3%;"></div>
+							</div>
+							<div class="stats-desc">Better than last week (76.3%)</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+				<!-- begin col-3 -->
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-blue">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">NEW COMMENTS</div>
+							<div class="stats-number">3,988</div>
+							<div class="stats-progress progress">
+								<div class="progress-bar" style="width: 54.9%;"></div>
+							</div>
+							<div class="stats-desc">Better than last week (54.9%)</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+			</div>
+			<!-- end row -->
+			<!-- begin row -->
+            <div class="row">
+                <!-- begin col-6 -->
+                <div class="col-xl-12">
+                    <!-- begin panel -->
+                    <div class="panel panel-inverse" data-sortable-id="form-validation-1">
+                        <!-- begin panel-body -->
+                        <div class="panel-body">
+                            
+                            <table class="table mt-3">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">title</th>
+                                        {{-- <th scope="col">Event</th> --}}
+                                        <th scope="col">price</th>
+                                        <th scope="col">currency</th>
+                                        <th scope="col">quantity</th>
+                                        <th scope="col">section</th>
+                                        <th scope="col">row</th>
+                                        <th scope="col">seat from</th>
+                                        <th scope="col">seat to</th>
+                                        <th scope="col">ticket type</th>
+                                        <th scope="col">ticket restrictions</th>
+                                        <th scope="col">status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($tickets as $ticket)
+                                    <tr>
+                                        <td>{{$ticket->id}}</td>
+                                        <td>{{$ticket->title}}</td>
+                                        {{-- <td>{{$ticket->event->title}}</td> --}}
+                                        <td>{{$ticket->price}}</td>
+                                        <td>{{$ticket->currency}}</td>
+                                        <td>{{$ticket->quantity}}</td>
+                                        <td>{{$ticket->section}}</td>
+                                        <td>{{$ticket->row}}</td>
+                                        <td>{{$ticket->seat_from}}</td>
+                                        <td>{{$ticket->seat_to}}</td>
+                                        <td>{{$ticket->ticket_type}}</td>
+                                        <td>{{$ticket->ticket_restrictions}}</td>
+                                        <td>{{$ticket->status}}</td>
+                                        <td>
+                                            <a
+                                                class="btn btn-primary"
+                                                href="{{route('admin.section_rows.edit',$ticket->id)}}"
+                                                >edit</a
+                                            >
+            
+                                            <a
+                                                class="btn btn-danger"
+                                                href="{{route('admin.section_rows.destroy',$ticket->id)}}"
+                                                >Delete</a
+                                            >
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="right">
-                            <span class="date-time">08:12am</span>
-                            <a href="javascript:;" class="name"><span class="label label-primary">ADMIN</span> Me</a>
-                            <a href="javascript:;" class="image"><img alt=""
-                                    src="/assets/img/user/user-13.jpg" /></a>
-                            <div class="message">
-                                Nullam posuere, nisl a varius rhoncus, risus tellus hendrerit neque.
-                            </div>
-                        </div>
-                        <div class="left">
-                            <span class="date-time">09:20am</span>
-                            <a href="javascript:;" class="name">Neck Jolly</a>
-                            <a href="javascript:;" class="image"><img alt=""
-                                    src="/assets/img/user/user-10.jpg" /></a>
-                            <div class="message">
-                                Euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                            </div>
-                        </div>
-                        <div class="left">
-                            <span class="date-time">11:15am</span>
-                            <a href="javascript:;" class="name">Shag Strap</a>
-                            <a href="javascript:;" class="image"><img alt=""
-                                    src="/assets/img/user/user-14.jpg" /></a>
-                            <div class="message">
-                                Nullam iaculis pharetra pharetra. Proin sodales tristique sapien mattis placerat.
-                            </div>
-                        </div>
+                        <!-- end panel-body -->
                     </div>
+                    <!-- end panel -->
                 </div>
-                <div class="panel-footer">
-                    <form name="send_message_form" data-id="message-form">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="message"
-                                placeholder="Enter your message here.">
-                            <span class="input-group-append">
-                                <button class="btn btn-primary" type="button"><i class="fa fa-camera"></i></button>
-                                <button class="btn btn-primary" type="button"><i class="fa fa-link"></i></button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
+                <!-- end col-6 -->
             </div>
-            <!-- end panel -->
-        </div>
-        <!-- end col-4 -->
-        <!-- begin col-4 -->
-        <div class="col-xl-4 col-lg-6">
-            <!-- begin panel -->
-            <div class="panel panel-inverse" data-sortable-id="index-3">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Today's Schedule</h4>
-                </div>
-                <div id="schedule-calendar" class="bootstrap-calendar"></div>
-                <div class="list-group">
-                    <a href="javascript:;"
-                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-ellipsis">
-                        Sales Reporting
-                        <span class="badge bg-teal f-s-10">9:00 am</span>
-                    </a>
-                    <a href="javascript:;"
-                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-ellipsis">
-                        Have a meeting with sales team
-                        <span class="badge bg-blue f-s-10">2:45 pm</span>
-                    </a>
-                </div>
-            </div>
-            <!-- end panel -->
-        </div>
-        <!-- end col-4 -->
-        <!-- begin col-4 -->
-        <div class="col-xl-4 col-lg-6">
-            <!-- begin panel -->
-            <div class="panel panel-inverse" data-sortable-id="index-4">
-                <div class="panel-heading">
-                    <h4 class="panel-title">New Registered Users</h4>
-                    <span class="label bg-teal">24 new users</span>
-                </div>
-                <ul class="registered-users-list">
-                    <li>
-                        <a href="javascript:;"><img src="/assets/img/user/user-5.jpg" alt="" /></a>
-                        <h4 class="username text-ellipsis">
-                            Savory Posh
-                            <small>Algerian</small>
-                        </h4>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><img src="/assets/img/user/user-3.jpg" alt="" /></a>
-                        <h4 class="username text-ellipsis">
-                            Ancient Caviar
-                            <small>Korean</small>
-                        </h4>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><img src="/assets/img/user/user-1.jpg" alt="" /></a>
-                        <h4 class="username text-ellipsis">
-                            Marble Lungs
-                            <small>Indian</small>
-                        </h4>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><img src="/assets/img/user/user-8.jpg" alt="" /></a>
-                        <h4 class="username text-ellipsis">
-                            Blank Bloke
-                            <small>Japanese</small>
-                        </h4>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><img src="/assets/img/user/user-2.jpg" alt="" /></a>
-                        <h4 class="username text-ellipsis">
-                            Hip Sculling
-                            <small>Cuban</small>
-                        </h4>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><img src="/assets/img/user/user-6.jpg" alt="" /></a>
-                        <h4 class="username text-ellipsis">
-                            Flat Moon
-                            <small>Nepalese</small>
-                        </h4>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><img src="/assets/img/user/user-4.jpg" alt="" /></a>
-                        <h4 class="username text-ellipsis">
-                            Packed Puffs
-                            <small>Malaysian</small>
-                        </h4>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><img src="/assets/img/user/user-9.jpg" alt="" /></a>
-                        <h4 class="username text-ellipsis">
-                            Clay Hike
-                            <small>Swedish</small>
-                        </h4>
-                    </li>
-                </ul>
-                <div class="panel-footer text-center">
-                    <a href="javascript:;" class="text-inverse">View All</a>
-                </div>
-            </div>
-            <!-- end panel -->
-        </div>
-        <!-- end col-4 -->
-    </div>
-    <!-- end row -->
-@endsection
-
-
-
-@push('scripts')
-    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-    <script src="{{ asset('AdminAssets/plugins/d3/d3.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/nvd3/build/nv.d3.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/jvectormap-next/jquery-jvectormap.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/gritter/js/jquery.gritter.js') }}"></script>
-    <script>
-        COLOR_BLUE = COLOR_INDIGO = COLOR_RED = COLOR_ORANGE = COLOR_LIME = COLOR_TEAL = 'rgba(0,0,0,0.5)';
-        COLOR_AQUA = COLOR_DARK_LIGHTER = COLOR_GREEN = 'rgba(0,0,0,0.75)';
-    </script>
-
-    <script src="{{ asset('AdminAssets/js/demo/dashboard-v2.js') }}"></script>
-@endpush
+			<!-- end row -->
+		</div>
+		<!-- end #content -->
+	
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="{{asset("AdminAssets/js/app.min.js")}}"></script>
+	<script src="{{asset("AdminAssets/js/theme/google.min.js")}}"></script>
+	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="{{asset("AdminAssets/plugins/d3/d3.min.js")}}"></script>
+	<script src="{{asset("AdminAssets/plugins/nvd3/build/nv.d3.min.js")}}"></script>
+	<script src="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap.min.js")}}"></script>
+	<script src="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js")}}"></script>
+	<script src="{{asset("AdminAssets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js")}}"></script>
+	<script src="{{asset("AdminAssets/plugins/gritter/js/jquery.gritter.js")}}"></script>
+	<script>
+		COLOR_BLUE = COLOR_INDIGO = COLOR_RED = COLOR_ORANGE = COLOR_LIME = COLOR_TEAL = 'rgba(0,0,0,0.5)';
+		COLOR_AQUA = COLOR_DARK_LIGHTER = COLOR_GREEN = 'rgba(0,0,0,0.75)';
+	</script>
+	
+	<script src="{{asset("AdminAssets/js/demo/dashboard-v2.js")}}"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+</body>
+</html>

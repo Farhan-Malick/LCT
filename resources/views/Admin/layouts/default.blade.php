@@ -34,7 +34,7 @@
         @include('Admin.includes.header')
         @includeWhen($topMenu, 'Admin.includes.top-menu')
 
-        @includeWhen(!$sidebarHide, 'Admin.includes.sidebar')
+        @include('Admin.includes.sidebar')
 
         <div id="content" class="content {{ $contentClass }}">
             @yield('content')

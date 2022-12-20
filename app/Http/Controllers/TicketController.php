@@ -190,7 +190,7 @@ class TicketController extends Controller
 
         $tickets = Ticket::all();
 
-        return view('Admin/pages/all_tickets',compact('tickets'));
+        return view('Admin/pages/index',compact('tickets'));
     }
 
     //buyer functions

@@ -88,7 +88,7 @@ Route::group(['middleware' => ['web']], function () {
 
         //Admin Ticket Routes
 
-        Route::get('admin/all_tickets', [TicketController::class, 'admin_tickets_show'])->name('admin.tickets.show');
+        Route::get('/Admin-Panel', [TicketController::class, 'admin_tickets_show']);
 
         Route::get('Admin-Panel/event-listing-form', [EventListingController::class, 'EventListingForm']);
         Route::get('Admin-Panel/event-listing', [EventListingController::class, 'showListing']);

@@ -12,7 +12,7 @@ use App\Http\Controllers\VanueSectionController;
 use App\Http\Controllers\VenueSectionRowsController;
 use App\Http\Controllers\VenuesController;
 use App\Http\Controllers\TicketListingController;
-
+use App\Http\Controllers\EventListingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,13 +90,13 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('admin/all_tickets', [TicketController::class, 'admin_tickets_show'])->name('admin.tickets.show');
 
-        Route::get('Admin-Panel/tickets/ticket-listing-form', [TicketListingController::class, 'ticketListingForm']);
-        Route::get('Admin-Panel/tickets/ticket-listing', [TicketListingController::class, 'showListing']);
-        Route::get('/Admin-Panel/tickets/listing-edit/{id}', [TicketListingController::class, 'editListing']);
-        Route::post('/Admin-Panel/tickets/ticket-listing/update/{id}', [TicketListingController::class, 'updateListing']);
-        Route::get('/Admin-Panel/tickets/ticket-listing/delete/{id}', [TicketListingController::class, 'delete']);
+        Route::get('Admin-Panel/event-listing-form', [EventListingController::class, 'EventListingForm']);
+        Route::get('Admin-Panel/event-listing', [EventListingController::class, 'showListing']);
+        Route::get('/Admin-Panel/listing-edit/{id}', [EventListingController::class, 'editListing']);
+        Route::post('/Admin-Panel/ticket-listing/update/{id}', [EventListingController::class, 'updateListing']);
+        Route::get('/Admin-Panel/event-listing/delete/{id}', [EventListingController::class, 'delete']);
 
-        Route::post('Admin-Panel/tickets/ticket-listing', [TicketListingController::class, 'ticketListing']);
+        Route::post('Admin-Panel/tickets/ticket-listing', [EventListingController::class, 'EventListing']);
         //Admin Puchase Module
 
         Route::get('admin/all_sales', [SalesController::class, 'admin_purchase_show'])->name('admin.sales.show');

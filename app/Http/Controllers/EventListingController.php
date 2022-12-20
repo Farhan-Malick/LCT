@@ -13,7 +13,7 @@ class EventListingController extends Controller
     {
         $categories = Category::all();
         $events = Event::all();
-        return view("Admin/pages/ticket_ListingForm",compact('categories','events'));
+        return view("Admin/pages/event_ListingForm",compact('categories','events'));
     }
 
     public function EventListing(Request $request){
@@ -25,12 +25,12 @@ class EventListingController extends Controller
         // dd($ticket);
         $ticket->save();
         $request->session()->flash('msg','Listing Has Been Added Successfully'); 
-        return redirect('Admin-Panel/tickets/ticket-listing');
+        return redirect('Admin-Panel/event-listing');
     }
     public function showListing()
     {
         $listing = EventListing::all();
-        return view("Admin/pages/ticket_Listing",compact('listing'));
+        return view("Admin/pages/event_Listing",compact('listing'));
     }
     public function editListing($id){
         $events = Event::all();
@@ -47,7 +47,7 @@ class EventListingController extends Controller
 
         $listings->update();
         $request->session()->flash('msg','Data Has Been Updated Successfully'); 
-        return redirect('Admin-Panel/tickets/ticket-listing');
+        return redirect('Admin-Panel/event-listing');
     }
     public function delete(Request $request,$id){
         

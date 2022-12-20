@@ -10,11 +10,11 @@
 <!-- begin breadcrumb -->
 <ol class="breadcrumb float-xl-right">
     <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-    <li class="breadcrumb-item active">All Tickets</li>
+    <li class="breadcrumb-item active">All Events Listings</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">All Tickets</h1>
+<h1 class="page-header">All Events Listings</h1>
 <!-- end page-header -->
 <div class="row">
     <!-- begin col-6 -->
@@ -47,13 +47,13 @@
                             <td>
                                 <a
                                     class="btn btn-primary"
-                                    href="{{URL('Admin-Panel/tickets/listing-edit',$ticket->id)}}"
+                                    href="{{URL('/Admin-Panel/listing-edit',$ticket->id)}}"
                                     >edit</a
                                 >
 
                                 <a
                                     class="btn btn-danger"
-                                    href="{{URL('/Admin-Panel/tickets/ticket-listing/delete',$ticket->id)}}"
+                                    href="{{URL('/Admin-Panel/event-listing/delete',$ticket->id)}}"
                                     >Delete</a
                                 >
                             </td>

@@ -51,6 +51,12 @@
                 <ul class="sub-menu">
                     <li><a href="/Admin-Panel/add-event">Add Event</a></li>
                     <li><a href="/Admin-Panel/All-event">All Events</a></li>
+                    <li>
+                        <a href="{{ URL('Admin-Panel/event-listing-form') }}">Add Event Listings</a>
+                    </li>
+                    <li>
+                        <a href="{{ URL('Admin-Panel/event-listing') }}">All Event Listings</a>
+                    </li>
                 </ul>
             </li>
             <li class="has-sub">
@@ -121,12 +127,7 @@
                     <span>Tickets</span>
                 </a>
                 <ul class="sub-menu">
-                    <li>
-                        <a href="{{ URL('Admin-Panel/tickets/ticket-listing-form') }}">Add Ticket Listings</a>
-                    </li>
-                    <li>
-                        <a href="{{ URL('Admin-Panel/tickets/ticket-listing') }}">All Ticket Listings</a>
-                    </li>
+            
                     <li>
                         <a href="{{ route('admin.tickets.show') }}">Total Tickets</a>
                     </li>

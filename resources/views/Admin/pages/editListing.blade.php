@@ -8,11 +8,11 @@
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-        <li class="breadcrumb-item active">Edit Ticket Listing</li>
+        <li class="breadcrumb-item active">Edit Event Listing</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Edit Ticket Listing</h1>
+    <h1 class="page-header">Edit Event Listing</h1>
     <!-- end page-header -->
     <div class="row">
         <!-- begin col-6 -->
@@ -27,13 +27,13 @@
                             <h5
                                 class="card-title fw-600 text-center"
                             >
-                                Edit Ticket Listing Here
+                                Edit Event Listing Here
                             </h5>
                             @if (session('msg'))
                                 <div class="col-sm-6 mx-auto " style="text-align: center;  font-size:20px">
                                     {{ session('msg') }}</div>
                             @endif
-                            <form method="post" action="{{URL('/Admin-Panel/tickets/ticket-listing/update/'.$listings->id)}}" >
+                            <form method="post" action="{{URL('/Admin-Panel/ticket-listing/update/'.$listings->id)}}" >
                                 @csrf
                                 <div class="form-row">
                                     <div
@@ -46,7 +46,7 @@
                                         <input
                                             type="text"
                                             class="form-control"
-                                            placeholder="Enter Ticket Title here"
+                                            placeholder="Enter Event Title here"
                                             name="title" value="{{$listings->title}}"
                                         />
                                     </div>

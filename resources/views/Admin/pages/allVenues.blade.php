@@ -18,7 +18,7 @@
 <!-- end page-header -->
 <div class="row">
     <!-- begin col-6 -->
-    <div class="col-xl-12">
+    <div class="col-md-12">
         <!-- begin panel -->
         <div class="panel panel-inverse" data-sortable-id="form-validation-1">
             <!-- begin panel-body -->

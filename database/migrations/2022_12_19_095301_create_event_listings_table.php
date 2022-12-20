@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ticket_listings', function (Blueprint $table) {
+        Schema::create('event_listings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('status');

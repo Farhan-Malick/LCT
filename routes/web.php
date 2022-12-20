@@ -13,6 +13,7 @@ use App\Http\Controllers\PdfUploadController;
 use App\Http\Controllers\PurchasesController;
 use App\Http\Controllers\VanueSectionController;
 use App\Http\Controllers\VenueSectionRowsController;
+use App\Http\Controllers\TicketListingController;
 
 
 /*

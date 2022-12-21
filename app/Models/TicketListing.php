@@ -18,7 +18,6 @@ class TicketListing extends Model
             ['id'=> $ticket_id],
             $params
         );
-
     }
 
     public function get_event_tickets($params = [])

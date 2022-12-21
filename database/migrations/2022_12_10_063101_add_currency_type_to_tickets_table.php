@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('tickets', function (Blueprint $table) {
             //
-            $table->string('currency_type')->nullable()->after('seat_to');
+            // $table->string('currency_type')->nullable();
         });
     }
 

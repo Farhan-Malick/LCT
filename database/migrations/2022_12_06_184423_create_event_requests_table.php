@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('tickets', function (Blueprint $table) {
-            //
-            // $table->string('currency')->nullable()->default('$ dollar')->after('price');
+        Schema::create('event_requests', function (Blueprint $table) {
+            $table->id();
+            $table->string('event')->nullable();
+            $table->string('category_event')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -26,9 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('tickets', function (Blueprint $table) {
-            //
-            $table->dropColumn('currency');
-        });
+        Schema::dropIfExists('event_request');
     }
 };

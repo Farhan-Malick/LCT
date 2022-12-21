@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::table('tickets', function (Blueprint $table) {
             //
-            $table->string('section')->nullable();
-            $table->string('row')->nullable();
-            $table->string('seat_from')->nullable();
-            $table->string('seat_to')->nullable();
-            $table->string('ticket_type')->nullable()->default('paper ticket');
-            $table->string('ticket_restrictions')->nullable()->default('yes');
-            $table->string('deleted_at')->nullable();
+            // $table->string('section')->nullable();
+            // $table->string('row')->nullable();
+            // $table->string('seat_from')->nullable();
+            // $table->string('seat_to')->nullable();
+            // $table->string('ticket_type')->nullable()->default('paper ticket');
+            // $table->string('ticket_restrictions')->nullable()->default('yes');
+            // $table->string('deleted_at')->nullable();
         });
     }
 

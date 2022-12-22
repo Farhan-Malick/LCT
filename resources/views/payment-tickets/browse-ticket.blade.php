@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="{{ asset("assets/styles/payments.css") }}">
     <link rel="stylesheet" href="{{ asset("assets/styles/common.css") }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <title>sell-tickets</title>
+
+    <title>Last Chance Ticket - Buyer</title>
 </head>
 
 <body>

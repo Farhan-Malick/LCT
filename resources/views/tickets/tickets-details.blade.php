@@ -593,7 +593,8 @@
                     <div class="card shadow-sm mb-3 type-card main-card br-10">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4>{{$ticketListing->title}}</h4>
+                                {{-- <h4>{{$ticketListing->title}}</h4> --}}
+                                <h4>Ticket Detail</h4>
                             </div>
                             <p>
                                 {{-- <strong>{{$tickets->event->start_time}}</strong><br>

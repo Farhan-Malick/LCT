@@ -120,12 +120,17 @@ Route::get('/Sell-tickets/{ticket_listing}/upload-ticket', [TicketController::cl
 
 // Purchase module
 Route::get('/ticket/{id}/view' , [PurchasesController::class,'buyer_ticket_show'])->name('buyer.ticket.show');
-Route::post('/tickets/{eventid}/{ticketid}/{sellerid}/view' , [PurchasesController::class,'buyer_ticket_create'])->name('buyer.ticket.create');
+Route::post('/tickets/{eventlisting_id}/{ticketid}/{sellerid}/view' , [PurchasesController::class,'buyer_ticket_create'])->name('buyer.ticket.create');
 
-Route::get('/ticket/{eventid}/{ticketid}/{sellerid}/checkout' , [PurchasesController::class,'buyer_ticket_checkout'])->name('buyer.ticket.checkout');
+Route::get('/ticket/{eventlisting_id}/{ticketid}/{sellerid}/checkout' , [PurchasesController::class,'buyer_ticket_checkout'])->name('buyer.ticket.checkout');
 // Route::get('/ticket/checkout', function () {
 //     return view('payment-tickets.checkout');
 // })->name("tickets.checkout");
+
+
+// Route::get('/ticket/checkout/pages', function () {
+    //     return view('tickets.checkout');
+    // });
 
 // Route::get('/ticket/{id}/checkout' , [TicketController::class,'buyer_ticket_checkout'])->name('buyer.ticket.checkout');
 

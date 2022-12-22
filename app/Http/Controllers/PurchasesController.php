@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Event;
 
-use App\Models\Ticket;
+use App\Models\TicketListing;
 
 use App\Models\Purchases;
 use Illuminate\Http\Request;
@@ -27,49 +27,43 @@ class PurchasesController extends Controller
     public function buyer_ticket_show($id){
 
         $events = Event::find($id);
-        $tickets = Ticket::where('event_id',$id)->get();
+        $tickets = TicketListing::where('eventlisting_id',$id)->get();
         return view('payment-tickets/browse-ticket',compact('events','tickets'));
     }
 
-    public function buyer_ticket_create(Request $request, $eventid, $ticketid, $sellerid){
-        
-        $tickets =Ticket::find($ticketid);
-        $events =Event::find($eventid);
+    public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid){
+        $tickets =TicketListing::find($ticketid);
+        $events =Event::find($eventlisting_id);
         $purchases = new Purchases;
         $purchases->user_id = auth()->user()->id; 
-        $purchases->event_id = $eventid;
+        $purchases->event_id = $eventlisting_id;
         $purchases->seller_id =$sellerid;
         $purchases->ticket_id = $ticketid;  
         $purchases->quantity = $request->quantity;
         $purchases->price = $request->price;
         $purchases->save();
-        return redirect()->route('downloadPdfTicket',['eventid' => $events->id,'ticketid' => $tickets->id, 'sellerid' => $tickets->user_id]);
-        
-
-
-        
-
+        return redirect()->route('downloadPdfTicket',['eventlisting_id' => $events->id,'ticketid' => $tickets->id, 'sellerid' => $tickets->user_id]);
     }
 
-    public function buyer_ticket_checkout( Ticket $ticket, Event $event, $eventid, $ticketid, $sellerid){
+    public function buyer_ticket_checkout( TicketListing $ticket, Event $event, $eventid, $ticketid, $sellerid){
 
         
         $events = Event::find($eventid);
-        $tickets = Ticket::find($ticketid);
+        $tickets = TicketListing::find($ticketid);
         $sellers = User::find($sellerid);
         return view('payment-tickets/checkout',compact('tickets','events','sellers'));
     }
 
-    public function dashboard_orders_show(Purchases $purchases,Ticket $ticket,Event $event)
+    public function dashboard_orders_show(Purchases $purchases,TicketListing $ticket,Event $event)
     {
         $purchases = Purchases::where('user_id',auth()->user()->id)->get();
         return view('dashboard/orders',compact('purchases'));
     }
 
-    public function Pdf_template(Ticket $ticket, Event $event, $eventid, $ticketid, $sellerid){
+    public function Pdf_template(TicketListing $ticket, Event $event, $eventid, $ticketid, $sellerid){
 
         $events = Event::find($eventid);
-        $tickets = Ticket::find($ticketid);
+        $tickets = TicketListing::find($ticketid);
         $sellers = User::find($sellerid);
 
         return view('invoice',compact('tickets','events','sellers'));

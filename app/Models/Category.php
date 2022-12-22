@@ -17,7 +17,6 @@ class Category extends Model
 
         return to_array($category);
     }
-
     // get event category
     public function get_event_category($id = null)
     {

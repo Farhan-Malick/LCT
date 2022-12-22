@@ -198,8 +198,6 @@ class TicketController extends Controller
 
     }
     public function dashboard_listing(Category $category, EventListing $event, TicketListing $TicketListing){
-
-
         $categories = Category::all();
         $events = EventListing::all();
         //$activetickets = TicketListing::all();
@@ -207,7 +205,6 @@ class TicketController extends Controller
          $active_tickets =TicketListing::where([['user_id',auth()->user()->id],['status',1]])->get();
         // dd ($active_tickets);
         return view('dashboard/listings',compact('categories','active_tickets','events'));
-
     }
 
     public function admin_tickets_show(TicketListing $TicketListing){

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset("assets/styles/common.css") }}">
     <!-- Bootstrap icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <title>forgot-password</title>
+    <title>Last Chance Ticket - Sign-up</title>
 </head>
 
 <body>

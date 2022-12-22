@@ -114,7 +114,11 @@
                 <ul class="sub-menu">
             
                     <li>
-                        <a href="{{ URL('Admin-Panel/') }}">Total Tickets</a>
+                        <a href="{{ URL('Admin-Panel/') }}">Paper Tickets</a>
+                    </li>
+                    
+                    <li>
+                        <a href="{{ URL('Admin-Panel/E_tickets') }}">E-Tickets</a>
                     </li>
                 </ul>
             </li>

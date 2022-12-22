@@ -10,6 +10,7 @@ use App\Models\Currency;
 use Illuminate\Http\Request;
 use App\Models\VanueSections;
 use App\Models\VenueSectionRows;
+use App\Models\ETicket;
 use App\Http\Controllers\Auth\LoginController;
 
 class TicketController extends Controller
@@ -243,6 +244,11 @@ class TicketController extends Controller
     {
         $tickets = TicketListing::all();
         return view('Admin/pages/index',compact('tickets'));
+    }
+    public function admin_e_tickets_show(TicketListing $TicketListing)
+    {
+        $e_tickets = TicketListing::all();
+        return view('Admin/pages/e_TicketListing',compact('e_tickets'));
     }
     public function Approval(Request $request)
     {

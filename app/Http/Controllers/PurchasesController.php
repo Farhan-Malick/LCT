@@ -27,7 +27,8 @@ class PurchasesController extends Controller
     public function buyer_ticket_show($id){
 
         $events = Event::find($id);
-        $tickets = TicketListing::where('eventlisting_id',$id)->get();
+        $tickets = TicketListing::where('approve','1')->get();
+        // $tickets = TicketListing::where('eventlisting_id',$id)->get();
         return view('payment-tickets/browse-ticket',compact('events','tickets'));
     }
 

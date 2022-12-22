@@ -43,7 +43,7 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                         @foreach($tickets as $ticket)
                         <tr>
                             <td>{{$ticket->id}}</td>

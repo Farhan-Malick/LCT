@@ -17,11 +17,11 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('user_id')->nullable();
 			$table->boolean('status')->default(1);
-            $table->string('ticket');
+            $table->string('ticket')->nullable();
             $table->string('currency')->nullable()->default('$ dollar');
-			$table->string('title', 64);
-			$table->decimal('price', 10);
-			$table->integer('quantity');
+			$table->string('title', 64)->nullable();
+			$table->decimal('price', 10)->nullable();
+			$table->integer('quantity')->nullable();
 			$table->string('description', 512)->nullable()->change();
             $table->integer('customer_limit')->nullable()->default(null);
 			// $table->integer('eventlisting_id');
@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('row')->nullable();
             $table->string('seat_from')->nullable();
             $table->string('seat_to')->nullable();
+            $table->string('reason_seating_unable')->nullable();
             $table->string('ticket_type')->nullable()->default('paper ticket');
             $table->string('ticket_restrictions')->nullable()->default('yes');
             $table->string('deleted_at')->nullable();

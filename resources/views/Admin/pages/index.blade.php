@@ -250,40 +250,56 @@
                                         <th scope="col">ticket type</th>
                                         <th scope="col">ticket restrictions</th>
                                         <th scope="col">status</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" >Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($tickets as $ticket)
-                                    <tr>
-                                        <td>{{$ticket->id}}</td>
-                                        <td>{{$ticket->title}}</td>
-                                        {{-- <td>{{$ticket->event->title}}</td> --}}
-                                        <td>{{$ticket->price}}</td>
-                                        <td>{{$ticket->currency}}</td>
-                                        <td>{{$ticket->quantity}}</td>
-                                        <td>{{$ticket->section}}</td>
-                                        <td>{{$ticket->row}}</td>
-                                        <td>{{$ticket->seat_from}}</td>
-                                        <td>{{$ticket->seat_to}}</td>
-                                        <td>{{$ticket->ticket_type}}</td>
-                                        <td>{{$ticket->ticket_restrictions}}</td>
-                                        <td>{{$ticket->status}}</td>
-                                        <td>
-                                            <a
-                                                class="btn btn-primary"
-                                                href="{{route('admin.section_rows.edit',$ticket->id)}}"
-                                                >edit</a
-                                            >
-            
-                                            <a
-                                                class="btn btn-danger"
-                                                href="{{route('admin.section_rows.destroy',$ticket->id)}}"
-                                                >Delete</a
-                                            >
-                                        </td>
-                                    </tr>
-                                    @endforeach
+										@foreach($tickets as $ticket)
+											@if($ticket->ticket_type == "paper ticket")
+												<tr>
+													<td>{{$ticket->id}}</td>
+													<td>{{$ticket->title}}</td>
+													{{-- <td>{{$ticket->event->title}}</td> --}}
+													<td>{{$ticket->price}}</td>
+													<td>{{$ticket->currency}}</td>
+													<td>{{$ticket->quantity}}</td>
+													<td>{{$ticket->section}}</td>
+													<td>{{$ticket->row}}</td>
+													<td>{{$ticket->seat_from}}</td>
+													<td>{{$ticket->seat_to}}</td>
+														<td>{{$ticket->ticket_type}}</td>
+												
+													<td>{{$ticket->ticket_restrictions}}</td>
+													<td>{{$ticket->status}}</td>
+													<td>
+														<form action="{{ url('/toggle-approve') }}" method="POST">
+															@csrf
+															<input <?php
+															if ($ticket->approve == 1) {
+																echo 'checked';
+															}
+															?> type="checkbox"
+																name="approve" class="mr-2">
+															<input type="hidden" name="ticket_id" id=""
+																value="{{ $ticket->id }}">
+															<input type="submit" class="btn btn-primary"
+																name="" value="Approve" id="">
+														</form>
+
+														{{-- <a
+															class="btn btn-primary"
+															href="{{route('admin.section_rows.edit',$ticket->id)}}"
+															>edit</a
+														> --}}
+														<a
+															class="btn btn-danger"
+															href="{{route('admin.section_rows.destroy',$ticket->id)}}"
+															><i class="fa fa-trash" aria-hidden="true"></i></a
+														>
+													</td>
+												</tr>
+											@endif
+										@endforeach
                                 </tbody>
                             </table>
                         </div>

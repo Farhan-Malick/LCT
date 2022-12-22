@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sellers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('ticket_listings', function (Blueprint $table) {
+            $table->boolean('approve')->nullable();
         });
     }
 
@@ -26,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sellers');
+        Schema::table('ticket_listings', function (Blueprint $table) {
+            //
+        });
     }
 };

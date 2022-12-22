@@ -19,7 +19,7 @@
         <div class="container my-4">
             <div class="row">
                 <div class="col-lg-9">
-                    <form action="{{route('seller.ticketlisting.store',$ticketListing->id)}}" method="post">
+                    <form action="{{route('seller.ticketlisting.store',$EventListing->id)}}" method="post">
                     @csrf
                         <!-- alert start here -->
                         <div class="alert alert-primary d-flex align-items-center" role="alert">

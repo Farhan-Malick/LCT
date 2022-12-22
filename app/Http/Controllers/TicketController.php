@@ -19,14 +19,14 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(VanueSections $vanuesections,VenueSectionRows $venuesectionrows, TicketListing $TicketListing,Currency $currency,$id)
+    public function index(VanueSections $vanuesections,VenueSectionRows $venuesectionrows, EventListing $EventListing,Currency $currency,$id)
     {
         //
         $currencies = Currency::all();
-        $ticketListing = TicketListing::find($id);
+        $EventListing = EventListing::find($id);
         $venue_section_rows = VenueSectionRows::all();
         $venue_sections = VanueSections::all();
-        return view('tickets/tickets-details',compact('venue_section_rows','venue_sections','ticketListing','currencies'));
+        return view('tickets/tickets-details',compact('venue_section_rows','venue_sections','EventListing','currencies'));
     }
 
     /**
@@ -238,13 +238,24 @@ class TicketController extends Controller
         return view('dashboard/listings',compact('categories','active_tickets','events'));
     }
 
-    public function admin_tickets_show(TicketListing $TicketListing){
-
+    public function admin_tickets_show(TicketListing $TicketListing)
+    {
         $tickets = TicketListing::all();
-
         return view('Admin/pages/index',compact('tickets'));
     }
-
+    public function Approval(Request $request)
+    {
+        $tickets=TicketListing::find($request->ticket_id);
+        $approval=$request->approve;
+        if ($approval=='on') {
+            $approval=1;
+        }else {
+            $approval=0;
+        }
+        $tickets->approve=$approval;
+        $tickets->save();
+        return redirect()->back()->with('You have Approved the Ticket');
+    }
     //buyer functions
 
     // public function buyer_tickets_index(EventListing $event,$id){

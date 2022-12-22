@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../../assets/styles/tablet-noexps.css">
     <link rel="stylesheet" href="../../assets/styles/experiments-noexps.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <title>Upload Tickets</title>
 </head>
 
@@ -61,9 +62,30 @@
                                 <div id="etuWorkArea">
                                     <h6 class="h l pb0 mb0 txtc">Drag and drop your tickets into consecutive seat number order</h6>
                                     <div id="js-incViewport" class="txtc">
+                                        <div class="js-viewport-inset js-incViewportInset mCustomScrollbar _mCS_1">
+                                            <div class="mCSB_container" style="position: relative; left: 0px; width: 944px;">
+                                                <div id="js-incReel" class="ibk cfix">
+                                                    <?php for($i = 0; $i < $ticket_listing->quantity; $i++){ ?>
+                                                    <div class="js-incDropTarget js-aDoc ui-droppable droppable">
+                                                        <div class="js-placeholderBacking js-incDropTargetBacking js-aDoc bdr dash">
+                                                            <div class="js-eticketHelpText">
+                                                                <span class="h m cGry2">Drag Ticket <?= $i+1 ?> Here</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div id="js-excViewport" class="txtc">
+                                        <div class="js-viewport-inset js-excViewportInset mCustomScrollbar _mCS_2">
+                                            <div class="mCSB_container" style="position: relative; left: 0px; width: 952px;">
+                                                <div id="js-excReel" class="ibk">
 
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +292,85 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="../../js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
-    <script src="../../js/eticket-uplod.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.0.6/jquery.mousewheel.min.js" ></script>
+    <script src="http://malihu.github.io/custom-scrollbar/3.0.0/jquery.mCustomScrollbar.concat.min.js" > </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.12/draggable.min.js" integrity="sha512-VTqyB/kLQGaTnF5kYAgeEFo8fwqdlAGNUQeoQi4EOmmBYTEQ/XrYC7lnzCvBBp1PR+1ODEQiT075oeUdPeFHwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const publicPath = `<?= asset('etickets/'); ?>`;
+
+        const makeDraggables = (draggableImages) => {
+            let draggableHtml = '';
+            draggableImages.map((image) => {
+               draggableHtml += `<div class="js-excPlaceholder etuTicketDimension" data-id="`+image.filename+`" style="height: 283px;">
+                                    <div class="js-placeholderBacking js-excBacking etuTicketDimension invis" style="height: 283px;">
+                                        <div class="js-eticketHelpText">
+                                            <span class="h m cGry2">Moved to Ticket <span class="js-ticket-ordinal"></span></span>
+                                        </div>
+                                    </div>
+                                    <div class="js-data-node js-ticketThumb etuTicketDimension js-excluded ui-draggable draggable" data-id="59894126" style="height: 283px;">
+                                        <img class="thumbnail imgFull" src="`+publicPath+`/`+image.filename+`">
+                                    </div>
+                                </div>`;
+            });
+            $('#js-excReel').append(draggableHtml)
+            console.log(draggableHtml);
+        };
+        $("#js-preUploadBtn").click(function() {
+            $("#js-preUploadInput").trigger("click")
+        });
+
+        $("#js-preUploadInput").change(function(e){
+            var myFormData = new FormData();
+            myFormData.append('etickets', e.target.files[0]);
+            $(".js-uploadInstructions").css("display","none");
+            $(".js-loading").css("display","block");
+            $.ajax({
+                type: 'POST',
+                url: `<?= route('seller.ticketlisting.tickets.pdf.store', $ticket_listing->id) ?>`,
+                data: myFormData,
+                cache: false,
+                success: function (data) {
+                    console.log(data);
+                    $(".js-splashScreen").css("display","none");
+                    $(".js-loading").css("display","none");
+                    $('#js-etuStateToggle').removeClass('js-preUpload');
+                    $('#js-etuStateToggle').addClass('js-activeUpload');
+                    makeDraggables(data);
+                },
+                processData: false,
+                contentType: false,
+            });
+        });
+        $( ".draggable" ).draggable();
+        $( ".droppable" ).droppable({
+            drop: function( event, ui ) {
+                /* $( this )
+                .addClass( "ui-state-highlight" )
+                .find( "p" )
+                    .html( "Dropped!" ); */
+            }
+        });
+        /* $('#js-excReel').mCustomScrollbar({
+            horizontalScroll: !0,
+            theme: "dark-thick",
+            mouseWheel: !1,
+            mouseWheelPixels: 1e3,
+            advanced: {
+                autoExpandHorizontalScroll: !0
+            },
+        });
+        $('#js-incReel').mCustomScrollbar({
+            horizontalScroll: !0,
+            theme: "dark-thick",
+            mouseWheel: !1,
+            mouseWheelPixels: 1e3,
+            advanced: {
+                autoExpandHorizontalScroll: !0
+            },
+        }); */
+    </script>
+    {{-- <script src="../../js/eticket-uplod.js"></script>
     <script src="../../js/web-vitals.js"></script>
     <script type="text/javascript">
 
@@ -284,35 +384,18 @@
             },
             state: {
                 authToken: "",
-                sellPipelineStateId: "4e00d30c-3483-4e1e-9532-8e06939c8b4d"
+                sellPipelineStateId: <?= $ticket_listing->id ?>
             },
             requiresTicketAllocation: true,
             numberOfPagesMustMatchExpectedQuantity: true,
             processBegun: false,
-            quantity: 5,
+            quantity: <?= $ticket_listing->quantity ?>,
             numberOfPagesPerETicket: 1,
             //element: $("#etuBox"),
             element: document,
             uploads: [  ],
             platform: 'tablet'
         });
-
-
-
-        //<![CDATA[
-
-        window.vgAsyncExec.push(function () {
-            $(document).bind(VGModal.Events.VGColorboxMessage, function (e, data) {
-                if (data.LoginResult == 'VGLogin' || data.LoginResult == 'FBLogin') {
-                    $.colorbox.close();
-                    document.location.reload();
-                }
-            });
-
-
-        });
-        //]]>
-
 
 
         //<![CDATA[
@@ -380,14 +463,6 @@
                 });
             });
 
-
-            $(function() {
-  $("[data-user-setting]").click(function(a) {
-      a.preventDefault();
-      var b = $(this).data("user-setting") || "1";
-      $.modal.post(VGPage.mergeUrlElements("https://www.viagogo.com/Browse/DefaultMaster/LocationSettings", "?selected=" + b + "&hide=True"))
-  })
-});
 
 function _defineProperty(e, r, t) {
   return r in e ? Object.defineProperty(e, r, {
@@ -688,7 +763,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }), n(document))
 });
 </script>
-<div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon311809122921"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon833998061291" alt="" src="https://bat.bing.com/action/0?ti=23001275&amp;Ver=2&amp;mid=f3e38324-5d5f-44c6-a51b-784876c3a052&amp;sid=b95fc7307edd11edb13ddb84302bba18&amp;vid=b95fdb407edd11ed9baae3d720f577a2&amp;vids=0&amp;msclkid=N&amp;pi=918639831&amp;lg=en-US&amp;sw=1600&amp;sh=900&amp;sc=24&amp;tl=Sell%20Tickets%20-%20Sell%20Concert,%20Sports,%20Theatre%20tickets%20%7C%20viagogo%20Ticket%20Exchange&amp;kw=viagogo,%20buy%20tickets,%20sell%20tickets,%20concert%20tickets,%20sport%20tickets,%20theatre%20tickets&amp;p=https%3A%2F%2Fwww.viagogo.com%2FSecure%2FPipeline%2FSell%2FETicketUpload%3FID%3D4e00d30c-3483-4e1e-9532-8e06939c8b4d&amp;r=https%3A%2F%2Fwww.viagogo.com%2FSecure%2FPipeline%2FSell%2FTicketDetails%3FID%3D4e00d30c-3483-4e1e-9532-8e06939c8b4d&amp;lt=3819&amp;mtp=256&amp;evt=pageLoad&amp;sv=1&amp;rn=88174" width="0" height="0"></div>
+<div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon311809122921"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon833998061291" alt="" src="https://bat.bing.com/action/0?ti=23001275&amp;Ver=2&amp;mid=f3e38324-5d5f-44c6-a51b-784876c3a052&amp;sid=b95fc7307edd11edb13ddb84302bba18&amp;vid=b95fdb407edd11ed9baae3d720f577a2&amp;vids=0&amp;msclkid=N&amp;pi=918639831&amp;lg=en-US&amp;sw=1600&amp;sh=900&amp;sc=24&amp;tl=Sell%20Tickets%20-%20Sell%20Concert,%20Sports,%20Theatre%20tickets%20%7C%20viagogo%20Ticket%20Exchange&amp;kw=viagogo,%20buy%20tickets,%20sell%20tickets,%20concert%20tickets,%20sport%20tickets,%20theatre%20tickets&amp;p=https%3A%2F%2Fwww.viagogo.com%2FSecure%2FPipeline%2FSell%2FETicketUpload%3FID%3D4e00d30c-3483-4e1e-9532-8e06939c8b4d&amp;r=https%3A%2F%2Fwww.viagogo.com%2FSecure%2FPipeline%2FSell%2FTicketDetails%3FID%3D4e00d30c-3483-4e1e-9532-8e06939c8b4d&amp;lt=3819&amp;mtp=256&amp;evt=pageLoad&amp;sv=1&amp;rn=88174" width="0" height="0"></div> --}}
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

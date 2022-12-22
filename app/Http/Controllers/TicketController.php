@@ -7,6 +7,8 @@ use App\Models\Event;
 use App\Models\TicketListing;
 use App\Models\Category;
 use App\Models\Currency;
+use App\Models\User;
+use App\Models\Seller;
 use Illuminate\Http\Request;
 use App\Models\VanueSections;
 use App\Models\VenueSectionRows;
@@ -52,6 +54,7 @@ class TicketController extends Controller
      */
     public function store(Request $request, $id)
     {
+        // dd($request);
         $guestUser = LoginController::guestLogin();
         $ticketListing = new TicketListing();
         $ticketListing->user_id = $guestUser;
@@ -86,13 +89,41 @@ class TicketController extends Controller
         return redirect()->route('seller.complete_ticket.address.save', ['id' => $tickets->id]);
     }
 
+    public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)
+    {
+        $tickets = TicketListing::find($id);
+        $user = User::find($tickets->user_id);
+
+        $seller = new Seller();
+        $seller->user_id = $user->id;
+        $seller->email = $request->email;
+        $seller->first_name = $request->firstname;
+        $seller->last_name = $request->lastname;
+        $seller->country = $request->country;
+        $seller->address_line_1 = $request->address1;
+        $seller->address_line_2 = $request->address2;
+        $seller->address_line_3 = $request->address3;
+        $seller->city = $request->city;
+        $seller->state = $request->state;
+        $seller->zip_code = $request->zipcode;
+        $seller->phone = $request->phone;
+        $seller->save();
+
+        $user->first_name = $request->firstname;
+        $user->last_name = $request->lastname;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->update();
+        return redirect('/')->with('Your tickets has been submitted, You will get a confirmation email.');
+    }
+
     public function showAddressPage(Currency $currencies, TicketListing $tickets, $id, EventListing $event)
     {
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
         $currencies = Currency::all();
         $ticketCurrency = Currency::find($tickets->currency);
-        dd($ticketCurrency, $tickets);
+        // dd($ticketCurrency, $tickets);
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
         $percentage = $divide * 15;

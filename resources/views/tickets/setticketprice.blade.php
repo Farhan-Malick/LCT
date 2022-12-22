@@ -34,9 +34,8 @@
                                     @csrf
                                     <div class="form-group">
                                         <select class="form-select" aria-label="Default select example" name="currency">
-                                            <option selected disabled>{{$ticketCurrency->currency_type}}</option>
                                             @foreach($currencies as $currency)
-                                            <option value="{{$ticketCurrency->id}}">{{$currency->currency_type}}</option>
+                                            <option value="{{$currency->id}}" @if($ticketCurrency->id === $currency->id) @php echo "selected='true'" @endphp @endif>{{$currency->currency_type}}</option>
                                             @endforeach
 
                                         </select>

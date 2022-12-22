@@ -83,6 +83,7 @@ Route::get('/tickets/{id}/setticketprice' , [TicketController::class,'show_price
 
 Route::post('/tickets/{id}/save-price' , [TicketController::class,'savePrice'])->name('seller.complete_ticket.save');
 Route::get('/tickets/{id}/add-address' , [TicketController::class,'showAddressPage'])->name('seller.complete_ticket.address.save');
+Route::post('/tickets/{id}/store-address' , [TicketController::class,'storeAddress'])->name('seller.complete_ticket.address.store');
 
 Route::get('/tickets/{id}/upload-ticket' , [TicketController::class,'show_ticket'])->name('seller.complete_ticket.show');
 

@@ -30,9 +30,10 @@
                                 </p>
                             </div>
                             <div class="col-md-8">
-                                <form action="">
+                                <form action="{{route('seller.complete_ticket.address.store',$tickets->id)}}" method="post">
+                                    @csrf
                                     <div class="form-group mb-3">
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" name="country" aria-label="Default select example">
                                             <option value="USA">USA</option>
                                             <option value="UK">UK</option>
                                             <option value="PAKISTAN">Pakistan</option>
@@ -41,8 +42,16 @@
                                         </select>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="fullname">Full Name</label>
-                                        <input type="text" class="form-control" name="fullname" id="fullname">
+                                        <label for="firstname">First Name</label>
+                                        <input type="text" class="form-control" name="firstname" id="firstname">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="lastname">Last Name</label>
+                                        <input type="text" class="form-control" name="lastname" id="lastname">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" name="email" id="email">
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="address">Address</label>
@@ -59,7 +68,7 @@
                                         <input type="text" class="form-control" name="city">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" aria-label="Default select example" name="state">
                                             <option selected>Select state</option>
                                             <option value="Alabama">Alabama</option>
                                             <option value="Alaska">Alaska</option>
@@ -69,18 +78,18 @@
                                     </div>
                                     <div class="form-group mb-3 w-50">
                                         <label for="zip">Zip Code</label>
-                                        <input type="number" class="form-control" name="number" id="zip">
+                                        <input type="number" class="form-control" name="zipcode" id="zip">
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="phone">Phone <span class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" name="number" id="phone">
+                                        <input type="number" class="form-control" name="phone" id="phone">
                                     </div>
                                     <small>We require a phone number in case we need to contact you about
                                         your ticket
                                         sale or account details. We will not use this number for any other
                                         reason.</small>
-                                    <a class="btn primary-btn w-100 mt-3"
-                                        href="{{URL("Sell-tickets/upload-ticket")}}"><strong>CONTINUE</strong></a>
+                                    <button class="btn primary-btn w-100 mt-3"
+                                        type="submit"><strong>Done</strong></button>
                                 </form>
                             </div>
                         </div>

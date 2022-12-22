@@ -91,6 +91,7 @@ class TicketController extends Controller
         $tickets = TicketListing::find($id);
         $currencies = Currency::all();
         $ticketCurrency = Currency::find($tickets->currency);
+        dd($ticketCurrency, $tickets);
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
         $percentage = $divide * 15;

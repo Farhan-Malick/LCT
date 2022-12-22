@@ -215,7 +215,7 @@
                                 <div class="ticket-action-btns">
                                     <p class="m-0">{{$ticket->currency}}{{$ticket->price}}</p>
                                     <p class="">per ticket</p>
-                                    <a class="btn btn-sm success-btn w-100" href="{{ route('buyer.ticket.checkout',['eventid' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}">Select</a>
+                                    <a class="btn btn-sm success-btn w-100" href="{{ route('buyer.ticket.checkout',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}">Select</a>
                                 </div>
                             </div>
                         </div>

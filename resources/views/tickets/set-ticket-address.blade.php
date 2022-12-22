@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../assets/styles/sellticket.css">
     <link rel="stylesheet" href="../../assets/styles/common.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <title>set-price</title>
+    <title>Ticket Location Address</title>
 </head>
 
 <body>
@@ -90,42 +90,50 @@
                     <div class="card shadow-sm mb-3 type-card main-card br-10">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4>Bad Bunny</h4>
+                                <h4>{{$tickets->event->title}}</h4>
                             </div>
                             <div class="card-subtitle">
-                                <span class="fw-600">Monday, 28 November 2022 20:00</span>
+                                <span class="fw-600"><strong>{{$tickets->event->start_date}}
+                                    <strong>{{$tickets->event->start_time}}</strong>
+                                </strong></span>
+                                <br>
                                 <span class="text-muted">Singapore National Stadium, Singapore, Singapore</span>
                             </div>
                             <div class="tags d-flex">
-                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>Paper
-                                    Tickets</span>
+                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>{{$tickets->ticket_type}}</span>
                                 <span class="ticket-type p-1 rounded-3 me-2"><strong>Split Type: </strong>any</span>
                             </div>
+
                             <div class="price-tag d-sm-flex d-block justify-content-between">
                                 <span> <strong>Price/Ticket: </strong></span>
-                                <span><strong> US$ 242.00</strong></span>
+                                <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$tickets->price}}</span></strong></span>
                             </div>
+
                             <div class="price-tag d-sm-flex d-block justify-content-between tags">
                                 <span> <strong>Number of Tickets: </strong></span>
-                                <span><strong> × 1</strong></span>
+                                <span><strong> × {{$tickets->quantity}}</strong></span>
+                            </div>
+                            <div class="tags d-flex mt-1">
+                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>{{$tickets->section}}</span>
+                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>{{$tickets->row}}</span>
                             </div>
                             <div class="price-tag d-sm-flex d-block justify-content-between">
                                 <span> <strong>Website Price: </strong></span>
-                                <span><strong> US$ 242.00</strong></span>
+                                <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$price}}</span></strong></span>
                             </div>
                             <div class="price-tag d-sm-flex d-block justify-content-between">
                                 <span> <strong> Seller Fees: </strong></span>
-                                <span><strong> -US$ 24.20</strong></span>
+                                <span><strong> {{$ticketCurrency->currency_type}} <span class="percentage">{{$percentage}}</span></strong></span>
                             </div>
                             <div class="price-tag d-sm-flex d-block justify-content-between">
-                                <span> <strong>VAT -US$: </strong></span>
+                                <span> <strong>VAT {{$ticketCurrency->currency_type}}: </strong></span>
                                 <span><strong> 1.86</strong></span>
                             </div>
                             <div class="small tags"> VAT amount can change depending on your location.
-                                YOU'LL RECEIVE US$ 215.94</div>
+                                YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div>
                             <div class="price-tag d-sm-flex d-block justify-content-between">
                                 <span> <strong>YOU'LL RECEIVE: </strong></span>
-                                <span><strong> US$ 215.94</strong></span>
+                                <span><strong> {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></strong></span>
                             </div>
                         </div>
                     </div>

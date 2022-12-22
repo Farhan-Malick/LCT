@@ -81,6 +81,9 @@ Route::get('/Sell-tickets/set-ticket-address', function () {
 // });
 Route::get('/tickets/{id}/setticketprice' , [TicketController::class,'show_price'])->name('seller.ticket_price.index');
 
+Route::post('/tickets/{id}/save-price' , [TicketController::class,'savePrice'])->name('seller.complete_ticket.save');
+Route::get('/tickets/{id}/add-address' , [TicketController::class,'showAddressPage'])->name('seller.complete_ticket.address.save');
+
 Route::get('/tickets/{id}/upload-ticket' , [TicketController::class,'show_ticket'])->name('seller.complete_ticket.show');
 
 Route::get('/tickets/upload-E-tickets', function () {

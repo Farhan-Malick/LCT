@@ -67,7 +67,35 @@ class TicketController extends Controller
         $ticketListing->reason_seating_unable = $request->reason_seating_unable;
         $ticketListing->save();
 
-        return redirect()->route('event.ticketlisting.ticket.upload', ['ticket_listing' => $ticketListing->id]);
+        if ($request->ticket_type === "e-ticket") {
+            return redirect()->route('event.ticketlisting.ticket.upload', ['ticket_listing' => $ticketListing->id]);
+        } else {
+            return redirect()->route('seller.ticket_price.index', ['id' => $ticketListing->id]);
+        }
+    }
+
+
+    public function savePrice(Request $request, $id, TicketListing $tickets)
+    {
+        // dd($id, $request->price, $request->currency);
+        $tickets = TicketListing::find($id);
+        $tickets->price = $request->price;
+        $tickets->currency = $request->currency;
+        $tickets->update();
+        return redirect()->route('seller.complete_ticket.address.save', ['id' => $tickets->id]);
+    }
+
+    public function showAddressPage(Currency $currencies, TicketListing $tickets, $id, EventListing $event)
+    {
+        $events = EventListing::all();
+        $tickets = TicketListing::find($id);
+        $currencies = Currency::all();
+        $ticketCurrency = Currency::find($tickets->currency);
+        $price = $tickets->price * $tickets->quantity;
+        $divide = $price / 100;
+        $percentage = $divide * 15;
+        $grand_total = $price - $percentage;
+        return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency'));
     }
 
     /**
@@ -123,14 +151,17 @@ class TicketController extends Controller
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
         $currencies = Currency::all();
+        $ticketCurrency = Currency::find($tickets->currency);
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
         $percentage = $divide * 15;
         $grand_total = $price - $percentage;
-        return view('tickets/setticketprice',compact('currencies','tickets','events','price','percentage','grand_total'));
+        return view('tickets/setticketprice',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency'));
     }
 
     public function show_ticket(Currency $currencies, TicketListing $tickets, $id, EventListing $event){
+
+        dd();
 
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
@@ -139,7 +170,7 @@ class TicketController extends Controller
         $divide = $price / 100;
         $percentage = $divide * 15;
        $grand_total = $price - $percentage;
-        return view('tickets/upload-TicketListing',compact('currencies','tickets','events','price','percentage','grand_total'));
+        return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total'));
 
     }
 

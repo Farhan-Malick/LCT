@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
 			$table->string('title', 256)->nullable();
 			$table->text('description', 65535)->nullable();
 			$table->string('thumbnail', 256)->nullable();

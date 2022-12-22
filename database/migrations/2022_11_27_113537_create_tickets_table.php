@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->increments('id');
-			$table->string('title', 64);
-			$table->decimal('price', 10);
-			$table->integer('quantity');
-			$table->string('description', 512)->nullable()->change();
-            $table->integer('customer_limit')->nullable()->default(null);
-			$table->integer('event_id');
+            $table->bigIncrements('id');
+			// $table->string('title', 64);
+			// $table->decimal('price', 10);
+			// $table->integer('quantity');
+			// $table->string('description', 512)->nullable()->change();
+            // $table->integer('customer_limit')->nullable()->default(null);
+			// $table->integer('eventlisting_id');
 			$table->timestamps();
-			$table->boolean('status')->default(1);
+			// $table->boolean('status')->default(1);
         });
     }
 

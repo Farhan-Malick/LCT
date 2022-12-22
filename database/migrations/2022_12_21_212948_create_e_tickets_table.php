@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('event_request', function (Blueprint $table) {
+        Schema::create('e_tickets', function (Blueprint $table) {
             $table->id();
-            $table->string('event')->nullable();
-            $table->string('category_event')->nullable();
+            $table->unsignedBigInteger('ticketlisting_id');
+            $table->foreign('ticketlisting_id')->references('id')->on('ticket_listings')->onDelete('cascade');
+            $table->longtext('ticket_path');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_request');
+        Schema::dropIfExists('e_tickets');
     }
 };

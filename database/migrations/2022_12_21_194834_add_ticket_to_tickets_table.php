@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('tickets', function (Blueprint $table) {
-            //
-            // $table->string('currency')->nullable()->default('$ dollar')->after('price');
+            // $table->string('ticket');
         });
     }
 
@@ -27,8 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('tickets', function (Blueprint $table) {
-            //
-            $table->dropColumn('currency');
+            $table->dropColumn('ticket');
         });
     }
 };

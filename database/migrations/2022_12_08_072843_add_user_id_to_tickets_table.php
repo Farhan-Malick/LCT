@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('tickets', function (Blueprint $table) {
             //
-            $table->string('user_id')->nullable()->after('event_id');
+            // $table->string('user_id')->nullable()->after('eventlisting_id');
         });
     }
 

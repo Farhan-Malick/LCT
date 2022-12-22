@@ -61,19 +61,9 @@
                                 <div id="etuWorkArea">
                                     <h6 class="h l pb0 mb0 txtc">Drag and drop your tickets into consecutive seat number order</h6>
                                     <div id="js-incViewport" class="txtc">
-                                        <div id="js-incReel" class="ibk cfix">
-                                            <div class="js-incDropTarget js-aDoc ui-droppable">
-                                                <div class="js-placeholderBacking js-incDropTargetBacking js-aDoc bdr dash">
-                                                    <div class="js-eticketHelpText">
-                                                        <span class="h m cGry2">Drag Ticket 1 Here</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div id="js-excViewport" class="txtc">
-                                        <div id="js-excReel" class="ibk">
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

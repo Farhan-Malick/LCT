@@ -254,34 +254,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-										@foreach($tickets as $ticket)
-											@if($ticket->ticket_type == "paper-ticket")
+										@foreach($mobile_tickets as $m_ticket)
+											@if($m_ticket->ticket_type == "mobile-ticket")
 												<tr>
-													<td>{{$ticket->id}}</td>
-													<td>{{$ticket->title}}</td>
-													<td>{{$ticket->event->title}}</td>
-													<td>{{$ticket->price}}</td>
-													<td>{{$ticket->currency}}</td>
-													<td>{{$ticket->quantity}}</td>
-													<td>{{$ticket->section}}</td>
-													<td>{{$ticket->row}}</td>
-													<td>{{$ticket->seat_from}}</td>
-													<td>{{$ticket->seat_to}}</td>
-														<td>{{$ticket->ticket_type}}</td>
+													<td>{{$m_ticket->id}}</td>
+													<td>{{$m_ticket->title}}</td>
+													<td>{{$m_ticket->event->title}}</td>
+													<td>{{$m_ticket->price}}</td>
+													<td>{{$m_ticket->currency}}</td>
+													<td>{{$m_ticket->quantity}}</td>
+													<td>{{$m_ticket->section}}</td>
+													<td>{{$m_ticket->row}}</td>
+													<td>{{$m_ticket->seat_from}}</td>
+													<td>{{$m_ticket->seat_to}}</td>
+														<td>{{$m_ticket->ticket_type}}</td>
 												
-													<td>{{$ticket->ticket_restrictions}}</td>
-													<td>{{$ticket->status}}</td>
+													<td>{{$m_ticket->ticket_restrictions}}</td>
+													<td>{{$m_ticket->status}}</td>
 													<td>
 														<form action="{{ url('/toggle-approve') }}" method="POST">
 															@csrf
 															<input <?php
-															if ($ticket->approve == 1) {
+															if ($m_ticket->approve == 1) {
 																echo 'checked';
 															}
 															?> type="checkbox"
 																name="approve" class="mr-2">
 															<input type="hidden" name="ticket_id" id=""
-																value="{{ $ticket->id }}">
+																value="{{ $m_ticket->id }}">
 															<input type="submit" class="btn btn-primary"
 																name="" value="Approve" id="">
 														</form>
@@ -293,7 +293,7 @@
 														> --}}
 														<a
 															class="btn btn-danger"
-															href="{{route('admin.section_rows.destroy',$ticket->id)}}"
+															href="{{route('admin.section_rows.destroy',$m_ticket->id)}}"
 															><i class="fa fa-trash" aria-hidden="true"></i></a
 														>
 													</td>

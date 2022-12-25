@@ -120,6 +120,9 @@
                     <li>
                         <a href="{{ URL('Admin-Panel/E_tickets') }}">E-Tickets</a>
                     </li>
+                    <li>
+                        <a href="{{ URL('Admin-Panel/Mobile_tickets') }}">Mobile-Tickets</a>
+                    </li>
                 </ul>
             </li>
             <li class="has-sub">

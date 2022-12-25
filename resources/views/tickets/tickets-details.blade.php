@@ -32,18 +32,18 @@
                                 <h4 class="fw-700">Choose Ticket Type</h4>
                                 <input type="hidden" id="ticket-type" name="ticket_type" value="paper-ticket" />
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="card shadow-sm mb-3 select-card select-active" data-ticket="paper-ticket">
                                             <div class="card-body py-5">
                                                 <div class="card-subtitle">
                                                     <strong> Paper Tickets</strong>
                                                 </div>
-                                                <div class="card-description">Printed tickets, not in electronic format
+                                                <div class="card-description">Printed tickets, not in E-format
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="card shadow-sm mb-3 select-card" data-ticket="e-ticket">
                                             <div class="card-body py-5">
                                                 <div class="card-subtitle">
@@ -51,6 +51,18 @@
                                                 </div>
                                                 <div class="card-description">
                                                     Electronic tickets in PDF format
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card shadow-sm mb-3 select-card" data-ticket="mobile-ticket">
+                                            <div class="card-body py-5">
+                                                <div class="card-subtitle">
+                                                    <strong>Mobile Ticket</strong>
+                                                </div>
+                                                <div class="card-description">
+                                                    You'll have Mobile Ticket via App
                                                 </div>
                                             </div>
                                         </div>
@@ -635,7 +647,6 @@
                     document.getElementById('ticket-type').value = value;
                 });
             });
-
 
             document.querySelectorAll('.ticket-num-card').forEach(function(element) {
                 element.addEventListener("click", (event) => {

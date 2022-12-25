@@ -208,7 +208,7 @@
                                     type="submit"
                                     class="btn btn-primary"
                                 >
-                                    Add Ticket
+                                    Add Event Listing
                                 </button>
                             </form>
                         </div>

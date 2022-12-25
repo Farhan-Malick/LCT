@@ -90,6 +90,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/Admin-Panel', [TicketController::class, 'admin_tickets_show']);
         Route::get('/Admin-Panel/E_tickets', [TicketController::class, 'admin_e_tickets_show']);
+        Route::get('/Admin-Panel/Mobile_tickets', [TicketController::class, 'admin_mobile_tickets_show']);
         Route::post('/toggle-approve', [TicketController::class, 'Approval']);
 
         Route::get('Admin-Panel/event-listing-form', [EventListingController::class, 'EventListingForm']);

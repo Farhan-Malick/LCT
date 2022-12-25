@@ -114,7 +114,7 @@ class TicketController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->update();
-        return redirect('/')->with('Your tickets has been submitted, You will get a confirmation email.');
+        return redirect('/dashboard/listings')->with('Your tickets has been submitted, You will get a confirmation email.');
     }
 
     public function showAddressPage(Currency $currencies, TicketListing $tickets, $id, EventListing $event)
@@ -280,6 +280,11 @@ class TicketController extends Controller
     {
         $e_tickets = TicketListing::all();
         return view('Admin/pages/e_TicketListing',compact('e_tickets'));
+    }
+    public function admin_mobile_tickets_show(TicketListing $TicketListing)
+    {
+        $mobile_tickets = TicketListing::all();
+        return view('Admin/pages/mobileTicket',compact('mobile_tickets'));
     }
     public function Approval(Request $request)
     {

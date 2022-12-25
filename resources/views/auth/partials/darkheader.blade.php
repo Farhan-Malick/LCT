@@ -68,8 +68,8 @@
                                         >
                                     </li>
                                     <li class="nav-item">
-                                        <a
-                                            class="nav-link btn btn-sm primary-btn px-3"
+                                        <a 
+                                            class="nav-link btn btn-sm primary-btn px-3 text-dark"
                                             href="{{ URL('Sell-tickets') }}"
                                             >Sell Tickets</a
                                         >

@@ -167,7 +167,7 @@
                                             {{ $event->title }}
                                         </h6>
                                         <span class="text-danger card-span">
-                                            {{$event->start_time}}<br>
+                                            {{$event->start_time}}-{{$event->end_time}}<br>
                                             {{$event->start_date}}
                                             </span
                                         >

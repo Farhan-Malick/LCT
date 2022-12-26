@@ -144,7 +144,23 @@
         </section>
         <div class="container m-5 ">
           <div class="row">
+          
             <div class="col-md-6">
+                @if ($message = Session::get('msg'))
+                <div class="alert alert-success">
+                    <center><strong>{{ $message }}</strong></center>
+                </div>
+            @endif
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <h1 style=" margin: 0px;
                 position: relative;
                 top: 50%;
@@ -158,6 +174,7 @@
                     @csrf
                     <div class="form-group mb-3">
                         <H3>LAST CHANCE TICKET EVENT FORM</H3>
+                        <hr>
                         <label for="InputEvent">Event Name</label>
                         <input
                             type="text"
@@ -174,6 +191,53 @@
                             class="form-control"
                             name="event_category"
                             placeholder="Event Category"
+                        />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="InputDate">Event Date</label>
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="event_date"
+                            placeholder="Event Date"
+                        />
+                    </div>
+                    <div class="row">
+                        <div class="form-group mb-3 col-6">
+                            <label for="InputDate">Start Time</label>
+                            <input
+                                type="time"
+                                class="form-control"
+                                name="start_time"
+                                placeholder="Event Time"
+                            />
+                        </div>
+                        <div class="form-group mb-3 col-6">
+                            <label for="InputTime">End Time</label>
+                            <input
+                                type="time"
+                                class="form-control"
+                                name="end_time"
+                                placeholder="Event Time"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="InputVenue">Veunue Name</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="venue_name"
+                            placeholder="Veunue Name"
+                        />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="InputLocation">Location</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="location"
+                            placeholder="Event Location"
                         />
                     </div>
                     <button type="submit" class="btn btn-primary">Request</button>

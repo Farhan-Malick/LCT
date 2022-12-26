@@ -48,6 +48,18 @@
                 <a href="javascript:;">
                     <b class="caret"></b>
                     <i class="fa fa-list-ol"></i>
+                    <span>Event Requests</span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{ route('admin.request.show') }}">Requests</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fa fa-list-ol"></i>
                     <span>Categories</span>
                 </a>
                 <ul class="sub-menu">
@@ -90,18 +102,6 @@
                         <a href="{{ route('admin.currency.index') }}"
                             >Add Currency</a
                         >
-                    </li>
-                </ul>
-            </li>
-            <li class="has-sub">
-                <a href="javascript:;">
-                    <b class="caret"></b>
-                    <i class="fa fa-list-ol"></i>
-                    <span>Event Requests</span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="{{ route('admin.request.show') }}">Requests</a>
                     </li>
                 </ul>
             </li>

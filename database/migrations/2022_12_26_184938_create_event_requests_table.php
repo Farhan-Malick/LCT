@@ -17,6 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('event')->nullable();
             $table->string('category_event')->nullable();
+            $table->string('event_date')->nullable();
+            $table->string('venue_name')->nullable();
+            $table->string('location')->nullable();
+            $table->string('start_time',256)->nullable();
+			$table->string('end_time',256)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_request');
+        Schema::dropIfExists('event_requests');
     }
 };

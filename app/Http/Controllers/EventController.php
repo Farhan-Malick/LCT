@@ -165,8 +165,13 @@ class EventController extends Controller
         //return $request;
         $eventRequest->event = $request->event;
         $eventRequest->category_event = $request->event_category;
+        $eventRequest->event_date = $request->event_date;
+        $eventRequest->start_time = $request->start_time;
+        $eventRequest->end_time = $request->end_time;
+        $eventRequest->venue_name = $request->venue_name;
+        $eventRequest->location = $request->location;
         $eventRequest->save();
-        return back();
+        return back()->with('msg',"Your request has been sent to the Admin center");
     }
 
     public function destroy_request($id){

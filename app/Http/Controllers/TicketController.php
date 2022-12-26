@@ -174,7 +174,6 @@ class TicketController extends Controller
         $ticket_details->currency = $request->currency;
         $ticket_details->ticket_restrictions = $request->ticket_restrictions;
         $ticket_details->update();
-
         return back();
 
     }
@@ -278,13 +277,13 @@ class TicketController extends Controller
     }
     public function admin_e_tickets_show(TicketListing $TicketListing)
     {
-        $e_tickets = TicketListing::all();
-        return view('Admin/pages/e_TicketListing',compact('e_tickets'));
+        $tickets = TicketListing::all();
+        return view('Admin/pages/e_TicketListing',compact('tickets'));
     }
     public function admin_mobile_tickets_show(TicketListing $TicketListing)
     {
-        $mobile_tickets = TicketListing::all();
-        return view('Admin/pages/mobileTicket',compact('mobile_tickets'));
+        $tickets = TicketListing::all();
+        return view('Admin/pages/mobileTicket',compact('tickets'));
     }
     public function Approval(Request $request)
     {

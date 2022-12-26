@@ -93,7 +93,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/Admin-Panel/Mobile_tickets', [TicketController::class, 'admin_mobile_tickets_show']);
         Route::post('/toggle-approve', [TicketController::class, 'Approval']);
         Route::get('/Admin-Panel/{id}/destroy', [TicketController::class, 'ticket_destroy'])->name('admin.ticket.destroy');
-        Route::post('/Admin-Panel/Ticket/Edit', [TicketController::class, 'edit']);
+        Route::get('/Admin-Panel/Ticket/Edit/{id}', [TicketController::class, 'edit_tickets']);
 
 
         Route::get('Admin-Panel/event-listing-form', [EventListingController::class, 'EventListingForm']);

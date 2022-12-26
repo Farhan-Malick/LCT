@@ -66,7 +66,50 @@
 		
 		<!-- begin #content -->
 		<div id="content" class="content">
-           <h1>Edit here</h1>
+            
+            <div class="row">
+                
+                <!-- begin col-6 -->
+                <div class="col-xl-12">
+                    <!-- begin panel -->
+                    <div class="panel panel-inverse" data-sortable-id="form-validation-1">
+                        
+                        <!-- begin panel-body -->
+                        <div class="panel-body">
+                            
+            <h1>Modify Ticket</h1>
+                            <form class="form-horizontal" data-parsley-validate="true" name="demo-form"
+                                action="{{ url('Admin-Panel/addCategory') }}" method="POST"> @csrf
+                                <div class="form-group row m-b-15">
+                                    <label class="col-md-4 col-form-label" for="event">Event Name *
+                                        :</label>
+                                    <div class="col-md-8 col-sm-8">
+                                        <input class="form-control" type="text" id="event" name="event"
+                                            placeholder="Required" data-parsley-required="true" />
+                                    </div>
+                                </div>
+                                  <div class="form-group row m-b-15">
+                                    <label class="col-md-4 col-form-label" for="category_name">Category Name *
+                                        :</label>
+                                    <div class="col-md-8 col-sm-8">
+                                        <input class="form-control" type="text" id="category_name" name="category_name"
+                                            placeholder="Required" data-parsley-required="true" />
+                                    </div>
+                                </div>
+                                <div class="form-group row m-b-0">
+                                    <label class="col-md-4 col-form-label">&nbsp;</label>
+                                    <div class="col-md-8 col-sm-8">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end panel-body -->
+                    </div>
+                    <!-- end panel -->
+                </div>
+                <!-- end col-6 -->
+            </div>
 		</div>
 		<!-- end #content -->
 	

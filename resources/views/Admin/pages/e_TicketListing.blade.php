@@ -29,7 +29,7 @@
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed page-with-wide-sidebar page-with-light-sidebar">
 		<!-- begin #header -->
-	@include('Admin.includes.header')
+		@include('Admin.includes.header')
 		<!-- end #header -->
 		
 		<!-- begin #sidebar -->
@@ -40,7 +40,7 @@
 		<div id="content" class="content">
 			<!-- begin breadcrumb -->
 			<ol class="breadcrumb float-xl-right">
-				<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+				<li class="breadcrumb-item"><a href="javascript:;">E-Ticket</a></li>
 				<li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
 				<li class="breadcrumb-item active">Last-Chance-Ticket</li>
 			</ol>
@@ -116,8 +116,23 @@
             <div class="row">
                 <!-- begin col-6 -->
                 <div class="col-xl-12">
-					<h1 class="text-center">E-Tickets</h1>
                     <!-- begin panel -->
+					<h1 class="text-center">E-Tickets</h1>
+					@if ($message = Session::get('msg'))
+                            <div class="alert alert-danger alert-block">
+                                <strong>{{ $message }}</strong>
+                            </div>
+					@endif
+					@if ($message = Session::get('approve'))
+					<div class="alert alert-primary alert-block">
+						<strong>{{ $message }}</strong>
+					</div>
+					@endif
+					@if ($message = Session::get('update'))
+					<div class="alert alert-success alert-block">
+						<strong>{{ $message }}</strong>
+					</div>
+					@endif
                     <div class="panel panel-inverse" data-sortable-id="form-validation-1">
                         <!-- begin panel-body -->
                         <div class="panel-body">
@@ -126,7 +141,7 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">title</th>
+                                        {{-- <th scope="col">title</th> --}}
                                         <th scope="col">Event</th>
                                         <th scope="col">price</th>
                                         <th scope="col">currency</th>
@@ -138,56 +153,63 @@
                                         <th scope="col">ticket type</th>
                                         <th scope="col">ticket restrictions</th>
                                         <th scope="col">status</th>
-                                        <th scope="col" >Action</th>
+                                        <th scope="col" >Approval</th>
+										<th scope="col" >Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-										@foreach($e_tickets as $e_ticket)
-											@if($e_ticket->ticket_type == "e-ticket")
-												<tr>
-													<td>{{$e_ticket->id}}</td>
-													<td>{{$e_ticket->title}}</td>
-													<td>{{$e_ticket->event->title}}</td>
-													<td>{{$e_ticket->price}}</td>
-													<td>{{$e_ticket->currency}}</td>
-													<td>{{$e_ticket->quantity}}</td>
-													<td>{{$e_ticket->section}}</td>
-													<td>{{$e_ticket->row}}</td>
-													<td>{{$e_ticket->seat_from}}</td>
-													<td>{{$e_ticket->seat_to}}</td>
-														<td>{{$e_ticket->ticket_type}}</td>
-												
-													<td>{{$e_ticket->ticket_restrictions}}</td>
-													<td>{{$e_ticket->status}}</td>
-													<td>
-														<form action="{{ url('/toggle-approve') }}" method="POST">
-															@csrf
-															<input <?php
-															if ($e_ticket->approve == 1) {
-																echo 'checked';
-															}
-															?> type="checkbox"
-																name="approve" class="mr-2">
-															<input type="hidden" name="ticket_id" id=""
-																value="{{ $e_ticket->id }}">
-															<input type="submit" class="btn btn-primary"
-																name="" value="Approve" id="">
-														</form>
+									@foreach($tickets as $e_ticket)
+									@if($e_ticket->ticket_type == "e-ticket")
+										<tr>
+											<td>{{$e_ticket->id}}</td>
+											{{-- <td>{{$e_ticket->title}}</td> --}}
+											<td>{{$e_ticket->event->title}}</td>
+											<td>{{$e_ticket->price}}</td>
+											<td>{{$e_ticket->currency}}</td>
+											<td>{{$e_ticket->quantity}}</td>
+											<td>{{$e_ticket->section}}</td>
+											<td>{{$e_ticket->row}}</td>
+											<td>{{$e_ticket->seat_from}}</td>
+											<td>{{$e_ticket->seat_to}}</td>
+												<td>{{$e_ticket->ticket_type}}</td>
+											<td>{{$e_ticket->ticket_restrictions}}</td>
+											<td>{{$e_ticket->status}}</td>
+											<td>
+												<form action="{{ url('/toggle-approve') }}" method="POST">
+													@csrf
+													<input <?php
+													if ($e_ticket->approve == 1) {
+														echo 'checked';
+													}
+													?> type="checkbox"
+														name="approve" class="mr-2">
+													<input type="hidden" name="ticket_id" id=""
+														value="{{ $e_ticket->id }}">
+													<input type="submit" class="btn btn-primary"
+														name="" value="Approve" id="">
+												</form>
 
-														{{-- <a
-															class="btn btn-primary"
-															href="{{route('admin.section_rows.edit',$ticket->id)}}"
-															>edit</a
-														> --}}
-														<a
-															class="btn btn-danger"
-															href="{{route('admin.section_rows.destroy',$e_ticket->id)}}"
-															><i class="fa fa-trash" aria-hidden="true"></i></a
-														>
-													</td>
-												</tr>
-											@endif
-										@endforeach
+												{{-- <a
+													class="btn btn-primary"
+													href="{{route('admin.section_rows.edit',$ticket->id)}}"
+													>edit</a
+												> --}}
+											</td>
+											<td>
+												<a
+													class="btn btn-success"
+													href="{{URL('/Admin-Panel/Ticket/Edit',$e_ticket->id)}}"
+													><i class="fa fa-edit" aria-hidden="true"></i></a
+												>
+												<a
+													class="btn btn-danger"
+													href="{{route('admin.ticket.destroy',$e_ticket->id)}}"
+													><i class="fa fa-trash" aria-hidden="true"></i></a
+												>
+											</td>
+										</tr>
+									@endif
+								@endforeach
                                 </tbody>
                             </table>
                         </div>

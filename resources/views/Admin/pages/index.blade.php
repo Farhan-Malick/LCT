@@ -118,6 +118,21 @@
                 <div class="col-xl-12">
                     <!-- begin panel -->
 					<h1 class="text-center">Paper Tickets</h1>
+					@if ($message = Session::get('msg'))
+                            <div class="alert alert-danger alert-block">
+                                <strong>{{ $message }}</strong>
+                            </div>
+					@endif
+					@if ($message = Session::get('approve'))
+					<div class="alert alert-primary alert-block">
+						<strong>{{ $message }}</strong>
+					</div>
+					@endif
+					@if ($message = Session::get('update'))
+					<div class="alert alert-success alert-block">
+						<strong>{{ $message }}</strong>
+					</div>
+					@endif
                     <div class="panel panel-inverse" data-sortable-id="form-validation-1">
                         <!-- begin panel-body -->
                         <div class="panel-body">
@@ -138,7 +153,8 @@
                                         <th scope="col">ticket type</th>
                                         <th scope="col">ticket restrictions</th>
                                         <th scope="col">status</th>
-                                        <th scope="col" >Action</th>
+                                        <th scope="col" >Approval</th>
+										<th scope="col" >Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -156,7 +172,6 @@
 													<td>{{$ticket->seat_from}}</td>
 													<td>{{$ticket->seat_to}}</td>
 														<td>{{$ticket->ticket_type}}</td>
-												
 													<td>{{$ticket->ticket_restrictions}}</td>
 													<td>{{$ticket->status}}</td>
 													<td>
@@ -166,22 +181,28 @@
 															if ($ticket->approve == 1) {
 																echo 'checked';
 															}
-															?> type="checkbox"
+															?> type="checkbox" 
 																name="approve" class="mr-2">
 															<input type="hidden" name="ticket_id" id=""
-																value="{{ $ticket->id }}">
+																value="{{ $ticket->id }}" >
 															<input type="submit" class="btn btn-primary"
 																name="" value="Approve" id="">
 														</form>
-
 														{{-- <a
 															class="btn btn-primary"
 															href="{{route('admin.section_rows.edit',$ticket->id)}}"
 															>edit</a
 														> --}}
+													</td>
+													<td>
+														<a
+															class="btn btn-success"
+															href="{{URL('/Admin-Panel/Ticket/Edit',$ticket->id)}}"
+															><i class="fa fa-edit" aria-hidden="true"></i></a
+														>
 														<a
 															class="btn btn-danger"
-															href="{{route('admin.section_rows.destroy',$ticket->id)}}"
+															href="{{route('admin.ticket.destroy',$ticket->id)}}"
 															><i class="fa fa-trash" aria-hidden="true"></i></a
 														>
 													</td>

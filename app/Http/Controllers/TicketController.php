@@ -297,7 +297,18 @@ class TicketController extends Controller
         }
         $tickets->approve=$approval;
         $tickets->save();
-        return redirect()->back()->with('You have Approved the Ticket');
+        return redirect()->back()->with('approve','Ticket has been Approved Successfully');
+    }
+    public function edit_tickets($id){
+        $tickets = Event::find($id);
+        return view('Admin/pages/editTickets',compact('tickets'));
+    }
+    public function ticket_destroy($id){
+        //return $id;
+        $tickets = TicketListing::find($id);
+        $tickets->delete();
+        return back()->with('msg',"Ticket has been Deleted Successfully");
+
     }
     //buyer functions
 

@@ -59,14 +59,14 @@
 		<!-- begin #header -->
         @include('Admin.includes.header')
 		<!-- end #header -->
-		
+        
 		<!-- begin #sidebar -->
 		@include('Admin.includes.sidebar')
 		<!-- end #sidebar -->
 		
 		<!-- begin #content -->
 		<div id="content" class="content">
-           
+           <h1>Edit here</h1>
 		</div>
 		<!-- end #content -->
 	

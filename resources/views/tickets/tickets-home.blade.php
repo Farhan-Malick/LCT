@@ -83,21 +83,27 @@
                             >
                                 <div class="row">
                                     <div class="col-md-2 col-lg-2">
+                                       <b>
                                         <p>
                                             <br />
-                                            {{-- {{$eventListing->event->start_time}} <br />
-                                            <br />
-                                            {{$eventListing->event->start_date}} <br /> --}}
+                                            {{$eventListing->start_time}} - {{$eventListing->end_time}}<br />
+                                            <hr />
+                                            {{$eventListing->event_date}} <br />
 
                                         </p>
+                                       </b>
                                     </div>
                                     <div class="col-md-10 col-lg-10">
                                         <div
                                             class="card-content d-md-flex justify-content-between"
                                         >
                                             <div class="card-des">
-                                                <h5>{{$eventListing->title}}</h5>
-                                                <p></p>
+                                                <h5>{{$eventListing->event_name}}</h5>
+                                                <p>
+                                                    Location : {{$eventListing->location}}
+                                                    <br>
+
+                                                </p>
                                                 <div
                                                     class="alert alert-danger"
                                                     role="alert"
@@ -114,9 +120,9 @@
                                                 </div>
                                             </div>
                                             <div
-                                                class="card-action d-flex flex-column text-end"
+                                                class="card-action d-flex flex-column text-end pt-5"
                                             >
-                                                <span>From</span>
+                                                {{-- <span>From</span> --}}
                                                 {{-- <span>${{$ticket->price}}</span> --}}
 
                                                 <a href="{{route('seller.ticket.index',$eventListing->id)}}" class="btn primary-btn"> Sell Tickets</a>

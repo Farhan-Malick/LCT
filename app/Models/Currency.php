@@ -27,4 +27,5 @@ class Currency extends Model
         
         
     ];
+    
 }

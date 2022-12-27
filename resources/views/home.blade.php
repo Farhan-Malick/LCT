@@ -164,16 +164,15 @@
                                     />
                                     <div class="card-body">
                                         <h6 class="card-title">
-                                            {{ $event->title }}
+                                            {{ $event->event_name }}
                                         </h6>
                                         <span class="text-danger card-span">
                                             {{$event->start_time}}-{{$event->end_time}}<br>
-                                            {{$event->start_date}}
+                                            {{$event->event_date}}
                                             </span
                                         >
                                         <p class="card-text">
-                                            Circuit de Monaco, Monte Carlo,
-                                            Monaco
+                                            {{$event->venue_name}}
                                         </p>
                                     </div>
                                 </div>

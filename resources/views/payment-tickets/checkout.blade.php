@@ -46,16 +46,16 @@
                                 {{-- <p>{{$tickets->event->title}}
                                     <span class="bg-danger text-light  br-10 px-3">In 3 Hours</span>
                                 </p> --}}
-                                <p>Title of the Event
-                                    <span class="bg-danger text-light  br-10 px-3">In 3 Hours</span>
+                                <p>{{ $events->event_name }}
+                                    <span class="bg-danger text-light  br-10 px-3">{{ get_when($events->event_date) }}</span>
                                 </p>
                                 {{-- <p class="fw-600 m-0">{{$tickets->event->start_time}} to {{$tickets->event->end_time}}<br>
                                     {{$tickets->event->start_date}}
                                 </p> --}}
-                                <p class="fw-600 m-0">Event Start Time to Event ENd time <br>
-                                    Event Start Date
+                                <p class="fw-600 m-0">{{ $events->start_time }} to {{ $events->end_time }} <br>
+                                    {{ $events->event_date }}
                                 </p>
-                                <p>Citizens Bank Park, Philadelphia, Pennsylvania, USA</p>
+                                <p>{{ get_when($events->venue_name) }}</p>
                                 <p><span class="bg-secondary text-light p-1 br-10">Section:A</span> <span
                                         class="bg-secondary text-light p-1 br-10">row:12</span></p>
                                         
@@ -64,7 +64,7 @@
                             </div>
                             <div class="tickets-details d-sm-flex d-block justify-content-between">
                                 <p>Number of Tickets</p>
-                                <p id="noticket">2</p>
+                                <p id="noticket">{{ $tickets->quantity }}</p>
                             </div>
                             <div class="row tickets-details d-sm-flex d-block">
                                <div class="col-md-6"> <p>Sales Tax</p></div>
@@ -77,12 +77,12 @@
                                     <p>Per Ticket Price</p>
                                 </div>  
                                 <div class="col-md-6">
-                                    <span style="float: right"> $<span id="priceticket">1000 </span>
+                                    <span style="float: right"> $<span id="priceticket">{{ $tickets->price }} </span>
                                     </span>
                                     {{-- <small>Per ticket</small> --}}
                                 </div>
                                 
-                                <input type="hidden" id="pricetotal" value="1" name="price">
+                                <input type="hidden" id="pricetotal" value="{{ $tickets->price }}" name="price">
                             </div>
                             {{-- <div class="tickets-details d-sm-flex d-block justify-content-between">
                                 <p>Sale Tax  </p>
@@ -118,17 +118,10 @@
                         <div class="number-of-tickets ">
                             <h6>Number of tickets</h6>
                                 <select class="form-select" id="#ticket" name="quantity">
-                                    <option selected>select</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
+                                    <option selected>Select Number of Tickets</option>
+                                    @for ($i = 1; $i <= $tickets->quantity; $i++)
+                                        <option value="{{ $i }}">{{ $i }} Tickets</option>
+                                    @endfor
                                 </select>
                             </div>
                         <div class="row justify-content-between align-items-center">

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}">
     <link rel="stylesheet" href="{{ asset("assets/styles/payments.css") }}">
     <link rel="stylesheet" href="{{ asset("assets/styles/common.css") }}">
+    <link rel="stylesheet" href="../../assets/styles/sellticket.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <title>Last Chance Ticket - Buyer</title>
@@ -35,22 +36,23 @@
                     <div class="row">
                         <div class="col-lg-2">
                             <div class="ticket-img p-4">
+                                <?php //dd($events); ?>
                                 <img src="/uploads/events/thumbnail/{{$events->thumbnail}}" height="150" width="150" alt="">
                             </div>
                         </div>
                         <div class="col-lg-10 p-4">
                             <div class="ticket-details">
                                 <div class="ticket-title">
-                                    <h4 class="primary-text fw-700">{{$events->title}}</h4>
+                                    <h4 class="primary-text fw-700">{{$events->event_name}}</h4>
                                 </div>
                                 <div class="ticket-subtitle">
-                                    <p class="fw-600 p-0 m-0">Citizens Bank Park, Philadelphia, Pennsylvania, USA</p>
+                                    <p class="fw-600 p-0 m-0">{{$events->venue_name}}</p>
                                 </div>
                                 <div class="ticket-date">
-                                    <span>{{$events->create_at}}</span>
+                                    <span>{{$events->event_date}}</span>
                                 </div>
                                 <div class="current-date d-flex flex-column">
-                                    <span class="text-danger fw-700">Today</span>
+                                    <span class="text-danger fw-700">{{ get_when($events->event_date) }}</span>
                                     <span> (More {{$events->title}} Events)</span>
                                 </div>
                             </div>
@@ -69,6 +71,10 @@
                         <h4 class="fw-700">How Many Tickets?</h4>
                         <div class="row select-ticket">
                             <div class="col-lg-12">
+                                <form method="get" id="qty-form">
+                                    {{-- @csrf --}}
+                                    <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty">
+                                </form>
                                 <p class="primary-text">
                                     <i class="bi bi-info-circle-fill me-2"></i>
                                     Select a quantity to quickly find the best tickets available for the number of
@@ -78,40 +84,40 @@
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-2">
                                 <div class="card mb-3">
-                                    <div class="card-body ticket-num-card cursor-pointer shadow-sm">
+                                    <div class="card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 1 ) <?php echo 'select-active' ?> @endif" data-tickets-val="1">
                                         <h4>1</h4>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-2">
                                 <div class="card mb-3">
-                                    <div class="card-body ticket-num-card cursor-pointer shadow-sm">
+                                    <div class="card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 2 ) <?php echo 'select-active' ?> @endif" data-tickets-val="2">
                                         <h4>2</h4>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-2">
                                 <div class="card mb-3">
-                                    <div class="card-body ticket-num-card cursor-pointer shadow-sm">
+                                    <div class="card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 3 ) <?php echo 'select-active' ?> @endif" data-tickets-val="3">
                                         <h4>3</h4>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-2">
                                 <div class="card mb-3">
-                                    <div class="card-body ticket-num-card cursor-pointer shadow-sm">
+                                    <div class="card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 4 ) <?php echo 'select-active' ?> @endif" data-tickets-val="4">
                                         <h4>4</h4>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-2">
                                 <div class="card mb-3">
-                                    <div class="card-body ticket-num-card cursor-pointer shadow-sm">
+                                    <div class="card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 5 ) <?php echo 'select-active' ?> @endif" data-tickets-val="5">
                                         <h4>5 +</h4>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            {{-- <div class="col-lg-12">
                                 <form action="" method="post">
                                     <select class="form-select" aria-label="Default select example">
                                         <option selected>Select tickets amount</option>
@@ -132,7 +138,7 @@
                                         <option value="15">15</option>
                                     </select>
                                 </form>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -197,6 +203,11 @@
                         <i class="bi bi-info-circle-fill me-3"></i>You'll be seated together for seated sections
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                    @if(count($tickets) == 0)
+                    <div>
+                        <h5>No tickets available.</h5>
+                    </div>
+                    @endif
                     @foreach($tickets as $ticket)
                     <div class="card mb-3 p-2 br-10 shadow-sm ticket-cards">
                         <div class="row">
@@ -255,6 +266,20 @@
     <!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="../../js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            document.querySelectorAll('.ticket-num-card').forEach(function(element) {
+                element.addEventListener("click", (event) => {
+                    document.querySelectorAll('.ticket-num-card').forEach((element) => element.classList.remove('select-active'));
+                    event.currentTarget.classList.add('select-active');
+                    const value =event.currentTarget.attributes['data-tickets-val'].value;
+                    document.getElementById('total-tickets').value = value;
+                    document.getElementById('qty-form').submit();
+                });
+            });
+        });
+    </script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

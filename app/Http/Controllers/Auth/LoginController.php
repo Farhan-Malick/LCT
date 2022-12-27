@@ -43,12 +43,16 @@ class LoginController extends Controller
 
     public static function guestLogin()
     {
-        $randomNumbers = rand(pow(10, 5 - 1), pow(10, 5) - 1);
-        $guest = User::create([
-            'first_name' => "Guest{$randomNumbers}",
-        ]);
+        if (Auth::check()) {
+            return Auth::id();
+        } else {
+            $randomNumbers = rand(pow(10, 5 - 1), pow(10, 5) - 1);
+            $guest = User::create([
+                'first_name' => "Guest{$randomNumbers}",
+            ]);
 
-        Auth::loginUsingId($guest->id);
-        return $guest->id;
+            // Auth::loginUsingId($guest->id);
+            return $guest->id;
+        }
     }
 }

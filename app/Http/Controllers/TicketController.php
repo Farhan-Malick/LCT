@@ -14,6 +14,9 @@ use App\Models\VanueSections;
 use App\Models\VenueSectionRows;
 use App\Models\ETicket;
 use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Seller as SellerMail;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -30,6 +33,10 @@ class TicketController extends Controller
         $venue_section_rows = VenueSectionRows::all();
         $venue_sections = VanueSections::all();
         return view('tickets/tickets-details',compact('venue_section_rows','venue_sections','EventListing','currencies'));
+    }
+
+    public function sendAwienMail(){
+        Mail::to("usamaayub00@gmail.com")->send(new SellerMail("usamaayub00@gmail.com"));
     }
 
     /**
@@ -118,11 +125,13 @@ class TicketController extends Controller
         $seller->phone = $request->phone;
         $seller->save();
 
-        $user->first_name = $request->firstname;
-        $user->last_name = $request->lastname;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->update();
+        if(!Auth::check()) {
+            $user->first_name = $request->firstname;
+            $user->last_name = $request->lastname;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->update();
+        }
         return redirect()->back()->with('msg','Your tickets has been created, Your ticket will be in the Listings when Admin will Approve.');
     }
 

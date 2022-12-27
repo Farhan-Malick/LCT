@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Event;
+use App\Models\EventListing;
 
 use App\Models\TicketListing;
 
@@ -24,10 +24,17 @@ class PurchasesController extends Controller
     //     return view('payment-tickets/browse-tickets',compact('events'));
     // }
 
-    public function buyer_ticket_show($id){
+    public function buyer_ticket_show(Request $request, $id){
+        // dd($request->qty);
 
-        $events = Event::find($id);
-        $tickets = TicketListing::where('approve','1')->get();
+        $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->where('event_listings.id', $id)->first();
+        // dd($events);
+        if ($request->qty !== null) {
+            $tickets = TicketListing::where('approve', '=', '1')->where('quantity', '>=', $request->qty)->get();
+        } else {
+            $tickets = TicketListing::where('approve','1')->get();
+        }
+        
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
         return view('payment-tickets/browse-ticket',compact('events','tickets'));
     }
@@ -46,10 +53,10 @@ class PurchasesController extends Controller
         return redirect()->route('downloadPdfTicket',['eventlisting_id' => $events->id,'ticketid' => $tickets->id, 'sellerid' => $tickets->user_id]);
     }
 
-    public function buyer_ticket_checkout( TicketListing $ticket, Event $event, $eventid, $ticketid, $sellerid){
+    public function buyer_ticket_checkout( TicketListing $ticket, EventListing $event, $eventid, $ticketid, $sellerid){
 
         
-        $events = Event::find($eventid);
+        $events = EventListing::find($eventid);
         $tickets = TicketListing::find($ticketid);
         $sellers = User::find($sellerid);
         return view('payment-tickets/checkout',compact('tickets','events','sellers'));

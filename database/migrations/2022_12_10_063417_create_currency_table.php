@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('currency', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('currency_type')->nullable();
             $table->timestamps();
             $table->string('deleted_at')->nullable();

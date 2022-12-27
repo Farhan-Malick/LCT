@@ -19,9 +19,16 @@ class EventListingController extends Controller
     public function EventListing(Request $request){
         
         $ticket= new EventListing();
-        $ticket->title=$request->title;
+        $ticket->event_name=$request->event_name;
         $ticket->event_id=$request->event;
         $ticket->status=$request->status;
+
+        $ticket->category_event=$request->category_event;
+        $ticket->location=$request->location;
+        $ticket->event_date=$request->event_date;
+        $ticket->venue_name=$request->venue_name;
+        $ticket->start_time=$request->start_time;
+        $ticket->end_time=$request->end_time;
         // dd($ticket);
         $ticket->save();
         $request->session()->flash('msg','Listing Has Been Added Successfully'); 
@@ -41,16 +48,21 @@ class EventListingController extends Controller
     public function updateListing(Request $request,$id){
         //return $request;
         $listings = EventListing::find($id);
-        $listings->title = $request->title;
+        $listings->event_name=$request->event_name;
         $listings->event_id=$request->event;
         $listings->status=$request->status;
+        $listings->category_event=$request->category_event;
+        $listings->location=$request->location;
+        $listings->event_date=$request->event_date;
+        $listings->venue_name=$request->venue_name;
+        $listings->start_time=$request->start_time;
+        $listings->end_time=$request->end_time;
 
         $listings->update();
         $request->session()->flash('msg','Data Has Been Updated Successfully'); 
         return redirect('Admin-Panel/event-listing');
     }
     public function delete(Request $request,$id){
-        
         $listings = EventListing::find($id);
         $listings->delete();
         $request->session()->flash('msg','Data Has Been Deleted Successfully'); 

@@ -175,13 +175,13 @@
                     <div class="form-group mb-3">
                         <H3>LAST CHANCE TICKET EVENT FORM</H3>
                         <hr>
-                        <label for="InputEvent">Event Name</label>
+                        <label for="InputEvent">Title</label>
                         <input
                             type="text"
                             class="form-control"
                             name="event"
                             aria-describedby="emailHelp"
-                            placeholder="Enter Event To Add"
+                            placeholder="Enter Event Title Here"
                         />
                     </div>
                     <div class="form-group mb-3">

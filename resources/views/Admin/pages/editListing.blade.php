@@ -102,18 +102,115 @@
                                     >
                                         <label
                                             for="inputTitle4"
-                                            >Title</label
+                                            >Event</label
                                         >
                                         <input
                                             type="text"
                                             class="form-control"
-                                            placeholder="Enter Event Title here"
-                                            name="title" value="{{$listings->title}}"
+                                            placeholder="Enter Event here"
+                                            name="event_name" value="{{ $listings->event_name}}"
                                         />
                                     </div>
                                   
                                 </div>
-                    
+                                <div class="form-row">
+                                    <div
+                                        class="form-group col-md-6"
+                                    >
+                                        <label
+                                            for="inputTitle4"
+                                            >Event Date</label
+                                        >
+                                        <input
+                                            type="date"
+                                            class="form-control"
+                                            placeholder="Event Date"
+                                            name="event_date" value="{{ $listings->event_date}}"
+                                        />
+                                    </div>
+                                  
+                                </div>
+                                <div class="form-row">
+                                    <div
+                                        class="form-group col-md-6"
+                                    >
+                                        <label
+                                            for="inputTitle4"
+                                            >Venue Name</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Venue Name"
+                                            name="venue_name"value="{{ $listings->venue_name}}"
+                                        />
+                                    </div>
+                                  
+                                </div>
+                                <div class="form-row">
+                                    <div
+                                        class="form-group col-md-6"
+                                    >
+                                        <label
+                                            for="inputTitle4"
+                                            >Location</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Location"
+                                            name="location" value="{{ $listings->location}}"
+                                        />
+                                    </div>
+                                  
+                                </div>
+                                <div class="form-row">
+                                    <div
+                                        class="form-group col-md-6"
+                                    >
+                                        <label
+                                            for="inputTitle4"
+                                            >Event Category</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Event Category"
+                                            name="category_event" value="{{ $listings->category_event}}"
+                                        />
+                                    </div>
+                                  
+                                </div>
+                                <div class="form-row">
+                                    <div
+                                        class="form-group col-md-4"
+                                    >
+                                        <label
+                                            for="inputTitle4"
+                                            >Start Time</label
+                                        >
+                                        <input
+                                            type="time"
+                                            class="form-control"
+                                            placeholder="Start Time"
+                                            name="start_time"value="{{ $listings->start_time}}"
+                                        />
+                                    </div>
+                                    <div
+                                        class="form-group col-md-4"
+                                    >
+                                        <label
+                                            for="inputTitle4"
+                                            >End Time</label
+                                        >
+                                        <input
+                                            type="time"
+                                            class="form-control"
+                                            placeholder="End Time"
+                                            name="end_time" value="{{ $listings->end_time}}"
+                                        />
+                                    </div>
+                                </div>
                                 <div class="form-row">
                                     
                                      {{-- <div
@@ -157,8 +254,8 @@
                                             class="form-control"
                                             name="event"
                                         >
-                                            <option 
-                                                
+                                            <option
+                                                selected
                                             >
                                                 Select Event
                                             </option>
@@ -173,7 +270,7 @@
                                         </select>
                                     </div>
                                     <div
-                                        class="form-group col-md-2 mb-3"
+                                        class="form-group col-md-4 mb-3"
                                     >
                                         <label
                                             for="inputState"

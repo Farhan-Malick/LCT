@@ -89,8 +89,13 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">title</th>
                                         <th scope="col">Event</th>
+                                        <th scope="col">Event Title</th>
+                                        <th scope="col">Venue</th>
+                                        <th scope="col">Start Time</th>
+                                        <th scope="col">End Time</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Event Category</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -99,8 +104,13 @@
                                     @foreach($listing as $ticket)
                                     <tr>
                                         <td>{{$ticket->id}}</td>
-                                        <td>{{$ticket->title}}</td>
                                         <td>{{$ticket->events->title}}</td>
+                                        <td>{{$ticket->event_name}}</td>
+                                        <td>{{$ticket->venue_name}}</td>
+                                        <td>{{$ticket->start_time}}</td>
+                                        <td>{{$ticket->end_time}}</td>
+                                        <td>{{$ticket->location}}</td>
+                                        <td>{{$ticket->category_event}}</td>
                                         <td>{{$ticket->status}}</td>
                                         <td>
                                             <a

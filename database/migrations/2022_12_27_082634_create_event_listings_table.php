@@ -15,10 +15,16 @@ return new class extends Migration
     {
         Schema::create('event_listings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
+            $table->string('event_name');
             $table->string('status');
             $table->unsignedBigInteger('event_id');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->string('category_event')->nullable();
+            $table->string('event_date')->nullable();
+            $table->string('venue_name')->nullable();
+            $table->string('location')->nullable();
+            $table->string('start_time',256)->nullable();   
+			$table->string('end_time',256)->nullable();
             // $table->string('category');
             $table->timestamps();
         });
@@ -31,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ticket_listings');
+        Schema::dropIfExists('event_listings');
     }
 };

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('vanue_sections', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('sections')->nullable();
             $table->string('deleted_at')->nullable();
             $table->timestamps();

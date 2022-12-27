@@ -16,9 +16,12 @@ return new class extends Migration
         Schema::create('ticket_listings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id')->nullable();
+            $table->boolean('approve')->nullable();
 			$table->boolean('status')->default(1);
             $table->string('ticket')->nullable();
-            $table->string('currency')->nullable()->default('$ dollar');
+            // $table->string('currency')->nullable()->default('$ dollar');
+            $table->unsignedBigInteger('currency_id');
+            $table->foreign('currency_id')->references('id')->on('currency')->onDelete('cascade');
 			$table->string('title', 64)->nullable();
 			$table->decimal('price', 10)->nullable();
 			$table->integer('quantity')->nullable();
@@ -35,7 +38,9 @@ return new class extends Migration
             // $table->foreign('ticketlisting_id')->references('id')->on('event_listings')->onDelete('cascade');
             
 			$table->string('currency_type')->nullable();
-            $table->string('section')->nullable();
+            // $table->string('section')->nullable();
+            $table->unsignedBigInteger('section_id');
+            $table->foreign('section_id')->references('id')->on('vanue_sections')->onDelete('cascade');
             $table->string('row')->nullable();
             $table->string('seat_from')->nullable();
             $table->string('seat_to')->nullable();

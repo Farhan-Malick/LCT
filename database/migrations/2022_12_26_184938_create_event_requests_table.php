@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('start_time',256)->nullable();
 			$table->string('end_time',256)->nullable();
+            $table->string('deleted_at')->nullable();
             $table->timestamps();
         });
     }

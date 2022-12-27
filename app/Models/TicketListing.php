@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\EventListing;
+use App\Models\VanueSections;
+use App\Models\Currency;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -37,16 +39,19 @@ class TicketListing extends Model
                 ->orderBy('price')
                 ->get();
         }
-
         return $result;
     }
-
+    public function user(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
     public function event(){
         return $this->hasOne(EventListing::class,'id','eventlisting_id');
     }
-
-    public function user(){
-        return $this->hasOne(User::class,'id','user_id');
+    public function Section(){
+        return $this->hasOne(VanueSections::class,'id','section_id');
+    }
+    public function Currency(){
+        return $this->hasOne(Currency::class,'id','currency_id');
     }
     
 }

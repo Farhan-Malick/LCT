@@ -520,22 +520,24 @@
                                         </thead>
                                         <tbody class="table-group-divider">
                                             @foreach ($active_tickets as $ticket)
-                                                <tr>
-                                                <th scope="row">1</th>
-                                                {{-- <td>{{$ticket->title}}</td> --}}
-                                                <td>{{$ticket->event->title}}</td>
-                                                <td>{{$ticket->price}}</td>
-                                                {{-- <td>{{$ticket->currency}}</td> --}}
-                                                <td>{{$ticket->quantity}}</td>
-                                                <td>{{$ticket->section}}</td>
-                                                <td>{{$ticket->row}}</td>
-                                                <td>{{$ticket->seat_from}}</td>
-                                                <td>{{$ticket->seat_to}}</td>
-                                                    <td>{{$ticket->ticket_type}}</td>
-                                            
-                                                <td>{{$ticket->ticket_restrictions}}</td>
-                                                {{-- <td>{{$ticket->status}}</td> --}}
-                                                </tr>
+                                            @if ($ticket->approve == 1)
+                                            <tr>
+                                               <th scope="row">1</th>
+                                               {{-- <td>{{$ticket->title}}</td> --}}
+                                               <td>{{$ticket->event->title}}</td>
+                                               <td>{{$ticket->price}}</td>
+                                               {{-- <td>{{$ticket->currency}}</td> --}}
+                                               <td>{{$ticket->quantity}}</td>
+                                               <td>{{$ticket->section}}</td>
+                                               <td>{{$ticket->row}}</td>
+                                               <td>{{$ticket->seat_from}}</td>
+                                               <td>{{$ticket->seat_to}}</td>
+                                                  <td>{{$ticket->ticket_type}}</td>
+                                         
+                                               <td>{{$ticket->ticket_restrictions}}</td>
+                                               {{-- <td>{{$ticket->status}}</td> --}}
+                                            </tr>
+                                            @endif
                                             @endforeach
                                         </tbody>
                                       </table>

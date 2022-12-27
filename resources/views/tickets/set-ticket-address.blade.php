@@ -21,6 +21,11 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h4 class="fw-700">Enter Your Ticket Location Address</h4>
+                    @if ($message = Session::get('msg'))
+                            <div class="alert alert-success alert-block">
+                                <strong>{{ $message }}</strong>
+                            </div>
+					@endif
                     <div class="card p-4 mb-3 shadow-sm main-card br-10">
                         <div class="row">
                             <div class="col-lg-12">

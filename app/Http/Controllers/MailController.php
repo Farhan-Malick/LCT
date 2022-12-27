@@ -19,7 +19,6 @@ class MailController extends Controller
         try{
             Mail::to('itsole82@gmail.com')->send(new MailNotify($data));
             return response()->json(['Great check your mail box']);
-
         }catch(Exception $th){
             return response()->json(['Mail not sent']);
         }

@@ -600,7 +600,6 @@
                     </form>
                 </div>
 
-
                 <div class="col-lg-3 order-md-last order-first">
                     <div class="card shadow-sm mb-3 type-card main-card br-10">
                         <div class="card-body">

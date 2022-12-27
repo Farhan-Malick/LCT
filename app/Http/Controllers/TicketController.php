@@ -114,7 +114,7 @@ class TicketController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->update();
-        return redirect('/dashboard/listings')->with('Your tickets has been submitted, You will get a confirmation email.');
+        return redirect()->back()->with('msg','Your tickets has been created, Your ticket will be in the Listings when Admin will Approve.');
     }
 
     public function showAddressPage(Currency $currencies, TicketListing $tickets, $id, EventListing $event)

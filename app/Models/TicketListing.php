@@ -48,10 +48,10 @@ class TicketListing extends Model
         return $this->hasOne(EventListing::class,'id','eventlisting_id');
     }
     public function Section(){
-        return $this->hasOne(VanueSections::class,'id','section_id');
+        return $this->hasOne(VanueSections::class,'id');
     }
     public function Currency(){
-        return $this->hasOne(Currency::class,'id','currency_id');
+        return $this->hasOne(Currency::class,'id');
     }
     
 }

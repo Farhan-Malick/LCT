@@ -142,7 +142,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         {{-- <th scope="col">title</th> --}}
-                                        <th scope="col">Event</th>
+                                        <th scope="col">Event Title</th>
                                         <th scope="col">price</th>
                                         <th scope="col">currency</th>
                                         <th scope="col">quantity</th>
@@ -163,11 +163,12 @@
 										<tr>
 											<td>{{$m_ticket->id}}</td>
 											{{-- <td>{{$m_ticket->title}}</td> --}}
-											<td>{{$m_ticket->event->title}}</td>
+											<td>{{$m_ticket->event->event_name}}</td>
 											<td>{{$m_ticket->price}}</td>
 											<td>{{$m_ticket->currency}}</td>
+											{{-- <td>{{$m_ticket->Currency->currency_type}}</td> --}}
 											<td>{{$m_ticket->quantity}}</td>
-											<td>{{$m_ticket->section}}</td>
+											<td>{{$m_ticket->Section->sections}}</td>
 											<td>{{$m_ticket->row}}</td>
 											<td>{{$m_ticket->seat_from}}</td>
 											<td>{{$m_ticket->seat_to}}</td>

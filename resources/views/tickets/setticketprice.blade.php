@@ -14,7 +14,8 @@
 </head>
 
 <body>
-
+    <?php //foreach($currencies as $currency){ print_r($currency->id); } exit; ?>
+    <?php //echo $maxValue; echo $minValue; ?>
     @include("auth.partials.darkheader")
     <section class="section-two">
         <div class="container my-4">
@@ -48,11 +49,11 @@
                                                 aria-label="Amount (to the nearest dollar)" value = "{{$tickets->price}}">
                                             <span class="input-group-text">.00</span>
                                         </div>
-                                        <small>Tickets in this area are currently selling between <strong>{{$ticketCurrency->currency_type}} 242.16 and
+                                        <small>Tickets in this area are currently selling between <strong>{{$ticketCurrency->currency_type}} {{ $minValue }} and
                                             {{$ticketCurrency->currency_type}}
-                                                620.13</strong> per ticket. In order to sell your tickets quickly we
+                                                {{ $maxValue }}</strong> per ticket. In order to sell your tickets quickly we
                                             suggest you sell
-                                            your tickets at <strong>{{$ticketCurrency->currency_type}} 242.16</strong> per ticket</small>
+                                            your tickets at <strong>{{$ticketCurrency->currency_type}} {{ $minValue }}</strong> per ticket</small>
                                     </div>
                                     <button class="btn primary-btn w-100"
                                         type="submit"><strong>CONTINUE</strong></button>

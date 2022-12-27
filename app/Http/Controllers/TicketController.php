@@ -37,10 +37,19 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function eticketStore(Request $request, $id)
     {
         //
+        // dd($request);
+        $tickets = $request->eticket;
 
+        foreach ($tickets as $ticket) {
+            $eTicket = new ETicket();
+            $eTicket->ticketlisting_id = $id;
+            $eTicket->ticket_path = $ticket;
+            $eTicket->save();
+        }
+        return redirect()->route('seller.ticket_price.index', ['id' => $id]);
 
         // Sell-tickets/setticketprice
 
@@ -182,13 +191,15 @@ class TicketController extends Controller
 
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
+        $maxValue = TicketListing::where('eventlisting_id', $tickets->eventlisting_id)->max('price');
+        $minValue = TicketListing::where('eventlisting_id', $tickets->eventlisting_id)->min('price');
         $currencies = Currency::all();
         $ticketCurrency = Currency::find($tickets->currency);
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
         $percentage = $divide * 15;
         $grand_total = $price - $percentage;
-        return view('tickets/setticketprice',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency'));
+        return view('tickets/setticketprice',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency', 'maxValue', 'minValue'));
     }
 
     public function show_ticket(Currency $currencies, TicketListing $tickets, $id, EventListing $event){

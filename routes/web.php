@@ -108,7 +108,7 @@ Route::get('/Sell-tickets/tickets-home/{id}' , [TicketController::class,'event_c
 Route::get('/Sell-tickets/tickets-home/{id}' , [TicketController::class,'event_category_ticket'])->name('event.category.ticket');
 
 Route::get('/Sell-tickets/{ticket_listing}/upload-ticket', [TicketController::class,'upload_tickets'])->name('event.ticketlisting.ticket.upload');
-
+Route::post('/Sell-tickets/{ticket_listing}/upload-ticket', [TicketController::class,'eticketStore'])->name('event.ticketlisting.ticket.upload');
 
 // Buyer Module Routes
 // Route::get('/tickets/browse', function () {

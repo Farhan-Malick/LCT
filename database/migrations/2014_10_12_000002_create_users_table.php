@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name')->default("User");
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();
             $table->string('account_type')->default("buyer");
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->default("buyer");
             $table->rememberToken();
             $table->timestamps();
         });

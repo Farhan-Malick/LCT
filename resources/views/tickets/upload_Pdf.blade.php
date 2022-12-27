@@ -13,277 +13,186 @@
     <link rel="stylesheet" href="../../assets/styles/tablet-noexps.css">
     <link rel="stylesheet" href="../../assets/styles/experiments-noexps.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="http://code.jquery.com/ui/1.8.24/themes/blitzer/jquery-ui.css" rel="stylesheet"
+    type="text/css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <title>Upload Tickets</title>
 </head>
-
+<style>
+     .draggable
+{
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+.dropped
+{
+    position: static !important;
+}
+</style>
 <body>
 
     @include("auth.partials.darkheader")
     <section class="section-two">
         <div class="container my-4">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div id="js-etuStateToggle" class="js-preUpload">
-                        <div id="etuBox" class="pb0">
-                            <div id="js-excDropTarget" class="ui-droppable">
-                                <div id="js-splashScreen">
-                                    <div id="etuUploadSplash" class="tile txtc ptl mauto">
-                                        <div class="js-loading uuxxl">
-                                            <div class="spin l"></div>
-                                            <div class="js-loading-text"></div>
-                                        </div>
-                                        <div class="js-uploadInstructions uul">
-                                            <i class="i-upload-alt cGry6"></i>
-                                            <h6 class="h xl mtxs">Upload Your Tickets Now</h6>
-                                            <div id="etuUploadDesc" class="ptm pbl cGry2 mb0">
-                                                <ul class="txtl ibk v-inline-block">
-                                                    <li><i class="i-ok"></i>Tickets are more likely to sell if ready for 'Instant Download'</li>
-                                                    <li><i class="i-ok"></i>Keep your tickets listed right up until the event</li>
-                                                    <li><i class="i-ok"></i>You can retrieve your tickets at any time</li>
-                                                </ul>
+            <form method="POST" action="{{route('event.ticketlisting.ticket.upload',$ticket_listing->id)}}" id="ticekts-upload-form">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div id="js-etuStateToggle" class="js-preUpload">
+                            <div id="etuBox" class="pb0">
+                                <div id="js-excDropTarget" class="ui-droppable">
+                                    <div id="js-splashScreen">
+                                        <div id="etuUploadSplash" class="tile txtc ptl mauto">
+                                            <div class="js-loading uuxxl">
+                                                <div class="spin l"></div>
+                                                <div class="js-loading-text"></div>
                                             </div>
-                                            <button id="js-preUploadBtn" class="btn pri l mtm mbxxs ">
-                                                <i class="i-upload-alt prs" style="font-size:18px"></i>
-                                                <span>Choose file</span>
-                                            </button>
-                                            <form class="js-fileUpload" method="POST" action="{{route('seller.ticketlisting.tickets.pdf.store',$ticket_listing->id)}}" id="initialETicketFileUpload" novalidate="novalidate">
-                                                <input id="js-preUploadInput" name="etickets" type="file" multiple="" accept=".pdf">
-                                                <input data-val="true" data-val-number="Not a valid number" data-val-required="The EventId field is required." id="eventId" name="eventId" type="hidden" value="150113682">
-                                                <input data-val="true" data-val-number="Not a valid number" id="transactionId" name="transactionId" type="hidden" value="">
-                                                <input data-val="true" data-val-number="Not a valid number" id="listingId" name="listingId" type="hidden" value="">
-                                                <input id="sellPipelineStateId" name="sellPipelineStateId" type="hidden" value="2e816991-2e26-452a-bb63-c1d959c0b502">
-                                                <input data-val="true" data-val-required="The PageVisitId field is required." id="pageVisitId" name="pageVisitId" type="hidden" value="e56b978b-1ef7-4ab6-9bb5-811ef92335fd">
-                                            </form>
+                                            <div class="js-uploadInstructions uul">
+                                                <i class="i-upload-alt cGry6"></i>
+                                                <h6 class="h xl mtxs">Upload Your Tickets Now</h6>
+                                                <div id="etuUploadDesc" class="ptm pbl cGry2 mb0">
+                                                    <ul class="txtl ibk v-inline-block">
+                                                        <li><i class="i-ok"></i>Tickets are more likely to sell if ready for 'Instant Download'</li>
+                                                        <li><i class="i-ok"></i>Keep your tickets listed right up until the event</li>
+                                                        <li><i class="i-ok"></i>You can retrieve your tickets at any time</li>
+                                                    </ul>
+                                                </div>
+                                                <button id="js-preUploadBtn" class="btn pri l mtm mbxxs ">
+                                                    <i class="i-upload-alt prs" style="font-size:18px"></i>
+                                                    <span>Choose file</span>
+                                                </button>
+                                                <input id="js-preUploadInput" name="etickets" type="file" multiple="" accept=".pdf" style="display: none;">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div id="etuWorkArea">
-                                    <h6 class="h l pb0 mb0 txtc">Drag and drop your tickets into consecutive seat number order</h6>
-                                    <div id="js-incViewport" class="txtc">
-                                        <div class="js-viewport-inset js-incViewportInset mCustomScrollbar _mCS_1">
-                                            <div class="mCSB_container" style="position: relative; left: 0px; width: 944px;">
-                                                <div id="js-incReel" class="ibk cfix">
-                                                    <?php for($i = 0; $i < $ticket_listing->quantity; $i++){ ?>
-                                                    <div class="js-incDropTarget js-aDoc ui-droppable droppable">
-                                                        <div class="js-placeholderBacking js-incDropTargetBacking js-aDoc bdr dash">
-                                                            <div class="js-eticketHelpText">
-                                                                <span class="h m cGry2">Drag Ticket <?= $i+1 ?> Here</span>
+                                    <div id="etuWorkArea">
+                                        <h6 class="h l pb0 mb0 txtc">Drag and drop your tickets into consecutive seat number order</h6>
+                                        <div id="js-incViewport" class="txtc">
+                                            <div class="js-viewport-inset js-incViewportInset mCustomScrollbar _mCS_1">
+                                                <div class="mCSB_container" style="position: relative; left: 0px; width: 944px;">
+                                                    <div id="js-incReel" class="ibk cfix">
+                                                        <?php for($i = 0; $i < $ticket_listing->quantity; $i++){ ?>
+                                                        <div class="js-incDropTarget js-aDoc ui-droppable">
+                                                            <div class="js-placeholderBacking js-incDropTargetBacking js-aDoc bdr dash">
+                                                                <div class="js-eticketHelpText">
+                                                                    <span class="h m cGry2">Drag Ticket <?= $i+1 ?> Here</span>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <?php } ?>
                                                     </div>
-                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div id="js-excViewport" class="txtc">
-                                        <div class="js-viewport-inset js-excViewportInset mCustomScrollbar _mCS_2">
-                                            <div class="mCSB_container" style="position: relative; left: 0px; width: 952px;">
-                                                <div id="js-excReel" class="ibk">
+                                        <div id="js-excViewport" class="txtc">
+                                            <div id="js-excReel" class="ibk">
 
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div id="etuToolStrip" class="reduceVSpace">
-                                <div class="js-loading" style="display: none">
-                                    <div class="spin m"></div>
-                                </div>
-                                <div class="txtc">
-                                    <button id="js-activeUploadBtn" class="btn pri">
-                                        <i class="i-upload-alt prxxs" style="font-size:18px"></i>
-                                        <span>Add Another File</span>
-                                    </button>
-                                    <div class="js-save btn">
-                                        Continue
-                                        <i class="plxs i-chevron-right" style="font-size:14px"></i>
+                                {{-- <div id="etuToolStrip" class="reduceVSpace">
+                                    <div class="js-loading" style="display: none">
+                                        <div class="spin m"></div>
                                     </div>
-                                    <div class="ibk" style="width:35px; height:1px"></div>
+                                    <div class="txtc">
+                                        <button id="js-activeUploadBtn" class="btn pri">
+                                            <i class="i-upload-alt prxxs" style="font-size:18px"></i>
+                                            <span>Add Another File</span>
+                                        </button>
+                                        <div class="js-save btn">
+                                            Continue
+                                            <i class="plxs i-chevron-right" style="font-size:14px"></i>
+                                        </div>
+                                        <div class="ibk" style="width:35px; height:1px"></div>
 
-                                </div>
-                                    <div class="gCol3 gCol3m mb0 1bGrn2 upload-later">
-                                        <div class="js-skipStep btn a cWht nowrap">Upload Later</div>
                                     </div>
+                                        <div class="gCol3 gCol3m mb0 1bGrn2 upload-later">
+                                            <div class="js-skipStep btn a cWht nowrap">Upload Later</div>
+                                        </div>
 
-                                <div class="js-fileUpload">
-                                    <form method="POST" action="{{route('seller.ticketlisting.tickets.pdf.store',$ticket_listing->id)}}" id="toolbarETicketFileUpload" novalidate="novalidate">
-                                        <input name="etickets" type="file" id="js-activeUploadInput" multiple="" accept=".pdf">
-                                        <input id="eventId" name="eventId" type="hidden" value="150113682">
-                                        <input id="transactionId" name="transactionId" type="hidden" value="">
-                                        <input id="listingId" name="listingId" type="hidden" value="">
-                                        <input id="sellPipelineStateId" name="sellPipelineStateId" type="hidden" value="2e816991-2e26-452a-bb63-c1d959c0b502">
-                                        <input id="pageVisitId" name="pageVisitId" type="hidden" value="e56b978b-1ef7-4ab6-9bb5-811ef92335fd">
-                                    </form>
-                                </div>
+                                    <div class="js-fileUpload">
+                                        <form method="POST" action="{{route('seller.ticketlisting.tickets.pdf.store',$ticket_listing->id)}}" id="toolbarETicketFileUpload" novalidate="novalidate">
+                                            <input name="etickets" type="file" id="js-activeUploadInput" multiple="" accept=".pdf">
+                                            <input id="eventId" name="eventId" type="hidden" value="150113682">
+                                            <input id="transactionId" name="transactionId" type="hidden" value="">
+                                            <input id="listingId" name="listingId" type="hidden" value="">
+                                            <input id="sellPipelineStateId" name="sellPipelineStateId" type="hidden" value="2e816991-2e26-452a-bb63-c1d959c0b502">
+                                            <input id="pageVisitId" name="pageVisitId" type="hidden" value="e56b978b-1ef7-4ab6-9bb5-811ef92335fd">
+                                        </form>
+                                    </div>
+                                </div> --}}
                             </div>
-
-                            <div class="js-zoomBackdrop">
-                                <div class="js-zoomFrame js-data-node">
-                                    <div class="etuThumbIcon js-trash"></div>
-                                    <div class="etuThumbIcon js-close"></div>
-                                </div>
-                            </div>
-
-                            <form method="POST" class="js-eticket-state" novalidate="novalidate">
-                                <input type="hidden" name="transactionId">
-                                <input type="hidden" name="listingId">
-                                <input type="hidden" name="pipelineStateId" value="2e816991-2e26-452a-bb63-c1d959c0b502">
-                                <input type="hidden" name="submitMode" id="eTicketSelectionSubmitMode">
-                                <input type="hidden" name="pageIds" id="eTicketSelectionPageIds">
-                                <input type="hidden" class="js-upload-process-begun" value="0">
-                            </form>
                         </div>
 
 
-
-                        <script class="js-ticketThumbTmpl" type="text/x-jquery-tmpl">
-                            <div class="js-excPlaceholder etuTicketDimension invis" data-id="${ETicketPageId}" style="height: ${PageHeight}px;">
-                                <div class="js-placeholderBacking js-excBacking etuTicketDimension invis" style="height: ${PageHeight}px;">
-                                    <div class="js-eticketHelpText">
-                                        <span class="h m cGry2">Moved to Ticket <span class="js-ticket-ordinal"></span></span>
-                                    </div>
-                                </div>
-                                <div class="js-data-node js-ticketThumb etuTicketDimension js-excluded" data-id="${ETicketPageId}" style="height: ${PageHeight}px;">
-
-                                    <div class="etuThumbIcon js-trash"></div>
-                                    <div class="etuThumbIcon js-magnify"></div>
-                                    <div class="etuThumbInfo">
-                                        <div class="t s cGry3">${UploadFileName}</div>
-                                        <div class="t s cGry3">
-                                               ${PageIndex + 1} of ${UploadPageCount}
-                                        </div>
-                                    </div>
+                        {{-- <div class="card p-4 mb-3 shadow-sm main-card br-10">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <h4>Don't have Tickets Yet?</h4>
+                                    <a class="primary-text cursor-pointer"
+                                        href="{{URL('Sell-tickets/ticket-authentication')}}">Upload Later</a>
                                 </div>
                             </div>
-                        </script>
-
-                        <!-- Dialog templates -->
-                        <script class="js-vgDialog-template" type="text/x-jquery-tmpl">
-                            <div class="js-vgDialog-root" data-id="${dataId}">
-                                <div class="js-vgDialog-root-inner">
-                                    <div class="js-vgDialog-border">
-                                        <div class="js-vgDialog-body">
-                                            <div class="js-vgDialog-content-hook"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </script>
-
-                        <script class="js-vgDialog-template-content-duplicateUpload" type="text/x-jquery-tmpl">
-                            <div class="js-vgDialog-content">
-                                <h2 class="v-serif v-vgDialog-content-heading">This file has the same name as a file already uploaded</h2>
-                                <div class="v-vgDialog-content-body">
-                                    <div>${filename}</div><br />
-                                    <h4>Do you still want to upload this file?</h4>
-                                </div>
-                                <div class="v-vgDialog-button-container">
-                                    <div class="js-vgDialog-button-confirm v-vgDialog-button btn pri">Yes</div>
-                                    <div class="js-vgDialog-button-cancel v-vgDialog-button btn">Cancel</div>
-                                </div>
-                            </div>
-                        </script>
-
-                        <script class="js-vgDialog-template-content-confirmDelete" type="text/x-jquery-tmpl">
-                            <div class="js-vgDialog-content">
-                                <h2 class="v-serif v-vgDialog-content-heading">Confirm</h2>
-                                <h4 class="v-vgDialog-content-body">Are you sure you want to delete this page?</h4>
-                                <div class="v-vgDialog-button-container">
-                                    <div class="js-vgDialog-button-confirm v-vgDialog-button btn pri">Delete</div>
-                                    <div class="js-vgDialog-button-cancel v-vgDialog-button btn">Cancel</div>
-                                </div>
-                            </div>
-                        </script>
-
-                        <script class="js-vgDialog-template-content-confirmUpload" type="text/x-jquery-tmpl">
-                            <div class="js-vgDialog-content">
-                                <h2 class="v-serif v-vgDialog-content-heading">Confirm Upload</h2>
-                                <h4 class="v-vgDialog-content-body">Please confirm you have sorted your tickets into consecutive seat number order</h4>
-                                <div class="v-vgDialog-button-container">
-                                    <div class="js-vgDialog-button-confirm v-vgDialog-button btn pri">Confirm</div>
-                                    <div class="js-vgDialog-button-cancel v-vgDialog-button btn">Cancel</div>
-                                </div>
-                            </div>
-                        </script>
-
-                        <script class="js-vgDialog-template-content-uploadIncomplete" type="text/x-jquery-tmpl">
-                            <div class="js-vgDialog-content">
-                                <h2 class="v-serif v-vgDialog-content-heading">Upload Incomplete</h2>
-                                <h4 class="v-vgDialog-content-body">Drag and drop your tickets into the slots provided</h4>
-                                <div class="v-vgDialog-button-container">
-                                    <div class="js-vgDialog-button-confirm v-vgDialog-button btn pri">Cancel</div>
-                                </div>
-                            </div>
-                        </script>
+                        </div> --}}
                     </div>
 
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm mb-3 type-card main-card br-10">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4>Title</h4>
+                                </div>
+                                <div class="card-subtitle">
+                                    <span class="fw-600">Start Time<br>End Time</span><br>
+                                    <span class="text-muted">Singapore National Stadium, Singapore, Singapore</span>
+                                </div>
+                                <div class="tags d-flex">
+                                    <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>Ticket type</span>
+                                    <span class="ticket-type p-1 rounded-3 me-2"><strong>Split Type: </strong>any</span>
+                                </div>
 
-                    <div class="card p-4 mb-3 shadow-sm main-card br-10">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h4>Don't have Tickets Yet?</h4>
-                                <a class="primary-text cursor-pointer"
-                                    href="{{URL('Sell-tickets/ticket-authentication')}}">Upload Later</a>
+                                <div class="price-tag d-sm-flex d-block justify-content-between">
+                                    <span> <strong>Price/Ticket: </strong></span>
+                                    <span><strong> $ 10000</strong></span>
+                                </div>
+
+                                <div class="price-tag d-sm-flex d-block justify-content-between tags">
+                                    <span> <strong>Number of Tickets: </strong></span>
+                                    <span><strong> × 2(Quantity)</strong></span>
+                                </div>
+                                <div class="tags d-flex mt-1">
+                                    <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>A</span>
+                                    <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>5</span>
+                                </div>
+                                <div class="price-tag d-sm-flex d-block justify-content-between">
+                                    <span> <strong>Website Price: </strong></span>
+                                    <span><strong> $10000</strong></span>
+                                </div>
+                                <div class="price-tag d-sm-flex d-block justify-content-between">
+                                    <span> <strong> Seller Fees: </strong></span>
+                                    <span><strong> $ (Percentage)</strong></span>
+                                </div>
+                                <div class="price-tag d-sm-flex d-block justify-content-between">
+                                    <span> <strong>VAT currency: </strong></span>
+                                    <span><strong> 1.86</strong></span>
+                                </div>
+                                <div class="small tags"> VAT amount can change depending on your location.
+                                    YOU'LL RECEIVE $ (Grand total)</div>
+                                <div class="price-tag d-sm-flex d-block justify-content-between">
+                                    <span> <strong>YOU'LL RECEIVE: </strong></span>
+                                    <span><strong> $ (Grand total)</strong></span>
+                                </div>
+                                <div class="price-tag d-sm-flex d-block justify-content-between">
+                                    <button id="btn-continue-upload" disabled="true" class="btn pri w-100 fw-700" type="submit">Continue</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-4">
-                    <div class="card shadow-sm mb-3 type-card main-card br-10">
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h4>Title</h4>
-                            </div>
-                            <div class="card-subtitle">
-                                <span class="fw-600">Start Time<br>End Time</span><br>
-                                <span class="text-muted">Singapore National Stadium, Singapore, Singapore</span>
-                            </div>
-                            <div class="tags d-flex">
-                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>Ticket type</span>
-                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Split Type: </strong>any</span>
-                            </div>
-
-                            <div class="price-tag d-sm-flex d-block justify-content-between">
-                                <span> <strong>Price/Ticket: </strong></span>
-                                <span><strong> $ 10000</strong></span>
-                            </div>
-
-                            <div class="price-tag d-sm-flex d-block justify-content-between tags">
-                                <span> <strong>Number of Tickets: </strong></span>
-                                <span><strong> × 2(Quantity)</strong></span>
-                            </div>
-                            <div class="tags d-flex mt-1">
-                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>A</span>
-                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>5</span>
-                            </div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between">
-                                <span> <strong>Website Price: </strong></span>
-                                <span><strong> $10000</strong></span>
-                            </div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between">
-                                <span> <strong> Seller Fees: </strong></span>
-                                <span><strong> $ (Percentage)</strong></span>
-                            </div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between">
-                                <span> <strong>VAT currency: </strong></span>
-                                <span><strong> 1.86</strong></span>
-                            </div>
-                            <div class="small tags"> VAT amount can change depending on your location.
-                                YOU'LL RECEIVE $ (Grand total)</div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between">
-                                <span> <strong>YOU'LL RECEIVE: </strong></span>
-                                <span><strong> $ (Grand total)</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
     </section>
 
@@ -291,11 +200,8 @@
     @include("auth.partials.footer")
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="../../js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.0.6/jquery.mousewheel.min.js" ></script>
-    <script src="http://malihu.github.io/custom-scrollbar/3.0.0/jquery.mCustomScrollbar.concat.min.js" > </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/draggable/1.0.0-beta.12/draggable.min.js" integrity="sha512-VTqyB/kLQGaTnF5kYAgeEFo8fwqdlAGNUQeoQi4EOmmBYTEQ/XrYC7lnzCvBBp1PR+1ODEQiT075oeUdPeFHwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.24/jquery-ui.min.js" type="text/javascript"></script>
     <script>
         const publicPath = `<?= asset('etickets/'); ?>`;
 
@@ -308,13 +214,50 @@
                                             <span class="h m cGry2">Moved to Ticket <span class="js-ticket-ordinal"></span></span>
                                         </div>
                                     </div>
-                                    <div class="js-data-node js-ticketThumb etuTicketDimension js-excluded ui-draggable draggable" data-id="59894126" style="height: 283px;">
+                                    <div class="js-data-node js-ticketThumb etuTicketDimension js-excluded ui-draggable" data-id="`+image.filename+`" style="height: 283px;">
+                                        <input type="hidden" name="eticket[]" value="`+image.filename+`" class="eticket" />
                                         <img class="thumbnail imgFull" src="`+publicPath+`/`+image.filename+`">
                                     </div>
                                 </div>`;
             });
             $('#js-excReel').append(draggableHtml)
-            console.log(draggableHtml);
+            $(".js-data-node").draggable({
+                revert: "invalid",
+                refreshPositions: true,
+                drag: function (event, ui) {
+                    ui.helper.addClass("draggable");
+                },
+                stop: function (event, ui) {
+                    // ui.helper.removeClass("draggable");
+                    // console.log(this.lastElementChild.src);
+                    var image = this.lastElementChild.src.split("/")[this.lastElementChild.src.split("/").length - 1];
+                    if ($.ui.ddmanager.drop(ui.helper.data("draggable"), event)) {
+                        // alert(image + " dropped.");
+                    }
+                    else {
+                        // alert(image + " not dropped.");
+                    }
+                }
+            });
+            $(".js-incDropTarget").droppable({
+                drop: function (event, ui) {
+                    // console.log($("img", this));
+                    if ($("img", this).length == 0) {
+                        $(this).html("");
+                        ui.draggable.addClass("dropped");
+                        console.log(ui.draggable);
+                        $(this).append(ui.draggable);
+                        var buttonDisable = 0;
+                        $.each($(".js-incDropTarget"), function(i, val){ if($(val).has('.js-data-node').length){ buttonDisable++; } })
+                        if($(".js-incDropTarget").length === buttonDisable){
+                            $("#btn-continue-upload").prop("disabled", false);
+                        }
+                    } else {
+                        ui.draggable.draggable('option', 'revert', true);
+                    }
+
+                }
+            });
         };
         $("#js-preUploadBtn").click(function() {
             $("#js-preUploadInput").trigger("click")
@@ -331,7 +274,6 @@
                 data: myFormData,
                 cache: false,
                 success: function (data) {
-                    console.log(data);
                     $(".js-splashScreen").css("display","none");
                     $(".js-loading").css("display","none");
                     $('#js-etuStateToggle').removeClass('js-preUpload');
@@ -342,14 +284,13 @@
                 contentType: false,
             });
         });
-        $( ".draggable" ).draggable();
-        $( ".droppable" ).droppable({
-            drop: function( event, ui ) {
-                /* $( this )
-                .addClass( "ui-state-highlight" )
-                .find( "p" )
-                    .html( "Dropped!" ); */
+        document.getElementById("ticekts-upload-form").addEventListener('submit', function (event) {
+
+            // Ignore the #toggle-something button
+            if (event.submitter.matches('#js-preUploadBtn')) {
+                event.preventDefault();
             }
+
         });
         /* $('#js-excReel').mCustomScrollbar({
             horizontalScroll: !0,

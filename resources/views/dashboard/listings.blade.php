@@ -420,86 +420,6 @@
                                        >
                                        All Active Listings here
                                     </h5>
-                                    {{-- @foreach($active_tickets as $key
-                                    => $active_ticket)
-                                    <div
-                                       class="card-body"
-                                       style="
-                                       border-bottom: 3px solid
-                                       #61c3e3;
-                                       "
-                                       >
-                                       <div class="row">
-                                          <div
-                                             class="col-md-2 col-lg-2"
-                                             >
-                                             <p>
-                                                <br />
-                                                {{$active_ticket->created_at}}
-                                                <br />
-                                             </p>
-                                          </div>
-                                          <div
-                                             class="col-md-10 col-lg-10"
-                                             >
-                                             <div
-                                                class="card-content d-md-flex justify-content-between"
-                                                >
-                                                <div
-                                                   class="card-des"
-                                                   >
-                                                   <h5>
-                                                      {{$active_ticket->title}}
-                                                   </h5>
-                                                   <p></p>
-                                                   <div
-                                                      class="alert alert-danger"
-                                                      role="alert"
-                                                      >
-                                                      <strong
-                                                         >Only
-                                                      {{$active_ticket->quantity}}
-                                                      available
-                                                      tickets.</strong
-                                                         >
-                                                      Creating
-                                                      a
-                                                      listing
-                                                      now will
-                                                      increase
-                                                      the
-                                                      chances
-                                                      of your
-                                                      tickets
-                                                      selling.
-                                                   </div>
-                                                </div>
-                                                <div
-                                                   class="card-action d-flex flex-column text-end"
-                                                   >
-                                                   <span
-                                                      >From</span
-                                                      >
-                                                   <span
-                                                      >${{$active_ticket->price}}</span
-                                                      >
-                                                   <button
-                                                      class="btn primary-btn"
-                                                      href="{{
-                                                      URL(
-                                                      'Sell-tickets/tickets-details'
-                                                      )
-                                                      }}"
-                                                      >
-                                                   Sell
-                                                   Tickets
-                                                   </button>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    @endforeach --}}
                                     <table class="table">
                                         <thead>
                                           <tr>
@@ -520,24 +440,23 @@
                                         </thead>
                                         <tbody class="table-group-divider">
                                             @foreach ($active_tickets as $ticket)
-                                            @if ($ticket->approve == 1)
-                                            <tr>
-                                               <th scope="row">1</th>
-                                               {{-- <td>{{$ticket->title}}</td> --}}
-                                               <td>{{$ticket->event->title}}</td>
-                                               <td>{{$ticket->price}}</td>
-                                               {{-- <td>{{$ticket->currency}}</td> --}}
-                                               <td>{{$ticket->quantity}}</td>
-                                               <td>{{$ticket->section}}</td>
-                                               <td>{{$ticket->row}}</td>
-                                               <td>{{$ticket->seat_from}}</td>
-                                               <td>{{$ticket->seat_to}}</td>
-                                                  <td>{{$ticket->ticket_type}}</td>
-                                         
-                                               <td>{{$ticket->ticket_restrictions}}</td>
-                                               {{-- <td>{{$ticket->status}}</td> --}}
-                                            </tr>
-                                            @endif
+                                                @if ($ticket->approve == 1)
+                                                   <tr>
+                                                      <th>{{$ticket->id}}</th>
+                                                      {{-- <td>{{$ticket->title}}</td> --}}
+                                                      <td>{{$ticket->event->event_name}}</td>
+                                                      <td>{{$ticket->price}}</td>
+                                                      {{-- <td>{{$ticket->currency}}</td> --}}
+                                                      <td>{{$ticket->quantity}}</td>
+                                                      <td>{{$ticket->Section->sections}}</td>
+                                                      <td>{{$ticket->row}}</td>
+                                                      <td>{{$ticket->seat_from}}</td>
+                                                      <td>{{$ticket->seat_to}}</td>
+                                                         <td>{{$ticket->ticket_type}}</td>
+                                                      <td>{{$ticket->ticket_restrictions}}</td>
+                                                      {{-- <td>{{$ticket->status}}</td> --}}
+                                                   </tr>
+                                                @endif
                                             @endforeach
                                         </tbody>
                                       </table>
@@ -653,13 +572,60 @@
                                     </div>
                                  </div>
                               </div>
-                              <div class="card shadow-sm mb-3">
+                              <div class="card shadow-sm mb-3" >
                                  <div class="card-body">
-                                    <h5
+                                    {{-- <h5
                                        class="card-title fw-600 text-center"
                                        >
-                                       You don't have any listings
-                                    </h5>
+                                       You don't have any pending listings 
+                                    </h5> --}}
+                                    <div class="card-body">
+                                       <h5
+                                          class="card-title fw-600 text-center"
+                                          >
+                                          All Pending Listings here
+                                       </h5>
+                                       <table class="table" >
+                                           <thead>
+                                             <tr>
+                                               <th scope="col">#</th>
+                                               {{-- <th scope="col">title</th> --}}
+                                               <th scope="col">Event</th>
+                                               <th scope="col">price</th>
+                                               {{-- <th scope="col">currency</th> --}}
+                                               <th scope="col">quantity</th>
+                                               <th scope="col">section</th>
+                                               <th scope="col">row</th>
+                                               <th scope="col">seat from</th>
+                                               <th scope="col">seat to</th>
+                                               <th scope="col">ticket type</th>
+                                               <th scope="col">ticket restrictions</th>
+                                               {{-- <th scope="col">status</th> --}}
+                                             </tr>
+                                           </thead>
+                                           <tbody class="table-group-divider">
+                                               @foreach ($active_tickets as $ticket)
+                                                   @if ($ticket->approve == 0)
+                                                      <tr>
+                                                         <th>{{$ticket->id}}</th>
+                                                         {{-- <td>{{$ticket->title}}</td> --}}
+                                                         <td>{{$ticket->event->event_name}}</td>
+                                                         <td>{{$ticket->price}}</td>
+                                                         {{-- <td>{{$ticket->currency}}</td> --}}
+                                                         <td>{{$ticket->quantity}}</td>
+                                                         <td>{{$ticket->Section->sections}}</td>
+                                                         <td>{{$ticket->row}}</td>
+                                                         <td>{{$ticket->seat_from}}</td>
+                                                         <td>{{$ticket->seat_to}}</td>
+                                                            <td>{{$ticket->ticket_type}}</td>
+                                                         <td>{{$ticket->ticket_restrictions}}</td>
+                                                         {{-- <td>{{$ticket->status}}</td> --}}
+                                                      </tr>
+                                                   @endif
+                                               @endforeach
+                                           </tbody>
+                                         </table>
+                                    </div>
                                  </div>
                               </div>
                            </div>

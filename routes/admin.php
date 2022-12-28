@@ -13,6 +13,7 @@ use App\Http\Controllers\VenueSectionRowsController;
 use App\Http\Controllers\VenuesController;
 use App\Http\Controllers\TicketListingController;
 use App\Http\Controllers\EventListingController;
+use App\Http\Controllers\MisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,7 +43,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/Admin-Panel/Edit-Event/{id}', [EventController::class, 'editEvents']);
     Route::post('/Admin-Panel/event/update/{id}', [EventController::class, 'updateEvents']);
     Route::get('/Admin-Panel/event/delete/{id}', [EventController::class, 'delete']);
-
 
     Route::get('/Admin-Panel/add-venue', [VenuesController::class, 'index']);
     Route::post('/Admin-Panel/add-venue', [VenuesController::class, 'store']);
@@ -92,6 +92,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/Admin-Panel/E_tickets', [TicketController::class, 'admin_e_tickets_show']);
         Route::get('/Admin-Panel/Mobile_tickets', [TicketController::class, 'admin_mobile_tickets_show']);
         Route::post('/toggle-approve', [TicketController::class, 'Approval']);
+        Route::post('/toggle-approve/purchase', [TicketController::class, 'ApprovalForPurchase']);
         Route::get('/Admin-Panel/{id}/destroy', [TicketController::class, 'ticket_destroy'])->name('admin.ticket.destroy');
         Route::get('/Admin-Panel/Ticket/Edit/{id}', [TicketController::class, 'edit_tickets']);
         Route::get('/Admin-Panel/Ticket/view-tickets/{id}', [PdfUploadController::class, 'view_tickets'])->name('admin.ticket.view');
@@ -107,5 +108,6 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('admin/all_sales', [SalesController::class, 'admin_purchase_show'])->name('admin.sales.show');
 
-
+        //Admin MIS Points
+        Route::get('Admin-Panel/', [MisController::class, 'index']);
 });

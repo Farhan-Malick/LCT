@@ -67,7 +67,6 @@ Route::get('/dashboard/settings', function () {
 Route::get('/dashboard/wallet', function () {
     return view('dashboard/wallet');
 });
-
 // Seller Module Routes
 // Route::get('/Sell-tickets', function () {
 //     return view('tickets/selltickets');

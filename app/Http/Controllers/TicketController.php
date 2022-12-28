@@ -272,10 +272,9 @@ class TicketController extends Controller
     {
         //
     }
-
     public function sell_category_show(Event $event,Category $category){
-        $events_sports = Event::where('category_id', '2')->get();
         $events_concert = Event::where('category_id', '1')->get();
+        $events_sports = Event::where('category_id', '2')->get();
         $events_theatre = Event::where('category_id', '3')->get();
         $events_festival = Event::where('category_id', '4')->get();
 
@@ -336,6 +335,19 @@ class TicketController extends Controller
         return view('Admin/pages/mobileTicket',compact('tickets'));
     }
     public function Approval(Request $request)
+    {
+        $tickets=TicketListing::find($request->ticket_id);
+        $approval=$request->approve;
+        if ($approval=='on') {
+            $approval=1;
+        }else {
+            $approval=0;
+        }
+        $tickets->approve=$approval;
+        $tickets->save();
+        return redirect()->back()->with('approve','Ticket has been Approved Successfully');
+    }
+    public function ApprovalForPurchase(Request $request) 
     {
         $tickets=TicketListing::find($request->ticket_id);
         $approval=$request->approve;

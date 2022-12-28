@@ -104,7 +104,7 @@
                             <div class="col-lg-12">
                                 <h6>
                                     Here is the last chance to be the member of world largest marketplace for tickets to live events.
-                                    Prices are set by sellers and may be <center> below or above face value.</center>
+                                    Prices are set by sellers and may be below or above face value.
                                 </h6>
                             </div>
                            <div class="row">

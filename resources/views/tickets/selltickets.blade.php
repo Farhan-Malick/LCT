@@ -72,7 +72,7 @@
                             <div
                                 class="card-header text-center text-light fw-700"
                             >
-                                <h5>Concert Tickets</h5>
+                                <h5>Sports Tickets</h5>
                             </div>
                             <ul class="list-group list-group-flush">
                                 @foreach($events_concert as $event)
@@ -106,7 +106,7 @@
                             <div
                                 class="card-header text-center text-light fw-700"
                             >
-                                <h5>Sports Tickets</h5>
+                                <h5>Concert Tickets</h5>
                             </div>
                             <ul class="list-group list-group-flush">
                                 @foreach($events_sports as $event)

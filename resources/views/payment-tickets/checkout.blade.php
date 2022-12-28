@@ -61,7 +61,7 @@
                                     class="bg-secondary text-light p-1 br-10">row:{{$tickets->row}}</span></p> --}}
                             </div>
                             <div class="tickets-details d-sm-flex d-block justify-content-between">
-                                <p>Number of Tickets</p>
+                                <p>Available Tickets</p>
                                 <p id="noticket">{{ $tickets->quantity }}</p>
                             </div>
                             {{-- <div class="row tickets-details d-sm-flex d-block">

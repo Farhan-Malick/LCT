@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Auth;
 
-
-
-
-
 class PurchasesController extends Controller
 {
     //
@@ -31,9 +27,7 @@ class PurchasesController extends Controller
         if(!auth()->check()){
             return redirect('/login');
         }
-
         $ticket = TicketListing::find($id);
-
         $purchase = new Purchases();
         $purchase->user_id = auth()->id();
         $purchase->event_id = $ticket->eventlisting_id;
@@ -44,7 +38,7 @@ class PurchasesController extends Controller
         $purchase->save();
         return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
     }
-
+    
     public function buyer_ticket_show(Request $request, $id){
         // dd($request->qty);
 

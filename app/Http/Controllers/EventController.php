@@ -173,17 +173,16 @@ class EventController extends Controller
         $eventRequest->save();
         return back()->with('msg',"Your request has been sent to the Admin center");
     }
-
     public function destroy_request($id){
         //return $id;
         $eventRequest = EventRequest::find($id);
         $eventRequest->delete();
         return redirect()->route('admin.request.show');
     }
+    
     public function allEvents(){
         // $tickets = Ticket::all();
         $events = Event::all();
-
         return view('/Admin/pages/allEvents',compact('events'));
     }
     public function editEvents($id){
@@ -209,25 +208,23 @@ class EventController extends Controller
         $thumbnail->move(public_path('uploads/events/thumbnail'), $thumbnail_name);
         $events->thumbnail = $thumbnail_name;
     }
-
     if($request->hasFile('poster')){
         $poster = $request->file('poster');
         $poster_name = time().'_'.$poster->getClientOriginalName();
         $poster->move(public_path('uploads/events/poster'), $poster_name);
         $events->poster = $poster_name;
     }
-
         $events->update();
         $request->session()->flash('msg','Data Has Been Updated Successfully'); 
         return redirect('Admin-Panel/All-event');
     }
     public function delete($id, Request $request){
-        
         $events = Event::find($id);
         $events->delete();
         $request->session()->flash('msg','Data Has Been Deleted Successfully'); 
         return redirect()->back();
     }
+    
 }
 
     

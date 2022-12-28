@@ -15,8 +15,8 @@ use App\Models\VenueSectionRows;
 use App\Models\ETicket;
 use App\Http\Controllers\Auth\LoginController;
 use Mail;
-use App\Mail\Seller as SellerMail;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MailController;
 use Exception;
 
 class TicketController extends Controller
@@ -151,6 +151,7 @@ class TicketController extends Controller
             $user->phone = $request->phone;
             $user->update();
         }
+        MailController::ticketlistingadded($user->email);
         return redirect()->back()->with('msg','Your tickets has been created, Your ticket will be in the Listings when Admin will Approve.');
     }
 

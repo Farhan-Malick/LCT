@@ -32,8 +32,8 @@ class MailNotify extends Mailable
 
     public function build()
     {
-    return $this->from('noreply@lastchanceticket.com', 'Me')
-    ->to("usamaayub00@gmail.com", "usama ayub")->subject("test mail")
+    return $this->from(env('MAIL_FROM'), 'Me')
+    ->subject("test mail")
     ->view('emails.sellers')->with('data',$this->data);
     }
 }

@@ -66,12 +66,12 @@
                                                 >
                                                     @csrf
                                                     <button type="submit" class="btn btn-link">Logout</button>
-                                                   
+
                                                 </form>
                                             </li>
                                         </ul>
                                     </li>
-                                    
+
                                     @endauth @guest
                                     <li class="nav-item">
                                         <a
@@ -164,15 +164,15 @@
                                     />
                                     <div class="card-body">
                                         <h6 class="card-title">
-                                            {{ $event->event_name }}
+                                            {{ $event->title }}
                                         </h6>
                                         <span class="text-danger card-span">
                                             {{$event->start_time}}-{{$event->end_time}}<br>
-                                            {{$event->event_date}}
+                                            {{$event->start_date}}
                                             </span
                                         >
                                         <p class="card-text">
-                                            {{$event->venue_name}}
+                                            {{$event->vTitle}}
                                         </p>
                                     </div>
                                 </div>

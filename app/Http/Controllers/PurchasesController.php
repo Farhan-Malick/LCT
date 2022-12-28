@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\EventListing;
+use App\Models\Event;
 
 use App\Models\TicketListing;
 
@@ -19,7 +20,7 @@ class PurchasesController extends Controller
 {
     //
     // public function buyer_tickets_index(Event $event,$id){
-       
+
     //     $events = Event::find($id);
     //     return view('payment-tickets/browse-tickets',compact('events'));
     // }
@@ -27,14 +28,26 @@ class PurchasesController extends Controller
     public function buyer_ticket_show(Request $request, $id){
         // dd($request->qty);
 
-        $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->where('event_listings.id', $id)->first();
+        // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->where('event_listings.id', $id)->first();
+        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle')->where('events.id', $id)->first();
         // dd($events);
         if ($request->qty !== null) {
-            $tickets = TicketListing::where('approve', '=', '1')->where('quantity', '>=', $request->qty)->get();
+            $tickets = TicketListing::select('*')
+            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
+            ->where('approve', '=', '1')
+            ->where('quantity', '>=', $request->qty)
+            ->get();
         } else {
-            $tickets = TicketListing::where('approve','1')->get();
+            $tickets = TicketListing::select('*')
+            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
+            ->where('approve','1')
+            ->get();
         }
-        
+
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
         return view('payment-tickets/browse-ticket',compact('events','tickets'));
     }
@@ -43,10 +56,10 @@ class PurchasesController extends Controller
         $tickets =TicketListing::find($ticketid);
         $events =Event::find($eventlisting_id);
         $purchases = new Purchases;
-        $purchases->user_id = auth()->user()->id; 
+        $purchases->user_id = auth()->user()->id;
         $purchases->event_id = $eventlisting_id;
         $purchases->seller_id =$sellerid;
-        $purchases->ticket_id = $ticketid;  
+        $purchases->ticket_id = $ticketid;
         $purchases->quantity = $request->quantity;
         $purchases->price = $request->price;
         $purchases->save();
@@ -55,7 +68,7 @@ class PurchasesController extends Controller
 
     public function buyer_ticket_checkout( TicketListing $ticket, EventListing $event, $eventid, $ticketid, $sellerid){
 
-        
+
         $events = EventListing::find($eventid);
         $tickets = TicketListing::find($ticketid);
         $sellers = User::find($sellerid);
@@ -81,9 +94,9 @@ class PurchasesController extends Controller
 
     public function downloadPdf(){
 
-        
-        
-        
+
+
+
         $pdf = Pdf::loadView('invoice');
         return $pdf->download('invoice.pdf');
     }

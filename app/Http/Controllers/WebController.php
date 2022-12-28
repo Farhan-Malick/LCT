@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\EventListing;
+use App\Models\Event;
 
 
 class WebController extends Controller
@@ -16,7 +16,8 @@ class WebController extends Controller
     public function index()
     {
         //
-        $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->get();
+        // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->get();
+        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle')->get();
         return view('home', compact('events'));
     }
 

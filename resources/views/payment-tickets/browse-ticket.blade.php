@@ -43,16 +43,16 @@
                         <div class="col-lg-10 p-4">
                             <div class="ticket-details">
                                 <div class="ticket-title">
-                                    <h4 class="primary-text fw-700">{{$events->event_name}}</h4>
+                                    <h4 class="primary-text fw-700">{{$events->title}}</h4>
                                 </div>
                                 <div class="ticket-subtitle">
-                                    <p class="fw-600 p-0 m-0">{{$events->venue_name}}</p>
+                                    <p class="fw-600 p-0 m-0">{{$events->vTitle}}</p>
                                 </div>
                                 <div class="ticket-date">
-                                    <span>{{$events->event_date}}</span>
+                                    <span>{{$events->start_date}}</span>
                                 </div>
                                 <div class="current-date d-flex flex-column">
-                                    <span class="text-danger fw-700">{{ get_when($events->event_date) }}</span>
+                                    <span class="text-danger fw-700">{{ get_when($events->start_date) }}</span>
                                     <span> (More {{$events->title}} Events)</span>
                                 </div>
                             </div>
@@ -216,7 +216,8 @@
                             </div>
                             <div class="col-md-7 col-lg-8">
                                 <div class="ticket-title">
-                                    <h6 class="fw-700">Section: {{$ticket->section}}</h6>
+                                    <h4 class="fw-700">{{$ticket->event_name}}</h4>
+                                    <h6 class="fw-700">Section: {{$ticket->sections}}, Row: {{$ticket->rows}}</h6>
                                     <p class="text-danger fw-600 m-0">{{$ticket->quantity}} tickets remaining</p>
                                     <p class="m-0">in this listing on our site</p>
                                     <button class="btn btn-sm success-btn">Instant Download</button>

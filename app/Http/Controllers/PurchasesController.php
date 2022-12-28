@@ -33,9 +33,11 @@ class PurchasesController extends Controller
         // dd($events);
         $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+            ->join('events', 'events.id', '=', 'event_listings.event_id')
             ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
             ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
-            ->where('approve','1');
+            ->where('approve','1')
+            ->where('events.id',$id);
 
         if ($request->qty !== null) {
             $tickets = $tickets->where('quantity', '>=', $request->qty);

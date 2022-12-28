@@ -168,7 +168,7 @@
 											{{-- <td>{{$e_ticket->currency	}}</td> --}}
 											{{-- <td>{{$e_ticket->Currency->currency_type}}</td> --}}
 											<td>{{$e_ticket->quantity}}</td>
-											<td>{{$e_ticket->Section->sections}}</td>
+											<td>{{$e_ticket->section}}</td>
 											<td>{{$e_ticket->row}}</td>
 											<td>{{$e_ticket->seat_from}}</td>
 											<td>{{$e_ticket->seat_to}}</td>
@@ -198,6 +198,11 @@
 											</td>
 											<td>
 												<a
+													class="btn btn-primary"
+													href="{{route('admin.ticket.view',$e_ticket->id)}}"
+													><i class="fa fa-eye" aria-hidden="true"></i></a
+												>
+												<a
 													class="btn btn-success"
 													href="{{URL('/Admin-Panel/Ticket/Edit',$e_ticket->id)}}"
 													><i class="fa fa-edit" aria-hidden="true"></i></a
@@ -207,6 +212,7 @@
 													href="{{route('admin.ticket.destroy',$e_ticket->id)}}"
 													><i class="fa fa-trash" aria-hidden="true"></i></a
 												>
+												
 											</td>
 										</tr>
 									@endif

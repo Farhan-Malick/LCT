@@ -143,47 +143,50 @@
                         <div class="card shadow-sm mb-3 type-card main-card br-10">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4>Title</h4>
+                                    <h4>{{$ticket_listing->event->title}}</h4>
                                 </div>
                                 <div class="card-subtitle">
-                                    <span class="fw-600">Start Time<br>End Time</span><br>
+                                    <span class="fw-600"><strong>{{$ticket_listing->event->start_date}}
+                                        <strong>{{$ticket_listing->event->start_time}}</strong>
+                                    </strong></span>
+                                    <br>
                                     <span class="text-muted">Singapore National Stadium, Singapore, Singapore</span>
                                 </div>
                                 <div class="tags d-flex">
-                                    <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>Ticket type</span>
+                                    <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>{{$ticket_listing->ticket_type}}</span>
                                     <span class="ticket-type p-1 rounded-3 me-2"><strong>Split Type: </strong>any</span>
                                 </div>
-
+    
                                 <div class="price-tag d-sm-flex d-block justify-content-between">
                                     <span> <strong>Price/Ticket: </strong></span>
-                                    <span><strong> $ 10000</strong></span>
+                                    <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$ticket_listing->price}}</span></strong></span>
                                 </div>
-
+    
                                 <div class="price-tag d-sm-flex d-block justify-content-between tags">
                                     <span> <strong>Number of Tickets: </strong></span>
-                                    <span><strong> × 2(Quantity)</strong></span>
+                                    <span><strong> × {{$ticket_listing->quantity}}</strong></span>
                                 </div>
                                 <div class="tags d-flex mt-1">
-                                    <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>A</span>
-                                    <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>5</span>
+                                    <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>{{$ticket_listing->section}}</span>
+                                    <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>{{$ticket_listing->row}}</span>
                                 </div>
                                 <div class="price-tag d-sm-flex d-block justify-content-between">
                                     <span> <strong>Website Price: </strong></span>
-                                    <span><strong> $10000</strong></span>
+                                    <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$price}}</span></strong></span>
                                 </div>
                                 <div class="price-tag d-sm-flex d-block justify-content-between">
                                     <span> <strong> Seller Fees: </strong></span>
-                                    <span><strong> $ (Percentage)</strong></span>
+                                    <span><strong> {{$ticketCurrency->currency_type}} <span class="percentage">{{$percentage}}</span></strong></span>
                                 </div>
                                 <div class="price-tag d-sm-flex d-block justify-content-between">
-                                    <span> <strong>VAT currency: </strong></span>
+                                    <span> <strong>VAT {{$ticketCurrency->currency_type}}: </strong></span>
                                     <span><strong> 1.86</strong></span>
                                 </div>
                                 <div class="small tags"> VAT amount can change depending on your location.
-                                    YOU'LL RECEIVE $ (Grand total)</div>
+                                    YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div>
                                 <div class="price-tag d-sm-flex d-block justify-content-between">
                                     <span> <strong>YOU'LL RECEIVE: </strong></span>
-                                    <span><strong> $ (Grand total)</strong></span>
+                                    <span><strong> {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></strong></span>
                                 </div>
                                 <div class="price-tag d-sm-flex d-block justify-content-between">
                                     <button id="btn-continue-upload" disabled="true" class="btn pri w-100 fw-700" type="submit">Continue</button>

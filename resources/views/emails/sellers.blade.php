@@ -93,7 +93,7 @@
                         "
                       >
                         Hello Example@gmail.com Or Name
-                        <!-- Hello {{ $email_data['name'] }} -->
+                        {{-- <!-- Hello {{ $email_data['name'] }} --> --}}
                         <br />
                         <span
                           style="

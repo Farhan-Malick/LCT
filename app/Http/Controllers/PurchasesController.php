@@ -25,7 +25,6 @@ class PurchasesController extends Controller
     //     $events = Event::find($id);
     //     return view('payment-tickets/browse-tickets',compact('events'));
     // }
-
     public function buyer_ticket_purchase(Request $request, $id)
     {
         // dd(auth()->check());
@@ -40,11 +39,7 @@ class PurchasesController extends Controller
         $purchase->event_id = $ticket->eventlisting_id;
         $purchase->ticket_id = $ticket->id;
         $purchase->seller_id = $ticket->user_id;
-<<<<<<< HEAD
-        $purchase->price = $ticket->price * $request->quantity;
-=======
         $purchase->price = (int) $ticket->price * (int) $request->quantity;
->>>>>>> d9fc5d78803ade4cd60cf590f2c0c8c2397d10f1
         $purchase->quantity = $request->quantity;
         $purchase->save();
         return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');

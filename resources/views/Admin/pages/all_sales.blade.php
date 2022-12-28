@@ -146,6 +146,7 @@
                                         <th scope="col">Ticket name</th>
                                         <th scope="col">Total price</th>
                                         <th scope="col">Quantity</th>
+                                        <th scope="col">Approval</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -162,13 +163,13 @@
                                             <form action="{{ url('/toggle-approve') }}" method="POST">
                                                 @csrf
                                                 <input <?php
-                                                if ($ticket->approve == 1) {
+                                                if ($purchase->approve == 1) {
                                                     echo 'checked';
                                                 }
                                                 ?> type="checkbox" 
                                                     name="approve" class="mr-2">
                                                 <input type="hidden" name="ticket_id" id=""
-                                                    value="{{ $ticket->id }}" >
+                                                    value="{{ $purchase->id }}" >
                                                 <input type="submit" class="btn btn-primary"
                                                     name="" value="Approve" id="">
                                             </form>
@@ -181,12 +182,12 @@
                                         <td>
                                             <a
                                                 class="btn btn-success"
-                                                href="{{URL('/Admin-Panel/Ticket/Edit',$ticket->id)}}"
+                                                href="{{URL('/Admin-Panel/Ticket/Edit',$purchase->id)}}"
                                                 ><i class="fa fa-edit" aria-hidden="true"></i></a
                                             >
                                             <a
                                                 class="btn btn-danger"
-                                                href="{{route('admin.ticket.destroy',$ticket->id)}}"
+                                                href="{{route('admin.ticket.destroy',$purchase->id)}}"
                                                 ><i class="fa fa-trash" aria-hidden="true"></i></a
                                             >
                                         </td>

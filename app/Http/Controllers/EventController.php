@@ -178,9 +178,7 @@ class EventController extends Controller
         //return $id;
         $eventRequest = EventRequest::find($id);
         $eventRequest->delete();
-
         return redirect()->route('admin.request.show');
-
     }
     public function allEvents(){
         // $tickets = Ticket::all();
@@ -188,12 +186,10 @@ class EventController extends Controller
 
         return view('/Admin/pages/allEvents',compact('events'));
     }
-
     public function editEvents($id){
         $events = Event::find($id);
         return view('Admin/pages/editEvent',compact('events'));
     }
-
     public function updateEvents(Request $request,$id){
         //return $request;
         $events = Event::find($id);

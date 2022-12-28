@@ -168,7 +168,7 @@
 											{{-- <td>{{$m_ticket->currency}}</td> --}}
 											{{-- <td>{{$m_ticket->Currency->currency_type}}</td> --}}
 											<td>{{$m_ticket->quantity}}</td>
-											<td>{{$m_ticket->Section->sections}}</td>
+											<td>{{$m_ticket->section}}</td>
 											<td>{{$m_ticket->row}}</td>
 											<td>{{$m_ticket->seat_from}}</td>
 											<td>{{$m_ticket->seat_to}}</td>

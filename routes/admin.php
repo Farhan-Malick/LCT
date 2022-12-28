@@ -94,7 +94,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/toggle-approve', [TicketController::class, 'Approval']);
         Route::get('/Admin-Panel/{id}/destroy', [TicketController::class, 'ticket_destroy'])->name('admin.ticket.destroy');
         Route::get('/Admin-Panel/Ticket/Edit/{id}', [TicketController::class, 'edit_tickets']);
-
+        Route::get('/Admin-Panel/Ticket/view-tickets/{id}', [PdfUploadController::class, 'view_tickets'])->name('admin.ticket.view');
 
         Route::get('Admin-Panel/event-listing-form', [EventListingController::class, 'EventListingForm']);
         Route::get('Admin-Panel/event-listing', [EventListingController::class, 'showListing']);

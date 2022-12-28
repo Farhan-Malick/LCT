@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use setasign\Fpdf\Fpdf;
 use setasign\Fpdi\Fpdi;
+use App\Models\ETicket;
 // use Imagick;
 
 class PdfUploadController extends Controller
@@ -18,7 +19,6 @@ class PdfUploadController extends Controller
         $num = preg_match_all("/\/Page\W/", $pdftext, $dummy);
 
         return $num;
-
       }
 
     public function store(Request $request)
@@ -41,5 +41,10 @@ class PdfUploadController extends Controller
             return response()->json($fileNames);
         }
         return response(422)->json(["message" => "File is not supported."]);
+    }
+    public function view_tickets($id, Request $request)
+    {
+        $e_tickets = ETicket::where('ticketlisting_id',$id)->get();
+        return view('/Admin/pages/viewTickets',compact('e_tickets'));
     }
 }

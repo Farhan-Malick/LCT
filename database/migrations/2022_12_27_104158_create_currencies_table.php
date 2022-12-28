@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('currency', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('currency_type')->nullable();
             $table->timestamps();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('currency_type');
+        Schema::dropIfExists('currencies');
     }
 };

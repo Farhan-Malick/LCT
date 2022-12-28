@@ -122,8 +122,8 @@
                             </div>
                             <div class="number-of-tickets ">
                                 <h6>Number of tickets</h6>
-                                    <select class="form-select" id="#ticket" name="quantity">
-                                        <option selected>Select Number of Tickets</option>
+                                    <select class="form-select" id="#ticket" name="quantity" required>
+                                        <option disabled>Select Number of Tickets</option>
                                         @for ($i = 1; $i <= $tickets->quantity; $i++)
                                             <option value="{{ $i }}">{{ $i }} Tickets</option>
                                         @endfor

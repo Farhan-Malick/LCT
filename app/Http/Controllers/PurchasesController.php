@@ -11,6 +11,7 @@ use App\Models\TicketListing;
 use App\Models\Purchases;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Auth;
 
 
 
@@ -24,6 +25,26 @@ class PurchasesController extends Controller
     //     $events = Event::find($id);
     //     return view('payment-tickets/browse-tickets',compact('events'));
     // }
+
+    public function buyer_ticket_purchase(Request $request, $id)
+    {
+        // dd(auth()->check());
+        if(!auth()->check()){
+            return redirect('/login');
+        }
+
+        $ticket = TicketListing::find($id);
+
+        $purchase = new Purchases();
+        $purchase->user_id = auth()->id();
+        $purchase->event_id = $ticket->eventlisting_id;
+        $purchase->ticket_id = $ticket->id;
+        $purchase->seller_id = $ticket->user_id;
+        $purchase->price = auth()->id();
+        $purchase->quantity = $request->quantity;
+        $purchase->save();
+        return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
+    }
 
     public function buyer_ticket_show(Request $request, $id){
         // dd($request->qty);

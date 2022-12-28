@@ -125,6 +125,7 @@ Route::post('/Sell-tickets/{ticket_listing}/upload-ticket', [TicketController::c
 
 // Purchase module
 Route::get('/ticket/{id}/view' , [PurchasesController::class,'buyer_ticket_show'])->name('buyer.ticket.show');
+Route::post('/ticket/{ticketid}/purchase' , [PurchasesController::class,'buyer_ticket_purchase'])->name('buyer.ticket.purchase');
 Route::post('/tickets/{eventlisting_id}/{ticketid}/{sellerid}/view' , [PurchasesController::class,'buyer_ticket_create'])->name('buyer.ticket.create');
 
 Route::get('/ticket/{eventlisting_id}/{ticketid}/{sellerid}/checkout' , [PurchasesController::class,'buyer_ticket_checkout'])->name('buyer.ticket.checkout');

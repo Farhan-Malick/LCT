@@ -20,7 +20,7 @@ class MailController extends Controller
             'body' =>'Hello This is my email delivery!'
         ];
         try{
-            Mail::to(`farhan.malicck@gmail.com`)->send(new MailNotify($data));
+            Mail::to(`usamaayub00@gmail.com`)->send(new MailNotify($data));
             return response()->json(['Great check your mail box']);
         }catch(Exception $th){
             dd($th);

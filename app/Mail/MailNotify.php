@@ -13,7 +13,7 @@ class MailNotify extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $data = [];
+    private $data;
     /**
      * Create a new message instance.
      *
@@ -28,41 +28,12 @@ class MailNotify extends Mailable
      * Get the message envelope.
      *
      * @return \Illuminate\Mail\Mailables\Envelope
-     */
+    */
 
-     public function build()
-     {
-         return $this->to('farhan.malicck@gmail.com')->from('noreply@lastchanceticket.com','last chance ticket')
-         ->subject($this->data['subject'])
-         ->view('emails.sellers')->with('data',$this->data);
-     }
-
-    public function envelope()
+    public function build()
     {
-        // return new Envelope(
-        //     subject: 'Mail Notify',
-        // );
-    }
-
-    /**
-     * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
-     */
-    public function content()
-    {
-        
-            // return $this->from('tickting@example.org','Ticting website')->subject($this->data['subject'])->view('tickets.e-ticting')->with('data',$this->data);
-        
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
+    return $this->from('noreply@lastchanceticket.com', 'Me')
+    ->to("usamaayub00@gmail.com", "usama ayub")->subject("test mail")
+    ->view('emails.sellers')->with('data',$this->data);
     }
 }

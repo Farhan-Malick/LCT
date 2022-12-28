@@ -142,6 +142,7 @@ Route::get('/ticket/{eventlisting_id}/{ticketid}/{sellerid}/checkout' , [Purchas
 
 //mail route
 Route::get('/tickets/{id}', [TicketController::class,'showCatTickets'])->name("tickets.category");
+Route::get('/tickets', [TicketController::class,'showCatTickets'])->name("tickets");
 // Route::get('/sendmail' , [TicketController::class,'sendAwienMail'])->name('buyer.ticket.email');
 Route::get('/sendmail' , [MailController::class,'index']);
 

@@ -12,6 +12,7 @@ use App\Models\Purchases;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Auth;
+use App\Http\Controllers\MailController;
 
 class PurchasesController extends Controller
 {
@@ -27,7 +28,16 @@ class PurchasesController extends Controller
         if(!auth()->check()){
             return redirect('/login');
         }
+<<<<<<< HEAD
         $ticket = TicketListing::find($id);
+=======
+
+        $ticket = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'event_listings.event_date', 'event_listings.start_time')
+        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->where('ticket_listings.id', $id)
+        ->first();
+
+>>>>>>> a3a92ac4749e7bcde22787ab25589238a6710f0b
         $purchase = new Purchases();
         $purchase->user_id = auth()->id();
         $purchase->event_id = $ticket->eventlisting_id;
@@ -36,6 +46,7 @@ class PurchasesController extends Controller
         $purchase->price = (int) $ticket->price * (int) $request->quantity;
         $purchase->quantity = $request->quantity;
         $purchase->save();
+        MailController::ticketpurchased(auth()->user()->email, $ticket);
         return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
     }
     

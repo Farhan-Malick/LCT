@@ -1,30 +1,37 @@
 <?php
-
 namespace App\Http\Controllers;
-use Mail;
-use App\Mail\MailNotify;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TicketListingAdded;
+use App\Mail\Ticketpurchased;
 use Exception;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Validator;
 
 
 class MailController extends Controller
 {
     //
 
-    public function index(){
-
-        $data = [
-            'subject' => 'Last Chance Ticket Mailer',
-            'body' =>'Hello This is my email delivery!'
-        ];
+    public static function ticketlistingadded($email) {
+        
         try{
-            Mail::to(`usamaayub00@gmail.com`)->send(new MailNotify($data));
-            return response()->json(['Great check your mail box']);
+            $mail = Mail::to($email)->send(new TicketListingAdded());
+            return $mail;
         }catch(Exception $th){
             dd($th);
             return response()->json(['Mail not sent']);
         }
     } 
+
+
+    public static function ticketpurchased($email, $data) {
+        
+        try{
+            $mail = Mail::to($email)->send(new Ticketpurchased($data));
+            return $mail;
+        }catch(Exception $th){
+            dd($th);
+            return response()->json(['Mail not sent']);
+        }
+    }
 }

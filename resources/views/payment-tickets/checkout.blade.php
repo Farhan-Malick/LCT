@@ -55,9 +55,9 @@
                                 <p class="fw-600 m-0">{{ $events->start_time }} to {{ $events->end_time }} <br>
                                     {{ $events->event_date }}
                                 </p>
-                                <p>{{ get_when($events->venue_name) }}</p>
-                                <p><span class="bg-secondary text-light p-1 br-10">Section:A</span> <span
-                                        class="bg-secondary text-light p-1 br-10">row:12</span></p>
+                                <p>{{ $events->venue_name }}</p>
+                                <p><span class="bg-secondary text-light p-1 br-10">Section:{{ $tickets->sections }}</span> <span
+                                        class="bg-secondary text-light p-1 br-10">row:{{ $tickets->rows }}</span></p>
                                         
                                 {{-- <p><span class="bg-secondary text-light p-1 br-10">Section:{{$tickets->section}}</span> <span
                                     class="bg-secondary text-light p-1 br-10">row:{{$tickets->row}}</span></p> --}}
@@ -66,12 +66,12 @@
                                 <p>Number of Tickets</p>
                                 <p id="noticket">{{ $tickets->quantity }}</p>
                             </div>
-                            <div class="row tickets-details d-sm-flex d-block">
+                            {{-- <div class="row tickets-details d-sm-flex d-block">
                                <div class="col-md-6"> <p>Sales Tax</p></div>
                                <div class="col-md-6 ">
                                     <span style="float:right">$<span id="taxpriceticket"> .00 </span></span>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row tickets-details d-sm-flex d-block">
                                 <div class="col-md-6">
                                     <p>Per Ticket Price</p>
@@ -130,12 +130,12 @@
                                     <div class="my_ticket_title p-3">
                                         {{-- <h4 class="fw-700">{{$tickets->event->title}}({{$tickets->title}})
                                         </h4> --}}
-                                        <h4 class="fw-700">Event Title Name and Tickets Title</h4>
+                                        <h4 class="fw-700">{{ $tickets->event_name }}, {{ $events->title }}</h4>
                                         {{-- <p class="m-0">{{$tickets->event->start_time}}<br>
                                             {{$tickets->event->start_date}} </p> --}}
-                                        <p class="m-0">event Start time<br>
-                                           Event Start date </p>
-                                        <p>Citizens Bank Park, Philadelphia, Pennsylvania, USA</p>
+                                        <p class="m-0">{{ $events->start_time }}<br>
+                                           {{ $events->event_date }} </p>
+                                        <p>{{ $tickets->event_venue }}</p>
                                         <p>Notes:</p>
                                         <p> <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>Unrestricted view
                                             (what's this?)</p>
@@ -155,9 +155,9 @@
                                 <span>Row</span>
                                 <span class="text-success fw-700">{{$tickets->row}}</span> --}}
                                 <span>Section</span>
-                                <span class="text-success fw-700">A</span>
+                                <span class="text-success fw-700">{{ $tickets->sections }}</span>
                                 <span>Row</span>
-                                <span class="text-success fw-700">12</span>
+                                <span class="text-success fw-700">{{ $tickets->rows }}</span>
                                 <div class="border-right-top"></div>
                                 <div class="border-right-bottom"></div>
                             </div>

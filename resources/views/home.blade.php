@@ -108,18 +108,25 @@
                                 </h6>
                             </div>
                            <div class="row">
-                            <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="btn btn-sm btn-danger w-100">Concerts Tickets</a>
+                            <?php
+                                $catClasses = ['btn-danger', 'btn-success', 'btn-warning', 'btn-primary'];    
+                            ?>
+                            @foreach ($categories as $cat)
+                            <?php $key = array_rand($catClasses); ?>
+                                <div class="col-sm-6 col-xl-3 my-3">
+                                    <a href="{{ route("tickets.category", ['id'=>$cat->id]) }}" class="btn btn-sm <?= $catClasses[$key] ?> w-100">{{ $cat->name }}</a>
+                                </div>
+                            @endforeach
+                            
+                            {{-- <div class="col-sm-6 col-xl-3 my-3">
+                                <a href="{{ route("tickets") }}" class="d-block btn btn-sm  w-100">Sports Tickets</a>
                             </div>
                             <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="d-block btn btn-sm btn-success w-100">Sports Tickets</a>
+                                <a href="{{ route("tickets") }}" class="btn btn-sm  w-100">Theater Tickets</a>
                             </div>
                             <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="btn btn-sm btn-warning w-100">Theater Tickets</a>
-                            </div>
-                            <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="btn btn-sm btn-primary w-100">Festival Tickets</a>
-                            </div>
+                                <a href="{{ route("tickets") }}" class="btn btn-sm  w-100">Festival Tickets</a>
+                            </div> --}}
                             <div class="col-lg-12 my-4">
                                 <marquee behavior="" direction="">
                                     <h5>Hurray! You are in the right place. 100% customer satisfaction. We value every single customers. We guarantee your entry. Secured payout.</h5>

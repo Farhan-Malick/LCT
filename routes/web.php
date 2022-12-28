@@ -141,10 +141,11 @@ Route::get('/ticket/{eventlisting_id}/{ticketid}/{sellerid}/checkout' , [Purchas
 
 //mail route
 Route::get('/sendmail' , [TicketController::class,'sendAwienMail'])->name('buyer.ticket.email');
+Route::get('/tickets/{id}', [TicketController::class,'showCatTickets'])->name("tickets.category");
 
-Route::get('/tickets', function () {
+/* Route::get('/tickets', function () {
     return view('payment-tickets.home');
-})->middleware(['auth'])->name("tickets");
+})->middleware(['auth'])->name("tickets"); */
 
 // Route::get('/', function () {
 //     return view('home');

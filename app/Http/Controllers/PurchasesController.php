@@ -31,23 +31,22 @@ class PurchasesController extends Controller
         // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->where('event_listings.id', $id)->first();
         $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle')->where('events.id', $id)->first();
         // dd($events);
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
+            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
+            ->where('approve','1');
+
         if ($request->qty !== null) {
-            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
-            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
-            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
-            ->where('approve', '=', '1')
-            ->where('quantity', '>=', $request->qty)
-            ->get();
-        } else {
-            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
-            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
-            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
-            ->where('approve','1')
-            ->get();
+            $tickets = $tickets->where('quantity', '>=', $request->qty);
         }
 
+        if($request->search_text !== null){
+            $tickets = $tickets->where('event_listings.event_name', 'like', '%'.$request->search_text.'%');
+        }
+
+        $tickets = $tickets->get();
+        // dd($tickets);
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
         return view('payment-tickets/browse-ticket',compact('events','tickets'));
     }
@@ -69,8 +68,16 @@ class PurchasesController extends Controller
     public function buyer_ticket_checkout( TicketListing $ticket, EventListing $event, $eventid, $ticketid, $sellerid){
 
 
-        $events = EventListing::find($eventid);
-        $tickets = TicketListing::find($ticketid);
+        $events = EventListing::select('event_listings.*', 'events.*')
+        ->join('events', 'events.id', '=', 'event_listings.event_id')
+        ->where('event_listings.id',$eventid)
+        ->first();
+
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
+        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
+        ->where('ticket_listings.id',$ticketid)->first();
         // dd($tickets);
         $sellers = User::find($sellerid);
         return view('payment-tickets/checkout',compact('tickets','events','sellers'));

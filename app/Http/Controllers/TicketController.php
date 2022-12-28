@@ -14,9 +14,10 @@ use App\Models\VanueSections;
 use App\Models\VenueSectionRows;
 use App\Models\ETicket;
 use App\Http\Controllers\Auth\LoginController;
-use Illuminate\Support\Facades\Mail;
+use Mail;
 use App\Mail\Seller as SellerMail;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class TicketController extends Controller
 {
@@ -37,6 +38,10 @@ class TicketController extends Controller
 
     public function sendAwienMail(){
         Mail::to("usamaayub00@gmail.com")->send(new SellerMail("usamaayub00@gmail.com"));
+        /* if (Mail::failures()) {
+            // return failed mails
+            dd(Mail::failures());
+        } */
     }
 
     /**
@@ -60,6 +65,20 @@ class TicketController extends Controller
 
         // Sell-tickets/setticketprice
 
+    }
+
+    public function showCatTickets(Request $request, $id)
+    {
+        
+        // $events = [];
+        $events = Event::select('events.*', 'venues.title as vTitle')
+        ->join('categories', 'categories.id', '=', 'events.category_id')
+        ->join('venues', 'venues.id', '=', 'events.venue_id')
+        ->where('categories.id', '=', $id)
+        ->get();
+        $categories = Category::all();
+        // dd($tickets);
+        return view('payment-tickets.home',compact('events', 'categories'));
     }
 
     /**

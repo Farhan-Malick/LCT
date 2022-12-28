@@ -19,34 +19,17 @@
 
     <body>
         <section class="section-one">
+            <div class="banner">
             <div class="header">
-                <div class="container-fluid px-0 mx-0">
-                    <nav class="navbar navbar-expand-lg navbar-light shadow-lg">
-                        <div class="container-fluid">
+                    <nav class="navbar navbar-expand-sm navbar-DARK shadow-lg">
+                        <div class="container">
                             <div class="logo">
-                                <a
-                                    class="navbar-brand"
-                                    href="{{ route('home') }}"
-                                >
-                                    <img
-                                        src="{{
-                                            asset('assets/images/logo2.jpg')
-                                        }}"
-                                        height="45"
-                                        width="220"
-                                        alt=""
-                                    />
-                                </a>
+                                    {{-- <a class="navbar-brand" href="{{ URL("/") }}" style="color: skyblue; font-size:25px; text-decoration:none">Last Chance Ticket</a> --}}
+                                   <a href="{{ URL("/") }}"> <img src="../../assets/images/logodark2.jpg" height="40" width="250" alt=""></a>
                             </div>
-                            <button
-                                class="navbar-toggler"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent"
-                                aria-expanded="false"
-                                aria-label="Toggle navigation"
-                            >
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div
@@ -55,7 +38,9 @@
                             >
                                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="#"
+                                        <a
+                                            class="nav-link"
+                                            href="{{ route('request.show') }}"
                                             >Request Event</a
                                         >
                                     </li>
@@ -64,24 +49,33 @@
                                     </li>
 
                                     @auth
-                                    <li class="nav-item">
-                                        <form
-                                            action="{{ route('logout') }}"
-                                            method="POST"
-                                        >
-                                            @csrf
-                                            <button
-                                                class="nav-link"
-                                                type="submit"
-                                            >
-                                                Logout
-                                            </button>
-                                        </form>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            My Account
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="{{ URL('/dashboard') }}">My Dashboard</a></li>
+                                            <li><a class="dropdown-item" href="{{ URL('/dashboard/orders') }}">My Order</a></li>
+                                            <li><a class="dropdown-item" href="{{ URL('/dashboard/listings') }}">My Listings</a></li>
+                                            <li><a class="dropdown-item" href="{{ URL('/dashboard/settings') }}">Settings</a></li>
+                                            <li class="nav-item">
+                                                <form
+                                                    action="{{ route('logout') }}"
+                                                    method="POST"
+                                                >
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-link">Logout</button>
+
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </li>
+
                                     @endauth @guest
                                     <li class="nav-item">
                                         <a
-                                            class="nav-link"
+                                             class="nav-link"
                                             href="{{ route('login') }}"
                                             >Login</a
                                         >
@@ -103,82 +97,53 @@
                             </div>
                         </div>
                     </nav>
-                </div>
             </div>
-            <div class="banner">
-                <div class="container pt-5">
+            <div class="container-fluid pt-5">
                     <div class="row text-light banner-btns">
-                        <div class="col-xl-12">
-                            <h6 class="">
-                                Here is the last chance to be the member of
-                                world largest marketplace for tickets to live
-                                events. Prices are set by sellers and may be
-                                below or above face value.
-                            </h6>
-                        </div>
-                        <div class="col-sm-6 col-xl-3 my-3">
-                            <a
-                                href="{{ route('tickets') }}"
-                                class="btn btn-sm btn-danger w-100"
-                                >Concerts Tickets</a
-                            >
-                        </div>
-                        <div class="col-sm-6 col-xl-3 my-3">
-                            <a
-                                href="{{ route('tickets') }}"
-                                class="d-block btn btn-sm btn-success w-100"
-                                >Sports Tickets</a
-                            >
-                        </div>
-                        <div class="col-sm-6 col-xl-3 my-3">
-                            <a
-                                href="{{ route('tickets') }}"
-                                class="btn btn-sm btn-warning w-100"
-                                >Theater Tickets</a
-                            >
-                        </div>
-                        <div class="col-sm-6 col-xl-3 my-3">
-                            <a
-                                href="{{ route('tickets') }}"
-                                class="btn btn-sm btn-primary w-100"
-                                >Festival Tickets</a
-                            >
-                        </div>
-                        <div class="col-xl-12 my-4">
-                            <center>
-                                <marquee
-                                    behavior="scroll"
-                                    width="60%"
-                                    direction="left"
-                                    scrollmount="50"
-                                >
-                                    <h6 class="text-dark">
-                                        <b>
-                                            Hurray! You are in the right place.
-                                            100% customer satisfaction. We value
-                                            every single customers. We guarantee
-                                            your entry. Secured payout.</b
-                                        >
-                                    </h6>
-                                </marquee>
-                            </center>
-                            <form action="" class="form-inline">
-                                <div class="input-group w-100">
-                                    <input
-                                        type="search"
-                                        class="form-control form-control-lg"
-                                        placeholder="Search for and event, venue or city"
-                                    />
-                                    <div class="input-group-append">
-                                        <button
-                                            class="btn btn-lg search-btn px-3"
-                                            type="button"
-                                        >
-                                            <i class="bi bi-search"></i>
-                                        </button>
-                                    </div>
+                        <div class="col-lg-10 offset-lg-1">
+                            <div class="col-lg-12">
+                                <h6>
+                                    Here is the last chance to be the member of world largest marketplace for tickets to live events.
+                                    Prices are set by sellers and may be <center> below or above face value.</center>
+                                </h6>
+                            </div>
+                           <div class="row">
+                            <?php
+                                $catClasses = ['btn-danger', 'btn-success', 'btn-warning', 'btn-primary'];    
+                            ?>
+                            @foreach ($categories as $cat)
+                            <?php $key = array_rand($catClasses); ?>
+                                <div class="col-sm-6 col-xl-3 my-3">
+                                    <a href="{{ route("tickets.category", ['id'=>$cat->id]) }}" class="btn btn-sm <?= $catClasses[$key] ?> w-100">{{ $cat->name }}</a>
                                 </div>
-                            </form>
+                            @endforeach
+                            
+                            {{-- <div class="col-sm-6 col-xl-3 my-3">
+                                <a href="{{ route("tickets") }}" class="d-block btn btn-sm  w-100">Sports Tickets</a>
+                            </div>
+                            <div class="col-sm-6 col-xl-3 my-3">
+                                <a href="{{ route("tickets") }}" class="btn btn-sm  w-100">Theater Tickets</a>
+                            </div>
+                            <div class="col-sm-6 col-xl-3 my-3">
+                                <a href="{{ route("tickets") }}" class="btn btn-sm  w-100">Festival Tickets</a>
+                            </div> --}}
+                            <div class="col-lg-12 my-4">
+                                <marquee behavior="" direction="">
+                                    <h5>Hurray! You are in the right place. 100% customer satisfaction. We value every single customers. We guarantee your entry. Secured payout.</h5>
+                                </marquee>
+                                <form action="" class="form-inline">
+                                    <div class="input-group w-100">
+                                        <input type="search" class="form-control form-control-lg"
+                                            placeholder="Search for and event, venue or city">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-lg search-btn px-3" type="button">
+                                                <i class="bi bi-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -195,9 +160,14 @@
                                 Top Events in worldwide
                             </h3>
                         </div>
+                        @if(count($events) == 0)
+                        <div>
+                            No Events Happening right now.
+                        </div>
+                        @endif
                         @foreach ($events as $event)
                         <div class="col-md-6 col-lg-3">
-                            <a href="{{ URL('/tickets') }}">
+                            <a href="{{ route('buyer.ticket.show',$event->id) }}">
                                 <div class="card mb-2">
                                     <img
                                         src="{{ asset('uploads/events/poster/' . $event->poster) }}"
@@ -209,11 +179,11 @@
                                             {{ $event->title }}
                                         </h6>
                                         <span class="text-danger card-span">
-                                            Sunday, May 28 2023 10:00 AM</span
+                                            {{ $event->start_time }} - 
+                                            {{ $event->start_date }}</span
                                         >
                                         <p class="card-text">
-                                            Circuit de Monaco, Monte Carlo,
-                                            Monaco
+                                            {{ $event->vTitle }}
                                         </p>
                                     </div>
                                 </div>
@@ -221,12 +191,8 @@
                         </div>
                         @endforeach
 
-                        <div class="col-lg-12">
-                            <h3 class="text-center mb-4">
-                                Top International Events
-                            </h3>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
+                        
+                        {{-- <div class="col-md-6 col-lg-3">
                             <a href="{{ URL('/tickets') }}">
                                 <div class="card mb-4">
                                     <img
@@ -329,7 +295,7 @@
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

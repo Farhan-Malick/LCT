@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Category;
 
 
 class WebController extends Controller
@@ -18,7 +19,8 @@ class WebController extends Controller
         //
         // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->get();
         $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle')->get();
-        return view('home', compact('events'));
+        $categories = Category::all();
+        return view('home', compact('events', 'categories'));
     }
 
     /**

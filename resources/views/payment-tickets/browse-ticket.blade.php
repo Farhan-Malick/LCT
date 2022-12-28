@@ -71,10 +71,6 @@
                         <h4 class="fw-700">How Many Tickets?</h4>
                         <div class="row select-ticket">
                             <div class="col-lg-12">
-                                <form method="get" id="qty-form">
-                                    {{-- @csrf --}}
-                                    <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty">
-                                </form>
                                 <p class="primary-text">
                                     <i class="bi bi-info-circle-fill me-2"></i>
                                     Select a quantity to quickly find the best tickets available for the number of
@@ -139,6 +135,19 @@
                                     </select>
                                 </form>
                             </div> --}}
+                        </div>
+                        <div class="row">
+                            <form method="get" id="qty-form">
+                                {{-- @csrf --}}
+                                <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="search_text"  placeholder="Search Event Name" value="@if(request()->get('search_text')) <?= request()->get('search_text')?> @endif"/>
+                                </div>
+                                <div class="col-md-1 mt-2">
+                                    <input type="submit" value="Search" class="btn btn-primary"/>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -220,7 +229,7 @@
                                     <h6 class="fw-700">Section: {{$ticket->sections}}, Row: {{$ticket->rows}}</h6>
                                     <p class="text-danger fw-600 m-0">{{$ticket->quantity}} tickets remaining</p>
                                     <p class="m-0">in this listing on our site</p>
-                                    <button class="btn btn-sm success-btn">Instant Download</button>
+                                    {{-- <button class="btn btn-sm success-btn">Instant Download</button> --}}
                                 </div>
                             </div>
                             <div class="col-md-3 col-lg-2">

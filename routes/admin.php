@@ -109,5 +109,5 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('admin/all_sales', [SalesController::class, 'admin_purchase_show'])->name('admin.sales.show');
 
         //Admin MIS Points
-        Route::get('Admin-Panel/', [MisController::class, 'index']);
+        // Route::get('Admin-Panel/', [MisController::class, 'index']);
 });

@@ -167,7 +167,7 @@
 													<td>${{$ticket->price}}</td>
 													{{-- <td>{{$ticket->currency}}</td> --}}
 													<td>{{$ticket->quantity}}</td>
-													<td>{{$ticket->Section->sections}}</td>
+													<td>{{$ticket->section}}</td>
 													<td>{{$ticket->row}}</td>
 													<td>{{$ticket->seat_from}}</td>
 													<td>{{$ticket->seat_to}}</td>

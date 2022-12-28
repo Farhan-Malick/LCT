@@ -147,6 +147,7 @@ class TicketController extends Controller
         $percentage = $divide * 15;
         $grand_total = $price - $percentage;
         return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency'));
+    
     }
 
     /**
@@ -227,9 +228,19 @@ class TicketController extends Controller
     }
 
     public function upload_tickets($ticketlistingid){
+            $events = EventListing::all();
+            $ticket_listing = TicketListing::find($ticketlistingid);
+            $currencies = Currency::all();
+            $ticketCurrency = Currency::find($ticket_listing->currency);
+            // dd($ticketCurrency, $tickets);
+            $price = $ticket_listing->price * $ticket_listing->quantity;
+            $divide = $price / 100;
+            $percentage = $divide * 15;
+            $grand_total = $price - $percentage;
+            return view('tickets/upload_Pdf',compact('currencies','ticket_listing','events','price','percentage','grand_total', 'ticketCurrency'));
         //dd($ticketlistingid);
-        $ticket_listing = TicketListing::find($ticketlistingid);
-        return view('tickets/upload_Pdf', compact('ticket_listing'));
+        // $ticket_listing = TicketListing::find($ticketlistingid);
+        // return view('tickets/upload_Pdf', compact('ticket_listing'));
     }
 
     /**

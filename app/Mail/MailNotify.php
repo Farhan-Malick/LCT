@@ -32,7 +32,7 @@ class MailNotify extends Mailable
 
      public function build()
      {
-         return $this->from('noreply@lastchanceticket.com','last chance ticket')
+         return $this->to('farhan.malicck@gmail.com')->from('noreply@lastchanceticket.com','last chance ticket')
          ->subject($this->data['subject'])
          ->view('emails.sellers')->with('data',$this->data);
      }

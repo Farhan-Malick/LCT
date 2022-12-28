@@ -40,7 +40,7 @@ class PurchasesController extends Controller
         $purchase->event_id = $ticket->eventlisting_id;
         $purchase->ticket_id = $ticket->id;
         $purchase->seller_id = $ticket->user_id;
-        $purchase->price = auth()->id();
+        $purchase->price = $ticket->price * $request->quantity;
         $purchase->quantity = $request->quantity;
         $purchase->save();
         return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');

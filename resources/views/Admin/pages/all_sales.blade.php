@@ -15,37 +15,9 @@
 	
 	<!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
 	<link href="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap.css")}}" rel="stylesheet" />
-            <link href="{{asset("AdminAssets/plugins/bootstrap-calendar/css/bootstrap_calendar.css")}}" rel="stylesheet" />
-            <link href="{{asset("AdminAssets/plugins/gritter/css/jquery.gritter.css")}}"  rel="stylesheet" />
-            <link href="{{asset("AdminAssets/plugins/nvd3/build/nv.d3.css")}}"  rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/smartwizard/dist/css/smart_wizard.css') }}" rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}"
-                rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css') }}"
-                rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/ion-rangeslider/css/ion.rangeSlider.min.css') }}" rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}"
-                rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}"
-                rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/@danielfarrell/bootstrap-combobox/css/bootstrap-combobox.css') }}"
-                rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css') }}"
-                rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/tag-it/css/jquery.tagit.css') }}" rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
-            <link
-                href="{{ asset('AdminAssets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}"
-                rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css') }}"
-                rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css') }}"
-                rel="stylesheet" />
-            <link href="{{ asset('AdminAssets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css') }}"
-                rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css') }}"
-        rel="stylesheet" />
+	<link href="{{asset("AdminAssets/plugins/bootstrap-calendar/css/bootstrap_calendar.css")}}" rel="stylesheet" />
+	<link href="{{asset("AdminAssets/plugins/gritter/css/jquery.gritter.css")}}"  rel="stylesheet" />
+	<link href="{{asset("AdminAssets/plugins/nvd3/build/nv.d3.css")}}"  rel="stylesheet" />
 </head>
 <body>
 	<!-- begin #page-loader -->
@@ -57,7 +29,7 @@
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed page-with-wide-sidebar page-with-light-sidebar">
 		<!-- begin #header -->
-        @include('Admin.includes.header')
+		@include('Admin.includes.header')
 		<!-- end #header -->
 		
 		<!-- begin #sidebar -->
@@ -66,18 +38,101 @@
 		
 		<!-- begin #content -->
 		<div id="content" class="content">
-            <ol class="breadcrumb float-xl-right">
-                <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-                <li class="breadcrumb-item active">All Sales</li>
-            </ol>
-            <!-- end breadcrumb -->
-            <!-- begin page-header -->
-            <h1 class="page-header">All Sales</h1>
-            <!-- end page-header -->
+			<!-- begin breadcrumb -->
+			<ol class="breadcrumb float-xl-right">
+				<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+				<li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
+				<li class="breadcrumb-item active">Last-Chance-Ticket</li>
+			</ol>
+			<!-- end breadcrumb -->
+			<!-- begin page-header -->
+			<h1 class="page-header">Last-Chance-Ticket Dashboard </h1>
+			<!-- end page-header -->
+			<!-- begin row -->
+			<div class="row">
+				<!-- begin col-3 -->
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-blue">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">TODAY'S VISITS</div>
+							<div class="stats-number">7,842,900</div>
+							<div class="stats-progress progress">
+								<div class="progress-bar" style="width: 70.1%;"></div>
+							</div>
+							<div class="stats-desc">Better than last week (70.1%)</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+				<!-- begin col-3 -->
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-blue">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">TODAY'S PROFIT</div>
+							<div class="stats-number">180,200</div>
+							<div class="stats-progress progress">
+								<div class="progress-bar" style="width: 40.5%;"></div>
+							</div>
+							<div class="stats-desc">Better than last week (40.5%)</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+				<!-- begin col-3 -->
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-blue">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">NEW ORDERS</div>
+							<div class="stats-number">38,900</div>
+							<div class="stats-progress progress">
+								<div class="progress-bar" style="width: 76.3%;"></div>
+							</div>
+							<div class="stats-desc">Better than last week (76.3%)</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+				<!-- begin col-3 -->
+				<div class="col-xl-3 col-md-6">
+					<div class="widget widget-stats bg-blue">
+						<div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
+						<div class="stats-content">
+							<div class="stats-title">NEW COMMENTS</div>
+							<div class="stats-number">3,988</div>
+							<div class="stats-progress progress">
+								<div class="progress-bar" style="width: 54.9%;"></div>
+							</div>
+							<div class="stats-desc">Better than last week (54.9%)</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+			</div>
+			<!-- end row -->
+			<!-- begin row -->
             <div class="row">
                 <!-- begin col-6 -->
                 <div class="col-xl-12">
                     <!-- begin panel -->
+					<h1 class="text-center">Paper Tickets</h1>
+					@if ($message = Session::get('msg'))
+                            <div class="alert alert-danger alert-block">
+                                <strong>{{ $message }}</strong>
+                            </div>
+					@endif
+					@if ($message = Session::get('approve'))
+					<div class="alert alert-primary alert-block">
+						<strong>{{ $message }}</strong>
+					</div>
+					@endif
+					@if ($message = Session::get('update'))
+					<div class="alert alert-success alert-block">
+						<strong>{{ $message }}</strong>
+					</div>
+					@endif
                     <div class="panel panel-inverse" data-sortable-id="form-validation-1">
                         <!-- begin panel-body -->
                         <div class="panel-body">
@@ -86,36 +141,53 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">purchaser</th>
-                                        {{-- <th scope="col">event name</th> --}}
-                                        <th scope="col">ticket name</th>
-                                        <th scope="col">total price</th>
-                                        <th scope="col">quantity</th>
+                                        <th scope="col">Purchaser</th>
+                                        <th scope="col">Event name</th>
+                                        <th scope="col">Ticket name</th>
+                                        <th scope="col">Total price</th>
+                                        <th scope="col">Quantity</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($purchases as $purchase) 
                                     <tr>
-                                        
                                         <td>{{$purchase->id}}</td>
                                         <td>{{$purchase->user->first_name}}</td>
-                                        {{-- <td>{{$purchase->event->title}}</td> --}}
-                                        <td>{{$purchase->ticket->title}}</td>
+                                        <td>{{$purchase->event->title}}</td>
+                                        <td>{{$purchase->ticket_id}}</td>
                                         <td>{{$purchase->price}}</td>
                                         <td>{{$purchase->quantity}}</td>
-                                        
+                                        <td>
+                                            <form action="{{ url('/toggle-approve') }}" method="POST">
+                                                @csrf
+                                                <input <?php
+                                                if ($ticket->approve == 1) {
+                                                    echo 'checked';
+                                                }
+                                                ?> type="checkbox" 
+                                                    name="approve" class="mr-2">
+                                                <input type="hidden" name="ticket_id" id=""
+                                                    value="{{ $ticket->id }}" >
+                                                <input type="submit" class="btn btn-primary"
+                                                    name="" value="Approve" id="">
+                                            </form>
+                                            {{-- <a
+                                                class="btn btn-primary"
+                                                href="{{route('admin.section_rows.edit',$ticket->id)}}"
+                                                >edit</a
+                                            > --}}
+                                        </td>
                                         <td>
                                             <a
-                                                class="btn btn-primary"
-                                                href=""
-                                                >edit</a
+                                                class="btn btn-success"
+                                                href="{{URL('/Admin-Panel/Ticket/Edit',$ticket->id)}}"
+                                                ><i class="fa fa-edit" aria-hidden="true"></i></a
                                             >
-            
                                             <a
                                                 class="btn btn-danger"
-                                                href=""
-                                                >Delete</a
+                                                href="{{route('admin.ticket.destroy',$ticket->id)}}"
+                                                ><i class="fa fa-trash" aria-hidden="true"></i></a
                                             >
                                         </td>
             
@@ -131,6 +203,7 @@
                 </div>
                 <!-- end col-6 -->
             </div>
+			<!-- end row -->
 		</div>
 		<!-- end #content -->
 	
@@ -147,48 +220,17 @@
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
 	<script src="{{asset("AdminAssets/plugins/d3/d3.min.js")}}"></script>
-            <script src="{{asset("AdminAssets/plugins/nvd3/build/nv.d3.min.js")}}"></script>
-            <script src="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap.min.js")}}"></script>
-            <script src="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js")}}"></script>
-            <script src="{{asset("AdminAssets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js")}}"></script>
-            <script src="{{asset("AdminAssets/plugins/gritter/js/jquery.gritter.js")}}"></script>
-            <script src="{{ asset('AdminAssets/plugins/parsleyjs/dist/parsley.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/smartwizard/dist/js/jquery.smartWizard.js') }}"></script>
-            <script src="{{ asset('AdminAssets/js/demo/form-wizards-validation.demo.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/jquery-migrate/dist/jquery-migrate.min.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/moment/min/moment.min.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/@danielfarrell/bootstrap-combobox/js/bootstrap-combobox.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/tag-it/js/tag-it.min.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/select2/dist/js/select2.min.js') }}"></script>
-            <script
-                src="{{ asset('AdminAssets/plugins/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}">
-            </script>
-            <script src="{{ asset('AdminAssets/plugins/bootstrap-show-password/dist/bootstrap-show-password.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/clipboard/dist/clipboard.min.js') }}"></script>
-            <script src="{{ asset('AdminAssets/js/demo/form-plugins.demo.js') }}"></script>
-
-            <script src="{{ asset('AdminAssets/plugins/ckeditor/ckeditor.js') }}"></script>
-            <script src="{{ asset('AdminAssets/plugins/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.min.js') }}">
-            </script>
-            <script src="{{ asset('AdminAssets/js/demo/form-wysiwyg.demo.js') }}"></script>
-            <script>
-                COLOR_BLUE = COLOR_INDIGO = COLOR_RED = COLOR_ORANGE = COLOR_LIME = COLOR_TEAL = 'rgba(0,0,0,0.5)';
-                COLOR_AQUA = COLOR_DARK_LIGHTER = COLOR_GREEN = 'rgba(0,0,0,0.75)';
-            </script>
+	<script src="{{asset("AdminAssets/plugins/nvd3/build/nv.d3.min.js")}}"></script>
+	<script src="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap.min.js")}}"></script>
+	<script src="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js")}}"></script>
+	<script src="{{asset("AdminAssets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js")}}"></script>
+	<script src="{{asset("AdminAssets/plugins/gritter/js/jquery.gritter.js")}}"></script>
+	<script>
+		COLOR_BLUE = COLOR_INDIGO = COLOR_RED = COLOR_ORANGE = COLOR_LIME = COLOR_TEAL = 'rgba(0,0,0,0.5)';
+		COLOR_AQUA = COLOR_DARK_LIGHTER = COLOR_GREEN = 'rgba(0,0,0,0.75)';
+	</script>
 	
 	<script src="{{asset("AdminAssets/js/demo/dashboard-v2.js")}}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 </body>
 </html>
-    
- 

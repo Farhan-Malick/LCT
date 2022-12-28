@@ -32,7 +32,7 @@ class PurchasesController extends Controller
         $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle')->where('events.id', $id)->first();
         // dd($events);
         if ($request->qty !== null) {
-            $tickets = TicketListing::select('*')
+            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
             ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
@@ -40,7 +40,7 @@ class PurchasesController extends Controller
             ->where('quantity', '>=', $request->qty)
             ->get();
         } else {
-            $tickets = TicketListing::select('*')
+            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
             ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
@@ -54,7 +54,7 @@ class PurchasesController extends Controller
 
     public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid){
         $tickets =TicketListing::find($ticketid);
-        $events =Event::find($eventlisting_id);
+        $events = Event::find($eventlisting_id);
         $purchases = new Purchases;
         $purchases->user_id = auth()->user()->id;
         $purchases->event_id = $eventlisting_id;
@@ -71,6 +71,7 @@ class PurchasesController extends Controller
 
         $events = EventListing::find($eventid);
         $tickets = TicketListing::find($ticketid);
+        // dd($tickets);
         $sellers = User::find($sellerid);
         return view('payment-tickets/checkout',compact('tickets','events','sellers'));
     }

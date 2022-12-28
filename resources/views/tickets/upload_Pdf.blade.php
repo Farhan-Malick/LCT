@@ -34,40 +34,40 @@
     @include("auth.partials.darkheader")
     <section class="section-two">
         <div class="container my-4">
-            <form method="POST" action="{{route('event.ticketlisting.ticket.upload',$ticket_listing->id)}}" id="ticekts-upload-form">
-                @csrf
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div id="js-etuStateToggle" class="js-preUpload">
-                            <div id="etuBox" class="pb0">
-                                <div id="js-excDropTarget" class="ui-droppable">
-                                    <div id="js-splashScreen">
-                                        <div id="etuUploadSplash" class="tile txtc ptl mauto">
-                                            <div class="js-loading uuxxl">
-                                                <div class="spin l"></div>
-                                                <div class="js-loading-text"></div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div id="js-etuStateToggle" class="js-preUpload">
+                        <div id="etuBox" class="pb0">
+                            <div id="js-excDropTarget" class="ui-droppable">
+
+                                <div id="js-splashScreen">
+                                    <div id="etuUploadSplash" class="tile txtc ptl mauto">
+                                        <div class="js-loading uuxxl">
+                                            <div class="spin l"></div>
+                                            <div class="js-loading-text"></div>
+                                        </div>
+                                        <div class="js-uploadInstructions uul">
+                                            <i class="i-upload-alt cGry6"></i>
+                                            <h6 class="h xl mtxs">Upload Your Tickets Now</h6>
+                                            <div id="etuUploadDesc" class="ptm pbl cGry2 mb0">
+                                                <ul class="txtl ibk v-inline-block">
+                                                    <li><i class="i-ok"></i>Tickets are more likely to sell if ready for 'Instant Download'</li>
+                                                    <li><i class="i-ok"></i>Keep your tickets listed right up until the event</li>
+                                                    <li><i class="i-ok"></i>You can retrieve your tickets at any time</li>
+                                                </ul>
                                             </div>
-                                            <div class="js-uploadInstructions uul">
-                                                <i class="i-upload-alt cGry6"></i>
-                                                <h6 class="h xl mtxs">Upload Your Tickets Now</h6>
-                                                <div id="etuUploadDesc" class="ptm pbl cGry2 mb0">
-                                                    <ul class="txtl ibk v-inline-block">
-                                                        <li><i class="i-ok"></i>Tickets are more likely to sell if ready for 'Instant Download'</li>
-                                                        <li><i class="i-ok"></i>Keep your tickets listed right up until the event</li>
-                                                        <li><i class="i-ok"></i>You can retrieve your tickets at any time</li>
-                                                    </ul>
-                                                </div>
-                                                <button id="js-preUploadBtn" class="btn pri l mtm mbxxs ">
-                                                    <i class="i-upload-alt prs" style="font-size:18px"></i>
-                                                    <span>Choose file</span>
-                                                </button>
-                                                <input id="js-preUploadInput" name="etickets" type="file" multiple="" accept=".pdf" style="display: none;">
-                                            </div>
+                                            <button id="js-preUploadBtn" class="btn pri l mtm mbxxs ">
+                                                <i class="i-upload-alt prs" style="font-size:18px"></i>
+                                                <span>Choose file</span>
+                                            </button>
+                                            <input id="js-preUploadInput" name="etickets" type="file" multiple="" accept=".pdf" style="display: none;">
                                         </div>
                                     </div>
-
-                                    <div id="etuWorkArea">
-                                        <h6 class="h l pb0 mb0 txtc">Drag and drop your tickets into consecutive seat number order</h6>
+                                </div>
+                                <div id="etuWorkArea">
+                                    <h6 class="h l pb0 mb0 txtc">Drag and drop your tickets into consecutive seat number order</h6>
+                                    <form method="POST" action="{{route('event.ticketlisting.ticket.upload',$ticket_listing->id)}}" id="ticekts-upload-form">
+                                        @csrf
                                         <div id="js-incViewport" class="txtc">
                                             <div class="js-viewport-inset js-incViewportInset mCustomScrollbar _mCS_1">
                                                 <div class="mCSB_container" style="position: relative; left: 0px; width: 944px;">
@@ -85,114 +85,117 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="js-excViewport" class="txtc">
-                                            <div id="js-excReel" class="ibk">
+                                    </form>
+                                    <div id="js-excViewport" class="txtc">
+                                        <div id="js-excReel" class="ibk">
 
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                {{-- <div id="etuToolStrip" class="reduceVSpace">
-                                    <div class="js-loading" style="display: none">
-                                        <div class="spin m"></div>
-                                    </div>
-                                    <div class="txtc">
-                                        <button id="js-activeUploadBtn" class="btn pri">
-                                            <i class="i-upload-alt prxxs" style="font-size:18px"></i>
-                                            <span>Add Another File</span>
-                                        </button>
-                                        <div class="js-save btn">
-                                            Continue
-                                            <i class="plxs i-chevron-right" style="font-size:14px"></i>
-                                        </div>
-                                        <div class="ibk" style="width:35px; height:1px"></div>
-
-                                    </div>
-                                        <div class="gCol3 gCol3m mb0 1bGrn2 upload-later">
-                                            <div class="js-skipStep btn a cWht nowrap">Upload Later</div>
-                                        </div>
-
-                                    <div class="js-fileUpload">
-                                        <form method="POST" action="{{route('seller.ticketlisting.tickets.pdf.store',$ticket_listing->id)}}" id="toolbarETicketFileUpload" novalidate="novalidate">
-                                            <input name="etickets" type="file" id="js-activeUploadInput" multiple="" accept=".pdf">
-                                            <input id="eventId" name="eventId" type="hidden" value="150113682">
-                                            <input id="transactionId" name="transactionId" type="hidden" value="">
-                                            <input id="listingId" name="listingId" type="hidden" value="">
-                                            <input id="sellPipelineStateId" name="sellPipelineStateId" type="hidden" value="2e816991-2e26-452a-bb63-c1d959c0b502">
-                                            <input id="pageVisitId" name="pageVisitId" type="hidden" value="e56b978b-1ef7-4ab6-9bb5-811ef92335fd">
-                                        </form>
-                                    </div>
-                                </div> --}}
                             </div>
+
+                            {{-- <div id="etuToolStrip" class="reduceVSpace">
+                                <div class="js-loading" style="display: none">
+                                    <div class="spin m"></div>
+                                </div>
+                                <div class="txtc">
+                                    <button id="js-activeUploadBtn" class="btn pri">
+                                        <i class="i-upload-alt prxxs" style="font-size:18px"></i>
+                                        <span>Add Another File</span>
+                                    </button>
+                                    <div class="js-save btn">
+                                        Continue
+                                        <i class="plxs i-chevron-right" style="font-size:14px"></i>
+                                    </div>
+                                    <div class="ibk" style="width:35px; height:1px"></div>
+
+                                </div>
+                                    <div class="gCol3 gCol3m mb0 1bGrn2 upload-later">
+                                        <div class="js-skipStep btn a cWht nowrap">Upload Later</div>
+                                    </div>
+
+                                <div class="js-fileUpload">
+                                    <form method="POST" action="{{route('seller.ticketlisting.tickets.pdf.store',$ticket_listing->id)}}" id="toolbarETicketFileUpload" novalidate="novalidate">
+                                        <input name="etickets" type="file" id="js-activeUploadInput" multiple="" accept=".pdf">
+                                        <input id="eventId" name="eventId" type="hidden" value="150113682">
+                                        <input id="transactionId" name="transactionId" type="hidden" value="">
+                                        <input id="listingId" name="listingId" type="hidden" value="">
+                                        <input id="sellPipelineStateId" name="sellPipelineStateId" type="hidden" value="2e816991-2e26-452a-bb63-c1d959c0b502">
+                                        <input id="pageVisitId" name="pageVisitId" type="hidden" value="e56b978b-1ef7-4ab6-9bb5-811ef92335fd">
+                                    </form>
+                                </div>
+                            </div> --}}
                         </div>
-
-
-                        {{-- <div class="card p-4 mb-3 shadow-sm main-card br-10">
-                            <div class="row">
-                                <div class="col-lg-12 text-center">
-                                    <h4>Don't have Tickets Yet?</h4>
-                                    <a class="primary-text cursor-pointer"
-                                        href="{{URL('Sell-tickets/ticket-authentication')}}">Upload Later</a>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="card shadow-sm mb-3 type-card main-card br-10">
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h4>{{$ticket_listing->event->title}}</h4>
-                                </div>
-                                <div class="card-subtitle">
-                                    <span class="fw-600"><strong>{{$ticket_listing->event->start_date}}
-                                        <strong>{{$ticket_listing->event->start_time}}</strong>
-                                    </strong></span>
-                                    <br>
-                                    <span class="text-muted">Singapore National Stadium, Singapore, Singapore</span>
-                                </div>
-                                <div class="tags d-flex">
-                                    <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>{{$ticket_listing->ticket_type}}</span>
-                                    <span class="ticket-type p-1 rounded-3 me-2"><strong>Split Type: </strong>any</span>
-                                </div>
-    
-                                <div class="price-tag d-sm-flex d-block justify-content-between">
-                                    <span> <strong>Price/Ticket: </strong></span>
-                                    <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$ticket_listing->price}}</span></strong></span>
-                                </div>
-    
-                                <div class="price-tag d-sm-flex d-block justify-content-between tags">
-                                    <span> <strong>Number of Tickets: </strong></span>
-                                    <span><strong> × {{$ticket_listing->quantity}}</strong></span>
-                                </div>
-                                <div class="tags d-flex mt-1">
-                                    <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>{{$ticket_listing->section}}</span>
-                                    <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>{{$ticket_listing->row}}</span>
-                                </div>
-                                <div class="price-tag d-sm-flex d-block justify-content-between">
-                                    <span> <strong>Website Price: </strong></span>
-                                    <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$price}}</span></strong></span>
-                                </div>
-                                <div class="price-tag d-sm-flex d-block justify-content-between">
-                                    <span> <strong> Seller Fees: </strong></span>
-                                    <span><strong> {{$ticketCurrency->currency_type}} <span class="percentage">{{$percentage}}</span></strong></span>
-                                </div>
-                                <div class="price-tag d-sm-flex d-block justify-content-between">
-                                    <span> <strong>VAT {{$ticketCurrency->currency_type}}: </strong></span>
-                                    <span><strong> 1.86</strong></span>
-                                </div>
-                                <div class="small tags"> VAT amount can change depending on your location.
-                                    YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div>
-                                <div class="price-tag d-sm-flex d-block justify-content-between">
-                                    <span> <strong>YOU'LL RECEIVE: </strong></span>
-                                    <span><strong> {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></strong></span>
-                                </div>
+
+                    {{-- <div class="card p-4 mb-3 shadow-sm main-card br-10">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h4>Don't have Tickets Yet?</h4>
+                                <a class="primary-text cursor-pointer"
+                                    href="{{URL('Sell-tickets/ticket-authentication')}}">Upload Later</a>
+                            </div>
+                        </div>
+                    </div> --}}
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card shadow-sm mb-3 type-card main-card br-10">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h4>{{$ticket_listing->event->title}}</h4>
+                            </div>
+                            <div class="card-subtitle">
+                                <span class="fw-600"><strong>{{$ticket_listing->event->start_date}}
+                                    <strong>{{$ticket_listing->event->start_time}}</strong>
+                                </strong></span>
+                                <br>
+                                <span class="text-muted">Singapore National Stadium, Singapore, Singapore</span>
+                            </div>
+                            <div class="tags d-flex">
+                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>{{$ticket_listing->ticket_type}}</span>
+                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Split Type: </strong>any</span>
+                            </div>
+
+                            <div class="price-tag d-sm-flex d-block justify-content-between">
+                                <span> <strong>Price/Ticket: </strong></span>
+                                <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$ticket_listing->price}}</span></strong></span>
+                            </div>
+
+                            <div class="price-tag d-sm-flex d-block justify-content-between tags">
+                                <span> <strong>Number of Tickets: </strong></span>
+                                <span><strong> × {{$ticket_listing->quantity}}</strong></span>
+                            </div>
+                            <div class="tags d-flex mt-1">
+                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>{{$ticket_listing->section}}</span>
+                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>{{$ticket_listing->row}}</span>
+                            </div>
+                            <div class="price-tag d-sm-flex d-block justify-content-between">
+                                <span> <strong>Website Price: </strong></span>
+                                <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$price}}</span></strong></span>
+                            </div>
+                            <div class="price-tag d-sm-flex d-block justify-content-between">
+                                <span> <strong> Seller Fees: </strong></span>
+                                <span><strong> {{$ticketCurrency->currency_type}} <span class="percentage">{{$percentage}}</span></strong></span>
+                            </div>
+                            <div class="price-tag d-sm-flex d-block justify-content-between">
+                                <span> <strong>VAT {{$ticketCurrency->currency_type}}: </strong></span>
+                                <span><strong> 1.86</strong></span>
+                            </div>
+                            <div class="small tags"> VAT amount can change depending on your location.
+                                YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div>
+                            <div class="price-tag d-sm-flex d-block justify-content-between">
+                                <span> <strong>YOU'LL RECEIVE: </strong></span>
+                                <span><strong> {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></strong></span>
+                            </div>
+                            <div class="price-tag d-sm-flex d-block justify-content-between">
+                                <button type="button" id="btn-continue-upload" class="btn primary-btn w-100 fw-700 pri" disabled="true">Continue</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -204,7 +207,10 @@
     <script src="http://code.jquery.com/ui/1.8.24/jquery-ui.min.js" type="text/javascript"></script>
     <script>
         const publicPath = `<?= asset('etickets/'); ?>`;
-
+        document.getElementById('btn-continue-upload').addEventListener("click", (event) => {
+            // $("#btn-continue-upload").prop("disabled", true);
+            document.getElementById('ticekts-upload-form').submit();
+        });
         const makeDraggables = (draggableImages) => {
             let draggableHtml = '';
             draggableImages.map((image) => {

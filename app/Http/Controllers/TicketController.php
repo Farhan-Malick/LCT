@@ -147,7 +147,7 @@ class TicketController extends Controller
         $percentage = $divide * 15;
         $grand_total = $price - $percentage;
         return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency'));
-    
+
     }
 
     /**

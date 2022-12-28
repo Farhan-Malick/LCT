@@ -13,14 +13,14 @@ class MailController extends Controller
 
     public function index(){
         $data = [
-            'subject' => 'Cambo Turorial Mail',
+            'subject' => 'Last Chance Ticket Mailer',
             'body' =>'Hello This is my email delivery!'
         ];
         try{
-            Mail::to('itsole82@gmail.com')->send(new MailNotify($data));
+            Mail::to('farhan.malicck@gmail.com')->send(new MailNotify($data));
             return response()->json(['Great check your mail box']);
         }catch(Exception $th){
             return response()->json(['Mail not sent']);
         }
-    }
+    } 
 }

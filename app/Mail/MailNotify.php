@@ -29,11 +29,19 @@ class MailNotify extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Envelope
      */
+
+     public function build()
+     {
+         return $this->from('noreply@lastchanceticket.com','last chance ticket')
+         ->subject($this->data['subject'])
+         ->view('emails.sellers')->with('data',$this->data);
+     }
+
     public function envelope()
     {
-        return new Envelope(
-            subject: 'Mail Notify',
-        );
+        // return new Envelope(
+        //     subject: 'Mail Notify',
+        // );
     }
 
     /**
@@ -44,7 +52,7 @@ class MailNotify extends Mailable
     public function content()
     {
         
-            return $this->from('tickting@example.org','Ticting website')->subject($this->data['subject'])->view('tickets.e-ticting')->with('data',$this->data);
+            // return $this->from('tickting@example.org','Ticting website')->subject($this->data['subject'])->view('tickets.e-ticting')->with('data',$this->data);
         
     }
 

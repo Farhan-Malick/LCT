@@ -140,7 +140,8 @@ Route::get('/ticket/{eventlisting_id}/{ticketid}/{sellerid}/checkout' , [Purchas
 // Route::get('/ticket/{id}/checkout' , [TicketController::class,'buyer_ticket_checkout'])->name('buyer.ticket.checkout');
 
 //mail route
-Route::get('/sendmail' , [TicketController::class,'sendAwienMail'])->name('buyer.ticket.email');
+// Route::get('/sendmail' , [TicketController::class,'sendAwienMail'])->name('buyer.ticket.email');
+Route::get('/sendmail' , [MailController::class,'index']);
 
 Route::get('/tickets', function () {
     return view('payment-tickets.home');

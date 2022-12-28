@@ -4,9 +4,11 @@ namespace App\Models;
 
 use App\Models\EventListing;
 use App\Models\VanueSections;
+use App\Models\Purchases;
 use App\Models\Currency;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class TicketListing extends Model
 {
@@ -19,6 +21,14 @@ class TicketListing extends Model
         return TicketListing::updateOrCreate(
             ['id'=> $ticket_id],
             $params
+        );
+    }
+
+    protected function quantity(): Attribute
+    {
+        $sum = Purchases::where('ticket_id', $this->id)->sum('quantity');
+        return Attribute::make(
+            get: fn ($value) => $value - $sum,
         );
     }
 

@@ -357,19 +357,7 @@ class TicketController extends Controller
         $tickets->save();
         return redirect()->back()->with('approve','Ticket has been Approved Successfully');
     }
-    public function ApprovalForPurchase(Request $request) 
-    {
-        $tickets=TicketListing::find($request->ticket_id);
-        $approval=$request->approve;
-        if ($approval=='on') {
-            $approval=1;
-        }else {
-            $approval=0;
-        }
-        $tickets->approve=$approval;
-        $tickets->save();
-        return redirect()->back()->with('approve','Ticket has been Approved Successfully');
-    }
+    
     public function edit_tickets($id){
         $tickets = Event::find($id);
         return view('Admin/pages/editTickets',compact('tickets'));

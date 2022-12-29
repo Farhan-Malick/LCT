@@ -19,6 +19,7 @@ use Mail;
 use App\Mail\Seller as SellerMail;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use App\Http\Controllers\MailController;
 
 class TicketController extends Controller
 {
@@ -70,7 +71,7 @@ class TicketController extends Controller
 
     public function showCatTickets(Request $request, $id)
     {
-        
+
         // $events = [];
         $events = Event::select('events.*', 'venues.title as vTitle')
         ->join('categories', 'categories.id', '=', 'events.category_id')
@@ -152,6 +153,7 @@ class TicketController extends Controller
             $user->phone = $request->phone;
             $user->update();
         }
+        MailController::ticketlistingadded($user->email);
         return redirect()->back()->with('msg','Your tickets has been created, Your ticket will be in the Listings when Admin will Approve.');
     }
 
@@ -357,7 +359,7 @@ class TicketController extends Controller
         $tickets->save();
         return redirect()->back()->with('approve','Ticket has been Approved Successfully');
     }
-    
+
     public function edit_tickets($id){
         $tickets = Event::find($id);
         return view('Admin/pages/editTickets',compact('tickets'));

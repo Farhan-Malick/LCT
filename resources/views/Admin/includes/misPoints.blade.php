@@ -17,8 +17,8 @@
 					<div class="widget widget-stats bg-blue">
 						<div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
 						<div class="stats-content">
-							<div class="stats-title">TODAY'S PROFIT</div>
-							<div class="stats-number">180,200</div>
+							<div class="stats-title">TOTAL PROFIT</div>
+							<div class="stats-number">${{$price->price}}</div>
 							<div class="stats-progress progress">
 								<div class="progress-bar" style="width: 40.5%;"></div>
 							</div>

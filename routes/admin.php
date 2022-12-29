@@ -14,6 +14,7 @@ use App\Http\Controllers\VenuesController;
 use App\Http\Controllers\TicketListingController;
 use App\Http\Controllers\EventListingController;
 use App\Http\Controllers\MisController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +25,8 @@ use App\Http\Controllers\MisController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/Admin', function () {
+
+Route::get('/admin', function () {
 	return view('Admin.pages.login');
 });
 Route::get('/Admin-Register', function () {
@@ -109,5 +111,5 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('admin/all_sales', [SalesController::class, 'admin_purchase_show'])->name('admin.sales.show');
 
         //Admin MIS Points
-        // Route::get('Admin-Panel/', [MisController::class, 'index']);
+        Route::get('Admin-Panel/', [PurchasesController::class, 'index']);
 });

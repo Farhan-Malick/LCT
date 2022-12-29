@@ -32,9 +32,7 @@ Route::get('/admin', function () {
 Route::get('/Admin-Register', function () {
 	return view('Admin.pages.register_v3');
 });
-Route::get('/Admin-Panel', function () {
-	return view('Admin.pages.index');
-});
+
 
 // group route for admin with middleware
 Route::group(['middleware' => ['web']], function () {
@@ -110,6 +108,5 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('admin/all_sales', [SalesController::class, 'admin_purchase_show'])->name('admin.sales.show');
 
-        //Admin MIS Points
-        Route::get('Admin-Panel/', [PurchasesController::class, 'index']);
+        Route::get('/Admin-Panel/all_sales/{id}/destroy', [SalesController::class, 'ticket_destroy'])->name('admin.purchase.ticket.destroy');
 });

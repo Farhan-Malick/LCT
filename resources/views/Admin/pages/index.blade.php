@@ -79,7 +79,6 @@
                     <div class="panel panel-inverse" data-sortable-id="form-validation-1">
                         <!-- begin panel-body -->
                         <div class="panel-body">
-                            
                             <table class="table mt-3">
                                 <thead class="thead-dark">
                                     <tr>

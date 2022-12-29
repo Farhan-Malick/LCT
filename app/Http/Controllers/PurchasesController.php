@@ -16,6 +16,7 @@ use App\Http\Controllers\MailController;
 
 class PurchasesController extends Controller
 {
+ 
     //
     // public function buyer_tickets_index(Event $event,$id){
 
@@ -28,16 +29,12 @@ class PurchasesController extends Controller
         if(!auth()->check()){
             return redirect('/login');
         }
-<<<<<<< HEAD
-        $ticket = TicketListing::find($id);
-=======
 
         $ticket = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'event_listings.event_date', 'event_listings.start_time')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->where('ticket_listings.id', $id)
         ->first();
 
->>>>>>> a3a92ac4749e7bcde22787ab25589238a6710f0b
         $purchase = new Purchases();
         $purchase->user_id = auth()->id();
         $purchase->event_id = $ticket->eventlisting_id;

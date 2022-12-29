@@ -58,7 +58,7 @@
                 <!-- begin col-6 -->
                 <div class="col-xl-12">
                     <!-- begin panel -->
-					<h1 class="text-center">Paper Tickets</h1>
+					<h1 class="text-center">All Purchased Tickets</h1>
 					@if ($message = Session::get('msg'))
                             <div class="alert alert-danger alert-block">
                                 <strong>{{ $message }}</strong>
@@ -121,15 +121,15 @@
                                             > --}}
                                         </td>
                                         <td>
-                                            <a
+                                            {{-- <a
                                                 class="btn btn-success"
                                                 href="{{URL('/Admin-Panel/Ticket/Edit',$purchase->id)}}"
                                                 ><i class="fa fa-edit" aria-hidden="true"></i></a
-                                            >
+                                            > --}}
                                             <a
                                                 class="btn btn-danger"
-                                                href="{{route('admin.ticket.destroy',$purchase->id)}}"
-                                                ><i class="fa fa-trash" aria-hidden="true"></i></a
+                                                href="{{route('admin.purchase.ticket.destroy',$purchase->id)}}"
+                                                ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a
                                             >
                                         </td>
             

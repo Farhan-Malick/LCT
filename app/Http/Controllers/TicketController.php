@@ -13,10 +13,11 @@ use Illuminate\Http\Request;
 use App\Models\VanueSections;
 use App\Models\VenueSectionRows;
 use App\Models\ETicket;
+use App\Models\Purchases;
 use App\Http\Controllers\Auth\LoginController;
 use Mail;
+use App\Mail\Seller as SellerMail;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\MailController;
 use Exception;
 
 class TicketController extends Controller
@@ -151,7 +152,6 @@ class TicketController extends Controller
             $user->phone = $request->phone;
             $user->update();
         }
-        MailController::ticketlistingadded($user->email);
         return redirect()->back()->with('msg','Your tickets has been created, Your ticket will be in the Listings when Admin will Approve.');
     }
 
@@ -323,17 +323,26 @@ class TicketController extends Controller
     public function admin_tickets_show(TicketListing $TicketListing)
     {
         $tickets = TicketListing::all();
-        return view('Admin/pages/index',compact('tickets'));
+        $price = Purchases::sum('price');
+        $userCount = User::count();
+        $total_no_sold_tickets = Purchases::sum('quantity');
+        return view('Admin/pages/index',compact('tickets','price','userCount','total_no_sold_tickets'));
     }
     public function admin_e_tickets_show(TicketListing $TicketListing)
     {
         $tickets = TicketListing::all();
-        return view('Admin/pages/e_TicketListing',compact('tickets'));
+        $price = Purchases::sum('price');
+        $userCount = User::count();
+        $total_no_sold_tickets = Purchases::sum('quantity');
+        return view('Admin/pages/e_TicketListing',compact('tickets','price','userCount','total_no_sold_tickets'));
     }
     public function admin_mobile_tickets_show(TicketListing $TicketListing)
     {
         $tickets = TicketListing::all();
-        return view('Admin/pages/mobileTicket',compact('tickets'));
+        $price = Purchases::sum('price');
+        $userCount = User::count();
+        $total_no_sold_tickets = Purchases::sum('quantity');
+        return view('Admin/pages/mobileTicket',compact('tickets','price','userCount','total_no_sold_tickets'));
     }
     public function Approval(Request $request)
     {

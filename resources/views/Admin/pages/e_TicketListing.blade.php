@@ -49,9 +49,9 @@
 			<h1 class="page-header">Last-Chance-Ticket Dashboard </h1>
 			<!-- end page-header -->
 			<!-- begin row -->
-			<div class="row">
-				@include('Admin.includes.misPoints')
-			</div>
+		<div class="row">
+			@include('Admin.includes.misPoints')
+		</div>
 			<!-- end row -->
 			<!-- begin row -->
             <div class="row">

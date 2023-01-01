@@ -66,7 +66,7 @@
                                 </div>
                                 <div id="etuWorkArea">
                                     <h6 class="h l pb0 mb0 txtc">Drag and drop your tickets into consecutive seat number order</h6>
-                                    <form method="POST" action="{{route('event.ticketlisting.ticket.upload',$ticket_listing->id)}}" id="ticekts-upload-form">
+                                    <form method="POST" action="{{route('event.ticketlisting.ticket.uploads',$ticket_listing->id)}}" id="ticekts-upload-form">
                                         @csrf
                                         <div id="js-incViewport" class="txtc">
                                             <div class="js-viewport-inset js-incViewportInset mCustomScrollbar _mCS_1">

@@ -130,7 +130,6 @@ class TicketController extends Controller
     {
         $tickets = TicketListing::find($id);
         $user = User::find($tickets->user_id);
-
         $seller = new Seller();
         $seller->user_id = $user->id;
         $seller->email = $request->email;

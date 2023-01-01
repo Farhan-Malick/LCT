@@ -63,7 +63,7 @@
                                                     
                                                     <td>{{$purchase->id}}</td>
                                                     <td>{{$purchase->event->title}}</td>
-                                                    <td>{{$purchase->ticket->title}}</td>
+                                                    <td>{{$purchase->title_id}}</td>
                                                     <td>{{$purchase->quantity}}</td>
                                                     <td>{{$purchase->price}}</td>
                                                     

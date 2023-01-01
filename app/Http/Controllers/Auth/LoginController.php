@@ -68,7 +68,7 @@ class LoginController extends Controller
 
             }else if (auth()->user()->account_type == 'buyer') {
 
-                return redirect()->route('dashboard');
+                return redirect('dashboard');
 
             }else{
 

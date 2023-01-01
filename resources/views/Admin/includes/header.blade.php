@@ -13,7 +13,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a href="{{URL('/index')}}" class="navbar-brand">
+		<a href="{{URL('/Admin-Panel')}}" class="navbar-brand">
 			<b class="mr-1">Last-Chance-Ticket</b> 
 		</a>
 		<button type="button" class="navbar-toggle" data-click="sidebar-toggled">

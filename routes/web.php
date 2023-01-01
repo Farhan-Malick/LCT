@@ -41,6 +41,8 @@ Route::get('/dashboard', function () {
 // Route::get('/dashboard/orders', function () {
 //     return view('dashboard/orders');
 // });
+
+Route::get('show/request', [EventController::class, 'show_request'])->name('request.show');
 Route::post('request/event', [EventController::class, 'store_request'])->name('request.event');
 
 Route::get('/dashboard/orders' , [PurchasesController::class,'dashboard_orders_show'])->name('dashboard.orders_show');

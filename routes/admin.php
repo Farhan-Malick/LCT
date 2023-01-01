@@ -28,8 +28,6 @@ use App\Http\Middleware\AdminAuth;
 */
 
 
-
-
 // group route for admin with middleware
 Route::group(['middleware' => 'web'], function () {
     Route::get('/admin', function () {
@@ -59,10 +57,9 @@ Route::group(['middleware' => 'web'], function () {
 
 
         //Admin Category Request
-        Route::get('show/request', [EventController::class, 'show_request'])->name('request.show');
         Route::get('event_requests', [EventController::class, 'admin_show_request'])->name('admin.request.show');
         Route::get('event_requests/{id}/destroy', [EventController::class, 'destroy_request'])->name('admin.request.destroy');
-        Route::post('request/event', [EventController::class, 'store_request'])->name('request.event');
+      
         //Admin Sales
         Route::get('admin/sales', [SalesController::class, 'index'])->name('admin.sales.index');
 

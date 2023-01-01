@@ -164,11 +164,13 @@
                         <div class="col-md-6 col-lg-3">
                             <a href="{{ route('buyer.ticket.show',$event->id) }}">
                                 <div class="card mb-2">
-                                    <img
-                                        src="{{ asset('uploads/events/poster/' . $event->poster) }}"
-                                        class="card-img-top"
-                                        alt="..."
-                                    />
+                                    <div class="" style="height: 200px" width="200px">
+                                        <img
+                                            src="{{ asset('uploads/events/poster/' . $event->poster) }}" 
+                                            class="" height="200px"
+                                            alt="..."
+                                            />
+                                    </div>
                                     <div class="card-body">
                                         <h6 class="card-title">
                                             {{ $event->title }}

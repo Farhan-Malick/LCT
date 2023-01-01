@@ -96,7 +96,7 @@
                             <th scope="col">Standing Guest.No</th>
                             <th scope="col">Address</th>
                             <th scope="col">City</th>
-                            <th scope="col">Country</th>
+                            {{-- <th scope="col">Country</th> --}}
                             <th scope="col">State</th>
                             <th scope="col">Zip Code</th>
                             <th scope="col">G.LAT</th>
@@ -120,7 +120,7 @@
                             <td>{{$venue->address}}</td>
                             <td>{{$venue->city}}</td>
                            
-                            <td>{{$venue->country->country_name}}</td>
+                            {{-- <td>{{$venue->country_name}}</td> --}}
                             <td>{{$venue->state}}</td>
                             <td>{{$venue->zipcode}}</td>
                             <td>{{$venue->glat}}</td>

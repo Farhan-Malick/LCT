@@ -34,7 +34,7 @@
                                 <form action="{{route('seller.complete_ticket.save',$tickets->id)}}" method="post">
                                     @csrf
                                     <div class="form-group">
-                                        <select class="form-select" aria-label="Default select example" name="currency">
+                                        <select class="form-select" aria-label="Default select example" name="currency" required>
                                             @foreach($currencies as $currency)
                                             <option value="{{$currency->id}}" @if($ticketCurrency->id === $currency->id) @php echo "selected='true'" @endphp @endif>{{$currency->currency_type}}</option>
                                             @endforeach

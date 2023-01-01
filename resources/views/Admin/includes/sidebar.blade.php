@@ -10,8 +10,8 @@
                         <img src="{{asset("AdminAssets/img/user/user-13.jpg")}}" alt="" />
                     </div>
                     <div class="info">
-                        <b class="caret pull-right"></b>Mubashir Paracha
-                        <small>Front end developer</small>
+                        <b class="caret pull-right"></b>Admin (LCT)
+                        <small>Designed By LCT</small>
                     </div>
                 </a>
             </li>

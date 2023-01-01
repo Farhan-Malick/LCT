@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -39,6 +40,50 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+
+        $input = $request->all();
+
+
+
+        $this->validate($request, [
+
+            'email' => 'required|email',
+
+            'password' => 'required',
+
+        ]);
+
+
+
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+
+            if (auth()->user()->account_type == 'admin') {
+
+                return redirect()->route('admin.home');
+
+            }else if (auth()->user()->account_type == 'buyer') {
+
+                return redirect()->route('dashboard');
+
+            }else{
+
+                return redirect()->route('/');
+
+            }
+
+        }else{
+
+            return redirect()->back()->with('error','Email-Address And Password Are Wrong.');
+
+        }
+
+
+
     }
 
     public static function guestLogin()

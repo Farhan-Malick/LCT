@@ -153,6 +153,8 @@ class TicketController extends Controller
             $user->phone = $request->phone;
             $user->update();
         }
+        $tickets->completed = 1;
+        $tickets->update();
         MailController::ticketlistingadded($user->email);
         return redirect()->back()->with('msg','Your tickets has been created, Your ticket will be in the Listings when Admin will Approve.');
     }
@@ -324,7 +326,7 @@ class TicketController extends Controller
 
     public function admin_tickets_show(TicketListing $TicketListing)
     {
-        $tickets = TicketListing::all();
+        $tickets = TicketListing::where('completed', 1)->get();
         $price = Purchases::sum('price');
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
@@ -332,7 +334,7 @@ class TicketController extends Controller
     }
     public function admin_e_tickets_show(TicketListing $TicketListing)
     {
-        $tickets = TicketListing::all();
+        $tickets = TicketListing::where('completed', 1)->get();
         $price = Purchases::sum('price');
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
@@ -340,7 +342,7 @@ class TicketController extends Controller
     }
     public function admin_mobile_tickets_show(TicketListing $TicketListing)
     {
-        $tickets = TicketListing::all();
+        $tickets = TicketListing::where('completed', 1)->get();
         $price = Purchases::sum('price');
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');

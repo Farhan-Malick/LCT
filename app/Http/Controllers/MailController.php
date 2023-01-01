@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TicketListingAdded;
+use App\Mail\TicketListingRejected;
 use App\Mail\Ticketpurchased;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,6 +17,17 @@ class MailController extends Controller
         
         try{
             $mail = Mail::to($email)->send(new TicketListingAdded());
+            return $mail;
+        }catch(Exception $th){
+            dd($th);
+            return response()->json(['Mail not sent']);
+        }
+    } 
+
+    public static function ticketlistingrejected($email, $ticket) {
+        
+        try{
+            $mail = Mail::to($email)->send(new TicketListingRejected($ticket));
             return $mail;
         }catch(Exception $th){
             dd($th);

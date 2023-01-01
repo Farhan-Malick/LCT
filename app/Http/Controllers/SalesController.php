@@ -14,7 +14,9 @@ class SalesController extends Controller
 
     public function admin_purchase_show(TicketListing $ticket,Event $event,Purchases $purchases){
         
-        $purchases = Purchases::all();
+        $purchases = Purchases::select('purchases.*', 'event_listings.event_name as event_name')
+        ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
+        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')->get();
         $tickets = TicketListing::all();
         $events = Event::all();
         

@@ -87,7 +87,7 @@
                                         <th scope="col">Ticket name</th>
                                         <th scope="col">Total price</th>
                                         <th scope="col">Quantity</th>
-                                        <th scope="col">Approval</th>
+                                        {{-- <th scope="col">Approval</th> --}}
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -97,29 +97,10 @@
                                         <td>{{$purchase->id}}</td>
                                         <td>{{$purchase->user->first_name}}</td>
                                         <td>{{$purchase->event->title}}</td>
-                                        <td>{{$purchase->ticket_id}}</td>
+                                        <td>{{$purchase->event_name}}</td>
                                         <td>{{$purchase->price}}</td>
                                         <td>{{$purchase->quantity}}</td>
-                                        <td>
-                                            <form action="{{ url('/toggle-approve') }}" method="POST">
-                                                @csrf
-                                                <input <?php
-                                                if ($purchase->approve == 1) {
-                                                    echo 'checked';
-                                                }
-                                                ?> type="checkbox" 
-                                                    name="approve" class="mr-2">
-                                                <input type="hidden" name="ticket_id" id=""
-                                                    value="{{ $purchase->id }}" >
-                                                <input type="submit" class="btn btn-primary"
-                                                    name="" value="approve" id="">
-                                            </form>
-                                            {{-- <a
-                                                class="btn btn-primary"
-                                                href="{{route('admin.section_rows.edit',$ticket->id)}}"
-                                                >edit</a
-                                            > --}}
-                                        </td>
+                                       {{-- s --}}
                                         <td>
                                             {{-- <a
                                                 class="btn btn-success"

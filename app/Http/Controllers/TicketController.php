@@ -325,7 +325,9 @@ class TicketController extends Controller
 
     public function admin_tickets_show(TicketListing $TicketListing)
     {
-        $tickets = TicketListing::where('completed', 1)->get();
+        $tickets = TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
+        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        ->where('completed', 1)->get();
         $price = Purchases::sum('price');
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
@@ -350,15 +352,21 @@ class TicketController extends Controller
     public function Approval(Request $request)
     {
         $tickets=TicketListing::find($request->ticket_id);
-        $approval=$request->approve;
-        if ($approval=='on') {
-            $approval=1;
-        }else {
-            $approval=0;
-        }
-        $tickets->approve=$approval;
-        $tickets->save();
+        $tickets->approve=1;
+        $tickets->update();
         return redirect()->back()->with('approve','Ticket has been Approved Successfully');
+    }
+
+    public function Rejection(Request $request)
+    {
+        // dd($request->all());
+        $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')->where('id', $request->ticket_id)->first();
+        $user = User::find($tickets->user_id);
+        $tickets->approve=2;
+        $tickets->rejection_reason=$request->reason;
+        $tickets->update();
+        MailController::ticketlistingrejected($user->email, $tickets);
+        return redirect()->back()->with('approve','Ticket has been Rejected Successfully');
     }
 
     public function edit_tickets($id){

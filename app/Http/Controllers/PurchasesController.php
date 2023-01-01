@@ -52,6 +52,7 @@ class PurchasesController extends Controller
 
         // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->where('event_listings.id', $id)->first();
         $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle')->where('events.id', $id)->first();
+        $eventListings = EventListing::where('status', 1)->select('id', 'event_name')->get();
         // dd($events);
         $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
@@ -65,6 +66,10 @@ class PurchasesController extends Controller
             $tickets = $tickets->where('quantity', '>=', $request->qty);
         }
 
+        if ($request->ticket_event !== null) {
+            $tickets = $tickets->where('eventlisting_id', '>=', $request->ticket_event);
+        }
+
         if($request->search_text !== null){
             $tickets = $tickets->where('event_listings.event_name', 'like', '%'.$request->search_text.'%');
         }
@@ -72,7 +77,7 @@ class PurchasesController extends Controller
         $tickets = $tickets->get();
         // dd($tickets);
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
-        return view('payment-tickets/browse-ticket',compact('events','tickets'));
+        return view('payment-tickets/browse-ticket',compact('events','tickets', 'eventListings'));
     }
 
     public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid){

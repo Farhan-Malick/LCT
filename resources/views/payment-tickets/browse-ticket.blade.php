@@ -136,19 +136,29 @@
                                 </form>
                             </div> --}}
                         </div>
-                        <div class="row">
-                            <form method="get" id="qty-form">
+                        <form method="get" id="qty-form">
+                            <div class="row">
+                            
                                 {{-- @csrf --}}
                                 <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif">
-                                <div class="col-md-12">
+                                <div class="col-md-8">
                                     <input type="text" class="form-control" name="search_text"  placeholder="Search Event Name" value="@if(request()->get('search_text')) <?= request()->get('search_text')?> @endif"/>
                                 </div>
-                                <div class="col-md-1 mt-2">
+                                <div class="col-md-3">
+                                    <select class="form-control" name="ticket_event"  placeholder="Select Event Name">
+                                        <option disabled @if(request()->get('ticket_event') == null)selected @endif>Select Event</option>
+                                        @foreach ($eventListings as $eventListing)
+                                        <option value="{{ $eventListing->id }}" @if(request()->get('ticket_event') && request()->get('ticket_event')== $eventListing->id) selected @endif>{{ $eventListing->event_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
                                     <input type="submit" value="Search" class="btn btn-primary"/>
                                 </div>
 
-                            </form>
-                        </div>
+                            
+                            </div>
+                        </form>
                     </div>
                 </div>
 

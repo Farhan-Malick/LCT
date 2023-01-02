@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('ticket_listings', function (Blueprint $table) {
-            $table->longtext('rejection_reason')->default(null)->after('ticket_restrictions');
+            $table->longtext('rejection_reason')->nullable()->after('ticket_restrictions');
         });
     }
 

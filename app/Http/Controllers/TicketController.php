@@ -318,7 +318,11 @@ class TicketController extends Controller
         $events = EventListing::all();
         //$activetickets = TicketListing::all();
         //$active_tickets = TicketListing::where('status',1)->get();
-         $active_tickets =TicketListing::where([['user_id',auth()->user()->id],['status',1]])->get();
+        //  $active_tickets =TicketListing::where([['user_id',auth()->user()->id],['status',1]])->get();
+         $active_tickets = TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
+        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        ->where([['user_id',auth()->user()->id],['status',1]])
+        ->where('completed', 1)->get();
         // dd ($active_tickets);
         return view('dashboard/listings',compact('categories','active_tickets','events'));
     }
@@ -335,7 +339,9 @@ class TicketController extends Controller
     }
     public function admin_e_tickets_show(TicketListing $TicketListing)
     {
-        $tickets = TicketListing::where('completed', 1)->get();
+        $tickets = TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
+        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        ->where('completed', 1)->get();
         $price = Purchases::sum('price');
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
@@ -343,7 +349,9 @@ class TicketController extends Controller
     }
     public function admin_mobile_tickets_show(TicketListing $TicketListing)
     {
-        $tickets = TicketListing::where('completed', 1)->get();
+        $tickets = TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
+        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        ->where('completed', 1)->get();
         $price = Purchases::sum('price');
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
@@ -359,8 +367,8 @@ class TicketController extends Controller
 
     public function Rejection(Request $request)
     {
-        // dd($request->all());
-        $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')->where('id', $request->ticket_id)->first();
+        // dd($request->all());     
+        $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')->where('ticket_listings.id', $request->ticket_id)->first();
         $user = User::find($tickets->user_id);
         $tickets->approve=2;
         $tickets->rejection_reason=$request->reason;

@@ -109,7 +109,7 @@
 											{{-- <td>{{$e_ticket->currency	}}</td> --}}
 											{{-- <td>{{$e_ticket->Currency->currency_type}}</td> --}}
 											<td>{{$e_ticket->quantity}}</td>
-											<td>{{$e_ticket->section}}</td>
+											<td>{{$e_ticket->section_name}}</td>
 											<td>{{$e_ticket->row}}</td>
 											<td>{{$e_ticket->seat_from}}</td>
 											<td>{{$e_ticket->seat_to}}</td>
@@ -117,28 +117,27 @@
 											<td>{{$e_ticket->ticket_restrictions}}</td>
 											<td>{{$e_ticket->status}}</td>
 											<td>
+												@if($e_ticket->approve != 1 || $e_ticket->approve == 0)
 												<form action="{{ url('/toggle-approve') }}" method="POST">
 													@csrf
-													<input <?php
-													if ($e_ticket->approve == 1) {
-														echo 'checked';
-													}
-													?> type="checkbox"
-														name="approve" class="mr-2">
 													<input type="hidden" name="ticket_id" id=""
-														value="{{ $e_ticket->id }}">
+														value="{{ $e_ticket->id }}" >
 													<input type="submit" class="btn btn-primary"
 														name="" value="Approve" id="">
 												</form>
-
-												{{-- <a
-													class="btn btn-primary"
-													href="{{route('admin.section_rows.edit',$ticket->id)}}"
-													>edit</a
-												> --}}
+												@else
+														<button class="btn btn-success" disabled="disabled">Approved</button>
+												@endif
+												
 											</td>
+											
 											<td>
-												<a
+													{{-- @if($e_ticket->approve != 2 || $e_ticket->approve == 0) --}}
+														<button type="button" class="btn btn-danger" data-id="{{ $e_ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
+															<i class="fa fa-times" aria-hidden="true"></i>
+														</button>
+													{{-- @endif --}}
+															<a
 													class="btn btn-primary"
 													href="{{route('admin.ticket.view',$e_ticket->id)}}"
 													><i class="fa fa-eye" aria-hidden="true"></i></a
@@ -176,6 +175,32 @@
 		<!-- end scroll to top btn -->
 	</div>
 	<!-- end page container -->
+		{{-- Modal For rejection --}}
+		<div class="modal fade" id="rejectionModal" tabindex="-1" role="dialog" aria-labelledby="Rejection Modal" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Rejection Reason</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<form action="{{ url('/toggle-reject') }}" method="POST" >
+					@csrf
+					<input type="hidden" name="ticket_id" id="ticket_id" value="" >
+					<div class="modal-body">
+						<div class="form-row">
+							<textarea name="reason" class="form-control" placeholder="Please Enter reason for rejection" required></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+					<button type="submit" class="btn btn-danger">Reject</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</form>
+			  </div>
+			</div>
+		</div>
 	
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{{asset("AdminAssets/js/app.min.js")}}"></script>
@@ -195,6 +220,11 @@
 	</script>
 	
 	<script src="{{asset("AdminAssets/js/demo/dashboard-v2.js")}}"></script>
+	<script>
+        $('#rejectionModal').on('show.bs.modal', function (e) {
+            $("#ticket_id").val($(e.relatedTarget).data('id'));
+        });
+    </script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 </body>
 </html>

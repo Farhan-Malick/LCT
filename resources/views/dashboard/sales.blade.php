@@ -196,7 +196,7 @@
                                                       
                                                       <td>{{$sale->id}}</td>
                                                       <td>{{$sale->event->title}}</td>
-                                                      <td>{{$sale->title}}</td>
+                                                      <td>{{$sale->event_name}}</td>
                                                       <td>{{$sale->quantity}}</td>
                                                       <td>{{$sale->price}}</td>
                                                       

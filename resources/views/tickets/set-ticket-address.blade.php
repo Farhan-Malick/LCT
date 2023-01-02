@@ -334,6 +334,7 @@
                                             <option value="Florida">Florida</option>
                                             <option value="Jorgia">Jorgia</option>
                                         </select> --}}
+                                        <label for="State">State</label>
                                         <input type="text" class="form-control" name="state"required>
                                     </div>
                                     <div class="form-group mb-3 w-50">

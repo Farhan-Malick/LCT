@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('standing_guestnumber')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
-            $table->integer('country_id')->nullable();
+            $table->string('country_id')->nullable();
             $table->string('state')->nullable();
             $table->string('zipcode')->nullable();
             $table->string('glat')->nullable();

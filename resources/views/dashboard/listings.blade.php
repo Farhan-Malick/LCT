@@ -448,7 +448,7 @@
                                                       <td>{{$ticket->price}}</td>
                                                       {{-- <td>{{$ticket->currency}}</td> --}}
                                                       <td>{{$ticket->quantity}}</td>
-                                                      <td>{{$ticket->Section->sections}}</td>
+                                                      <td>{{$ticket->section_name}}</td>
                                                       <td>{{$ticket->row}}</td>
                                                       <td>{{$ticket->seat_from}}</td>
                                                       <td>{{$ticket->seat_to}}</td>
@@ -605,7 +605,7 @@
                                            </thead>
                                            <tbody class="table-group-divider">
                                                @foreach ($active_tickets as $ticket)
-                                                   @if ($ticket->approve == 0)
+                                                   @if ($ticket->approve == null)
                                                       <tr>
                                                          <th>{{$ticket->id}}</th>
                                                          {{-- <td>{{$ticket->title}}</td> --}}
@@ -613,7 +613,7 @@
                                                          <td>{{$ticket->price}}</td>
                                                          {{-- <td>{{$ticket->currency}}</td> --}}
                                                          <td>{{$ticket->quantity}}</td>
-                                                         <td>{{$ticket->Section->sections}}</td>
+                                                         <td>{{$ticket->section_name}}</td>
                                                          <td>{{$ticket->row}}</td>
                                                          <td>{{$ticket->seat_from}}</td>
                                                          <td>{{$ticket->seat_to}}</td>

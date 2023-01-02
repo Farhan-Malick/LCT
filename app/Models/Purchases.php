@@ -38,9 +38,9 @@ class Purchases extends Model
         return $this->hasOne(Event::class,'id','event_id');
     }
 
-    public function ticket(){
-        return $this->hasOne(Ticket::class,'id','ticket_id');
-    }
+    // public function ticket(){
+    //     return $this->hasOne(Purchases::class,'id','ticket_id');
+    // }
 
     public function user(){
         return $this->hasOne(User::class,'id','user_id');

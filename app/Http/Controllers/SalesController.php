@@ -29,8 +29,10 @@ class SalesController extends Controller
     }
 
     public function dashboard_sales_show(Purchases $purchases){
-
-        $sales = Purchases::where('seller_id',auth()->user()->id)->get();
+        $sales = Purchases::select('purchases.*', 'event_listings.event_name as event_name')
+        ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
+        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->where('seller_id',auth()->user()->id)->get();
         
         return view('dashboard/sales',compact('sales'));
     }

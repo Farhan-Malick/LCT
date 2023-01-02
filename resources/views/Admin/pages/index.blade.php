@@ -123,14 +123,13 @@
 															<input type="hidden" name="ticket_id" id=""
 																value="{{ $ticket->id }}" >
 															<input type="submit" class="btn btn-primary"
-																name="" value="Approve" id="">
+																name="" value="Approve" id="" >
+																
 														</form>
+														@else
+														<button class="btn btn-success" disabled="disabled">Approved</button>
                                                         @endif
-                                                        @if($ticket->approve != 2 || $ticket->approve == 0)
-                                                        <button type="button" class="btn btn-danger" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
-                                                           Reject
-                                                        </button>
-                                                        @endif
+                                                    
 														{{-- <a
 															class="btn btn-primary"
 															href="{{route('admin.section_rows.edit',$ticket->id)}}"
@@ -138,6 +137,11 @@
 														> --}}
 													</td>
 													<td>
+														    {{-- @if($ticket->approve != 2 || $ticket->approve == 0) --}}
+															<button type="button" class="btn btn-danger" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
+																<i class="fa fa-times" aria-hidden="true"></i>
+															</button>
+															{{-- @endif --}}
 														<a
 															class="btn btn-success"
 															href="{{URL('/Admin-Panel/Ticket/Edit',$ticket->id)}}"

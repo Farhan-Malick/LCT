@@ -138,7 +138,7 @@
                         </div>
                         <form method="get" id="qty-form">
                             <div class="row">
-                            
+
                                 {{-- @csrf --}}
                                 <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif">
                                 <div class="col-md-8">
@@ -156,7 +156,7 @@
                                     <input type="submit" value="Search" class="btn btn-primary"/>
                                 </div>
 
-                            
+
                             </div>
                         </form>
                     </div>
@@ -172,7 +172,7 @@
                 <div class="col-md-5 col-lg-5">
                     <div class="card mb-3 shadow-sm br-10">
                         <div class="card-body shadow-sm">
-                            <img src="../../assets/images/al-bayt-stadium.webp" class="img-fluid" alt="">
+                            <img src="{{ asset('uploads/venues').'/'.$events->vImage }}" class="img-fluid" alt="">
                         </div>
                     </div>
                     {{-- <div class="card mb-3 p-3 br-10">

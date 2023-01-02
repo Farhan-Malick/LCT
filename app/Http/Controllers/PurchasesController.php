@@ -51,7 +51,7 @@ class PurchasesController extends Controller
         // dd($request->qty);
 
         // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->where('event_listings.id', $id)->first();
-        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle')->where('events.id', $id)->first();
+        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $id)->first();
         $eventListings = EventListing::where('status', 1)->select('id', 'event_name')->get();
         // dd($events);
         $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')

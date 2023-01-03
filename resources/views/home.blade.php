@@ -25,7 +25,7 @@
                         <div class="container">
                             <div class="logo">
                                     {{-- <a class="navbar-brand" href="{{ URL("/") }}" style="color: skyblue; font-size:25px; text-decoration:none">Last Chance Ticket</a> --}}
-                                   <a href="{{ URL("/") }}"> <img src="../../assets/images/logodark2.jpg" height="40" width="250" alt=""></a>
+                                   <a href="{{ URL("/") }}"> <img src="{{asset('assets/images/logodark2.jpg')}}" height="40" width="250" alt=""></a>
                             </div>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

@@ -6,12 +6,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/styles/common.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/styles/sellticket.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/styles/payments.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/styles/tablet-noexps.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/styles/experiments-noexps.css')}}">
+
+    {{-- <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/styles/sellticket.css">
     <link rel="stylesheet" href="../../assets/styles/common.css">
     <link rel="stylesheet" href="../../assets/styles/payments.css">
     <link rel="stylesheet" href="../../assets/styles/tablet-noexps.css">
-    <link rel="stylesheet" href="../../assets/styles/experiments-noexps.css">
+    <link rel="stylesheet" href="../../assets/styles/experiments-noexps.css"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="http://code.jquery.com/ui/1.8.24/themes/blitzer/jquery-ui.css" rel="stylesheet"
     type="text/css" />

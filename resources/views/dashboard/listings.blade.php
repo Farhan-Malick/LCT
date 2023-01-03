@@ -5,8 +5,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="../../css/bootstrap.min.css" />
-      <link rel="stylesheet" href="../../assets/styles/dashboard.css" />
+      <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/styles/dashboard.css')}}">
       <link rel="stylesheet" href="{{ asset('assets/styles/common.css') }}" />
       <!-- <link rel="stylesheet" href="../../assets/styles/common.css"> -->
       <link

@@ -101,9 +101,11 @@ class VenuesController extends Controller
      * @param  \App\Models\Venues  $venues
      * @return \Illuminate\Http\Response
      */
-    public function edit(Venues $venues)
+    public function editVenues(Venues $venues,$id)
     {
-        //
+        // return view('Admin.pages.editVenue');
+        $venues = Venues::find($id);
+        return view('Admin/pages/editVenue',compact('venues'));
     }
 
     /**
@@ -113,9 +115,35 @@ class VenuesController extends Controller
      * @param  \App\Models\Venues  $venues
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Venues $venues)
+    public function update(Request $request,$id)
     {
-        //
+        $request->validate([
+            'image' => 'required|mimes:png,gif,jpg,jpeg|max:10000',
+        ]);
+        //image upload
+        // $fileName = time().'.'.$request->file->extension();
+
+        // $request->file->move(public_path('uploads/venues'), $fileName);
+
+        $venues = Venues::find($id);
+        $venues->title = $request->venue_name;
+        $venues->venue_type = $request->venue_type;
+        $venues->seated_guestnumber = $request->venue_seated_guest;
+        $venues->standing_guestnumber = $request->venue_standing_guest;
+        $venues->address = $request->venue_address;
+        $venues->city = $request->venue_city;
+        // $venues->country_id = $request->country_id;
+        $venues->state = $request->venue_state;
+        $venues->zipcode = $request->venue_zipcode;
+
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $image_name = time().'_'.$image->getClientOriginalName();
+            $image->move(public_path('uploads/venues'), $image_name);
+            $venues->image = $image_name;
+        }
+        $venues->update();
+        return redirect('Admin-Panel/venue/all-venues')->with('success', 'Venue Updated successfully');
     }
 
     /**

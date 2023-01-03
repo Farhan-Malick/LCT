@@ -4,7 +4,7 @@
                 <nav class="navbar navbar-expand-lg navbar-dark ">
                     <div class="logo d-flex flex-column text-light p-0 m-0">
                     <a class="navbar-brand" href="{{ route("home") }}">
-                        <img src="{{asset("../../assets/images/logodark2.jpg")}}" height="45" width="220" alt="">
+                        <img src="{{asset("/assets/images/logodark2.jpg")}}" height="45" width="220" alt="">
                     </a>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

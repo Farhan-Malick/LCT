@@ -49,6 +49,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/Admin-Panel/add-venue', [VenuesController::class, 'index']);
         Route::post('/Admin-Panel/add-venue', [VenuesController::class, 'store']);
         Route::get('/Admin-Panel/venue/all-venues', [VenuesController::class, 'allVenues']);
+        Route::get('/Admin-Panel/venue/edit/venue/{id}', [VenuesController::class, 'editVenues']);
+        Route::post('/Admin-Panel/venue/updateVenues/{id}', [VenuesController::class, 'update']);
         Route::get('/Admin-Panel/venue/all-venues/delete/{id}', [VenuesController::class, 'deleteVenue']);
         Route::get('/Admin-Panel/add-category',function() {
             return view('Admin.pages.add_category');

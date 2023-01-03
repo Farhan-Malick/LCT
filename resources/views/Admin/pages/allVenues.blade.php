@@ -82,27 +82,32 @@
         <div class="panel panel-inverse" data-sortable-id="form-validation-1">
             <!-- begin panel-body -->
             <div class="panel-body">
-                
+                @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+            @endif
                 <table class="table mt-3 responsive">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
-                            <th scope="col">Description</th>
+                            {{-- <th scope="col">Description</th> --}}
                             <th scope="col">Venue_type</th>
-                            <th scope="col">Amenities</th>
+                            {{-- <th scope="col">Amenities</th> --}}
                             <th scope="col">Slug</th>
-                            <th scope="col">Seated Guest.No</th>
-                            <th scope="col">Standing Guest.No</th>
+                            <th scope="col">Seated</th>
+                            <th scope="col">Standing</th>
                             <th scope="col">Address</th>
                             <th scope="col">City</th>
-                            {{-- <th scope="col">Country</th> --}}
+                            <th scope="col">Country</th>
                             <th scope="col">State</th>
                             <th scope="col">Zip Code</th>
-                            <th scope="col">G.LAT</th>
-                            <th scope="col">G.Long</th>
+                            {{-- <th scope="col">G.LAT</th>
+                            <th scope="col">G.Long</th> --}}
                             <th scope="col">Image</th>
-                            <th scope="col">Status</th>
+                            {{-- <th scope="col">Status</th> --}}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -111,33 +116,39 @@
                         <tr>
                             <td>{{$venue->id}}</td>
                             <td>{{$venue->title}}</td>
-                            <td>{{$venue->description}}</td>
+                            {{-- <td>{{$venue->description}}</td> --}}
                             <td>{{$venue->venue_type}}</td>
-                            <td> {{ Str::limit($venue->amenities, 50) }}</td>
+                            {{-- <td> {{ Str::limit($venue->amenities, 50) }}</td> --}}
                             <td>{{$venue->slug}}</td>
                             <td>{{$venue->seated_guestnumber}}</td>
                             <td>{{$venue->standing_guestnumber}}</td>
                             <td>{{$venue->address}}</td>
                             <td>{{$venue->city}}</td>
                            
-                            {{-- <td>{{$venue->country_name}}</td> --}}
+                            <td>{{$venue->country_id}}</td>
                             <td>{{$venue->state}}</td>
                             <td>{{$venue->zipcode}}</td>
-                            <td>{{$venue->glat}}</td>
-                            <td>{{$venue->glong}}</td>
-                            <td>{{$venue->image}}</td>
-                            <td>{{$venue->status}}</td>
+                            {{-- <td>{{$venue->glat}}</td> --}}
+                            {{-- <td>{{$venue->glong}}</td> --}}
+                            <td><img
+                                src="{{ asset('uploads/venues/' . $venue->image) }}"
+                                class="img-rounded height-30 width-30" /></td>
+                            {{-- <td>{{$venue->status}}</td> --}}
                             <td>
                                 {{-- <a
                                     class="btn btn-primary"
                                     href="{{route('admin.section_rows.edit',$venue->id)}}"
                                     >edit</a
                                 > --}}
-
+                                <a
+                                    class="btn btn-primary"
+                                    href="{{URL('/Admin-Panel/venue/edit/venue',$venue->id)}}"
+                                    ><i class="fa fa-edit" aria-hidden="true"></i></a
+                                >
                                 <a
                                     class="btn btn-danger"
                                     href="{{URL('/Admin-Panel/venue/all-venues/delete',$venue->id)}}"
-                                    >Delete</a
+                                    ><i class="fa fa-trash" aria-hidden="true"></i></a
                                 >
                             </td>
                         </tr>

@@ -34,8 +34,8 @@
                     <span>Events</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="/Admin-Panel/add-event">Add Event</a></li>
-                    <li><a href="/Admin-Panel/All-event">All Events</a></li>
+                    <li><a href="{{ URL('/Admin-Panel/add-event') }}">Add Event</a></li>
+                    <li><a href="{{ URL('/Admin-Panel/All-event') }}">All Events</a></li>
                     <li>
                         <a href="{{ URL('Admin-Panel/event-listing-form') }}">Add Event Listings</a>
                     </li>
@@ -64,7 +64,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="/Admin-Panel/add-category">Add Category</a>
+                        <a href="{{ URL('/Admin-Panel/add-category') }}">Add Category</a>
                     </li>
                 </ul>
             </li>
@@ -75,7 +75,7 @@
                     <span>Venues</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="/Admin-Panel/add-venue">Add Venue</a></li>
+                    <li><a href="{{ URL('/Admin-Panel/add-venue') }}">Add Venue</a></li>
                     <li><a href="{{URL('/Admin-Panel/venue/all-venues')}}">All Venues</a></li>
                     <li>
                         <a href="{{ route('admin.sections.index') }}"
@@ -485,8 +485,8 @@
                     <span>Events</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="/Admin-Panel/add-event">Add Event</a></li>
-                    <li><a href="/Admin-Panel/All-event">All Events</a></li>
+                    <li><a href="{{ URL('/Admin-Panel/add-event') }}">Add Event</a></li>
+                    <li><a href="{{ URL('/Admin-Panel/All-event') }}">All Events</a></li>
                     <li>
                         <a href="{{ URL('Admin-Panel/event-listing-form') }}">Add Event Listings</a>
                     </li>
@@ -503,7 +503,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="/Admin-Panel/add-category">Add Category</a>
+                        <a href="{{ URL('/Admin-Panel/add-category') }}">Add Category</a>
                     </li>
                 </ul>
             </li>
@@ -514,7 +514,7 @@
                     <span>Venues</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="/Admin-Panel/add-venue">Add Venue</a></li>
+                    <li><a href="{{ URL('/Admin-Panel/add-venue') }}">Add Venue</a></li>
                     <li><a href="{{URL('/Admin-Panel/venue/all-venues')}}">All Venues</a></li>
                     <li>
                         <a href="{{ route('admin.sections.index') }}"

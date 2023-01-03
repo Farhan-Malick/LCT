@@ -109,7 +109,7 @@
                             </div>
                            <div class="row">
                             <?php
-                                $catClasses = ['btn-danger', 'btn-success', 'btn-warning', 'btn-primary'];    
+                                      $catClasses = ['btn-danger', 'btn-success', 'btn-warning', 'btn-primary','btn-secondary'];    
                             ?>
                             @foreach ($categories as $cat)
                             <?php $key = array_rand($catClasses); ?>

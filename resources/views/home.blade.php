@@ -109,7 +109,7 @@
                             </div>
                            <div class="row">
                             <?php
-                                $catClasses = ['btn-danger', 'btn-success', 'btn-warning', 'btn-primary'];    
+                                $catClasses = ['btn-danger', 'btn-success', 'btn-warning', 'btn-primary','btn-secondary'];    
                             ?>
                             @foreach ($categories as $cat)
                             <?php $key = array_rand($catClasses); ?>
@@ -117,15 +117,17 @@
                                     <a href="{{ route("tickets.category", ['id'=>$cat->id]) }}" class="btn btn-sm <?= $catClasses[$key] ?> w-100">{{ $cat->name }}</a>
                                 </div>
                             @endforeach
-                            
                             {{-- <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="d-block btn btn-sm  w-100">Sports Tickets</a>
+                                <a href="{{ route("tickets") }}" class="btn btn-sm w-100">Sports Tickets</a>
                             </div>
                             <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="btn btn-sm  w-100">Theater Tickets</a>
+                                <a href="{{ route("tickets.category")}}" class="btn btn-sm w-100" >Concert Tickets</a>
                             </div>
                             <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="btn btn-sm  w-100">Festival Tickets</a>
+                                <a href="{{ route("tickets") }}" class="btn btn-sm w-100">Theater Tickets</a>
+                            </div>
+                            <div class="col-sm-6 col-xl-3 my-3">
+                                <a href="{{ route("tickets") }}" class="btn btn-sm w-100">Festival Tickets</a>
                             </div> --}}
                             <div class="col-lg-12 my-4">
                                 <marquee behavior="" direction="">

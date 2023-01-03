@@ -96,7 +96,6 @@ class PurchasesController extends Controller
 
     public function buyer_ticket_checkout( TicketListing $ticket, EventListing $event, $eventid, $ticketid, $sellerid){
 
-
         $events = EventListing::select('event_listings.*', 'events.*')
         ->join('events', 'events.id', '=', 'event_listings.event_id')
         ->where('event_listings.id',$eventid)
@@ -114,7 +113,10 @@ class PurchasesController extends Controller
 
     public function dashboard_orders_show(Purchases $purchases,TicketListing $ticket,Event $event)
     {
-        $purchases = Purchases::where('user_id',auth()->user()->id)->get();
+        $purchases = Purchases::select('purchases.*', 'event_listings.event_name as event_name')
+        ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
+        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->where('seller_id',auth()->user()->id)->get();
         return view('dashboard/orders',compact('purchases'));
     }
 
@@ -125,7 +127,6 @@ class PurchasesController extends Controller
         $sellers = User::find($sellerid);
 
         return view('invoice',compact('tickets','events','sellers'));
-
     }
 
 

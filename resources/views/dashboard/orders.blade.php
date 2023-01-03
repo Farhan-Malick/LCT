@@ -6,8 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../assets/styles/dashboard.css">
+   
+  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/styles/dashboard.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/styles/common.css') }}" />
     <!-- <link rel="stylesheet" href="../../assets/styles/common.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -63,7 +64,7 @@
                                                     
                                                     <td>{{$purchase->id}}</td>
                                                     <td>{{$purchase->event->title}}</td>
-                                                    <td>{{$purchase->title_id}}</td>
+                                                    <td>{{$purchase->event_name}}</td>
                                                     <td>{{$purchase->quantity}}</td>
                                                     <td>{{$purchase->price}}</td>
                                                     

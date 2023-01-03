@@ -37,20 +37,6 @@ class SalesController extends Controller
         return view('dashboard/sales',compact('sales'));
     }
 
-    public function ApprovalForPurchase(Request $request) 
-    {
-        $tickets=TicketListing::find($request->ticket_id);
-        $approval=$request->approve;
-        if ($approval=='on') {
-            $approval=1;
-        }else {
-            $approval=0;
-        }
-        $tickets->approve=$approval;
-        $tickets->save();
-        return redirect()->back()->with('approve','Ticket has been Approved Successfully');
-    }
-
     public function ticket_destroy($id){
         //return $id;
         $tickets = Purchases::find($id);

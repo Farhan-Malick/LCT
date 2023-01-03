@@ -49,11 +49,11 @@
                                                 aria-label="Amount (to the nearest dollar)" value = "{{$tickets->price}}">
                                             <span class="input-group-text">.00</span>
                                         </div>
-                                        <small>Tickets in this area are currently selling between <strong>{{$ticketCurrency->currency_type}} {{ $minValue }} and
+                                        @if($minValue != '' && $maxValue != '')<small>Tickets in this area are currently selling between <strong>{{$ticketCurrency->currency_type}} {{ $minValue }} and
                                             {{$ticketCurrency->currency_type}}
                                                 {{ $maxValue }}</strong> per ticket. In order to sell your tickets quickly we
                                             suggest you sell
-                                            your tickets at <strong>{{$ticketCurrency->currency_type}} {{ $minValue }}</strong> per ticket</small>
+                                            your tickets at <strong>{{$ticketCurrency->currency_type}} {{ $minValue }}</strong> per ticket</small>@endif
                                     </div>
                                     <button class="btn primary-btn w-100"
                                         type="submit"><strong>CONTINUE</strong></button>

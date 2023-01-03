@@ -16,7 +16,7 @@ use App\Http\Controllers\MailController;
 
 class PurchasesController extends Controller
 {
- 
+
     //
     // public function buyer_tickets_index(Event $event,$id){
 
@@ -35,6 +35,8 @@ class PurchasesController extends Controller
         ->where('ticket_listings.id', $id)
         ->first();
 
+        $seller = User::find($ticket->user_id);
+
         $purchase = new Purchases();
         $purchase->user_id = auth()->id();
         $purchase->event_id = $ticket->eventlisting_id;
@@ -44,9 +46,10 @@ class PurchasesController extends Controller
         $purchase->quantity = $request->quantity;
         $purchase->save();
         MailController::ticketpurchased(auth()->user()->email, $ticket);
+        MailController::sellerticketpurchased($seller->email, $ticket);
         return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
     }
-    
+
     public function buyer_ticket_show(Request $request, $id){
         // dd($request->qty);
 

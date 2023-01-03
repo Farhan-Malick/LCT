@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\TicketListingAdded;
 use App\Mail\TicketListingRejected;
 use App\Mail\Ticketpurchased;
+use App\Mail\SellerTicketPurchased;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class MailController extends Controller
     //
 
     public static function ticketlistingadded($email) {
-        
+
         try{
             $mail = Mail::to($email)->send(new TicketListingAdded());
             return $mail;
@@ -22,10 +23,10 @@ class MailController extends Controller
             dd($th);
             return response()->json(['Mail not sent']);
         }
-    } 
+    }
 
     public static function ticketlistingrejected($email, $ticket) {
-        
+
         try{
             $mail = Mail::to($email)->send(new TicketListingRejected($ticket));
             return $mail;
@@ -33,13 +34,24 @@ class MailController extends Controller
             dd($th);
             return response()->json(['Mail not sent']);
         }
-    } 
+    }
 
 
     public static function ticketpurchased($email, $data) {
-        
+
         try{
             $mail = Mail::to($email)->send(new Ticketpurchased($data));
+            return $mail;
+        }catch(Exception $th){
+            dd($th);
+            return response()->json(['Mail not sent']);
+        }
+    }
+
+    public static function sellerticketpurchased($email, $data) {
+
+        try{
+            $mail = Mail::to($email)->send(new SellerTicketPurchased($data));
             return $mail;
         }catch(Exception $th){
             dd($th);

@@ -224,8 +224,8 @@ class TicketController extends Controller
 
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
-        $maxValue = TicketListing::where('eventlisting_id', $tickets->eventlisting_id)->max('price');
-        $minValue = TicketListing::where('eventlisting_id', $tickets->eventlisting_id)->min('price');
+        $maxValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->max('price');
+        $minValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->min('price');
         $currencies = Currency::all();
         $ticketCurrency = Currency::find($tickets->currency);
         $price = $tickets->price * $tickets->quantity;
@@ -367,7 +367,7 @@ class TicketController extends Controller
 
     public function Rejection(Request $request)
     {
-        // dd($request->all());     
+        // dd($request->all());
         $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')->where('ticket_listings.id', $request->ticket_id)->first();
         $user = User::find($tickets->user_id);
         $tickets->approve=2;

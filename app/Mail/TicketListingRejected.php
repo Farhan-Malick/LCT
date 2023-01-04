@@ -44,7 +44,7 @@ class TicketListingRejected extends Mailable
     public function content()
     {
         return new Content(
-            markdown: 'view.emails.seller.ticket.rejected',
+            view: 'emails.seller.ticket.rejected',
         );
     }
 

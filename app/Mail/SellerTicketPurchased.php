@@ -9,10 +9,11 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class Ticketpurchased extends Mailable
+class SellerTicketPurchased extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
+
     /**
      * Create a new message instance.
      *
@@ -43,7 +44,7 @@ class Ticketpurchased extends Mailable
     public function content()
     {
         return new Content(
-            markdown: 'emails.buyer.ticket.purchased',
+            markdown: 'emails.seller.ticket_purchased',
         );
     }
 

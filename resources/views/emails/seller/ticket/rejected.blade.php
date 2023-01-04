@@ -9,6 +9,6 @@ You ticket listing no {{ $ticket->id }} for event {{ $ticket->event_name }} has 
 Button Text
 </x-mail::button> --}}
 
-Thanks,<br>
+Thanks<br>
 {{ config('app.name') }}
 </x-mail::message>

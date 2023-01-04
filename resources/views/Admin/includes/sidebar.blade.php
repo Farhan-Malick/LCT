@@ -87,6 +87,11 @@
                             >Add Rows</a
                         >
                     </li>
+                    <li>
+                        <a href="{{ route('admin.sellerCategory.index') }}"
+                            >Add Seller Category</a
+                        >
+                    </li>
                 </ul>
             </li>
             <li class="has-sub">

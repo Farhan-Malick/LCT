@@ -133,10 +133,19 @@
 											</td>
 											
 											<td>
+												@if($m_ticket->approve == 1)
+												<button type="button" class="btn btn-danger" disabled="disabled" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
+													<i class="fa fa-times" aria-hidden="true"></i>
+												</button>	
+												@elseif ($m_ticket->approve == 0)
+												<button type="button" class="btn btn-danger" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
+													<i class="fa fa-times" aria-hidden="true"></i>
+												</button>
+											@endif
 													{{-- @if($m_ticket->approve != 2 || $m_ticket->approve == 0) --}}
-														<button type="button" class="btn btn-danger" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
+														{{-- <button type="button" class="btn btn-danger" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
 															<i class="fa fa-times" aria-hidden="true"></i>
-														</button>
+														</button> --}}
 													{{-- @endif --}}
 												<a
 													class="btn btn-success"

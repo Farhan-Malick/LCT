@@ -14,6 +14,7 @@ use App\Models\VanueSections;
 use App\Models\VenueSectionRows;
 use App\Models\ETicket;
 use App\Models\Purchases;
+use App\Models\SellerCategory;
 use App\Http\Controllers\Auth\LoginController;
 use Mail;
 use App\Mail\Seller as SellerMail;
@@ -35,7 +36,8 @@ class TicketController extends Controller
         $EventListing = EventListing::find($id);
         $venue_section_rows = VenueSectionRows::all();
         $venue_sections = VanueSections::all();
-        return view('tickets/tickets-details',compact('venue_section_rows','venue_sections','EventListing','currencies'));
+        $sellerCategories = SellerCategory::all();
+        return view('tickets/tickets-details',compact('venue_section_rows','venue_sections','EventListing','currencies','sellerCategories'));
     }
 
     public function sendAwienMail(){
@@ -97,6 +99,7 @@ class TicketController extends Controller
         $ticketListing->user_id = $guestUser;
         $ticketListing->eventlisting_id = $id;
         $ticketListing->currency = $request->currency;
+        $ticketListing->categories = $request->categories;
         $ticketListing->section = $request->sections;
         $ticketListing->row = $request->row;
         $ticketListing->seat_from = $request->seat_from;

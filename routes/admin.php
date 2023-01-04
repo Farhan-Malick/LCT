@@ -14,6 +14,7 @@ use App\Http\Controllers\VenuesController;
 use App\Http\Controllers\TicketListingController;
 use App\Http\Controllers\EventListingController;
 use App\Http\Controllers\MisController;
+use App\Http\Controllers\SellerCategoryController;
 use App\Http\Middleware\AdminAuth;
 
 /*
@@ -46,7 +47,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/Admin-Panel/event/update/{id}', [EventController::class, 'updateEvents']);
         Route::get('/Admin-Panel/event/delete/{id}', [EventController::class, 'delete']);
 
-        Route::get('/Admin-Panel/add-venue', [VenuesController::class, 'index']);
+        Route::get('/Admin-Panel/add-venuez', [VenuesController::class, 'index']);
         Route::post('/Admin-Panel/add-venue', [VenuesController::class, 'store']);
         Route::get('/Admin-Panel/venue/all-venues', [VenuesController::class, 'allVenues']);
         Route::get('/Admin-Panel/venue/edit/venue/{id}', [VenuesController::class, 'editVenues']);
@@ -57,7 +58,12 @@ Route::group(['middleware' => 'web'], function () {
         });
         Route::post('/Admin-Panel/addCategory', [CategoryController::class, 'store']);
 
-
+        //Category For seller
+        Route::get('Admin-Panel/Sellers-Categories', [SellerCategoryController::class, 'index'])->name('admin.sellerCategory.index');
+        Route::post('Admin-Panel/Sellers-Categories/create', [SellerCategoryController::class, 'create'])->name('admin.sellerCategory.create');
+        Route::get('Admin-Panel/Sellers-Categories/{id}/edit', [SellerCategoryController::class, 'edit'])->name('admin.sellerCategory.edit');
+        Route::post('Admin-Panel/Sellers-Categories/update/{id}', [SellerCategoryController::class, 'update'])->name('admin.sellerCategory.updateCat');
+        Route::get('Admin-Panel/Sellers-Categories/{id}/destroy', [SellerCategoryController::class, 'destroy'])->name('admin.sellerCategory.destroy');
         //Admin Category Request
         Route::get('event_requests', [EventController::class, 'admin_show_request'])->name('admin.request.show');
         Route::get('event_requests/{id}/destroy', [EventController::class, 'destroy_request'])->name('admin.request.destroy');

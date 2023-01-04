@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../../assets/styles/tablet-noexps.css">
     <link rel="stylesheet" href="../../assets/styles/experiments-noexps.css"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link href="http://code.jquery.com/ui/1.8.24/themes/blitzer/jquery-ui.css" rel="stylesheet"
+    <link href="https://code.jquery.com/ui/1.8.24/themes/blitzer/jquery-ui.css" rel="stylesheet"
     type="text/css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <title>Upload Tickets</title>
@@ -210,8 +210,8 @@
     @include("auth.partials.footer")
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="../../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.8.24/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.24/jquery-ui.min.js" type="text/javascript"></script>
     <script>
         const publicPath = `<?= asset('etickets/'); ?>`;
         document.getElementById('btn-continue-upload').addEventListener("click", (event) => {

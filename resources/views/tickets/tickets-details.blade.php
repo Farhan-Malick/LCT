@@ -148,6 +148,17 @@
                                         <div class="col-lg-8">
                                             <div class="form">
                                                 <div class="form-group">
+                                                    <label for="section">Select Category</label>
+                                                    <select class="form-select"
+                                                        name="categories" value="">
+                                                        <option selected disabled>Please Select Category</option>
+                                                        @foreach($sellerCategories as $sellerCategory)
+                                                        <option value="{{$sellerCategory->categories}}">{{$sellerCategory->categories}}</option>
+                                                        @endforeach
+
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="section">Sections</label>
                                                     <select class="form-select"
                                                         name="sections" value="">

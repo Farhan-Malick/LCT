@@ -88,6 +88,7 @@
                                         <th scope="col">price</th>
                                         {{-- <th scope="col">currency</th> --}}
                                         <th scope="col">quantity</th>
+										<th scope="col">category</th>
                                         <th scope="col">section</th>
                                         <th scope="col">row</th>
                                         <th scope="col">seat from</th>
@@ -108,7 +109,9 @@
 													<td>{{$ticket->event->event_name}}</td>
 													<td>${{$ticket->price}}</td>
 													{{-- <td>{{$ticket->currency}}</td> --}}
+													
 													<td>{{$ticket->quantity}}</td>
+													<td>{{$ticket->categories}}</td>
 													<td>{{$ticket->section_name}}</td>
 													<td>{{$ticket->row}}</td>
 													<td>{{$ticket->seat_from}}</td>
@@ -117,19 +120,19 @@
 													<td>{{$ticket->ticket_restrictions}}</td>
 													<td>{{$ticket->status}}</td>
 													<td>
-														@if($ticket->approve != 1 || $ticket->approve == 0)
+														@if($ticket->approve == null || $ticket->approve == 0)
                                                         <form action="{{ url('/toggle-approve') }}" method="POST">
 															@csrf
 															<input type="hidden" name="ticket_id" id=""
 																value="{{ $ticket->id }}" >
 															<input type="submit" class="btn btn-primary"
 																name="" value="Approve" id="" >
-																
 														</form>
-														@else
+														@elseif ($ticket->approve == 2)
+														<button class="btn btn-primary" disabled="disabled">Cant Approve now</button>
+																@else
 														<button class="btn btn-success" disabled="disabled">Approved</button>
                                                         @endif
-                                                    
 														{{-- <a
 															class="btn btn-primary"
 															href="{{route('admin.section_rows.edit',$ticket->id)}}"
@@ -137,16 +140,25 @@
 														> --}}
 													</td>
 													<td>
-														    {{-- @if($ticket->approve != 2 || $ticket->approve == 0) --}}
+															@if($ticket->approve == 1 || $ticket->approve == 2)
+																<button type="button" class="btn btn-danger" disabled="disabled" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal">
+																	Reject
+																</button>	
+																@elseif ($ticket->approve == null )
+																<button type="button" class="btn btn-danger" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
+																	Reject
+																</button>
+															@endif
+														    {{-- @if($ticket->approve != 2 || $ticket->approve == 0)
 															<button type="button" class="btn btn-danger" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
 																<i class="fa fa-times" aria-hidden="true"></i>
 															</button>
-															{{-- @endif --}}
-														<a
+															@endif --}}
+														{{-- <a
 															class="btn btn-success"
 															href="{{URL('/Admin-Panel/Ticket/Edit',$ticket->id)}}"
 															><i class="fa fa-edit" aria-hidden="true"></i></a
-														>
+														> --}}
 														<a
 															class="btn btn-danger"
 															href="{{route('admin.ticket.destroy',$ticket->id)}}"

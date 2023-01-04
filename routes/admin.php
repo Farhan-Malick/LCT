@@ -37,7 +37,15 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/Admin-Register', function () {
         return view('Admin.pages.register_v3');
     });
-
+    Route::get('/Admin-Panel/Dashboard', function () {
+        $tickets = App\Models\TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
+        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        ->where('completed', 1)->get();
+        $price = App\Models\Purchases::sum('price');
+        $userCount = App\Models\User::count();
+        $total_no_sold_tickets = App\Models\Purchases::sum('quantity');
+        return view('Admin/pages/dashboard',compact('tickets','price','userCount','total_no_sold_tickets'));
+    });
     Route::middleware('adminauth')->group(function () {
         Route::get('/Admin-Panel/add-event', [EventController::class, 'index']);
         Route::post('/Admin-Panel/add-event', [EventController::class, 'store']);
@@ -47,7 +55,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/Admin-Panel/event/update/{id}', [EventController::class, 'updateEvents']);
         Route::get('/Admin-Panel/event/delete/{id}', [EventController::class, 'delete']);
 
-        Route::get('/Admin-Panel/add-venuez', [VenuesController::class, 'index']);
+        Route::get('/Admin-Panel/add-venue', [VenuesController::class, 'index']);
         Route::post('/Admin-Panel/add-venue', [VenuesController::class, 'store']);
         Route::get('/Admin-Panel/venue/all-venues', [VenuesController::class, 'allVenues']);
         Route::get('/Admin-Panel/venue/edit/venue/{id}', [VenuesController::class, 'editVenues']);

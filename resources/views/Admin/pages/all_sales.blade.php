@@ -81,12 +81,14 @@
                             <table class="table mt-3">
                                 <thead class="thead-dark">
                                     <tr>
+										
                                         <th scope="col">#</th>
                                         <th scope="col">Purchaser</th>
                                         <th scope="col">Event name</th>
                                         <th scope="col">Ticket name</th>
                                         <th scope="col">Total price</th>
                                         <th scope="col">Quantity</th>
+										<th scope="col">Status</th>
                                         {{-- <th scope="col">Approval</th> --}}
                                         <th scope="col">Action</th>
                                     </tr>
@@ -100,6 +102,7 @@
                                         <td>{{$purchase->event_name}}</td>
                                         <td>{{$purchase->price}}</td>
                                         <td>{{$purchase->quantity}}</td>
+										<td><button class="btn btn-success" disabled="disabled">SOLD</button></td>
                                        {{-- s --}}
                                         <td>
                                             {{-- <a

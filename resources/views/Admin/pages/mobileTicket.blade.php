@@ -118,40 +118,45 @@
 											<td>{{$m_ticket->ticket_restrictions}}</td>
 											<td>{{$m_ticket->status}}</td>
 											<td>
-												@if($m_ticket->approve != 1 || $m_ticket->approve == 0)
+												@if($m_ticket->approve == null || $m_ticket->approve == 0)
 												<form action="{{ url('/toggle-approve') }}" method="POST">
 													@csrf
 													<input type="hidden" name="ticket_id" id=""
 														value="{{ $m_ticket->id }}" >
 													<input type="submit" class="btn btn-primary"
-														name="" value="Approve" id="">
+														name="" value="Approve" id="" >
 												</form>
-												@else
-														<button class="btn btn-success" disabled="disabled">Approved</button>
+												@elseif ($m_ticket->approve == 2)
+												<button class="btn btn-primary" disabled="disabled">Cant Approve now</button>
+														@else
+												<button class="btn btn-success" disabled="disabled">Approved</button>
 												@endif
-												
+												{{-- <a
+													class="btn btn-primary"
+													href="{{route('admin.section_rows.edit',$m_ticket->id)}}"
+													>edit</a
+												> --}}
 											</td>
-											
 											<td>
-												@if($m_ticket->approve == 1)
-												<button type="button" class="btn btn-danger" disabled="disabled" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
-													<i class="fa fa-times" aria-hidden="true"></i>
-												</button>	
-												@elseif ($m_ticket->approve == 0)
-												<button type="button" class="btn btn-danger" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
-													<i class="fa fa-times" aria-hidden="true"></i>
-												</button>
-											@endif
+													@if($m_ticket->approve == 1 || $m_ticket->approve == 2)
+														<button type="button" class="btn btn-danger" disabled="disabled" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal">
+															Reject
+														</button>	
+														@elseif ($m_ticket->approve == null )
+														<button type="button" class="btn btn-danger" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
+															Reject
+														</button>
+													@endif
 													{{-- @if($m_ticket->approve != 2 || $m_ticket->approve == 0) --}}
 														{{-- <button type="button" class="btn btn-danger" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
 															<i class="fa fa-times" aria-hidden="true"></i>
 														</button> --}}
 													{{-- @endif --}}
-												<a
+												{{-- <a
 													class="btn btn-success"
 													href="{{URL('/Admin-Panel/Ticket/Edit',$m_ticket->id)}}"
 													><i class="fa fa-edit" aria-hidden="true"></i></a
-												>
+												> --}}
 												<a
 													class="btn btn-danger"
 													href="{{route('admin.ticket.destroy',$m_ticket->id)}}"

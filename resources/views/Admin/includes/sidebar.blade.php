@@ -31,6 +31,17 @@
                 <a href="javascript:;">
                     <b class="caret"></b>
                     <i class="fa fa-gem"></i>
+                    <span>LCT Dashboard</span>
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="{{ URL('/Admin-Panel/Dashboard') }}">Dashboard</a></li>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fa fa-gem"></i>
                     <span>Events</span>
                 </a>
                 <ul class="sub-menu">

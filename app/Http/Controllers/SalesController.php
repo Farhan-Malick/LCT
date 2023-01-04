@@ -37,6 +37,7 @@ class SalesController extends Controller
         return view('dashboard/sales',compact('sales'));
     }
 
+
     public function ticket_destroy($id){
         //return $id;
         $tickets = Purchases::find($id);

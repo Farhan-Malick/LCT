@@ -32,6 +32,9 @@ class TicketController extends Controller
     public function index(VanueSections $vanuesections,VenueSectionRows $venuesectionrows, EventListing $EventListing,Currency $currency,$id)
     {
         //
+        if(!auth()->check()){
+            return redirect('/login');
+        }
         $currencies = Currency::all();
         $EventListing = EventListing::find($id);
         $venue_section_rows = VenueSectionRows::all();
@@ -131,7 +134,7 @@ class TicketController extends Controller
 
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)
     {
-        
+
         $tickets = TicketListing::find($id);
         $user = User::find($tickets->user_id);
         $seller = new Seller();
@@ -149,13 +152,13 @@ class TicketController extends Controller
         $seller->phone = $request->phone;
         $seller->save();
 
-        if(!Auth::check()) {
+        /* if(!Auth::check()) {
             $user->first_name = $request->firstname;
             $user->last_name = $request->lastname;
             $user->email = $request->email;
             $user->phone = $request->phone;
             $user->update();
-        }
+        } */
         $tickets->completed = 1;
         $tickets->update();
         MailController::ticketlistingadded($user->email);

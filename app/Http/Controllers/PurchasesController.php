@@ -55,7 +55,7 @@ class PurchasesController extends Controller
 
         // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->where('event_listings.id', $id)->first();
         $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $id)->first();
-        $eventListings = EventListing::where('status', 1)->select('id', 'event_name')->get();
+        $eventListings = EventListing::where('status', 1)->where('event_id', $id)->select('id', 'event_name')->get();
         // dd($events);
         $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
@@ -119,7 +119,7 @@ class PurchasesController extends Controller
         $purchases = Purchases::select('purchases.*', 'event_listings.event_name as event_name')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
-        ->where('seller_id',auth()->user()->id)->get();
+        ->where('purchases.user_id',auth()->user()->id)->get();
         return view('dashboard/orders',compact('purchases'));
     }
 

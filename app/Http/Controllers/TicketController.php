@@ -366,9 +366,11 @@ class TicketController extends Controller
     }
     public function Approval(Request $request)
     {
-        $tickets=TicketListing::find($request->ticket_id);
+        $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')->where('ticket_listings.id', $request->ticket_id)->first();
+        $user = User::find($tickets->user_id);
         $tickets->approve=1;
         $tickets->update();
+        MailController::ticketlistingapproved($user->email, $tickets);
         return redirect()->back()->with('approve','Ticket has been Approved Successfully');
     }
 

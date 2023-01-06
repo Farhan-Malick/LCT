@@ -9,11 +9,10 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class TicketListingRejected extends Mailable
+class SellerTicketApproved extends Mailable
 {
     use Queueable, SerializesModels;
     public $ticket;
-
     /**
      * Create a new message instance.
      *
@@ -32,7 +31,7 @@ class TicketListingRejected extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Ticket Listing Rejected',
+            subject: 'Seller Ticket Approved',
         );
     }
 
@@ -41,21 +40,11 @@ class TicketListingRejected extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Content
      */
-    /* public function content()
+    public function content()
     {
         return new Content(
-            view: 'emails.seller.ticket.rejected',
+            markdown: 'emails.seller.ticket_approved',
         );
-    } */
-
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
-        return $this->markdown('emails.seller.ticket.rejected');
     }
 
     /**

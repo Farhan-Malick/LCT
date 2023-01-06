@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Mail\SellerTicketApproved;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TicketListingAdded;
 use App\Mail\TicketListingRejected;
@@ -29,6 +30,17 @@ class MailController extends Controller
 
         try{
             $mail = Mail::to($email)->send(new TicketListingRejected($ticket));
+            return $mail;
+        }catch(Exception $th){
+            dd($th);
+            return response()->json(['Mail not sent']);
+        }
+    }
+
+    public static function ticketlistingapproved($email, $ticket) {
+
+        try{
+            $mail = Mail::to($email)->send(new SellerTicketApproved($ticket));
             return $mail;
         }catch(Exception $th){
             dd($th);

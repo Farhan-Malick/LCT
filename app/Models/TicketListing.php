@@ -63,7 +63,5 @@ class TicketListing extends Model
     public function Currency(){
         return $this->hasOne(Currency::class,'id');
     }
-    public function eventListing(){
-        return $this->belongsTo(Event::class,'id');
-    }
+
 }

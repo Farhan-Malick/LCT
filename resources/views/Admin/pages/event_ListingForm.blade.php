@@ -102,12 +102,12 @@
                                     >
                                         <label
                                             for="inputTitle4"
-                                            >Event</label
+                                            >Event Listing Name</label
                                         >
                                         <input
                                             type="text"
                                             class="form-control"
-                                            placeholder="Enter Event here"
+                                            placeholder="Enter Listing Listing Name here"
                                             name="event_name"
                                         />
                                     </div>

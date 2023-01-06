@@ -37,7 +37,8 @@
                         <div class="col-lg-2">
                             <div class="ticket-img p-4">
                                 <?php //dd($events); ?>
-                                <img src="/uploads/events/thumbnail/{{$events->thumbnail}}" height="150" width="150" alt="">
+                                
+                                <img src="{{ asset('/uploads/events/thumbnail/').'/'.$events->thumbnail }}" height="150" width="150" alt="">
                             </div>
                         </div>
                         <div class="col-lg-10 p-4">

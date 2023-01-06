@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\EventListing;
 use App\Models\Category;
+use App\Models\Venues;
 
 class EventListingController extends Controller
 {
@@ -13,7 +14,8 @@ class EventListingController extends Controller
     {
         $categories = Category::all();
         $events = Event::all();
-        return view("Admin/pages/event_ListingForm",compact('categories','events'));
+        $venues_dropdown = Venues::all();
+        return view("Admin/pages/event_ListingForm",compact('categories','events','venues_dropdown'));
     }
 
     public function EventListing(Request $request){

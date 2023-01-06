@@ -132,19 +132,32 @@
                                 </div>
                                 <div class="form-row">
                                     <div
-                                        class="form-group col-md-6"
+                                    class="form-group col-md-4"
+                                >
+                                    <label
+                                        for="inputState"
+                                        >Venue Name</label
                                     >
-                                        <label
-                                            for="inputTitle4"
-                                            >Venue Name</label
+                                    <select
+                                        id="inputState"
+                                        class="form-control"
+                                        name="venue_name"
+                                    >
+                                        <option
+                                            selected
                                         >
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Venue Name"
-                                            name="venue_name"
-                                        />
-                                    </div>
+                                            Select Venue 
+                                        </option>
+                                        @foreach($venues_dropdown
+                                        as $venue)
+                                        <option
+                                            value="{{$venue->id}}"
+                                        >
+                                            {{$venue->title}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                   
                                 </div>
                                 <div class="form-row">

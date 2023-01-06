@@ -83,8 +83,8 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">#</th>
-                                        {{-- <th scope="col">title</th> --}}
-                                        <th scope="col">Event Title</th>
+                                        <th scope="col">Event Name</th>
+                                        <th scope="col">Event Listing Name</th>
                                         <th scope="col">price</th>
                                         {{-- <th scope="col">currency</th> --}}
                                         <th scope="col">quantity</th>
@@ -105,7 +105,7 @@
 											@if($ticket->ticket_type == "paper-ticket")
 												<tr>
 													<td>{{$ticket->id}}</td>
-													{{-- <td>{{$ticket->title}}</td> --}}
+													<td>{{$ticket->eventListing->title}}</td>
 													<td>{{$ticket->event->event_name}}</td>
 													<td>${{$ticket->price}}</td>
 													{{-- <td>{{$ticket->currency}}</td> --}}

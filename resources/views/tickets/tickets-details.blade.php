@@ -55,7 +55,7 @@
                                 <h4 class="fw-700 mb-2">Choose Ticket Type</h4>
                                 <input  type="hidden" id="ticket-type" name="ticket_type" value="paper-ticket" />
                                 <div class="row">
-                                    <div class="col-md-4"  id="tp">
+                                    <div class="col-md-4">
                                         <div class="card shadow-sm mb-3 select-card select-active" data-ticket="paper-ticket">
                                             <div class="card-body py-5">
                                                 <div class="card-subtitle">
@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
                             </div>
-                          
+
                             <div class="col-lg-12">
                                 <h4 class="fw-700"> Enter Seating Details</h4>
                                 <div class="card p-4 mb-3 shadow-sm main-card br-10">
@@ -296,7 +296,7 @@
                                                             Restrictions </label>
                                                     </div>
                                                 </div>
-                                           
+
 
                                         </div>
                                     </div>
@@ -313,7 +313,7 @@
                     <div class="card shadow-sm mb-3 type-card main-card br-10">
                         <div class="card-body">
                             <div class="card-title">
-                               
+
                                 <h4 class="mb-2">Ticket Detail</h4>
                                 <h5>{{$EventListing->event_name}}</h5>
                             </div>
@@ -322,18 +322,11 @@
                                 <strong>{{$EventListing->event_date}}</strong><br>
                                 <strong>{{$EventListing->venue_name}}</strong><br>
                             </p>
-                            <p class="p_type p-1 rounded-3">
+                            <p class="p_type p-1 rounded-3" id="ticket-type-box">
 
                                 {{-- <script>show()</script> --}}
 
                             </p>
-                            <script>
-                                    $(document).ready(function(){
-                                        $("#tp").click(function(){
-                                            $('.p_type').html("<strong >Ticket Type: </strong>");
-                                        });
-                                    });
-                            </script>
                         </div>
                     </div>
                     <div class="card shadow-sm mb-3 card-success br-10">
@@ -372,6 +365,7 @@
                     document.querySelectorAll('.select-card').forEach((element) => element.classList.remove('select-active'));
                     event.currentTarget.classList.add('select-active');
                     const value = event.currentTarget.attributes['data-ticket'].value;
+                    document.getElementById('ticket-type-box').innerHTML = `<strong>${value}</strong>`
                     document.getElementById('ticket-type').value = value;
                 });
             });

@@ -54,7 +54,7 @@ class VenuesController extends Controller
             "venue_latitude" => "required",
             "venue_type" => "required",
             "venue_amenities" => "required",
-            'file' => 'required|mimes:png,gif,jpg,jpeg|max:10000',
+            'file' => 'required|mimes:png,gif,jpg,jpeg,webp|max:10000',
         ]);
 
         //image upload
@@ -118,7 +118,7 @@ class VenuesController extends Controller
     public function update(Request $request,$id)
     {
         $request->validate([
-            'image' => 'required|mimes:png,gif,jpg,jpeg|max:10000',
+            'image' => 'required|mimes:png,gif,jpg,jpeg,webp|max:10000',
         ]);
         //image upload
         // $fileName = time().'.'.$request->file->extension();

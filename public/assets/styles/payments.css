@@ -62,8 +62,8 @@ border-radius: 10px 10px 0px 0px;
     padding: 5px;
 }
 .tabs-active{
-    background-color: #8cc63e;
-    color: #fff;
+    background-color: #c3f1f5;
+    color: #37383a;
 }
 .tabs-row{
     border-bottom: 1px solid #dfdfe0;
@@ -100,12 +100,14 @@ border: 5px solid #61c3e3;
     font-size: 50px;
 }
 .my-ticket{
+  margin-top: 30px;
     background-color: #dfdfe0;
     border-right: 2px dashed grey;
 }
 .ticket-left{
+  margin-top: 30px;
     background-color: #dfdfe0;
-    height: 320px;
+    height: 275px;
 }
 .border-right-top{
     position: absolute;

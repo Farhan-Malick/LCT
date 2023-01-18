@@ -1,37 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/styles/payments.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/styles/common.css") }}">
-    <link rel="stylesheet" href="../../assets/styles/sellticket.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
-    <title>Last Chance Ticket - Buyer</title>
-</head>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset("assets/styles/payments.css") }}">
+        <link rel="stylesheet" href="{{asset('assets/styles/sellticket.css')}}">
+        <link rel="stylesheet" href="{{ asset('assets/styles/index.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/styles/common.css') }}" />
+        <link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">
+        <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
+        <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
+        <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
+        <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+        <!-- Bootstrap icons CDN -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+        />
+        <title>Last Chance Ticket - Buyer</title>
+    </head>
 
 <body>
-@include("auth.partials.darkheader")
+@include("auth.partials.newHeader")
     <!-- tabs sections starts here  -->
-    <section class="section-two">
+    <section class="section-two" style="margin-top: 70px">
         <div class="container-fluid bg-white">
             <div class="row text-center tabs-row">
                 <div class="col-md-4 col-lg-4 p-2">
-                    <h5 class="tabs-title tabs-active"><i class="bi bi-check-lg me-3"></i>1. Browse Events</h5>
+                    <h5 class="tabs-title "><i class="bi bi-check-lg me-3"></i>1. Browse Events</h5>
                 </div>
                 <div class="col-md-4 col-lg-4 p-2">
-                    <h5 class="tabs-title "><i class="bi bi-ticket-fill me-3"></i>2. Choose Your Tickets</h5>
+                    <h5 class="tabs-title tabs-active"><i class="bi bi-ticket-fill me-3"></i>2. Choose Your Tickets</h5>
                 </div>
                 <div class="col-md-4 col-lg-4 p-2">
                     <h5 class="tabs-title "><i class="bi bi-pen-fill me-3"></i>3.Confirm Details</h5>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="background-color: #c3f1f5">
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-2">
@@ -43,7 +51,7 @@
                         <div class="col-lg-10 p-4">
                             <div class="ticket-details">
                                 <div class="ticket-title">
-                                    <h4 class="primary-text fw-700">{{$events->title}}</h4>
+                                    <h4 class="secondary-text fw-700">{{$events->title}}</h4>
                                 </div>
                                 <div class="ticket-subtitle">
                                     <p class="fw-600 p-0 m-0">{{$events->vTitle}}</p>
@@ -74,8 +82,7 @@
                                 <p class="primary-text">
                                     <i class="bi bi-info-circle-fill me-2"></i>
                                     Select a quantity to quickly find the best tickets available for the number of
-                                    people attending the event. There may be fewer tickets remaining for the quantity
-                                    you select.
+                                    people attending the event.
                                 </p>
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-2">
@@ -136,10 +143,9 @@
                                 </form>
                             </div> --}}
                         </div>
-                        <form method="get" id="qty-form">
+                        {{-- <form method="get" id="qty-form">
                             <div class="row">
 
-                                {{-- @csrf --}}
                                 <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif">
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" name="search_text"  placeholder="Search Event Name" value="@if(request()->get('search_text')) <?= request()->get('search_text')?> @endif"/>
@@ -153,12 +159,12 @@
                                     </select>
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="submit" value="Search" class="btn btn-primary"/>
+                                    <input type="submit" value="Search" class="btn btn primary-btn w-100"/>
                                 </div>
 
 
                             </div>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
 
@@ -168,54 +174,21 @@
     <!-- stadium map section starts here  -->
     <section class="section-four">
         <div class="container my-4">
+                <div class="row ">
+                    {{-- <div class="col-md-5">
+                            <h4 class="tabs-title tabs-active  text-center p-3">VENUE MAP</h4>
+                    </div>
+                    <div class="col-md-7">
+                        <h4 class="tabs-title tabs-active text-center p-3">Browse Tickets</h4>
+                </div> --}}
+            </div>
             <div class="row">
-                <div class="col-md-5 col-lg-5">
+                <div class="col-lg-5">
                     <div class="card mb-3 shadow-sm br-10">
                         <div class="card-body shadow-sm">
                             <img src="{{ asset('uploads/venues').'/'.$events->vImage }}" class="img-fluid" alt="">
                         </div>
                     </div>
-                    {{-- <div class="card mb-3 p-3 br-10">
-                        <h4>WHERE WOULD YOU LIKE TO BE?</h4>
-                        <div class="form">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Diamond Club
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Dugout Diamond
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Field Level
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Field Level Baseline
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Field Level Outfield
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Hall of Fame Club
-                                </label>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
@@ -231,7 +204,8 @@
                     <div class="card mb-3 p-2 br-10 shadow-sm ticket-cards">
                         <div class="row">
                             <div class="col-md-2 col-lg-2">
-                                <img src="/uploads/events/thumbnail/{{$ticket->event->thumbnail}}" class="img-fluid" alt="">
+                                {{-- <img src="/uploads/events/thumbnail/{{$ticket->event->thumbnail}}" class="img-fluid" alt=""> --}}
+                                <img src="{{asset('assets/images/t1.webp')}}" height="100px" width="100px" alt="">
                             </div>
                             <div class="col-md-7 col-lg-8">
                                 <div class="ticket-title">
@@ -246,7 +220,7 @@
                                 <div class="ticket-action-btns">
                                     <p class="m-0">${{$ticket->price}}</p>
                                     <p class="">per ticket</p>
-                                    <a class="btn btn-sm success-btn w-100" href="@if($ticket->quantity > 0){{ route('buyer.ticket.checkout',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif @if($ticket->quantity == 0)javascript:void(0) @endif">Select</a>
+                                    <a class="btn btn primary-btn w-100" href="@if($ticket->quantity > 0){{ route('buyer.ticket.checkout',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif @if($ticket->quantity == 0)javascript:void(0) @endif">Select</a>
                                 </div>
                             </div>
                         </div>
@@ -282,10 +256,14 @@
         </div>
     </section>
     @include("auth.partials.footer")
-
-    <!-- Optional JavaScript; choose one of the two! -->
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="../../js/bootstrap.min.js"></script>
+    <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>
+    <script src="{{asset('newAssets/assets/js/owl-carousel.js')}}"></script>
+    <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
+    <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
+    <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 

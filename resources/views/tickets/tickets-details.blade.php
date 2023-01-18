@@ -1,25 +1,48 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <!-- Required meta tags -->
+  <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+    <!-- Bootstrap core CSS -->
+    <link href="{{asset('newAssets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    {{-- <link rel="stylesheet" href="{{ asset('assets/styles/index.css') }}" /> --}}
     <link rel="stylesheet" href="{{asset('assets/styles/common.css')}}">
     <link rel="stylesheet" href="{{asset('assets/styles/sellticket.css')}}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <title>Sell Tickets - LAST CHANCE TICKET</title>
 </head>
 
 <body>
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+          <span class="dot"></span>
+          <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
     @include("auth.partials.darkheader")
-    <section class="section-two">
+    <section class="section-two reservation-form-sell" style="margin-top: 100px">
         <div class="container my-4">
             <div class="row">
                 <div class="col-lg-9">
-                    <form action="{{route('seller.ticketlisting.store',$EventListing->id)}}" method="post">
+                    <form action="{{route('seller.ticketlisting.store',$EventListing->id)}}" method="post" id="reservation-form">
                     @csrf
                         <!-- alert start here -->
                         <div class="alert alert-primary d-flex align-items-center" role="alert">
@@ -27,15 +50,16 @@
                             <div>You can edit your ticket details and price later</div>
                         </div>
                         <!-- cards-row starts here  -->
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-lg-12">
-                                <h4 class="fw-700">Choose Ticket Type</h4>
-                                <input type="hidden" id="ticket-type" name="ticket_type" value="paper-ticket" />
+                                <h4 class="fw-700 mb-2">Choose Ticket Type</h4>
+                                <input  type="hidden" id="ticket-type" name="ticket_type" value="paper-ticket" />
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4"  id="tp">
                                         <div class="card shadow-sm mb-3 select-card select-active" data-ticket="paper-ticket">
                                             <div class="card-body py-5">
                                                 <div class="card-subtitle">
+                                                    {{-- <input style="border:none" type="text" id="test" value="Paper Ticket"> --}}
                                                     <strong> Paper Tickets</strong>
                                                 </div>
                                                 <div class="card-description">Printed tickets, not in E-format
@@ -44,7 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm mb-3 select-card" data-ticket="e-ticket">
+                                        <div id="ticket_type" class="card shadow-sm mb-3 select-card" data-ticket="e-ticket">
                                             <div class="card-body py-5">
                                                 <div class="card-subtitle">
                                                     <strong>E-Tickets</strong>
@@ -56,7 +80,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm mb-3 select-card" data-ticket="mobile-ticket">
+                                        <div id="ticket_type" class="card shadow-sm mb-3 select-card" data-ticket="mobile-ticket">
                                             <div class="card-body py-5">
                                                 <div class="card-subtitle">
                                                     <strong>Mobile Ticket</strong>
@@ -84,52 +108,53 @@
                                         <div class="col-sm-3 col-md-3 col-lg-2">
                                             <div class="card mb-3">
                                                 <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="1">
-                                                    <h4>1</h4>
+                                                    <h5>1</h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3 col-lg-2">
                                             <div class="card mb-3">
                                                 <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="2">
-                                                    <h4>2</h4>
+                                                    <h5>2</h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3 col-lg-2">
                                             <div class="card mb-3">
                                                 <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="3">
-                                                    <h4>3</h4>
+                                                    <h5>3</h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3 col-lg-2">
                                             <div class="card mb-3">
                                                 <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="4">
-                                                    <h4>4</h4>
+                                                    <h5>4</h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3 col-lg-2">
                                             <div class="card mb-3">
                                                 <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="5">
-                                                    <h4>5</h4>
+                                                    <h5>5</h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3 col-lg-2">
                                             <div class="card mb-3">
                                                 <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="6">
-                                                    <h4>6+</h4>
+                                                    <h5>6+</h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-12" id="ticket-more-6" style="display:none">
-                                            <input type="text" class="form-control" id="total-tickets" placeholder="Total Tickets" name="total_tickets">
+                                            <input  type="text" class="form-control inputstyle" id="total-tickets" placeholder="Total Tickets" name="total_tickets">
                                             <small class="text-muted">Total tickets</small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                          
                             <div class="col-lg-12">
                                 <h4 class="fw-700"> Enter Seating Details</h4>
                                 <div class="card p-4 mb-3 shadow-sm main-card br-10">
@@ -183,33 +208,31 @@
                                                     <label for="seats">Seats</label>
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control" placeholder="From" name="seat_from">
-                                                            <small class="text-muted">First seat</small>
+                                                            <input  type="text" class="form-control inputstyle" placeholder="From First seat" name="seat_from">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control" placeholder="To" name="seat_to">
-                                                            <small class="text-muted">last seat</small>
+                                                            <input  type="text" class="form-control inputstyle" placeholder="To Last seat" name="seat_to">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <label for="">If you are unable to provide seating information please
                                                         select a reason why:</label>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
+                                                        <input  class="form-check-input" type="radio"
                                                             id="flexRadioDefault1" name="reason_seating_unable" value="The primary site has not provided me with this information">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             The primary site has not provided me with this information
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
+                                                        <input  class="form-check-input" type="radio"
                                                             id="flexRadioDefault2" name="reason_seating_unable" value="other" checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
                                                             Other
                                                         </label>
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                             </div>
                                         </div>
@@ -238,14 +261,13 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group mt-3">
-                                                    <label for="">Amount per ticket</label>
+                                                    <label for="" class="mb-3">Amount per ticket</label>
                                                     <div class="input-group mb-3">
-
-                                                        <span class="input-group-text">$</span>
-                                                        <input type="text" class="form-control"
+                                                        {{-- <span class="input-group-text">$</span> --}}
+                                                        <input  type="text" class="form-control inputstyle"
                                                             aria-label="Amount (to the nearest dollar)"
-                                                            name="price" value="{{-- {{$tickets->price}} --}}">
-                                                        <span class="input-group-text">.00</span>
+                                                            name="price" value="$ ">
+                                                        {{-- <span class="input-group-text">.00</span> --}}
                                                     </div>
                                                 </div>
 
@@ -254,68 +276,6 @@
                                 </div>
 
                             </div>
-                            <!-- <div class="col-lg-12">
-                                <h4 class="fw-700">Choose Ticket Type</h4>
-                                <div class="card p-4 main-card mb-3 br-10">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p><i class="bi bi-info-circle-fill me-2"></i>
-                                                If you work for viagogo, or are the organiser of this event, you are
-                                                required by section 90(6) <br>of the Consumer Rights Act to select it below:
-                                            </p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mb-3 about-card">
-                                                <div class="card-body">
-                                                    <h5>Neither of These</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mb-3 about-card">
-                                                <div class="card-body">
-                                                    <h5>Event Organiser</h5>
-                                                    <p>You are responsible for organising or managing the event, or receive
-                                                        some or all of the revenue from the event, or a person who is acting
-                                                        on behalf of one of the above</p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mb-3 about-card">
-                                                <div class="card-body">
-                                                    <h5>You are an operator of <br> Last-chance-ticket</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mb-3 about-card">
-                                                <div class="card-body">
-                                                    <p>You are a parent undertaking or a subsidiary undertaking in relation
-                                                        to an operator of Last-chance-ticket</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mb-3 about-card">
-                                                <div class="card-body">
-                                                    <p>You are employed or engaged by Last-chance-ticket</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mb-3 about-card">
-                                                <div class="card-body">
-                                                    <p>You are acting on behalf of a person who is employed or engaged by
-                                                        Last-chance-ticket</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div> -->
                             <div class="col-lg-12">
                                 <h4 class="fw-700">Select Restrictions on Use</h4>
                                 <div class="card p-4 main-card mb-3 br-10">
@@ -331,282 +291,20 @@
 
                                                 <div class="form-group">
                                                     <div class="mb-3 form-check">
-                                                        <input type="checkbox" class="form-check-input" name="ticket_restrictions" value="No Restrictions">
+                                                        <input   type="checkbox" class="form-check-input checkboxs" name="ticket_restrictions" value="No Restrictions">
                                                         <label class="form-check-label" for="exampleCheck1">No
-                                                            Restrictions</label>
+                                                            Restrictions </label>
                                                     </div>
                                                 </div>
-                                                <!-- <h6>Or</h6> -->
-                                                <!-- <div class="row">
-                                                    <div class="col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label"
-                                                                    for="exampleCheck1">Concession ticket - child</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label"
-                                                                    for="exampleCheck1">Wheelchair user only</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Under 18
-                                                                    Ticket</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Original
-                                                                    Purchaser's ID must be shown</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label"
-                                                                    for="exampleCheck1">Concession ticket - student</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Under 21
-                                                                    Ticket</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Over 18
-                                                                    Ticket</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Meetup
-                                                                    with Seller</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Under
-                                                                    15s accompanied by an adult</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label"
-                                                                    for="exampleCheck1">Concession ticket - senior
-                                                                    citizen</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">21 and
-                                                                    over Ticket</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">No Under
-                                                                    14s</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Resale
-                                                                    not allowed</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+                                           
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-lg-12">
-                                <h4 class="fw-700">Select Required Ticket Details</h4>
-                                <div class="card p-4 main-card mb-3 br-10">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <p><i class="bi bi-info-circle-fill me-2"></i>
-                                                If any of the following conditions apply to your tickets, you must select
-                                                the corresponding options below
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <form action="">
-                                                <div class="row">
-                                                    <div class="col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1"> Limited
-                                                                    or restricted view</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">
-                                                                    Includes VIP pass</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1"> Alcohol
-                                                                    free area</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Access
-                                                                    to VIP Lounge</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Ticket
-                                                                    and meal package</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Includes
-                                                                    parking</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Standing
-                                                                    Only</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1"> Aisle
-                                                                    seat</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label" for="exampleCheck1">Side or
-                                                                    rear view</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="mb-3 form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="exampleCheck1">
-                                                                <label class="form-check-label"
-                                                                    for="exampleCheck1">Restricted legroom</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div> -->
-                            <!-- <div class="col-lg-12">
-                                <h4 class="fw-700">Selling to people in the United Kingdom or Europe?</h4>
-                                <div class="card p-4 main-card mb-3 br-10">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <p><i class="bi bi-info-circle-fill me-2"></i>
-                                                In order to sell to customer in the United Kingdom or Europe you must select
-                                                if any of the below apply to you:
-                                            </p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mb-3 about-card">
-                                                <div class="card-body">
-                                                    <p>Normal Seller</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mb-3 about-card">
-                                                <div class="card-body">
-                                                    <p><strong>Trader</strong>
-                                                        You sell tickets through a registered company, you are a sole
-                                                        trader, you have a VAT number or you pay people to sell tickets on
-                                                        your behalf
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mb-3 about-card">
-                                                <div class="card-body">
-                                                    <p><strong>I prefer not to provide this information</strong>
-                                                        Your listings will not be purchasable by UK buyers</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div> -->
                             <div class="col-lg-12">
                                 <button class="btn primary-btn w-100 fw-700" type="submit">Continue</button>
                             </div>
-                            {{-- <div class="container mt-3">
-                                <a class="btn primary-btn w-100 fw-700" href="{{route('seller.ticket_price.index',$tickets->id)}}">View Details</a>
-                            </div> --}}
                         </div>
                     </form>
                 </div>
@@ -615,17 +313,27 @@
                     <div class="card shadow-sm mb-3 type-card main-card br-10">
                         <div class="card-body">
                             <div class="card-title">
-                                {{-- <h4>{{$ticketListing->title}}</h4> --}}
-                                <h4>Ticket Detail</h4>
+                               
+                                <h4 class="mb-2">Ticket Detail</h4>
+                                <h5>{{$EventListing->event_name}}</h5>
                             </div>
                             <p>
-                                {{-- <strong>{{$tickets->event->start_time}}</strong><br>
-                                <strong>{{$tickets->event->start_date}}</strong><br> --}}
-                                Singapore National Stadium, Singapore, Singapore
+                                <strong>{{$EventListing->start_time}} AM - {{$EventListing->end_time}} PM</strong><br>
+                                <strong>{{$EventListing->event_date}}</strong><br>
+                                <strong>{{$EventListing->venue_name}}</strong><br>
                             </p>
-                            <p class="ticket-type p-1 rounded-3">
-                                <strong>Ticket Type: </strong>Paper Tickets
+                            <p class="p_type p-1 rounded-3">
+
+                                {{-- <script>show()</script> --}}
+
                             </p>
+                            <script>
+                                    $(document).ready(function(){
+                                        $("#tp").click(function(){
+                                            $('.p_type').html("<strong >Ticket Type: </strong>");
+                                        });
+                                    });
+                            </script>
                         </div>
                     </div>
                     <div class="card shadow-sm mb-3 card-success br-10">
@@ -644,8 +352,18 @@
 
     <!-- Optional JavaScript; choose one of the two! -->
     @include("auth.partials.footer")
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="../../js/bootstrap.min.js"></script>
+           <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+  <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/owl-carousel.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
+
+
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -676,10 +394,6 @@
             });
         });
     </script>
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
 </body>
 
 </html>

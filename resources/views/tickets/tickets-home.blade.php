@@ -1,32 +1,63 @@
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/styles/common.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/styles/sellticket.css')}}">
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
-        />
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+    <!-- Bootstrap core CSS -->
+    <link href="{{asset('newAssets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    {{-- <link rel="stylesheet" href="{{ asset('assets/styles/index.css') }}" /> --}}
+    <link rel="stylesheet" href="{{ asset('assets/styles/common.css') }}" />
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
         <title>Sell Tickets</title>
     </head>
 
     <body>
+        <div id="js-preloader" class="js-preloader">
+            <div class="preloader-inner">
+              <span class="dot"></span>
+              <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
         @include("auth.partials.darkheader")
-
-        <section class="section-two primary-bg p-sm-5 p-2">
-            <div class="container">
+        <div class="call-to-action" style="margin-top: 75px">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12 p-5 text-center mt-5">
+                <h2> Sell your tickets on Last Chance Ticket</h2>
+                <h4>  Reach millions of buyers around the world
+                  through the world's largest ticket marketplace</h4>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+        {{-- <section class="section-two primary-bg p-sm-5 p-2" style="margin-top: 80px; height:250px">
+            <div class="container" style="margin-top: 60px">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center text-light">
-                            <h1 class="fw-700">
+                            <h1 class="fw-700 text-light">
                                 Sell your tickets on Last Chance Ticket
                             </h1>
-                            <p>
+                            <p class="text-dark">
                                 Reach millions of buyers around the world
                                 through the world's largest ticket marketplace
                             </p>
@@ -34,157 +65,103 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="section-three">
-            <div class="container">
-                <div class="row my-3">
-                    <div class="col-lg-12">
-                        <h3 class="text-center m-3">
-                            @foreach($events as $event)
-                            {{$event->title}}
-                            @endforeach
-                        </h3>
-                    </div>
-                    <div class="col-lg-12">
-                        <div
-                            class="alert alert-primary d-flex align-items-center"
-                            role="alert"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                fill="currentColor"
-                                class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"
-                                viewBox="0 0 16 16"
-                                role="img"
-                                aria-label="Warning:"
-                            >
-                                <path
-                                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-                                />
-                            </svg>
-
-                            <div>
-                                You do not need to have received your tickets
-                                yet in order to sell them on LCT!
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h3>International Events</h3>
-                            </div>
-                            @foreach($eventListings as $eventListing)
-                            <div
-                                class="card-body"
-                                style="border-bottom: 3px solid #61c3e3"
-                            >
-                                <div class="row">
-                                    <div class="col-md-2 col-lg-2">
-                                       <b>
-                                        <p>
-                                            <br />
-                                            {{$eventListing->start_time}} - {{$eventListing->end_time}}<br />
-                                            <hr />
-                                            {{$eventListing->event_date}} <br />
-
-                                        </p>
-                                       </b>
-                                    </div>
-                                    <div class="col-md-10 col-lg-10">
-                                        <div
-                                            class="card-content d-md-flex justify-content-between"
-                                        >
-                                            <div class="card-des">
-                                                <h5>{{$eventListing->event_name}}</h5>
-                                                <p>
-                                                    Location : {{$eventListing->location}}
-                                                    <br>
-
-                                                </p>
-                                                <div
-                                                    class="alert alert-danger"
-                                                    role="alert"
-                                                >
-                                                    <strong
-                                                        >Only
-                                                        {{-- {{$eventListing->quantity}} --}}
-                                                        available
-                                                        tickets.</strong
-                                                    >
-                                                    Creating a listing now will
-                                                    increase the chances of your
-                                                    tickets selling.
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="card-action d-flex flex-column text-end pt-5"
-                                            >
-                                                {{-- <span>From</span> --}}
-                                                {{-- <span>${{$ticket->price}}</span> --}}
-
-                                                <a href="{{route('seller.ticket.index',$eventListing->id)}}" class="btn primary-btn"> Sell Tickets</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                            <!-- <div class="card-body" style="border-bottom: 3px solid #61c3e3;">
-                            <div class="row">
-                                <div class="col-md-2 col-lg-2">
-                                    <p>Mon <br> 8 Nov 2022 <br> 20:00</p>
-                                </div>
-                                <div class="col-md-10 col-lg-10">
-                                    <div class="card-content d-md-flex justify-content-between">
-                                        <div class="card-des">
-                                            <h5>Bad Bunny</h5>
-                                            <p> Singapore National Stadium Singapore, Singapore</p>
-                                        </div>
-                                        <div class="card-action d-flex flex-column text-end">
-                                            <span>From</span>
-                                            <span>$200.00</span>
-                                            <a class="btn primary-btn" href="{{URL("Sell-tickets/tickets-details")}}">Sell Tickets</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body" style="border-bottom: 3px solid #61c3e3;">
-                            <div class="row">
-                                <div class="col-md-2 col-lg-2">
-                                    <p>Mon <br> 8 Nov 2022 <br> 20:00</p>
-                                </div>
-                                <div class="col-md-10 col-lg-10">
-                                    <div class="card-content d-md-flex justify-content-between">
-                                        <div class="card-des">
-                                            <h5>Bad Bunny</h5>
-                                            <p> Singapore National Stadium Singapore, Singapore</p>
-                                        </div>
-                                        <div class="card-action d-flex flex-column text-end">
-                                            <span>From</span>
-                                            <span>$200.00</span>
-                                            <a class="btn primary-btn" href="{{URL("Sell-tickets/tickets-details")}}">Sell Tickets</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        </div>
-                    </div>
+        </section> --}}
+        <div class="weekly-offers">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 offset-lg-3">
+                <div class="section-heading text-center">
+                  <h1>Event
+                      @foreach($events as $event)
+                      {{$event->title}}
+                      @endforeach
+                  </h1>
+                  <p>Hurray! You are in the right place. 100% customer satisfaction. We value every single customers. We guarantee your entry. Secured payout.</p>
                 </div>
+              </div>
             </div>
-        </section>
-
+          </div>
+          <div class="container">
+            <div class="row ">
+              <div class="col-12 ">
+                <div class="alert alert-primary "  role="alert" >
+                  <p class="text-dark">
+                   <strong>Only
+                     {{-- {{$eventListing->quantity}} --}}
+                     available
+                     tickets.
+                   </strong>
+                   Creating a listing now will
+                   increase the chances of your
+                   tickets selling.
+                  </p>
+               </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="owl-weekly-offers owl-carousel">
+                  @foreach($eventListings as $eventListing)
+                  <div class="item">
+                    <div class="thumb">
+                      <img src="{{asset('assets/images/1673434292_cricket2.png')}}" alt="">
+                      <div class="text">
+                        <h4>{{$eventListing->event_name}}<br><span><i class="fa fa-volleyball"></i> {{$eventListing->category_event}}</span></h4>
+                        <h6>LCT<br><span style="font-size: 10px">Last Chance Ticket</span></h6>
+                        <div class="line-dec"></div>
+                        
+                        <ul style="font-size: 25px">
+                          <li>Details:</li>
+                          <li><i class="fa fa-clock"></i>   {{$eventListing->start_time}} AM - {{$eventListing->end_time}} PM</li>
+                          <li><i class="fa fa-globe"></i>  {{$eventListing->event_date}}</li>
+                          <li><i class="fa fa-location"></i> {{$eventListing->location}}</li>
+                        </ul>
+                        <div class="main-button" style="padding-top: 30px">
+                          <a href="{{route('seller.ticket.index',$eventListing->id)}}" class="btn primary-btn"> Sell Tickets Here</a>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+          
+       
         <!-- Optional JavaScript; choose one of the two! -->
         @include("auth.partials.footer")
-        <!-- Option 1: Bootstrap Bundle with Popper -->
-        <script src="../../js/bootstrap.min.js"></script>
-        <!-- Option 2: Separate Popper and Bootstrap JS -->
-        <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    --></body>
+          <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+  <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/owl-carousel.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
+  <script>
+    $(".option").click(function(){
+      $(".option").removeClass("active");
+      $(this).addClass("active"); 
+    });
+  </script>
+  <script>
+    function bannerSwitcher() {
+      next = $('.sec-1-input').filter(':checked').next('.sec-1-input');
+      if (next.length) next.prop('checked', true);
+      else $('.sec-1-input').first().prop('checked', true);
+    }
+
+    var bannerTimer = setInterval(bannerSwitcher, 10000);
+
+    $('nav .controls label').click(function() {
+      clearInterval(bannerTimer);
+      bannerTimer = setInterval(bannerSwitcher, 10000)
+    });
+  </script>    
+    </body>
 </html>

@@ -99,11 +99,11 @@
                             <th scope="col">Slug</th>
                             <th scope="col">Seated</th>
                             <th scope="col">Standing</th>
-                            <th scope="col">Address</th>
+                            {{-- <th scope="col">Address</th> --}}
                             <th scope="col">City</th>
                             <th scope="col">Country</th>
-                            <th scope="col">State</th>
-                            <th scope="col">Zip Code</th>
+                            {{-- <th scope="col">State</th>
+                            <th scope="col">Zip Code</th> --}}
                             {{-- <th scope="col">G.LAT</th>
                             <th scope="col">G.Long</th> --}}
                             <th scope="col">Image</th>
@@ -122,17 +122,17 @@
                             <td>{{$venue->slug}}</td>
                             <td>{{$venue->seated_guestnumber}}</td>
                             <td>{{$venue->standing_guestnumber}}</td>
-                            <td>{{$venue->address}}</td>
+                            {{-- <td>{{$venue->address}}</td> --}}
                             <td>{{$venue->city}}</td>
                            
                             <td>{{$venue->country_id}}</td>
-                            <td>{{$venue->state}}</td>
-                            <td>{{$venue->zipcode}}</td>
+                            {{-- <td>{{$venue->state}}</td>
+                            <td>{{$venue->zipcode}}</td> --}}
                             {{-- <td>{{$venue->glat}}</td> --}}
                             {{-- <td>{{$venue->glong}}</td> --}}
                             <td><img
                                 src="{{ asset('uploads/venues/' . $venue->image) }}"
-                                class="img-rounded height-30 width-30" /></td>
+                                class="img-rounded height-80 width-100" /></td>
                             {{-- <td>{{$venue->status}}</td> --}}
                             <td>
                                 {{-- <a

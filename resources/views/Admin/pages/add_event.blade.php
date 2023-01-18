@@ -195,11 +195,10 @@
                                             <label class="col-lg-3 text-lg-right col-form-label">Description<span
                                                     class="text-danger">*</span></label>
                                         </div>
-                                        <div class="col panel panel-inverse">
+                                        <div class="">
                                             <div class="panel-body panel-form">
-                                                <textarea data-parsley-group="step-1" data-parsley-required="true" class="ckeditor" id="editor1"
-                                                    name="description" rows="20">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
-                                            </div>
+                                                <textarea class="border-none" name="description" id="" cols="80" rows="10"></textarea>
+                                               </div>
                                         </div>
                                         <!-- end form-group -->
                                     </div>

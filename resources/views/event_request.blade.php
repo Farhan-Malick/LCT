@@ -1,155 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
 
-        <link rel="stylesheet" href="{{ asset('assets/styles/index.css') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/styles/common.css') }}" />
-        <!-- Bootstrap icons CDN -->
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
-        />
-        <title>Last Chance Ticket - Event</title>
-    </head>
+  <head>
 
-    <body>
-        <section class="section-one">
-            <div class="banner">
-            <div class="header">
-                    <nav class="navbar navbar-expand-sm navbar-DARK shadow-lg">
-                        <div class="container">
-                            <div class="logo">
-                                    {{-- <a class="navbar-brand" href="{{ URL("/") }}" style="color: skyblue; font-size:25px; text-decoration:none">Last Chance Ticket</a> --}}
-                                   <a href="{{ URL("/") }}"> <img src="{{asset('assets/images/logodark2.jpg')}}" height="40" width="250" alt=""></a>
-                            </div>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div
-                                class="collapse navbar-collapse"
-                                id="navbarSupportedContent"
-                            >
-                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                                    <li class="nav-item active">
-                                        <a
-                                            class="nav-link"
-                                            href="{{ route('request.show') }}"
-                                            >Request Event</a
-                                        >
-                                    </li>
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="#">US$</a>
-                                    </li>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-                                    @auth
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            My Account
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item" href="{{ URL('/dashboard') }}">My Dashboard</a></li>
-                                            <li><a class="dropdown-item" href="{{ URL('/dashboard/orders') }}">My Order</a></li>
-                                            <li><a class="dropdown-item" href="{{ URL('/dashboard/listings') }}">My Listings</a></li>
-                                            <li><a class="dropdown-item" href="{{ URL('/dashboard/settings') }}">Settings</a></li>
-                                            <li class="nav-item">
-                                                <form
-                                                    action="{{ route('logout') }}"
-                                                    method="POST"
-                                                >
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-link">Logout</button>
-                                                   
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    
-                                    @endauth @guest
-                                    <li class="nav-item">
-                                        <a
-                                             class="nav-link"
-                                            href="{{ route('login') }}"
-                                            >Login</a
-                                        >
-                                    </li>
-                                    @endguest
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"
-                                            >Help Center</a
-                                        >
-                                    </li>
-                                    <li class="nav-item">
-                                        <a
-                                            class="nav-link btn btn-sm primary-btn px-3"
-                                            href="{{ URL('Sell-tickets') }}"
-                                            >Sell Tickets</a
-                                        >
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Last Chance Ticket - Event Request</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{asset('newAssets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{ asset('assets/styles/index.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/styles/common.css') }}" />
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  @include("auth.partials.newHeader")
+  <!-- ***** Header Area End ***** -->
+
+  <div class="second-page-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h4>LAST CHANCE TICKET</h4>
+          <h2>Create Your Event Request</h2>
+          <p> Here is the last chance to be the member of world largest marketplace for tickets to live events.
+            Prices are set by sellers and may be below or above face value.</p>
+          <div class="main-button"><a href="#">Discover More</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="more-info reservation-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-phone"></i>
+            <h4>Make a Phone Call</h4>
+            <a href="#">+123 456 789 (0)</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-envelope"></i>
+            <h4>Contact Us via Email</h4>
+            <a href="#">company@email.com</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-map-marker"></i>
+            <h4>Visit Our Offices</h4>
+            <a href="#">24th Street North Avenue London, UK</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reservation-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            @if ($message = Session::get('msg'))
+            <div class="alert alert-success">
+                <center><strong>{{ $message }}</strong></center>
             </div>
-            <div class="container-fluid pt-5">
-                    <div class="row text-light banner-btns">
-                        <div class="col-lg-10 offset-lg-1">
-                            <div class="col-lg-12">
-                                <h6>
-                                    Here is the last chance to be the member of world largest marketplace for tickets to live events.
-                                    Prices are set by sellers and may be <center> below or above face value.</center>
-                                </h6>
-                            </div>
-                           <div class="row">
-                            <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="btn btn-sm btn-danger w-100">Concerts Tickets</a>
-                            </div>
-                            <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="d-block btn btn-sm btn-success w-100">Sports Tickets</a>
-                            </div>
-                            <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="btn btn-sm btn-warning w-100">Theater Tickets</a>
-                            </div>
-                            <div class="col-sm-6 col-xl-3 my-3">
-                                <a href="{{ route("tickets") }}" class="btn btn-sm btn-primary w-100">Festival Tickets</a>
-                            </div>
-                            <div class="col-lg-12 my-4">
-                                <marquee behavior="" direction="">
-                                    <h5>Hurray! You are in the right place. 100% customer satisfaction. We value every single customers. We guarantee your entry. Secured payout.</h5>
-                                </marquee>
-                                <form action="" class="form-inline">
-                                    <div class="input-group w-100">
-                                        <input type="search" class="form-control form-control-lg"
-                                            placeholder="Search for and event, venue or city">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-lg search-btn px-3" type="button">
-                                                <i class="bi bi-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                           </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="container m-5 ">
-          <div class="row">
-          
-            <div class="col-md-6">
-                @if ($message = Session::get('msg'))
-                <div class="alert alert-success">
-                    <center><strong>{{ $message }}</strong></center>
-                </div>
             @endif
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
@@ -161,21 +103,16 @@
                     </ul>
                 </div>
             @endif
-                <h1 style=" margin: 0px;
-                position: relative;
-                top: 50%;
-                transform: translate(0,-50%);
-                text-align: center;">
-                    Request Your Event
-                </h1>
-            </div>
-            <div class="col-md-6">
-                <form method="post" action="{{ route('request.event') }}">
-                    @csrf
-                    <div class="form-group mb-3">
-                        <H3>LAST CHANCE TICKET EVENT FORM</H3>
-                        <hr>
-                        <label for="InputEvent">Title</label>
+            <form method="post" action="{{ route('request.event') }}" id="reservation-form">
+                @csrf
+          {{-- <form id="reservation-form" name="gs" method="submit" role="search" action="#"> --}}
+            <div class="row">
+              <div class="col-lg-12">
+                <h4>Create Your <em>Event Request</em> Through This <em>Form</em></h4>
+              </div>
+              <div class="col-lg-6">
+                    <fieldset>
+                        <label class="text-dark" for="InputEvent">Title</label>
                         <input
                             type="text"
                             class="form-control"
@@ -183,80 +120,109 @@
                             aria-describedby="emailHelp"
                             placeholder="Enter Event Title Here"
                         />
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="InputCategory">Event Category</label>
+                    </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                    <label class="text-dark" for="InputCategory">Event Category</label>
                         <input
                             type="text"
                             class="form-control"
                             name="event_category"
                             placeholder="Event Category"
                         />
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="InputDate">Event Date</label>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                  <fieldset>
+                    <label class="text-dark" for="InputVenue">Veunue Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="venue_name"
+                        placeholder="Veunue Name"
+                    />
+                  </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                    <label class="text-dark" for="InputDate">Event Date</label>
                         <input
                             type="date"
                             class="form-control"
                             name="event_date"
                             placeholder="Event Date"
                         />
-                    </div>
-                    <div class="row">
-                        <div class="form-group mb-3 col-6">
-                            <label for="InputDate">Start Time</label>
-                            <input
-                                type="time"
-                                class="form-control"
-                                name="start_time"
-                                placeholder="Event Time"
-                            />
-                        </div>
-                        <div class="form-group mb-3 col-6">
-                            <label for="InputTime">End Time</label>
-                            <input
-                                type="time"
-                                class="form-control"
-                                name="end_time"
-                                placeholder="Event Time"
-                            />
-                        </div>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="InputVenue">Veunue Name</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="venue_name"
-                            placeholder="Veunue Name"
-                        />
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="InputLocation">Location</label>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                  <fieldset>
+                    <label class="text-dark" for="InputDate">Start Time</label>
+                    <input
+                        type="time"
+                        class="form-control"
+                        name="start_time"
+                        placeholder="Event Time"
+                    />
+                  </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                    <label class="text-dark" for="InputTime">End Time</label>
+                    <input
+                        type="time"
+                        class="form-control"
+                        name="end_time"
+                        placeholder="Event Time"
+                    />
+                </fieldset>
+            </div>
+            <div class="col-lg-12">
+                <fieldset>
+                    <label class="text-dark" for="InputLocation">Location</label>
                         <input
                             type="text"
                             class="form-control"
                             name="location"
                             placeholder="Event Location"
                         />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Request</button>
-                </form>
+                </fieldset>
             </div>
-          </div>
+              <div class="col-lg-12">                        
+                  <fieldset>
+                      <button type="submit" class="main-button">Create Your Event Request Now</button>
+                  </fieldset>
+              </div>
+            </div>
+          </form>
         </div>
-        @include("auth.partials.footer")
-        <!-- Optional JavaScript; choose one of the two! -->
+      </div>
+    </div>
+  </div>
 
-        <!-- Option 1: Bootstrap Bundle with Popper -->
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <!-- Option 2: Separate Popper and Bootstrap JS -->
-        <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-    </script>
-    --></body>
+ @include("auth.partials.footer")
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+
+  <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/owl-carousel.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/wow.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
+  <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
+
+  <script>
+    $(".option").click(function(){
+      $(".option").removeClass("active");
+      $(this).addClass("active"); 
+    });
+  </script>
+
+  </body>
+
 </html>

@@ -439,7 +439,7 @@
                                 <div class="col-lg-9 col-xl-6">
                                     <img class=""
                                     src="{{ asset('uploads/venues/'.$venues->image) }}"
-                                    width="80px" alt="" height="35px">
+                                    width="100%" alt="" height="400px">
 
                                 <div class="custom-file">
                                     <input type="file" name="image" class="custom-file-input"

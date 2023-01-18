@@ -1,89 +1,142 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}">
+  <head>
 
-    <link rel="stylesheet" href="{{ asset("assets/styles/login.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/styles/common.css") }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+    <title>LCT - Last Chance Ticket</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{asset('newAssets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{ asset('assets/styles/index.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/styles/login.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/styles/common.css') }}" />
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    
     <!-- Bootstrap icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>Last Chance Ticket - login</title>
+
 </head>
 
 <body>
-    @include("auth.partials.header")
-    <section class="section-two">
-        <div class="container">
-            <div class="row my-5">
-                <div class="col-md-6 offset-md-3">
-                    <div class="card p-3 shadow-sm">
-                        <h4 class="text-center text-secondary">Existing Customers</h4>
-                        <form action="{{ route("login") }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" placeholder="email@example.com" class="form-control" name="email">
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    <div class="" style="">
+        @include("auth.partials.darkheader")
+    </div>
+
+  <div class="container " >
+    <section class="vh-100"style="margin-bottom: 150px" >
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="{{asset('assets/images/img1.webp')}}"
+                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form action="{{ route("login") }}" method="POST">
+                  @csrf
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <i class="fas fa-cubes fa-2x me-3" style="color: #22b3c1;"></i>
+                    <span class="h1 fw-bold mb-0">Last Chance Ticket</span>
+                  </div>
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+
+                  <div class="form-outline mb-4">
+                    {{-- <input type="email" id="form2Example17" class="form-control form-control-lg" /> --}}
+                    <input type="email" id="email" placeholder="email@example.com" class="form-control form-control-lg" name="email">
                                 @error('email')
                                 <p style="color: red">{{ $message }}</p>
                                 @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" placeholder="password" class="form-control" name="password">
-                                @error('password')
-                                <p style="color: red">{{ $message }}</p>
-                                @enderror
-                                <small class="float-end primary-text my-2"> <a href="{{ route("password.request") }}">Forgot your Password?</a></small>
-                            </div>
-                            <button class="btn primary-btn w-100 mb-3" href="../dashboard/dashboard.html" type="submit">Login</button>
-                            <a class="btn btn-primary w-100 mb-3" href="{{ url('auth/facebook') }}">Login with
-                                facebook</a>
-                            <p class="text-center"><a href="{{ route("signup") }}">Don't have an account? Signup</a></p>
-                            <small>By signing in or creating an account, you acknowledge and accept our privacy
-                                policy</small>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-6 offset-md-3 my-3">
-                    <div class="card p-3 text-center shadow-sm">
-                        <p>Have an access code? <span class="primary-text">find you order</span></p>
-                    </div>
-                </div>
-                <div class="col-md-6 offset-md-3 my-3">
-                    <div class="card p-3 text-center shadow-sm">
-                        <h5 class="primary-text">Help signing in</h5>
-                        <p>
-                            If you can't remember the email you used, checked out as a guest or have forgotten your
-                            password, we can help!
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-6 offset-md-3 my-3">
-                    <div class="card p-3 text-center shadow-sm">
-                        <h5 class="primary-text">View FAQs</h5>
-                        <p>
-                            If you don't have an order or listing yet, the answer to your question may be found in our
-                            top FAQ's
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-6 offset-md-3 my-3">
-                    <div class="card p-3 text-center shadow-sm">
-                        <p class="primary-text">how do i contact last chance ticket?</p>
-                    </div>
-                </div>
+                    <label class="form-label" for="form2Example17">Email address</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    {{-- <input type="password" id="form2Example27" class="form-control form-control-lg" /> --}}
+                    
+                    <input type="password" id="password" placeholder="password" class="form-control form-control-lg" name="password">
+                    @error('password')
+                    <p style="color: red">{{ $message }}</p>
+                    @enderror
+                    <label class="form-label" for="form2Example27">Password</label>
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color: #22b3c1" type="button">Login</button>
+                  </div>
+
+                  <a class="small text-muted" href="#!">Forgot password?</a>
+                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="{{ route("signup") }}"
+                      style="color: #22b3c1;">Register here</a></p>
+                  <a href="#!" class="small text-muted">Terms of use.</a>
+                  <a href="#!" class="small text-muted">Privacy policy</a>
+                </form>
+
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-    <!-- Optional JavaScript; choose one of the two! -->
+      </div>
+    </div>
+  </div>
+</section>
+  </div>
     @include("auth.partials.footer")
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="{{ asset("js/bootstrap.min.js") }}"></script>
+
+    <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>
+    <script src="{{asset('newAssets/assets/js/owl-carousel.js')}}"></script>
+    <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
+    <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
+    <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
+  
+    <script>
+      function bannerSwitcher() {
+        next = $('.sec-1-input').filter(':checked').next('.sec-1-input');
+        if (next.length) next.prop('checked', true);
+        else $('.sec-1-input').first().prop('checked', true);
+      }
+  
+      var bannerTimer = setInterval(bannerSwitcher, 5000);
+  
+      $('nav .controls label').click(function() {
+        clearInterval(bannerTimer);
+        bannerTimer = setInterval(bannerSwitcher, 5000)
+      });
+    </script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

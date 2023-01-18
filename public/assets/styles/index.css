@@ -1,58 +1,4 @@
-/* section one start here  */
-.nav-item .nav-link{
-    text-decoration: none;
-    color: #fff;
-}
-.banner-search{
-    border-radius: 50px;
-}
-.search-btn{
-    background-color: #61c3e3;
-    color: #fff;
-}
-.banner{
-    background:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%),  url("../images/banner-3.jpg") no-repeat  center ;
-    background-size: cover;
-    height: 100%;
-    padding-bottom: 10%;
-}
-.banner-btns button{
-font-size: 20px;
-font-weight: 700
-}
 
-/* section two starts here  */
-.top-events a{
-    text-decoration: none;
-}
-.top-events .card{
-    padding-bottom: 20px;
-    border-radius: 8px;
-    height: 90%;
-    overflow: hidden;
-}
-.top-events .card:hover{
-    box-shadow: 0px 20px 40px rgba(0,0,0,0.4);
-    transform: scale(1.05,1.05);
-    transition: ease-in 0.5s;
-    cursor: pointer;
-}
-.top-events .card img{
-border-radius: 8px 8px 0px 0px;
-}
-.top-events .card-title{
-    font-size: 18px;
-    color: #61c3e3;
-    font-weight: 600;
-}
-.top-events .card-span {
-    font-size: 14px;
-    font-weight: 600;
-}
-.top-events .card-text{
-    font-size: 14px;
-    color: #000;
-}
 /* section three starts here  */
 .find-best{
     background-color:#61c3e3;
@@ -60,3 +6,4 @@ border-radius: 8px 8px 0px 0px;
 .modal-header{
     border-bottom: none;
 }
+/* ========================================= */

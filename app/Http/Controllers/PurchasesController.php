@@ -99,10 +99,11 @@ class PurchasesController extends Controller
 
     public function buyer_ticket_checkout( TicketListing $ticket, EventListing $event, $eventid, $ticketid, $sellerid){
 
-        $events = EventListing::select('event_listings.*', 'events.*')
-        ->join('events', 'events.id', '=', 'event_listings.event_id')
-        ->where('event_listings.id',$eventid)
-        ->first();
+        // $events = EventListing::select('event_listings.*', 'events.*')
+        // ->join('events', 'events.id', '=', 'event_listings.event_id')
+        // ->where('event_listings.id',$eventid)
+        // ->first();
+        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $eventid)->first();
 
         $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')

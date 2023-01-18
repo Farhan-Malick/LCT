@@ -151,7 +151,7 @@
                                         @foreach($venues_dropdown
                                         as $venue)
                                         <option
-                                            value="{{$venue->id}}"
+                                            value="{{$venue->title}}"
                                         >
                                             {{$venue->title}}
                                         </option>

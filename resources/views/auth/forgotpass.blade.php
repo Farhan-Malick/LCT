@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    @include("auth.partials.header")
+    @include("auth.partials.newHeader")
     <section class="section-two">
         <div class="container my-5">
             <div class="row">

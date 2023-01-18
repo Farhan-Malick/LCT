@@ -47,12 +47,11 @@
                                     aria-labelledby="nav-current-tab">
                                     <div class="card shadow-sm mb-3">
                                         <div class="card-body">
-                                            <h5 class="card-title fw-600">All Purchases Here</h5>
+                                            <h5 class="card-title fw-600">All Orders Here</h5>
                                             <table class="table">
                                                 <thead class="thead-light">
                                                   <tr>
                                                     <th>#</th>
-                                                    <th >Event Name</th>
                                                     <th >Ticket Name</th>
                                                     <th >Quantity</th>
                                                     <th >Price</th>
@@ -63,7 +62,6 @@
                                                   <tr>
                                                     
                                                     <td>{{$purchase->id}}</td>
-                                                    <td>{{$purchase->event->title}}</td>
                                                     <td>{{$purchase->event_name}}</td>
                                                     <td>{{$purchase->quantity}}</td>
                                                     <td>{{$purchase->price}}</td>

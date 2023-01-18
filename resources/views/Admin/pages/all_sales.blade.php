@@ -84,7 +84,7 @@
 										
                                         <th scope="col">#</th>
                                         <th scope="col">Purchaser</th>
-                                        <th scope="col">Event name</th>
+                                        {{-- <th scope="col">Event name</th> --}}
                                         <th scope="col">Ticket name</th>
                                         <th scope="col">Total price</th>
                                         <th scope="col">Quantity</th>
@@ -98,7 +98,7 @@
                                     <tr>
                                         <td>{{$purchase->id}}</td>
                                         <td>{{$purchase->user->first_name}}</td>
-                                        <td>{{$purchase->event->title}}</td>
+                                        {{-- <td>{{$purchase->eventTitle}}</td> --}}
                                         <td>{{$purchase->event_name}}</td>
                                         <td>{{$purchase->price}}</td>
                                         <td>{{$purchase->quantity}}</td>

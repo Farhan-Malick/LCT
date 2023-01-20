@@ -54,7 +54,7 @@ border-radius: 10px 10px 0px 0px;
 }
 .carousel-cards a {
     text-decoration: none;
-}
+} 
 
 /* browser-ticket css starts here  */
 
@@ -62,7 +62,7 @@ border-radius: 10px 10px 0px 0px;
     padding: 5px;
 }
 .tabs-active{
-    background-color: #c3f1f5;
+    background-color: #5bc9d3;
     color: #37383a;
 }
 .tabs-row{

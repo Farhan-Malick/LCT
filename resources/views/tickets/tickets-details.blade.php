@@ -266,7 +266,7 @@
                                                         {{-- <span class="input-group-text">$</span> --}}
                                                         <input  type="text" class="form-control inputstyle"
                                                             aria-label="Amount (to the nearest dollar)"
-                                                            name="price" value="$ ">
+                                                            name="price" value="">
                                                         {{-- <span class="input-group-text">.00</span> --}}
                                                     </div>
                                                 </div>
@@ -314,22 +314,22 @@
                         <div class="card-body">
                             <div class="card-title">
 
-                                <h4 class="mb-2">Ticket Detail</h4>
-                                <h5>{{$EventListing->event_name}}</h5>
+                                {{-- <h2 class="mb-3">Ticket Detail</h2> --}}
+                                <h2 class="mb-3">{{$EventListing->event_name}}</h2>
                             </div>
-                            <p>
-                                <strong>{{$EventListing->start_time}} AM - {{$EventListing->end_time}} PM</strong><br>
-                                <strong>{{$EventListing->event_date}}</strong><br>
-                                <strong>{{$EventListing->venue_name}}</strong><br>
+                            <p style="font-size: 14px">
+                               <b>TIME : </b> <strong>{{$EventListing->start_time}} AM - {{$EventListing->end_time}} PM</strong><br>
+                               <b>DATE : </b><strong>{{$EventListing->event_date}}</strong><br>
+                               <b>VENUE : </b><strong>{{$EventListing->venue_name}}</strong><br>
                             </p>
-                            <p class="p_type p-1 rounded-3" id="ticket-type-box">
+                            <p style="font-size: 14px" class="p_type p-1 rounded-3" id="ticket-type-box">
 
                                 {{-- <script>show()</script> --}}
 
                             </p>
                         </div>
                     </div>
-                    <div class="card shadow-sm mb-3 card-success br-10">
+                    <div class=" alert alert-primary br-10">
                         <div class="card-body">
                             <h6>2 buyers are currently searching for tickets for this event. Now is a good time to
                                 sell!</h6>
@@ -365,7 +365,7 @@
                     document.querySelectorAll('.select-card').forEach((element) => element.classList.remove('select-active'));
                     event.currentTarget.classList.add('select-active');
                     const value = event.currentTarget.attributes['data-ticket'].value;
-                    document.getElementById('ticket-type-box').innerHTML = `<strong>${value}</strong>`
+                    document.getElementById('ticket-type-box').innerHTML = `<strong>TICKET-TYPE : </strong>${value}`
                     document.getElementById('ticket-type').value = value;
                 });
             });

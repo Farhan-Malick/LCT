@@ -3,20 +3,28 @@
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Bootstrap CSS -->
-   
-  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{asset('assets/styles/dashboard.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+
+    <link rel="stylesheet" href="{{asset('assets/styles/dashboard.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/styles/common.css') }}" />
-    <!-- <link rel="stylesheet" href="../../assets/styles/common.css"> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <title>Last Chance Ticket - Dashboard</title>
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
+    <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <!-- Bootstrap icons CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
 </head>
 
 <body>
-    <div class="container-fluid px-0 mx-0">
+    <div class="container-fluid px-0 mx-0" style="margin-top: 100px">
         <!-- header menu starts here  -->
         @include("auth.partials.darkheader")
         <div class="container-md sidebar-con">
@@ -24,7 +32,7 @@
                 <!-- sidebar starts here  -->
                 @include("auth.partials.dashboardSidebar")
                 <!-- dashboard starts here  -->
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <main class="bg-light p-4 col-md-9 ms-sm-auto col-lg-10 px-md-4">
                     <div
                         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                         <h1 class="h2">Orders</h1>

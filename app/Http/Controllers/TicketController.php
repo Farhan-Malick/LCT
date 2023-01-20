@@ -227,8 +227,8 @@ class TicketController extends Controller
 
     }
 
-    public function show_price(Currency $currencies, TicketListing $tickets, $id, EventListing $event){
-
+    public function show_price(Currency $currencies, TicketListing $tickets, $id, EventListing $event)
+    {
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
         $maxValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->max('price');
@@ -239,7 +239,9 @@ class TicketController extends Controller
         $divide = $price / 100;
         $percentage = $divide * 15;
         $grand_total = $price - $percentage;
-        return view('tickets/setticketprice',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency', 'maxValue', 'minValue'));
+        return view('tickets/setticketprice',compact(
+            'currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency', 'maxValue', 'minValue'
+        ));
     }
 
     public function show_ticket(Currency $currencies, TicketListing $tickets, $id, EventListing $event){

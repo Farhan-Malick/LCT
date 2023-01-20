@@ -1,4 +1,4 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+<nav id="sidebarMenu" style="border-radius: 10px" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
     <div class="position-sticky pt-3 sidebar-sticky">
         <div class="user-prfile text-center">
             <a href="">
@@ -6,7 +6,7 @@
                 <h6>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h6>
               </a>
         </div>
-        <ul class="nav flex-column">
+        <ul class="nav flex-column p-4" style="font-size: 15px">
             <li class="nav-item">
                 <a class="nav-link " aria-current="page" href="{{URL("/dashboard")}}">
                     <span data-feather="home" class="align-text-bottom"></span>
@@ -49,8 +49,6 @@
                     Wallet
                 </a>
             </li>
-        </ul>
-        <ul class="nav flex-column mb-2">
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="file-text" class="align-text-bottom"></span>
@@ -76,6 +74,32 @@
                 </a>
             </li>
         </ul>
+        {{-- <ul class="nav flex-column p-4 mb-2" style="font-size: 15px">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="file-text" class="align-text-bottom"></span>
+                    Legal Information
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="file-text" class="align-text-bottom"></span>
+                    Customer Support
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="file-text" class="align-text-bottom"></span>
+                    My Messages
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="file-text" class="align-text-bottom"></span>
+                    View FAQs
+                </a>
+            </li>
+        </ul> --}}
     </div>
 </nav>
 

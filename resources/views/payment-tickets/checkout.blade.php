@@ -65,7 +65,19 @@
 <body>
 @include("auth.partials.newHeader")
 <section class="" style="background-color: #eee;">
+    
     <div class="container py-5 ">
+        <div class="row text-center tabs-row">
+            <div class="col-md-4 col-lg-4 p-2">
+                <h5 class="tabs-title "><i class="bi bi-check-lg me-3"></i>1. Browse Events</h5>
+            </div>
+            <div class="col-md-4 col-lg-4 p-2">
+                <h5 class="tabs-title "><i class="bi bi-check-lg me-3"></i>2. Choose Your Tickets</h5>
+            </div>
+            <div class="col-md-4 col-lg-4 p-2">
+                <h5 class="tabs-title tabs-active"><i class="bi bi-pen-fill me-3"></i>3.Confirm Details</h5>
+            </div>
+        </div>
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-12 mb-3">
           <div class="card card-stepper" style="border-radius: 10px;">
@@ -95,16 +107,16 @@
                   class="d-flex justify-content-center align-items-center big-dot dot">
                   <i class="fa fa-check text-white"></i></span>
               </div>
-              <div class="d-flex flex-row justify-content-between align-items-center">
-                <div class="d-flex flex-column align-items-start"><span><b>EVENT : </b> <br>{{ $events->title }}</span>
+              <div class="row d-flex flex-row justify-content-between align-items-center">
+                <div class="col-md-1 d-flex flex-column align-items-start"><span><b>EVENT : </b> <br>{{ $events->title }}</span>
                 </div>
-                <div class="d-flex flex-column justify-content-center"><span></span><b>TIME :</b>{{ $events->start_time }}-{{ $events->end_time }}<span></div>
-                <div class="d-flex flex-column justify-content-center align-items-center"><span><b>DATE : </b><br>{{ $events->start_date }}</span></div>
-                <div class="d-flex flex-column align-items-center"><span><b>VENUE NAME : </b><br>{{ $events->vTitle }}</span></div>
-                <div class="d-flex flex-column align-items-center"><span><b>SECTION : </b><br>{{ $tickets->sections }}</span></div>
-                <div class="d-flex flex-column align-items-center"><span><b>ROW NO : </b><br>{{ $tickets->rows }}</span></div>
-                <div class="d-flex flex-column align-items-center"><span id="noticket"><b>AVAILABLE TICKETS : </b><br>{{ $tickets->quantity }}</span></div>
-                <div class="d-flex flex-column align-items-center"><span><b>PER-TICKET PRICE : </b><br>${{ $tickets->price }}</span></div>
+                <div class="col-md-1 d-flex flex-column "><span></span><b>TIME :</b>{{ $events->start_time }}-{{ $events->end_time }}<span></div>
+                <div class="col-md-1 d-flex  flex-column  "><span><b>DATE : </b><br>{{ $events->start_date }}</span></div>
+                <div class="col-md-1 d-flex flex-column "><span><b>VENUE NAME : </b><br>{{ $events->vTitle }}</span></div>
+                <div class="col-md-1 d-flex flex-column "><span><b>SECTION : </b><br>{{ $tickets->sections }}</span></div>
+                <div class="col-md-1 d-flex flex-column "><span><b>ROW NO : </b><br>{{ $tickets->rows }}</span></div>
+                <div class="col-md-1 d-flex flex-column "><span id="noticket"><b>AVAILABLE TICKETS : </b><br>{{ $tickets->quantity }}</span></div>
+                <div class="col-md-1 d-flex flex-column "><span><b>PER-TICKET PRICE : </b><br>${{ $tickets->price }}</span></div>
                 <input type="hidden" id="pricetotal" value="{{ $tickets->price }}" name="price">
                 {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
               </div>

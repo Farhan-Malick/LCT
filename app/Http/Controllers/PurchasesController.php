@@ -30,7 +30,7 @@ class PurchasesController extends Controller
             return redirect('/login');
         }
 
-        $ticket = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'event_listings.event_date', 'event_listings.start_time')
+        $ticket = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'event_listings.event_date', 'event_listings.start_time','event_listings.venue_name')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->where('ticket_listings.id', $id)
         ->first();

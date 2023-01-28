@@ -9,7 +9,7 @@ You ticket listing no {{ $ticket->id }} for event {{ $ticket->event_name }} has 
 Button Text
 </x-mail::button> --}}
 If you need any further information on the listing rejection, please feel free to contact the support 
-at support@lastchanceticket.com
+at support@lastchanceticket.com <br>
 
 Thanks<br>
 {{ config('app.name') }}

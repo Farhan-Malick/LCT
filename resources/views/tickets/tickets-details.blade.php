@@ -251,25 +251,45 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {{-- <div class="form-group">
-                                                    <label for="">If you are unable to provide seating information please
-                                                        select a reason why:</label>
-                                                    <div class="form-check">
-                                                        <input  class="form-check-input" type="radio"
-                                                            id="flexRadioDefault1" name="reason_seating_unable" value="The primary site has not provided me with this information">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
-                                                            The primary site has not provided me with this information
-                                                        </label>
+                                                @if ($EventListing->event_id == "1" && $EventListing->event_id == "5")
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <h5 class="mb-4">FANS SECTION</h5>
+                                                            <hr>
+                                                            <label for="row" class="mb-2">{{$EventListing->event_name}}</label>
+                                                            <select class="form-select" name="fan_section">
+                                                                <option selected disabled>Please Select Fans Section</option>
+                                                               
+                                                                <option value=" @php
+                                                                $myName = $EventListing->event_name;
+                                                                $arr = explode(' ',trim($myName));
+                                                                echo $arr[0];
+                                                            @endphp">
+                                                                    @php
+                                                                        $myName = $EventListing->event_name;
+                                                                        $arr = explode(' ',trim($myName));
+                                                                        echo $arr[0];
+                                                                    @endphp
+                                                                </option>
+                                                                <option value="  @php
+                                                                $myName = $EventListing->event_name;
+                                                                $arr = explode(' ',trim($myName));
+                                                                echo $arr[2];
+                                                            @endphp">
+                                                                    @php
+                                                                        $myName = $EventListing->event_name;
+                                                                        $arr = explode(' ',trim($myName));
+                                                                        echo $arr[2];
+                                                                    @endphp
+                                                                </option>
+        
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-check">
-                                                        <input  class="form-check-input" type="radio"
-                                                            id="flexRadioDefault2" name="reason_seating_unable" value="other" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault2">
-                                                            Other
-                                                        </label>
-                                                    </div>
-                                                </div> --}}
-
+                                               </div>
+                                              
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -330,7 +350,7 @@
                                             <div class="form-group">
                                                 <label for="row">Restrictions</label>
                                                 <select class="form-select"  name="ticket_restrictions">
-                                                    <option selected disabled>Please Restriction</option>
+                                                    <option selected disabled>Please Select Restriction</option>
                                                     <option value="No Restriction">No Restrictions</option>
                                                     <option value="Restricted View">Restricted View</option>
                                                     <option value="Age Limit 14+">Age Limit 14+</option>
@@ -383,7 +403,7 @@
                                 {{-- <h2 class="mb-3">Ticket Detail</h2> --}}
                                 <h2 class="mb-3">{{$EventListing->event_name}}</h2>
                             </div>
-                            <p style="font-size: 14px">
+                            <p style="font-size: 12px">
                                <b>TIME : </b> <strong>{{$EventListing->start_time}} AM - {{$EventListing->end_time}} PM</strong><br>
                                <b>DATE : </b><strong>{{$EventListing->event_date}}</strong><br>
                                <b>VENUE : </b><strong>{{$EventListing->venue_name}}</strong><br>

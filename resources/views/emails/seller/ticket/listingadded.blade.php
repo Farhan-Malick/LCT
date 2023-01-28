@@ -7,7 +7,9 @@ message when your listing gets approved.
 {{-- <x-mail::button :url="''">
 Button Text
 </x-mail::button> --}}
-
+If you need any further information on your listing, please feel free to contact the support at 
+support@lastchanceticket.com
+<br>
 Thanks,<br>
 {{ config('app.name') }}
 </x-mail::message>

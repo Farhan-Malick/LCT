@@ -109,6 +109,7 @@ class TicketController extends Controller
         $ticketListing->type_sec = $request->type_sec;
         $ticketListing->type_row = $request->type_row;
         $ticketListing->ticket_benefits = $request->ticket_benefits;
+        $ticketListing->fan_section = $request->fan_section;
 
         $ticketListing->section = $request->sections;
         $ticketListing->row = $request->row;

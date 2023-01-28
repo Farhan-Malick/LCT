@@ -115,22 +115,13 @@
                 <div class="col-md-2 d-flex flex-column "><span><b>VENUE : </b><br>{{ $events->vTitle }}</span></div>
                 <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>{{ $tickets->categories }}</span></div>
                 {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
-              </div>
-              <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
-                <span class="dot"></span>
-                <hr class="flex-fill track-line"><span class="dot"></span>
-                <hr class="flex-fill track-line"><span class="dot"></span>
-                <hr class="flex-fill track-line"><span class="dot"></span>
-                <hr class="flex-fill track-line"><span
-                  class="d-flex justify-content-center align-items-center big-dot dot">
-                  <i class="fa fa-check text-white"></i></span>
-              </div>
+              </div><br>
               <div class="row d-flex flex-row justify-content-between align-items-center">
                 <div class="col-md-2 d-flex flex-column "><span><b>SECTION : ROW</b><br>{{ $tickets->sections }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $tickets->rows }}</span></div>
-                <div class="col-md-2 d-flex flex-column "><span><b>SeatedArea</b><br>{{ $tickets->seated_area }}</span></div>
-                <div class="col-md-2 d-flex flex-column "><span><b>Ticket : </b><br>{{ $tickets->ticket_type }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span><b>SEATED AREA :</b><br>{{ $tickets->seated_area }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span><b>TICKET : </b><br>{{ $tickets->ticket_type }}</span></div>
                 <div class="col-md-2 d-flex flex-column "><span id="noticket"><b>AVAILABLE TICKETS : </b><br>{{ $tickets->quantity }}</span></div>
-                <div class="col-md-2 d-flex flex-column "><span><b>PER-TICKET </b><br>${{ $tickets->price }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span><b>PER-TICKET :</b><br>${{ $tickets->price }}</span></div>
                 <input type="hidden" id="pricetotal" value="{{ $tickets->price }}" name="price">
                 {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
               </div>

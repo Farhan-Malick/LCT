@@ -102,7 +102,14 @@ class TicketController extends Controller
         $ticketListing->user_id = $guestUser;
         $ticketListing->eventlisting_id = $id;
         $ticketListing->currency = $request->currency;
+        $ticketListing->seated_area = $request->seated_area;
         $ticketListing->categories = $request->categories;
+
+        $ticketListing->type_cat = $request->type_cat;
+        $ticketListing->type_sec = $request->type_sec;
+        $ticketListing->type_row = $request->type_row;
+        $ticketListing->ticket_benefits = $request->ticket_benefits;
+
         $ticketListing->section = $request->sections;
         $ticketListing->row = $request->row;
         $ticketListing->seat_from = $request->seat_from;
@@ -174,7 +181,7 @@ class TicketController extends Controller
         // dd($ticketCurrency, $tickets);
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
-        $percentage = $divide * 15;
+        $percentage = $divide * 10;
         $grand_total = $price - $percentage;
         return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency'));
 
@@ -237,7 +244,7 @@ class TicketController extends Controller
         $ticketCurrency = Currency::find($tickets->currency);
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
-        $percentage = $divide * 15;
+        $percentage = $divide * 10;
         $grand_total = $price - $percentage;
         return view('tickets/setticketprice',compact(
             'currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency', 'maxValue', 'minValue'
@@ -253,7 +260,7 @@ class TicketController extends Controller
         $currencies = Currency::all();
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
-        $percentage = $divide * 15;
+        $percentage = $divide * 10;
        $grand_total = $price - $percentage;
         return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total'));
 
@@ -267,7 +274,7 @@ class TicketController extends Controller
             // dd($ticketCurrency, $tickets);
             $price = $ticket_listing->price * $ticket_listing->quantity;
             $divide = $price / 100;
-            $percentage = $divide * 15;
+            $percentage = $divide * 10;
             $grand_total = $price - $percentage;
             return view('tickets/upload_Pdf',compact('currencies','ticket_listing','events','price','percentage','grand_total', 'ticketCurrency'));
         //dd($ticketlistingid);

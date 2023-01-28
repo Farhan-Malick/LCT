@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Contacts\Session\Session;
 
 class LoginController extends Controller
 {
@@ -42,41 +43,40 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function showLoginForm()
+    {
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+        return view("auth.login");
+    }
+
     public function login(Request $request)
     {
 
         $input = $request->all();
 
-
-
         $this->validate($request, [
-
             'email' => 'required|email',
-
             'password' => 'required',
-
         ]);
 
-
-
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-
-            if (auth()->user()->account_type == 'admin') {
-
+        {          
+           if (auth()->user()->account_type == 'admin')
+            {
                 return redirect()->route('admin.home');
-
-            }else if (auth()->user()->account_type == 'buyer') {
-
-                return redirect('dashboard');
-
-            }else{
-
-                return redirect()->route('/');
-
             }
-
-        }else{
+            else
+            {
+                // return redirect()->route('/');
+                
+            return redirect(session()->get('url.intended'));
+            }
+          
+        }
+        else{
 
             return redirect()->back()->with('error','Email-Address And Password Are Wrong.');
 

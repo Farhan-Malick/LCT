@@ -1,7 +1,7 @@
 <x-mail::message>
-# Tickets listing Approved
+# Ticket Listing Approved
 
-You ticket listing no {{ $ticket->id }} for event {{ $ticket->event_name }} has been approved by the admins.<br>
+You ticket listing no {{ $ticket->id }} for event {{ $ticket->event_name }} has been admin.<br>
 
 {{-- <x-mail::button :url="''">
 Button Text

@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </form>
-                <table class="table mt-3">
+                <table class="table mt-3 border 1px">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>

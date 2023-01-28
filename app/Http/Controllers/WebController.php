@@ -14,12 +14,18 @@ class WebController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->get();
-        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle')->get();
+        $events = Event::select('events.*', 'venues.title as vTitle')
+        ->join('venues', 'venues.id', '=', 'events.venue_id');
+        // ->join('event_listings','event_id' , '=', 'events.id');
         $categories = Category::all();
+        if($request->search_text !== null){
+            $events = $events->where('events.title', 'like', '%'.$request->search_text.'%');
+        }
+        $events = $events->get();
         return view('home', compact('events', 'categories'));
     }
 

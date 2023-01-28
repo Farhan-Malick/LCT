@@ -8,9 +8,12 @@
 	<meta content="" name="author" />
 	
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="{{asset('AdminAssets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('AdminAssets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	<link href="{{asset("AdminAssets/css/google/app.min.css")}}" rel="stylesheet" />
+	
 	<!-- ================== END BASE CSS STYLE ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
@@ -55,128 +58,151 @@
 				<!-- end col-3 -->
 			</div>
 			<!-- end row -->
-			<!-- begin row -->
-            <div class="row">
-                <!-- begin col-6 -->
-                <div class="col-xl-12">
-                    <!-- begin panel -->
-					<h1 class="text-center">Paper Tickets</h1>
-					@if ($message = Session::get('msg'))
-                            <div class="alert alert-danger alert-block">
-                                <strong>{{ $message }}</strong>
-                            </div>
-					@endif
-					@if ($message = Session::get('approve'))
-					<div class="alert alert-primary alert-block">
-						<strong>{{ $message }}</strong>
+			<div id="content" class="">
+				<!-- begin breadcrumb -->
+				<ol class="breadcrumb float-xl-right">
+					<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+					<li class="breadcrumb-item"><a href="javascript:;">Tickets</a></li>
+					<li class="breadcrumb-item active">Paper Ticket Tables</li>
+				</ol>
+				<!-- end breadcrumb -->
+				<!-- begin page-header -->
+				<div class="row">
+					<div class="col-lg-12">
+						   <!-- begin panel -->
+							<h4 class="">Paper Tickets</h4>
+							@if ($message = Session::get('msg'))
+									<div class="alert alert-danger alert-block">
+										<strong>{{ $message }}</strong>
+									</div>
+							@endif
+							@if ($message = Session::get('approve'))
+							<div class="alert alert-primary alert-block">
+								<strong>{{ $message }}</strong>
+							</div>
+							@endif
+							@if ($message = Session::get('update'))
+							<div class="alert alert-success alert-block">
+								<strong>{{ $message }}</strong>
+							</div>
+							@endif
 					</div>
-					@endif
-					@if ($message = Session::get('update'))
-					<div class="alert alert-success alert-block">
-						<strong>{{ $message }}</strong>
+				</div>
+				<!-- end page-header -->
+				<!-- begin panel -->
+				<div class="panel panel-inverse">
+					<!-- begin panel-heading -->
+					<div class="panel-heading">
+						<h4 class="panel-title">Data Table - Paper Ticket</h4>
+						<div class="panel-heading-btn">
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+						</div>
 					</div>
-					@endif
-                    <div class="panel panel-inverse" data-sortable-id="form-validation-1">
-                        <!-- begin panel-body -->
-                        <div class="panel-body">
-                            <table class="table mt-3">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        {{-- <th scope="col">title</th> --}}
-                                        <th scope="col">Event Listing Name</th>
-                                        <th scope="col">price</th>
-                                        {{-- <th scope="col">currency</th> --}}
-                                        <th scope="col">quantity</th>
-										<th scope="col">category</th>
-                                        <th scope="col">section</th>
-                                        <th scope="col">row</th>
-                                        <th scope="col">seat from</th>
-                                        <th scope="col">seat to</th>
-                                        <th scope="col">ticket type</th>
-                                        <th scope="col">ticket restrictions</th>
-                                        <th scope="col">status</th>
-                                        <th scope="col" >Approval</th>
-										<th scope="col" >Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-										@foreach($tickets as $ticket)
-											@if($ticket->ticket_type == "paper-ticket")
-												<tr>
-													<td>{{$ticket->id}}</td>
-													{{-- <td>{{$ticket->title}}</td> --}}
-													<td>{{$ticket->event->event_name}}</td>
-													<td>${{$ticket->price}}</td>
-													{{-- <td>{{$ticket->currency}}</td> --}}
-													
-													<td>{{$ticket->quantity}}</td>
-													<td>{{$ticket->categories}}</td>
-													<td>{{$ticket->section_name}}</td>
-													<td>{{$ticket->row}}</td>
-													<td>{{$ticket->seat_from}}</td>
-													<td>{{$ticket->seat_to}}</td>
-														<td>{{$ticket->ticket_type}}</td>
-													<td>{{$ticket->ticket_restrictions}}</td>
-													<td>{{$ticket->status}}</td>
-													<td>
-														@if($ticket->approve == null || $ticket->approve == 0)
-                                                        <form action="{{ url('/toggle-approve') }}" method="POST">
-															@csrf
-															<input type="hidden" name="ticket_id" id=""
-																value="{{ $ticket->id }}" >
-															<input type="submit" class="btn btn-primary"
-																name="" value="Approve" id="" >
-														</form>
-														@elseif ($ticket->approve == 2)
-														<button class="btn btn-primary" disabled="disabled">Cant Approve now</button>
-																@else
-														<button class="btn btn-success" disabled="disabled">Approved</button>
-                                                        @endif
-														{{-- <a
-															class="btn btn-primary"
-															href="{{route('admin.section_rows.edit',$ticket->id)}}"
-															>edit</a
-														> --}}
-													</td>
-													<td>
-															@if($ticket->approve == 1 || $ticket->approve == 2)
-																<button type="button" class="btn btn-danger" disabled="disabled" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal">
-																	Reject
-																</button>	
-																@elseif ($ticket->approve == null )
-																<button type="button" class="btn btn-danger" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
-																	Reject
-																</button>
-															@endif
-														    {{-- @if($ticket->approve != 2 || $ticket->approve == 0)
+					<!-- end panel-heading -->
+				
+					<!-- begin panel-body -->
+					<div class="panel-body">
+						<table id="data-table-default" class="table table-striped table-bordered table-td-valign-middle">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">#</th>
+									{{-- <th scope="col">title</th> --}}
+									<th scope="col">Event Listing Name</th>
+									<th scope="col">price</th>
+									{{-- <th scope="col">currency</th> --}}
+									<th scope="col">quantity</th>
+									<th scope="col">category</th>
+									<th scope="col">section</th>
+									<th scope="col">row</th>
+									<th scope="col">seat from</th>
+									<th scope="col">seat to</th>
+									<th scope="col">ticket type</th>
+									<th scope="col">ticket restrictions</th>
+									<th scope="col">status</th>
+									<th scope="col" >Approval</th>
+									<th scope="col" >Action</th>
+								</tr>
+							</thead>
+							<tbody>
+									@foreach($tickets as $ticket)
+										@if($ticket->ticket_type == "paper-ticket")
+											<tr>
+												<td>{{$ticket->id}}</td>
+												{{-- <td>{{$ticket->title}}</td> --}}
+												<td>{{$ticket->event->event_name}}</td>
+												<td>${{$ticket->price}}</td>
+												{{-- <td>{{$ticket->currency}}</td> --}}
+												
+												<td>{{$ticket->quantity}}</td>
+												<td>{{$ticket->categories}}</td>
+												<td>{{$ticket->section_name}}</td>
+												<td>{{$ticket->row}}</td>
+												<td>{{$ticket->seat_from}}</td>
+												<td>{{$ticket->seat_to}}</td>
+													<td>{{$ticket->ticket_type}}</td>
+												<td>{{$ticket->ticket_restrictions}}</td>
+												<td>{{$ticket->status}}</td>
+												<td>
+													@if($ticket->approve == null || $ticket->approve == 0)
+													<form action="{{ url('/toggle-approve') }}" method="POST">
+														@csrf
+														<input type="hidden" name="ticket_id" id=""
+															value="{{ $ticket->id }}" >
+														<input type="submit" class="btn btn-primary"
+															name="" value="Approve" id="" >
+													</form>
+													@elseif ($ticket->approve == 2)
+													<button class="btn btn-primary" disabled="disabled">Cant Approve now</button>
+															@else
+													<button class="btn btn-success" disabled="disabled">Approved</button>
+													@endif
+													{{-- <a
+														class="btn btn-primary"
+														href="{{route('admin.section_rows.edit',$ticket->id)}}"
+														>edit</a
+													> --}}
+												</td>
+												<td>
+														@if($ticket->approve == 1 || $ticket->approve == 2)
+															<button type="button" class="btn btn-danger" disabled="disabled" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal">
+																Reject
+															</button>	
+															@elseif ($ticket->approve == null )
 															<button type="button" class="btn btn-danger" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
-																<i class="fa fa-times" aria-hidden="true"></i>
+																Reject
 															</button>
-															@endif --}}
-														{{-- <a
-															class="btn btn-success"
-															href="{{URL('/Admin-Panel/Ticket/Edit',$ticket->id)}}"
-															><i class="fa fa-edit" aria-hidden="true"></i></a
-														> --}}
-														<a
-															class="btn btn-danger"
-															href="{{route('admin.ticket.destroy',$ticket->id)}}"
-															><i class="fa fa-trash" aria-hidden="true"></i></a
-														>
-													</td>
-												</tr>
-											@endif
-										@endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- end panel-body -->
-                    </div>
-                    <!-- end panel -->
-                </div>
-                <!-- end col-6 -->
-            </div>
+														@endif
+														{{-- @if($ticket->approve != 2 || $ticket->approve == 0)
+														<button type="button" class="btn btn-danger" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
+															<i class="fa fa-times" aria-hidden="true"></i>
+														</button>
+														@endif --}}
+													{{-- <a
+														class="btn btn-success"
+														href="{{URL('/Admin-Panel/Ticket/Edit',$ticket->id)}}"
+														><i class="fa fa-edit" aria-hidden="true"></i></a
+													> --}}
+													<a
+														class="btn btn-danger"
+														href="{{route('admin.ticket.destroy',$ticket->id)}}"
+														><i class="fa fa-trash" aria-hidden="true"></i></a
+													>
+												</td>
+											</tr>
+										@endif
+									@endforeach
+							</tbody>
+						</table>
+					</div>
+					<!-- end panel-body -->
+				</div>
+				<!-- end panel -->
+			</div>
+			<!-- begin row -->
+            
 			<!-- end row -->
 		</div>
 		<!-- end #content -->
@@ -219,6 +245,11 @@
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="{{asset('AdminAssets/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/js/demo/table-manage-default.demo.js')}}"></script>
 	<script src="{{asset("AdminAssets/plugins/d3/d3.min.js")}}"></script>
 	<script src="{{asset("AdminAssets/plugins/nvd3/build/nv.d3.min.js")}}"></script>
 	<script src="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap.min.js")}}"></script>

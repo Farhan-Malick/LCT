@@ -108,15 +108,29 @@
                   <i class="fa fa-check text-white"></i></span>
               </div>
               <div class="row d-flex flex-row justify-content-between align-items-center">
-                <div class="col-md-1 d-flex flex-column align-items-start"><span><b>EVENT : </b> <br>{{ $events->title }}</span>
-                </div>
-                <div class="col-md-1 d-flex flex-column "><span></span><b>TIME :</b>{{ $events->start_time }}-{{ $events->end_time }}<span></div>
-                <div class="col-md-1 d-flex  flex-column  "><span><b>DATE : </b><br>{{ $events->start_date }}</span></div>
-                <div class="col-md-1 d-flex flex-column "><span><b>VENUE NAME : </b><br>{{ $events->vTitle }}</span></div>
-                <div class="col-md-1 d-flex flex-column "><span><b>SECTION : </b><br>{{ $tickets->sections }}</span></div>
-                <div class="col-md-1 d-flex flex-column "><span><b>ROW NO : </b><br>{{ $tickets->rows }}</span></div>
-                <div class="col-md-1 d-flex flex-column "><span id="noticket"><b>AVAILABLE TICKETS : </b><br>{{ $tickets->quantity }}</span></div>
-                <div class="col-md-1 d-flex flex-column "><span><b>PER-TICKET PRICE : </b><br>${{ $tickets->price }}</span></div>
+                
+                <div class="col-md-2 d-flex flex-column align-items-start"><span><b>EVENT : </b> <br>{{ $events->title }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span></span><b>TIME :</b>{{ $events->start_time }}-{{ $events->end_time }}<span></div>
+                <div class="col-md-2 d-flex  flex-column  "><span><b>DATE : </b><br>{{ $events->start_date }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span><b>VENUE : </b><br>{{ $events->vTitle }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>{{ $tickets->categories }}</span></div>
+                {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
+              </div>
+              <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
+                <span class="dot"></span>
+                <hr class="flex-fill track-line"><span class="dot"></span>
+                <hr class="flex-fill track-line"><span class="dot"></span>
+                <hr class="flex-fill track-line"><span class="dot"></span>
+                <hr class="flex-fill track-line"><span
+                  class="d-flex justify-content-center align-items-center big-dot dot">
+                  <i class="fa fa-check text-white"></i></span>
+              </div>
+              <div class="row d-flex flex-row justify-content-between align-items-center">
+                <div class="col-md-2 d-flex flex-column "><span><b>SECTION : ROW</b><br>{{ $tickets->sections }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $tickets->rows }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span><b>SeatedArea</b><br>{{ $tickets->seated_area }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span><b>Ticket : </b><br>{{ $tickets->ticket_type }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span id="noticket"><b>AVAILABLE TICKETS : </b><br>{{ $tickets->quantity }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span><b>PER-TICKET </b><br>${{ $tickets->price }}</span></div>
                 <input type="hidden" id="pricetotal" value="{{ $tickets->price }}" name="price">
                 {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
               </div>
@@ -177,7 +191,8 @@
                                         <p class="m-0"><b class="text-dark">TIME :</b> {{ $events->start_time }} To {{ $events->end_time }}</p>
                                         <p><b class="text-dark">DATE :</b>  {{ $events->start_date }} </p>
                                         <p><b class="text-dark">Event Venue :</b>  {{ $events->vTitle }}</p>
-                                        <p><b class="text-dark">Notes : </b>  <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>Unrestricted view</p>
+                                        <p><b class="text-dark">Notes : </b>  <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>{{$tickets->ticket_restrictions}}</p>
+                                        <p><b class="text-dark">Benefits : </b>  <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>{{$tickets->ticket_benefits}}</p>
                                         <p></p>
                                         <span><i class="bi bi-upc"></i></span>
                                     </div>

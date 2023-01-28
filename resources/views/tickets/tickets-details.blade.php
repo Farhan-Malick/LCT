@@ -160,50 +160,86 @@
                                 <div class="card p-4 mb-3 shadow-sm main-card br-10">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <p>
-                                                <i class="bi bi-info-circle-fill"></i>
-                                                You are required to provide section, row and seat information if this
-                                                information is available to you at the time of listing. If you do not have
-                                                all of this information at present, you may list your tickets, but you must
-                                                update your listing once you have this information. Listings can be updated
-                                                using My Account. For help on locating seating details on your tickets, view
-                                                examples.
+                                            <p class="mb-3">
+                                                <i class="bi bi-info-circle-fill "></i>
+                                                     You are required to provide section, row and seat information.
                                             </p>
                                         </div>
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-12">
                                             <div class="form">
                                                 <div class="form-group">
-                                                    <label for="section">Select Category</label>
-                                                    <select class="form-select"
-                                                        name="categories" value="">
-                                                        <option selected disabled>Please Select Category</option>
-                                                        @foreach($sellerCategories as $sellerCategory)
-                                                        <option value="{{$sellerCategory->categories}}">{{$sellerCategory->categories}}</option>
-                                                        @endforeach
-
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="section">Sections</label>
-                                                    <select class="form-select"
-                                                        name="sections" value="">
-                                                        <option selected disabled>Please Select Section</option>
-                                                        @foreach($venue_sections as $venue_section)
-                                                        <option value="{{$venue_section->id}}">{{$venue_section->sections}}</option>
-                                                        @endforeach
-
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="row">Rows</label>
-                                                    <select class="form-select" name="row">
+                                                    <label for="row">Seating Area</label>
+                                                    <select class="form-select" name="seated_area">
                                                         <option selected disabled>Please Select Row</option>
-                                                        @foreach($venue_section_rows as $venue_section_row)
-                                                        <option value="{{$venue_section_row->id}}">{{$venue_section_row->rows}}</option>
-                                                        @endforeach
-
+                                                        <option value="Seated Tickets">Seated Tickets</option>
+                                                        <option value="Standing Tickets">Standing Tickets</option>
+                                                        <option value="Free Seating">Free Seating</option>
                                                     </select>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="section">Select Category</label>
+                                                            <select class="form-select"
+                                                                name="categories" value="">
+                                                                <option selected disabled>Please Select Category</option>
+                                                                @foreach($sellerCategories as $sellerCategory)
+                                                                <option value="{{$sellerCategory->categories}}">{{$sellerCategory->categories}}</option>
+                                                                @endforeach
+        
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="section">Category</label>
+                                                            <input  type="text" class="form-control inputstyle" placeholder="Type Category" name="type_cat" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="section">Section</label>
+                                                            <select class="form-select"
+                                                                name="sections" value="">
+                                                                <option selected disabled>Please Select Section</option>
+                                                                @foreach($venue_sections as $venue_section)
+                                                                <option value="{{$venue_section->id}}">{{$venue_section->sections}}</option>
+                                                                @endforeach
+        
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="section">Section</label>
+                                                            <input  type="text" class="form-control inputstyle" placeholder="Type Section" name="type_sec" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                               <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="row">Rows</label>
+                                                            <select class="form-select" name="row">
+                                                                <option selected disabled>Please Select Row</option>
+                                                                @foreach($venue_section_rows as $venue_section_row)
+                                                                <option value="{{$venue_section_row->id}}">{{$venue_section_row->rows}}</option>
+                                                                @endforeach
+        
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="section">Rows</label>
+                                                            <input  type="text" class="form-control inputstyle" placeholder="Type Row" name="type_row">
+                                                        </div>
+                                                    </div>
+                                               </div>
+                                               
                                                 <div class="form-group">
                                                     <label for="seats">Seats</label>
                                                     <div class="row">
@@ -281,24 +317,54 @@
                                 <div class="card p-4 main-card mb-3 br-10">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <p><i class="bi bi-info-circle-fill me-2"></i>
+                                            <p class="mb-3"><i class="bi bi-info-circle-fill me-2"></i>
                                                 If any of the following conditions apply to your tickets, please select them
                                                 from the list below. If there is a restriction on the use of your ticket not
                                                 shown here, please stop listing and <a href="">contact us</a>
                                             </p>
                                         </div>
-                                        <div class="col-lg-12">
-
-                                                <div class="form-group">
-                                                    <div class="mb-3 form-check">
-                                                        <input   type="checkbox" class="form-check-input checkboxs" name="ticket_restrictions" value="No Restrictions">
+                                       
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="row">Restrictions</label>
+                                                <select class="form-select"  name="ticket_restrictions">
+                                                    <option selected disabled>Please Restriction</option>
+                                                    <option value="No Restriction">No Restrictions</option>
+                                                    <option value="Restricted View">Restricted View</option>
+                                                    <option value="Age Limit 14+">Age Limit 14+</option>
+                                                    <option value="Age Limit 18+">Age Limit 18+</option>
+                                                    <option value="Age Limit 21+">Age Limit 21+</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="row">Benefits</label>
+                                                <select class="form-select"  name="ticket_benefits">
+                                                    <option selected disabled>Please Choose Benefits</option>
+                                                    <option value="Food and Meals"> Food and Meals</option>
+                                                    <option value="Parking">Parking</option>
+                                                    <option value="VIP Section">VIP Section</option>
+                                                    <option value="Lounge Access">Lounge Access</option>
+                                                    <option value="Early Entry">Early Entry</option>
+                                                    <option value="Meet and Greet">Meet and Greet</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        {{-- <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <div class="mb-3 form-check " style="border: 1px">
+                                                    <label class="" for="">Select</label><br>
+                                                   <div class="border 1px p-3">
+                                                        <input   type="checkbox" class="form-check-input checkboxs " name="ticket_restrictions" value="No Restrictions">
                                                         <label class="form-check-label" for="exampleCheck1">No
                                                             Restrictions </label>
-                                                    </div>
+                                                   </div>
                                                 </div>
-
-
-                                        </div>
+                                            </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

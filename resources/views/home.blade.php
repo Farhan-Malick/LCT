@@ -237,6 +237,38 @@
             <h2>Last chance to explore world top events</h2>
           </div>
         </div>
+        <div class="container ml-5 mr-5 mb-5 ">
+          <form method="get" id="qty-form">
+                {{-- <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif"> --}}
+                <div class="input-group w-100">
+                <input type="text" class="form-control" name="search_text"  placeholder="Search Event Name" value="@if(request()->get('search_text')) <?= request()->get('search_text')?> @endif"/>
+                  <div class="input-group-append">
+                      <button class="btn btn-lg search-btn px-3" type="submit" value="Search">
+                          <i class="bi bi-search"></i>
+                      </button>
+                  </div>
+              </div>
+            </form>
+        </div>
+          @if(count($events) == 0)
+          <div>
+              <h5>Browse the <b>EVENTS</b> according to your serach to see more.</h5>
+          </div>
+          @endif
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+        
+                    document.querySelectorAll('.ticket-num-card').forEach(function(element) {
+                        element.addEventListener("click", (event) => {
+                            document.querySelectorAll('.ticket-num-card').forEach((element) => element.classList.remove('select-active'));
+                            event.currentTarget.classList.add('select-active');
+                            const value =event.currentTarget.attributes['data-tickets-val'].value;
+                            document.getElementById('total-tickets').value = value;
+                            document.getElementById('qty-form').submit();
+                        });
+                    });
+                });
+            </script>
         @foreach ($events as $event)
             <div class="col-lg-6 col-sm-6">
             <div class="item">

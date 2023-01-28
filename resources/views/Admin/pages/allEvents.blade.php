@@ -8,9 +8,12 @@
 	<meta content="" name="author" />
 	
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="{{asset('AdminAssets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('AdminAssets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	<link href="{{asset("AdminAssets/css/google/app.min.css")}}" rel="stylesheet" />
+	
 	<!-- ================== END BASE CSS STYLE ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
@@ -18,34 +21,6 @@
 	<link href="{{asset("AdminAssets/plugins/bootstrap-calendar/css/bootstrap_calendar.css")}}" rel="stylesheet" />
 	<link href="{{asset("AdminAssets/plugins/gritter/css/jquery.gritter.css")}}"  rel="stylesheet" />
 	<link href="{{asset("AdminAssets/plugins/nvd3/build/nv.d3.css")}}"  rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/smartwizard/dist/css/smart_wizard.css') }}" rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/ion-rangeslider/css/ion.rangeSlider.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/@danielfarrell/bootstrap-combobox/css/bootstrap-combobox.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/tag-it/css/jquery.tagit.css') }}" rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
-    <link
-        href="{{ asset('AdminAssets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminAssets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css') }}"
-        rel="stylesheet" />
 </head>
 <body>
 	<!-- begin #page-loader -->
@@ -57,7 +32,7 @@
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed page-with-wide-sidebar page-with-light-sidebar">
 		<!-- begin #header -->
-        @include('Admin.includes.header')
+		@include('Admin.includes.header')
 		<!-- end #header -->
 		
 		<!-- begin #sidebar -->
@@ -66,89 +41,124 @@
 		
 		<!-- begin #content -->
 		<div id="content" class="content">
-            <ol class="breadcrumb float-xl-right">
-                <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-                <li class="breadcrumb-item active">All Events</li>
-            </ol>
-            <!-- end breadcrumb -->
-            <!-- begin page-header -->
-            <h1 class="page-header">All Events</h1>
-            <!-- end page-header -->
-            <div class="row">
-                <!-- begin col-6 -->
-                <div class="col-xl-12">
-                    <!-- begin panel -->
-                    <div class="panel panel-inverse" data-sortable-id="form-validation-1">
-                        <!-- begin panel-body -->
-                       
-                        <div class="panel-body">
-                            @if (session('msg'))
-                            <div class="col-sm-6 mx-auto " style="text-align: center;  font-size:20px">
-                                {{ session('msg') }}</div>
-                        @endif
-                            <table class="table mt-3">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Slug</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Thumbnail</th>
-                                        <th scope="col">Poster</th>
-                                        <th scope="col">Venue_id</th>
-                                        <th scope="col">Start Date</th>
-                                        <th scope="col">End Date</th>
-                                        <th scope="col">Start Time</th>
-                                        <th scope="col">End Time</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($events as $event) 
-                                    <tr>
-                                        
-                                        <td>{{$event->id}}</td>
-                                        <td>{{$event->slug}}</td>
-                                        <td>{{$event->title}}</td>
-                                        <td>{{$event->description}}</td>
-                                        <td><img
-                                            src="{{ asset('uploads/events/thumbnail/' . $event->thumbnail) }}"
-                                            class="img-rounded height-30 width-30" /></td>
-                                            <td><img
-                                                src="{{ asset('uploads/events/poster/' . $event->poster) }}"
-                                                class="img-rounded height-30 width-30" /></td>
-                                        <td>{{$event->venue_id}}</td>
-                                        <td>{{$event->start_date}}</td>
-                                        <td>{{$event->end_date}}</td>
-                                        <td>{{$event->start_time}}</td>
-                                        <td>{{$event->end_time}}</td>
-                                        
-                                        <td>
-                                            <a
-                                                class="btn btn-primary"
-                                                href="{{ URL('/Admin-Panel/Edit-Event/' . $event->id) }}"
-                                                >edit</a
-                                            >
-            
-                                            <a
-                                                class="btn btn-danger"
-                                                href="{{ URL('/Admin-Panel/event/delete/' . $event->id) }}"
-                                                >Delete</a
-                                            >
-                                        </td>
-            
-                                    </tr>
-                                    @endforeach
-                                    
-                                </tbody>
-                            </table>
+			<!-- begin breadcrumb -->
+		
+			<!-- end breadcrumb -->
+			<!-- begin page-header -->
+			{{-- <h1 class="page-header">Last-Chance-Ticket Dashboard </h1> --}}
+			<!-- end page-header -->
+			<!-- begin row -->
+			<div class="row">
+				<!-- begin col-3 -->
+				{{-- @include('Admin.includes.misPoints') --}}
+				<!-- end col-3 -->
+			</div>
+			<!-- end row -->
+			<div id="content" class="">
+				<!-- begin breadcrumb -->
+				<ol class="breadcrumb float-xl-right">
+					<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+					<li class="breadcrumb-item"><a href="javascript:;">Tables</a></li>
+					<li class="breadcrumb-item active">Managed Tables</li>
+				</ol>
+				<!-- end breadcrumb -->
+				<!-- begin page-header -->
+				<div class="row">
+					<div class="col-lg-12">
+                        <h4>All Events</h4>
+                        @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
                         </div>
-                        <!-- end panel-body -->
-                    </div>
-                    <!-- end panel -->
-                </div>
-                <!-- end col-6 -->
-            </div>
+                    @endif
+					</div>
+				</div>
+				<!-- end page-header -->
+				<!-- begin panel -->
+				<div class="panel panel-inverse">
+					<!-- begin panel-heading -->
+					<div class="panel-heading">
+						<h4 class="panel-title">Data Table - Default</h4>
+						<div class="panel-heading-btn">
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+						</div>
+					</div>
+					<!-- end panel-heading -->
+				
+					<!-- begin panel-body -->
+					<div class="panel-body">
+                        @if (session('msg'))
+                        <div class="col-sm-6 mx-auto " style="text-align: center;  font-size:20px">
+                            {{ session('msg') }}</div>
+                    @endif
+						<table id="data-table-default" class="table table-striped table-bordered table-td-valign-middle">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Slug</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Thumbnail</th>
+                                    <th scope="col">Poster</th>
+                                    <th scope="col">Venue_id</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
+                                    <th scope="col">Start Time</th>
+                                    <th scope="col">End Time</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($events as $event) 
+                                <tr>
+                                    
+                                    <td>{{$event->id}}</td>
+                                    <td>{{$event->slug}}</td>
+                                    <td>{{$event->title}}</td>
+                                    <td>{{$event->description}}</td>
+                                    <td><img
+                                        src="{{ asset('uploads/events/thumbnail/' . $event->thumbnail) }}"
+                                        class="img-rounded height-30 width-30" /></td>
+                                        <td><img
+                                            src="{{ asset('uploads/events/poster/' . $event->poster) }}"
+                                            class="img-rounded height-30 width-30" /></td>
+                                    <td>{{$event->venue_id}}</td>
+                                    <td>{{$event->start_date}}</td>
+                                    <td>{{$event->end_date}}</td>
+                                    <td>{{$event->start_time}}</td>
+                                    <td>{{$event->end_time}}</td>
+                                    
+                                    <td>
+                                        <a
+                                            class="btn btn-primary"
+                                            href="{{ URL('/Admin-Panel/Edit-Event/' . $event->id) }}"
+                                            >edit</a
+                                        >
+        
+                                        <a
+                                            class="btn btn-danger"
+                                            href="{{ URL('/Admin-Panel/event/delete/' . $event->id) }}"
+                                            >Delete</a
+                                        >
+                                    </td>
+        
+                                </tr>
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+					</div>
+					<!-- end panel-body -->
+				</div>
+				<!-- end panel -->
+			</div>
+			<!-- begin row -->
+            
+			<!-- end row -->
 		</div>
 		<!-- end #content -->
 	
@@ -157,56 +167,61 @@
 		<!-- end scroll to top btn -->
 	</div>
 	<!-- end page container -->
-	
+	{{-- Modal For rejection --}}
+    <div class="modal fade" id="rejectionModal" tabindex="-1" role="dialog" aria-labelledby="Rejection Modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Rejection Reason</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="{{ url('/toggle-reject') }}" method="POST" >
+                @csrf
+                <input type="hidden" name="ticket_id" id="ticket_id" value="" >
+                <div class="modal-body">
+                    <div class="form-row">
+                        <textarea name="reason" class="form-control" placeholder="Please Enter reason for rejection" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-danger">Reject</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+    {{-- Modal for rejectio end --}}
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{{asset("AdminAssets/js/app.min.js")}}"></script>
 	<script src="{{asset("AdminAssets/js/theme/google.min.js")}}"></script>
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="{{asset('AdminAssets/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/js/demo/table-manage-default.demo.js')}}"></script>
 	<script src="{{asset("AdminAssets/plugins/d3/d3.min.js")}}"></script>
 	<script src="{{asset("AdminAssets/plugins/nvd3/build/nv.d3.min.js")}}"></script>
 	<script src="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap.min.js")}}"></script>
 	<script src="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js")}}"></script>
 	<script src="{{asset("AdminAssets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js")}}"></script>
 	<script src="{{asset("AdminAssets/plugins/gritter/js/jquery.gritter.js")}}"></script>
-    <script src="{{ asset('AdminAssets/plugins/parsleyjs/dist/parsley.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/smartwizard/dist/js/jquery.smartWizard.js') }}"></script>
-    <script src="{{ asset('AdminAssets/js/demo/form-wizards-validation.demo.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/jquery-migrate/dist/jquery-migrate.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/moment/min/moment.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/@danielfarrell/bootstrap-combobox/js/bootstrap-combobox.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/tag-it/js/tag-it.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/select2/dist/js/select2.min.js') }}"></script>
-    <script
-        src="{{ asset('AdminAssets/plugins/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}">
-    </script>
-    <script src="{{ asset('AdminAssets/plugins/bootstrap-show-password/dist/bootstrap-show-password.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/clipboard/dist/clipboard.min.js') }}"></script>
-    <script src="{{ asset('AdminAssets/js/demo/form-plugins.demo.js') }}"></script>
-
-    <script src="{{ asset('AdminAssets/plugins/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('AdminAssets/plugins/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.min.js') }}">
-    </script>
-    <script src="{{ asset('AdminAssets/js/demo/form-wysiwyg.demo.js') }}"></script>
 	<script>
 		COLOR_BLUE = COLOR_INDIGO = COLOR_RED = COLOR_ORANGE = COLOR_LIME = COLOR_TEAL = 'rgba(0,0,0,0.5)';
 		COLOR_AQUA = COLOR_DARK_LIGHTER = COLOR_GREEN = 'rgba(0,0,0,0.75)';
 	</script>
 	
 	<script src="{{asset("AdminAssets/js/demo/dashboard-v2.js")}}"></script>
+    <script>
+        $('#rejectionModal').on('show.bs.modal', function (e) {
+            $("#ticket_id").val($(e.relatedTarget).data('id'));
+        });
+    </script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 </body>
 </html>
-    
- 

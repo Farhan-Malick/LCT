@@ -73,6 +73,9 @@ class PurchasesController extends Controller
             $tickets = $tickets->where('eventlisting_id', '>=', $request->ticket_event);
         }
 
+        if ($request->ticket_type !== null) {
+            $tickets = $tickets->where('ticket_type', '=', $request->ticket_type);
+        }
         if($request->search_text !== null){
             $tickets = $tickets->where('event_listings.event_name', 'like', '%'.$request->search_text.'%');
         }

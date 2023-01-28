@@ -161,14 +161,13 @@
                     <div class="card shadow-sm mb-3 type-card main-card br-10">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4>{{$ticket_listing->event->title}}</h4>
+                                <h4>{{$ticket_listing->event->event_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( {{$ticket_listing->event->event_date}}  )</h4>
                             </div>
-                            <div class="card-subtitle">
-                                <span class="fw-600"><strong>{{$ticket_listing->event->start_date}}
-                                    <strong>{{$ticket_listing->event->start_time}}</strong>
-                                </strong></span>
+                            <div class="card-subtitle mb-2">
+                                <span class="fw-600 mb-2">
+                                    <strong>Time : </strong>{{$ticket_listing->event->start_time}} - {{$ticket_listing->event->end_time}}</span>
                                 <br>
-                                <span class="text-muted">Singapore National Stadium, Singapore, Singapore</span>
+                                <span class="text-muted mb-2"><strong class="text-dark">VENUE : </strong>{{$ticket_listing->event->venue_name}} , {{$ticket_listing->event->location}}  </span>
                             </div>
                             <div class="tags d-flex">
                                 <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>{{$ticket_listing->ticket_type}}</span>
@@ -187,20 +186,18 @@
                             <div class="tags d-flex mt-1">
                                 <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>{{$ticket_listing->section}}</span>
                                 <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>{{$ticket_listing->row}}</span>
+                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Category: </strong>{{$ticket_listing->categories}}</span>
                             </div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between">
-                                <span> <strong>Website Price: </strong></span>
+                            <div class="price-tag d-sm-flex d-block justify-content-between mt-1">
+                                <span> <strong>Ticket Price: </strong></span>
                                 <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$price}}</span></strong></span>
                             </div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between">
+                            <div class="price-tag d-sm-flex d-block justify-content-between mt-1">
                                 <span> <strong> Seller Fees: </strong></span>
-                                <span><strong> {{$ticketCurrency->currency_type}} <span class="percentage">{{$percentage}}</span></strong></span>
+                                <span><strong><span class="percentage">10%</span></strong></span>
                             </div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between">
-                                <span> <strong>VAT {{$ticketCurrency->currency_type}}: </strong></span>
-                                <span><strong> 1.86</strong></span>
-                            </div>
-                            <div class="small tags"> VAT amount can change depending on your location.
+                          
+                            <div class="small tags mb-4 mt-2"> VAT amount can change depending on your location.
                                 YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div>
                             <div class="price-tag d-sm-flex d-block justify-content-between">
                                 <span> <strong>YOU'LL RECEIVE: </strong></span>

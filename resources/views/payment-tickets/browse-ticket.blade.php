@@ -170,7 +170,7 @@
                                 <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif">
                                 <div class="col-md-3">
                                     <select class="form-control" name="ticket_type"  placeholder="Select Ticket Type">
-                                        <option disabled @if(request()->get('ticket_type') == null)selected @endif>Choose Ticket Type</option>
+                                        <option disabled @if(request()->get('ticket_type') == null)selected @endif>Filter By Ticket Type</option>
 
                                         <option value="paper-ticket"  @if(request()->get('ticket_type') && request()->get('ticket_type') == 'paper-ticket') 
                                             selected @endif  >Paper Ticket</option>
@@ -180,21 +180,38 @@
 
                                         <option value="mobile-ticket" @if(request()->get('ticket_type') && request()->get('ticket_type') == 'mobile-ticket') 
                                             selected @endif>Mobile Ticket</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control" name="ticket_restrictions"  placeholder="Select Ticket Type">
+                                        <option disabled @if(request()->get('ticket_restrictions') == null)selected @endif>Filter By Restrictions</option>
 
-
-                                        {{-- <option disabled @if(request()->get('ticket_event') == null)selected @endif>Select Event</option>
-                                        @foreach ($eventListings as $eventListing)
-                                            <option value="{{ $eventListing->id }}" 
-                                                @if(request()->get('ticket_event') && request()->get('ticket_event') == $eventListing->id) 
-                                                selected @endif>{{ $eventListing->event_name }}
-                                            </option>
-                                        @endforeach --}}
+                                        <option value=" No Restriction "  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'No Restriction') 
+                                            selected @endif  >No Restriction</option>
+                                        <option value=" Restricted View "  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'Restricted View') 
+                                            selected @endif  >Restricted View</option>
+                                        <option value="Age Limit 14+"  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'Age Limit 14+') 
+                                            selected @endif  >Age Limit 14+</option>
+                                        <option value="Age Limit 18+"  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'Age Limit 18+') 
+                                            selected @endif  >Age Limit 18+</option>
+                                        <option value="Age Limit 21+"  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'Age Limit 21+') 
+                                            selected @endif  >Age Limit 21+</option>
                                     </select>
                                 </div>
                                 <div class="col-md-1">
                                     <input type="submit" value="Search" class="btn btn primary-btn w-100"/>
                                 </div>
-
+                               
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-7">
+                                    <span style="font-size: 15px; margin-right:20px">Sort By :</span>
+                                    <a href="{{URL::current()}}"style=" margin-right:20px">ALL</a>
+                                    <a href="{{URL::current()."?sort=price_asc"}}"style=" margin-right:20px">PRICE : Low to High</a>
+                                    <a href="{{URL::current()."?sort=price_desc"}}"style=" margin-right:20px">PRICE : High to Low</a>
+                                    <a href="{{URL::current()."?sort=best_value"}}"style=" margin-right:20px">Best Value</a>
+                                    <a href="{{URL::current()."?sort=newest"}}"style=" margin-right:20px">Newest</a>
+                                 </div>
                             </div>
                         </form>
                     </div>
@@ -225,38 +242,22 @@
                         <div class="card-body shadow-sm" >
                             <h5 class="mb-3">Filter By Category</h5>
                             <form method="get" id="qty-form">
-                                <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif">
-                                {{-- <select class="form-control" name="categories"  placeholder="Select Event Name">
-                                    <option disabled @if(request()->get('categories') == null)selected @endif>Choose Category</option>
-                                    @foreach ($category as $cat)
-                                     <option value="{{ $cat->id }}" @if(request()->get('categories') && request()->get('categories')== $cat->id) selected @endif>{{ $cat->categories }}</option>
-                                    @endforeach
-                                </select> --}}
+                                <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif">   
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        
-                                             <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="">
+                                    <div class="col-md-12">                                        
+                                             <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="CAT 1"  >
                                              <label for="" name="categories" class="form-control-md">CAT 1</label>
-                                             <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="">
+                                             <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="CAT 2"  >
                                              <label for="" name="categories" class="form-control-md">CAT 2</label>
-                                             <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="">
+                                             <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="CAT 3"  >
                                              <label for="" name="categories" class="form-control-md">CAT 3</label>
+                                             <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="CAT 4"  >
+                                             <label for="" name="categories" class="form-control-md">CAT 4</label>
                                        
                                      </div>
                                      
                                 </div>
                                 
-                               {{-- <div class="row">
-                                   <div class="col-md-12">
-                                        @foreach($category as $ticket)
-                                            <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="{{$ticket->categories}}"
-                                            @if(request()->get('categories') && request()->get('categories') == 'categories') 
-                                            selected @endif
-                                            >
-                                            <label for="" name="categories" class="form-control-md">{{$ticket->categories}}</label>
-                                        @endforeach
-                                    </div>
-                               </div> --}}
                                <div class="row">
                                 <div class="col-md-12">
                                     <input type="submit" value="Search" class="btn btn primary-btn w-100 mt-2"/>
@@ -288,7 +289,7 @@
                                         <h4 class="fw-700">{{$ticket->event_name}}</h4>
                                         <h6 class="fw-700 ">Section: {{$ticket->sections}}, Row: {{$ticket->rows}}, Category: {{$ticket->categories}}</h6>
                                         <h6 class="fw-700 ">{{$ticket->ticket_type}}</h6>
-                                        <p class="text-danger fw-600 m-0">@if($ticket->quantity > 0){{$ticket->quantity}} tickets remaining @endif @if($ticket->quantity == 0)SOLD @endif</p>
+                                        <p class="text-danger fw-600 m-0">@if($ticket->quantity > 0){{$ticket->quantity}} tickets remaining @endif </p>
                                         <p class="m-0">in this listing on our site</p>
                                         <h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>
                                         {{-- <button class="btn btn-sm success-btn">Instant Download</button> --}}
@@ -298,9 +299,26 @@
                                     <div class="ticket-action-btns">
                                         <p class="m-0">${{$ticket->price}}</p>
                                         <p class="">per ticket</p>
-                                        <a class="btn btn primary-btn w-100" href="@if($ticket->quantity > 0){{ route('buyer.ticket.checkout',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif @if($ticket->quantity == 0)javascript:void(0) @endif">Select</a>
+                                        <a class="@if($ticket->quantity != 0) btn btn primary-btn w-100 mb-2 @else btn btn-danger w-100  @endif" href="@if($ticket->quantity > 0)
+                                            {{ route('buyer.ticket.checkout',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif " >
+                                            @if($ticket->quantity == 0) SOLD @else Select
+                                             @endif 
+                                        </a>
+                                        @if ($ticket->quantity != 0)
+                                        <a href="{{ route('Pdftemplate',['eventlisting_id' => $events->id,'ticketid' => $ticket->id] ) }}" class="text-danger">Ticket PDF</a>
+                                        @endif
                                     </div>
+                                   
                                 </div>
+                                {{-- <div class="row" >
+                                    <div class="col-md-12  text-center">
+                                        @if ($ticket->quantity == 0)
+                                        <label for="">Upload PDF For Booking</label><br>
+                                        <input type="file" class="btn btn primary-btn  " name="" id="" value="">
+                                            
+                                        @endif
+                                    </div>
+                                </div> --}}
                             </div>
                         </div>
                     @endforeach

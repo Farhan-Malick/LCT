@@ -169,9 +169,9 @@ Route::get('dashboard/my_orders', [PurchasesController::class, 'dashboard_purcha
 
 //Download PDF
 
-Route::get('/Pdf_template/{eventid}/{sellerid}/{ticketid}/',[PurchasesController::class,'Pdf_template'])->name('Pdftemplate');
+Route::get('/Pdf_template/{eventlisting_id}/{ticketid}',[PurchasesController::class,'Pdf_template'])->name('Pdftemplate');
 
-Route::get('/downloadPdf/{eventid}/{sellerid}/{ticketid}/',[PurchasesController::class,'downloadPdf'])->name('downloadPdfTicket');
+// Route::get('/downloadPdf/{eventid}/{sellerid}/{ticketid}/',[PurchasesController::class,'downloadPdf'])->name('downloadPdfTicket');
 
 //E- Ticket
 

@@ -435,7 +435,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
   <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/owl-carousel.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>

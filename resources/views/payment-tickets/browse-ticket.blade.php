@@ -287,7 +287,11 @@
                                 <div class="col-md-7 col-lg-8">
                                     <div class="ticket-title">
                                         <h4 class="fw-700">{{$ticket->event_name}}</h4>
-                                        <h6 class="fw-700 ">Section: {{$ticket->sections}}, Row: {{$ticket->rows}}, Category: {{$ticket->categories}}</h6>
+                                        <h6 class="fw-700 ">Section: {{$ticket->sections}}, Row: {{$ticket->rows}}, Category: @if ($ticket->categories == null)
+                                            {{$ticket->type_cat}}
+                                            @else
+                                            {{$ticket->categories}}
+                                        @endif</h6>
                                         <h6 class="fw-700 ">{{$ticket->ticket_type}}</h6>
                                         <p class="text-danger fw-600 m-0">@if($ticket->quantity > 0){{$ticket->quantity}} tickets remaining @endif </p>
                                         <p class="m-0">in this listing on our site</p>

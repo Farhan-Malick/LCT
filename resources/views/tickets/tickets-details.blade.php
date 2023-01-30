@@ -169,33 +169,47 @@
                                             <div class="form">
                                                 <div class="form-group">
                                                     <label for="row">Seating Area</label>
-                                                    <select class="form-select" name="seated_area">
+                                                    <select class="form-select @error('seated_area') is-invalid @enderror"  required autocomplete="seated_area" autofocus name="seated_area">
                                                         <option selected disabled>Please Select Row</option>
                                                         <option value="Seated Tickets">Seated Tickets</option>
                                                         <option value="Standing Tickets">Standing Tickets</option>
                                                         <option value="Free Seating">Free Seating</option>
                                                     </select>
+                                                    @error('seated_area')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Select Category</label>
-                                                            <select class="form-select"
+                                                            <select class="form-select " 
                                                                 name="categories" value="">
                                                                 <option selected disabled>Please Select Category</option>
                                                                 @foreach($sellerCategories as $sellerCategory)
                                                                 <option value="{{$sellerCategory->categories}}">{{$sellerCategory->categories}}</option>
                                                                 @endforeach
-        
+                                                                {{-- @if($cat != null)
+                                                                    @error('categories')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>{{ $message }}</strong>
+                                                                        </span>
+                                                                    @enderror
+                                                                @endif --}}
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    @if ($cat == null)
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Category</label>
                                                             <input  type="text" class="form-control inputstyle" placeholder="Type Category" name="type_cat" required>
                                                         </div>
                                                     </div>
+                                                    @endif
+                                                   
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -211,12 +225,14 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="section">Section</label>
-                                                            <input  type="text" class="form-control inputstyle" placeholder="Type Section" name="type_sec" required>
+                                                    @if ($venue_sections == null)
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="section">Section</label>
+                                                                <input  type="text" class="form-control inputstyle" placeholder="Type Section" name="type_sec" required>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    @endif
                                                 </div>
                                                 
                                                <div class="row">
@@ -232,12 +248,14 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    @if ($venue_section_rows == null)
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Rows</label>
                                                             <input  type="text" class="form-control inputstyle" placeholder="Type Row" name="type_row">
                                                         </div>
                                                     </div>
+                                                    @endif
                                                </div>
                                                
                                                 <div class="form-group">
@@ -251,7 +269,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @if ($EventListing->event_id == "1" && $EventListing->event_id == "5")
+                                                @if ($EventListing->event_id == "1" || $EventListing->event_id == "9")
                                                 <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="form-group">
@@ -283,6 +301,7 @@
                                                                         echo $arr[2];
                                                                     @endphp
                                                                 </option>
+                                                                <option value="Dont know">Dont Know</option>
         
                                                             </select>
                                                         </div>

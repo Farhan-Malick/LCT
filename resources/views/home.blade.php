@@ -62,7 +62,7 @@
                     <h5>Hurray! You are in the right place. 100% customer satisfaction. We value every single customers. We guarantee your entry. Secured payout.</h5>
                 </marquee>
               </div>
-              <div class="border-button"><a href="about.html">Go There</a></div>
+              {{-- <div class="border-button"><a href="about.html">Go There</a></div> --}}
             </div>
             <div class="container">
               <div class="row">
@@ -103,7 +103,7 @@
                 </marquee>
               </div>
 
-              <div class="border-button"><a href="about.html">Go There</a></div>
+              {{-- <div class="border-button"><a href="about.html">Go There</a></div> --}}
             </div>
             <div class="container">
               <div class="row">
@@ -144,7 +144,7 @@
                 </marquee>
               </div>
 
-              <div class="border-button"><a href="about.html">Go There</a></div>
+              {{-- <div class="border-button"><a href="about.html">Go There</a></div> --}}
             </div>
             <div class="container">
               <div class="row">
@@ -185,7 +185,7 @@
                 </marquee>
               </div>
 
-              <div class="border-button"><a href="about.html">Go There</a></div>
+              {{-- <div class="border-button"><a href="about.html">Go There</a></div> --}}
             </div>
             <div class="container">
               <div class="row">

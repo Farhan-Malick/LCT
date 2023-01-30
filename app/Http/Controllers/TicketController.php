@@ -40,7 +40,9 @@ class TicketController extends Controller
         $venue_section_rows = VenueSectionRows::all();
         $venue_sections = VanueSections::all();
         $sellerCategories = SellerCategory::all();
-        return view('tickets/tickets-details',compact('venue_section_rows','venue_sections','EventListing','currencies','sellerCategories'));
+        $cat = SellerCategory::first();
+        $sec = VanueSections::first();
+        return view('tickets/tickets-details',compact('sec','cat','venue_section_rows','venue_sections','EventListing','currencies','sellerCategories'));
     }
 
     public function sendAwienMail(){
@@ -96,17 +98,28 @@ class TicketController extends Controller
      */
     public function store(Request $request, $id)
     {
+        // $request->validate([
+        //     "seated_area" => "required",
+        //     "categories" => "required",
+        // ]);
         // dd($request);
         $guestUser = LoginController::guestLogin();
         $ticketListing = new TicketListing();
+        $category = SellerCategory::first();
+        $venue_sections = VanueSections::first();
+
         $ticketListing->user_id = $guestUser;
         $ticketListing->eventlisting_id = $id;
         $ticketListing->currency = $request->currency;
         $ticketListing->seated_area = $request->seated_area;
         $ticketListing->categories = $request->categories;
 
+       if($category == null){
         $ticketListing->type_cat = $request->type_cat;
+       }
+       if($venue_sections == null){
         $ticketListing->type_sec = $request->type_sec;
+       }
         $ticketListing->type_row = $request->type_row;
         $ticketListing->ticket_benefits = $request->ticket_benefits;
         $ticketListing->fan_section = $request->fan_section;
@@ -130,14 +143,27 @@ class TicketController extends Controller
     }
 
 
-    public function savePrice(Request $request, $id, TicketListing $tickets)
+    public function savePrice(Request $request, $id, TicketListing $tickets, User $user,)
     {
         // dd($id, $request->price, $request->currency);
         $tickets = TicketListing::find($id);
         $tickets->price = $request->price;
         $tickets->currency = $request->currency;
         $tickets->update();
+       if($tickets->ticket_type === "e-ticket")
+       {
+        $tickets = TicketListing::find($id);
+        $tickets->price = $request->price;
+        $tickets->currency = $request->currency;
+        $tickets->completed = 1;
+        $tickets->update();
+        MailController::ticketlistingadded($user->email);
+        return redirect()->back()->with('msg','Your tickets has been created, Your ticket will be in the Listings when Admin will Approve.');
+       }
+       else{
         return redirect()->route('seller.complete_ticket.address.save', ['id' => $tickets->id]);
+       }
+       
     }
 
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)

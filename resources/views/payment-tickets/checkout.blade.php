@@ -62,7 +62,7 @@
     </style>
 </head>
 
-<body>
+<body >
 @include("auth.partials.newHeader")
 <section class="" style="background-color: #eee;">
     
@@ -89,8 +89,9 @@
                   <span class="text-muted small">by LAST CHANCE TICKET</span>
                 </div>
                 <div>
-                    <a href="{{URL('/')}}" class="logo">
-                        <img src="{{asset('assets/images/logo1.png')}}" width="30px" height="40px" alt="">
+                    <a href="{{URL('/')}}" class="">
+                        <h3 style="font-family: Georgia, 'Times New Roman', Times, serif">LAST CHANCE TICKET</h3>
+                        {{-- <img src="{{asset('assets/images/logo1.png')}}" width="30px" height="40px" alt=""> --}}
                     </a>
                   {{-- <button class="btn btn-outline-primary" type="button">Track order details</button> --}}
                   {{-- <span class="bg-danger text-white p-2" style=" border-radius: 30%" type="">{{ get_when($events->event_date) }}</span> --}}
@@ -113,7 +114,11 @@
                 <div class="col-md-2 d-flex flex-column "><span></span><b>TIME :</b>{{ $events->start_time }}-{{ $events->end_time }}<span></div>
                 <div class="col-md-2 d-flex  flex-column  "><span><b>DATE : </b><br>{{ $events->start_date }}</span></div>
                 <div class="col-md-2 d-flex flex-column "><span><b>VENUE : </b><br>{{ $events->vTitle }}</span></div>
-                <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>{{ $tickets->categories }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>@if ($tickets->categories == null)
+                    {{$tickets->type_cat}}
+                    @else
+                    {{$tickets->categories}}
+                @endif</span></div>
                 {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
               </div><br>
               <div class="row d-flex flex-row justify-content-between align-items-center">
@@ -152,7 +157,7 @@
                                 <select class="form-select" id="#ticket" name="quantity" required>
                                     <option disabled>Select Number of Tickets</option>
                                     @for ($i = 1; $i <= $tickets->quantity; $i++)
-                                        <option value="{{ $i }}">{{ $i }} Tickets</option>
+                                        <option value="{{ $i }}"    >{{ $i }} Tickets</option>
                                     @endfor
                                 </select>
                             </div>

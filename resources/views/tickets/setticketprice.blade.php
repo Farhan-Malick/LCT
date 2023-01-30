@@ -40,6 +40,11 @@
           </div>
         </div>
       </div>
+        @if ($message = Session::get('msg'))
+            <div class="alert alert-success alert-block">
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
     <section class="section-two" style="margin-top: 100px">
         <div class="container my-4">
             <div class="row">
@@ -88,8 +93,8 @@
                 <div class="col-lg-4 ">
                     <div class=" p-4  mb-3  " style="background-color: #f9f9f9">
                         <div class="card-body">
-                            <div class="card-title">
-                                <h4>{{$tickets->event->event_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( {{$tickets->event->event_date}}  )</h4>
+                            <div class="card-title mb-2">
+                                <h5>{{$tickets->event->event_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{$tickets->event->event_date}})</h5>
                             </div>
                             <div class="card-subtitle mb-2">
                                 <span class="fw-600 mb-2">
@@ -112,24 +117,29 @@
                                 <span><strong> × {{$tickets->quantity}}</strong></span>
                             </div>
                             <div class="tags d-flex mt-1">
-                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>{{$ticketCurrency->section}}</span>
-                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>{{$ticketCurrency->row}}</span>
-                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Category: </strong>{{$ticketCurrency->categories}}</span>
+                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>{{$tickets->section}}</span>
+                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>{{$tickets->row}}</span>
+                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Category: </strong>@if ($tickets->categories == null)
+                                    {{$tickets->type_cat}}
+                                    @else
+                                    {{$ticketCurrency->categories}}
+                                    @endif
+                                </span>
                             </div>
                             <div class="price-tag d-sm-flex d-block justify-content-between mt-1">
                                 <span> <strong>Ticket Price: </strong></span>
                                 <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$price}}</span></strong></span>
                             </div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between mt-1">
-                                <span> <strong> Seller Fees: </strong></span>
+                            <div class="price-tag d-sm-flex d-block justify-content-between mt-1 mb-2">
+                                <span> <strong>Service Charges: </strong></span>
                                 <span><strong><span class="percentage">10%</span></strong></span>
                             </div>
                             {{-- <div class="price-tag d-sm-flex mb-2 d-block justify-content-between">
                                 <span> <strong>VAT {{$ticketCurrency->currency_type}}: </strong></span>
                                 <span><strong> 1.86</strong></span>
                             </div> --}}
-                            <div class="small tags mb-4 mt-2" > VAT amount can change depending on your location.
-                                YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div>
+                            {{-- <div class="small tags mb-4 mt-2" > VAT amount can change depending on your location.
+                                YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div> --}}
                             <div class="price-tag mb-2 d-sm-flex d-block justify-content-between">
                                 <span> <strong>YOU'LL RECEIVE: </strong></span>
                                 <span><strong> {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></strong></span>
@@ -141,8 +151,6 @@
         </div>
     </section>
 
-    <!-- Optional JavaScript; choose one of the two! -->
-    @include("auth.partials.footer")
     <!-- Option 1: Bootstrap Bundle with Popper -->
     @include("auth.partials.footer")
     <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>

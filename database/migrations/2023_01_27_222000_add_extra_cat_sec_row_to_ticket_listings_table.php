@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('ticket_listings', function (Blueprint $table) {
-            $table->string('type_cat');
-            $table->string('type_sec');
-            $table->string('type_row');
-            $table->string('ticket_benefits');
+            $table->string('type_cat')->default('null');
+            $table->string('type_sec')->default('null');
+            $table->string('type_row')->nullable();
+            $table->string('ticket_benefits')->nullable();
         });
     }
 

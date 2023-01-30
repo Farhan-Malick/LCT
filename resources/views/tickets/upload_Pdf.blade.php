@@ -160,8 +160,8 @@
                 <div class="col-lg-4">
                     <div class="card shadow-sm mb-3 type-card main-card br-10">
                         <div class="card-body">
-                            <div class="card-title">
-                                <h4>{{$ticket_listing->event->event_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( {{$ticket_listing->event->event_date}}  )</h4>
+                            <div class="card-title mb-2">
+                                <h5>{{$ticket_listing->event->event_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{$ticket_listing->event->event_date}})</h5>
                             </div>
                             <div class="card-subtitle mb-2">
                                 <span class="fw-600 mb-2">
@@ -186,19 +186,23 @@
                             <div class="tags d-flex mt-1">
                                 <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>{{$ticket_listing->section}}</span>
                                 <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>{{$ticket_listing->row}}</span>
-                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Category: </strong>{{$ticket_listing->categories}}</span>
+                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Category: </strong>@if ($ticket_listing->categories == null)
+                                    {{$ticket_listing->type_cat}}
+                                    @else
+                                    {{$ticket_listing->categories}}
+                                    @endif</span>
                             </div>
                             <div class="price-tag d-sm-flex d-block justify-content-between mt-1">
                                 <span> <strong>Ticket Price: </strong></span>
                                 <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$price}}</span></strong></span>
                             </div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between mt-1">
-                                <span> <strong> Seller Fees: </strong></span>
+                            <div class="price-tag d-sm-flex d-block justify-content-between mt-1 mb-2">
+                                <span> <strong> Service Charges: </strong></span>
                                 <span><strong><span class="percentage">10%</span></strong></span>
                             </div>
                           
-                            <div class="small tags mb-4 mt-2"> VAT amount can change depending on your location.
-                                YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div>
+                            {{-- <div class="small tags mb-4 mt-2"> VAT amount can change depending on your location.
+                                YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div> --}}
                             <div class="price-tag d-sm-flex d-block justify-content-between">
                                 <span> <strong>YOU'LL RECEIVE: </strong></span>
                                 <span><strong> {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></strong></span>

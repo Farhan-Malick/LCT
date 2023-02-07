@@ -9,6 +9,7 @@ use App\Models\Event;
 use App\Models\TicketListing;
 
 use App\Models\Purchases;
+use App\Models\Seller;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 use Auth;
@@ -18,7 +19,6 @@ use Request;
 
 class PurchasesController extends Controller
 {
-
     //
     // public function buyer_tickets_index(Event $event,$id){
 
@@ -49,6 +49,7 @@ class PurchasesController extends Controller
         $purchase->seller_id = $ticket->user_id;
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
         $purchase->quantity = Request::get('quantity');
+        $purchase->country = Request::get('country');
         $purchase->save();
         MailController::ticketpurchased(auth()->user()->email, $ticket);
         MailController::sellerticketpurchased($seller->email, $ticket);
@@ -138,7 +139,9 @@ class PurchasesController extends Controller
         if(Request::get('search_text') !== null){
             $tickets = $tickets->where('event_listings.event_name', 'like', '%'.Request::get('search_text').'%');
         }
-
+        if(Request::get('homeFilters') !== null){
+            $events = $events->where('events.title', 'like', '%'.Request::get('homeFilters').'%');
+        }
         $tickets = $tickets->get();
         // dd($tickets);
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
@@ -174,7 +177,22 @@ class PurchasesController extends Controller
         ->where('ticket_listings.id',$ticketid)->first();
         // dd($tickets);
         $sellers = User::find($sellerid);
-        return view('payment-tickets/checkout',compact('tickets','events','sellers'));
+        $sellerCountry = Seller::where('user_id',$sellerid)->first();
+        return view('payment-tickets/checkout',compact('tickets','events','sellers','sellerCountry'));
+    }
+
+    public function buyer_ticket_detail( TicketListing $ticket, EventListing $event, $eventid, $ticketid, $sellerid){
+
+        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $eventid)->first();
+        // $eventListing = EventListing::select('event_listings.*')->where('event_listings.event_id', $eventid)->first();
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
+        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
+        ->where('ticket_listings.id',$ticketid)->first();
+        // dd($tickets);
+        $sellers = User::find($sellerid);
+        return view('payment-tickets/ticket_detail',compact('tickets','events','sellers'));
     }
 
     public function dashboard_orders_show(Purchases $purchases,TicketListing $ticket,Event $event)

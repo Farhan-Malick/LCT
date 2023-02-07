@@ -24,6 +24,43 @@
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <title>Set Price</title>
+    <style>
+        .track-line {
+            height: 2px !important;
+            background-color: #61c3e3;
+            opacity: 1;
+            }
+
+            .dot {
+            height: 10px;
+            width: 10px;
+            margin-left: 3px;
+            margin-right: 3px;
+            margin-top: 0px;
+            background-color: #61c3e3;
+            border-radius: 50%;
+            display: inline-block
+            }
+
+            .big-dot {
+            height: 25px;
+            width: 25px;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 0px;
+            background-color: #61c3e3;
+            border-radius: 50%;
+            display: inline-block;
+            }
+
+            .big-dot i {
+            font-size: 12px;
+            }
+
+            .card-stepper {
+            z-index: 0
+            }
+    </style>
 </head>
 
 <body>
@@ -48,7 +85,69 @@
     <section class="section-two" style="margin-top: 100px">
         <div class="container my-4">
             <div class="row">
-                <div class="col-lg-8 ">
+                <div class="col-lg-12 mb-3">
+                    <div class="card card-stepper" style="border-radius: 10px;background-color: #f9f9f9">
+                      <div class="card-body p-4">
+            
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="d-flex flex-column">
+                            <span class="lead fw-normal">Your Ticket Details</span>
+                            <span class="text-muted small">by LAST CHANCE TICKET</span>
+                          </div>
+                          <div>
+                              <a href="{{URL('/')}}" class="">
+                                  <h3 style="font-family: Georgia, 'Times New Roman', Times, serif">LAST CHANCE TICKET</h3>
+                                  {{-- <img src="{{asset('assets/images/logo1.png')}}" width="30px" height="40px" alt=""> --}}
+                              </a>
+                            {{-- <button class="btn btn-outline-primary" type="button">Track order details</button> --}}
+                            {{-- <span class="bg-danger text-white p-2" style=" border-radius: 30%" type="">{{ get_when($events->event_date) }}</span> --}}
+                          </div>
+                        </div>
+                        <hr class="my-4">
+            
+                        <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
+                          <span class="dot"></span>
+                          <hr class="flex-fill track-line"><span class="dot"></span>
+                          <hr class="flex-fill track-line"><span class="dot"></span>
+                          <hr class="flex-fill track-line"><span class="dot"></span>
+                          <hr class="flex-fill track-line"><span
+                            class="d-flex justify-content-center align-items-center big-dot dot">
+                            <i class="fa fa-check text-white"></i></span>
+                        </div>
+                        <div class="row d-flex flex-row justify-content-between align-items-center">
+                          
+                          <div class="col-md-2 d-flex flex-column align-items-start"><span><b>EVENT : </b> <br>{{$tickets->event->event_name}}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span></span><b>TIME :</b>{{$tickets->event->start_time}} - {{$tickets->event->end_time}}<span></div>
+                          <div class="col-md-2 d-flex  flex-column  "><span><b>DATE : </b><br>({{$tickets->event->event_date}})</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>VENUE : </b><br>{{$tickets->event->venue_name}} , {{$tickets->event->location}}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>@if ($tickets->categories == null)
+                              {{$tickets->type_cat}}
+                              @else
+                              {{$tickets->categories}}
+                          @endif</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>SECTION : ROW</b><br>{{$tickets->section}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $tickets->row }}</span></div>
+
+                          {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
+                        </div><br>
+                        <div class="row d-flex flex-row justify-content-between align-items-center">
+                          <div class="col-md-2 d-flex flex-column "><span><b>SEATED AREA :</b><br>{{ $tickets->seated_area }}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>TICKET : </b><br>{{ $tickets->ticket_type }}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span id="noticket"><b>NO.OF TICKETS : </b><br>{{ $tickets->quantity }}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>PER-TICKET :</b><br>${{ $tickets->price }}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>Service Charges : </b><br>{{$webCharge}}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>TOTAL TICKET PRICE:</b><br>${{$price}}</span></div>
+                          <input type="hidden" id="pricetotal" value="{{ $tickets->price }}" name="price">
+                          {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
+                        </div><br>
+                        <div class="row d-flex flex-row justify-content-between align-items-center">
+                            <div class="col-md-12 d-flex flex-column "><span><b>YOU WILL RECEIVE:</b><br>${{$grand_total}}</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 ">
                     <div class="p-5 mb-3 "  style="background-color: #f9f9f9">
                         <div class="row">
                             <div class="col-lg-12" >
@@ -90,63 +189,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 ">
-                    <div class=" p-4  mb-3  " style="background-color: #f9f9f9">
-                        <div class="card-body">
-                            <div class="card-title mb-2">
-                                <h5>{{$tickets->event->event_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{$tickets->event->event_date}})</h5>
-                            </div>
-                            <div class="card-subtitle mb-2">
-                                <span class="fw-600 mb-2">
-                                    <strong>Time : </strong>{{$tickets->event->start_time}} - {{$tickets->event->end_time}}</span>
-                                <br>
-                                <span class="text-muted mb-2"><strong class="text-dark">VENUE : </strong>{{$tickets->event->venue_name}} , {{$tickets->event->location}}  </span>
-                            </div>
-                            <div class="tags d-flex mb-2">
-                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Ticket Type: </strong>{{$tickets->ticket_type}}</span>
-                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Split Type: </strong>any</span>
-                            </div>
-    
-                            <div class="price-tag d-sm-flex d-block justify-content-between mb-2">
-                                <span> <strong>Price/Ticket: </strong></span>
-                                <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$tickets->price}}</span></strong></span>
-                            </div>
-    
-                            <div class="price-tag d-sm-flex d-block justify-content-between tags mb-2">
-                                <span> <strong>Number of Tickets: </strong></span>
-                                <span><strong> × {{$tickets->quantity}}</strong></span>
-                            </div>
-                            <div class="tags d-flex mt-1">
-                                <span class="ticket-type p-1 rounded-3 me-2"> <strong>Section: </strong>{{$tickets->section}}</span>
-                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Row: </strong>{{$tickets->row}}</span>
-                                <span class="ticket-type p-1 rounded-3 me-2"><strong>Category: </strong>@if ($tickets->categories == null)
-                                    {{$tickets->type_cat}}
-                                    @else
-                                    {{$ticketCurrency->categories}}
-                                    @endif
-                                </span>
-                            </div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between mt-1">
-                                <span> <strong>Ticket Price: </strong></span>
-                                <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$price}}</span></strong></span>
-                            </div>
-                            <div class="price-tag d-sm-flex d-block justify-content-between mt-1 mb-2">
-                                <span> <strong>Service Charges: </strong></span>
-                                <span><strong><span class="percentage">10%</span></strong></span>
-                            </div>
-                            {{-- <div class="price-tag d-sm-flex mb-2 d-block justify-content-between">
-                                <span> <strong>VAT {{$ticketCurrency->currency_type}}: </strong></span>
-                                <span><strong> 1.86</strong></span>
-                            </div> --}}
-                            {{-- <div class="small tags mb-4 mt-2" > VAT amount can change depending on your location.
-                                YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div> --}}
-                            <div class="price-tag mb-2 d-sm-flex d-block justify-content-between">
-                                <span> <strong>YOU'LL RECEIVE: </strong></span>
-                                <span><strong> {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></strong></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </section>

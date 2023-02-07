@@ -94,7 +94,7 @@
                                 <div class="col-sm-6 mx-auto " style="text-align: center;  font-size:20px">
                                     {{ session('msg') }}</div>
                             @endif
-                            <form method="post" action="{{URL('Admin-Panel/tickets/ticket-listing')}}" >
+                            <form method="post" action="{{URL('Admin-Panel/tickets/ticket-listing')}}"  enctype="multipart/form-data" >
                                 @csrf
                                 <div class="form-row">
                                     <div
@@ -313,7 +313,18 @@
                                         </select>
                                     </div>
                                 </div>
-                    
+                                {{-- <div class="form-group ">
+                                    <label class="text-lg-right col-form-label">Image<span
+                                            class="text-danger">*</span></label>
+                                    <div class=" col-xl-6">
+                                        <div class="custom-file">
+                                            <input type="file" name="layoutImage" class="custom-file-input"
+                                                id="exampleInputFile">
+                                            <label class="custom-file-label"
+                                                for="exampleInputFile">Choose file</label>
+                                        </div>      
+                                    </div>
+                                </div> --}}
                                 <button
                                     type="submit"
                                     class="btn btn-primary"

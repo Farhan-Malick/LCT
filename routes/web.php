@@ -39,6 +39,9 @@ Route::get('/signup', function () {
 Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
+Route::get('/TicketDetail', function () {
+    return view('payment-tickets/ticket_detail');
+});
 // Route::get('/dashboard/orders', function () {
 //     return view('dashboard/orders');
 // });
@@ -80,7 +83,7 @@ Route::get('/Sell-tickets/set-ticket-address', function () {
     return view('tickets/set-ticket-address');
 });
 // Route::get('/Sell-tickets/setticketprice', function () {
-//     return view('tickets/setticketprice');
+//     return view('ticketsTicketController');
 // });
 Route::get('/tickets/{id}/setticketprice' , [TicketController::class,'show_price'])->name('seller.ticket_price.index');
 
@@ -126,11 +129,14 @@ Route::post('/Sell-tickets/{ticket_listing}/upload-ticket', [TicketController::c
 // Route::get('/ticket/{id}/view' , [TicketController::class,'buyer_ticket_show'])->name('buyer.ticket.show');
 
 // Purchase module
+
 Route::get('/ticket/{id}/view' , [PurchasesController::class,'buyer_ticket_show'])->name('buyer.ticket.show');
 Route::post('/ticket/{ticketid}/purchase' , [PurchasesController::class,'buyer_ticket_purchase'])->name('buyer.ticket.purchase');
 Route::post('/tickets/{eventlisting_id}/{ticketid}/{sellerid}/view' , [PurchasesController::class,'buyer_ticket_create'])->name('buyer.ticket.create');
 
 Route::get('/ticket/{eventlisting_id}/{ticketid}/{sellerid}/checkout' , [PurchasesController::class,'buyer_ticket_checkout'])->name('buyer.ticket.checkout');
+
+Route::get('/ticket/{eventlisting_id}/{ticketid}/{sellerid}/TicketDetail' , [PurchasesController::class,'buyer_ticket_detail'])->name('buyer.ticket.detail');
 // Route::get('/ticket/checkout', function () {
 //     return view('payment-tickets.checkout');
 // })->name("tickets.checkout");

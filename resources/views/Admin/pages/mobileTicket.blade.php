@@ -127,7 +127,7 @@
                                 </thead>
                                 <tbody>
 									@foreach($tickets as $m_ticket)
-									@if($m_ticket->ticket_type == "mobile-ticket")
+									@if($m_ticket->ticket_type == "Mobile-Ticket")
 										<tr>
 											<td>{{$m_ticket->id}}</td>
 											{{-- <td>{{$m_ticket->title}}</td> --}}

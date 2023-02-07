@@ -26,7 +26,23 @@
   </head>
 
 <body>
-
+<!--Start of Tawk.to Script-->
+<!--Start of Tawk.to Script-->
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/63da4b37474251287910d929/1go6bbklo';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+  <!--End of Tawk.to Script-->
+  <!--End of Tawk.to Script-->
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
@@ -238,17 +254,47 @@
           </div>
         </div>
         <div class="container ml-5 mr-5 mb-5 ">
-          <form method="get" id="qty-form">
-                {{-- <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif"> --}}
-                <div class="input-group w-100">
-                <input type="text" class="form-control" name="search_text"  placeholder="Search Event Name" value="@if(request()->get('search_text')) <?= request()->get('search_text')?> @endif"/>
-                  <div class="input-group-append">
-                      <button class="btn btn-lg search-btn px-3" type="submit" value="Search">
-                          <i class="bi bi-search"></i>
-                      </button>
-                  </div>
+         <div class="row">
+            <div class="col-lg-8">
+                <form method="get" id="qty-form">
+                  {{-- <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif"> --}}
+                  <div class="input-group w-100">
+                  <input type="text" class="form-control" name="search_text"  placeholder="Search Event Name" value="@if(request()->get('search_text')) <?= request()->get('search_text')?> @endif"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-lg search-btn px-3" type="submit" value="Search">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-lg-4">
+              {{-- <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown button
+                </button>
+                <ul class="dropdown-menu">
+                  @foreach ($allevents as $all)
+                  <li><a class="dropdown-item text-dark" href="{{ route('buyer.ticket.show',$all->id) }}"> {{$all->even_name}}</a></li>
+                  @endforeach
+                </ul>
+              </div> --}}
+              <form method="get" id="qty-form">
+                <div class="form-group">
+                  {{-- <label for="row">Restrictions</label> --}}
+                  <select class="form-select form-control-lg"  name="homeFilters">
+                      <option selected disabled>ALL EVENTS</option>
+                     @foreach ($allevents as $all)
+                    <option value="homeFilters">{{$all->event_name}}</option></a>
+                     @endforeach
+                  </select>
+                  <a href="{{ route('buyer.ticket.show',$all->id) }}" class="btn btn-lg search-btn px-3" type="submit" value="Search"> 
+                    <i class="bi bi-search"></i>
+                  </a>
               </div>
-            </form>
+              </form>
+            </div>
+         </div>
         </div>
           @if(count($events) == 0)
           <div>

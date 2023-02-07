@@ -31,6 +31,15 @@ class EventListingController extends Controller
         $ticket->venue_name=$request->venue_name;
         $ticket->start_time=$request->start_time;
         $ticket->end_time=$request->end_time;
+
+        // if($request->hasfile('layoutImage'))
+        // {
+        //     $layoutImage=$request->file('layoutImage');
+        //     $ext = $layoutImage->GetClientOriginalExtension();
+        //     $file2=time().'.'.$ext;
+        //     $layoutImage->storeAs('public/post',$file2);
+        //     $ticket['layoutImage']=$file2;
+        // } 
         // dd($ticket);
         $ticket->save();
         $request->session()->flash('msg','Listing Has Been Added Successfully'); 

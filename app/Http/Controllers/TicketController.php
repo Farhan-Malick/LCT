@@ -40,9 +40,10 @@ class TicketController extends Controller
         $venue_section_rows = VenueSectionRows::all();
         $venue_sections = VanueSections::all();
         $sellerCategories = SellerCategory::all();
+        $Listing = TicketListing::first();
         $cat = SellerCategory::first();
         $sec = VanueSections::first();
-        return view('tickets/tickets-details',compact('sec','cat','venue_section_rows','venue_sections','EventListing','currencies','sellerCategories'));
+        return view('tickets/tickets-details',compact('Listing','sec','cat','venue_section_rows','venue_sections','EventListing','currencies','sellerCategories'));
     }
 
     public function sendAwienMail(){
@@ -98,30 +99,40 @@ class TicketController extends Controller
      */
     public function store(Request $request, $id)
     {
-        // $request->validate([
-        //     "seated_area" => "required",
-        //     "categories" => "required",
-        // ]);
-        // dd($request);
         $guestUser = LoginController::guestLogin();
         $ticketListing = new TicketListing();
-        $category = SellerCategory::first();
+        $sellerCategories = SellerCategory::first();
+        $Listing = TicketListing::first();
         $venue_sections = VanueSections::first();
+        
+        $this->validate($request, [
+            'ticket_restrictions'         => 'required',
+            'seated_area'                 => 'required',
+            'ticket_type'                 => 'required'
+        ]
+    );
+        // $request->validate([
+        //     'ticket_restrictions' => 'required',
+        //     'seated_area' => 'required'
+            
+        // ]);
+        // dd($request);
+      
 
         $ticketListing->user_id = $guestUser;
         $ticketListing->eventlisting_id = $id;
         $ticketListing->currency = $request->currency;
         $ticketListing->seated_area = $request->seated_area;
         $ticketListing->categories = $request->categories;
-
-       if($category == null){
+        
+       if($sellerCategories == null){
         $ticketListing->type_cat = $request->type_cat;
        }
        if($venue_sections == null){
         $ticketListing->type_sec = $request->type_sec;
        }
         $ticketListing->type_row = $request->type_row;
-        $ticketListing->ticket_benefits = $request->ticket_benefits;
+        $ticketListing->ticket_benefits = json_encode($request->ticket_benefits);
         $ticketListing->fan_section = $request->fan_section;
 
         $ticketListing->section = $request->sections;
@@ -129,13 +140,25 @@ class TicketController extends Controller
         $ticketListing->seat_from = $request->seat_from;
         $ticketListing->seat_to = $request->seat_to;
         $ticketListing->price = $request->price;
-        $ticketListing->ticket_restrictions = $request->ticket_restrictions;
+        $ticketListing->ticket_restrictions = json_encode($request->ticket_restrictions);
+        
         $ticketListing->ticket_type = $request->ticket_type;
         $ticketListing->quantity = $request->total_tickets;
         $ticketListing->reason_seating_unable = $request->reason_seating_unable;
+        
+        if($ticketListing->ticket_type == "Paper-Ticket"){
+            $ticketListing->country = $request->country;
+        }
+        // if($request->hasFile('simple_pdf')){
+        //     $simple_pdf = $request->file('simple_pdf');
+        //     $thumbnail_name = time().'_'.$simple_pdf->getClientOriginalName();
+        //     $simple_pdf->move(public_path('/booking'), $thumbnail_name);
+        //     $ticketListing->simple_pdf = $thumbnail_name;
+        // }
+       
         $ticketListing->save();
 
-        if ($request->ticket_type === "e-ticket") {
+        if ($request->ticket_type === "E-Ticket") {
             return redirect()->route('event.ticketlisting.ticket.upload', ['ticket_listing' => $ticketListing->id]);
         } else {
             return redirect()->route('seller.ticket_price.index', ['id' => $ticketListing->id]);
@@ -150,40 +173,45 @@ class TicketController extends Controller
         $tickets->price = $request->price;
         $tickets->currency = $request->currency;
         $tickets->update();
-       if($tickets->ticket_type === "e-ticket")
-       {
-        $tickets = TicketListing::find($id);
-        $tickets->price = $request->price;
-        $tickets->currency = $request->currency;
-        $tickets->completed = 1;
-        $tickets->update();
-        MailController::ticketlistingadded($user->email);
-        return redirect()->back()->with('msg','Your tickets has been created, Your ticket will be in the Listings when Admin will Approve.');
-       }
-       else{
+       
         return redirect()->route('seller.complete_ticket.address.save', ['id' => $tickets->id]);
-       }
        
     }
 
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)
     {
-
         $tickets = TicketListing::find($id);
+
+        if($tickets->ticket_type !== "E-Ticket")
+        {
+            $request->validate(
+                [
+                  'simple_pdf'       =>  'required|mimes: csv,txt,xlx,xls,pdf|max:2048'
+                ]);
+        }
+       
         $user = User::find($tickets->user_id);
         $seller = new Seller();
         $seller->user_id = $user->id;
-        $seller->email = $request->email;
-        $seller->first_name = $request->firstname;
-        $seller->last_name = $request->lastname;
+        // $seller->email = $request->email;
+        // $seller->first_name = $request->firstname;
+        // $seller->last_name = $request->lastname;
         $seller->country = $request->country;
-        $seller->address_line_1 = $request->address1;
-        $seller->address_line_2 = $request->address2;
-        $seller->address_line_3 = $request->address3;
-        $seller->city = $request->city;
-        $seller->state = $request->state;
-        $seller->zip_code = $request->zipcode;
-        $seller->phone = $request->phone;
+        if($request->hasfile('simple_pdf'))
+        {
+            $simple_pdf=$request->file('simple_pdf');
+            $ext = $simple_pdf->GetClientOriginalExtension();
+            $file2=time().'.'.$ext;
+            $simple_pdf->storeAs('public/post',$file2);
+            $seller['simple_pdf']=$file2;
+        } 
+        // $seller->address_line_1 = $request->address1;
+        // $seller->address_line_2 = $request->address2;
+        // $seller->address_line_3 = $request->address3;
+        // $seller->city = $request->city;
+        // $seller->state = $request->state;
+        // $seller->zip_code = $request->zipcode;
+        // $seller->phone = $request->phone;
         $seller->save();
 
         /* if(!Auth::check()) {
@@ -192,7 +220,7 @@ class TicketController extends Controller
             $user->email = $request->email;
             $user->phone = $request->phone;
             $user->update();
-        } */
+        } */    
         $tickets->completed = 1;
         $tickets->update();
         MailController::ticketlistingadded($user->email);
@@ -273,8 +301,9 @@ class TicketController extends Controller
         $divide = $price / 100;
         $percentage = $divide * 10;
         $grand_total = $price - $percentage;
+        $webCharge = $price / 10;
         return view('tickets/setticketprice',compact(
-            'currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency', 'maxValue', 'minValue'
+            'currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency', 'maxValue', 'minValue','webCharge'
         ));
     }
 

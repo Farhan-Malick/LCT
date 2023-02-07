@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\EventListing;
 use App\Models\Category;
 
 
@@ -25,8 +26,9 @@ class WebController extends Controller
         if($request->search_text !== null){
             $events = $events->where('events.title', 'like', '%'.$request->search_text.'%');
         }
+        $allevents=EventListing::all();
         $events = $events->get();
-        return view('home', compact('events', 'categories'));
+        return view('home', compact('events', 'categories','allevents'));
     }
 
     /**

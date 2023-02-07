@@ -16,17 +16,11 @@ return new class extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
             $table->string('user_id')->nullable();
-            $table->string('email');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('country');
-            $table->string('address_line_1');
-            $table->string('address_line_2');
-            $table->string('address_line_3');
-            $table->string('city');
-            $table->string('state');
-            $table->bigInteger('zip_code');
-            $table->bigInteger('phone');
+            // $table->string('email')->nullable();
+            // $table->string('first_name')->nullable();
+            // $table->string('last_name')->nullable();
+            $table->string('simple_pdf')->nullable();
+            $table->string('country')->nullable();
             $table->timestamps();
         });
     }

@@ -128,7 +128,7 @@
 							</thead>
 							<tbody>
 									@foreach($tickets as $ticket)
-										@if($ticket->ticket_type == "paper-ticket")
+										@if($ticket->ticket_type == "Paper-Ticket")
 											<tr>
 												<td>{{$ticket->id}}</td>
 												{{-- <td>{{$ticket->title}}</td> --}}

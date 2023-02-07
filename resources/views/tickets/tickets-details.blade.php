@@ -24,9 +24,47 @@
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <title>Sell Tickets - LAST CHANCE TICKET</title>
+    <style>
+        .track-line {
+            height: 2px !important;
+            background-color: #61c3e3;
+            opacity: 1;
+            }
+
+            .dot {
+            height: 10px;
+            width: 10px;
+            margin-left: 3px;
+            margin-right: 3px;
+            margin-top: 0px;
+            background-color: #61c3e3;
+            border-radius: 50%;
+            display: inline-block
+            }
+
+            .big-dot {
+            height: 25px;
+            width: 25px;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 0px;
+            background-color: #61c3e3;
+            border-radius: 50%;
+            display: inline-block;
+            }
+
+            .big-dot i {
+            font-size: 12px;
+            }
+
+            .card-stepper {
+            z-index: 0
+            }
+    </style>
+
 </head>
 
-<body>
+<body style="">
     <div id="js-preloader" class="js-preloader">
         <div class="preloader-inner">
           <span class="dot"></span>
@@ -41,34 +79,227 @@
     <section class="section-two reservation-form-sell" style="margin-top: 100px">
         <div class="container my-4">
             <div class="row">
-                <div class="col-lg-9">
+               
+            </div>
+            <div class="row mb-5">
+                <div class="col-lg-12 ">
                     <form action="{{route('seller.ticketlisting.store',$EventListing->id)}}" method="post" id="reservation-form">
                     @csrf
                         <!-- alert start here -->
-                        <div class="alert alert-primary d-flex align-items-center" role="alert">
-                            <i class="bi bi-info-circle me-3"></i>
-                            <div>You can edit your ticket details and price later</div>
-                        </div>
+                            
                         <!-- cards-row starts here  -->
-                        <div class="row ">
-                            <div class="col-lg-12">
-                                <h4 class="fw-700 mb-2">Choose Ticket Type</h4>
-                                <input  type="hidden" id="ticket-type" name="ticket_type" value="paper-ticket" />
+                            <div class="row ">
+                                <div class="col-lg-12 " >
+                                    <div class="card card-stepper shadow-sm main-card br-10" style="border-radius: 10px;">
+                                    <div class="card-body p-4">
+                            
+                                        <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex flex-column">
+                                            <span class="lead fw-normal">Your Ticket Details</span>
+                                            <span class="text-muted small">by LAST CHANCE TICKET</span>
+                                        </div>
+                                        <div>
+                                            <a href="{{URL('/')}}" class="">
+                                                <h3 style="font-family: Georgia, 'Times New Roman', Times, serif">LAST CHANCE TICKET</h3>
+                                                {{-- <img src="{{asset('assets/images/logo1.png')}}" width="30px" height="40px" alt=""> --}}
+                                            </a>
+                                            {{-- <button class="btn btn-outline-primary" type="button">Track order details</button> --}}
+                                            {{-- <span class="bg-danger text-white p-2" style=" border-radius: 30%" type="">{{ get_when($events->event_date) }}</span> --}}
+                                        </div>
+                                        </div>
+                                        <hr class="my-4">
+                            
+                                        <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
+                                        <span class="dot"></span>
+                                        <hr class="flex-fill track-line"><span class="dot"></span>
+                                        <hr class="flex-fill track-line"><span class="dot"></span>
+                                        <hr class="flex-fill track-line"><span class="dot"></span>
+                                        <hr class="flex-fill track-line"><span
+                                            class="d-flex justify-content-center align-items-center big-dot dot">
+                                            <i class="fa fa-check text-white"></i></span>
+                                        </div>
+                                        <div class="row d-flex flex-row justify-content-between align-items-center">
+                                        
+                                        <div class="col-md-2 d-flex flex-column align-items-start"><span><b>EVENT : </b> <br>{{$EventListing->event_name}}</span></div>
+                                        <div class="col-md-2 d-flex flex-column "><span></span><b>TIME :</b>{{$EventListing->start_time}} - {{$EventListing->end_time}}<span></div>
+                                        <div class="col-md-2 d-flex  flex-column  "><span><b>DATE : </b><br>({{$EventListing->event_date}})</span></div>
+                                        <div class="col-md-2 d-flex flex-column "><span><b>VENUE : </b><br>{{$EventListing->venue_name}} , {{$EventListing->location}}</span></div>
+                                        
+                                        <div class="col-md-2 d-flex flex-column "><span id="ticket-type-box"></span></div>
+                
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="col-lg-12 mt-5 ">
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card shadow-sm mb-3 select-card select-active" data-ticket="paper-ticket">
+                                    <div class="col-lg-12">
+                                        @if ($errors->any())
+                                        <div class="alert alert-danger" role="alert">
+                                            <div class="alert-icon">
+                                                <i class="flaticon-warning "></i>
+                                            </div>
+                                            <div class="alert-text">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div><br />
+                                    @endif
+                                    </div>
+                                </div>
+                                {{-- <input  type="hidden" id="ticket-type" name="ticket_type" value="Paper-Ticket" /> --}}
+                                <div class="row ">
+                                    <div class="col-md-12 card p-4 mb-3 shadow-sm main-card br-10">
+                                        <h1 class="fw-700 mb-2 mt-3 text-center">Choose Ticket Type <span style="color: red">*</span></h1>
+                                            <p style="none" class="text-center mb-2">
+                                                <i class="bi bi-info-circle-fill"></i>
+                                                Please Choose Ticket Type. Paper Ticket, Electronic tickets in PDF format, and You'll have Mobile Ticket via App<br>
+                                            </p>
+                                        <div class="form-group text-center "  name="ticket_type"  style="font-size: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                                           <div class="container">
+                                            <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px" data-ticket="Paper-Ticket" value="Paper-Ticket" name="ticket_type" id="progress1"> Paper Ticket <sup class="checked"></sup>
+                                            <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px"  data-ticket="E-Ticket" value="E-Ticket" name="ticket_type" id="progress2"> E-Ticket <sup class="checked"></sup>
+                                            <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px"  data-ticket="Mobile-Ticket" value="Mobile-Ticket" name="ticket_type" id="progress3">   Mobile Ticket <sup class="checked"></sup>
+                                           </div>
+                                        </div> 
+                                            <style>
+                                                 .checked{
+                                                        color: red;
+                                                        content: " *";
+                                                        font-weight: bold;
+                                                    }
+                                            </style>
+                                        <script>
+                                        function ckChange(ckType){
+                                            var ckName = document.getElementsByName(ckType.name);
+                                            var checked = document.getElementById(ckType.id);
+
+                                            if (checked.checked) {
+                                            for(var i=0; i < ckName.length; i++){
+
+                                                if(!ckName[i].checked){
+                                                    ckName[i].disabled = true;
+                                                }else{
+                                                    ckName[i].disabled = false;
+                                                }
+                                            } 
+                                            }
+                                            else {
+                                            for(var i=0; i < ckName.length; i++){
+                                                ckName[i].disabled = false;
+                                            } 
+                                            }    
+                                        }
+                                        </script>
+                                        {{-- <div class="form-group ">
+                                            <select class="form-select select-card select-active @error('ticket_type') is-invalid @enderror" >
+                                                <input  type="hidden" id="ticket-type" name="ticket_type" value="Paper-Ticket" />
+                                                <option selected disabled>Please Select Ticket Type</option>
+                                                <option value="" class="select-card select-active" data-ticket="Paper-Ticket">Paper Ticket</option>
+                                                <option value=""  class="select-card" data-ticket="E-Ticket">E-Ticket</option>
+                                                <option value="" class="select-card" data-ticket="Mobile-Ticket">Mobile-Ticket</option>
+                                            </select>
+                                            @error('ticket_type')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div> --}}
+                                        {{-- <div class="card shadow-sm mb-3 select-card select-active" data-ticket="Paper-Ticket">
                                             <div class="card-body py-5">
                                                 <div class="card-subtitle">
-                                                    {{-- <input style="border:none" type="text" id="test" value="Paper Ticket"> --}}
                                                     <strong> Paper Tickets</strong>
                                                 </div>
                                                 <div class="card-description">Printed tickets, not in E-format
                                                 </div>
                                             </div>
+                                        </div> --}}
+                                        <div class="col-lg-12">
+                                            <h4 class="fw-700 mt-4">Enter Number of Tickets <span style="color: red">*</span></h4>
+                                            <div class="card p-4 mb-3 shadow-sm  br-10">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <p>
+                                                            <i class="bi bi-info-circle-fill"></i>
+                                                            If seat numbers are specified on your tickets, all tickets must be
+                                                            consecutive. <br>
+                                                            For non-consecutive tickets, you must create separate listings.
+                                                        </p>
+                                                    </div>
+                                                    <input  type="hidden" id="no_of_ticket1" name="total_tickets" value="1" />
+                                                    {{-- <div class="form-group text-center "  name="total_tickets"  style="font-size: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                                                        <div class="container">
+                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2 select-active  ticket-num-card p-4 border 1px" data-tickets-val="1" value="1" name="total_tickets" id="progress1"> 1 
+                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="2" value="2" name="total_tickets" id="progress2"> 2
+                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="3" value="3" name="total_tickets" id="progress3">  3 
+
+                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2 select-active  ticket-num-card p-4 border 1px" data-tickets-val="4" value="4" name="total_tickets" id="progress4"> 4 
+                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="5" value="5" name="total_tickets" id="progress5"> 5
+                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="6" value="6" name="total_tickets" id="progress6">  6 +
+                                                        </div>
+                                                     </div>  --}}
+                                                    {{-- <select class="form-select ticket-num-card select-active @error('ticket_type') is-invalid @enderror" >
+                                                        <option selected disabled>Please Select No Of Ticket Type</option>
+                                                        <option value="1" class="select-card  select-active"data-tickets-val="1">1</option>
+                                                        <option value="2"  class="select-card"data-tickets-val="2">2</option>
+                                                        <option value=""data-tickets-val="Mobile-Ticket">3</option>
+                                                    </select> --}}
+            
+                                                    <div class="col-sm-3 col-md-3 col-lg-2">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="1">
+                                                                <h5>1</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3 col-lg-2">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body  ticket-num-card cursor-pointer shadow-sm" data-tickets-val="2">
+                                                                <h5>2</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3 col-lg-2">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="3">
+                                                                <h5>3</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3 col-lg-2">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="4">
+                                                                <h5>4</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3 col-lg-2">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="5">
+                                                                <h5>5</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3 col-lg-2">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="6">
+                                                                <h5>6+</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12" id="ticket-more-6" style="display:none">
+                                                        <input  type="text" class="form-control inputstyle" id="total-tickets" placeholder="Total Tickets" name="total_tickets">
+                                                        {{-- <small class="text-muted">Total tickets</small> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div id="ticket_type" class="card shadow-sm mb-3 select-card" data-ticket="e-ticket">
+                                    {{-- <div class="col-md-4">
+                                        <div id="ticket_type" class="card shadow-sm mb-3 select-card" data-ticket="E-Ticket">
                                             <div class="card-body py-5">
                                                 <div class="card-subtitle">
                                                     <strong>E-Tickets</strong>
@@ -80,7 +311,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div id="ticket_type" class="card shadow-sm mb-3 select-card" data-ticket="mobile-ticket">
+                                        <div id="ticket_type" class="card shadow-sm mb-3 select-card" data-ticket="Mobile-Ticket">
                                             <div class="card-body py-5">
                                                 <div class="card-subtitle">
                                                     <strong>Mobile Ticket</strong>
@@ -90,73 +321,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
+                                    
                                 </div>
+                                
                             </div>
+                           
                             <div class="col-lg-12">
-                                <h4 class="fw-700">Enter Number of Tickets</h4>
-                                <div class="card p-4 mb-3 shadow-sm main-card br-10">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <p>
-                                                <i class="bi bi-info-circle-fill"></i>
-                                                If seat numbers are specified on your tickets, all tickets must be
-                                                consecutive. <br>
-                                                For non-consecutive tickets, you must create separate listings.
-                                            </p>
-                                        </div>
-                                        <div class="col-sm-3 col-md-3 col-lg-2">
-                                            <div class="card mb-3">
-                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="1">
-                                                    <h5>1</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 col-md-3 col-lg-2">
-                                            <div class="card mb-3">
-                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="2">
-                                                    <h5>2</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 col-md-3 col-lg-2">
-                                            <div class="card mb-3">
-                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="3">
-                                                    <h5>3</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 col-md-3 col-lg-2">
-                                            <div class="card mb-3">
-                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="4">
-                                                    <h5>4</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 col-md-3 col-lg-2">
-                                            <div class="card mb-3">
-                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="5">
-                                                    <h5>5</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 col-md-3 col-lg-2">
-                                            <div class="card mb-3">
-                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="6">
-                                                    <h5>6+</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12" id="ticket-more-6" style="display:none">
-                                            <input  type="text" class="form-control inputstyle" id="total-tickets" placeholder="Total Tickets" name="total_tickets">
-                                            <small class="text-muted">Total tickets</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <h4 class="fw-700"> Enter Seating Details</h4>
+                                
+                                <h4 class="fw-700"> Enter Seating Details<span style="color: red">*</span></h4>
                                 <div class="card p-4 mb-3 shadow-sm main-card br-10">
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -169,17 +342,12 @@
                                             <div class="form">
                                                 <div class="form-group">
                                                     <label for="row">Seating Area</label>
-                                                    <select class="form-select @error('seated_area') is-invalid @enderror"  required autocomplete="seated_area" autofocus name="seated_area">
+                                                      <select class="form-select "  required autocomplete="seated_area" autofocus name="seated_area">
                                                         <option selected disabled>Please Select Row</option>
                                                         <option value="Seated Tickets">Seated Tickets</option>
                                                         <option value="Standing Tickets">Standing Tickets</option>
                                                         <option value="Free Seating">Free Seating</option>
                                                     </select>
-                                                    @error('seated_area')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -315,7 +483,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <h4 class="fw-700">Enter Face Value</h4>
+                                <h4 class="fw-700">Enter Face Value<span style="color: red">*</span></h4>
                                 <div class="card mb-3 shadow-sm p-4 main-card br-10">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -351,8 +519,282 @@
                                 </div>
 
                             </div>
+                            {{-- @if($Listing->ticket_type == "Paper-Ticket") --}}
+                                <div class="col-lg-12">
+                                    <h4 class="fw-700">Select Country<span style="color: red">*</span></h4>
+                                    <div class="card mb-3 shadow-sm p-4 main-card br-10">
+                                        <div class="row">
+                                            <div class="col-md-12">
+    
+                                                <p> <i class="bi bi-info-circle-fill me-2"></i>Select your Actual Country.
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                     <div class="form-group row m-b-10">
+                                                        <label class="col-lg-12 text-lg-right col-form-label">Select Country :</label>
+                                                            <select name="country" class="form-control" id="country" >
+                                                                <option >Select Country</option>
+                                                                <option name="country">Afghanistan</option>
+                                                                <option name="country">Åland Islands</option>
+                                                                <option  name="country" >Albania</option>
+                                                                <option  name="country" >Algeria</option>
+                                                                <option  name="country" >American Samoa</option>
+                                                                <option  name="country" >Andorra</option>
+                                                                <option  name="country" >Angola</option>
+                                                                <option  name="country" >Anguilla</option>
+                                                                <option  name="country" >Antarctica</option>
+                                                                <option  name="country" >Antigua & Barbuda</option>
+                                                                <option  name="country" >Argentina</option>
+                                                                <option  name="country" >Armenia</option>
+                                                                <option  name="country" >Aruba</option>
+                                                                <option  name="country" >Australia</option>
+                                                                <option  name="country" >Austria</option>
+                                                                <option  name="country" >Azerbaijan</option>
+                                                                <option  name="country" >Bahamas</option>
+                                                                <option  name="country" >Bahrain</option>
+                                                                <option  name="country" >Bangladesh</option>
+                                                                <option  name="country" >Barbados</option>
+                                                                <option  name="country" >Belarus</option>
+                                                                <option  name="country" >Belgium</option>
+                                                                <option  name="country" >Belize</option>
+                                                                <option  name="country" >Benin</option>
+                                                                <option  name="country" >Bermuda</option>
+                                                                <option  name="country" >Bhutan</option>
+                                                                <option  name="country" >Bolivia</option>
+                                                                <option  name="country" >Caribbean Netherlands</option>
+                                                                <option  name="country" >Bosnia & Herzegovina</option>
+                                                                <option  name="country" >Botswana</option>
+                                                                <option  name="country" >Bouvet Island</option>
+                                                                <option  name="country" >Brazil</option>
+                                                                <option  name="country" >British Indian Ocean Territory</option>
+                                                                <option  name="country" >Brunei</option>
+                                                                <option  name="country" >Bulgaria</option>
+                                                                <option  name="country" >Burkina Faso</option>
+                                                                <option  name="country" >Burundi</option>
+                                                                <option  name="country" >Cambodia</option>
+                                                                <option  name="country" >Cameroon</option>
+                                                                <option  name="country" >Canad</option>
+                                                                <option  name="country" >Cape Verde</option>
+                                                                <option  name="country" >Cayman Islands</option>
+                                                                <option  name="country" >Central African Republic</option>
+                                                                <option  name="country" >Chad</option>
+                                                                <option  name="country" >Chile</option>
+                                                                <option  name="country" >China</option>
+                                                                <option  name="country" >Christmas Island</option>
+                                                                <option  name="country" >Cocos (Keeling) Islands</option>
+                                                                <option  name="country" >Colombia</option>
+                                                                <option  name="country" >Comoros</option>
+                                                                <option  name="country" >Congo - Brazzaville</option>
+                                                                <option  name="country" >Congo - Kinshasa</option>
+                                                                <option  name="country" >Cook Islands</option>
+                                                                <option  name="country" >Costa Rica</option>
+                                                                <option  name="country" >Côte d’Ivoire</option>
+                                                                <option  name="country" >Croatia</option>
+                                                                <option  name="country" >Cuba</option>
+                                                                <option  name="country" >Curaçao</option>
+                                                                <option  name="country" >Cyprus</option>
+                                                                <option  name="country" >Czechia</option>
+                                                                <option  name="country" >Denmark</option>
+                                                                <option  name="country" >Djibouti</option>
+                                                                <option  name="country" >Dominica</option>
+                                                                <option  name="country" >Dominican Republic</option>
+                                                                <option  name="country" >Ecuador</option>
+                                                                <option  name="country" >Egypt</option>
+                                                                <option  name="country" >El Salvador</option>
+                                                                <option  name="country" >Equatorial Guinea</option>
+                                                                <option  name="country" >Eritrea</option>
+                                                                <option  name="country" >Estonia</option>
+                                                                <option  name="country" >Ethiopia</option>
+                                                                <option  name="country" >Falkland Islands (Islas Malvinas)</option>
+                                                                <option  name="country" >Faroe Islands</option>
+                                                                <option  name="country" >Fiji</option>
+                                                                <option  name="country" >Finland</option>
+                                                                <option  name="country" >France</option>
+                                                                <option  name="country" >French Guiana</option>
+                                                                <option  name="country" >French Polynesia</option>
+                                                                <option  name="country" >French Southern Territories</option>
+                                                                <option  name="country" >Gabon</option>
+                                                                <option  name="country" >Gambia</option>
+                                                                <option  name="country" >Georgia</option>
+                                                                <option  name="country" >Germany</option>
+                                                                <option  name="country" >Ghana</option>
+                                                                <option  name="country" >Gibraltar</option>
+                                                                <option  name="country" >Greece</option>
+                                                                <option  name="country" >Greenland</option>
+                                                                <option  name="country" >Grenada</option>
+                                                                <option  name="country" >Guadeloupe</option>
+                                                                <option  name="country" >Guam</option>
+                                                                <option  name="country" >Guatemala</option>
+                                                                <option  name="country" >Guernsey</option>
+                                                                <option  name="country" >Guinea</option>
+                                                                <option  name="country" >Guinea-Bissau</option>
+                                                                <option  name="country" >Guyana</option>
+                                                                <option  name="country" >Haiti</option>
+                                                                <option  name="country" >Heard & McDonald Island</option>
+                                                                <option  name="country" >Vatican City</option>
+                                                                <option  name="country" >Honduras</option>
+                                                                <option  name="country" >Hong Kong</option>
+                                                                <option  name="country" >Hungary</option>
+                                                                <option  name="country" >Iceland</option>
+                                                                <option  name="country" >India</option>
+                                                                <option  name="country" >Indonesia</option>
+                                                                <option  name="country" >Iran</option>
+                                                                <option  name="country" >Iraq</option>
+                                                                <option  name="country" >Ireland</option>
+                                                                <option  name="country" >Isle of Man</option>
+                                                                <option  name="country" >Israel</option>
+                                                                <option  name="country" >Italy</option>
+                                                                <option  name="country" >Jamaica</option>
+                                                                <option  name="country" >Japan</option>
+                                                                <option  name="country" >Jersey</option>
+                                                                <option  name="country" >Jordan</option>
+                                                                <option  name="country" >Kazakhsta</option>
+                                                                <option  name="country" >Kenya</option>
+                                                                <option  name="country" >Kiribati</option>
+                                                                <option  name="country" >North Korea</option>
+                                                                <option  name="country" >South Korea</option>
+                                                                <option  name="country" >Kosovo</option>
+                                                                <option  name="country" >Kuwait</option>
+                                                                <option  name="country" >Kyrgyzstan</option>
+                                                                <option  name="country" >Laos</option>
+                                                                <option  name="country" >Latvia</option>
+                                                                <option  name="country" >Lebanon</option>
+                                                                <option  name="country" >Lesotho</option>
+                                                                <option  name="country" >Liberia</option>
+                                                                <option  name="country" >Libya</option>
+                                                                <option  name="country" >Liechtenstein</option>
+                                                                <option  name="country" >Lithuania</option>
+                                                                <option  name="country" >Luxembourg</option>
+                                                                <option  name="country" >Macao</option>
+                                                                <option  name="country" >North Macedonia</option>
+                                                                <option  name="country" >Madagascar</option>
+                                                                <option  name="country" >Malawi</option>
+                                                                <option  name="country" >Malaysia</option>
+                                                                <option  name="country" >Maldives</option>
+                                                                <option  name="country" >Mali</option>
+                                                                <option  name="country" >Malta</option>
+                                                                <option  name="country" >Marshall Islands</option>
+                                                                <option  name="country" >Martinique</option>
+                                                                <option  name="country" >Mauritania</option>
+                                                                <option  name="country" >Mauritius</option>
+                                                                <option  name="country" >Mayotte</option>
+                                                                <option  name="country" >Mexico</option>
+                                                                <option  name="country" >Micronesia</option>
+                                                                <option  name="country" >Moldova</option>
+                                                                <option  name="country" >Monaco</option>
+                                                                <option  name="country" >Mongolia</option>
+                                                                <option  name="country" >Montenegro</option>
+                                                                <option  name="country" >Montserrat</option>
+                                                                <option  name="country" >Morocco</option>
+                                                                <option  name="country" >Mozambique</option>
+                                                                <option  name="country" >Myanmar (Burma)</option>
+                                                                <option  name="country" >Namibia</option>
+                                                                <option  name="country" >Nauru</option>
+                                                                <option  name="country" >Nepal</option>
+                                                                <option  name="country" >Netherlands</option>
+                                                                <option  name="country" >Curaçao</option>
+                                                                <option  name="country" >New Caledonia</option>
+                                                                <option  name="country" >New Zealand</option>
+                                                                <option  name="country" >Nicaragua</option>
+                                                                <option  name="country" >Niger</option>
+                                                                <option  name="country" >Nigeria</option>
+                                                                <option  name="country" >Niue</option>
+                                                                <option  name="country" >Norfolk Island</option>
+                                                                <option  name="country" >Northern Mariana Islands</option>
+                                                                <option  name="country" >Norway</option>
+                                                                <option  name="country" >Oman</option>
+                                                                <option  name="country" >Pakistan</option>
+                                                                <option  name="country" >Palau</option>
+                                                                <option  name="country" >Palestine</option>
+                                                                <option  name="country" >Panama</option>
+                                                                <option  name="country" >Papua New Guinea</option>
+                                                                <option  name="country" >Paraguay</option>
+                                                                <option  name="country" >Peru</option>
+                                                                <option  name="country" >Philippines</option>
+                                                                <option  name="country" >Pitcairn Islands</option>
+                                                                <option  name="country" >Poland</option>
+                                                                <option  name="country" >Portugal</option>
+                                                                <option  name="country" >Puerto Rico</option>
+                                                                <option  name="country" >Qatar</option>
+                                                                <option  name="country" >Réunion</option>
+                                                                <option  name="country" >Romania</option>
+                                                                <option  name="country" >Russia</option>
+                                                                <option  name="country" >Rwanda</option>
+                                                                <option  name="country" >St. Barthélemy</option>
+                                                                <option  name="country" >St. Helena</option>
+                                                                <option  name="country" >St. Kitts & Nevis</option>
+                                                                <option  name="country" >St. Lucia</option>
+                                                                <option  name="country" >St. Martin</option>
+                                                                <option  name="country" >St. Pierre & Miquelon</option>
+                                                                <option  name="country" >St. Vincent & Grenadines</option>
+                                                                <option  name="country" >Samoa</option>
+                                                                <option  name="country" >San Marino</option>
+                                                                <option  name="country" >São Tomé & Príncipe</option>
+                                                                <option  name="country" >Saudi Arabia</option>
+                                                                <option  name="country" >Senegal</option>
+                                                                <option  name="country" >Serbia</option>
+                                                                <option  name="country" >Serbia</option>
+                                                                <option  name="country" >Seychelles</option>
+                                                                <option  name="country" >Sierra Leone</option>
+                                                                <option  name="country" >Singapore</option>
+                                                                <option  name="country" >Sint Maarte</option>
+                                                                <option  name="country" >Slovakia</option>
+                                                                <option  name="country" >Slovenia</option>
+                                                                <option  name="country" >Solomon Islands</option>
+                                                                <option  name="country" >Somalia</option>
+                                                                <option  name="country" >South Africa</option>
+                                                                <option  name="country" >South Georgia & South Sandwich Islands</option>
+                                                                <option  name="country" >South Sudan</option>
+                                                                <option  name="country" >Spain</option>
+                                                                <option  name="country" >Sri Lanka</option>
+                                                                <option  name="country" >Sudan</option>
+                                                                <option  name="country" >Suriname</option>
+                                                                <option  name="country" >Svalbard & Jan Mayen</option>
+                                                                <option  name="country" >Eswatini</option>
+                                                                <option  name="country" >Sweden</option>
+                                                                <option  name="country" >Switzerland</option>
+                                                                <option  name="country" >Syria</option>
+                                                                <option  name="country" >Taiwan</option>
+                                                                <option  name="country" >Tajikistan</option>
+                                                                <option  name="country" >Tanzania</option>
+                                                                <option  name="country" >Thailand</option>
+                                                                <option  name="country" >Timor-Leste</option>
+                                                                <option  name="country" >Togo</option>
+                                                                <option  name="country" >Tokelau</option>
+                                                                <option  name="country" >Tonga</option>
+                                                                <option  name="country" >Trinidad & Tobago</option>
+                                                                <option  name="country" >Tunisia</option>
+                                                                <option  name="country" >Turkey</option>
+                                                                <option  name="country" >Turkmenistan</option>
+                                                                <option  name="country" >Turks & Caicos Islands</option>
+                                                                <option  name="country" >Tuvalu</option>
+                                                                <option  name="country" >Uganda</option>
+                                                                <option  name="country" >Ukraine</option>
+                                                                <option  name="country" >United Arab Emirates</option>
+                                                                <option  name="country" >United Kingdom</option>
+                                                                <option  name="country" >United State</option>
+                                                                <option  name="country" >U.S. Outlying Island</option>
+                                                                <option  name="country" >Uruguay</option>
+                                                                <option  name="country" >Uzbekistan</option>
+                                                                <option  name="country" >Vanuatu</option>
+                                                                <option  name="country" >Venezuela</option>
+                                                                <option  name="country" >Vietnam</option>
+                                                                <option  name="country" >British Virgin Islands</option>
+                                                                <option  name="country" >U.S. Virgin Islands</option>
+                                                                <option  name="country" >Wallis & Futuna</option>
+                                                                <option  name="country" >Western Sahara</option>
+                                                                <option  name="country" >Yemen</option>
+                                                                <option  name="country" >Zambia</option>
+                                                                <option  name="country" >Zimbabwe</option>
+                                                            </select>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{-- @endif --}}
                             <div class="col-lg-12">
-                                <h4 class="fw-700">Select Restrictions on Use</h4>
+                                <h4 class="fw-700">Select Restrictions on Use<span style="color: red">*</span></h4>
                                 <div class="card p-4 main-card mb-3 br-10">
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -365,8 +807,8 @@
                                        
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
+                                        <div class="col-lg-12">
+                                            {{-- <div class="form-group">
                                                 <label for="row">Restrictions</label>
                                                 <select class="form-select"  name="ticket_restrictions">
                                                     <option selected disabled>Please Select Restriction</option>
@@ -376,35 +818,91 @@
                                                     <option value="Age Limit 18+">Age Limit 18+</option>
                                                     <option value="Age Limit 21+">Age Limit 21+</option>
                                                 </select>
+                                            </div> --}}
+                                                  
+                                            <div class="form-group">
+                                                <label class="mb-2"><strong>Restrictions :</strong></label><br>
+                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="No Restrictions"> No Restrictions</label>
+                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="Restricted View"> Restricted View</label>
+                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 14+"> Age Limit 14+</label>
+                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 18+"> Age Limit 18+</label>
+                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 21+"> Age Limit 21+</label>
+                                                <label class="m-2"><input type="checkbox" name="" id="myCheck" onclick="myFunction()"> Other</label>
+                                            </div> 
+                                           <style>
+                                            .hide{
+                                                display: none;
+                                            }
+                                           </style>
+                                            <div class="form-group">
+                                                <input type="text" id="text" name="ticket_restrictions[]" class="form-control inputstyle hide" placeholder="Type Restriction">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <script>
+                                            function myFunction() {
+                                                 // Get the checkbox
+                                                 var checkBox = document.getElementById("myCheck");
+                                                 // Get the output text
+                                                 var text = document.getElementById("text");
+
+                                                 // If the checkbox is checked, display the output text
+                                                 if (checkBox.checked == false){
+                                                    text.style.display = "none";
+                                                 } else {
+                                                     text.style.display = "block";
+                                                 }
+                                                 }
+                                         </script>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label for="row">Benefits</label>
-                                                <select class="form-select"  name="ticket_benefits">
-                                                    <option selected disabled>Please Choose Benefits</option>
-                                                    <option value="Food and Meals"> Food and Meals</option>
-                                                    <option value="Parking">Parking</option>
-                                                    <option value="VIP Section">VIP Section</option>
-                                                    <option value="Lounge Access">Lounge Access</option>
-                                                    <option value="Early Entry">Early Entry</option>
-                                                    <option value="Meet and Greet">Meet and Greet</option>
-                                                </select>
+                                                <label class="mb-2 mt-2"><strong>Benefits :</strong></label><br>
+                                                <label class="m-2"><input type="checkbox" name="ticket_benefits[]" value="Food and Meals"> Food and Meals</label>
+                                                <label class="m-2"><input type="checkbox" name="ticket_benefits[]" value="Parking"> Parking</label>
+                                                <label class="m-2"><input type="checkbox" name="ticket_benefits[]" value="VIP Section"> VIP Section</label>
+                                                <label class="m-2"><input type="checkbox" name="ticket_benefits[]"  value="Lounge Access"> Lounge Access</label>
+                                                <label class="m-2"><input type="checkbox" name="ticket_benefits[]" value="Early Entry"> Early Entry</label>
+                                                <label class="m-2"><input type="checkbox" name="ticket_benefits[]" value="Meet and Greet"> Meet and Greet</label>
+                                                <label class="m-2"><input type="checkbox" name="" id="myCheck2" onclick="myFunction2()"> Other</label>
                                             </div>
-                                        </div>
-                                        {{-- <div class="col-lg-6">
+                                            <style>
+                                                .hide{
+                                                    display: none;
+                                                }
+                                            </style>
                                             <div class="form-group">
-                                                <div class="mb-3 form-check " style="border: 1px">
-                                                    <label class="" for="">Select</label><br>
-                                                   <div class="border 1px p-3">
-                                                        <input   type="checkbox" class="form-check-input checkboxs " name="ticket_restrictions" value="No Restrictions">
-                                                        <label class="form-check-label" for="exampleCheck1">No
-                                                            Restrictions </label>
-                                                   </div>
+                                                <input type="text" id="text2" name="ticket_benefits[]" class="form-control inputstyle hide" placeholder="Type Benefits">
+                                            </div>
+                                            <script>
+                                                function myFunction2() {
+                                                        // Get the checkbox
+                                                    var checkBox = document.getElementById("myCheck2");
+                                                    // Get the output text
+                                                    var text = document.getElementById("text2");
+
+                                                    // If the checkbox is checked, display the output text
+                                                    if (checkBox.checked == false){
+                                                    text.style.display = "none";
+                                                    } else {
+                                                        text.style.display = "block";
+                                                    }
+                                                    }
+                                            </script>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="row mt-3">
+                                        <div class="col-12">
+                                            <h5 class="mb-4"><strong> <span  style="color: #61c3e3">UPLOAD</span> PDF FILE FOR <span style="color: #61c3e3">CONFIRMATION</span> BOOKING</strong></h5>
+                                            <div class="form-group row m-b-10">
+                                                <label class="col-lg-3 text-dark text-lg-right col-form-label">PDF FILE<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-lg-9 col-xl-6">
+                                                    <input type="file" name="simple_pdf" placeholder=""  class="form-control-sm" />
                                                 </div>
                                             </div>
-                                        </div> --}}
-                                    </div>
+                                        </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -414,12 +912,10 @@
                     </form>
                 </div>
 
-                <div class="col-lg-3 order-md-last order-first">
+                {{-- <div class="col-lg-3 order-md-last order-first">
                     <div class="card shadow-sm mb-3 type-card main-card br-10">
                         <div class="card-body">
                             <div class="card-title">
-
-                                {{-- <h2 class="mb-3">Ticket Detail</h2> --}}
                                 <h2 class="mb-3">{{$EventListing->event_name}}</h2>
                             </div>
                             <p style="font-size: 12px">
@@ -428,9 +924,6 @@
                                <b>VENUE : </b><strong>{{$EventListing->venue_name}}</strong><br>
                             </p>
                             <p style="font-size: 14px" class="p_type p-1 rounded-3" id="ticket-type-box">
-
-                                {{-- <script>show()</script> --}}
-
                             </p>
                         </div>
                     </div>
@@ -440,11 +933,9 @@
                                 sell!</h6>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
-
-
     </section>
 
 
@@ -470,7 +961,7 @@
                     document.querySelectorAll('.select-card').forEach((element) => element.classList.remove('select-active'));
                     event.currentTarget.classList.add('select-active');
                     const value = event.currentTarget.attributes['data-ticket'].value;
-                    document.getElementById('ticket-type-box').innerHTML = `<strong>TICKET-TYPE : </strong>${value}`
+                    document.getElementById('ticket-type-box').innerHTML = `<strong>TICKET-TYPE : </strong><br>${value}`
                     document.getElementById('ticket-type').value = value;
                 });
             });
@@ -480,6 +971,9 @@
                     document.querySelectorAll('.ticket-num-card').forEach((element) => element.classList.remove('select-active'));
                     event.currentTarget.classList.add('select-active');
                     const value =event.currentTarget.attributes['data-tickets-val'].value;
+                    document.getElementById('no_of_ticket1').required = true;
+                    document.getElementById('no_of_ticket1').value = value;
+                    
                     if(value === "6"){
                         document.getElementById('ticket-more-6').style.display = "block";
                         document.getElementById('total-tickets').required = true;

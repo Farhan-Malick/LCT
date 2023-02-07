@@ -288,9 +288,9 @@
                     <option value="{{$all->id}}">{{$all->title}}</option></a>
                      @endforeach
                   </select>
-                  <a href="{{ route('buyer.ticket.show',$all->id) }}" class="btn btn-lg search-btn px-3" type="submit" value="Search">
+                  {{-- <a href="{{ route('buyer.ticket.show',$all->id) }}" class="btn btn-lg search-btn px-3" type="submit" value="Search">
                     <i class="bi bi-search"></i>
-                  </a>
+                  </a> --}}
               </div>
               </form>
             </div>

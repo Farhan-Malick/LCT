@@ -16,7 +16,7 @@ Date: {{ $data->event_date }} <br><br>
 Number of Tickets: {{$data->quantity}}<br>
 Price per Ticket: USD {{$data->price}}  <br>
 Total Price : USD4,800.00 <br> <br>
-If you need any further information on your order, please feel free to contact the support at 
+If you need any further information on your order, please feel free to contact the support at
 support@lastchanceticket.com <br><br><br>
 Thank you for using {{ config('app.name') }}
 

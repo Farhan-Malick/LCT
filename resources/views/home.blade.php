@@ -243,7 +243,7 @@
     </div>
   </section>
   <!-- ***** Main Banner Area End ***** -->
-  
+
   <!-- Events Section Start -->
   <div class="amazing-deals">
     <div class="container">
@@ -282,13 +282,13 @@
               <form method="get" id="qty-form">
                 <div class="form-group">
                   {{-- <label for="row">Restrictions</label> --}}
-                  <select class="form-select form-control-lg"  name="homeFilters">
+                  <select class="form-select form-control-lg"  name="filter"  onchange="this.form.submit()">
                       <option selected disabled>ALL EVENTS</option>
-                     @foreach ($allevents as $all)
-                    <option value="homeFilters">{{$all->event_name}}</option></a>
+                     @foreach ($events as $all)
+                    <option value="{{$all->id}}">{{$all->title}}</option></a>
                      @endforeach
                   </select>
-                  <a href="{{ route('buyer.ticket.show',$all->id) }}" class="btn btn-lg search-btn px-3" type="submit" value="Search"> 
+                  <a href="{{ route('buyer.ticket.show',$all->id) }}" class="btn btn-lg search-btn px-3" type="submit" value="Search">
                     <i class="bi bi-search"></i>
                   </a>
               </div>
@@ -296,14 +296,14 @@
             </div>
          </div>
         </div>
-          @if(count($events) == 0)
+          @if(count($allevents) == 0)
           <div>
               <h5>Browse the <b>EVENTS</b> according to your serach to see more.</h5>
           </div>
           @endif
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
-        
+
                     document.querySelectorAll('.ticket-num-card').forEach(function(element) {
                         element.addEventListener("click", (event) => {
                             document.querySelectorAll('.ticket-num-card').forEach((element) => element.classList.remove('select-active'));
@@ -315,14 +315,14 @@
                     });
                 });
             </script>
-        @foreach ($events as $event)
+        @foreach ($allevents as $event)
             <div class="col-lg-6 col-sm-6">
             <div class="item">
                 <div class="row">
                 <div class="col-lg-6">
                     <div class="">
                         <a href="{{ route('buyer.ticket.show',$event->id) }}" class="thumbnail-img">
-                            <img src="{{ asset('uploads/events/poster/' . $event->poster) }}" height="350px" alt="" style=" 
+                            <img src="{{ asset('uploads/events/poster/' . $event->poster) }}" height="350px" alt="" style="
                             background-position: center center;
                             background-size: cover;
                             background-repeat: no-repeat; ">
@@ -332,7 +332,7 @@
                 <div class="col-lg-6 align-self-center">
                     <div class="content">
                     <span class="info">*Limited Offer Today</span>
-                    <h4>{{ $event->title }}</h4>
+                    <h4>{{ $event->event_name }}</h4>
                     <div class="row">
                         <div class="col-6" >
                         <i class="fa fa-clock"></i>
@@ -340,7 +340,7 @@
                         </div>
                         <div class="col-6">
                         <i class="fa fa-map"></i>
-                        <span class="list"style="font-size: 13px">{{$event->start_date}}</span>
+                        <span class="list"style="font-size: 13px">{{$event->event_date}}</span>
                         </div>
                     </div>
                     <p>{{ $event->description }}</p>
@@ -406,7 +406,7 @@
 </div>
 
 @include('auth.partials.footer')
-  
+
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
   <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>

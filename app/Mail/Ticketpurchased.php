@@ -31,7 +31,7 @@ class Ticketpurchased extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Ticket Purchased',
+            subject: '[LCT] Congratulations!!! You have successfully purchased the tickets for the Event '.$this->data->event_name,
         );
     }
 

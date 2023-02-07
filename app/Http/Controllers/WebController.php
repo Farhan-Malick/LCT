@@ -17,17 +17,24 @@ class WebController extends Controller
      */
     public function index(Request $request)
     {
+        // var_dump($request->filter);
         //
         // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->get();
-        $events = Event::select('events.*', 'venues.title as vTitle')
+        $events = Event::all();
+        $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
+        ->join('events', 'events.id', '=', 'event_listings.event_id')
         ->join('venues', 'venues.id', '=', 'events.venue_id');
         // ->join('event_listings','event_id' , '=', 'events.id');
         $categories = Category::all();
         if($request->search_text !== null){
-            $events = $events->where('events.title', 'like', '%'.$request->search_text.'%');
+            $allevents = $allevents->where('event_listings.event_name', 'like', '%'.$request->search_text.'%');
         }
-        $allevents=EventListing::all();
-        $events = $events->get();
+
+        if($request->filter !== null){
+            $allevents = $allevents->where('event_listings.event_id', '=', $request->filter);
+        }
+
+        $allevents = $allevents->get();
         return view('home', compact('events', 'categories','allevents'));
     }
 

@@ -63,8 +63,16 @@ class PurchasesController extends Controller
     public function buyer_ticket_show(Request $request, $id){
         // dd($request->qty);
 
-        // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->where('event_listings.id', $id)->first();
-        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $id)->first();
+        $events = EventListing::select('*','venues.title as vTitle', 'venues.image as vImage')
+        ->join('events', 'events.id', '=', 'event_listings.event_id')
+        ->join('venues', 'venues.id', '=', 'events.venue_id')
+        ->where('event_listings.id', $id)
+        ->first();
+        // $events = Event::select('events.*', 'venues.title as vTitle', 'venues.image as vImage')
+        // ->join('venues', 'venues.id', '=', 'events.venue_id')
+        // ->where('events.id', '')
+        // ->first();
+
         $eventListings = EventListing::where('status', 1)->where('event_id', $id)->select('id', 'event_name')->get();
         // dd($events);
         $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
@@ -73,7 +81,7 @@ class PurchasesController extends Controller
             ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
             ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
             ->where('approve','1')
-            ->where('events.id',$id);
+            ->where('ticket_listings.eventlisting_id',$id);
             
         if(Request::get('sort') == 'price_asc'){
             $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')

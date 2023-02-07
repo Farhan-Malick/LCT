@@ -273,7 +273,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row mt-3">
-                                                            <div class="col-md-7">
+                                                            <div class="col-md-12">
                                                                 <span style="font-size: 15px; margin-right:20px">Sort By :</span>
                                                                 <a href="{{URL::current()}}"style=" margin-right:20px; text-decoration:none">ALL</a>
                                                                 <a href="{{URL::current()."?sort=price_asc"}}"style=" margin-right:20px; text-decoration:none">PRICE : Low to High</a>
@@ -389,9 +389,6 @@
                 
                     <div class="col-lg-8">
                         <div class="row">
-                            {{-- @foreach($tickets as $ticket)  --}}
-                               
-
                                     <div class="flight_search_result_wrapper">
                                         <div class="flight_search_item_wrappper">
                                              <?php
@@ -399,8 +396,6 @@
                                                 ?>
                                                 @foreach ($tickets as $ticket)
                                                     <?php $key = array_rand($catClasses); ?>
-                                                        
-                                                  
                                             <div class="flight_search_items border border <?php echo $catClasses[$key] ?> text-dark" 
                                                                                     style="  
                                                                                     border: 1px; 
@@ -423,7 +418,6 @@
                                                         </div>
                                                         <div class="flight_search_middel">
                                                             <div class="flight_right_arrow">
-                                                                
                                                                 <h6>Section: {{$ticket->sections}}</h6>
                                                                 <h6>
                                                                     Category: @if ($ticket->categories == null)
@@ -433,7 +427,6 @@
                                                                 @endif
                                                                 </h6>
                                                                 <h6>Row: {{$ticket->rows}}</h6>
-
                                                             </div>
                                                             <div class="flight_search_destination">
                                                                 <p>Ticket Type</p>
@@ -469,8 +462,6 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                </div>
-                            {{-- @endforeach --}}
                         </div>
                     </div>
             </div>

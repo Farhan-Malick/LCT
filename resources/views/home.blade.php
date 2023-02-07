@@ -321,7 +321,7 @@
                 <div class="row">
                 <div class="col-lg-6">
                     <div class="">
-                        <a href="{{ route('buyer.ticket.show',$event->id) }}" class="thumbnail-img">
+                        <a href="{{ route('buyer.ticket.show',$event->event_id) }}" class="thumbnail-img">
                             <img src="{{ asset('uploads/events/poster/' . $event->poster) }}" height="350px" alt="" style="
                             background-position: center center;
                             background-size: cover;

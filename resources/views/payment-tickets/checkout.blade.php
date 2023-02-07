@@ -430,7 +430,7 @@
                                         <option  name="country_id" >Zimbabwe</option>
                                     </select>
                             </div> --}}
-                           
+
                           <div class="mt-2">
                             @if ($tickets->ticket_type == "Paper-Ticket")
                                     <div id="v1">
@@ -700,7 +700,7 @@
                                         </table>
                                     </div>
                                     <div id="v2">
-                                        <p>Seller Country : {{$tickets->country}}</p>
+                                        {{-- <p>Seller Country : {{$tickets->country}}</p> --}}
                                         <h2></h2>
                                     </div>
                                     <script>

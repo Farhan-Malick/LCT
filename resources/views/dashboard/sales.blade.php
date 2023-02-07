@@ -196,6 +196,7 @@
                                                     
                                                     <th >Event Name</th>
                                                     <th >Ticket Name</th>
+                                                    <th >Ticket Type</th>
                                                     <th >Quantity</th>
                                                     <th >Price</th>
                                                   </tr>
@@ -207,6 +208,7 @@
                                                       <td>{{$sale->id}}</td>
                                                       <td>{{$sale->event->title}}</td>
                                                       <td>{{$sale->event_name}}</td>
+                                                      <td>{{$sale->ticket_type}}</td>
                                                       <td>{{$sale->quantity}}</td>
                                                       <td>{{$sale->price}}</td>
                                                       

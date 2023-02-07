@@ -55,6 +55,9 @@ Route::get('/dashboard/orders' , [PurchasesController::class,'dashboard_orders_s
 // });
 
 Route::get('/dashboard/listings' , [TicketController::class,'dashboard_listing'])->name('dashboard.listing');
+// Route::get('/dashboard/listings/{id}/destroy', [TicketController::class, 'ticket_deActivation'])->name('dashboard.ticket.Deactivate');
+Route::post('/toggle-deactivate', [TicketController::class, 'ticket_deActivation']);
+Route::post('/toggle-Active', [TicketController::class, 'ticket_Activation']);
 
 Route::post('/dashboard/create/listings' , [TicketController::class,'dashboard_add_listing'])->name('dashboard.add.listing');
 

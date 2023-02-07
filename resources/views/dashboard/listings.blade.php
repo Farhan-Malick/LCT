@@ -420,6 +420,20 @@
                                     </div>
                                  </div>
                               </div>
+                              <div class="row">
+                                 <div class="col-lg-12">
+                                       @if ($message = Session::get('deactivate'))
+                                       <div class="alert alert-primary alert-block">
+                                          <strong>{{ $message }}</strong>
+                                       </div>
+                                       @endif
+                                       @if ($message = Session::get('activate'))
+                                       <div class="alert alert-primary alert-block">
+                                          <strong>{{ $message }}</strong>
+                                       </div>
+                                       @endif
+                                 </div>
+                              </div>
                               <div class="card shadow-sm mb-3">
                                  <div class="card-body">
                                     <h5
@@ -442,7 +456,7 @@
                                             <th scope="col">seat to</th>
                                             <th scope="col">ticket type</th>
                                             <th scope="col">ticket restrictions</th>
-                                            {{-- <th scope="col">status</th> --}}
+                                            <th scope="col">Action</th>
                                           </tr>
                                         </thead>
                                         <tbody class="table-group-divider">
@@ -462,6 +476,16 @@
                                                          <td>{{$ticket->ticket_type}}</td>
                                                       <td>{{$ticket->ticket_restrictions}}</td>
                                                       {{-- <td>{{$ticket->status}}</td> --}}
+                                                      <td>
+                                                         <form action="{{ url('/toggle-deactivate') }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="ticket_id" id=""
+                                                               value="{{ $ticket->id }}" >
+                                                            <input type="submit" class="btn btn-danger"
+                                                               name="" value="Deactivate" id="" >
+                                                         </form>
+                                                         {{-- <a class="btn btn-danger" href="{{route('dashboard.ticket.Deactivate',$ticket->id)}}">Deactivate</a> --}}
+                                                      </td>
                                                    </tr>
                                                 @endif
                                             @endforeach
@@ -745,13 +769,72 @@
                                     </div>
                                  </div>
                               </div>
+                              <div class="row">
+                                 <div class="col-lg-12">
+                                       @if ($message = Session::get('activate'))
+                                       <div class="alert alert-primary alert-block">
+                                          <strong>{{ $message }}</strong>
+                                       </div>
+                                       @endif
+                                 </div>
+                              </div>
                               <div class="card shadow-sm mb-3">
                                  <div class="card-body">
                                     <h5
                                        class="card-title fw-600 text-center"
                                        >
-                                       You don't have any listings
+                                       All Deactivated Listings here
                                     </h5>
+                                    <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">#</th>
+                                            {{-- <th scope="col">title</th> --}}
+                                            <th scope="col">Event</th>
+                                            <th scope="col">price</th>
+                                            {{-- <th scope="col">currency</th> --}}
+                                            <th scope="col">quantity</th>
+                                            <th scope="col">section</th>
+                                            <th scope="col">row</th>
+                                            <th scope="col">seat from</th>
+                                            <th scope="col">seat to</th>
+                                            <th scope="col">ticket type</th>
+                                            <th scope="col">ticket restrictions</th>
+                                            <th scope="col">Action</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            @foreach ($active_tickets as $ticket)
+                                                @if ($ticket->approve == 4)
+                                                   <tr>
+                                                      <th>{{$ticket->id}}</th>
+                                                      {{-- <td>{{$ticket->title}}</td> --}}
+                                                      <td>{{$ticket->event->event_name}}</td>
+                                                      <td>{{$ticket->price}}</td>
+                                                      {{-- <td>{{$ticket->currency}}</td> --}}
+                                                      <td>{{$ticket->quantity}}</td>
+                                                      <td>{{$ticket->section_name}}</td>
+                                                      <td>{{$ticket->row}}</td>
+                                                      <td>{{$ticket->seat_from}}</td>
+                                                      <td>{{$ticket->seat_to}}</td>
+                                                         <td>{{$ticket->ticket_type}}</td>
+                                                      <td>{{$ticket->ticket_restrictions}}</td>
+                                                      {{-- <td>{{$ticket->status}}</td> --}}
+                                                      <td>
+                                                         <form action="{{ url('/toggle-Active') }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="ticket_id" id=""
+                                                               value="{{ $ticket->id }}" >
+                                                            <input type="submit" class="btn btn-success"
+                                                               name="" value="Active" id="" >
+                                                         </form>
+                                                         {{-- <a class="btn btn-danger" href="{{route('dashboard.ticket.Deactivate',$ticket->id)}}">Deactivate</a> --}}
+                                                      </td>
+                                                   </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                      </table>
                                  </div>
                               </div>
                            </div>

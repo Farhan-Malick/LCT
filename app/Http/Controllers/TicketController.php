@@ -29,6 +29,7 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+   
     public function index(VanueSections $vanuesections,VenueSectionRows $venuesectionrows, EventListing $EventListing,Currency $currency,$id)
     {
         //
@@ -450,7 +451,24 @@ class TicketController extends Controller
         MailController::ticketlistingrejected($user->email, $tickets);
         return redirect()->back()->with('approve','Ticket has been Rejected Successfully');
     }
-
+    public function ticket_deActivation(Request $request)
+    {
+            $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')->where('ticket_listings.id', $request->ticket_id)->first();
+            $user = User::find($tickets->user_id);
+            $tickets->approve=4;
+            $tickets->update();
+            // MailController::ticketlistingapproved($user->email, $tickets);
+            return redirect()->back()->with('deactivate','Ticket has been De-Activated Successfully');
+    }
+    public function ticket_Activation(Request $request)
+    {
+            $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')->where('ticket_listings.id', $request->ticket_id)->first();
+            $user = User::find($tickets->user_id);
+            $tickets->approve=1;
+            $tickets->update();
+            // MailController::ticketlistingapproved($user->email, $tickets);
+            return redirect()->back()->with('activate','Ticket has been Activated Successfully');
+    }
     public function edit_tickets($id){
         $tickets = Event::find($id);
         return view('Admin/pages/editTickets',compact('tickets'));

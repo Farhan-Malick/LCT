@@ -110,6 +110,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/Admin-Panel/Mobile_tickets', [TicketController::class, 'admin_mobile_tickets_show']);
         Route::post('/toggle-approve', [TicketController::class, 'Approval']);
         Route::post('/toggle-reject', [TicketController::class, 'Rejection']);
+        
         Route::post('/toggle-approve/purchase', [TicketController::class, 'ApprovalForPurchase']);
         Route::get('/Admin-Panel/{id}/destroy', [TicketController::class, 'ticket_destroy'])->name('admin.ticket.destroy');
         Route::get('/Admin-Panel/Ticket/Edit/{id}', [TicketController::class, 'edit_tickets']);

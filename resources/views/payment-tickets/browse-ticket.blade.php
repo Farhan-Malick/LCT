@@ -249,7 +249,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <select class="form-control" name="ticket_restrictions"  placeholder="Select Ticket Type">
+                                                                <select class="form-control" name="ticket_restrictions"  placeholder="Select Restrictions">
                                                                     <option disabled @if(request()->get('ticket_restrictions') == null)selected @endif>Filter By Restrictions</option>
                             
                                                                     <option value=" No Restriction "  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'No Restriction') 

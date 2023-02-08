@@ -396,8 +396,21 @@ class TicketController extends Controller
         ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
         ->where([['user_id',auth()->user()->id],['status',1]])
         ->where('completed', 1)->get();
+        $purchases = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date')
+        ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
+        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->where('purchases.user_id',auth()->user()->id)->get();
+        $data = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date')
+        ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
+        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->where('purchases.user_id',auth()->user()->id)->first();
         // dd ($active_tickets);
-        return view('dashboard/listings',compact('categories','active_tickets','events'));
+        
+        $sales = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date')
+        ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
+        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->where('seller_id',auth()->user()->id)->get();
+        return view('dashboard/dashboard',compact('categories','active_tickets','events','purchases','data','sales'));
     }
 
     public function admin_tickets_show(TicketListing $TicketListing)

@@ -24,6 +24,30 @@ class WebController extends Controller
         $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
         ->join('events', 'events.id', '=', 'event_listings.event_id')
         ->join('venues', 'venues.id', '=', 'events.venue_id');
+        if($request->sort == 'Sports'){
+            $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
+            ->join('events', 'events.id', '=', 'event_listings.event_id')
+            ->join('venues', 'venues.id', '=', 'events.venue_id')
+            ->where('category_event', '=', $request->sort);
+        }
+        if($request->sort == 'Concert'){
+            $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
+            ->join('events', 'events.id', '=', 'event_listings.event_id')
+            ->join('venues', 'venues.id', '=', 'events.venue_id')
+            ->where('category_event', '=', $request->sort);
+        }
+        if($request->sort == 'Festival'){
+            $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
+            ->join('events', 'events.id', '=', 'event_listings.event_id')
+            ->join('venues', 'venues.id', '=', 'events.venue_id')
+            ->where('category_event', '=', $request->sort);
+        }
+        if($request->sort == 'Theater'){
+            $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
+            ->join('events', 'events.id', '=', 'event_listings.event_id')
+            ->join('venues', 'venues.id', '=', 'events.venue_id')
+            ->where('category_event', '=', $request->sort);
+        }
         // ->join('event_listings','event_id' , '=', 'events.id');
         $categories = Category::all();
         if($request->search_text !== null){

@@ -140,7 +140,6 @@ class PurchasesController extends Controller
         if (Request::get('ticket_event') !== null) {
             $tickets = $tickets->where('eventlisting_id', '>=', Request::get('ticket_event'));
         }
-       
         if (Request::get('ticket_type') !== null) {
             $tickets = $tickets->where('ticket_type', '=',Request::get('ticket_type'));
         }

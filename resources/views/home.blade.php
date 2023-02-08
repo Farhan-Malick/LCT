@@ -84,22 +84,22 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="more-info">
-                    <div class="row">
+                     <div class="row">
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-user"></i>
-                        <h4><span>Sports:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Sports"}}" class="Anchor2">Sports</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-globe"></i>
-                        <h4><span>Concerts:</span><br>Events</h4>
+                        <h4><span> <a href="{{URL::current()."?sort=Concert"}}" class="Anchor2">Concerts</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-home"></i>
-                        <h4><span>Theaters:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Theater"}}" class="Anchor2">Theaters</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-home"></i>
-                        <h4><span>Festivals:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Festival"}}" class="Anchor2">Festivals</a></span><br>Events</h4>
                       </div>
                     </div>
                   </div>
@@ -125,22 +125,22 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="more-info">
-                    <div class="row">
+                     <div class="row">
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-user"></i>
-                        <h4><span>Sports:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Sports"}}" class="Anchor2">Sports</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-globe"></i>
-                        <h4><span>Concerts:</span><br>Events</h4>
+                        <h4><span> <a href="{{URL::current()."?sort=Concert"}}" class="Anchor2">Concerts</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-home"></i>
-                        <h4><span>Theaters:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Theater"}}" class="Anchor2">Theaters</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-home"></i>
-                        <h4><span>Festivals:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Festival"}}" class="Anchor2">Festivals</a></span><br>Events</h4>
                       </div>
                     </div>
                   </div>
@@ -166,22 +166,22 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="more-info">
-                    <div class="row">
+                     <div class="row">
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-user"></i>
-                        <h4><span>Sports:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Sports"}}" class="Anchor2">Sports</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-globe"></i>
-                        <h4><span>Concerts:</span><br>Events</h4>
+                        <h4><span> <a href="{{URL::current()."?sort=Concert"}}" class="Anchor2">Concerts</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-home"></i>
-                        <h4><span>Theaters:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Theater"}}" class="Anchor2">Theaters</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-home"></i>
-                        <h4><span>Festivals:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Festival"}}" class="Anchor2">Festivals</a></span><br>Events</h4>
                       </div>
                     </div>
                   </div>
@@ -210,19 +210,19 @@
                     <div class="row">
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-user"></i>
-                        <h4><span>Sports:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Sports"}}" class="Anchor2">Sports</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-globe"></i>
-                        <h4><span>Concerts:</span><br>Events</h4>
+                        <h4><span> <a href="{{URL::current()."?sort=Concert"}}" class="Anchor2">Concerts</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-home"></i>
-                        <h4><span>Theaters:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Theater"}}" class="Anchor2">Theaters</a></span><br>Events</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-home"></i>
-                        <h4><span>Festivals:</span><br>Events</h4>
+                        <h4><span><a href="{{URL::current()."?sort=Festival"}}" class="Anchor2">Festivals</a></span><br>Events</h4>
                       </div>
                     </div>
                   </div>
@@ -243,7 +243,125 @@
     </div>
   </section>
   <!-- ***** Main Banner Area End ***** -->
+  <style>
+    
+.theme_search_form_area {
+    background: #f7f4f4;
+    box-shadow: 4px 14px 28px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 30px 30px;
+    position: relative;
+}
 
+.theme_search_form_tabbtn .nav-item {
+    margin-right: 20px;
+}
+
+.theme_search_form_tabbtn .nav-item:last-child {
+    margin-right: 0px;
+}
+
+.theme_search_form_tabbtn .nav-tabs {
+    border-bottom: none;
+}
+
+
+  </style>
+  <section id="theme_search_form_tour" class="fligth_top_search_main_form_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="theme_search_form_area">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="flight_categories_search mb-4">
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" id="oneway-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#oneway_flight" type="button" role="tab"
+                                                    aria-controls="oneway_flight" aria-selected="true">Filter By Events</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="roundtrip-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#roundtrip" type="button" role="tab"
+                                                    aria-controls="roundtrip"
+                                                    aria-selected="false">Filter By Search</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content" id="myTabContent1">
+                                <div class="tab-pane fade show active" id="oneway_flight" role="tabpanel"
+                                    aria-labelledby="oneway-tab">
+                                    <div class="row">
+                                      <style>
+                                       .Anchor{
+                                        margin-right:20px; text-decoration:none"
+                                       }
+                                      </style>
+                                      <div class="col-lg-8">
+                                          <span style="font-size: 15px; margin-right:20px">Sort By :</span>
+                                          <a href="{{URL::current()}}" class="Anchor">ALL</a>
+                                          <a href="{{URL::current()."?sort=Sports"}}" class="Anchor">Sports</a>
+                                          <a href="{{URL::current()."?sort=Concert"}}" class="Anchor">Concerts</a>
+                                          <a href="{{URL::current()."?sort=Festival"}}" class="Anchor">Festivals</a>
+                                          <a href="{{URL::current()."?sort=Theater"}}" class="Anchor">Theaters</a>
+                                      </div>
+                                        <div class="col-lg-4">
+                                            <div class="oneway_search_form">
+                                              <form method="get" id="qty-form">
+                                                <div class="form-group">
+                                                  <select class="form-select form-control-lg"  name="filter"  onchange="this.form.submit()">
+                                                      <option selected disabled>ALL EVENTS</option>
+                                                     @foreach ($events as $all)
+                                                    <option value="{{$all->id}}">{{$all->title}}</option></a>
+                                                     @endforeach
+                                                  </select>
+                                              </div>
+                                              </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="roundtrip" role="tabpanel"
+                                    aria-labelledby="roundtrip-tab">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="oneway_search_form">
+                                                <div class="row select-ticket">
+                                                    <div class="col-lg-12">
+                                                        <p class="primary-text">
+                                                            <i class="bi bi-info-circle-fill me-2"></i>
+                                                            Search By Event Name
+                                                        </p>
+                                                    </div>
+                                                    <form method="get" id="qty-form">
+                                                      {{-- <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif"> --}}
+                                                      <div class="input-group w-100">
+                                                      <input type="text" class="form-control" name="search_text"  placeholder="Search Event Name" value="@if(request()->get('search_text')) <?= request()->get('search_text')?> @endif"/>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-lg search-btn px-3" type="submit" value="Search">
+                                                                <i class="bi bi-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                  </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
   <!-- Events Section Start -->
   <div class="amazing-deals">
     <div class="container">
@@ -253,49 +371,7 @@
             <h2>Last chance to explore world top events</h2>
           </div>
         </div>
-        <div class="container ml-5 mr-5 mb-5 ">
-         <div class="row">
-            <div class="col-lg-8">
-                <form method="get" id="qty-form">
-                  {{-- <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif"> --}}
-                  <div class="input-group w-100">
-                  <input type="text" class="form-control" name="search_text"  placeholder="Search Event Name" value="@if(request()->get('search_text')) <?= request()->get('search_text')?> @endif"/>
-                    <div class="input-group-append">
-                        <button class="btn btn-lg search-btn px-3" type="submit" value="Search">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
-                </div>
-              </form>
-            </div>
-            <div class="col-lg-4">
-              {{-- <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown button
-                </button>
-                <ul class="dropdown-menu">
-                  @foreach ($allevents as $all)
-                  <li><a class="dropdown-item text-dark" href="{{ route('buyer.ticket.show',$all->id) }}"> {{$all->even_name}}</a></li>
-                  @endforeach
-                </ul>
-              </div> --}}
-              <form method="get" id="qty-form">
-                <div class="form-group">
-                  {{-- <label for="row">Restrictions</label> --}}
-                  <select class="form-select form-control-lg"  name="filter"  onchange="this.form.submit()">
-                      <option selected disabled>ALL EVENTS</option>
-                     @foreach ($events as $all)
-                    <option value="{{$all->id}}">{{$all->title}}</option></a>
-                     @endforeach
-                  </select>
-                  {{-- <a href="{{ route('buyer.ticket.show',$all->id) }}" class="btn btn-lg search-btn px-3" type="submit" value="Search">
-                    <i class="bi bi-search"></i>
-                  </a> --}}
-              </div>
-              </form>
-            </div>
-         </div>
-        </div>
+       
           @if(count($allevents) == 0)
           <div>
               <h5>Browse the <b>EVENTS</b> according to your serach to see more.</h5>

@@ -132,14 +132,14 @@
                 {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
               </div>
               @if ($tickets->ticket_type == "Paper-Ticket")
-              <div class="row d-flex flex-row justify-content-between align-items-center" id="v2">
-                @if ($tickets->country == 'United Arab Emirates')
-                <div class="col-md-12 d-flex flex-column "><span><b>LOCAL SHIPMENT CHARGES :</b><br>$30</span></div>
-                    @else
-                    <div class="col-md-12 d-flex flex-column "><span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$100</span></div>
-                @endif
-                {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
-              </div>
+                    <div class="row d-flex flex-row justify-content-between align-items-center" id="v2">
+                        @if ($tickets->country == 'as')
+                            <div class="col-md-12 d-flex flex-column "><span><b>LOCAL SHIPMENT CHARGES :</b><br>$30</span></div>
+                             @else
+                            <div class="col-md-12 d-flex flex-column "><span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$100</span></div>
+                        @endif
+                        {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
+                    </div>
               @endif
             </div>
           </div>
@@ -701,13 +701,13 @@
                                     </div>
                                     <div id="v2">
                                         {{-- <p>Seller Country : {{$tickets->country}}</p> --}}
-                                        <h2></h2>
+                                       <p></p>
                                     </div>
                                     <script>
                                             $(function () {
                                                 $("#country_id").on("change", function () {
                                                     var text = $(this).find('option:selected').text();
-                                                    $('#v2 h2').text(text);
+                                                    $('#v2 p').text(text);
                                                 });
                                             });
                                     </script>

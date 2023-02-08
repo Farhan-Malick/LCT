@@ -37,9 +37,9 @@
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <li><a class="dropdown-item" href="{{ URL('/dashboard') }}">My Dashboard</a></li>
-                                            <li><a class="dropdown-item" href="{{ URL('/dashboard/orders') }}">My Order</a></li>
-                                            <li><a class="dropdown-item" href="{{ URL('/dashboard/listings') }}">My Listings</a></li>
-                                            <li><a class="dropdown-item" href="{{ URL('/dashboard/settings') }}">Settings</a></li>
+                                            <li><a class="dropdown-item" href="{{ URL('/dashboard') }}">My Order</a></li>
+                                            <li><a class="dropdown-item" href="{{ URL('/dashboard') }}">My Listings</a></li>
+                                            <li><a class="dropdown-item" href="{{ URL('/dashboard') }}">Settings</a></li>
                                             <li class="nav-item">
                                                 <form
                                                     action="{{ route('logout') }}"

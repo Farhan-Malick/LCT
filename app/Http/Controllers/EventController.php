@@ -170,6 +170,8 @@ class EventController extends Controller
         $eventRequest->end_time = $request->end_time;
         $eventRequest->venue_name = $request->venue_name;
         $eventRequest->location = $request->location;
+        $eventRequest->country = $request->country;
+        $eventRequest->url = $request->url;
         $eventRequest->save();
         return back()->with('msg',"Your request has been sent to the Admin center");
     }

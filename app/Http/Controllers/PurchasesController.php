@@ -49,7 +49,7 @@ class PurchasesController extends Controller
         $purchase->seller_id = $ticket->user_id;
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
         $purchase->quantity = Request::get('quantity');
-        $purchase->country = Request::get('country');
+        // $purchase->country = Request::get('country');
         $purchase->save();
         MailController::ticketpurchased(auth()->user()->email, $ticket);
         MailController::sellerticketpurchased($seller->email, $ticket);
@@ -156,6 +156,7 @@ class PurchasesController extends Controller
     }
 
     public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid){
+
         $tickets =TicketListing::find($ticketid);
         $events = Event::find($eventlisting_id);
         $purchases = new Purchases;

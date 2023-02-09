@@ -133,7 +133,7 @@
               </div>
               @if ($tickets->ticket_type == "Paper-Ticket")
                     <div class="row d-flex flex-row justify-content-between align-items-center" id="v2">
-                        @if ($tickets->country == 'as')
+                        @if ($tickets->country == 'Switzerland')
                             <div class="col-md-12 d-flex flex-column "><span><b>LOCAL SHIPMENT CHARGES :</b><br>$30</span></div>
                              @else
                             <div class="col-md-12 d-flex flex-column "><span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$100</span></div>
@@ -700,7 +700,7 @@
                                         </table>
                                     </div>
                                     <div id="v2">
-                                        {{-- <p>Seller Country : {{$tickets->country}}</p> --}}
+                                        <p>Seller Country : {{$tickets->country}}</p>
                                        <p></p>
                                     </div>
                                     <script>

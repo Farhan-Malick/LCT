@@ -134,9 +134,9 @@
               @if ($tickets->ticket_type == "Paper-Ticket")
                     <div class="row d-flex flex-row justify-content-between align-items-center" id="v2">
                         @if ($tickets->country == 'Switzerland')
-                            <div class="col-md-12 d-flex flex-column "><span><b>LOCAL SHIPMENT CHARGES :</b><br>$30</span></div>
+                            <div class="col-md-12 d-flex flex-column " id="shipment-charges"><span><b>LOCAL SHIPMENT CHARGES :</b><br>$30</span></div>
                              @else
-                            <div class="col-md-12 d-flex flex-column "><span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$100</span></div>
+                            <div class="col-md-12 d-flex flex-column " id="shipment-charges"><span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$100</span></div>
                         @endif
                         {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
                     </div>
@@ -725,7 +725,7 @@
                                 <h4 class="fw-700 m-0">About Your Tickets</h4>
                             </div>
                             <div class="card-body">
-                                <p> <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>RESTRICTIONS : {{$tickets->ticket_restrictions}}</p>
+                                <p> <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>RESTRICTIONS : {{implode(',', json_decode($tickets->ticket_restrictions, true))}}</p>
                                 <p> <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>BENEFITS : {{$tickets->ticket_benefits}}</p>
                             </div>
                         </div>
@@ -911,7 +911,17 @@
 <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
 <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
 <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
-
+<script>
+    var sellerCountry = "<?php echo $tickets->country ?>";
+$("#country_id").on('change', function (e) {
+    var countrySelected = $(this).val();
+    if(sellerCountry !== countrySelected){
+        $("#shipment-charges").html("<span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$100</span>")
+    } else {
+        $("#shipment-charges").html("<span><b>LOCAL SHIPMENT CHARGES :</b><br>$30</span>")
+    }
+});
+</script>
 </body>
 
 </html>

@@ -79,20 +79,20 @@
     <section class="section-two reservation-form-sell" style="margin-top: 100px">
         <div class="container my-4">
             <div class="row">
-               
+
             </div>
             <div class="row mb-5">
                 <div class="col-lg-12 ">
-                    <form action="{{route('seller.ticketlisting.store',$EventListing->id)}}" method="post" id="reservation-form">
+                    <form action="{{route('seller.ticketlisting.store',$EventListing->id)}}" method="post" id="reservation-form" >
                     @csrf
                         <!-- alert start here -->
-                            
+
                         <!-- cards-row starts here  -->
                             <div class="row ">
                                 <div class="col-lg-12 " >
                                     <div class="card card-stepper shadow-sm main-card br-10" style="border-radius: 10px;">
                                     <div class="card-body p-4">
-                            
+
                                         <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex flex-column">
                                             <span class="lead fw-normal">Your Ticket Details</span>
@@ -108,7 +108,7 @@
                                         </div>
                                         </div>
                                         <hr class="my-4">
-                            
+
                                         <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
                                         <span class="dot"></span>
                                         <hr class="flex-fill track-line"><span class="dot"></span>
@@ -119,18 +119,18 @@
                                             <i class="fa fa-check text-white"></i></span>
                                         </div>
                                         <div class="row d-flex flex-row justify-content-between align-items-center">
-                                        
+
                                         <div class="col-md-2 d-flex flex-column align-items-start"><span><b>EVENT : </b> <br>{{$EventListing->event_name}}</span></div>
                                         <div class="col-md-2 d-flex flex-column "><span></span><b>TIME :</b>{{$EventListing->start_time}} - {{$EventListing->end_time}}<span></div>
                                         <div class="col-md-2 d-flex  flex-column  "><span><b>DATE : </b><br>({{$EventListing->event_date}})</span></div>
                                         <div class="col-md-2 d-flex flex-column "><span><b>VENUE : </b><br>{{$EventListing->venue_name}} , {{$EventListing->location}}</span></div>
-                                        
+
                                         <div class="col-md-2 d-flex flex-column "><span id="ticket-type-box"></span></div>
-                
+
                                     </div>
                                 </div>
                             </div>
-                           
+
                             <div class="col-lg-12 mt-5 ">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -164,7 +164,7 @@
                                             <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px"  data-ticket="E-Ticket" value="E-Ticket" name="ticket_type" id="progress2"> E-Ticket <sup class="checked"></sup>
                                             <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px"  data-ticket="Mobile-Ticket" value="Mobile-Ticket" name="ticket_type" id="progress3">   Mobile Ticket <sup class="checked"></sup>
                                            </div>
-                                        </div> 
+                                        </div>
                                             <style>
                                                  .checked{
                                                         color: red;
@@ -185,13 +185,13 @@
                                                 }else{
                                                     ckName[i].disabled = false;
                                                 }
-                                            } 
+                                            }
                                             }
                                             else {
                                             for(var i=0; i < ckName.length; i++){
                                                 ckName[i].disabled = false;
-                                            } 
-                                            }    
+                                            }
+                                            }
                                         }
                                         </script>
                                         {{-- <div class="form-group ">
@@ -229,14 +229,14 @@
                                                             For non-consecutive tickets, you must create separate listings.
                                                         </p>
                                                     </div>
-                                                    <input  type="hidden" id="no_of_ticket1" name="total_tickets" value="1" />
+                                                    <input  type="hidden" id="no_of_ticket1" name="total_tickets" value="0" />
                                                     {{-- <div class="form-group text-center "  name="total_tickets"  style="font-size: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
                                                         <div class="container">
-                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2 select-active  ticket-num-card p-4 border 1px" data-tickets-val="1" value="1" name="total_tickets" id="progress1"> 1 
+                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2 select-active  ticket-num-card p-4 border 1px" data-tickets-val="1" value="1" name="total_tickets" id="progress1"> 1
                                                          <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="2" value="2" name="total_tickets" id="progress2"> 2
-                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="3" value="3" name="total_tickets" id="progress3">  3 
+                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="3" value="3" name="total_tickets" id="progress3">  3
 
-                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2 select-active  ticket-num-card p-4 border 1px" data-tickets-val="4" value="4" name="total_tickets" id="progress4"> 4 
+                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2 select-active  ticket-num-card p-4 border 1px" data-tickets-val="4" value="4" name="total_tickets" id="progress4"> 4
                                                          <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="5" value="5" name="total_tickets" id="progress5"> 5
                                                          <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="6" value="6" name="total_tickets" id="progress6">  6 +
                                                         </div>
@@ -247,7 +247,9 @@
                                                         <option value="2"  class="select-card"data-tickets-val="2">2</option>
                                                         <option value=""data-tickets-val="Mobile-Ticket">3</option>
                                                     </select> --}}
-            
+                                                    <div class="col-12" id="error-ticket-number" style="display:none;color: red;margin-bottom: 10px;font-size: 14px;">
+                                                        <span>Please select number of tickets.</span>
+                                                    </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
                                                             <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="1">
@@ -322,13 +324,13 @@
                                             </div>
                                         </div>
                                     </div> --}}
-                                    
+
                                 </div>
-                                
+
                             </div>
-                           
+
                             <div class="col-lg-12">
-                                
+
                                 <h4 class="fw-700"> Enter Seating Details<span style="color: red">*</span></h4>
                                 <div class="card p-4 mb-3 shadow-sm main-card br-10">
                                     <div class="row">
@@ -353,7 +355,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Select Category</label>
-                                                            <select class="form-select " 
+                                                            <select class="form-select "
                                                                 name="categories" value="">
                                                                 <option selected disabled>Please Select Category</option>
                                                                 @foreach($sellerCategories as $sellerCategory)
@@ -377,7 +379,7 @@
                                                         </div>
                                                     </div>
                                                     @endif
-                                                   
+
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -389,7 +391,7 @@
                                                                 @foreach($venue_sections as $venue_section)
                                                                 <option value="{{$venue_section->id}}">{{$venue_section->sections}}</option>
                                                                 @endforeach
-        
+
                                                             </select>
                                                         </div>
                                                     </div>
@@ -402,7 +404,7 @@
                                                         </div>
                                                     @endif
                                                 </div>
-                                                
+
                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -412,7 +414,7 @@
                                                                 @foreach($venue_section_rows as $venue_section_row)
                                                                 <option value="{{$venue_section_row->id}}">{{$venue_section_row->rows}}</option>
                                                                 @endforeach
-        
+
                                                             </select>
                                                         </div>
                                                     </div>
@@ -425,7 +427,7 @@
                                                     </div>
                                                     @endif
                                                </div>
-                                               
+
                                                 <div class="form-group">
                                                     <label for="seats">Seats</label>
                                                     <div class="row">
@@ -446,7 +448,7 @@
                                                             <label for="row" class="mb-2">{{$EventListing->event_name}}</label>
                                                             <select class="form-select" name="fan_section">
                                                                 <option selected disabled>Please Select Fans Section</option>
-                                                               
+
                                                                 <option value=" @php
                                                                 $myName = $EventListing->event_name;
                                                                 $arr = explode(' ',trim($myName));
@@ -470,12 +472,12 @@
                                                                     @endphp
                                                                 </option>
                                                                 <option value="Dont know">Dont Know</option>
-        
+
                                                             </select>
                                                         </div>
                                                     </div>
                                                </div>
-                                              
+
                                                 @endif
                                             </div>
                                         </div>
@@ -525,7 +527,7 @@
                                     <div class="card mb-3 shadow-sm p-4 main-card br-10">
                                         <div class="row">
                                             <div class="col-md-12">
-    
+
                                                 <p> <i class="bi bi-info-circle-fill me-2"></i>Select your Actual Country.
                                                 </p>
                                             </div>
@@ -804,7 +806,7 @@
                                                 shown here, please stop listing and <a href="">contact us</a>
                                             </p>
                                         </div>
-                                       
+
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -819,7 +821,7 @@
                                                     <option value="Age Limit 21+">Age Limit 21+</option>
                                                 </select>
                                             </div> --}}
-                                                  
+
                                             <div class="form-group">
                                                 <label class="mb-2"><strong>Restrictions :</strong></label><br>
                                                 <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="No Restrictions"> No Restrictions</label>
@@ -828,7 +830,7 @@
                                                 <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 18+"> Age Limit 18+</label>
                                                 <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 21+"> Age Limit 21+</label>
                                                 <label class="m-2"><input type="checkbox" name="" id="myCheck" onclick="myFunction()"> Other</label>
-                                            </div> 
+                                            </div>
                                            <style>
                                             .hide{
                                                 display: none;
@@ -973,7 +975,7 @@
                     const value =event.currentTarget.attributes['data-tickets-val'].value;
                     document.getElementById('no_of_ticket1').required = true;
                     document.getElementById('no_of_ticket1').value = value;
-                    
+
                     if(value === "6"){
                         document.getElementById('ticket-more-6').style.display = "block";
                         document.getElementById('total-tickets').required = true;
@@ -985,6 +987,19 @@
                     }
                 });
             });
+        });
+
+        $("#reservation-form").submit(function(event){
+            if($("input[name='total_tickets']").val() === '0'){
+                $("#error-ticket-number").show();
+                $('body').animate({
+                    scrollTop: $("#error-ticket-number").offset().top
+                }, 2000);
+                event.preventDefault();
+            }
+        });
+        $(".ticket-num-card").click(() => {
+            $("#error-ticket-number").hide();
         });
     </script>
 </body>

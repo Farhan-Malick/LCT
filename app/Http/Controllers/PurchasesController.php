@@ -14,8 +14,8 @@ use App\Models\Seller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Auth;
 use App\Http\Controllers\MailController;
-// use Illuminate\Http\Request;
-use Request;
+use Illuminate\Http\Request;
+// use Request;
 
 class PurchasesController extends Controller
 {
@@ -47,8 +47,8 @@ class PurchasesController extends Controller
         $purchase->event_id = $ticket->eventlisting_id;
         $purchase->ticket_id = $ticket->id;
         $purchase->seller_id = $ticket->user_id;
-        $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
-        $purchase->quantity = Request::get('quantity');
+        $purchase->price = $ticket->price * $request->quantity;
+        $purchase->quantity = $request->quantity;
         // $purchase->country = Request::get('country');
         $purchase->save();
         MailController::ticketpurchased(auth()->user()->email, $ticket);

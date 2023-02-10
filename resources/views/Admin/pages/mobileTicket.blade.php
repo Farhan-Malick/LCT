@@ -70,7 +70,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						   <!-- begin panel -->
-							<h4 class="">Paper Tickets</h4>
+							<h4 class="">Mobile Tickets</h4>
 							@if ($message = Session::get('msg'))
 									<div class="alert alert-danger alert-block">
 										<strong>{{ $message }}</strong>
@@ -114,12 +114,15 @@
                                         <th scope="col">price</th>
                                         {{-- <th scope="col">currency</th> --}}
                                         <th scope="col">quantity</th>
+										<th scope="col">Category</th>
                                         <th scope="col">section</th>
                                         <th scope="col">row</th>
                                         <th scope="col">seat from</th>
                                         <th scope="col">seat to</th>
                                         <th scope="col">ticket type</th>
                                         <th scope="col">ticket restrictions</th>
+										<th scope="col">Benefits</th>
+										<th scope="col">Fans Section</th>
                                         <th scope="col">status</th>
                                         <th scope="col" >Approval</th>
 										<th scope="col" >Action</th>
@@ -136,6 +139,13 @@
 											{{-- <td>{{$m_ticket->currency}}</td> --}}
 											{{-- <td>{{$m_ticket->Currency->currency_type}}</td> --}}
 											<td>{{$m_ticket->quantity}}</td>
+											<td>
+												@if($m_ticket->categories === null)
+												{{$m_ticket->type_cat}}
+												@else
+												{{$m_ticket->categories}}
+												@endif
+											</td>
 											<td>{{$m_ticket->section_name}}</td>
 											<td>{{$m_ticket->row}}</td>
 											<td>{{$m_ticket->seat_from}}</td>
@@ -143,6 +153,8 @@
 												<td>{{$m_ticket->ticket_type}}</td>
 										
 											<td>{{$m_ticket->ticket_restrictions}}</td>
+											<td>{{$ticket->ticket_benefits}}</td>
+											<td>{{$ticket->fan_section}}</td>
 											<td>{{$m_ticket->status}}</td>
 											<td>
 												@if($m_ticket->approve == null || $m_ticket->approve == 0)

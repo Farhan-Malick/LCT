@@ -114,13 +114,16 @@
 									<th scope="col">price</th>
 									{{-- <th scope="col">currency</th> --}}
 									<th scope="col">quantity</th>
+									<th scope="col">category</th>
 									<th scope="col">section</th>
 									<th scope="col">row</th>
 									<th scope="col">seat from</th>
 									<th scope="col">seat to</th>
 									<th scope="col">ticket type</th>
 									<th scope="col">ticket restrictions</th>
-									<th scope="col">status</th>
+									<th scope="col">Benefits</th>
+									<th scope="col">Fans Section</th>
+									{{-- <th scope="col">status</th> --}}
 									<th scope="col" >Approval</th>
 									<th scope="col" >Action</th>
 								</tr>
@@ -136,13 +139,22 @@
 										{{-- <td>{{$e_ticket->currency	}}</td> --}}
 										{{-- <td>{{$e_ticket->Currency->currency_type}}</td> --}}
 										<td>{{$e_ticket->quantity}}</td>
+										<td>
+											@if($e_ticket->categories === null)
+											{{$e_ticket->type_cat}}
+											@else
+											{{$e_ticket->categories}}
+											@endif
+										</td>
 										<td>{{$e_ticket->section_name}}</td>
 										<td>{{$e_ticket->row}}</td>
 										<td>{{$e_ticket->seat_from}}</td>
 										<td>{{$e_ticket->seat_to}}</td>
 											<td>{{$e_ticket->ticket_type}}</td>
 										<td>{{$e_ticket->ticket_restrictions}}</td>
-										<td>{{$e_ticket->status}}</td>
+										<td>{{$e_ticket->ticket_benefits}}</td>
+											<td>{{$e_ticket->fan_section}}</td>
+										{{-- <td>{{$e_ticket->status}}</td> --}}
 										<td>
 											@if($e_ticket->approve == null || $e_ticket->approve == 0)
 											<form action="{{ url('/toggle-approve') }}" method="POST">

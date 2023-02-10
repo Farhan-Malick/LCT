@@ -14,8 +14,8 @@ use App\Models\Seller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Auth;
 use App\Http\Controllers\MailController;
-use Illuminate\Http\Request;
-// use Request;
+// use Illuminate\Http\Request;
+use Request;
 
 class PurchasesController extends Controller
 {
@@ -47,9 +47,9 @@ class PurchasesController extends Controller
         $purchase->event_id = $ticket->eventlisting_id;
         $purchase->ticket_id = $ticket->id;
         $purchase->seller_id = $ticket->user_id;
-        $purchase->price = $ticket->price * $request->quantity;
-        $purchase->quantity = $request->quantity;
-        // $purchase->country = Request::get('country');
+        $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
+        $purchase->quantity = Request::get('quantity');
+        $purchase->country_id = Request::get('country_id');
         $purchase->save();
         MailController::ticketpurchased(auth()->user()->email, $ticket);
         MailController::sellerticketpurchased($seller->email, $ticket);
@@ -131,7 +131,7 @@ class PurchasesController extends Controller
             $tickets = $tickets->where('quantity', '=', Request::get('qty'));
         }
         if (Request::get('ticket_restrictions') !== null) {
-            $tickets = $tickets->where('ticket_restrictions', '=', Request::get('ticket_restrictions'));
+            $tickets = $tickets->where('ticket_restrictions', '=', Request::get('ticket_restrictions,'));
         }
         if (Request::get('categories') !== null) {
             $tickets = $tickets->where('categories', '=',Request::get('categories'));
@@ -164,6 +164,7 @@ class PurchasesController extends Controller
         $purchases->event_id = $eventlisting_id;
         $purchases->seller_id =$sellerid;
         $purchases->ticket_id = $ticketid;
+        // $purchases->country_id = $country_id;
         $purchases->quantity = Request::get('quantity');
         $purchases->price = Request::get('price');
         $purchases->save();

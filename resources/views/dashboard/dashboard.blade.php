@@ -102,35 +102,29 @@
                                           <div class="row">
                                              <div class="col-md-12">
                                                 <div class="main-card mt-4">
-                                                   <div class="card-top p-4">
-                                                    
-                                                   <div class="card shadow-sm mb-3">
+                                                   <div class="card shadow-sm mt-3">
                                                       <div class="card-body">
-                                                         <h5
-                                                            class="card-title fw-600 text-center"
-                                                            >
-                                                            All Active Listings here
-                                                         </h5>
-                                                         <table class="table">
-                                                             <thead>
+                                                          <h5 class="card-title fw-600">All Listings Here</h5>
+                                                          <table class="table">
+                                                            <thead>
                                                                <tr>
-                                                                 <th scope="col">#</th>
-                                                                 {{-- <th scope="col">title</th> --}}
-                                                                 <th scope="col">Event</th>
-                                                                 <th scope="col">price</th>
-                                                                 {{-- <th scope="col">currency</th> --}}
-                                                                 <th scope="col">quantity</th>
-                                                                 <th scope="col">section</th>
-                                                                 <th scope="col">row</th>
-                                                                 <th scope="col">seat from</th>
-                                                                 <th scope="col">seat to</th>
-                                                                 <th scope="col">ticket type</th>
-                                                                 <th scope="col">ticket restrictions</th>
-                                                                 <th scope="col">Action</th>
+                                                               <th scope="col">#</th>
+                                                               {{-- <th scope="col">title</th> --}}
+                                                               <th scope="col">Event</th>
+                                                               <th scope="col">price</th>
+                                                               {{-- <th scope="col">currency</th> --}}
+                                                               <th scope="col">quantity</th>
+                                                               <th scope="col">section</th>
+                                                               <th scope="col">row</th>
+                                                               <th scope="col">seat from</th>
+                                                               <th scope="col">seat to</th>
+                                                               <th scope="col">ticket type</th>
+                                                               <th scope="col">ticket restrictions</th>
+                                                               <th scope="col">Action</th>
                                                                </tr>
-                                                             </thead>
-                                                             <tbody class="table-group-divider">
-                                                                 @foreach ($active_tickets as $ticket)
+                                                            </thead>
+                                                            <tbody class="table-group-divider">
+                                                               @foreach ($active_tickets as $ticket)
                                                                      @if ($ticket->approve == 1)
                                                                         <tr>
                                                                            <th>{{$ticket->id}}</th>
@@ -144,7 +138,7 @@
                                                                            <td>{{$ticket->seat_from}}</td>
                                                                            <td>{{$ticket->seat_to}}</td>
                                                                               <td>{{$ticket->ticket_type}}</td>
-                                                                           <td>{{$ticket->ticket_restrictions}}</td>
+                                                                           <td>  {{implode(',', json_decode($ticket->ticket_restrictions, true))}}</td>
                                                                            {{-- <td>{{$ticket->status}}</td> --}}
                                                                            <td>
                                                                               <form action="{{ url('/toggle-deactivate') }}" method="POST">
@@ -158,12 +152,13 @@
                                                                            </td>
                                                                         </tr>
                                                                      @endif
-                                                                 @endforeach
-                                                             </tbody>
-                                                           </table>
-                                                      </div>
-                                                   </div>
-                                                   </div>
+                                                               @endforeach
+                                                            </tbody>
+                                                         </table>
+                                                         </div>
+                                                  </div>
+                                              
+                                                         
                                                 </div>
                                              </div>
                                           </div>
@@ -214,7 +209,7 @@
                                                                            <td>{{$ticket->seat_from}}</td>
                                                                            <td>{{$ticket->seat_to}}</td>
                                                                               <td>{{$ticket->ticket_type}}</td>
-                                                                           <td>{{$ticket->ticket_restrictions}}</td>
+                                                                           <td>  {{implode(',', json_decode($ticket->ticket_restrictions, true))}}</td>
                                                                            {{-- <td>{{$ticket->status}}</td> --}}
                                                                            <td>
                                                                               <form action="{{ url('/toggle-Active') }}" method="POST">
@@ -267,7 +262,8 @@
                                                                  <th scope="col">seat from</th>
                                                                  <th scope="col">seat to</th>
                                                                  <th scope="col">ticket type</th>
-                                                                 <th scope="col">ticket restrictions</th>
+                                                                 {{-- <th scope="col">ticket restrictions</th> --}}
+                                                                 
                                                                  {{-- <th scope="col">status</th> --}}
                                                                </tr>
                                                              </thead>
@@ -286,7 +282,7 @@
                                                                            <td>{{$ticket->seat_from}}</td>
                                                                            <td>{{$ticket->seat_to}}</td>
                                                                               <td>{{$ticket->ticket_type}}</td>
-                                                                           <td>{{$ticket->ticket_restrictions}}</td>
+                                                                           {{-- <td>  {{implode(',', json_decode($ticket->ticket_restrictions, true))}}</td> --}}
                                                                            {{-- <td>{{$ticket->status}}</td> --}}
                                                                         </tr>
                                                                      @endif

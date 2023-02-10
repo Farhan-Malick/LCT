@@ -250,17 +250,17 @@
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <select class="form-control" name="ticket_restrictions"  placeholder="Select Restrictions">
-                                                                    <option disabled @if(request()->get('ticket_restrictions') == null)selected @endif>Filter By Restrictions</option>
+                                                                    <option disabled @if(request()->get('ticket_restrictions,') == null)selected @endif>Filter By Restrictions</option>
                             
-                                                                    <option value=" No Restriction "  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'No Restriction') 
+                                                                    <option value=" No Restriction "  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'No Restriction') 
                                                                         selected @endif  >No Restriction</option>
-                                                                    <option value=" Restricted View "  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'Restricted View') 
+                                                                    <option value=" Restricted View "  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'Restricted View') 
                                                                         selected @endif  >Restricted View</option>
-                                                                    <option value="Age Limit 14+"  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'Age Limit 14+') 
+                                                                    <option value="Age Limit 14+"  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'Age Limit 14+') 
                                                                         selected @endif  >Age Limit 14+</option>
-                                                                    <option value="Age Limit 18+"  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'Age Limit 18+') 
+                                                                    <option value="Age Limit 18+"  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'Age Limit 18+') 
                                                                         selected @endif  >Age Limit 18+</option>
-                                                                    <option value="Age Limit 21+"  @if(request()->get('ticket_restrictions') && request()->get('ticket_restrictions') == 'Age Limit 21+') 
+                                                                    <option value="Age Limit 21+"  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'Age Limit 21+') 
                                                                         selected @endif  >Age Limit 21+</option>
                                                                 </select>
                                                             </div>
@@ -432,7 +432,9 @@
                                                                 <p>Ticket Type</p>
                                                                 <h6 class="fw-700 ">{{$ticket->ticket_type}}</h6>
                                                                 <p class="m-0">Restriction</p>
-                                                                <h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>
+                                                                <h6 class="fw-700 ">{{implode(',', json_decode($ticket->ticket_restrictions, true))}}</h6>
+                                                                <p class="m-0">Fans Section</p>
+                                                                <h6 class="fw-700 ">{{$ticket->fan_section}}</h6>
                                                             </div>
                                                         </div>
                                                     </div>

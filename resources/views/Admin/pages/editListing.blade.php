@@ -94,7 +94,7 @@
                                 <div class="col-sm-6 mx-auto " style="text-align: center;  font-size:20px">
                                     {{ session('msg') }}</div>
                             @endif
-                            <form method="post" action="{{URL('/Admin-Panel/ticket-listing/update/'.$listings->id)}}" >
+                            <form method="post" action="{{URL('/Admin-Panel/ticket-listing/update/'.$listings->id)}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <div
@@ -299,8 +299,26 @@
                                             </option>
                                         </select>
                                     </div>
+                                  
                                 </div>
-                    
+                                <div class="form-row">
+                                    <div class="form-group row m-b-10">
+                                        <label class="col-lg-3 text-lg-right col-form-label">Image<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-lg-9">
+                                            <img class=""
+                                            src="{{ asset('uploads/eventListing/'.$listings->layoutImage) }}"
+                                            width="100%" alt="" height="100px">
+        
+                                        <div class="custom-file">
+                                            <input type="file" name="layoutImage" class="custom-file-input"
+                                                id="exampleInputFile">
+                                            <label class="custom-file-label"
+                                                for="exampleInputFile">Choose file</label>
+                                        </div>
+                                        </div>
+                                    </div>
+                                   </div>
                                 <button
                                     type="submit"
                                     class="btn btn-primary"

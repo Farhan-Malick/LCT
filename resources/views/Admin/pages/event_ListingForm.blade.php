@@ -313,18 +313,25 @@
                                         </select>
                                     </div>
                                 </div>
-                                {{-- <div class="form-group ">
-                                    <label class="text-lg-right col-form-label">Image<span
+
+                               <div class="form-row">
+                                <div class="form-group row m-b-10">
+                                    <label class="col-lg-3 text-lg-right col-form-label">Image<span
                                             class="text-danger">*</span></label>
-                                    <div class=" col-xl-6">
-                                        <div class="custom-file">
-                                            <input type="file" name="layoutImage" class="custom-file-input"
-                                                id="exampleInputFile">
-                                            <label class="custom-file-label"
-                                                for="exampleInputFile">Choose file</label>
-                                        </div>      
+                                    <div class="col-lg-9">
+                                        {{-- <img class=""
+                                        src="{{ asset('uploads/eventListing/'.$venues->image) }}"
+                                        width="100%" alt="" height="400px">
+     --}}
+                                    <div class="custom-file">
+                                        <input type="file" name="layoutImage" class="custom-file-input"
+                                            id="exampleInputFile">
+                                        <label class="custom-file-label"
+                                            for="exampleInputFile">Choose file</label>
                                     </div>
-                                </div> --}}
+                                    </div>
+                                </div>
+                               </div>
                                 <button
                                     type="submit"
                                     class="btn btn-primary"

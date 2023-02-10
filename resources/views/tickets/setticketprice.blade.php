@@ -130,7 +130,7 @@
                           {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
                         </div><br>
                         <div class="row d-flex flex-row justify-content-between align-items-center">
-                          <div class="col-md-2 d-flex flex-column "><span><b>SEATED AREA :</b><br>{{ $tickets->seated_area }}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>SEATING AREA :</b><br>{{ $tickets->seated_area }}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span><b>TICKET : </b><br>{{ $tickets->ticket_type }}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span id="noticket"><b>NO.OF TICKETS : </b><br>{{ $tickets->quantity }}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span><b>PER-TICKET :</b><br>${{ $tickets->price }}</span></div>

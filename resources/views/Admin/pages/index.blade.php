@@ -121,6 +121,8 @@
 									<th scope="col">seat to</th>
 									<th scope="col">ticket type</th>
 									<th scope="col">ticket restrictions</th>
+									<th scope="col">Benefits</th>
+									<th scope="col">Fans Section</th>
 									<th scope="col">status</th>
 									<th scope="col" >Approval</th>
 									<th scope="col" >Action</th>
@@ -137,13 +139,21 @@
 												{{-- <td>{{$ticket->currency}}</td> --}}
 												
 												<td>{{$ticket->quantity}}</td>
-												<td>{{$ticket->categories}}</td>
+												<td>
+													@if($ticket->categories === null)
+													{{$ticket->type_cat}}
+													@else
+													{{$ticket->categories}}
+													@endif
+												</td>
 												<td>{{$ticket->section_name}}</td>
 												<td>{{$ticket->row}}</td>
 												<td>{{$ticket->seat_from}}</td>
 												<td>{{$ticket->seat_to}}</td>
 													<td>{{$ticket->ticket_type}}</td>
 												<td>{{$ticket->ticket_restrictions}}</td>
+												<td>{{$ticket->ticket_benefits}}</td>
+												<td>{{$ticket->fan_section}}</td>
 												<td>{{$ticket->status}}</td>
 												<td>
 													@if($ticket->approve == null || $ticket->approve == 0)

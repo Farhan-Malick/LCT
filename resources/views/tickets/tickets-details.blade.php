@@ -230,23 +230,7 @@
                                                         </p>
                                                     </div>
                                                     <input  type="hidden" id="no_of_ticket1" name="total_tickets" value="0" />
-                                                    {{-- <div class="form-group text-center "  name="total_tickets"  style="font-size: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
-                                                        <div class="container">
-                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2 select-active  ticket-num-card p-4 border 1px" data-tickets-val="1" value="1" name="total_tickets" id="progress1"> 1
-                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="2" value="2" name="total_tickets" id="progress2"> 2
-                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="3" value="3" name="total_tickets" id="progress3">  3
-
-                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2 select-active  ticket-num-card p-4 border 1px" data-tickets-val="4" value="4" name="total_tickets" id="progress4"> 4
-                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="5" value="5" name="total_tickets" id="progress5"> 5
-                                                         <input type="checkbox" onClick="ckChange2(this)" class="m-2  select-active ticket-num-card p-4 border 1px"  data-tickets-val="6" value="6" name="total_tickets" id="progress6">  6 +
-                                                        </div>
-                                                     </div>  --}}
-                                                    {{-- <select class="form-select ticket-num-card select-active @error('ticket_type') is-invalid @enderror" >
-                                                        <option selected disabled>Please Select No Of Ticket Type</option>
-                                                        <option value="1" class="select-card  select-active"data-tickets-val="1">1</option>
-                                                        <option value="2"  class="select-card"data-tickets-val="2">2</option>
-                                                        <option value=""data-tickets-val="Mobile-Ticket">3</option>
-                                                    </select> --}}
+                                                 
                                                     <div class="col-12" id="error-ticket-number" style="display:none;color: red;margin-bottom: 10px;font-size: 14px;">
                                                         <span>Please select number of tickets.</span>
                                                     </div>

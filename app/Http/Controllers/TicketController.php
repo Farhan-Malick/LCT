@@ -239,7 +239,8 @@ class TicketController extends Controller
         $divide = $price / 100;
         $percentage = $divide * 10;
         $grand_total = $price - $percentage;
-        return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency'));
+        $webCharge = $price / 10;
+        return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency','webCharge'));
 
     }
 

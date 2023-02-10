@@ -285,7 +285,7 @@
                                 <div class="tour_package_details_bar_list">
                                     <h5>More details</h5>
                                     <ul>
-                                        <li><i class="fas fa-circle"></i>Seated Area :  {{ $tickets->seated_area }}</li>
+                                        <li><i class="fas fa-circle"></i>Seating Area :  {{ $tickets->seated_area }}</li>
                                         <li><i class="fas fa-circle"></i>Number of Tickets : {{ $tickets->quantity }}
                                         </li>
                                         <li><i class="fas fa-circle"></i>Per Ticket : ${{ $tickets->price }}</li>

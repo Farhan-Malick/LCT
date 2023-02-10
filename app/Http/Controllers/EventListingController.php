@@ -32,14 +32,15 @@ class EventListingController extends Controller
         $ticket->start_time=$request->start_time;
         $ticket->end_time=$request->end_time;
 
-        // if($request->hasfile('layoutImage'))
-        // {
-        //     $layoutImage=$request->file('layoutImage');
-        //     $ext = $layoutImage->GetClientOriginalExtension();
-        //     $file2=time().'.'.$ext;
-        //     $layoutImage->storeAs('public/post',$file2);
-        //     $ticket['layoutImage']=$file2;
-        // } 
+        if($request->hasfile('layoutImage'))
+        {
+            $layoutImage=$request->file('layoutImage');
+            $ext = $layoutImage->GetClientOriginalExtension();
+            $file2=time().'.'.$ext;
+            
+            $layoutImage->move(public_path('uploads/eventListing'), $file2);
+            $ticket['layoutImage']=$file2;
+        } 
         // dd($ticket);
         $ticket->save();
         $request->session()->flash('msg','Listing Has Been Added Successfully'); 
@@ -68,7 +69,14 @@ class EventListingController extends Controller
         $listings->venue_name=$request->venue_name;
         $listings->start_time=$request->start_time;
         $listings->end_time=$request->end_time;
-
+        if($request->hasfile('layoutImage'))
+        {
+            $layoutImage=$request->file('layoutImage');
+            $ext = $layoutImage->GetClientOriginalExtension();
+            $file2=time().'.'.$ext;
+            $layoutImage->move(public_path('uploads/eventListing'), $file2);
+            $listings['layoutImage']=$file2;
+        } 
         $listings->update();
         $request->session()->flash('msg','Data Has Been Updated Successfully'); 
         return redirect('Admin-Panel/event-listing');

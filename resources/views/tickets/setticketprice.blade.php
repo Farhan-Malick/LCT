@@ -165,6 +165,7 @@
                                             @foreach($currencies as $currency)
                                             <option value="{{$currency->id}}" @if($ticketCurrency->id === $currency->id) @php echo "selected='true'" @endphp @endif>{{$currency->currency_type}}</option>
                                             @endforeach
+
                                         </select>
                                     </div>
                                     <div class="form-group mt-3">

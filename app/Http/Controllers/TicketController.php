@@ -117,33 +117,27 @@ class TicketController extends Controller
             'ticket_type'                 => 'required'
         ]
     );
-        // $request->validate([
-        //     'ticket_restrictions' => 'required',
-        //     'seated_area' => 'required'
-            
-        // ]);
-        // dd($request);
-      
-
         $ticketListing->user_id = $guestUser;
         $ticketListing->eventlisting_id = $id;
         $ticketListing->currency = $request->currency;
         $ticketListing->seated_area = $request->seated_area;
-        // $ticketListing->categories = $request->categories;
         $ticketListing->type_cat = $request->type_cat;
         $ticketListing->type_sec = $request->type_sec;
-    //    if($sellerCategories == null){
+        $ticketListing->type_row = $request->type_row;
+        $ticketListing->ticket_benefits = json_encode($request->ticket_benefits);
+        $ticketListing->fan_section = $request->fan_section;
+
+  //    if($sellerCategories == null){
     //     $ticketListing->type_cat = $request->type_cat;
     //    }
     //    if($venue_sections == null){
     //     $ticketListing->type_sec = $request->type_sec;
     //    }
-        $ticketListing->type_row = $request->type_row;
-        $ticketListing->ticket_benefits = json_encode($request->ticket_benefits);
-        $ticketListing->fan_section = $request->fan_section;
 
+        // $ticketListing->categories = $request->categories;
         // $ticketListing->section = $request->sections;
         // $ticketListing->row = $request->row;
+
         $ticketListing->seat_from = $request->seat_from;
         $ticketListing->seat_to = $request->seat_to;
         $ticketListing->face_price = $request->face_price;
@@ -157,6 +151,12 @@ class TicketController extends Controller
         if($ticketListing->ticket_type == "Paper-Ticket"){
             $ticketListing->country = $request->country;
         }
+        // if($request->hasFile('simple_pdf')){
+        //     $simple_pdf = $request->file('simple_pdf');
+        //     $thumbnail_name = time().'_'.$simple_pdf->getClientOriginalName();
+        //     $simple_pdf->move(public_path('/booking'), $thumbnail_name);
+        //     $ticketListing->simple_pdf = $thumbnail_name;
+        // }
        
         $ticketListing->save();
 

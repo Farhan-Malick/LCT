@@ -51,8 +51,8 @@
                         </li>
                         @endguest
                         <li class="nav-item">
-                            <a class="nav-link" href="#"
-                                >Help Center</a
+                            <a class="nav-link" href="{{URL('/contact-us')}}"
+                                >Contact us</a
                             >
                         </li>
                         <li class="nav-item">

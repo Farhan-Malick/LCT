@@ -358,28 +358,30 @@
                                                          <p>You can update your password from here. If you can't remember your current password, just log out and click on Forgot password.</p>
                                                       </div>
                                                       <div class="change-password-form">
-                                                         <div class="form-group mt-4">
+                                                         {{-- <div class="form-group mt-4">
                                                             <label class="form-label">Current password*</label>
                                                             <div class="loc-group position-relative">
                                                                <input class="form-control h_50" type="password" placeholder="Enter your password">
                                                                <span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span>
                                                             </div>
-                                                         </div>
+                                                         </div> --}}
+                                                         <form action="" method="">
                                                          <div class="form-group mt-4">
                                                             <label class="form-label">New password*</label>
                                                             <div class="loc-group position-relative">
-                                                               <input class="form-control h_50" type="password" placeholder="Enter your password">
+                                                               <input class="form-control h_50" type="password" name="password" placeholder="Enter your password">
                                                                <span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span>
                                                             </div>
                                                          </div>
-                                                         <div class="form-group mt-4">
+                                                         {{-- <div class="form-group mt-4">
                                                             <label class="form-label">Confirm new password*</label>
                                                             <div class="loc-group position-relative">
                                                                <input class="form-control h_50" type="password" placeholder="Enter your password">
                                                                <span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span>
                                                             </div>
-                                                         </div>
+                                                         </div> --}}
                                                          <button class="main-btn btn-hover w-100 mt-5" type="submit">Update Password</button>
+                                                      </form>
                                                       </div>
                                                    </div>
                                                 </div>

@@ -30,13 +30,17 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-    public function index(VanueSections $vanuesections,VenueSectionRows $venuesectionrows, EventListing $EventListing,Currency $currency,$id)
+    public function index( TicketListing $tickets,VanueSections $vanuesections,VenueSectionRows $venuesectionrows, EventListing $EventListing,Currency $currency,$id)
     {
         //
         if(!auth()->check()){
             return redirect('/login');
         }
+        $maxValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->max('price');
+        $minValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->min('price');
+       
         $currencies = Currency::all();
+        $ticketCurrency = Currency::find($tickets->currency);
         $EventListing = EventListing::find($id);
         $venue_section_rows = VenueSectionRows::all();
         $venue_sections = VanueSections::all();
@@ -44,7 +48,7 @@ class TicketController extends Controller
         $Listing = TicketListing::first();
         $cat = SellerCategory::first();
         $sec = VanueSections::first();
-        return view('tickets/tickets-details',compact('Listing','sec','cat','venue_section_rows','venue_sections','EventListing','currencies','sellerCategories'));
+        return view('tickets/tickets-details',compact('maxValue','minValue','Listing','sec','cat','venue_section_rows','venue_sections','EventListing','currencies','sellerCategories','ticketCurrency'));
     }
 
     public function sendAwienMail(){
@@ -100,6 +104,7 @@ class TicketController extends Controller
      */
     public function store(Request $request, $id)
     {
+
         $guestUser = LoginController::guestLogin();
         $ticketListing = new TicketListing();
         $sellerCategories = SellerCategory::first();
@@ -124,22 +129,24 @@ class TicketController extends Controller
         $ticketListing->eventlisting_id = $id;
         $ticketListing->currency = $request->currency;
         $ticketListing->seated_area = $request->seated_area;
-        $ticketListing->categories = $request->categories;
-        
-       if($sellerCategories == null){
+        // $ticketListing->categories = $request->categories;
         $ticketListing->type_cat = $request->type_cat;
-       }
-       if($venue_sections == null){
         $ticketListing->type_sec = $request->type_sec;
-       }
+    //    if($sellerCategories == null){
+    //     $ticketListing->type_cat = $request->type_cat;
+    //    }
+    //    if($venue_sections == null){
+    //     $ticketListing->type_sec = $request->type_sec;
+    //    }
         $ticketListing->type_row = $request->type_row;
         $ticketListing->ticket_benefits = json_encode($request->ticket_benefits);
         $ticketListing->fan_section = $request->fan_section;
 
-        $ticketListing->section = $request->sections;
-        $ticketListing->row = $request->row;
+        // $ticketListing->section = $request->sections;
+        // $ticketListing->row = $request->row;
         $ticketListing->seat_from = $request->seat_from;
         $ticketListing->seat_to = $request->seat_to;
+        $ticketListing->face_price = $request->face_price;
         $ticketListing->price = $request->price;
         $ticketListing->ticket_restrictions = json_encode($request->ticket_restrictions);
         
@@ -150,19 +157,13 @@ class TicketController extends Controller
         if($ticketListing->ticket_type == "Paper-Ticket"){
             $ticketListing->country = $request->country;
         }
-        // if($request->hasFile('simple_pdf')){
-        //     $simple_pdf = $request->file('simple_pdf');
-        //     $thumbnail_name = time().'_'.$simple_pdf->getClientOriginalName();
-        //     $simple_pdf->move(public_path('/booking'), $thumbnail_name);
-        //     $ticketListing->simple_pdf = $thumbnail_name;
-        // }
        
         $ticketListing->save();
 
         if ($request->ticket_type === "E-Ticket") {
             return redirect()->route('event.ticketlisting.ticket.upload', ['ticket_listing' => $ticketListing->id]);
         } else {
-            return redirect()->route('seller.ticket_price.index', ['id' => $ticketListing->id]);
+            return redirect()->route('seller.complete_ticket.address.save', ['id' => $ticketListing->id]);
         }
     }
 
@@ -178,7 +179,14 @@ class TicketController extends Controller
         return redirect()->route('seller.complete_ticket.address.save', ['id' => $tickets->id]);
        
     }
+    public function UserPasswordUpdate(){
+         if(!Auth::check()) {
+            $user->password = $request->password;
+            $user->update();
+        } 
+        return redirect()->back()->with('msg','Your Password has been Reset');
 
+    }
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)
     {
         $tickets = TicketListing::find($id);
@@ -320,7 +328,8 @@ class TicketController extends Controller
         $divide = $price / 100;
         $percentage = $divide * 10;
        $grand_total = $price - $percentage;
-        return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total'));
+       $webCharge = $price / 10;
+        return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total',''));
 
     }
 
@@ -334,7 +343,8 @@ class TicketController extends Controller
             $divide = $price / 100;
             $percentage = $divide * 10;
             $grand_total = $price - $percentage;
-            return view('tickets/upload_Pdf',compact('currencies','ticket_listing','events','price','percentage','grand_total', 'ticketCurrency'));
+            $webCharge = $price / 10;
+            return view('tickets/upload_Pdf',compact('currencies','ticket_listing','events','price','percentage','grand_total', 'ticketCurrency','webCharge'));
         //dd($ticketlistingid);
         // $ticket_listing = TicketListing::find($ticketlistingid);
         // return view('tickets/upload_Pdf', compact('ticket_listing'));

@@ -8,7 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Last Chance Ticket - Event Request</title>
+    <title>Last Chance Ticket - Contact Us</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('newAssets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -47,7 +47,7 @@
       <div class="row">
         <div class="col-lg-12">
           <h4>LAST CHANCE TICKET</h4>
-          <h2>Create Your Event Request</h2>
+          <h2>Contact Us</h2>
           <p> Here is the last chance to be the member of world largest marketplace for tickets to live events.
             Prices are set by sellers and may be below or above face value.</p>
           <div class="main-button"><a href="#">Discover More</a></div>
@@ -63,21 +63,23 @@
           <div class="info-item">
             <i class="fa fa-phone"></i>
             <h4>Make a Phone Call</h4>
-            <a href="#">+123 456 789 (0)</a>
+            <a href="#">+123 456 789 (0)</a><br>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="info-item">
             <i class="fa fa-envelope"></i>
             <h4>Contact Us via Email</h4>
-            <a href="#">sales@lastchanceticket.com</a>
+
+            For Sales : <a href="#">sales@lastchanceticket.com</a><br>
+            For Support : <a href="#">support@lastchanceticket.com</a>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="info-item">
             <i class="fa fa-map-marker"></i>
             <h4>Visit Our Offices</h4>
-            <a href="#">30 N Gould St Ste R Sheridan, WY 82801</a>
+            <a href="#">30 N Gould St Ste R Sheridan,<br> WY 82801, United States</a>
           </div>
         </div>
       </div>
@@ -108,7 +110,7 @@
           {{-- <form id="reservation-form" name="gs" method="submit" role="search" action="#"> --}}
             <div class="row">
               <div class="col-lg-12">
-                <h4>Create Your <em>Event Request</em> Through This <em>Form</em></h4>
+                <h4>Contact Us</em></h4>
               </div>
               <div class="col-lg-6">
                     <fieldset>

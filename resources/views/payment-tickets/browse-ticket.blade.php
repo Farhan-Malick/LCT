@@ -251,7 +251,7 @@
                                                             <div class="col-md-3">
                                                                 <select class="form-control" name="ticket_restrictions"  placeholder="Select Restrictions">
                                                                     <option disabled @if(request()->get('ticket_restrictions,') == null)selected @endif>Filter By Restrictions</option>
-                            
+                        
                                                                     <option value=" No Restriction "  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'No Restriction') 
                                                                         selected @endif  >No Restriction</option>
                                                                     <option value=" Restricted View "  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'Restricted View') 
@@ -391,12 +391,38 @@
                         <div class="row">
                                     <div class="flight_search_result_wrapper">
                                         <div class="flight_search_item_wrappper">
+                                           
+                                                @if ($tickets->count() == null)
+                                                    <div class="alert alert-success text-center">
+                                                        <h4>No Tickets Available for this event</h4>
+                                                    </div>
+                                                @endif
                                              <?php
-                                                $catClasses = ['btn-danger', 'btn-warning','btn-secondary'];    
+                                                $cat1 = ['btn-danger'];
+                                                $cat2 = ['btn-primary'];    
+                                                $cat3 = ['btn-warning'];
+                                                $cat4 = ['btn-secondary'];
+                                                $cat5 = ['btn-success'];
                                                 ?>
                                                 @foreach ($tickets as $ticket)
-                                                    <?php $key = array_rand($catClasses); ?>
-                                            <div class="flight_search_items border border <?php echo $catClasses[$key] ?> text-dark" 
+                                                    <?php 
+                                                        $key1 = array_rand($cat1);
+                                                        $key2 = array_rand($cat2);
+                                                        $key3 = array_rand($cat3);
+                                                        $key4 = array_rand($cat4);
+                                                        $key5 = array_rand($cat5);
+                                                     ?>
+                                            <div class="flight_search_items border border 
+                                            <?php 
+                                                if($ticket->type_cat === 'CAT 1' || $ticket->categories === 'CAT 1') {echo $cat1[$key1]; } 
+                                                if($ticket->type_cat === 'CAT 2' || $ticket->categories === 'CAT 2') {echo $cat2[$key2]; } 
+                                                if($ticket->type_cat === 'CAT 3' || $ticket->categories === 'CAT 3') {echo $cat3[$key3]; } 
+                                                if($ticket->type_cat === 'CAT 4' || $ticket->categories === 'CAT 4') {echo $cat4[$key4]; } 
+                                                if($ticket->type_cat === 'N/A' || $ticket->categories === 'N/A') {echo $cat5[$key5]; } 
+                                                else {
+                                                    'btn-success';
+                                                }
+                                            ?> text-dark" 
                                                                                     style="  
                                                                                     border: 1px; 
                                                                                     border-radius: 12px;
@@ -414,6 +440,8 @@
                                                                 <p>Event</p>
                                                                 <h3>{{$ticket->event_name}}</h3>
                                                                 <h6>Ticket : {{$ticket->ticket_type}}</h6>
+                                                                <p>Tickets</p>
+                                                                <h6>No of Tickets {{$ticket->quantity}}</h6>
                                                             </div>
                                                         </div>
                                                         <div class="flight_search_middel">
@@ -429,10 +457,11 @@
                                                                 <h6>Row: {{$ticket->rows}}</h6>
                                                             </div>
                                                             <div class="flight_search_destination">
-                                                                <p>Ticket Type</p>
-                                                                <h6 class="fw-700 ">{{$ticket->ticket_type}}</h6>
+                                                                <p>Seating Area</p>
+                                                                <h6 class="fw-700 ">{{$ticket->seated_area}}</h6>
                                                                 <p class="m-0">Restriction</p>
-                                                                <h6 class="fw-700 ">{{implode(',', json_decode($ticket->ticket_restrictions, true))}}</h6>
+                                                                {{-- <h6 class="fw-700 ">{{implode(',', json_decode(, true))}}</h6> --}}
+                                                                <h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>
                                                                 <p class="m-0">Fans Section</p>
                                                                 <h6 class="fw-700 ">{{$ticket->fan_section}}</h6>
                                                             </div>
@@ -453,8 +482,6 @@
                                                             {{-- <a href="{{ route('Pdftemplate',['eventlisting_id' => $events->id,'ticketid' => $ticket->id] ) }}" class="text-danger" >Ticket PDF</a> --}}
                                                         @endif
                                                     @endif
-                                                    {{-- <a href="flight-booking-submission.html" class="btn btn_theme btn_sm">Book
-                                                        now</a> --}}
                                                     <p>*Discount applicable on some conditions</p>
                                                     {{-- <h6 data-bs-toggle="collapse" data-bs-target="#collapseExample"
                                                         aria-expanded="false" aria-controls="collapseExample">Show more <i

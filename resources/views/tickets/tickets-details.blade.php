@@ -336,7 +336,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    {{-- <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Select Category</label>
                                                             <select class="form-select "
@@ -345,28 +345,21 @@
                                                                 @foreach($sellerCategories as $sellerCategory)
                                                                 <option value="{{$sellerCategory->categories}}">{{$sellerCategory->categories}}</option>
                                                                 @endforeach
-                                                                {{-- @if($cat != null)
-                                                                    @error('categories')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
-                                                                @endif --}}
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                    @if ($cat == null)
+                                                    </div> --}}
+                                                    {{-- @if ($cat == null) --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Category</label>
                                                             <input  type="text" class="form-control inputstyle" placeholder="Type Category" name="type_cat" required>
                                                         </div>
                                                     </div>
-                                                    @endif
+                                                    {{-- @endif --}}
 
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    {{-- <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Section</label>
                                                             <select class="form-select"
@@ -378,19 +371,19 @@
 
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                    @if ($venue_sections == null)
+                                                    </div> --}}
+                                                    {{-- @if ($venue_sections == null) --}}
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="section">Section</label>
                                                                 <input  type="text" class="form-control inputstyle" placeholder="Type Section" name="type_sec" required>
                                                             </div>
                                                         </div>
-                                                    @endif
+                                                    {{-- @endif --}}
                                                 </div>
 
                                                <div class="row">
-                                                    <div class="col-md-6">
+                                                    {{-- <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="row">Rows</label>
                                                             <select class="form-select" name="row">
@@ -401,15 +394,15 @@
 
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                    @if ($venue_section_rows == null)
+                                                    </div> --}}
+                                                    {{-- @if ($venue_section_rows == null) --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Rows</label>
                                                             <input  type="text" class="form-control inputstyle" placeholder="Type Row" name="type_row">
                                                         </div>
                                                     </div>
-                                                    @endif
+                                                    {{-- @endif --}}
                                                </div>
 
                                                 <div class="form-group">
@@ -468,7 +461,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                           <div class="row">
+                            <div class="col-lg-6">
                                 <h4 class="fw-700">Enter Face Value<span style="color: red">*</span></h4>
                                 <div class="card mb-3 shadow-sm p-4 main-card br-10">
                                     <div class="row">
@@ -495,9 +489,46 @@
                                                         {{-- <span class="input-group-text">$</span> --}}
                                                         <input  type="text" class="form-control inputstyle"
                                                             aria-label="Amount (to the nearest dollar)"
-                                                            name="price" value="">
+                                                            name="face_price" value="">
                                                         {{-- <span class="input-group-text">.00</span> --}}
                                                     </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 class="fw-700">Set Price<span style="color: red">*</span></h4>
+                                <div class="card mb-3 shadow-sm p-4 main-card br-10">
+                                    <div class="row">
+                                        <div class="col-md-12 mb-4">
+
+                                            <p> <i class="bi bi-info-circle-fill me-2"></i>Set your actual price for the ticket
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <select class="form-select" aria-label="Default select example" name="currency" required>
+                                                    @foreach($currencies as $currency)
+                                                    <option value="{{$currency->id}}">{{$currency->currency_type}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                                <div class="form-group mt-3">
+                                                    <label for="" class="mb-4">Amount per ticket</label>
+                                        <div class="input-group mb-4">
+                                            <span class="input-group-text">$</span>
+                                            <input type="text" id="price-field" name="price" style="height:40px" class="form-control "
+                                                aria-label="Amount (to the nearest dollar)" value = "">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                        @if($minValue != '' && $maxValue != '')<small >Tickets in this area are currently selling between <strong>{{$ticketCurrency->currency_type}} {{ $minValue }} and
+                                            {{$ticketCurrency->currency_type}}
+                                                {{ $maxValue }}</strong> per ticket. In order to sell your tickets quickly we
+                                            suggest you sell
+                                            your tickets at <strong>{{$ticketCurrency->currency_type}} {{ $minValue }}</strong> per ticket</small>@endif
+                                    </div>
                                                 </div>
 
                                         </div>
@@ -505,6 +536,7 @@
                                 </div>
 
                             </div>
+                           </div>
                             {{-- @if($Listing->ticket_type == "Paper-Ticket") --}}
                                 <div class="col-lg-12">
                                     <h4 class="fw-700">Select Country<span style="color: red">*</span></h4>

@@ -173,7 +173,24 @@
                                     @endfor
                                 </select>
                             </div>
-
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    @if ($errors->any())
+                                    <div class="alert alert-danger" role="alert">
+                                        <div class="alert-icon">
+                                            <i class="flaticon-warning "></i>
+                                        </div>
+                                        <div class="alert-text">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div><br />
+                                @endif
+                                </div>
+                            </div>
                           <div class="mt-2">
                             @if ($tickets->ticket_type == "Paper-Ticket")
                                     <div id="v1">
@@ -442,25 +459,9 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <div id="v2">
-                                        {{-- <p>Seller Country : {{$tickets->country}}</p> --}}
-                                       <p></p>
-                                    </div>
-                                    {{-- <script>
-                                            $(function () {
-                                                $("#country_id").on("change", function () {
-                                                    var text = $(this).find('option:selected').text();
-                                                    $('#v2 p').text(text);
-                                                });
-                                            });
-                                    </script> --}}
+                                  
                             @endif
                           </div>
-                            
-                            {{-- <div>
-                                <p>Pricing = </p>
-                            </div> --}}
-                          
                     </div>
                     <div class="col-md-8">
                         <div class="card p-3 shadow-sm br-10 mb-5">
@@ -468,8 +469,11 @@
                                 <h4 class="fw-700 m-0">About Your Tickets</h4>
                             </div>
                             <div class="card-body">
-                                <p> <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>RESTRICTIONS : {{implode(',', json_decode($tickets->ticket_restrictions, true))}}</p>
-                                <p> <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>BENEFITS : {{implode(',' , json_decode($tickets->ticket_benefits, true))}}</p>
+                                <p> <i class="fa fa-ban me-2 text-danger"></i>RESTRICTIONS :{{$tickets->ticket_restrictions}}</p>
+                                <p> <i class="fa fa-handshake  me-2 text-success"></i> BENEFITS : {{$tickets->ticket_benefits}}</p>
+                               
+                                {{-- <p> <i class="fa fa-ban me-2 text-danger"></i>RESTRICTIONS : {{implode(',', json_decode($tickets->ticket_restrictions, true))}}</p>
+                                <p> <i class="fa fa-handshake  me-2 text-success"></i> BENEFITS : {{implode(',' , json_decode($tickets->ticket_benefits, true))}}</p> --}}
                                 <p> <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>FANS SECTION : {{$tickets->fan_section}}</p>
                             </div>
                         </div>
@@ -660,9 +664,9 @@
 $("#country_id").on('change', function (e) {
     var countrySelected = $(this).val();
     if(sellerCountry !== countrySelected){
-        $("#shipment-charges").html("<span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$100</span>")
+        $("#shipment-charges").html("<span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$50</span>")
     } else {
-        $("#shipment-charges").html("<span><b>LOCAL SHIPMENT CHARGES :</b><br>$30</span>")
+        $("#shipment-charges").html("<span><b>LOCAL SHIPMENT CHARGES :</b><br>$20</span>")
     }
 });
 </script>

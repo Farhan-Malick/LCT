@@ -27,11 +27,9 @@ class PurchasesController extends Controller
     // }
     public function buyer_ticket_purchase(Request $request, $id)
     {
-        // dd(auth()->check());
         if(!auth()->check()){
             return redirect('/login');
         }
-
         $ticket = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'event_listings.event_date', 'event_listings.start_time',
         'event_listings.venue_name','users.last_name','purchases.quantity','purchases.price')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
@@ -39,9 +37,7 @@ class PurchasesController extends Controller
         ->join('purchases','purchases.user_id','=','users.id')
         ->where('ticket_listings.id', $id)
         ->first();
-
         $seller = User::find($ticket->user_id);
-
         $purchase = new Purchases();
         $purchase->user_id = auth()->id();
         $purchase->event_id = $ticket->eventlisting_id;
@@ -65,13 +61,10 @@ class PurchasesController extends Controller
 
         $events = EventListing::select('*','venues.title as vTitle', 'venues.image as vImage')
         ->join('events', 'events.id', '=', 'event_listings.event_id')
-        ->join('venues', 'venues.id', '=', 'events.venue_id')
+        // ->join('venues', 'venues.id', '=', 'events.venue_id')
+        ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
         ->where('event_listings.id', $id)
         ->first();
-        // $events = Event::select('events.*', 'venues.title as vTitle', 'venues.image as vImage')
-        // ->join('venues', 'venues.id', '=', 'events.venue_id')
-        // ->where('events.id', '')
-        // ->first();
 
         $eventListings = EventListing::where('status', 1)->where('event_id', $id)->select('id', 'event_name')->get();
         // dd($events);
@@ -164,7 +157,6 @@ class PurchasesController extends Controller
         $purchases->event_id = $eventlisting_id;
         $purchases->seller_id =$sellerid;
         $purchases->ticket_id = $ticketid;
-        // $purchases->country_id = $country_id;
         $purchases->quantity = Request::get('quantity');
         $purchases->price = Request::get('price');
         $purchases->save();
@@ -227,7 +219,7 @@ class PurchasesController extends Controller
             // ->where('ticket_listings.id',$id)
             ->where('events.id',$id)
             ->first();
-
+            
         $pdf = Pdf::loadView('downloadPDF',[
             'tickets'=>$tickets,
             'events'=>$events,

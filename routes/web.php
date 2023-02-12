@@ -42,6 +42,10 @@ Route::get('/dashboard', function () {
 Route::get('/TicketDetail', function () {
     return view('payment-tickets/ticket_detail');
 });
+
+Route::get('/contact-us', function () {
+    return view('/contactus');
+});
 // Route::get('/dashboard/orders', function () {
 //     return view('dashboard/orders');
 // });

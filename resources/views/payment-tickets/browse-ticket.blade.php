@@ -238,12 +238,10 @@
                                                                     <div class="form-group">
                                                                           <select class="form-control"  name="Restriction_filter"  onchange="this.form.submit()">
                                                                               <option selected disabled>Filter by Restrictions</option>
-                                                                              <option value="All">All</option>
-                                                                              <option value="">No Restriction</option>
-                                                                              <option value="">Restricted</option>
-                                                                                {{-- @foreach ($restrictionsFromTicketListing as $all)
+                                                                                @foreach ($restrictionsFromTicketListing as $all)
                                                                                     <option value="{{$all->ticket_restrictions}}">{{$all->ticket_restrictions}}</option></a>
-                                                                                @endforeach --}}
+                                                                                    {{-- <option value="{{$all->ticket_restrictions}}">{{implode(',', json_decode($all->ticket_restrictions, true))}}</option></a> --}}
+                                                                                @endforeach
                                                                           </select>
                                                                     </div>
                                                                   </form>
@@ -290,65 +288,145 @@
                                                                 <a href="{{URL::current()."?sort=newest"}}"style=" margin-right:20px; text-decoration:none">Newest</a>
                                                              </div>
                                                         </div>
-
+                                                    </form>
+                                                  
                                                         <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="oneway_search_form">
-                                                                    <div class="row select-ticket">
-                                                                        <div class="col-lg-12">
-                                                                            {{-- <p class="primary-text">
-                                                                                <i class="bi bi-info-circle-fill me-2"></i>
-                                                                                Select a quantity to quickly find the best tickets available for the number of
-                                                                                people attending the event.
-                                                                            </p> --}}
-                                                                        </div>
-                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3 mt-3">
-                                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 1 ) <?php echo 'select-active' ?> @endif" data-tickets-val="1">
-                                                                                    <h4>1</h4>
+                                                                <div class="col-lg-10">
+                                                                    <div class="oneway_search_form">
+                                                                        <form method="get" id="qty-form">
+
+                                                                            <div class="row select-ticket">
+                                                                                <div class="col-lg-12">
+                                                                                    {{-- <p class="primary-text">
+                                                                                        <i class="bi bi-info-circle-fill me-2"></i>
+                                                                                        Select a quantity to quickly find the best tickets available for the number of
+                                                                                        people attending the event.
+                                                                                    </p> --}}
+                                                                                </div>
+                                                                                <div class="col-sm-3 col-md-3 col-lg-3 mt-3 mt-3">
+                                                                                    <div class="cardNew btn_theme btn_md mb-3">
+                                                                                        <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 1 ) <?php echo 'select-active' ?> @endif" data-tickets-val="1">
+                                                                                            <h4>1</h4>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-3 col-md-3 col-lg-3 mt-3">
+                                                                                    <div class="cardNew btn_theme btn_md mb-3">
+                                                                                        <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 2 ) <?php echo 'select-active' ?> @endif" data-tickets-val="2">
+                                                                                            <h4>2</h4>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-3 col-md-3 col-lg-3 mt-3">
+                                                                                    <div class="cardNew btn_theme btn_md mb-3">
+                                                                                        <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 3 ) <?php echo 'select-active' ?> @endif" data-tickets-val="3">
+                                                                                            <h4>3</h4>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-3 col-md-3 col-lg-3 mt-3">
+                                                                                    <div class="cardNew btn_theme btn_md mb-3">
+                                                                                        <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 4 ) <?php echo 'select-active' ?> @endif" data-tickets-val="4">
+                                                                                            <h4>4</h4>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
-                                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 2 ) <?php echo 'select-active' ?> @endif" data-tickets-val="2">
-                                                                                    <h4>2</h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
-                                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 3 ) <?php echo 'select-active' ?> @endif" data-tickets-val="3">
-                                                                                    <h4>3</h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
-                                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 4 ) <?php echo 'select-active' ?> @endif" data-tickets-val="4">
-                                                                                    <h4>4</h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
-                                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 5 ) <?php echo 'select-active' ?> @endif" data-tickets-val="5">
-                                                                                    <h4>5</h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
-                                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 6 ) <?php echo 'select-active' ?> @endif" data-tickets-val="6">
-                                                                                    <h4>6 +</h4>
-                                                                                </div>
-                                                                            </div>
+                                                                        </form>
+
+                                                                    </div>
+                                                                </div>
+                                                            <div class="col-lg-2">
+                                                                <div class="col-lg-12 mt-3">
+                                                                    <div class="cardNew btn_theme btn_md mb-3">
+                                                                        <div class="text-center card-body ticket-card  cursor-pointer shadow-sm" data-tickets-val="5" >
+                                                                            <h4>5 +</h4>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-12" id="ticket-more-5" style="display:none">
+                                                                <form method="get" id="qty-form">
+                                                                    <div class="row height d-flex align-items-center">
+                                                                      <div class="col-md-10">
+                                                                        <div class="search">
+                                                                          <input type="text" name="search-no-of-tickets" value="@if(request()->get('search-no-of-tickets')) <?= request()->get('search-no-of-tickets')?> @endif"class="form-control" placeholder="Search Ticket Number Here">
+                                                                          <i class="fa fa-search"></i>
+                                                                          <button type="submit" value="Search" class="btn btn-primary">Search</button>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                  </form>
+                                                                {{-- <small class="text-muted">Total tickets</small> --}}
+                                                            </div>
+                                                            <style>
+                                                                .search{
+                                                                        position: relative;
+                                                                        box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+                                                                          
+                                                                        }
+                                              
+                                                                        .search input{
+                                              
+                                                                          height: 60px;
+                                                                          text-indent: 25px;
+                                                                          border: 2px solid #d6d4d4;
+                                              
+                                              
+                                                                        }
+                                              
+                                              
+                                                                        .search input:focus{
+                                              
+                                                                          box-shadow: none;
+                                                                          border: 2px solid rgb(74, 185, 226);
+                                              
+                                              
+                                                                        }
+                                              
+                                                                        .search .fa-search{
+                                              
+                                                                          position: absolute;
+                                                                          top: 20px;
+                                                                          left: 16px;
+                                              
+                                                                        }
+                                              
+                                                                        .search button{
+                                              
+                                                                          position: absolute;
+                                                                          top: 5px;
+                                                                          right: 5px;
+                                                                          height: 50px;
+                                                                          width: 110px;
+                                                                          background:  rgb(74, 185, 226);;
+                                              
+                                                                        }
+                                                              </style>
+                                                            <script>
+                                                                 document.addEventListener("DOMContentLoaded", () => {
+
+                                                                    document.querySelectorAll('.ticket-card').forEach(function(element) {
+                                                                        element.addEventListener("click", (event) => {
+                                                                            document.querySelectorAll('.ticket-card').forEach((element) => element.classList.remove('select-active'));
+                                                                            event.currentTarget.classList.add('select-active');
+                                                                            const value =event.currentTarget.attributes['data-tickets-val'].value;
+                                                                            document.getElementById('total-tickets').value = value;
+                                                                            if(value === "5"){
+                                                                                document.getElementById('ticket-more-5').style.display = "block";
+                                                                                document.getElementById('total-tickets').required = true;
+                                                                                document.getElementById('total-tickets').value = "";
+                                                                            } else {
+                                                                                document.getElementById('ticket-more-5').style.display = "none";
+                                                                                document.getElementById('total-tickets').required = false;
+                                                                                document.getElementById('total-tickets').value = value;
+                                                                            }
+                                                                        });
+                                                                    });
+                                                                    });
+                                                                
+                                                            </script>
                                                         </div>
-                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -409,6 +487,7 @@
                                                 @foreach ($colors as $key => $dbValues) 
                                                     @if ($key === 0)
                                                         {{$dbValues}}
+                                                        @endif
                                                     @endforeach
 
                                                 @foreach ($tickets as $ticket)
@@ -548,6 +627,7 @@
                     const value =event.currentTarget.attributes['data-tickets-val'].value;
                     document.getElementById('total-tickets').value = value;
                     document.getElementById('qty-form').submit();
+                    
                 });
             });
         });

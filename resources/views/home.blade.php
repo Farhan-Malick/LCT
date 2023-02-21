@@ -85,7 +85,7 @@
                         <div class="col-md-10">
                           <div class="search">
                             <i class="fa fa-search"></i>
-                            <input type="text" name="search_text" id="search_text" class="form-control" placeholder="Search Event Name Here">
+                            <input type="text" name="search-no-of-tickets" id="search_text" class="form-control" placeholder="Search Ticket Number Here">
                             <button class="btn btn-primary">Search</button>
                           </div>
                             <div id="search_list"> </div>

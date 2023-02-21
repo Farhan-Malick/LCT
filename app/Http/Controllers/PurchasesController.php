@@ -98,6 +98,7 @@ class PurchasesController extends Controller
         ->groupBy('ticket_restrictions')
         ->where('ticket_listings.eventlisting_id',$id)
         ->get();
+        
         $quantityFromTicketListing = TicketListing::select('ticket_listings.quantity')
         ->groupBy('quantity')
         ->where('approve','1')
@@ -148,6 +149,9 @@ class PurchasesController extends Controller
         }
         if (Request::get('qty') !== null) {
             $tickets = $tickets->where('quantity', '>=', Request::get('qty'));
+        }
+        if (Request::get('search-no-of-tickets') !== null) {
+            $tickets = $tickets->where('quantity', '>=', Request::get('search-no-of-tickets'));
         }
         if (Request::get('no_of_tickets') == '1') {
             // $tickets = $tickets->get(0)->name;

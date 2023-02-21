@@ -15,6 +15,7 @@ use App\Http\Controllers\TicketListingController;
 use App\Http\Controllers\EventListingController;
 use App\Http\Controllers\MisController;
 use App\Http\Controllers\SellerCategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Middleware\AdminAuth;
 
 /*
@@ -47,6 +48,20 @@ Route::group(['middleware' => 'web'], function () {
         return view('Admin/pages/dashboard',compact('tickets','price','userCount','total_no_sold_tickets'));
     });
     Route::middleware('adminauth')->group(function () {
+        Route::get('/view-PDF-File/{id}', [TicketController::class, 'viewPdf']);
+
+        Route::get('/Admin-Panel/Contact-Us', [ContactController::class, 'contactDetailForAdmin']);
+                //paperTicket
+        Route::get('/Admin-Panel/Edit-PaperTicket/{id}', [TicketController::class, 'editPaperTicket']);
+        Route::post('/Admin-Panel/PaperTicket/update/{id}', [TicketController::class, 'updatePaperTicket']);
+                // E_Ticket 
+        Route::get('/Admin-Panel/Edit-E_Ticket/{id}', [TicketController::class, 'editE_Ticket']);
+        Route::post('/Admin-Panel/E-Ticket/update/{id}', [TicketController::class, 'updateE_Ticket']);
+                //Mobile Ticket
+        Route::get('/Admin-Panel/Edit-MobileTicket/{id}', [TicketController::class, 'editMobileTicket']);
+        Route::post('/Admin-Panel/MobileTicket/update/{id}', [TicketController::class, 'updateMobileTicket']);
+
+
         Route::get('/Admin-Panel/add-event', [EventController::class, 'index']);
         Route::post('/Admin-Panel/add-event', [EventController::class, 'store']);
         // ALL EVENTS CRUD
@@ -128,5 +143,12 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('admin/all_sales', [SalesController::class, 'admin_purchase_show'])->name('admin.sales.show');
 
         Route::get('/Admin-Panel/all_sales/{id}/destroy', [SalesController::class, 'ticket_destroy'])->name('admin.purchase.ticket.destroy');
+
+        Route::get('/Admin-Panel/EventsForFooter', [EventController::class, 'footerEvents']);
+        Route::post('/toggle-Footerapprove-for-footer', [EventController::class, 'Approval']);
+
+        
+        Route::get('/Admin-Panel/HotTickets', [EventController::class, 'HotTickets']);
+        Route::post('/toggle-Footerapprove-HotTickets', [EventController::class, 'HotTicketsApproval']);
     });
 });

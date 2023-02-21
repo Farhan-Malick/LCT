@@ -155,6 +155,28 @@
                        
                     </ul>
                 </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        <b class="caret"></b>
+                        <i class="fa fa-align-left"></i>
+                        <span>Contact Us Detail</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{URL('/Admin-Panel/Contact-Us')}}">Contact Us</a></li>
+                       
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        <b class="caret"></b>
+                        <i class="fa fa-align-left"></i>
+                        <span>Footer Events</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{URL('/Admin-Panel/EventsForFooter')}}">Popular Events</a></li>
+                        <li><a href="{{URL('/Admin-Panel/HotTickets')}}">Hot Tickets</a></li>
+                    </ul>
+                </li>
               
                 <!-- begin sidebar minify button -->
                 <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>

@@ -73,12 +73,8 @@
                           <div class="col-md-2 d-flex flex-column "><span></span><b>TIME :</b>{{$tickets->event->start_time}} - {{$tickets->event->end_time}}<span></div>
                           <div class="col-md-2 d-flex  flex-column  "><span><b>DATE : </b><br>({{$tickets->event->event_date}})</span></div>
                           <div class="col-md-2 d-flex flex-column "><span><b>VENUE : </b><br>{{$tickets->event->venue_name}} , {{$tickets->event->location}}</span></div>
-                          <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>@if ($tickets->categories == null)
-                              {{$tickets->type_cat}}
-                              @else
-                              {{$tickets->categories}}
-                          @endif</span></div>
-                          <div class="col-md-2 d-flex flex-column "><span><b>SECTION : ROW</b><br>{{$tickets->section}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $tickets->row }}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>{{$tickets->type_cat}}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>SECTION : ROW</b><br>{{$tickets->type_sec}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $tickets->type_row }}</span></div>
 
                           {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
                         </div><br>
@@ -87,7 +83,7 @@
                           <div class="col-md-2 d-flex flex-column "><span><b>TICKET : </b><br>{{ $tickets->ticket_type }}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span id="noticket"><b>NO.OF TICKETS : </b><br>{{ $tickets->quantity }}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span><b>PER-TICKET :</b><br>${{ $tickets->price }}</span></div>
-                          <div class="col-md-2 d-flex flex-column "><span><b>Service Charges : </b><br>{{$webCharge}}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>Service Charges : </b><br>${{$webCharge}}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span><b>TOTAL TICKET PRICE:</b><br>${{$price}}</span></div>
                           <input type="hidden" id="pricetotal" value="{{ $tickets->price }}" name="price">
                           {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
@@ -103,7 +99,7 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-12">
-                @if ($tickets->ticket_type === "E-Ticket" )
+                {{-- @if ($tickets->ticket_type === "E-Ticket" )
                     @if ($message = Session::get('msg'))
                   <div class="alert alert-success alert-block">
                       <strong>{{ $message }}</strong>
@@ -138,7 +134,6 @@
                       <div class="form-group row m-b-10">
                         <div class="input-group">
                           <div class="pr-2" style="float: left">
-                              {{-- <label for="simage"><i class="bi bi-folder-plus"></i></label> --}}
                               <input value=""
                                   class="@error('simple_pdf') is-invalid @enderror " type="file"
                                   name="simple_pdf" id="simage"
@@ -160,7 +155,7 @@
                       </fieldset>
                   </form>
               </div>
-              @else
+              @else --}}
                   @if ($message = Session::get('msg'))
                   <div class="alert alert-success alert-block">
                       <strong>{{ $message }}</strong>
@@ -168,11 +163,11 @@
                   @endif
                   <form action="{{route('seller.complete_ticket.address.store',$tickets->id)}}" method="post" enctype="multipart/form-data" id="reservation-form">
                       @csrf
-                      <div class="row">
+                      {{-- <div class="row">
                         <div class="col-lg-12">
                           <h4>Enter Your <em>Ticket</em> Location<em></em></h4>
-                      </div>
-                        <div class="col-lg-12">
+                      </div> --}}
+                        {{-- <div class="col-lg-12">
                           <fieldset>
                               <label class="text-dark" for="phone">Country </label>
                               <select name="country" class="form-control"aria-label="Default select example" id="country" placeholder="" required>
@@ -431,17 +426,16 @@
                                   <option  name="country" >Zimbabwe</option>
                               </select>
                           </fieldset>
-                        </div>
+                        </div> --}}
                         <div class="col-lg-12">
-                          <h5 class="mb-4"><strong> <span  style="color: #61c3e3">UPLOAD</span> PDF FILE FOR <span style="color: #61c3e3">BOOKING</span> CONFIRMATION</strong></h5>
+                          <h2 class="mb-4 text-center"><strong>PLEASE CHECK YOUR TICKET DETAILS ABOVE IN THE MILESTONE AND SUBMIT</strong></h2>
                           <div class="form-group row m-b-10">
-                            <div class="input-group">
+                            {{-- <div class="input-group">
                               <div class="pr-2" style="float: left">
-                                  {{-- <label for="simage"><i class="bi bi-folder-plus"></i></label> --}}
                                   <input value=""
                                       class="@error('simple_pdf') is-invalid @enderror " type="file"
                                       name="simple_pdf" id="simage"
-                                     >
+                                     >  
                               </div>
                               @error('simple_pdf')
                                   <span class="invalid-feedback" role="alert">
@@ -450,19 +444,21 @@
                               @enderror
                               <div class="text-center text-dark" id="displayDocs">
                               </div>
-                          </div>
+                              
+                          </div> --}}
+                          <fieldset>
+                            <button class="btn primary-btn w-100 mt-3"
+                            type="submit"><strong>Submit Ticket</strong></button>
+                          </fieldset>
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-12">
-                        <fieldset>
-                          <button class="btn primary-btn w-100 mt-3"
-                          type="submit"><strong>Submit Ticket</strong></button>
-                        </fieldset>
+                      <div class="col-lg-6">
+                        
                     </div>
                      
                   </form>
-               @endif
+               {{-- @endif --}}
               
                 </div>
               {{-- <div class="col-lg-4 ">

@@ -83,7 +83,7 @@
             </div>
             <div class="row mb-5">
                 <div class="col-lg-12 ">
-                    <form action="{{route('seller.ticketlisting.store',$EventListing->id)}}" method="post" id="reservation-form" >
+                    <form action="{{route('seller.ticketlisting.store',$EventListing->id)}}" enctype="multipart/form-data" method="post" id="reservation-form" >
                     @csrf
                         <!-- alert start here -->
 
@@ -160,9 +160,9 @@
                                             </p>
                                         <div class="form-group text-center "  name="ticket_type"  style="font-size: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
                                            <div class="container">
-                                            <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px" data-ticket="Paper-Ticket" value="Paper-Ticket" name="ticket_type" id="progress1"> Paper Ticket <sup class="checked"></sup>
-                                            <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px"  data-ticket="E-Ticket" value="E-Ticket" name="ticket_type" id="progress2"> E-Ticket <sup class="checked"></sup>
-                                            <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px"  data-ticket="Mobile-Ticket" value="Mobile-Ticket" name="ticket_type" id="progress3">   Mobile Ticket <sup class="checked"></sup>
+                                            <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px " data-ticket="Paper-Ticket" value="Paper-Ticket" name="ticket_type" id="progress1"> Paper Ticket <sup class="checked"></sup>
+                                            <input type="checkbox" onClick="ckChange(this)"  onchange="E_Ticket()"class="E_Ticket m-2 select-card p-4 border 1px"  data-ticket="E-Ticket" value="E-Ticket" name="ticket_type" id="progress2"> E-Ticket <sup class="checked"></sup>
+                                            <input type="checkbox" onClick="ckChange(this)" onchange="MobileTicket()" class="MobileTicket m-2 select-card p-4 border 1px"  data-ticket="Mobile-Ticket" value="Mobile-Ticket" name="ticket_type" id="progress3">   Mobile Ticket <sup class="checked"></sup>
                                            </div>
                                         </div>
                                             <style>
@@ -179,7 +179,6 @@
 
                                             if (checked.checked) {
                                             for(var i=0; i < ckName.length; i++){
-
                                                 if(!ckName[i].checked){
                                                     ckName[i].disabled = true;
                                                 }else{
@@ -194,29 +193,6 @@
                                             }
                                         }
                                         </script>
-                                        {{-- <div class="form-group ">
-                                            <select class="form-select select-card select-active @error('ticket_type') is-invalid @enderror" >
-                                                <input  type="hidden" id="ticket-type" name="ticket_type" value="Paper-Ticket" />
-                                                <option selected disabled>Please Select Ticket Type</option>
-                                                <option value="" class="select-card select-active" data-ticket="Paper-Ticket">Paper Ticket</option>
-                                                <option value=""  class="select-card" data-ticket="E-Ticket">E-Ticket</option>
-                                                <option value="" class="select-card" data-ticket="Mobile-Ticket">Mobile-Ticket</option>
-                                            </select>
-                                            @error('ticket_type')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div> --}}
-                                        {{-- <div class="card shadow-sm mb-3 select-card select-active" data-ticket="Paper-Ticket">
-                                            <div class="card-body py-5">
-                                                <div class="card-subtitle">
-                                                    <strong> Paper Tickets</strong>
-                                                </div>
-                                                <div class="card-description">Printed tickets, not in E-format
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                         <div class="col-lg-12">
                                             <h4 class="fw-700 mt-4">Enter Number of Tickets <span style="color: red">*</span></h4>
                                             <div class="card p-4 mb-3 shadow-sm  br-10">
@@ -258,7 +234,7 @@
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
                                                             <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="4">
-                                                                <h5>4</h5>
+                                                                    <h5>4</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -284,35 +260,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-md-4">
-                                        <div id="ticket_type" class="card shadow-sm mb-3 select-card" data-ticket="E-Ticket">
-                                            <div class="card-body py-5">
-                                                <div class="card-subtitle">
-                                                    <strong>E-Tickets</strong>
-                                                </div>
-                                                <div class="card-description">
-                                                    Electronic tickets in PDF format
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div id="ticket_type" class="card shadow-sm mb-3 select-card" data-ticket="Mobile-Ticket">
-                                            <div class="card-body py-5">
-                                                <div class="card-subtitle">
-                                                    <strong>Mobile Ticket</strong>
-                                                </div>
-                                                <div class="card-description">
-                                                    You'll have Mobile Ticket via App
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
                                 </div>
-
                             </div>
-
                             <div class="col-lg-12">
 
                                 <h4 class="fw-700"> Enter Seating Details<span style="color: red">*</span></h4>
@@ -328,7 +277,7 @@
                                             <div class="form">
                                                 <div class="form-group">
                                                     <label for="row">Seating Area</label>
-                                                      <select class="form-select "  required autocomplete="seated_area" autofocus name="seated_area">
+                                                      <select class="form-select "   autocomplete="seated_area" autofocus name="seated_area">
                                                         <option selected disabled>Please Select Row</option>
                                                         <option value="Seated Tickets">Seated Tickets</option>
                                                         <option value="Standing Tickets">Standing Tickets</option>
@@ -348,14 +297,12 @@
                                                             </select>
                                                         </div>
                                                     </div> --}}
-                                                    {{-- @if ($cat == null) --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Category</label>
-                                                            <input  type="text" class="form-control inputstyle" placeholder="Type Category" name="type_cat" required>
+                                                            <input  type="text" class="form-control inputstyle" placeholder="Type Category" name="type_cat" >
                                                         </div>
                                                     </div>
-                                                    {{-- @endif --}}
 
                                                 </div>
                                                 <div class="row">
@@ -372,14 +319,12 @@
                                                             </select>
                                                         </div>
                                                     </div> --}}
-                                                    {{-- @if ($venue_sections == null) --}}
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="section">Section</label>
-                                                                <input  type="text" class="form-control inputstyle" placeholder="Type Section" name="type_sec" required>
+                                                                <input  type="text" class="form-control inputstyle" placeholder="Type Section" name="type_sec" >
                                                             </div>
                                                         </div>
-                                                    {{-- @endif --}}
                                                 </div>
 
                                                <div class="row">
@@ -395,14 +340,12 @@
                                                             </select>
                                                         </div>
                                                     </div> --}}
-                                                    {{-- @if ($venue_section_rows == null) --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Rows</label>
                                                             <input  type="text" class="form-control inputstyle" placeholder="Type Row" name="type_row">
                                                         </div>
                                                     </div>
-                                                    {{-- @endif --}}
                                                </div>
 
                                                 <div class="form-group">
@@ -534,282 +477,395 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                            </div>
-                            {{-- @if($Listing->ticket_type == "Paper-Ticket") --}}
-                                <div class="col-lg-12">
-                                    <h4 class="fw-700">Select Country<span style="color: red">*</span></h4>
-                                    <div class="card mb-3 shadow-sm p-4 main-card br-10">
-                                        <div class="row">
-                                            <div class="col-md-12">
-
-                                                <p> <i class="bi bi-info-circle-fill me-2"></i>Select your Actual Country.
-                                                </p>
+                           
+                                <div class="row">
+                                    <div class="col-lg-6 answer" >
+                                        <h4 class="fw-700">Select Country<span style="color: red">*</span></h4>
+                                        <div class="card mb-3 shadow-sm p-4 main-card br-10">
+                                            <div class="row">
+                                                <div class="col-md-12">
+    
+                                                    <p> <i class="bi bi-info-circle-fill me-2"></i>Select your Actual Country.
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-8" >
+                                                         <div class="form-group row m-b-10">
+                                                            <label class="col-lg-12 text-lg-right col-form-label">Select Country :</label>
+                                                                <select name="country" class="form-control" id="country" >
+                                                                    <option >Select Country</option>
+                                                                    <option name="country">Afghanistan</option>
+                                                                    <option name="country">Åland Islands</option>
+                                                                    <option  name="country" >Albania</option>
+                                                                    <option  name="country" >Algeria</option>
+                                                                    <option  name="country" >American Samoa</option>
+                                                                    <option  name="country" >Andorra</option>
+                                                                    <option  name="country" >Angola</option>
+                                                                    <option  name="country" >Anguilla</option>
+                                                                    <option  name="country" >Antarctica</option>
+                                                                    <option  name="country" >Antigua & Barbuda</option>
+                                                                    <option  name="country" >Argentina</option>
+                                                                    <option  name="country" >Armenia</option>
+                                                                    <option  name="country" >Aruba</option>
+                                                                    <option  name="country" >Australia</option>
+                                                                    <option  name="country" >Austria</option>
+                                                                    <option  name="country" >Azerbaijan</option>
+                                                                    <option  name="country" >Bahamas</option>
+                                                                    <option  name="country" >Bahrain</option>
+                                                                    <option  name="country" >Bangladesh</option>
+                                                                    <option  name="country" >Barbados</option>
+                                                                    <option  name="country" >Belarus</option>
+                                                                    <option  name="country" >Belgium</option>
+                                                                    <option  name="country" >Belize</option>
+                                                                    <option  name="country" >Benin</option>
+                                                                    <option  name="country" >Bermuda</option>
+                                                                    <option  name="country" >Bhutan</option>
+                                                                    <option  name="country" >Bolivia</option>
+                                                                    <option  name="country" >Caribbean Netherlands</option>
+                                                                    <option  name="country" >Bosnia & Herzegovina</option>
+                                                                    <option  name="country" >Botswana</option>
+                                                                    <option  name="country" >Bouvet Island</option>
+                                                                    <option  name="country" >Brazil</option>
+                                                                    <option  name="country" >British Indian Ocean Territory</option>
+                                                                    <option  name="country" >Brunei</option>
+                                                                    <option  name="country" >Bulgaria</option>
+                                                                    <option  name="country" >Burkina Faso</option>
+                                                                    <option  name="country" >Burundi</option>
+                                                                    <option  name="country" >Cambodia</option>
+                                                                    <option  name="country" >Cameroon</option>
+                                                                    <option  name="country" >Canad</option>
+                                                                    <option  name="country" >Cape Verde</option>
+                                                                    <option  name="country" >Cayman Islands</option>
+                                                                    <option  name="country" >Central African Republic</option>
+                                                                    <option  name="country" >Chad</option>
+                                                                    <option  name="country" >Chile</option>
+                                                                    <option  name="country" >China</option>
+                                                                    <option  name="country" >Christmas Island</option>
+                                                                    <option  name="country" >Cocos (Keeling) Islands</option>
+                                                                    <option  name="country" >Colombia</option>
+                                                                    <option  name="country" >Comoros</option>
+                                                                    <option  name="country" >Congo - Brazzaville</option>
+                                                                    <option  name="country" >Congo - Kinshasa</option>
+                                                                    <option  name="country" >Cook Islands</option>
+                                                                    <option  name="country" >Costa Rica</option>
+                                                                    <option  name="country" >Côte d’Ivoire</option>
+                                                                    <option  name="country" >Croatia</option>
+                                                                    <option  name="country" >Cuba</option>
+                                                                    <option  name="country" >Curaçao</option>
+                                                                    <option  name="country" >Cyprus</option>
+                                                                    <option  name="country" >Czechia</option>
+                                                                    <option  name="country" >Denmark</option>
+                                                                    <option  name="country" >Djibouti</option>
+                                                                    <option  name="country" >Dominica</option>
+                                                                    <option  name="country" >Dominican Republic</option>
+                                                                    <option  name="country" >Ecuador</option>
+                                                                    <option  name="country" >Egypt</option>
+                                                                    <option  name="country" >El Salvador</option>
+                                                                    <option  name="country" >Equatorial Guinea</option>
+                                                                    <option  name="country" >Eritrea</option>
+                                                                    <option  name="country" >Estonia</option>
+                                                                    <option  name="country" >Ethiopia</option>
+                                                                    <option  name="country" >Falkland Islands (Islas Malvinas)</option>
+                                                                    <option  name="country" >Faroe Islands</option>
+                                                                    <option  name="country" >Fiji</option>
+                                                                    <option  name="country" >Finland</option>
+                                                                    <option  name="country" >France</option>
+                                                                    <option  name="country" >French Guiana</option>
+                                                                    <option  name="country" >French Polynesia</option>
+                                                                    <option  name="country" >French Southern Territories</option>
+                                                                    <option  name="country" >Gabon</option>
+                                                                    <option  name="country" >Gambia</option>
+                                                                    <option  name="country" >Georgia</option>
+                                                                    <option  name="country" >Germany</option>
+                                                                    <option  name="country" >Ghana</option>
+                                                                    <option  name="country" >Gibraltar</option>
+                                                                    <option  name="country" >Greece</option>
+                                                                    <option  name="country" >Greenland</option>
+                                                                    <option  name="country" >Grenada</option>
+                                                                    <option  name="country" >Guadeloupe</option>
+                                                                    <option  name="country" >Guam</option>
+                                                                    <option  name="country" >Guatemala</option>
+                                                                    <option  name="country" >Guernsey</option>
+                                                                    <option  name="country" >Guinea</option>
+                                                                    <option  name="country" >Guinea-Bissau</option>
+                                                                    <option  name="country" >Guyana</option>
+                                                                    <option  name="country" >Haiti</option>
+                                                                    <option  name="country" >Heard & McDonald Island</option>
+                                                                    <option  name="country" >Vatican City</option>
+                                                                    <option  name="country" >Honduras</option>
+                                                                    <option  name="country" >Hong Kong</option>
+                                                                    <option  name="country" >Hungary</option>
+                                                                    <option  name="country" >Iceland</option>
+                                                                    <option  name="country" >India</option>
+                                                                    <option  name="country" >Indonesia</option>
+                                                                    <option  name="country" >Iran</option>
+                                                                    <option  name="country" >Iraq</option>
+                                                                    <option  name="country" >Ireland</option>
+                                                                    <option  name="country" >Isle of Man</option>
+                                                                    <option  name="country" >Israel</option>
+                                                                    <option  name="country" >Italy</option>
+                                                                    <option  name="country" >Jamaica</option>
+                                                                    <option  name="country" >Japan</option>
+                                                                    <option  name="country" >Jersey</option>
+                                                                    <option  name="country" >Jordan</option>
+                                                                    <option  name="country" >Kazakhsta</option>
+                                                                    <option  name="country" >Kenya</option>
+                                                                    <option  name="country" >Kiribati</option>
+                                                                    <option  name="country" >North Korea</option>
+                                                                    <option  name="country" >South Korea</option>
+                                                                    <option  name="country" >Kosovo</option>
+                                                                    <option  name="country" >Kuwait</option>
+                                                                    <option  name="country" >Kyrgyzstan</option>
+                                                                    <option  name="country" >Laos</option>
+                                                                    <option  name="country" >Latvia</option>
+                                                                    <option  name="country" >Lebanon</option>
+                                                                    <option  name="country" >Lesotho</option>
+                                                                    <option  name="country" >Liberia</option>
+                                                                    <option  name="country" >Libya</option>
+                                                                    <option  name="country" >Liechtenstein</option>
+                                                                    <option  name="country" >Lithuania</option>
+                                                                    <option  name="country" >Luxembourg</option>
+                                                                    <option  name="country" >Macao</option>
+                                                                    <option  name="country" >North Macedonia</option>
+                                                                    <option  name="country" >Madagascar</option>
+                                                                    <option  name="country" >Malawi</option>
+                                                                    <option  name="country" >Malaysia</option>
+                                                                    <option  name="country" >Maldives</option>
+                                                                    <option  name="country" >Mali</option>
+                                                                    <option  name="country" >Malta</option>
+                                                                    <option  name="country" >Marshall Islands</option>
+                                                                    <option  name="country" >Martinique</option>
+                                                                    <option  name="country" >Mauritania</option>
+                                                                    <option  name="country" >Mauritius</option>
+                                                                    <option  name="country" >Mayotte</option>
+                                                                    <option  name="country" >Mexico</option>
+                                                                    <option  name="country" >Micronesia</option>
+                                                                    <option  name="country" >Moldova</option>
+                                                                    <option  name="country" >Monaco</option>
+                                                                    <option  name="country" >Mongolia</option>
+                                                                    <option  name="country" >Montenegro</option>
+                                                                    <option  name="country" >Montserrat</option>
+                                                                    <option  name="country" >Morocco</option>
+                                                                    <option  name="country" >Mozambique</option>
+                                                                    <option  name="country" >Myanmar (Burma)</option>
+                                                                    <option  name="country" >Namibia</option>
+                                                                    <option  name="country" >Nauru</option>
+                                                                    <option  name="country" >Nepal</option>
+                                                                    <option  name="country" >Netherlands</option>
+                                                                    <option  name="country" >Curaçao</option>
+                                                                    <option  name="country" >New Caledonia</option>
+                                                                    <option  name="country" >New Zealand</option>
+                                                                    <option  name="country" >Nicaragua</option>
+                                                                    <option  name="country" >Niger</option>
+                                                                    <option  name="country" >Nigeria</option>
+                                                                    <option  name="country" >Niue</option>
+                                                                    <option  name="country" >Norfolk Island</option>
+                                                                    <option  name="country" >Northern Mariana Islands</option>
+                                                                    <option  name="country" >Norway</option>
+                                                                    <option  name="country" >Oman</option>
+                                                                    <option  name="country" >Pakistan</option>
+                                                                    <option  name="country" >Palau</option>
+                                                                    <option  name="country" >Palestine</option>
+                                                                    <option  name="country" >Panama</option>
+                                                                    <option  name="country" >Papua New Guinea</option>
+                                                                    <option  name="country" >Paraguay</option>
+                                                                    <option  name="country" >Peru</option>
+                                                                    <option  name="country" >Philippines</option>
+                                                                    <option  name="country" >Pitcairn Islands</option>
+                                                                    <option  name="country" >Poland</option>
+                                                                    <option  name="country" >Portugal</option>
+                                                                    <option  name="country" >Puerto Rico</option>
+                                                                    <option  name="country" >Qatar</option>
+                                                                    <option  name="country" >Réunion</option>
+                                                                    <option  name="country" >Romania</option>
+                                                                    <option  name="country" >Russia</option>
+                                                                    <option  name="country" >Rwanda</option>
+                                                                    <option  name="country" >St. Barthélemy</option>
+                                                                    <option  name="country" >St. Helena</option>
+                                                                    <option  name="country" >St. Kitts & Nevis</option>
+                                                                    <option  name="country" >St. Lucia</option>
+                                                                    <option  name="country" >St. Martin</option>
+                                                                    <option  name="country" >St. Pierre & Miquelon</option>
+                                                                    <option  name="country" >St. Vincent & Grenadines</option>
+                                                                    <option  name="country" >Samoa</option>
+                                                                    <option  name="country" >San Marino</option>
+                                                                    <option  name="country" >São Tomé & Príncipe</option>
+                                                                    <option  name="country" >Saudi Arabia</option>
+                                                                    <option  name="country" >Senegal</option>
+                                                                    <option  name="country" >Serbia</option>
+                                                                    <option  name="country" >Serbia</option>
+                                                                    <option  name="country" >Seychelles</option>
+                                                                    <option  name="country" >Sierra Leone</option>
+                                                                    <option  name="country" >Singapore</option>
+                                                                    <option  name="country" >Sint Maarte</option>
+                                                                    <option  name="country" >Slovakia</option>
+                                                                    <option  name="country" >Slovenia</option>
+                                                                    <option  name="country" >Solomon Islands</option>
+                                                                    <option  name="country" >Somalia</option>
+                                                                    <option  name="country" >South Africa</option>
+                                                                    <option  name="country" >South Georgia & South Sandwich Islands</option>
+                                                                    <option  name="country" >South Sudan</option>
+                                                                    <option  name="country" >Spain</option>
+                                                                    <option  name="country" >Sri Lanka</option>
+                                                                    <option  name="country" >Sudan</option>
+                                                                    <option  name="country" >Suriname</option>
+                                                                    <option  name="country" >Svalbard & Jan Mayen</option>
+                                                                    <option  name="country" >Eswatini</option>
+                                                                    <option  name="country" >Sweden</option>
+                                                                    <option  name="country" >Switzerland</option>
+                                                                    <option  name="country" >Syria</option>
+                                                                    <option  name="country" >Taiwan</option>
+                                                                    <option  name="country" >Tajikistan</option>
+                                                                    <option  name="country" >Tanzania</option>
+                                                                    <option  name="country" >Thailand</option>
+                                                                    <option  name="country" >Timor-Leste</option>
+                                                                    <option  name="country" >Togo</option>
+                                                                    <option  name="country" >Tokelau</option>
+                                                                    <option  name="country" >Tonga</option>
+                                                                    <option  name="country" >Trinidad & Tobago</option>
+                                                                    <option  name="country" >Tunisia</option>
+                                                                    <option  name="country" >Turkey</option>
+                                                                    <option  name="country" >Turkmenistan</option>
+                                                                    <option  name="country" >Turks & Caicos Islands</option>
+                                                                    <option  name="country" >Tuvalu</option>
+                                                                    <option  name="country" >Uganda</option>
+                                                                    <option  name="country" >Ukraine</option>
+                                                                    <option  name="country" >United Arab Emirates</option>
+                                                                    <option  name="country" >United Kingdom</option>
+                                                                    <option  name="country" >United State</option>
+                                                                    <option  name="country" >U.S. Outlying Island</option>
+                                                                    <option  name="country" >Uruguay</option>
+                                                                    <option  name="country" >Uzbekistan</option>
+                                                                    <option  name="country" >Vanuatu</option>
+                                                                    <option  name="country" >Venezuela</option>
+                                                                    <option  name="country" >Vietnam</option>
+                                                                    <option  name="country" >British Virgin Islands</option>
+                                                                    <option  name="country" >U.S. Virgin Islands</option>
+                                                                    <option  name="country" >Wallis & Futuna</option>
+                                                                    <option  name="country" >Western Sahara</option>
+                                                                    <option  name="country" >Yemen</option>
+                                                                    <option  name="country" >Zambia</option>
+                                                                    <option  name="country" >Zimbabwe</option>
+                                                                </select>
+                                                        </div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                     <div class="form-group row m-b-10">
-                                                        <label class="col-lg-12 text-lg-right col-form-label">Select Country :</label>
-                                                            <select name="country" class="form-control" id="country" >
-                                                                <option >Select Country</option>
-                                                                <option name="country">Afghanistan</option>
-                                                                <option name="country">Åland Islands</option>
-                                                                <option  name="country" >Albania</option>
-                                                                <option  name="country" >Algeria</option>
-                                                                <option  name="country" >American Samoa</option>
-                                                                <option  name="country" >Andorra</option>
-                                                                <option  name="country" >Angola</option>
-                                                                <option  name="country" >Anguilla</option>
-                                                                <option  name="country" >Antarctica</option>
-                                                                <option  name="country" >Antigua & Barbuda</option>
-                                                                <option  name="country" >Argentina</option>
-                                                                <option  name="country" >Armenia</option>
-                                                                <option  name="country" >Aruba</option>
-                                                                <option  name="country" >Australia</option>
-                                                                <option  name="country" >Austria</option>
-                                                                <option  name="country" >Azerbaijan</option>
-                                                                <option  name="country" >Bahamas</option>
-                                                                <option  name="country" >Bahrain</option>
-                                                                <option  name="country" >Bangladesh</option>
-                                                                <option  name="country" >Barbados</option>
-                                                                <option  name="country" >Belarus</option>
-                                                                <option  name="country" >Belgium</option>
-                                                                <option  name="country" >Belize</option>
-                                                                <option  name="country" >Benin</option>
-                                                                <option  name="country" >Bermuda</option>
-                                                                <option  name="country" >Bhutan</option>
-                                                                <option  name="country" >Bolivia</option>
-                                                                <option  name="country" >Caribbean Netherlands</option>
-                                                                <option  name="country" >Bosnia & Herzegovina</option>
-                                                                <option  name="country" >Botswana</option>
-                                                                <option  name="country" >Bouvet Island</option>
-                                                                <option  name="country" >Brazil</option>
-                                                                <option  name="country" >British Indian Ocean Territory</option>
-                                                                <option  name="country" >Brunei</option>
-                                                                <option  name="country" >Bulgaria</option>
-                                                                <option  name="country" >Burkina Faso</option>
-                                                                <option  name="country" >Burundi</option>
-                                                                <option  name="country" >Cambodia</option>
-                                                                <option  name="country" >Cameroon</option>
-                                                                <option  name="country" >Canad</option>
-                                                                <option  name="country" >Cape Verde</option>
-                                                                <option  name="country" >Cayman Islands</option>
-                                                                <option  name="country" >Central African Republic</option>
-                                                                <option  name="country" >Chad</option>
-                                                                <option  name="country" >Chile</option>
-                                                                <option  name="country" >China</option>
-                                                                <option  name="country" >Christmas Island</option>
-                                                                <option  name="country" >Cocos (Keeling) Islands</option>
-                                                                <option  name="country" >Colombia</option>
-                                                                <option  name="country" >Comoros</option>
-                                                                <option  name="country" >Congo - Brazzaville</option>
-                                                                <option  name="country" >Congo - Kinshasa</option>
-                                                                <option  name="country" >Cook Islands</option>
-                                                                <option  name="country" >Costa Rica</option>
-                                                                <option  name="country" >Côte d’Ivoire</option>
-                                                                <option  name="country" >Croatia</option>
-                                                                <option  name="country" >Cuba</option>
-                                                                <option  name="country" >Curaçao</option>
-                                                                <option  name="country" >Cyprus</option>
-                                                                <option  name="country" >Czechia</option>
-                                                                <option  name="country" >Denmark</option>
-                                                                <option  name="country" >Djibouti</option>
-                                                                <option  name="country" >Dominica</option>
-                                                                <option  name="country" >Dominican Republic</option>
-                                                                <option  name="country" >Ecuador</option>
-                                                                <option  name="country" >Egypt</option>
-                                                                <option  name="country" >El Salvador</option>
-                                                                <option  name="country" >Equatorial Guinea</option>
-                                                                <option  name="country" >Eritrea</option>
-                                                                <option  name="country" >Estonia</option>
-                                                                <option  name="country" >Ethiopia</option>
-                                                                <option  name="country" >Falkland Islands (Islas Malvinas)</option>
-                                                                <option  name="country" >Faroe Islands</option>
-                                                                <option  name="country" >Fiji</option>
-                                                                <option  name="country" >Finland</option>
-                                                                <option  name="country" >France</option>
-                                                                <option  name="country" >French Guiana</option>
-                                                                <option  name="country" >French Polynesia</option>
-                                                                <option  name="country" >French Southern Territories</option>
-                                                                <option  name="country" >Gabon</option>
-                                                                <option  name="country" >Gambia</option>
-                                                                <option  name="country" >Georgia</option>
-                                                                <option  name="country" >Germany</option>
-                                                                <option  name="country" >Ghana</option>
-                                                                <option  name="country" >Gibraltar</option>
-                                                                <option  name="country" >Greece</option>
-                                                                <option  name="country" >Greenland</option>
-                                                                <option  name="country" >Grenada</option>
-                                                                <option  name="country" >Guadeloupe</option>
-                                                                <option  name="country" >Guam</option>
-                                                                <option  name="country" >Guatemala</option>
-                                                                <option  name="country" >Guernsey</option>
-                                                                <option  name="country" >Guinea</option>
-                                                                <option  name="country" >Guinea-Bissau</option>
-                                                                <option  name="country" >Guyana</option>
-                                                                <option  name="country" >Haiti</option>
-                                                                <option  name="country" >Heard & McDonald Island</option>
-                                                                <option  name="country" >Vatican City</option>
-                                                                <option  name="country" >Honduras</option>
-                                                                <option  name="country" >Hong Kong</option>
-                                                                <option  name="country" >Hungary</option>
-                                                                <option  name="country" >Iceland</option>
-                                                                <option  name="country" >India</option>
-                                                                <option  name="country" >Indonesia</option>
-                                                                <option  name="country" >Iran</option>
-                                                                <option  name="country" >Iraq</option>
-                                                                <option  name="country" >Ireland</option>
-                                                                <option  name="country" >Isle of Man</option>
-                                                                <option  name="country" >Israel</option>
-                                                                <option  name="country" >Italy</option>
-                                                                <option  name="country" >Jamaica</option>
-                                                                <option  name="country" >Japan</option>
-                                                                <option  name="country" >Jersey</option>
-                                                                <option  name="country" >Jordan</option>
-                                                                <option  name="country" >Kazakhsta</option>
-                                                                <option  name="country" >Kenya</option>
-                                                                <option  name="country" >Kiribati</option>
-                                                                <option  name="country" >North Korea</option>
-                                                                <option  name="country" >South Korea</option>
-                                                                <option  name="country" >Kosovo</option>
-                                                                <option  name="country" >Kuwait</option>
-                                                                <option  name="country" >Kyrgyzstan</option>
-                                                                <option  name="country" >Laos</option>
-                                                                <option  name="country" >Latvia</option>
-                                                                <option  name="country" >Lebanon</option>
-                                                                <option  name="country" >Lesotho</option>
-                                                                <option  name="country" >Liberia</option>
-                                                                <option  name="country" >Libya</option>
-                                                                <option  name="country" >Liechtenstein</option>
-                                                                <option  name="country" >Lithuania</option>
-                                                                <option  name="country" >Luxembourg</option>
-                                                                <option  name="country" >Macao</option>
-                                                                <option  name="country" >North Macedonia</option>
-                                                                <option  name="country" >Madagascar</option>
-                                                                <option  name="country" >Malawi</option>
-                                                                <option  name="country" >Malaysia</option>
-                                                                <option  name="country" >Maldives</option>
-                                                                <option  name="country" >Mali</option>
-                                                                <option  name="country" >Malta</option>
-                                                                <option  name="country" >Marshall Islands</option>
-                                                                <option  name="country" >Martinique</option>
-                                                                <option  name="country" >Mauritania</option>
-                                                                <option  name="country" >Mauritius</option>
-                                                                <option  name="country" >Mayotte</option>
-                                                                <option  name="country" >Mexico</option>
-                                                                <option  name="country" >Micronesia</option>
-                                                                <option  name="country" >Moldova</option>
-                                                                <option  name="country" >Monaco</option>
-                                                                <option  name="country" >Mongolia</option>
-                                                                <option  name="country" >Montenegro</option>
-                                                                <option  name="country" >Montserrat</option>
-                                                                <option  name="country" >Morocco</option>
-                                                                <option  name="country" >Mozambique</option>
-                                                                <option  name="country" >Myanmar (Burma)</option>
-                                                                <option  name="country" >Namibia</option>
-                                                                <option  name="country" >Nauru</option>
-                                                                <option  name="country" >Nepal</option>
-                                                                <option  name="country" >Netherlands</option>
-                                                                <option  name="country" >Curaçao</option>
-                                                                <option  name="country" >New Caledonia</option>
-                                                                <option  name="country" >New Zealand</option>
-                                                                <option  name="country" >Nicaragua</option>
-                                                                <option  name="country" >Niger</option>
-                                                                <option  name="country" >Nigeria</option>
-                                                                <option  name="country" >Niue</option>
-                                                                <option  name="country" >Norfolk Island</option>
-                                                                <option  name="country" >Northern Mariana Islands</option>
-                                                                <option  name="country" >Norway</option>
-                                                                <option  name="country" >Oman</option>
-                                                                <option  name="country" >Pakistan</option>
-                                                                <option  name="country" >Palau</option>
-                                                                <option  name="country" >Palestine</option>
-                                                                <option  name="country" >Panama</option>
-                                                                <option  name="country" >Papua New Guinea</option>
-                                                                <option  name="country" >Paraguay</option>
-                                                                <option  name="country" >Peru</option>
-                                                                <option  name="country" >Philippines</option>
-                                                                <option  name="country" >Pitcairn Islands</option>
-                                                                <option  name="country" >Poland</option>
-                                                                <option  name="country" >Portugal</option>
-                                                                <option  name="country" >Puerto Rico</option>
-                                                                <option  name="country" >Qatar</option>
-                                                                <option  name="country" >Réunion</option>
-                                                                <option  name="country" >Romania</option>
-                                                                <option  name="country" >Russia</option>
-                                                                <option  name="country" >Rwanda</option>
-                                                                <option  name="country" >St. Barthélemy</option>
-                                                                <option  name="country" >St. Helena</option>
-                                                                <option  name="country" >St. Kitts & Nevis</option>
-                                                                <option  name="country" >St. Lucia</option>
-                                                                <option  name="country" >St. Martin</option>
-                                                                <option  name="country" >St. Pierre & Miquelon</option>
-                                                                <option  name="country" >St. Vincent & Grenadines</option>
-                                                                <option  name="country" >Samoa</option>
-                                                                <option  name="country" >San Marino</option>
-                                                                <option  name="country" >São Tomé & Príncipe</option>
-                                                                <option  name="country" >Saudi Arabia</option>
-                                                                <option  name="country" >Senegal</option>
-                                                                <option  name="country" >Serbia</option>
-                                                                <option  name="country" >Serbia</option>
-                                                                <option  name="country" >Seychelles</option>
-                                                                <option  name="country" >Sierra Leone</option>
-                                                                <option  name="country" >Singapore</option>
-                                                                <option  name="country" >Sint Maarte</option>
-                                                                <option  name="country" >Slovakia</option>
-                                                                <option  name="country" >Slovenia</option>
-                                                                <option  name="country" >Solomon Islands</option>
-                                                                <option  name="country" >Somalia</option>
-                                                                <option  name="country" >South Africa</option>
-                                                                <option  name="country" >South Georgia & South Sandwich Islands</option>
-                                                                <option  name="country" >South Sudan</option>
-                                                                <option  name="country" >Spain</option>
-                                                                <option  name="country" >Sri Lanka</option>
-                                                                <option  name="country" >Sudan</option>
-                                                                <option  name="country" >Suriname</option>
-                                                                <option  name="country" >Svalbard & Jan Mayen</option>
-                                                                <option  name="country" >Eswatini</option>
-                                                                <option  name="country" >Sweden</option>
-                                                                <option  name="country" >Switzerland</option>
-                                                                <option  name="country" >Syria</option>
-                                                                <option  name="country" >Taiwan</option>
-                                                                <option  name="country" >Tajikistan</option>
-                                                                <option  name="country" >Tanzania</option>
-                                                                <option  name="country" >Thailand</option>
-                                                                <option  name="country" >Timor-Leste</option>
-                                                                <option  name="country" >Togo</option>
-                                                                <option  name="country" >Tokelau</option>
-                                                                <option  name="country" >Tonga</option>
-                                                                <option  name="country" >Trinidad & Tobago</option>
-                                                                <option  name="country" >Tunisia</option>
-                                                                <option  name="country" >Turkey</option>
-                                                                <option  name="country" >Turkmenistan</option>
-                                                                <option  name="country" >Turks & Caicos Islands</option>
-                                                                <option  name="country" >Tuvalu</option>
-                                                                <option  name="country" >Uganda</option>
-                                                                <option  name="country" >Ukraine</option>
-                                                                <option  name="country" >United Arab Emirates</option>
-                                                                <option  name="country" >United Kingdom</option>
-                                                                <option  name="country" >United State</option>
-                                                                <option  name="country" >U.S. Outlying Island</option>
-                                                                <option  name="country" >Uruguay</option>
-                                                                <option  name="country" >Uzbekistan</option>
-                                                                <option  name="country" >Vanuatu</option>
-                                                                <option  name="country" >Venezuela</option>
-                                                                <option  name="country" >Vietnam</option>
-                                                                <option  name="country" >British Virgin Islands</option>
-                                                                <option  name="country" >U.S. Virgin Islands</option>
-                                                                <option  name="country" >Wallis & Futuna</option>
-                                                                <option  name="country" >Western Sahara</option>
-                                                                <option  name="country" >Yemen</option>
-                                                                <option  name="country" >Zambia</option>
-                                                                <option  name="country" >Zimbabwe</option>
-                                                            </select>
-                                                    </div>
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                      function E_Ticket()
+                                        {
+                                            if($('.E_Ticket').is(":checked")) 
+                                            $(".eticket").hide();  
+                                            if($('.E_Ticket').is(":checked")) 
+                                            $(".answer").hide();  
+                                            if($('.E_Ticket').is(":checked")) 
+                                            $(".doYouHaveATicket").show(); 
+                                        }
+                                        function MobileTicket()
+                                        {
+                                            if($('.MobileTicket').is(":checked")) 
+                                            $(".answer").hide();  
+                                            else
+                                            $(".answer").show();
+                                        }
+                                        function valueChanged()
+                                        {
+                                            if($('.coupon_question').is(":checked")) 
+                                            $(".answer").hide();  
+                                            else
+                                            $(".answer").show();
+                                        }
+                                    </script>
+                                    <div class="col-lg-6 eticket" >
+                                        <h4 class="fw-700">Booking Confirmation PDF<span style="color: red">*</span></h4>
+                                        <div class="card mb-3 shadow-sm p-4 main-card br-10">
+                                            <div class="row">
+                                                <div class="col-md-12">
+    
+                                                    <p> <i class="bi bi-info-circle-fill me-2"></i>Please upload the PDF file for Booking Confirmation.
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-12" >
+                                                    <div class="">
+                                                        <label class="col-lg-12 text-lg-right col-form-label">Booking Confirmation :</label>
+                                                        <div class="input-group">
+                                                          <div class="pr-2" style="float: left">
+                                                              {{-- <label for="simage"><i class="bi bi-folder-plus"></i></label> --}}
+                                                              <input value=""
+                                                                  class="@error('simple_pdf') is-invalid @enderror inputstyle" type="file"
+                                                                  name="simple_pdf" id="simage"
+                                                                 >  
+                                                          </div>
+                                                          @error('simple_pdf')
+                                                              <span class="invalid-feedback" role="alert">
+                                                                  <strong>{{ $message }}</strong>
+                                                              </span>
+                                                          @enderror
+                                                          <div class="text-center text-dark" id="displayDocs">
+                                                          </div>
+                                                          
+                                                      </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-6 doYouHaveATicket"  style="display: none">
+                                        <h5 style="font-size:18px" class="mb-2">Do you have a Ticket ? <span style="color: red">*</span></h5>
+                                        <div class="card mb-3 shadow-sm p-4 main-card br-10">
+                                            <div class="row">
+                                                <div class="col-md-12">
+    
+                                                  
+                                                    <p >
+                                                        <input type="checkbox"  id="yesCheck" class="yes" name="book_eticket" id="" value="Yes" onClick="ckChange(this)"> YES i have a ticket.
+                                                    </p>
+                                                    <p onchange="checkBoxValidation()"> 
+                                                        <input type="checkbox" id="noCheck" class="no" name="book_eticket" id="" value="No" onClick="ckChange(this)"> No i dont have.
+                                                    </p>
+                                                </div>
+                                                <script>
+                                                    function checkBoxValidation()
+                                                    {
+                                                        if($('#noCheck').is(":checked")) 
+                                                        $(".bookingForE-Ticket").show(); 
+                                                        else
+                                                        $(".bookingForE-Ticket").hide();
+                                                    }
+                                                </script>
+                                                <div class="col-md-12 bookingForE-Ticket" style="display: none">
+                                                    <div class="">
+                                                        <label class="col-lg-12 text-lg-right col-form-label">Booking Confirmation :</label>
+                                                        <div class="input-group">
+                                                          <div class="pr-2" style="float: left">
+                                                              {{-- <label for="simage"><i class="bi bi-folder-plus"></i></label> --}}
+                                                              <input value=""
+                                                                  class="@error('simple_pdf') is-invalid @enderror inputstyle" type="file"
+                                                                  name="simple_pdf" id="simage"
+                                                                 >  
+                                                          </div>
+                                                          @error('simple_pdf')
+                                                              <span class="invalid-feedback" role="alert">
+                                                                  <strong>{{ $message }}</strong>
+                                                              </span>
+                                                          @enderror
+                                                          <div class="text-center text-dark" id="displayDocs">
+                                                          </div>
+                                                          
+                                                      </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <style>
+                                   #progress1:checked + #area {
+                                    display: block !important;
+                                    }
+                                </style>
                             {{-- @endif --}}
                             <div class="col-lg-12">
                                 <h4 class="fw-700">Select Restrictions on Use<span style="color: red">*</span></h4>
@@ -822,29 +878,16 @@
                                                 shown here, please stop listing and <a href="">contact us</a>
                                             </p>
                                         </div>
-
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            {{-- <div class="form-group">
-                                                <label for="row">Restrictions</label>
-                                                <select class="form-select"  name="ticket_restrictions">
-                                                    <option selected disabled>Please Select Restriction</option>
-                                                    <option value="No Restriction">No Restrictions</option>
-                                                    <option value="Restricted View">Restricted View</option>
-                                                    <option value="Age Limit 14+">Age Limit 14+</option>
-                                                    <option value="Age Limit 18+">Age Limit 18+</option>
-                                                    <option value="Age Limit 21+">Age Limit 21+</option>
-                                                </select>
-                                            </div> --}}
-
                                             <div class="form-group">
                                                 <label class="mb-2"><strong>Restrictions :</strong></label><br>
-                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="No Restrictions"> No Restrictions</label>
-                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="Restricted View"> Restricted View</label>
-                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 14+"> Age Limit 14+</label>
-                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 18+"> Age Limit 18+</label>
-                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 21+"> Age Limit 21+</label>
+                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="No Restrictions" id="resCheck"  onClick="ckChange(this)"> No Restrictions</label>
+                                                <label class="m-2" id="res1"><input type="checkbox" name="ticket_restrictions[]" value="Restricted View" > Restricted View</label>
+                                                <label class="m-2" id="res2"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 14+" > Age Limit 14+</label>
+                                                <label class="m-2" id="res3"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 18+"  > Age Limit 18+</label>
+                                                <label class="m-2" id="res4"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 21+" > Age Limit 21+</label>
                                                 <label class="m-2"><input type="checkbox" name="" id="myCheck" onclick="myFunction()"> Other</label>
                                             </div>
                                            <style>
@@ -857,6 +900,20 @@
                                             </div>
                                         </div>
                                         <script>
+                                            function restrictionFunction() {
+                                                 // Get the checkbox
+                                                 var checkBox = document.getElementById("resCheck");
+                                                 // Get the output text
+                                                 var text = document.getElementById("res1","res2","res3","res4");
+
+                                                 // If the checkbox is checked, display the output text
+                                                 if (checkBox.checked == false){
+                                                    text.style.display = "block";
+                                                    
+                                                 } else {
+                                                    text.style.display = "none";
+                                                 }
+                                                 }
                                             function myFunction() {
                                                  // Get the checkbox
                                                  var checkBox = document.getElementById("myCheck");

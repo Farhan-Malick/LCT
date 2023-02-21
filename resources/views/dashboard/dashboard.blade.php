@@ -133,8 +133,8 @@
                                                                            <td>{{$ticket->price}}</td>
                                                                            {{-- <td>{{$ticket->currency}}</td> --}}
                                                                            <td>{{$ticket->quantity}}</td>
-                                                                           <td>{{$ticket->section_name}}</td>
-                                                                           <td>{{$ticket->row}}</td>
+                                                                           <td>{{$ticket->type_sec}}</td>
+                                                                           <td>{{$ticket->type_row}}</td>
                                                                            <td>{{$ticket->seat_from}}</td>
                                                                            <td>{{$ticket->seat_to}}</td>
                                                                               <td>{{$ticket->ticket_type}}</td>
@@ -204,8 +204,8 @@
                                                                            <td>{{$ticket->price}}</td>
                                                                            {{-- <td>{{$ticket->currency}}</td> --}}
                                                                            <td>{{$ticket->quantity}}</td>
-                                                                           <td>{{$ticket->section_name}}</td>
-                                                                           <td>{{$ticket->row}}</td>
+                                                                           <td>{{$ticket->type_sec}}</td>
+                                                                           <td>{{$ticket->type_row}}</td>
                                                                            <td>{{$ticket->seat_from}}</td>
                                                                            <td>{{$ticket->seat_to}}</td>
                                                                               <td>{{$ticket->ticket_type}}</td>
@@ -277,8 +277,8 @@
                                                                            <td>{{$ticket->price}}</td>
                                                                            {{-- <td>{{$ticket->currency}}</td> --}}
                                                                            <td>{{$ticket->quantity}}</td>
-                                                                           <td>{{$ticket->section_name}}</td>
-                                                                           <td>{{$ticket->row}}</td>
+                                                                           <td>{{$ticket->type_sec}}</td>
+                                                                           <td>{{$ticket->type_row}}</td>
                                                                            <td>{{$ticket->seat_from}}</td>
                                                                            <td>{{$ticket->seat_to}}</td>
                                                                               <td>{{$ticket->ticket_type}}</td>
@@ -308,7 +308,7 @@
                                                    <th>#</th>
                                                    
                                                    <th >Event Name</th>
-                                                   <th >Ticket Name</th>
+                                                   {{-- <th >Ticket Name</th> --}}
                                                    {{-- <th >Ticket Type</th> --}}
                                                    <th >Quantity</th>
                                                    <th >Price</th>
@@ -319,7 +319,7 @@
                                                    <tr>
                                                      
                                                      <td>{{$sale->id}}</td>
-                                                     <td>{{$sale->event->title}}</td>
+                                                     {{-- <td>{{$sale->event->title}}</td> --}}
                                                      <td>{{$sale->event_name}}</td>
                                                      {{-- <td>{{$sale->ticket_type}}</td> --}}
                                                      <td>{{$sale->quantity}}</td>
@@ -392,55 +392,7 @@
                                     </div>
                                  </div>
                                  <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                                    <div class="main-card mt-4">
-                                       <div class="card-top p-4">
-                                          <div class="card-event-img">
-                                             <img src="{{asset('assets/images/t1.webp')}}" style="width: 80%" alt="">
-                                          </div>
-                                          <div class="card-event-dt">
-                                             <h3>{{$data->event_name}}</h3>
-                                             <div class="invoice-id">Order Id :  <span>{{$data->id}}</span></div>
-                                          </div>
-                                       </div>
-                                       <div class="card-bottom">
-                                          <div class="card-bottom-item">
-                                             <div class="card-icon">
-                                                <i class="fa-solid fa-calendar-days"></i>
-                                             </div>
-                                             <div class="card-dt-text">
-                                                <h6>Event Starts on</h6>
-                                                <span>{{$data->start_date}}</span>
-                                             </div>
-                                          </div>
-                                          <div class="card-bottom-item">
-                                             <div class="card-icon">
-                                                <i class="fa-solid fa-ticket"></i>
-                                             </div>
-                                             <div class="card-dt-text">
-                                                <h6>Total Tickets</h6>
-                                                <span>{{$data->quantity}}</span>
-                                             </div>
-                                          </div>
-                                          <div class="card-bottom-item">
-                                             <div class="card-icon">
-                                                <i class="fa-solid fa-money-bill"></i>
-                                             </div>
-                                             <div class="card-dt-text">
-                                                <h6>Paid Amount</h6>
-                                                <span>$ {{$data->price}}.00</span>
-                                             </div>
-                                          </div>
-                                          <div class="card-bottom-item">
-                                             <div class="card-icon">
-                                                <i class="fa-solid fa-money-bill"></i>
-                                             </div>
-                                             <div class="card-dt-text">
-                                                <h6>Invoice</h6>
-                                                <a href="#">Download</a>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
+                               
                                     <div class="card shadow-sm mt-3">
                                        <div class="card-body">
                                            <h5 class="card-title fw-600">All Orders Here</h5>

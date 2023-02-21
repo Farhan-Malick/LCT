@@ -2,19 +2,19 @@
     {{-- #  [LCT] Congratulations!!! You have successfully purchased the tickets for the Event <b>{{ $data->event_name }}</b> --}}
 {{-- # Ticket Purchased --}}
 
-Hello {{$data->last_name}},<br>
+Hello {{$data->last_name}},<br>z
 Congratulations, You have successfully purchased tickets for the event <b>{{ $data->event_name }}</b>.<br><br>
 <b>Order Information</b><br>
 Order Number: {{$data->id}}  <br>
 Ticket Type: {{$data->ticket_type}} <br>
-Section : {{ $data->section }}, Category : {{ $data->categories }}, Row : {{ $data->row }} <br>
+Section : {{ $data->type_sec }}, Category : {{ $data->type_cat }}, Row : {{ $data->type_row }} <br>
 Event: {{ $data->event_name }} <br>
 Venue: {{ $data->venue_name }} <br>
 Date: {{ $data->event_date }} <br><br>
 <b>You will shortly receive an email from us about delivery of the tickets.</b><br><br>
 <b>Price Information: </b><br>
 Number of Tickets: {{$data->quantity}}<br>
-Price per Ticket: USD {{$data->price}}  <br>
+Price per Ticket: USD {{$data->price}} <br>
 Total Price :  {{$data->price}}<br> <br>
 If you need any further information on your order, please feel free to contact the support at
 support@lastchanceticket.com <br><br><br>

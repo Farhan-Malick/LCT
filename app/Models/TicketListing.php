@@ -57,6 +57,9 @@ class TicketListing extends Model
     public function event(){
         return $this->hasOne(EventListing::class,'id','eventlisting_id');
     }
+    public function eventCategory(){
+        return $this->hasOne(Event::class,'id','category_id');
+    }
     public function Section(){
         return $this->hasOne(VanueSections::class,'id');
     }

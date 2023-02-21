@@ -42,19 +42,15 @@
 		<!-- begin #content -->
 		<div id="content" class="content">
 			<!-- begin breadcrumb -->
-			<ol class="breadcrumb float-xl-right">
-				<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-				<li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
-				<li class="breadcrumb-item active">Last-Chance-Ticket</li>
-			</ol>
+		
 			<!-- end breadcrumb -->
 			<!-- begin page-header -->
-			<h1 class="page-header">Last-Chance-Ticket Dashboard </h1>
+			{{-- <h1 class="page-header">Last-Chance-Ticket Dashboard </h1> --}}
 			<!-- end page-header -->
 			<!-- begin row -->
 			<div class="row">
 				<!-- begin col-3 -->
-				@include('Admin.includes.misPoints')
+				{{-- @include('Admin.includes.misPoints') --}}
 				<!-- end col-3 -->
 			</div>
 			<!-- end row -->
@@ -69,23 +65,13 @@
 				<!-- begin page-header -->
 				<div class="row">
 					<div class="col-lg-12">
-						   <!-- begin panel -->
-							<h4 >All Purchased Tickets</h4>
-							@if ($message = Session::get('msg'))
-									<div class="alert alert-danger alert-block">
-										<strong>{{ $message }}</strong>
-									</div>
-							@endif
-							@if ($message = Session::get('approve'))
-							<div class="alert alert-primary alert-block">
-								<strong>{{ $message }}</strong>
-							</div>
-							@endif
-							@if ($message = Session::get('update'))
-							<div class="alert alert-success alert-block">
-								<strong>{{ $message }}</strong>
-							</div>
-							@endif
+                        <h4>All Events Listings For Hot Tickets</h4>
+                        @if ($message = Session::get('msg'))
+                        <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
 					</div>
 				</div>
 				<!-- end page-header -->
@@ -105,52 +91,62 @@
 				
 					<!-- begin panel-body -->
 					<div class="panel-body">
+						@if (session('approve'))
+                        <div class="col-sm-6 mx-auto " style="text-align: center;  font-size:20px">
+                            {{ session('approve') }}</div>
+                    @endif
 						<table id="data-table-default" class="table table-striped table-bordered table-td-valign-middle">
-							<thead class="thead-dark">
-								<tr>
-									
-									<th scope="col">#</th>
-									<th scope="col">Purchaser</th>
-									{{-- <th scope="col">Event name</th> --}}
-									<th scope="col">Ticket name</th>
-									<th scope="col">Ticket Type</th>
-									<th scope="col">Total price</th>
-									<th scope="col">Quantity</th>
-									<th scope="col">Status</th>
-									{{-- <th scope="col">Approval</th> --}}
-									<th scope="col">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach($purchases as $purchase) 
-								<tr>
-									<td>{{$purchase->id}}</td>
-									<td>{{$purchase->user->first_name}}</td>
-									{{-- <td>{{$purchase->eventTitle}}</td> --}}
-									<td>{{$purchase->event_name}}</td>
-										<td>{{$purchase->ticket_type}}</td>
-									<td>{{$purchase->price}}</td>
-									<td>{{$purchase->quantity}}</td>
-									<td><button class="btn btn-success" disabled="disabled">SOLD</button></td>
-								{{-- s --}}
-									<td>
-										{{-- <a
-											class="btn btn-success"
-											href="{{URL('/Admin-Panel/Ticket/Edit',$purchase->id)}}"
-											><i class="fa fa-edit" aria-hidden="true"></i></a
-										> --}}
-										<a
-											class="btn btn-danger"
-											href="{{route('admin.purchase.ticket.destroy',$purchase->id)}}"
-											><i class="fa fa-trash" aria-hidden="true"></i> Delete</a
-										>
-									</td>
-		
-								</tr>
-								@endforeach
-								
-							</tbody>
-						</table>
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Event Title</th>
+                                    <th scope="col">Event</th>
+                                    <th scope="col">Venue</th>
+                                    <th scope="col">Start Time</th>
+                                    <th scope="col">End Time</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Event Category</th>
+                                    {{-- <th scope="col">Status</th> --}}
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($listing as $ticket)
+                                <tr>
+                                    <td>{{$ticket->id}}</td>
+                                    <td>{{$ticket->event_name}}</td>
+                                    <td>{{$ticket->events->title}}</td>
+                                    <td>{{$ticket->venue_name}}</td>
+                                    <td>{{$ticket->start_time}}</td>
+                                    <td>{{$ticket->end_time}}</td>
+                                    <td>{{$ticket->location}}</td>
+                                    <td>{{$ticket->category_event}}</td>
+                                    {{-- <td>{{$ticket->status}}</td> --}}
+                                    <td>
+                                        <form action="{{ url('/toggle-Footerapprove-HotTickets') }}" method="POST">
+                                            @csrf
+                                            <input <?php
+                                            if ($ticket->Footerapprove == 1) {
+                                                echo 'checked';
+                                            }
+                                            ?> type="checkbox"
+                                                name="Footerapprove" class="mr-2">
+                                            <input type="hidden" name="ad_id" id=""
+                                                value="{{ $ticket->id }}">
+
+												@if ($ticket->Footerapprove == null)
+												<input type="submit" class="btn btn-primary"
+												name="" value="Add To Hot Tickets" id="">
+												@else
+												<input type="submit" class="btn btn-danger"
+												name="" value="Remove From Hot Tickets" id="">
+											@endif
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
 					</div>
 					<!-- end panel-body -->
 				</div>
@@ -168,31 +164,7 @@
 	</div>
 	<!-- end page container -->
 	{{-- Modal For rejection --}}
-    <div class="modal fade" id="rejectionModal" tabindex="-1" role="dialog" aria-labelledby="Rejection Modal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Rejection Reason</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form action="{{ url('/toggle-reject') }}" method="POST" >
-                @csrf
-                <input type="hidden" name="ticket_id" id="ticket_id" value="" >
-                <div class="modal-body">
-                    <div class="form-row">
-                        <textarea name="reason" class="form-control" placeholder="Please Enter reason for rejection" required></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <button type="submit" class="btn btn-danger">Reject</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </form>
-          </div>
-        </div>
-    </div>
+   
     {{-- Modal for rejectio end --}}
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{{asset("AdminAssets/js/app.min.js")}}"></script>

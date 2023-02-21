@@ -125,12 +125,9 @@
                               <div class="col-md-2 d-flex flex-column "><span></span><b>TIME :</b>{{$ticket_listing->event->start_time}} - {{$ticket_listing->event->end_time}}<span></div>
                               <div class="col-md-2 d-flex  flex-column  "><span><b>DATE : </b><br>({{$ticket_listing->event->event_date}})</span></div>
                               <div class="col-md-2 d-flex flex-column "><span><b>VENUE : </b><br>{{$ticket_listing->event->venue_name}} , {{$ticket_listing->event->location}}</span></div>
-                              <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>@if ($ticket_listing->categories == null)
-                                  {{$ticket_listing->type_cat}}
-                                  @else
-                                  {{$ticket_listing->categories}}
-                              @endif</span></div>
-                              <div class="col-md-2 d-flex flex-column "><span><b>SECTION : ROW</b><br>{{$ticket_listing->section}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $ticket_listing->row }}</span></div>
+                              <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>{{$ticket_listing->type_cat}}
+                              </span></div>
+                              <div class="col-md-2 d-flex flex-column "><span><b>SECTION : ROW</b><br>{{$ticket_listing->type_sec}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $ticket_listing->type_row }}</span></div>
     
                               {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
                             </div><br>
@@ -179,7 +176,6 @@
                                             <label class="m-2"><input type="checkbox" name="" id="myCheck" onclick="myFunction()">&nbsp;&nbsp;&nbsp;<span style="font-size: 18px">No Tiket Available ?</span></label>
                                             <label class="m-2"><input type="checkbox" name="" id="myCheck2" onclick="myFunction2()">&nbsp;&nbsp;&nbsp;<span style="font-size: 18px">I have a Ticket to Split</span></label>
                                         </div>  --}}
-                                        
                                         <div class="js-uploadInstructions uul" id="text2">
                                             <h6 class="h xl mtxs">Upload ( P D F ) Ticket</h6>
                                             <div id="etuUploadDesc" class="ptm pbl cGry2 mb0">

@@ -30,13 +30,19 @@ class PurchasesController extends Controller
         if(!auth()->check()){
             return redirect('/login');
         }
-        $ticket = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'event_listings.event_date', 'event_listings.start_time',
-        'event_listings.venue_name','users.last_name','purchases.quantity','purchases.price')
+        $ticket = TicketListing::select('ticket_listings.*','users.last_name', 'event_listings.event_name', 
+        'event_listings.event_date', 'event_listings.start_time',
+        'event_listings.venue_name','categories.id as cat_id',
+        // 'purchases.quantity as ticketQuantity',
+        )
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->join('users','users.id','=','ticket_listings.user_id')
-        ->join('purchases','purchases.user_id','=','users.id')
-        ->where('ticket_listings.id', $id)
+        // ->join('purchases','purchases.ticket_id','=','ticket_listings.id')
+        ->join('events', 'events.id', '=', 'event_listings.event_id')
+        ->join( 'categories','categories.id', '=','events.category_id')
+        ->where('ticket_listings.id',$id)
         ->first();
+        // dd($ticket);
         $seller = User::find($ticket->user_id);
         $purchase = new Purchases();
         $purchase->user_id = auth()->id();
@@ -46,6 +52,7 @@ class PurchasesController extends Controller
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
         $purchase->quantity = Request::get('quantity');
         $purchase->country_id = Request::get('country_id');
+        // dd($purchase);
         $purchase->save();
         MailController::ticketpurchased(auth()->user()->email, $ticket);
         MailController::sellerticketpurchased($seller->email, $ticket);
@@ -68,68 +75,87 @@ class PurchasesController extends Controller
 
         $eventListings = EventListing::where('status', 1)->where('event_id', $id)->select('id', 'event_name')->get();
         // dd($events);
-        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
+
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
-            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
+            ->join( 'categories','categories.id', '=','events.category_id')
+            ->orderBy('price','asc')
             ->where('approve','1')
             ->where('ticket_listings.eventlisting_id',$id);
-            
+        $categoriesFromTicketListing = TicketListing::select('ticket_listings.type_cat')
+            ->groupBy('type_cat')
+            ->where('approve','1')
+            ->where('ticket_listings.eventlisting_id',$id)
+            ->get();
+        $colors = TicketListing::select('ticket_listings.type_cat')
+        ->groupBy('type_cat')
+        ->where('approve','1')
+        ->where('ticket_listings.eventlisting_id',$id)->get();
+        // dd($colors);
+        
+        $restrictionsFromTicketListing = TicketListing::select('ticket_listings.ticket_restrictions')
+        ->groupBy('ticket_restrictions')
+        ->where('ticket_listings.eventlisting_id',$id)
+        ->get();
+        $quantityFromTicketListing = TicketListing::select('ticket_listings.quantity')
+        ->groupBy('quantity')
+        ->where('approve','1')
+        ->where('ticket_listings.eventlisting_id',$id)
+        ->get();
+        if (Request::get('Restriction_filter') !== null) {
+            $tickets = $tickets->where('ticket_restrictions', '=',Request::get('Restriction_filter'));
+        }
+        if (Request::get('Cat_filter') !== null) {
+            $tickets = $tickets->where('type_cat', '=',Request::get('Cat_filter'));
+        }
         if(Request::get('sort') == 'price_asc'){
-            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
+            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
-            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
-            // ->join('seller_categories', 'seller_categories.id', '=', 'ticket_listings.categories')
+            ->join( 'categories','categories.id', '=','events.category_id')
             ->orderBy('price','asc')
             ->where('approve','1')
-            ->where('events.id',$id);
+            ->where('ticket_listings.eventlisting_id',$id);
         }
         elseif(Request::get('sort') == 'price_desc'){
-            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
+            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
-            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
-            // ->join('seller_categories', 'seller_categories.id', '=', 'ticket_listings.categories')
+            ->join( 'categories','categories.id', '=','events.category_id')
             ->orderBy('price','desc')
             ->where('approve','1')
-            ->where('events.id',$id);
+            ->where('ticket_listings.eventlisting_id',$id);
         }
         elseif(Request::get('sort') == 'newest'){
-            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
+            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
-            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
-            // ->join('seller_categories', 'seller_categories.id', '=', 'ticket_listings.categories')
+            ->join( 'categories','categories.id', '=','events.category_id')
             ->orderBy('created_at','desc')
             ->where('approve','1')
-            ->where('events.id',$id);
+            ->where('ticket_listings.eventlisting_id',$id);
+          
         }
         elseif(Request::get('sort') == 'best_value'){
-            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
+            $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
-            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
-            // ->join('seller_categories', 'seller_categories.id', '=', 'ticket_listings.categories')
+            ->join( 'categories','categories.id', '=','events.category_id')
             ->orderBy('price','asc')
             ->where('approve','1')
-            ->where('events.id',$id);
+            ->where('ticket_listings.eventlisting_id',$id);
         }
         if (Request::get('qty') !== null) {
-            $tickets = $tickets->where('quantity', '=', Request::get('qty'));
+            $tickets = $tickets->where('quantity', '>=', Request::get('qty'));
+        }
+        if (Request::get('no_of_tickets') == '1') {
+            // $tickets = $tickets->get(0)->name;
+            // $tickets = $tickets->where('quantity', '=', Request::get('no_of_tickets'));
         }
         if (Request::get('ticket_restrictions') !== null) {
             $tickets = $tickets->where('ticket_restrictions', '=', Request::get('ticket_restrictions,'));
         }
-        if (Request::get('categories') !== null) {
-            $tickets = $tickets->where('categories', '=',Request::get('categories'));
-        }
-        
         if (Request::get('ticket_event') !== null) {
             $tickets = $tickets->where('eventlisting_id', '>=', Request::get('ticket_event'));
         }
@@ -142,10 +168,13 @@ class PurchasesController extends Controller
         if(Request::get('homeFilters') !== null){
             $events = $events->where('events.title', 'like', '%'.Request::get('homeFilters').'%');
         }
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
+        
         $tickets = $tickets->get();
         // dd($tickets);
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
-        return view('payment-tickets/browse-ticket',compact('events','tickets', 'eventListings'));
+        return view('payment-tickets/browse-ticket',compact('Footerevents','FooterEventListing','quantityFromTicketListing','restrictionsFromTicketListing','events','tickets', 'eventListings','categoriesFromTicketListing','colors'));
     }
 
     public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid){
@@ -163,37 +192,44 @@ class PurchasesController extends Controller
         return redirect()->route('downloadPdfTicket',['eventlisting_id' => $events->id,'ticketid' => $tickets->id, 'sellerid' => $tickets->user_id]);
     }
 
-    public function buyer_ticket_checkout( TicketListing $ticket, EventListing $event, $eventid, $ticketid, $sellerid){
+    public function buyer_ticket_checkout( TicketListing $ticket, EventListing $event, $eventlisting_id, $ticketid, $sellerid){
 
-        // $events = EventListing::select('event_listings.*', 'events.*')
-        // ->join('events', 'events.id', '=', 'event_listings.event_id')
-        // ->where('event_listings.id',$eventid)
-        // ->first();
-        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $eventid)->first();
-
-        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
-        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
-        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-        ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
-        ->where('ticket_listings.id',$ticketid)->first();
+        $events = EventListing::select('*','venues.title as vTitle', 'venues.image as vImage')
+        ->join('events', 'events.id', '=', 'event_listings.event_id')
+        // ->join('venues', 'venues.id', '=', 'events.venue_id')
+        ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
+        ->where('event_listings.id', $eventlisting_id)
+        ->first();
+        // dd($events);
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id')
+            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+            ->join('events', 'events.id', '=', 'event_listings.event_id')
+            ->join( 'categories','categories.id', '=','events.category_id')
+            ->where('approve','1')
+            ->where('ticket_listings.id',$ticketid)
+            ->first();
         // dd($tickets);
         $sellers = User::find($sellerid);
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
         $sellerCountry = Seller::where('user_id',$sellerid)->first();
-        return view('payment-tickets/checkout',compact('tickets','events','sellers','sellerCountry'));
+        return view('payment-tickets/checkout',compact('Footerevents','FooterEventListing','tickets','events','sellers','sellerCountry'));
     }
 
     public function buyer_ticket_detail( TicketListing $ticket, EventListing $event, $eventid, $ticketid, $sellerid){
 
         $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $eventid)->first();
         // $eventListing = EventListing::select('event_listings.*')->where('event_listings.event_id', $eventid)->first();
-        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
         ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
         ->where('ticket_listings.id',$ticketid)->first();
         // dd($tickets);
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
         $sellers = User::find($sellerid);
-        return view('payment-tickets/ticket_detail',compact('tickets','events','sellers'));
+        return view('payment-tickets/ticket_detail',compact('FooterEventListing','Footerevents','tickets','events','sellers'));
     }
 
     public function dashboard_orders_show(Purchases $purchases,TicketListing $ticket,Event $event)
@@ -210,7 +246,7 @@ class PurchasesController extends Controller
         $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $id)->first();
         $eventListings = EventListing::where('status', 1)->where('event_id', $id)->select('id', 'event_name','venue_name')->first();
         // dd($events);
-        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'vanue_sections.sections', 'venue_section_rows.rows')
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
             ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')

@@ -15,6 +15,7 @@ use App\Http\Controllers\VanueSectionController;
 use App\Http\Controllers\VenueSectionRowsController;
 use App\Http\Controllers\TicketListingController;
 use App\Http\Controllers\SellerCategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Middleware\AdminAuth;
 
 /*
@@ -30,21 +31,29 @@ use App\Http\Middleware\AdminAuth;
 
 Route::get('/',  [WebController::class, 'index'])->name('home');
 Route::get('/login', function () {
-    return view('auth.login');
+    $FooterEventListing = App\Models\EventListing::get();
+    $Footerevents = App\Models\Event::get();
+    return view('auth.login',compact('FooterEventListing','Footerevents'));
 })->name("login");
 Route::get('/signup', function () {
-    return view('auth.signup');
+    $FooterEventListing = App\Models\EventListing::get();
+    $Footerevents = App\Models\Event::get();
+    return view('auth.signup',compact('FooterEventListing','Footerevents'));
 })->name("signup");
 // DASHBOARD Routes
 Route::get('/dashboard', function () {
-    return view('dashboard/dashboard');
+    $FooterEventListing = App\Models\EventListing::get();
+    $Footerevents = App\Models\Event::get();
+return view('dashboard/dashboard',compact('FooterEventListing','Footerevents'));
 });
 Route::get('/TicketDetail', function () {
     return view('payment-tickets/ticket_detail');
 });
 
 Route::get('/contact-us', function () {
-    return view('/contactus');
+    $FooterEventListing = App\Models\EventListing::get();
+        $Footerevents = App\Models\Event::get();
+    return view('/contactus',compact('FooterEventListing','Footerevents'));
 });
 // Route::get('/dashboard/orders', function () {
 //     return view('dashboard/orders');
@@ -52,6 +61,7 @@ Route::get('/contact-us', function () {
 
 Route::get('show/request', [EventController::class, 'show_request'])->name('request.show');
 Route::post('request/event', [EventController::class, 'store_request'])->name('request.event');
+Route::post('contact-us', [ContactController::class, 'Store'])->name('contact-us');
 
 Route::get('/dashboard/orders' , [PurchasesController::class,'dashboard_orders_show'])->name('dashboard.orders_show');
 // Route::get('/dashboard/listings', function () {
@@ -174,8 +184,6 @@ Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
 Route::get('auth/facebook/callback', [SocialController::class, 'loginWithFacebook']);
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-
 //purchases dashboard
 
 Route::get('dashboard/my_orders', [PurchasesController::class, 'dashboard_purchase_show'])->name('dashboard.purchases.show');
@@ -193,3 +201,7 @@ Route::get('/E-Ticket',[MailController::class,'index'])->name('E-Ticket');
 // Upload PDF
 
 Route::post('/upload-pdfticket',[PdfUploadController::class,'store'])->name('upload_pdf_ticket');
+
+Route::get('/autocomplete-search', [WebController::class, 'autocompleteSearch']);
+
+

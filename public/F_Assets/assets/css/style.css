@@ -78,7 +78,8 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 .logo img {
-    width: 40%;
+    width: 50%;
+    float: left;
   }
   .ticket img {
     width: 50%;
@@ -134,8 +135,8 @@ a:hover {
 
 
 p {
-    font-size: 16px;
-    line-height: 28px;
+    /* font-size: 16px; */
+    /* line-height: 28px; */
     color: var(--paragraph-color);
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
@@ -430,7 +431,7 @@ section {
 
 
 .btn_md {
-    padding: 12px 35px;
+    padding: -21px 35px;
     font-size: 18px;
 }
 
@@ -1947,65 +1948,7 @@ section {
 /* =============================
         Home Page Three
 ================================*/
-#home_three_banner{
-    background-image: url(../img/banner/banner-three.png);
-    padding: 325px 0 340px 0;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.banner_area_three{
-    text-align: center;
-}
-.banner_area_three h2{
-    font-size: 80px;
-    line-height: 90px;
-    color: var(--white-color);
-}
-.banner_area_three h3{
-    color: var(--white-color);
-    font-weight: 400;
-}
-.top_banner_three_text{
-    padding-bottom: 20px;
-}
-.bottom_banner_three_text{
-    padding-top: 23px;
-}
-/* --About Area-- */
-.three_about_left{
-    position: relative;
-}
-.three_about_left a img{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-.verified_area{
-    position: absolute;
-    right: -105px;
-    bottom: 0;
-}
-.three_heading_area{
-    color: var(--main-color);
-    font-weight: 400;
-    position: relative;
-}
-.three_heading_area::after{
-    content: "";
-    position: absolute;
-    width: 50px;
-    height: 1px;
-    left: 145px;
-    top: 13px;
-    background-color: var(--main-color);
-}
-.three_about_right h4{
-    padding-bottom:10px;
-}
-.three_about_right h2{
-    line-height: 51px;
-}
+
 .three_about_right p{
     padding-top: 15px;
 }
@@ -2284,11 +2227,11 @@ font-weight: 500;
 =========================*/
 /* --Common Banner-- */
 #common_banner {
-    background-image: url('../img/banner/banner-two-bg-2.png');
+    background-image: url('../img/banner-two-bg-2.png');
     padding: 260px 0 130px 0;
     background-repeat: no-repeat;
     background-size: cover;
-}
+}   
 
 .common_bannner_text {
     text-align: center;
@@ -4506,6 +4449,8 @@ textarea {
 ================================*/
 
 .flight_search_items {
+    border-color: #22b3c1;
+   
     background: #F3EFF9;
     display: flex;
     justify-content: space-between;

@@ -71,6 +71,11 @@
 					<div class="col-lg-12">
 						   <!-- begin panel -->
 							<h4 class="">Paper Tickets</h4>
+							@if ($message = Session::get('msg2'))
+									<div class="alert alert-Primary alert-block">
+										<strong>{{ $message }}</strong>
+									</div>
+							@endif
 							@if ($message = Session::get('msg'))
 									<div class="alert alert-danger alert-block">
 										<strong>{{ $message }}</strong>
@@ -119,42 +124,36 @@
 									<th scope="col">row</th>
 									<th scope="col">seat from</th>
 									<th scope="col">seat to</th>
-									<th scope="col">ticket type</th>
+									<th scope="col">Booking Confirmation</th>
+									
 									<th scope="col">ticket restrictions</th>
 									<th scope="col">Benefits</th>
-									<th scope="col">Fans Section</th>
+									{{-- <th scope="col">Fans Section</th> --}}
 									<th scope="col">status</th>
+									<th scope="col">ticket type</th>
 									<th scope="col" >Approval</th>
 									<th scope="col" >Action</th>
 								</tr>
 							</thead>
 							<tbody>
 									@foreach($tickets as $ticket)
-										@if($ticket->ticket_type == "Paper-Ticket")
+										@if($ticket->ticket_type === "Paper-Ticket")
 											<tr>
 												<td>{{$ticket->id}}</td>
-												{{-- <td>{{$ticket->title}}</td> --}}
 												<td>{{$ticket->event->event_name}}</td>
 												<td>${{$ticket->price}}</td>
-												{{-- <td>{{$ticket->currency}}</td> --}}
-												
 												<td>{{$ticket->quantity}}</td>
-												<td>
-													@if($ticket->categories === null)
-													{{$ticket->type_cat}}
-													@else
-													{{$ticket->categories}}
-													@endif
-												</td>
-												<td>{{$ticket->section_name}}</td>
-												<td>{{$ticket->row}}</td>
+												<td>{{$ticket->type_cat}}</td>
+												<td>{{$ticket->type_sec}}</td>
+												<td>{{$ticket->type_row}}</td>
 												<td>{{$ticket->seat_from}}</td>
 												<td>{{$ticket->seat_to}}</td>
-													<td>{{$ticket->ticket_type}}</td>
+												<td><a href="{{URL('view-PDF-File/'.$ticket->id)}}">{{$ticket->simple_pdf}}</a></td>
 												<td>{{$ticket->ticket_restrictions}}</td>
 												<td>{{$ticket->ticket_benefits}}</td>
-												<td>{{$ticket->fan_section}}</td>
+												{{-- <td>{{$ticket->fan_section}}</td> --}}
 												<td>{{$ticket->status}}</td>
+												<td>{{$ticket->ticket_type}}</td>
 												<td>
 													@if($ticket->approve == null || $ticket->approve == 0)
 													<form action="{{ url('/toggle-approve') }}" method="POST">
@@ -185,16 +184,11 @@
 																Reject
 															</button>
 														@endif
-														{{-- @if($ticket->approve != 2 || $ticket->approve == 0)
-														<button type="button" class="btn btn-danger" data-id="{{ $ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
-															<i class="fa fa-times" aria-hidden="true"></i>
-														</button>
-														@endif --}}
-													{{-- <a
-														class="btn btn-success"
-														href="{{URL('/Admin-Panel/Ticket/Edit',$ticket->id)}}"
+													<a
+														class="btn btn-primary"
+														href="{{ URL('/Admin-Panel/Edit-PaperTicket/' . $ticket->id) }}"
 														><i class="fa fa-edit" aria-hidden="true"></i></a
-													> --}}
+													>
 													<a
 														class="btn btn-danger"
 														href="{{route('admin.ticket.destroy',$ticket->id)}}"

@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
 use App\Models\User;
+use App\Models\EventListing;
+use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Contacts\Session\Session;
@@ -49,7 +51,10 @@ class LoginController extends Controller
         {
             session(['url.intended' => url()->previous()]);
         }
-        return view("auth.login");
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
+        return view('auth.login',compact('FooterEventListing','Footerevents'));
+        // return view("auth.login");
     }
 
     public function login(Request $request)

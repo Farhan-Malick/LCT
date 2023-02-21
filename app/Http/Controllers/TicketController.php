@@ -21,6 +21,9 @@ use App\Mail\Seller as SellerMail;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use App\Http\Controllers\MailController;
+use Response;
+use Illuminate\Support\Facades\File;
+
 
 class TicketController extends Controller
 {
@@ -48,7 +51,9 @@ class TicketController extends Controller
         $Listing = TicketListing::first();
         $cat = SellerCategory::first();
         $sec = VanueSections::first();
-        return view('tickets/tickets-details',compact('maxValue','minValue','Listing','sec','cat','venue_section_rows','venue_sections','EventListing','currencies','sellerCategories','ticketCurrency'));
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
+        return view('tickets/tickets-details',compact('FooterEventListing','Footerevents','maxValue','minValue','Listing','sec','cat','venue_section_rows','venue_sections','EventListing','currencies','sellerCategories','ticketCurrency'));
     }
 
     public function sendAwienMail(){
@@ -76,10 +81,9 @@ class TicketController extends Controller
             $eTicket->ticket_path = $ticket;
             $eTicket->save();
         }
-        return redirect()->route('seller.ticket_price.index', ['id' => $id]);
+        return redirect()->route('seller.complete_ticket.address.save', ['id' => $id]);
 
         // Sell-tickets/setticketprice
-
     }
 
     public function showCatTickets(Request $request, $id)
@@ -104,19 +108,24 @@ class TicketController extends Controller
      */
     public function store(Request $request, $id)
     {
-
-        $guestUser = LoginController::guestLogin();
-        $ticketListing = new TicketListing();
-        $sellerCategories = SellerCategory::first();
-        $Listing = TicketListing::first();
-        $venue_sections = VanueSections::first();
-        
-        $this->validate($request, [
-            'ticket_restrictions'         => 'required',
+        $request->validate([
+            'ticket_restrictions'        => 'required',
             'seated_area'                 => 'required',
-            'ticket_type'                 => 'required'
+            'ticket_type'                 => 'required',
+            'price'                       => 'required',
+            'face_price'                  => 'required',
+            'type_cat'                    => 'required',  
+            'type_sec'                    => 'required',
+            'type_row'                    => 'required',
+            'currency'                    => 'required'
         ]
     );
+    $guestUser = LoginController::guestLogin();
+    $ticketListing = new TicketListing();
+    $sellerCategories = SellerCategory::first();
+    $Listing = TicketListing::first();
+    $venue_sections = VanueSections::first();
+    
         $ticketListing->user_id = $guestUser;
         $ticketListing->eventlisting_id = $id;
         $ticketListing->currency = $request->currency;
@@ -134,9 +143,9 @@ class TicketController extends Controller
     //     $ticketListing->type_sec = $request->type_sec;
     //    }
 
-        // $ticketListing->categories = $request->categories;
-        // $ticketListing->section = $request->sections;
-        // $ticketListing->row = $request->row;
+        $ticketListing->categories = $request->categories;
+        $ticketListing->section = $request->sections;
+        $ticketListing->row = $request->row;
 
         $ticketListing->seat_from = $request->seat_from;
         $ticketListing->seat_to = $request->seat_to;
@@ -145,29 +154,40 @@ class TicketController extends Controller
         $ticketListing->ticket_restrictions = json_encode($request->ticket_restrictions);
         
         $ticketListing->ticket_type = $request->ticket_type;
+        $ticketListing->book_eticket = $request->book_eticket;
         $ticketListing->quantity = $request->total_tickets;
         $ticketListing->reason_seating_unable = $request->reason_seating_unable;
         
-        if($ticketListing->ticket_type == "Paper-Ticket"){
+        // if($ticketListing->ticket_type == "Paper-Ticket"){
             $ticketListing->country = $request->country;
+          if($request->hasfile('simple_pdf'))
+        {
+            $simple_pdf=$request->file('simple_pdf');
+            $ext = $simple_pdf->GetClientOriginalExtension();
+            $file2=time().'.'.$ext;
+            $simple_pdf->storeAs('public/post',$file2);
+            $ticketListing['simple_pdf']=$file2;
         }
-        // if($request->hasFile('simple_pdf')){
-        //     $simple_pdf = $request->file('simple_pdf');
-        //     $thumbnail_name = time().'_'.$simple_pdf->getClientOriginalName();
-        //     $simple_pdf->move(public_path('/booking'), $thumbnail_name);
-        //     $ticketListing->simple_pdf = $thumbnail_name;
-        // }
-       
         $ticketListing->save();
-
-        if ($request->ticket_type === "E-Ticket") {
+        if ($request->book_eticket === "Yes") {
             return redirect()->route('event.ticketlisting.ticket.upload', ['ticket_listing' => $ticketListing->id]);
         } else {
             return redirect()->route('seller.complete_ticket.address.save', ['id' => $ticketListing->id]);
         }
     }
+    public function viewPdf($id)
+        {
+            $Listing = TicketListing::find($id);
+            // return File::get(storage_path('app/public/post/'.$Listing->simple_pdf));
 
+            $filename = $Listing->simple_pdf;
+            $path = storage_path('app/public/post/'.$filename);
 
+            return Response::make(file_get_contents($path), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.$filename.'"'
+                ]);
+        }
     public function savePrice(Request $request, $id, TicketListing $tickets, User $user,)
     {
         // dd($id, $request->price, $request->currency);
@@ -191,13 +211,13 @@ class TicketController extends Controller
     {
         $tickets = TicketListing::find($id);
 
-        if($tickets->ticket_type !== "E-Ticket")
-        {
-            $request->validate(
-                [
-                  'simple_pdf'       =>  'required|mimes: csv,txt,xlx,xls,pdf|max:2048'
-                ]);
-        }
+        // if($tickets->ticket_type !== "E-Ticket")
+        // {
+        //     $request->validate(
+        //         [
+        //           'simple_pdf'       =>  'required|mimes: csv,txt,xlx,xls,pdf|max:2048'
+        //         ]);
+        // }
        
         $user = User::find($tickets->user_id);
         $seller = new Seller();
@@ -205,15 +225,15 @@ class TicketController extends Controller
         // $seller->email = $request->email;
         // $seller->first_name = $request->firstname;
         // $seller->last_name = $request->lastname;
-        $seller->country = $request->country;
-        if($request->hasfile('simple_pdf'))
-        {
-            $simple_pdf=$request->file('simple_pdf');
-            $ext = $simple_pdf->GetClientOriginalExtension();
-            $file2=time().'.'.$ext;
-            $simple_pdf->storeAs('public/post',$file2);
-            $seller['simple_pdf']=$file2;
-        } 
+        // $seller->country = $request->country;
+        // if($request->hasfile('simple_pdf'))
+        // {
+        //     $simple_pdf=$request->file('simple_pdf');
+        //     $ext = $simple_pdf->GetClientOriginalExtension();
+        //     $file2=time().'.'.$ext;
+        //     $simple_pdf->storeAs('public/post',$file2);
+        //     $seller['simple_pdf']=$file2;
+        // } 
         // $seller->address_line_1 = $request->address1;
         // $seller->address_line_2 = $request->address2;
         // $seller->address_line_3 = $request->address3;
@@ -241,6 +261,8 @@ class TicketController extends Controller
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
         $currencies = Currency::all();
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
         $ticketCurrency = Currency::find($tickets->currency);
         // dd($ticketCurrency, $tickets);
         $price = $tickets->price * $tickets->quantity;
@@ -248,7 +270,7 @@ class TicketController extends Controller
         $percentage = $divide * 10;
         $grand_total = $price - $percentage;
         $webCharge = $price / 10;
-        return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency','webCharge'));
+        return view('tickets/set-ticket-address',compact('FooterEventListing','Footerevents','currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency','webCharge'));
 
     }
 
@@ -301,6 +323,8 @@ class TicketController extends Controller
 
     public function show_price(Currency $currencies, TicketListing $tickets, $id, EventListing $event)
     {
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
         $maxValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->max('price');
@@ -312,7 +336,7 @@ class TicketController extends Controller
         $percentage = $divide * 10;
         $grand_total = $price - $percentage;
         $webCharge = $price / 10;
-        return view('tickets/setticketprice',compact(
+        return view('tickets/setticketprice',compact('FooterEventListing','Footerevents',
             'currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency', 'maxValue', 'minValue','webCharge'
         ));
     }
@@ -320,7 +344,8 @@ class TicketController extends Controller
     public function show_ticket(Currency $currencies, TicketListing $tickets, $id, EventListing $event){
 
         dd();
-
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
         $currencies = Currency::all();
@@ -329,7 +354,7 @@ class TicketController extends Controller
         $percentage = $divide * 10;
        $grand_total = $price - $percentage;
        $webCharge = $price / 10;
-        return view('tickets/set-ticket-address',compact('currencies','tickets','events','price','percentage','grand_total',''));
+        return view('tickets/set-ticket-address',compact('FooterEventListing','Footerevents','currencies','tickets','events','price','percentage','grand_total',''));
 
     }
 
@@ -344,7 +369,9 @@ class TicketController extends Controller
             $percentage = $divide * 10;
             $grand_total = $price - $percentage;
             $webCharge = $price / 10;
-            return view('tickets/upload_Pdf',compact('currencies','ticket_listing','events','price','percentage','grand_total', 'ticketCurrency','webCharge'));
+            $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
+            return view('tickets/upload_Pdf',compact('FooterEventListing','Footerevents','currencies','ticket_listing','events','price','percentage','grand_total', 'ticketCurrency','webCharge'));
         //dd($ticketlistingid);
         // $ticket_listing = TicketListing::find($ticketlistingid);
         // return view('tickets/upload_Pdf', compact('ticket_listing'));
@@ -365,8 +392,9 @@ class TicketController extends Controller
         $events_sports = Event::where('category_id', '2')->get();
         $events_theatre = Event::where('category_id', '3')->get();
         $events_festival = Event::where('category_id', '4')->get();
-
-        return view('tickets/selltickets',compact('events_sports','events_concert','events_theatre','events_festival'));
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
+        return view('tickets/selltickets',compact('FooterEventListing','Footerevents','events_sports','events_concert','events_theatre','events_festival'));
     }
 
     public function event_category_ticket(TicketListing $TicketListing,EventListing $event,$id){
@@ -374,9 +402,10 @@ class TicketController extends Controller
 
         $eventListings = EventListing::where('event_id',$id)->get();
         $events = Event::where('id',$id)->get();
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
 
-
-        return view('tickets/tickets-home',compact('events','eventListings'));
+        return view('tickets/tickets-home',compact('FooterEventListing','Footerevents','events','eventListings'));
     }
 
 
@@ -395,64 +424,118 @@ class TicketController extends Controller
 
         // $TicketListing->save();
         // return back();
-
     }
     public function dashboard_listing(Category $category, EventListing $event, TicketListing $TicketListing){
         $categories = Category::all();
         $events = EventListing::all();
-        //$activetickets = TicketListing::all();
-        //$active_tickets = TicketListing::where('status',1)->get();
-        //  $active_tickets =TicketListing::where([['user_id',auth()->user()->id],['status',1]])->get();
-         $active_tickets = TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
-        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
+        //  $active_tickets = TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
+        // ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        // ->where([['user_id',auth()->user()->id],['status',1]])
+        // ->where('completed', 1)->get();
+        $active_tickets = TicketListing::select('ticket_listings.*')
         ->where([['user_id',auth()->user()->id],['status',1]])
         ->where('completed', 1)->get();
+        
         $purchases = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->where('purchases.user_id',auth()->user()->id)->get();
+      
         $data = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
-        ->where('purchases.user_id',auth()->user()->id)->first();
+        ->where('purchases.user_id',auth()->user()->id)
+        ->first();
+       
+      
         // dd ($active_tickets);
 
         $sales = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->where('seller_id',auth()->user()->id)->get();
-        return view('dashboard/dashboard',compact('categories','active_tickets','events','purchases','data','sales'));
+        return view('dashboard/dashboard',compact('FooterEventListing','Footerevents','categories','active_tickets','events','purchases','data','sales'));
     }
 
+    // Paper Ticket in Admin Panel
+    
     public function admin_tickets_show(TicketListing $TicketListing)
     {
-        $tickets = TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
-        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        $tickets = TicketListing::select('ticket_listings.*')
         ->where('completed', 1)->get();
         $price = Purchases::sum('price');
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
         return view('Admin/pages/index',compact('tickets','price','userCount','total_no_sold_tickets'));
     }
+    public function editPaperTicket($id){
+        $paper_ticket = TicketListing::find($id);
+        return view('Admin/pages/editPaperTicket',compact('paper_ticket'));
+    }
+    public function updatePaperTicket(Request $request,$id){
+        //return $request;
+        $paper_ticket = TicketListing::find($id);
+        $paper_ticket->type_row = $request->type_row;
+        $paper_ticket->type_sec = $request->type_sec;
+        $paper_ticket->type_cat = $request->type_cat;
+        $paper_ticket->update();
+        $request->session()->flash('msg2','Data Has Been Updated Successfully'); 
+        return redirect('Admin-Panel/');
+    }
+//END OF PAPER TICKET
+
+
+     // E-Ticket in Admin Panel
+
     public function admin_e_tickets_show(TicketListing $TicketListing)
     {
-        $tickets = TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
-        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        $tickets = TicketListing::select('ticket_listings.*')
         ->where('completed', 1)->get();
         $price = Purchases::sum('price');
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
         return view('Admin/pages/e_TicketListing',compact('tickets','price','userCount','total_no_sold_tickets'));
     }
+    public function editE_Ticket($id){
+        $e_ticket = TicketListing::find($id);
+        return view('Admin/pages/editE_Ticket',compact('e_ticket'));
+    }
+    public function updateE_Ticket(Request $request,$id){
+        $e_ticket = TicketListing::find($id);
+        $e_ticket->type_row = $request->type_row;
+        $e_ticket->type_sec = $request->type_sec;
+        $e_ticket->type_cat = $request->type_cat;
+        $e_ticket->update();
+        $request->session()->flash('msg2','Data Has Been Updated Successfully'); 
+        return redirect('Admin-Panel/E_tickets');
+    }
+
+     // Mobile Ticket in Admin Panel
+
     public function admin_mobile_tickets_show(TicketListing $TicketListing)
     {
-        $tickets = TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
-        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        $tickets = TicketListing::select('ticket_listings.*')
         ->where('completed', 1)->get();
         $price = Purchases::sum('price');
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
         return view('Admin/pages/mobileTicket',compact('tickets','price','userCount','total_no_sold_tickets'));
+    }
+    public function editMobileTicket($id){
+        $mobile_ticket = TicketListing::find($id);
+        return view('Admin/pages/editmobileTicket',compact('mobile_ticket'));
+    }
+    public function updatemobileTicket(Request $request,$id){
+        //return $request;
+        $mobile_ticket = TicketListing::find($id);
+        $mobile_ticket->type_row = $request->type_row;
+        $mobile_ticket->type_sec = $request->type_sec;
+        $mobile_ticket->type_cat = $request->type_cat;
+        $mobile_ticket->update();
+        $request->session()->flash('msg2','Data Has Been Updated Successfully'); 
+        return redirect('Admin-Panel/Mobile_tickets');
     }
     public function Approval(Request $request)
     {
@@ -523,9 +606,10 @@ class TicketController extends Controller
     // }
 
     public function buyer_ticket_checkout( TicketListing $TicketListing,$id){
-
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
         $tickets = TicketListing::find($id);
-        return view('payment-tickets/checkout',compact('tickets'));
+        return view('payment-tickets/checkout',compact('FooterEventListing','Footerevents','tickets'));
     }
 
 }

@@ -2,7 +2,7 @@
 
 Order Number: {{$data->id}}  <br>
 Ticket Type: {{$data->ticket_type}} <br>
-Section : {{ $data->section }}, Category : {{ $data->categories }}, Row : {{ $data->row }} <br><br>
+Section : {{ $data->type_sec }}, Category : {{ $data->type_cat }}, Row : {{ $data->type_row }} <br><br>
 Event: {{ $data->event_name }} <br>
 Venue: {{ $data->venue_name }} <br>
 Date: {{ $data->event_date }} <br><br>

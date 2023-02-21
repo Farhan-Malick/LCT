@@ -6,6 +6,9 @@ use App\Models\Event;
 use App\Models\Category;
 use App\Models\EventRequest;
 use App\Models\Venues;
+use App\Models\Purchases;
+use App\Models\User;
+use App\Models\EventListing;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -20,7 +23,9 @@ class EventController extends Controller
         // get categories
         $categories = Category::all();
         $venues = Venues::all();
-        return view('Admin.pages.add_event', compact('categories', 'venues'));
+        $allevents = allevents::get();
+        $events = Event::get();
+        return view('Admin.pages.add_event', compact('allevents','events','categories', 'venues'));
     }
 
     /**
@@ -149,14 +154,13 @@ class EventController extends Controller
 
     public function show_request()
     {
-      
-        return view('event_request');
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
+        return view('event_request',compact('FooterEventListing','Footerevents'));
     }
     public function admin_show_request(EventRequest $eventRequest)
     {
         $requests=EventRequest::all();
-        
-      
         return view('Admin/pages/event_requests',compact('requests'));
     }
 
@@ -226,7 +230,49 @@ class EventController extends Controller
         $request->session()->flash('msg','Data Has Been Deleted Successfully'); 
         return redirect()->back();
     }
-    
+    public function footerEvents(Request $request){
+       
+        $price = Purchases::sum('price');
+        $userCount = User::count();
+        $total_no_sold_tickets = Purchases::sum('quantity');
+        $events = Event::all();
+        return view('Admin.pages.footerEvents',compact('events','price','userCount','total_no_sold_tickets'));
+    }
+    public function Approval(Request $request)
+    {
+        $events=Event::find($request->ad_id);
+        $approval=$request->Footerapprove;
+        if ($approval=='on') {
+            $approval=1;
+        }else {
+            $approval=null;
+        }
+        $events->Footerapprove=$approval;
+        $events->save();
+
+        return redirect()->back()->with('approve','Event has been Set to the Footer Successfully');
+    }
+    public function HotTickets(Request $request){
+        $price = Purchases::sum('price');
+        $userCount = User::count();
+        $total_no_sold_tickets = Purchases::sum('quantity');
+        $listing = EventListing::all();
+        return view('Admin.pages.HotTickets',compact('listing','price','userCount','total_no_sold_tickets'));
+    }
+    public function HotTicketsApproval(Request $request)
+    {
+        $listing=EventListing::find($request->ad_id);
+        $approval=$request->Footerapprove;
+        if ($approval=='on') {
+            $approval=1;
+        }else {
+            $approval=null;
+        }
+        $listing->Footerapprove=$approval;
+        $listing->save();
+
+        return redirect()->back()->with('approve','Event has been Set to the Footer Successfully');
+    }
 }
 
     

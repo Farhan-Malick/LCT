@@ -7,7 +7,6 @@ use App\Models\Event;
 use App\Models\EventListing;
 use App\Models\Category;
 
-
 class WebController extends Controller
 {
     /**
@@ -15,15 +14,40 @@ class WebController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function autocompleteSearch(Request $request)
+    {
+          $query = $request->get('query');
+          $filterResult = EventListing::where('event_name','LIKE','%'.$query.'%')->get();
+          return response()->json($filterResult);
+    }
     public function index(Request $request)
     {
-        // var_dump($request->filter);
-        //
-        // $events = EventListing::select('*')->join('events', 'events.id', '=', 'event_listings.event_id')->get();
+        
+        if($request->ajax()){
+            $data=EventListing::where('event_name','LIKE','%'.$request->search_text.'%')->get();
+
+            $output = '';
+            if(count($data) > 0)
+            {
+                $output = '<ul class="list-group" style="display:block;position:relative; z-index:1">';
+                    foreach($data as $row)
+                    {  
+                        $output .= '<li class="list-group-item">'.$row->event_name.'</li>';
+                    }
+                $output .= '</ul>';
+            }else{
+                $output .= '<li class="list-group-item">No Data Found </li>';
+            }
+            return $output;
+           
+        }
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
         $events = Event::all();
         $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
         ->join('events', 'events.id', '=', 'event_listings.event_id')
         ->join('venues', 'venues.id', '=', 'events.venue_id');
+        
         if($request->sort == 'Sports'){
             $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
@@ -50,18 +74,16 @@ class WebController extends Controller
         }
         // ->join('event_listings','event_id' , '=', 'events.id');
         $categories = Category::all();
-        if($request->search_text !== null){
-            $allevents = $allevents->where('event_listings.event_name', 'like', '%'.$request->search_text.'%');
-        }
-
+        
         if($request->filter !== null){
             $allevents = $allevents->where('event_listings.event_id', '=', $request->filter);
         }
-
+        if($request->search_text !== null){
+            $allevents = $allevents->where('event_listings.event_name', 'like', '%'.$request->search_text.'%');
+        }
         $allevents = $allevents->get();
-        return view('home', compact('events', 'categories','allevents'));
+        return view('home', compact('Footerevents','FooterEventListing','events', 'categories','allevents'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -127,4 +149,9 @@ class WebController extends Controller
     {
         //
     }
+    // public function footerEvents(Request $request){
+        // $allevents = allevents::get();
+        // $events = Event::get();
+    //     return view('auth.partials.footer',compact('events','eventListing'));
+    // }
 }

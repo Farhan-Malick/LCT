@@ -93,29 +93,36 @@
             <div class="main-navbar">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <a class="logo" href="{{URL('/')}}">
-                            <img src="{{asset('F_Assets/assets/img/logo1.png')}}" alt="logo">
-                        </a>
-                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                            <ul class="navbar-nav">
+                        <div style="width:50%;">
+                            <a class="logo" href="{{URL('/')}}">
+                                <img src="{{asset('F_Assets/assets/img/logo1.png')}}" alt="logo" style="width:60%">
+                            </a>
+                        </div>
+                        <div class="navUL collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                            <ul class="navbar-nav" >
                               
                                 <li class="nav-item">
-                                    <a
+                                    <a  style="font-size: 14px"
                                     class="nav-link"
                                     href="{{ route('request.show') }}"
-                                    >Request_Event</a
+                                    >Request Event</a
                                 >
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{URL('/contact-us')}}"
+                                        >Contact us</a
+                                    >
                                 </li>
                                 @auth
                                 <li class="dropdown nav-item">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    <a  style="font-size: 14px" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         My Account
                                     </a>
                                     <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My Dashboard</a></li>
-                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/orders') }}">My Order</a></li>
-                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/listings') }}">My Listings</a></li>
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My Profile</a></li>
+                                        {{-- <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/orders') }}">My Order</a></li>
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/listings') }}">My Listings</a></li> --}}
                                         <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/settings') }}">Settings</a></li>
                                         <li class="nav-item">
                                             <form
@@ -132,7 +139,7 @@
         
                                 @endauth @guest
                                 <li class="nav-item">
-                                    <a
+                                    <a  style="font-size: 14px"
                                          class="nav-link"
                                         href="{{ route('login') }}"
                                         >Login</a
@@ -145,7 +152,7 @@
                                     >
                                 </li> --}}
                                 <li class="nav-item">
-                                    <a
+                                    <a  style="font-size: 14px"
                                         class="nav-link btn btn-sm primary-btn px-3"
                                         href="{{ URL('Sell-tickets') }}"
                                         >Sell Tickets</a
@@ -154,29 +161,6 @@
                             </ul>
                         </div>
                     </nav>
-                </div>
-            </div>
-            <div class="others-option-for-responsive">
-                <div class="container">
-                    <div class="dot-menu">
-                        <div class="inner">
-                            <div class="circle circle-one"></div>
-                            <div class="circle circle-two"></div>
-                            <div class="circle circle-three"></div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="option-inner">
-                            <div class="others-options d-flex align-items-center">
-                                <div class="option-item">
-                                    <a href="#" class="search-box"><i class="fas fa-search"></i></a>
-                                </div>
-                                <div class="option-item">
-                                    <a href="contact.html" class="btn  btn_navber">Get free quote</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -212,14 +196,14 @@
                                                 <li class="nav-item" role="presentation">
                                                     <button class="nav-link active" id="oneway-tab" data-bs-toggle="tab"
                                                         data-bs-target="#oneway_flight" type="button" role="tab"
-                                                        aria-controls="oneway_flight" aria-selected="true">Multi Filters</button>
+                                                        aria-controls="oneway_flight" aria-selected="true"><b><h5 style="font-weight:600">Last Chance Ticket</h5></b></button>
                                                 </li>
-                                                <li class="nav-item" role="presentation">
+                                                {{-- <li class="nav-item" role="presentation">
                                                     <button class="nav-link" id="roundtrip-tab" data-bs-toggle="tab"
                                                         data-bs-target="#roundtrip" type="button" role="tab"
                                                         aria-controls="roundtrip"
                                                         aria-selected="false">Filter By No. of Tickets</button>
-                                                </li>
+                                                </li> --}}
                                             </ul>
                                         </div>
                                     </div>
@@ -227,6 +211,7 @@
                                 <div class="tab-content" id="myTabContent1">
                                     <div class="tab-pane fade show active" id="oneway_flight" role="tabpanel"
                                         aria-labelledby="oneway-tab">
+                                       
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="oneway_search_form">
@@ -234,8 +219,8 @@
                                                         <div class="row">
                             
                                                             <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif">
-                                                            <div class="col-md-3">
-                                                                <select class="form-control" name="ticket_type"  placeholder="Select Ticket Type">
+                                                            <div class="col-md-4">
+                                                                <select class="form-control" name="ticket_type"  placeholder="Select Ticket Type" onchange="this.form.submit()">
                                                                     <option disabled @if(request()->get('ticket_type') == null)selected @endif>Filter By Ticket Type</option>
                             
                                                                     <option value="paper-ticket"  @if(request()->get('ticket_type') && request()->get('ticket_type') == 'paper-ticket') 
@@ -248,30 +233,53 @@
                                                                         selected @endif>Mobile Ticket</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                <select class="form-control" name="ticket_restrictions"  placeholder="Select Restrictions">
-                                                                    <option disabled @if(request()->get('ticket_restrictions,') == null)selected @endif>Filter By Restrictions</option>
-                        
-                                                                    <option value=" No Restriction "  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'No Restriction') 
-                                                                        selected @endif  >No Restriction</option>
-                                                                    <option value=" Restricted View "  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'Restricted View') 
-                                                                        selected @endif  >Restricted View</option>
-                                                                    <option value="Age Limit 14+"  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'Age Limit 14+') 
-                                                                        selected @endif  >Age Limit 14+</option>
-                                                                    <option value="Age Limit 18+"  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'Age Limit 18+') 
-                                                                        selected @endif  >Age Limit 18+</option>
-                                                                    <option value="Age Limit 21+"  @if(request()->get('ticket_restrictions,') && request()->get('ticket_restrictions,') == 'Age Limit 21+') 
-                                                                        selected @endif  >Age Limit 21+</option>
-                                                                </select>
+                                                            <div class="col-md-4">
+                                                                <form method="get" id="qty-form">
+                                                                    <div class="form-group">
+                                                                          <select class="form-control"  name="Restriction_filter"  onchange="this.form.submit()">
+                                                                              <option selected disabled>Filter by Restrictions</option>
+                                                                              <option value="All">All</option>
+                                                                              <option value="">No Restriction</option>
+                                                                              <option value="">Restricted</option>
+                                                                                {{-- @foreach ($restrictionsFromTicketListing as $all)
+                                                                                    <option value="{{$all->ticket_restrictions}}">{{$all->ticket_restrictions}}</option></a>
+                                                                                @endforeach --}}
+                                                                          </select>
+                                                                    </div>
+                                                                  </form>
                                                             </div>
-                                                            {{-- <div class="col-md-1">
-                                                                <input type="submit" value="Search" class="btn btn-primary w-100"/>
+                                                            <div class="col-md-4">
+                                                                <form method="get" id="qty-form">
+                                                                    <div class="form-group">
+                                                                          <select class="form-control"  name="qty"  onchange="this.form.submit()">
+                                                                              <option selected disabled>No. of Tickets in Listing</option>
+                                                                              @foreach ($quantityFromTicketListing as $all)
+                                                                                    <option value="{{$all->quantity}}">{{$all->quantity}}</option></a>
+                                                                                @endforeach
+                                                                          </select>
+                                                                    </div>
+                                                                  </form>
+                                                            </div>
+                                                            {{-- <div class="col-md-4">
+                                                                <form method="get" id="qty-form">
+                                                                    <div class="form-group">
+                                                                          <select class="form-control"  name="no_of_tickets"  onchange="this.form.submit()">
+                                                                              <option selected disabled>Filter By No. of Tickets</option>
+                                                                                <option value="1"><a href="{{URL::current()."?no_of_tickets=1"}}">1</a></option>
+                                                                                <option value="2">2</option>
+                                                                                <option value="3">3</option>
+                                                                                <option value="4">4</option>
+                                                                                <option value="5">5</option>
+                                                                          </select>
+                                                                    </div>
+                                                                  </form>
                                                             </div> --}}
-                                                            <div class=" col-md-1 top_form_search_button">
+                                                         
+                                                            {{-- <div class=" col-md-1 top_form_search_button">
                                                                 <input type="submit" value="Search" class="btn btn_theme btn_md"/>
-                                                                {{-- <button class="">Search</button> --}}
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
+                                                        
                                                         <div class="row mt-3">
                                                             <div class="col-md-12">
                                                                 <span style="font-size: 15px; margin-right:20px">Sort By :</span>
@@ -282,64 +290,70 @@
                                                                 <a href="{{URL::current()."?sort=newest"}}"style=" margin-right:20px; text-decoration:none">Newest</a>
                                                              </div>
                                                         </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="oneway_search_form">
+                                                                    <div class="row select-ticket">
+                                                                        <div class="col-lg-12">
+                                                                            {{-- <p class="primary-text">
+                                                                                <i class="bi bi-info-circle-fill me-2"></i>
+                                                                                Select a quantity to quickly find the best tickets available for the number of
+                                                                                people attending the event.
+                                                                            </p> --}}
+                                                                        </div>
+                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3 mt-3">
+                                                                            <div class="cardNew btn_theme btn_md mb-3">
+                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 1 ) <?php echo 'select-active' ?> @endif" data-tickets-val="1">
+                                                                                    <h4>1</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
+                                                                            <div class="cardNew btn_theme btn_md mb-3">
+                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 2 ) <?php echo 'select-active' ?> @endif" data-tickets-val="2">
+                                                                                    <h4>2</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
+                                                                            <div class="cardNew btn_theme btn_md mb-3">
+                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 3 ) <?php echo 'select-active' ?> @endif" data-tickets-val="3">
+                                                                                    <h4>3</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
+                                                                            <div class="cardNew btn_theme btn_md mb-3">
+                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 4 ) <?php echo 'select-active' ?> @endif" data-tickets-val="4">
+                                                                                    <h4>4</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
+                                                                            <div class="cardNew btn_theme btn_md mb-3">
+                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 5 ) <?php echo 'select-active' ?> @endif" data-tickets-val="5">
+                                                                                    <h4>5</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
+                                                                            <div class="cardNew btn_theme btn_md mb-3">
+                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 6 ) <?php echo 'select-active' ?> @endif" data-tickets-val="6">
+                                                                                    <h4>6 +</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="roundtrip" role="tabpanel"
-                                        aria-labelledby="roundtrip-tab">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="oneway_search_form">
-                                                    <div class="row select-ticket">
-                                                        <div class="col-lg-12">
-                                                            <p class="primary-text">
-                                                                <i class="bi bi-info-circle-fill me-2"></i>
-                                                                Select a quantity to quickly find the best tickets available for the number of
-                                                                people attending the event.
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3 mt-3">
-                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 1 ) <?php echo 'select-active' ?> @endif" data-tickets-val="1">
-                                                                    <h4>1</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
-                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 2 ) <?php echo 'select-active' ?> @endif" data-tickets-val="2">
-                                                                    <h4>2</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
-                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 3 ) <?php echo 'select-active' ?> @endif" data-tickets-val="3">
-                                                                    <h4>3</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
-                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 4 ) <?php echo 'select-active' ?> @endif" data-tickets-val="4">
-                                                                    <h4>4</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3 col-md-3 col-lg-2 mt-3">
-                                                            <div class="cardNew btn_theme btn_md mb-3">
-                                                                <div class="card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 5 ) <?php echo 'select-active' ?> @endif" data-tickets-val="5">
-                                                                    <h4>5 +</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 
                                 </div>
                             </div>
@@ -362,26 +376,20 @@
                             <div  class="card mb-3 shadow-sm br-10">
                                 <div class="card-body shadow-sm" >
                                     <h5 class="mb-3">Filter By Category</h5>
-                                    <form method="get" id="qty-form">
-                                        <input type="hidden" class="form-control" id="total-tickets" placeholder="Total Tickets" name="qty" value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif">   
                                         <div class="row">
-                                            <div class="col-md-12">                                        
-                                                     <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="CAT 1"  >
-                                                     <label for="" name="categories" class="form-control-md">CAT 1</label>
-                                                     <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="CAT 2"  >
-                                                     <label for="" name="categories" class="form-control-md">CAT 2</label>
-                                                     <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="CAT 3"  >
-                                                     <label for="" name="categories" class="form-control-md">CAT 3</label>
-                                                     <input class="form-control-md m-3" type="checkbox" name="categories" id="" value="CAT 4"  >
-                                                     <label for="" name="categories" class="form-control-md">CAT 4</label>
+                                            <div class="col-md-12">
+                                                <form method="get" id="qty-form">
+                                                    <div class="form-group">
+                                                          <select class="form-select form-control-lg"  name="Cat_filter"  onchange="this.form.submit()">
+                                                              <option selected disabled>SEACH BY CATEGORY</option>
+                                                                @foreach ($categoriesFromTicketListing as $all)
+                                                                    <option value="{{$all->type_cat}}">{{$all->type_cat}}</option></a>
+                                                                @endforeach
+                                                          </select>
+                                                    </div>
+                                                  </form>
                                              </div>
                                         </div>
-                                       <div class="row">
-                                        <div class="col-md-12">
-                                            <input type="submit" value="Search" class="btn btn primary-btn w-100 mt-2"/>
-                                        </div>
-                                       </div>
-                                    </form>
                                 </div>
                             </div>
                     </div>
@@ -397,92 +405,89 @@
                                                         <h4>No Tickets Available for this event</h4>
                                                     </div>
                                                 @endif
-                                             <?php
-                                                $cat1 = ['btn-danger'];
-                                                $cat2 = ['btn-primary'];    
-                                                $cat3 = ['btn-warning'];
-                                                $cat4 = ['btn-secondary'];
-                                                $cat5 = ['btn-success'];
-                                                ?>
+                                                
+                                                @foreach ($colors as $key => $dbValues) 
+                                                    @if ($key === 0)
+                                                        {{$dbValues}}
+                                                    @endforeach
+
                                                 @foreach ($tickets as $ticket)
                                                     <?php 
-                                                        $key1 = array_rand($cat1);
-                                                        $key2 = array_rand($cat2);
-                                                        $key3 = array_rand($cat3);
-                                                        $key4 = array_rand($cat4);
-                                                        $key5 = array_rand($cat5);
+                                                        // $key = array_rand($cat0);
+                                                        // $key = array_rand($cat1);
+                                                        // $key = array_rand($cat2);
+                                                        // print_r( $key = array_rand($cat0));  
+                                                    
                                                      ?>
-                                            <div class="flight_search_items border border 
-                                            <?php 
-                                                if($ticket->type_cat === 'CAT 1' || $ticket->categories === 'CAT 1') {echo $cat1[$key1]; } 
-                                                if($ticket->type_cat === 'CAT 2' || $ticket->categories === 'CAT 2') {echo $cat2[$key2]; } 
-                                                if($ticket->type_cat === 'CAT 3' || $ticket->categories === 'CAT 3') {echo $cat3[$key3]; } 
-                                                if($ticket->type_cat === 'CAT 4' || $ticket->categories === 'CAT 4') {echo $cat4[$key4]; } 
-                                                if($ticket->type_cat === 'N/A' || $ticket->categories === 'N/A') {echo $cat5[$key5]; } 
-                                                else {
-                                                    'btn-success';
-                                                }
-                                            ?> text-dark" 
+                                            <div class="flight_search_items border 
+                                             <?php 
+                                                // if($ticket->type_cat === $key ){ 
+                                                //     echo $cat0[$key]; 
+                                                // }
+                                             ?> 
+                                            text-dark" 
                                                                                     style="  
-                                                                                    border: 1px; 
                                                                                     border-radius: 12px;
                                                                                     margin-bottom:20px
                                                                                     ;"
                                                                                     >
-                                                <div class="multi_city_flight_lists">
+                                                <div class="multi_city_flight_lists" style="border-left:10px solid #ac2e2e;">
                                                     <div class="flight_multis_area_wrapper">
                                                         <div class="flight_search_left">
-                                                            <div class="ticket text-center">
-                                                                <img src="{{asset('F_Assets/assets/img/t1.webp')}}" width="" alt="">
+                                                            <div class="ticket" >
+                                                                <img src="" width="" alt="">
                                                                 {{-- <img src="{{asset('F_Assets/assets/img/common/biman_bangla.png')}}" alt="img"> --}}
                                                             </div>
                                                             <div class="flight_search_destination">
                                                                 <p>Event</p>
-                                                                <h3>{{$ticket->event_name}}</h3>
-                                                                <h6>Ticket : {{$ticket->ticket_type}}</h6>
+                                                                <p class="text-dark"><b>{{$ticket->event_name}}</b></p>
                                                                 <p>Tickets</p>
                                                                 <h6>No of Tickets {{$ticket->quantity}}</h6>
+                                                                <p class="m-0">Restriction</p>
+                                                                <h6 class="fw-700 ">{{implode(',', json_decode($ticket->ticket_restrictions, true))}}</h6>
+                                                                {{-- <h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6> --}}
+                                                               
                                                             </div>
                                                         </div>
                                                         <div class="flight_search_middel">
                                                             <div class="flight_right_arrow">
-                                                                <h6>Section: {{$ticket->sections}}</h6>
                                                                 <h6>
-                                                                    Category: @if ($ticket->categories == null)
+                                                                    Category:
                                                                     {{$ticket->type_cat}}
-                                                                    @else
-                                                                    {{$ticket->categories}}
-                                                                @endif
                                                                 </h6>
-                                                                <h6>Row: {{$ticket->rows}}</h6>
+                                                                <h6>Section: {{$ticket->type_sec}}</h6>
+                                                                <h6>Row: {{$ticket->type_row}}</h6>
                                                             </div>
                                                             <div class="flight_search_destination">
+                                                                <p>Ticket : </p>
+                                                                <h6>{{$ticket->ticket_type}}</h6>
                                                                 <p>Seating Area</p>
                                                                 <h6 class="fw-700 ">{{$ticket->seated_area}}</h6>
-                                                                <p class="m-0">Restriction</p>
-                                                                {{-- <h6 class="fw-700 ">{{implode(',', json_decode(, true))}}</h6> --}}
-                                                                <h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>
-                                                                <p class="m-0">Fans Section</p>
-                                                                <h6 class="fw-700 ">{{$ticket->fan_section}}</h6>
+                                                                @if($ticket->cat_id == 1)
+                                                                <h6 class="fw-700 ">
+                                                                    <p class="m-0">Fans Section</p>
+                                                                    {{$ticket->fan_section}}
+                                                                </h6>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="flight_search_right">
-                                                    <h2>${{$ticket->price}}<sup>per.tick</sup></h2>
+                                                    <h2>${{$ticket->price}}<sup style="font-size: 10px">Per Ticket</sup></h2>
                                                     {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.detail',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}">View Ticket Detail</a> --}}
                                                     <a class="@if($ticket->quantity != 0) btn btn_theme btn_sm mb-2 @else btn btn-danger w-100  @endif" href="@if($ticket->quantity > 0)
-                                                        {{ route('buyer.ticket.checkout',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif " >
+                                                        {{ route('buyer.ticket.checkout',['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif " >
                                                         @if($ticket->quantity == 0) SOLD @else Select Ticket
                                                             @endif 
                                                     </a>
-                                                    @if ($ticket->ticket_type === "E-Ticket")
+                                                   
+                                                    <p> @if ($ticket->ticket_type === "E-Ticket")
                                                         @if ($ticket->quantity != 0)
-                                                        <a href="#" class="text-danger" >Ticket PDF</a>
+                                                        <a href="#" class="text-danger" >Instant Download</a>
                                                             {{-- <a href="{{ route('Pdftemplate',['eventlisting_id' => $events->id,'ticketid' => $ticket->id] ) }}" class="text-danger" >Ticket PDF</a> --}}
                                                         @endif
-                                                    @endif
-                                                    <p>*Discount applicable on some conditions</p>
+                                                    @endif</p>
                                                     {{-- <h6 data-bs-toggle="collapse" data-bs-target="#collapseExample"
                                                         aria-expanded="false" aria-controls="collapseExample">Show more <i
                                                             class="fas fa-chevron-down"></i></h6> --}}
@@ -496,113 +501,7 @@
             </div>
         </div>
     </section>
-<section class="section-five mt-5">
-    <div class="footer ">
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-xl-3">
-                    <h5 class="mb-4 text-white">Regional Settings</h5>
-                    <!-- Button trigger modal -->
-                    <button
-                        type="button"
-                        class="btn footer-btn mb-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#"
-                    >
-                        <i class="bi bi-globe me-2"></i>Country:
-                        world-wide
-                    </button>
-                    <!-- Button trigger modal -->
-                    <button
-                        type="button"
-                        class="btn footer-btn mb-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#"
-                    >
-                        <i class="bi bi-chat-fill me-2"></i> Language:
-                        English (US)
-                    </button>
-                    <!-- Button trigger modal -->
-                    <button
-                        type="button"
-                        class="btn footer-btn mb-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#"
-                    >
-                        <i class="bi bi-cash-coin me-2"></i> Currency:
-                        US$
-                    </button>
-                    <!-- Modal -->
-                    <div
-                        class="modal fade"
-                        id=""
-                        tabindex="-1"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                    >
-                        <div class="modal-dialog text-white">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4>Modal title here</h4>
-                                    <button
-                                        type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"
-                                    ></button>
-                                </div>
-                                <div class="modal-body">
-                                    <h4>modal content here</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3">
-                    <h5 class="mb-4 text-white">More</h5>
-                    <ul>
-                        <li><a href="" class="text-white">Help Center</a></li>
-                        <li><a href="" class="text-white">About Us</a></li>
-                        <li><a href="" class="text-white">Affiliates</a></li>
-                        <li><a href="" class="text-white">Careers</a></li>
-                        <li><a href="" class="text-white">How do i contact?</a></li>
-                        <li><a href="" class="text-white">Event Organizers</a></li>
-                    </ul>
-                </div>
-                <div class="col-xl-3">
-                    <h5 class="mb-4 text-white">Popular Events</h5>
-                </div>
-                <div class="col-xl-3">
-                    <h5 class="mb-4 text-white">Stay Up to Date</h5>
-                    <ul class="d-flex social-links text-center">
-                        <li>
-                            <a href=""
-                                ><i class="bi bi-facebook"></i
-                            ></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="bi bi-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="bi bi-google"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-xl-12 mt-4">
-                    <p class="text-white">
-                        Copyright © Last-Chance-Ticket AG 2022
-                        Company Details<br />
-                        Use of this web site constitutes acceptance of
-                        the Terms and Conditions and
-                        Privacy Policy
-                        and Cookies Policy and
-                        Mobile Privacy Policy
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@include('auth.partials.footer')
     {{-- @include("auth.partials.footer") --}}
     {{-- <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

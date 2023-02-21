@@ -71,6 +71,11 @@
 					<div class="col-lg-12">
 						   <!-- begin panel -->
 							<h4 class="">E-Tickets</h4>
+							@if ($message = Session::get('msg2'))
+									<div class="alert alert-Primary alert-block">
+										<strong>{{ $message }}</strong>
+									</div>
+							@endif
 							@if ($message = Session::get('msg'))
 									<div class="alert alert-danger alert-block">
 										<strong>{{ $message }}</strong>
@@ -119,11 +124,13 @@
 									<th scope="col">row</th>
 									<th scope="col">seat from</th>
 									<th scope="col">seat to</th>
-									<th scope="col">ticket type</th>
+									<th scope="col">Booking Confirmation</th>
+									
 									<th scope="col">ticket restrictions</th>
 									<th scope="col">Benefits</th>
 									<th scope="col">Fans Section</th>
-									{{-- <th scope="col">status</th> --}}
+									<th scope="col">status</th>
+									<th scope="col">ticket type</th>
 									<th scope="col" >Approval</th>
 									<th scope="col" >Action</th>
 								</tr>
@@ -140,21 +147,24 @@
 										{{-- <td>{{$e_ticket->Currency->currency_type}}</td> --}}
 										<td>{{$e_ticket->quantity}}</td>
 										<td>
-											@if($e_ticket->categories === null)
 											{{$e_ticket->type_cat}}
-											@else
-											{{$e_ticket->categories}}
-											@endif
 										</td>
-										<td>{{$e_ticket->section_name}}</td>
-										<td>{{$e_ticket->row}}</td>
+										<td>{{$e_ticket->type_sec}}</td>
+										<td>{{$e_ticket->type_row}}</td>
 										<td>{{$e_ticket->seat_from}}</td>
 										<td>{{$e_ticket->seat_to}}</td>
-											<td>{{$e_ticket->ticket_type}}</td>
+										<td>
+											@if ($e_ticket->simple_pdf === null)
+											 <p class="text-success">I have a ticket</p>
+											 @else
+											 <a class="text-primary" href="{{URL('view-PDF-File/'.$e_ticket->id)}}">{{$e_ticket->simple_pdf}}</a>
+											@endif
+										</td>
 										<td>{{$e_ticket->ticket_restrictions}}</td>
 										<td>{{$e_ticket->ticket_benefits}}</td>
 											<td>{{$e_ticket->fan_section}}</td>
-										{{-- <td>{{$e_ticket->status}}</td> --}}
+										<td>{{$e_ticket->status}}</td>
+										<td>{{$e_ticket->ticket_type}}</td>
 										<td>
 											@if($e_ticket->approve == null || $e_ticket->approve == 0)
 											<form action="{{ url('/toggle-approve') }}" method="POST">
@@ -190,16 +200,18 @@
 														<i class="fa fa-times" aria-hidden="true"></i>
 													</button> --}}
 												{{-- @endif --}}
+														@if ($e_ticket->book_eticket === "Yes")
 														<a
-												class="btn btn-primary"
-												href="{{route('admin.ticket.view',$e_ticket->id)}}"
-												><i class="fa fa-eye" aria-hidden="true"></i></a
-											>
-											{{-- <a
+														class="btn btn-primary"
+														href="{{route('admin.ticket.view',$e_ticket->id)}}"
+														><i class="fa fa-eye" aria-hidden="true"></i></a
+													>
+														@endif
+											<a
 												class="btn btn-success"
-												href="{{URL('/Admin-Panel/Ticket/Edit',$e_ticket->id)}}"
+												href="{{URL('/Admin-Panel/Edit-E_Ticket',$e_ticket->id)}}"
 												><i class="fa fa-edit" aria-hidden="true"></i></a
-											> --}}
+											>
 											<a
 												class="btn btn-danger"
 												href="{{route('admin.ticket.destroy',$e_ticket->id)}}"

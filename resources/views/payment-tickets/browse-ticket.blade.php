@@ -258,24 +258,6 @@
                                                                     </div>
                                                                   </form>
                                                             </div>
-                                                            {{-- <div class="col-md-4">
-                                                                <form method="get" id="qty-form">
-                                                                    <div class="form-group">
-                                                                          <select class="form-control"  name="no_of_tickets"  onchange="this.form.submit()">
-                                                                              <option selected disabled>Filter By No. of Tickets</option>
-                                                                                <option value="1"><a href="{{URL::current()."?no_of_tickets=1"}}">1</a></option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                          </select>
-                                                                    </div>
-                                                                  </form>
-                                                            </div> --}}
-                                                         
-                                                            {{-- <div class=" col-md-1 top_form_search_button">
-                                                                <input type="submit" value="Search" class="btn btn_theme btn_md"/>
-                                                            </div> --}}
                                                         </div>
                                                         
                                                         <div class="row mt-3">
@@ -431,8 +413,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                
                                 </div>
                             </div>
                         </div>
@@ -474,43 +454,83 @@
                 </div>
                 
                     <div class="col-lg-8">
+                        <div class="row mb-2">
+                            <div class="col-lg-12">
+                                <span style="font-size: 18px"><b>Categories : </b>  
+                                    @foreach ($colors as $key => $dbValues) 
+                                        @if ($key === 0)
+                                            <span style='border-left:20px solid red;'></span> &nbsp; {{$dbValues->type_cat}} 
+                                        @endif
+                                          @if ($key === 1)
+                                            <span style='border-left:20px solid yellow;'></span> &nbsp; {{$dbValues->type_cat}} 
+                                        @endif
+                                          @if ($key === 2)
+                                            <span style='border-left:20px solid blue;'></span> &nbsp; {{$dbValues->type_cat}} 
+                                        @endif
+                                          @if ($key === 3)
+                                            <span style='border-left:20px solid green;'></span> &nbsp; {{$dbValues->type_cat}} 
+                                        @endif
+                                          @if ($key === 4)
+                                            <span style='border-left:20px solid grey;'></span> &nbsp; {{$dbValues->type_cat}} 
+                                        @endif
+                                    @endforeach
+                                </span> 
+                            </div>
+                        </div>
                         <div class="row">
                                     <div class="flight_search_result_wrapper">
                                         <div class="flight_search_item_wrappper">
-                                           
                                                 @if ($tickets->count() == null)
                                                     <div class="alert alert-success text-center">
                                                         <h4>No Tickets Available for this event</h4>
                                                     </div>
                                                 @endif
-                                                
-                                                @foreach ($colors as $key => $dbValues) 
-                                                    @if ($key === 0)
-                                                        {{$dbValues}}
-                                                        @endif
-                                                    @endforeach
-
+                                               <?php
+                                                    $catClass0 = ["<span style='border-left:20px solid red;'></span>"];
+                                                    $catClass1 = ["<span style='border-left:20px solid yellow;'></span>"];  
+                                                    $catClass2 = ["<span style='border-left:20px solid blue;'></span>"]; 
+                                                    $catClass3 = ["<span style='border-left:20px solid green;'></span>"]; 
+                                                    $catClass4 = ["<span style='border-left:20px solid grey;'></span>"]; 
+                                               ?>
+                                                {{-- <?php 
+                                                    foreach ($colors as $key => $ticket) {
+                                                        if ($key === 0){
+                                                            echo "<span style='border-left:10px solid red;'></span>";
+                                                        }
+                                                        if ($key === 1){
+                                                            echo "<span style='border-left:10px solid yellow;'></span>";
+                                                        }
+                                                        if ($key === 2){
+                                                            echo "<span style='border-left:10px solid blue;'></span>";
+                                                        }
+                                                        if ($key === 3){
+                                                            echo "<span style='border-left:10px solid green;'></span>";
+                                                        }
+                                                        if ($key === 4){
+                                                            echo "<span style='border-left:10px solid grey;'></span>";
+                                                        }
+                                                    }
+                                                ?>  --}}
                                                 @foreach ($tickets as $ticket)
-                                                    <?php 
-                                                        // $key = array_rand($cat0);
-                                                        // $key = array_rand($cat1);
-                                                        // $key = array_rand($cat2);
-                                                        // print_r( $key = array_rand($cat0));  
-                                                    
-                                                     ?>
-                                            <div class="flight_search_items border 
-                                             <?php 
-                                                // if($ticket->type_cat === $key ){ 
-                                                //     echo $cat0[$key]; 
-                                                // }
-                                             ?> 
-                                            text-dark" 
-                                                                                    style="  
-                                                                                    border-radius: 12px;
-                                                                                    margin-bottom:20px
-                                                                                    ;"
-                                                                                    >
-                                                <div class="multi_city_flight_lists" style="border-left:10px solid #ac2e2e;">
+                                                <?php 
+                                                    $key0 = array_rand($catClass0); 
+                                                    $key1 = array_rand($catClass1); 
+                                                    $key2 = array_rand($catClass2); 
+                                                    $key3 = array_rand($catClass3); 
+                                                    $key4 = array_rand($catClass4); 
+                                                    // print_r( $key = array_rand($catClass0));  
+                                                ?>
+                                                   
+                                            <div class="flight_search_items border text-dark"  style="border-radius: 12px; margin-bottom:20px ;">
+                                                {{-- <?php var_dump($key1 == 0);?> --}}
+                                                <div class="multi_city_flight_lists" style="
+                                                <?php if($key0 === 0){ ?>
+                                                    border-left:10px solid red;
+                                                 <?php }?> 
+                                                 
+                                                 "
+                                               
+                                                >
                                                     <div class="flight_multis_area_wrapper">
                                                         <div class="flight_search_left">
                                                             <div class="ticket" >

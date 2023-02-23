@@ -79,31 +79,20 @@
                   <marquee behavior="" direction="">
                     <h2 class="" style="color: #fff; text-shadow: 2px 2px #6e14dc;"><b>Hurray! You are in the right place  <span class="text-warning" style=" text-shadow: 2px 2px #33f122;">*  100% customer satisfaction  *</span>  We value every customers <span  style=" text-shadow: 2px 2px #9ffa27;" class="text-warning">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
                   </marquee>
-                  <div class="container">
+                  <div class="container ">
                     <form method="get" id="qty-form">
                       <div class="row height d-flex justify-content-center align-items-center">
                         <div class="col-md-10">
-                          <div class="search">
+                          <div class="search ">
                             <i class="fa fa-search"></i>
-                            <input type="text" name="search-no-of-tickets" id="search_text" class="form-control" placeholder="Search Ticket Number Here">
+                            <input type="text"  name="search_text" id="search_text" class="form-control" placeholder="Search Ticket Number Here">
                             <button class="btn btn-primary">Search</button>
                           </div>
-                            <div id="search_list"> </div>
+                            <div id="search_list" style="position:absolute; z-index:1; width:68%;"> </div>
                         </div>
                       </div>
                     </form>
-                      <script type="text/javascript">
-                        var route = "{{ route('home') }}";
-                        $('#search').typeahead({
-                            source: function (query, process) {
-                                return $.get(route, {
-                                    query: query
-                                }, function (data) {
-                                    return process(data);
-                                });
-                            }
-                        });
-                    </script>
+                     
                 </div>
                 <style>
                   .search{
@@ -162,7 +151,7 @@
               </div>
                       
             </div>
-            <div class="container">
+            {{-- <div class="container" style="position:relative;">
               <div class="row">
                 <div class="col-lg-12">
                   <div class="more-info">
@@ -187,7 +176,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
         </div>
         {{-- <div id="top-banner-2" class="banner">
@@ -314,14 +303,14 @@
           </div>
         </div> --}}
       </div>
-      <nav>
+      {{-- <nav>
         <div class="controls">
           <label for="banner1"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">1</span></label>
           <label for="banner2"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">2</span></label>
           <label for="banner3"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">3</span></label>
           <label for="banner4"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">4</span></label>
         </div>
-      </nav>
+      </nav> --}}
     </div>
   </section>
   <!-- ***** Main Banner Area End ***** -->
@@ -521,7 +510,7 @@
                         <span class="list"style="font-size: 13px">{{$event->event_date}}</span>
                         </div>
                     </div>
-                    <p>{{ $event->description }}</p>
+                    <p>Venue : <b>{{ $event->venue_name }}</b></p>
                     <div class="main-button">
                         <a href="{{ route('buyer.ticket.show',$event->id) }}">View Tickets</a>
                     </div>
@@ -589,7 +578,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
   <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>

@@ -85,12 +85,14 @@ class PurchasesController extends Controller
             ->where('ticket_listings.eventlisting_id',$id);
         $categoriesFromTicketListing = TicketListing::select('ticket_listings.type_cat')
             ->groupBy('type_cat')
+            ->orderBy('type_cat','asc')
             ->where('approve','1')
             ->where('ticket_listings.eventlisting_id',$id)
             ->get();
         $colors = TicketListing::select('ticket_listings.type_cat')
         ->groupBy('type_cat')
         ->where('approve','1')
+        ->orderBy('type_cat','asc')
         ->where('ticket_listings.eventlisting_id',$id)->get();
         // dd($colors);
         

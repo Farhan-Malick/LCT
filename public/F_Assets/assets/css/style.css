@@ -179,7 +179,10 @@ section {
 }
 
 .section_padding {
-    padding: 100px 0;
+    padding-top: 30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 100px;
 }
 
 .section_padding_top {
@@ -602,7 +605,7 @@ section {
     font-size: 14px;
 }
 
-.flight_Search_boxed input {
+/* .flight_Search_boxed input {
     font-size: 22px;
     width: 87%;
     border: none;
@@ -610,7 +613,7 @@ section {
     font-weight: 500;
     height: 35px;
     padding: 0;
-}
+} */
 
 .flight_Search_boxed input:focus-within {
     outline: none;
@@ -4449,7 +4452,7 @@ textarea {
 ================================*/
 
 .flight_search_items {
-    border-color: #22b3c1;
+    /* border-color: #22b3c1; */
    
     background: #F3EFF9;
     display: flex;

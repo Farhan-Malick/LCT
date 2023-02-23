@@ -120,11 +120,11 @@ class TicketController extends Controller
             'currency'                    => 'required'
         ]
     );
-    $guestUser = LoginController::guestLogin();
-    $ticketListing = new TicketListing();
-    $sellerCategories = SellerCategory::first();
-    $Listing = TicketListing::first();
-    $venue_sections = VanueSections::first();
+        $guestUser = LoginController::guestLogin();
+        $ticketListing = new TicketListing();
+        $sellerCategories = SellerCategory::first();
+        $Listing = TicketListing::first();
+        $venue_sections = VanueSections::first();
     
         $ticketListing->user_id = $guestUser;
         $ticketListing->eventlisting_id = $id;
@@ -135,13 +135,6 @@ class TicketController extends Controller
         $ticketListing->type_row = $request->type_row;
         $ticketListing->ticket_benefits = json_encode($request->ticket_benefits);
         $ticketListing->fan_section = $request->fan_section;
-
-  //    if($sellerCategories == null){
-    //     $ticketListing->type_cat = $request->type_cat;
-    //    }
-    //    if($venue_sections == null){
-    //     $ticketListing->type_sec = $request->type_sec;
-    //    }
 
         $ticketListing->categories = $request->categories;
         $ticketListing->section = $request->sections;
@@ -160,6 +153,14 @@ class TicketController extends Controller
         
         // if($ticketListing->ticket_type == "Paper-Ticket"){
             $ticketListing->country = $request->country;
+            if($request->hasfile('simple_pdfForMobileAndPaper'))
+            {
+                $simple_pdfForMobileAndPaper=$request->file('simple_pdfForMobileAndPaper');
+                $ext = $simple_pdfForMobileAndPaper->GetClientOriginalExtension();
+                $file2=time().'.'.$ext;
+                $simple_pdfForMobileAndPaper->storeAs('public/post',$file2);
+                $ticketListing['simple_pdf']=$file2;
+            }
           if($request->hasfile('simple_pdf'))
         {
             $simple_pdf=$request->file('simple_pdf');
@@ -168,6 +169,7 @@ class TicketController extends Controller
             $simple_pdf->storeAs('public/post',$file2);
             $ticketListing['simple_pdf']=$file2;
         }
+        // dd($ticketListing); 
         $ticketListing->save();
         if ($request->book_eticket === "Yes") {
             return redirect()->route('event.ticketlisting.ticket.upload', ['ticket_listing' => $ticketListing->id]);
@@ -210,46 +212,11 @@ class TicketController extends Controller
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)
     {
         $tickets = TicketListing::find($id);
-
-        // if($tickets->ticket_type !== "E-Ticket")
-        // {
-        //     $request->validate(
-        //         [
-        //           'simple_pdf'       =>  'required|mimes: csv,txt,xlx,xls,pdf|max:2048'
-        //         ]);
-        // }
-       
         $user = User::find($tickets->user_id);
         $seller = new Seller();
         $seller->user_id = $user->id;
-        // $seller->email = $request->email;
-        // $seller->first_name = $request->firstname;
-        // $seller->last_name = $request->lastname;
-        // $seller->country = $request->country;
-        // if($request->hasfile('simple_pdf'))
-        // {
-        //     $simple_pdf=$request->file('simple_pdf');
-        //     $ext = $simple_pdf->GetClientOriginalExtension();
-        //     $file2=time().'.'.$ext;
-        //     $simple_pdf->storeAs('public/post',$file2);
-        //     $seller['simple_pdf']=$file2;
-        // } 
-        // $seller->address_line_1 = $request->address1;
-        // $seller->address_line_2 = $request->address2;
-        // $seller->address_line_3 = $request->address3;
-        // $seller->city = $request->city;
-        // $seller->state = $request->state;
-        // $seller->zip_code = $request->zipcode;
-        // $seller->phone = $request->phone;
-        $seller->save();
 
-        /* if(!Auth::check()) {
-            $user->first_name = $request->firstname;
-            $user->last_name = $request->lastname;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->update();
-        } */    
+        $seller->save();
         $tickets->completed = 1;
         $tickets->update();
         MailController::ticketlistingadded($user->email);

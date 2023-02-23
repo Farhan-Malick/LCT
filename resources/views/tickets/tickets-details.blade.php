@@ -791,21 +791,20 @@
                                                     <div class="">
                                                         <label class="col-lg-12 text-lg-right col-form-label">Booking Confirmation :</label>
                                                         <div class="input-group">
-                                                          <div class="pr-2" style="float: left">
-                                                              {{-- <label for="simage"><i class="bi bi-folder-plus"></i></label> --}}
-                                                              <input value=""
-                                                                  class="@error('simple_pdf') is-invalid @enderror inputstyle" type="file"
-                                                                  name="simple_pdf" id="simage"
-                                                                 >  
-                                                          </div>
-                                                          @error('simple_pdf')
+                                                            <div class="pr-2" style="float: left">
+                                                                {{-- <label for="simage"><i class="bi bi-folder-plus"></i></label> --}}
+                                                                <input value=""
+                                                                    class="@error('simple_pdfForMobileAndPaper') is-invalid @enderror inputstyle" type="file"
+                                                                    name="simple_pdfForMobileAndPaper" id="simage"
+                                                                   >  
+                                                            </div>
+                                                          @error('simple_pdfForMobileAndPaper')
                                                               <span class="invalid-feedback" role="alert">
                                                                   <strong>{{ $message }}</strong>
                                                               </span>
                                                           @enderror
                                                           <div class="text-center text-dark" id="displayDocs">
                                                           </div>
-                                                          
                                                       </div>
                                                 </div>
                                             </div>
@@ -966,18 +965,6 @@
                                             </script>
                                         </div>
                                     </div>
-                                    {{-- <div class="row mt-3">
-                                        <div class="col-12">
-                                            <h5 class="mb-4"><strong> <span  style="color: #61c3e3">UPLOAD</span> PDF FILE FOR <span style="color: #61c3e3">CONFIRMATION</span> BOOKING</strong></h5>
-                                            <div class="form-group row m-b-10">
-                                                <label class="col-lg-3 text-dark text-lg-right col-form-label">PDF FILE<span
-                                                        class="text-danger">*</span></label>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <input type="file" name="simple_pdf" placeholder=""  class="form-control-sm" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                             <div class="col-lg-12">

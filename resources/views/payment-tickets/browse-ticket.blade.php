@@ -423,6 +423,29 @@
 
     <section id="explore_area" class="section_padding">
         <div class="container">
+            <div class="row mb-2">
+                <div class="col-lg-12">
+                    <span style="font-size: 18px"><b>Categories : </b>  
+                        @foreach ($colors as $key => $dbValues) 
+                            @if ($key === 0)
+                                <span style='border-left:20px solid red;'></span> &nbsp; {{$dbValues->type_cat}} 
+                            @endif
+                              @if ($key === 1)
+                                <span style='border-left:20px solid yellow;'></span> &nbsp; {{$dbValues->type_cat}} 
+                            @endif
+                              @if ($key === 2)
+                                <span style='border-left:20px solid blue;'></span> &nbsp; {{$dbValues->type_cat}} 
+                            @endif
+                              @if ($key === 3)
+                                <span style='border-left:20px solid green;'></span> &nbsp; {{$dbValues->type_cat}} 
+                            @endif
+                              @if ($key === 4)
+                                <span style='border-left:20px solid grey;'></span> &nbsp; {{$dbValues->type_cat}} 
+                            @endif
+                        @endforeach
+                    </span> 
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="left_side_search_area">
@@ -452,31 +475,9 @@
                             </div>
                     </div>
                 </div>
-                
+                    
                     <div class="col-lg-8">
-                        <div class="row mb-2">
-                            <div class="col-lg-12">
-                                <span style="font-size: 18px"><b>Categories : </b>  
-                                    @foreach ($colors as $key => $dbValues) 
-                                        @if ($key === 0)
-                                            <span style='border-left:20px solid red;'></span> &nbsp; {{$dbValues->type_cat}} 
-                                        @endif
-                                          @if ($key === 1)
-                                            <span style='border-left:20px solid yellow;'></span> &nbsp; {{$dbValues->type_cat}} 
-                                        @endif
-                                          @if ($key === 2)
-                                            <span style='border-left:20px solid blue;'></span> &nbsp; {{$dbValues->type_cat}} 
-                                        @endif
-                                          @if ($key === 3)
-                                            <span style='border-left:20px solid green;'></span> &nbsp; {{$dbValues->type_cat}} 
-                                        @endif
-                                          @if ($key === 4)
-                                            <span style='border-left:20px solid grey;'></span> &nbsp; {{$dbValues->type_cat}} 
-                                        @endif
-                                    @endforeach
-                                </span> 
-                            </div>
-                        </div>
+                        
                         <div class="row">
                                     <div class="flight_search_result_wrapper">
                                         <div class="flight_search_item_wrappper">
@@ -485,114 +486,117 @@
                                                         <h4>No Tickets Available for this event</h4>
                                                     </div>
                                                 @endif
-                                               <?php
-                                                    $catClass0 = ["<span style='border-left:20px solid red;'></span>"];
-                                                    $catClass1 = ["<span style='border-left:20px solid yellow;'></span>"];  
-                                                    $catClass2 = ["<span style='border-left:20px solid blue;'></span>"]; 
-                                                    $catClass3 = ["<span style='border-left:20px solid green;'></span>"]; 
-                                                    $catClass4 = ["<span style='border-left:20px solid grey;'></span>"]; 
-                                               ?>
-                                                {{-- <?php 
-                                                    foreach ($colors as $key => $ticket) {
-                                                        if ($key === 0){
-                                                            echo "<span style='border-left:10px solid red;'></span>";
-                                                        }
-                                                        if ($key === 1){
-                                                            echo "<span style='border-left:10px solid yellow;'></span>";
-                                                        }
-                                                        if ($key === 2){
-                                                            echo "<span style='border-left:10px solid blue;'></span>";
-                                                        }
-                                                        if ($key === 3){
-                                                            echo "<span style='border-left:10px solid green;'></span>";
-                                                        }
-                                                        if ($key === 4){
-                                                            echo "<span style='border-left:10px solid grey;'></span>";
-                                                        }
-                                                    }
-                                                ?>  --}}
+                                              
                                                 @foreach ($tickets as $ticket)
-                                                <?php 
-                                                    $key0 = array_rand($catClass0); 
-                                                    $key1 = array_rand($catClass1); 
-                                                    $key2 = array_rand($catClass2); 
-                                                    $key3 = array_rand($catClass3); 
-                                                    $key4 = array_rand($catClass4); 
-                                                    // print_r( $key = array_rand($catClass0));  
-                                                ?>
-                                                   
-                                            <div class="flight_search_items border text-dark"  style="border-radius: 12px; margin-bottom:20px ;">
-                                                {{-- <?php var_dump($key1 == 0);?> --}}
-                                                <div class="multi_city_flight_lists" style="
-                                                <?php if($key0 === 0){ ?>
-                                                    border-left:10px solid red;
-                                                 <?php }?> 
-                                                 
-                                                 "
-                                               
-                                                >
-                                                    <div class="flight_multis_area_wrapper">
-                                                        <div class="flight_search_left">
-                                                            <div class="ticket" >
-                                                                <img src="" width="" alt="">
-                                                                {{-- <img src="{{asset('F_Assets/assets/img/common/biman_bangla.png')}}" alt="img"> --}}
-                                                            </div>
-                                                            <div class="flight_search_destination">
-                                                                <p>Event</p>
-                                                                <p class="text-dark"><b>{{$ticket->event_name}}</b></p>
-                                                                <p>Tickets</p>
-                                                                <h6>No of Tickets {{$ticket->quantity}}</h6>
-                                                                <p class="m-0">Restriction</p>
-                                                                <h6 class="fw-700 ">{{implode(',', json_decode($ticket->ticket_restrictions, true))}}</h6>
-                                                                {{-- <h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6> --}}
-                                                               
+                                                
+                                                    {{-- <?php 
+                                                        $catClass0 = ["<span style='border-left:20px solid red;'></span>"];
+                                                        $catClass1 = ["<span style='border-left:20px solid yellow;'></span>"];  
+                                                        $catClass2 = ["<span style='border-left:20px solid blue;'></span>"]; 
+                                                        $catClass3 = ["<span style='border-left:20px solid green;'></span>"]; 
+                                                        $catClass4 = ["<span style='border-left:20px solid grey;'></span>"]; 
+                                                        
+                                                        $key0 = array_rand($catClass0); 
+                                                        $key1 = array_rand($catClass1); 
+                                                        $key2 = array_rand($catClass2); 
+                                                        $key3 = array_rand($catClass3); 
+                                                    ?> --}}
+                                                    <div class="flight_search_items border text-dark"  style="border-radius: 12px; margin-bottom:20px ;">
+                                                        <div class="multi_city_flight_lists" 
+                                                        style="
+                                                            <?php 
+                                                                  foreach ($colors as $key => $dbValues) {
+                                                                    if ($key === 0){ 
+                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                              border-left:7px solid red;
+                                                                        <?php   }
+                                                                    }
+                                                                    if ($key === 1){ 
+                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                              border-left:7px solid yellow;
+                                                                        <?php   }
+                                                                    }
+                                                                    if ($key === 2){ 
+                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                              border-left:7px solid blue;
+                                                                        <?php   }
+                                                                    }
+                                                                    if ($key === 3){ 
+                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                              border-left:7px solid green;
+                                                                        <?php   }
+                                                                    }
+                                                                    if ($key === 4){ 
+                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                              border-left:7px solid grey;
+                                                                        <?php   }
+                                                                    }
+                                                                  }
+                                                                
+                                                            ?>
+                                                        ">
+                                                            <div class="flight_multis_area_wrapper" >
+                                                                <div class="flight_search_left" >
+                                                                    <div class="ticket" >
+                                                                        <img src="" width="" alt="">
+                                                                        {{-- <img src="{{asset('F_Assets/assets/img/common/biman_bangla.png')}}" alt="img"> --}}
+                                                                    </div>
+                                                                    <div class="flight_search_destination" >
+                                                                        <p>Event</p>
+                                                                        <p class="text-dark"><b>{{$ticket->event_name}}</b></p>
+                                                                        <p>Tickets</p>
+                                                                        <h6>No of Tickets {{$ticket->quantity}}</h6>
+                                                                        <p class="m-0">Restriction</p>
+                                                                        {{-- <h6 class="fw-700 ">{{implode(',', json_decode($ticket->ticket_restrictions, true))}}</h6> --}}
+                                                                        <h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>
+                                                                    
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flight_search_middel">
+                                                                    <div class="flight_right_arrow">
+                                                                        <h6>
+                                                                            Category:
+                                                                            {{$ticket->type_cat}}
+                                                                        </h6>
+                                                                        <h6>Section: {{$ticket->type_sec}}</h6>
+                                                                        <h6>Row: {{$ticket->type_row}}</h6>
+                                                                    </div>
+                                                                    <div class="flight_search_destination">
+                                                                        <p>Ticket : </p>
+                                                                        <h6>{{$ticket->ticket_type}}</h6>
+                                                                        <p>Seating Area</p>
+                                                                        <h6 class="fw-700 ">{{$ticket->seated_area}}</h6>
+                                                                        @if($ticket->cat_id == 1)
+                                                                        <h6 class="fw-700 ">
+                                                                            <p class="m-0">Fans Section</p>
+                                                                            {{$ticket->fan_section}}
+                                                                        </h6>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="flight_search_middel">
-                                                            <div class="flight_right_arrow">
-                                                                <h6>
-                                                                    Category:
-                                                                    {{$ticket->type_cat}}
-                                                                </h6>
-                                                                <h6>Section: {{$ticket->type_sec}}</h6>
-                                                                <h6>Row: {{$ticket->type_row}}</h6>
-                                                            </div>
-                                                            <div class="flight_search_destination">
-                                                                <p>Ticket : </p>
-                                                                <h6>{{$ticket->ticket_type}}</h6>
-                                                                <p>Seating Area</p>
-                                                                <h6 class="fw-700 ">{{$ticket->seated_area}}</h6>
-                                                                @if($ticket->cat_id == 1)
-                                                                <h6 class="fw-700 ">
-                                                                    <p class="m-0">Fans Section</p>
-                                                                    {{$ticket->fan_section}}
-                                                                </h6>
+                                                        <div class="flight_search_right">
+                                                            <h2>${{$ticket->price}}<sup style="font-size: 10px">Per Ticket</sup></h2>
+                                                            {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.detail',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}">View Ticket Detail</a> --}}
+                                                            <a class="@if($ticket->quantity != 0) btn btn_theme btn_sm mb-2 @else btn btn-danger w-100  @endif" href="@if($ticket->quantity > 0)
+                                                                {{ route('buyer.ticket.checkout',['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif " >
+                                                                @if($ticket->quantity == 0) SOLD @else Select Ticket
+                                                                    @endif 
+                                                            </a>
+                                                        
+                                                            <p> @if ($ticket->ticket_type === "E-Ticket")
+                                                                @if ($ticket->quantity != 0)
+                                                                <a href="#" class="text-danger" >Instant Download</a>
+                                                                    {{-- <a href="{{ route('Pdftemplate',['eventlisting_id' => $events->id,'ticketid' => $ticket->id] ) }}" class="text-danger" >Ticket PDF</a> --}}
                                                                 @endif
-                                                            </div>
+                                                            @endif</p>
+                                                            {{-- <h6 data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                                                                aria-expanded="false" aria-controls="collapseExample">Show more <i
+                                                                    class="fas fa-chevron-down"></i></h6> --}}
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="flight_search_right">
-                                                    <h2>${{$ticket->price}}<sup style="font-size: 10px">Per Ticket</sup></h2>
-                                                    {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.detail',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}">View Ticket Detail</a> --}}
-                                                    <a class="@if($ticket->quantity != 0) btn btn_theme btn_sm mb-2 @else btn btn-danger w-100  @endif" href="@if($ticket->quantity > 0)
-                                                        {{ route('buyer.ticket.checkout',['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif " >
-                                                        @if($ticket->quantity == 0) SOLD @else Select Ticket
-                                                            @endif 
-                                                    </a>
-                                                   
-                                                    <p> @if ($ticket->ticket_type === "E-Ticket")
-                                                        @if ($ticket->quantity != 0)
-                                                        <a href="#" class="text-danger" >Instant Download</a>
-                                                            {{-- <a href="{{ route('Pdftemplate',['eventlisting_id' => $events->id,'ticketid' => $ticket->id] ) }}" class="text-danger" >Ticket PDF</a> --}}
-                                                        @endif
-                                                    @endif</p>
-                                                    {{-- <h6 data-bs-toggle="collapse" data-bs-target="#collapseExample"
-                                                        aria-expanded="false" aria-controls="collapseExample">Show more <i
-                                                            class="fas fa-chevron-down"></i></h6> --}}
-                                                </div>
-                                            </div>
-                                            @endforeach
+                                                @endforeach
                                         </div>
                                     </div>
                         </div>

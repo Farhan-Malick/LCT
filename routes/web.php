@@ -184,6 +184,8 @@ Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
 Route::get('auth/facebook/callback', [SocialController::class, 'loginWithFacebook']);
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
 //purchases dashboard
 
 Route::get('dashboard/my_orders', [PurchasesController::class, 'dashboard_purchase_show'])->name('dashboard.purchases.show');
@@ -202,6 +204,5 @@ Route::get('/E-Ticket',[MailController::class,'index'])->name('E-Ticket');
 
 Route::post('/upload-pdfticket',[PdfUploadController::class,'store'])->name('upload_pdf_ticket');
 
-Route::get('/autocomplete-search', [WebController::class, 'autocompleteSearch']);
 
 

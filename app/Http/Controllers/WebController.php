@@ -14,12 +14,7 @@ class WebController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function autocompleteSearch(Request $request)
-    {
-          $query = $request->get('query');
-          $filterResult = EventListing::where('event_name','LIKE','%'.$query.'%')->get();
-          return response()->json($filterResult);
-    }
+    
     public function index(Request $request)
     {
         

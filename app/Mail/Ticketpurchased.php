@@ -36,7 +36,7 @@ class Ticketpurchased extends Mailable
             subject: 'Congratulations!!! You have successfully purchased the tickets for the Event '.$this->data->event_name,
         );
     }
-
+    
     /**
      * Get the message content definition.
      *

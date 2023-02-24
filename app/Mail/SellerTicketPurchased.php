@@ -13,15 +13,17 @@ class SellerTicketPurchased extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
+    public $purchase;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data, $purchase)
     {
         $this->data = $data;
+        $this->purchase = $purchase;
     }
 
     /**
@@ -32,7 +34,7 @@ class SellerTicketPurchased extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Ticket Purchased',
+            subject: 'Congratulations!!! Your '.$this->data->ticket_type.' is sold for the Event '.$this->data->event_name,
         );
     }
 

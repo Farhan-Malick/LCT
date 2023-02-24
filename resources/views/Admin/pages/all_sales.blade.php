@@ -111,13 +111,12 @@
 									
 									<th scope="col">#</th>
 									<th scope="col">Purchaser</th>
-									{{-- <th scope="col">Event name</th> --}}
 									<th scope="col">Ticket name</th>
 									<th scope="col">Ticket Type</th>
 									<th scope="col">Total price</th>
 									<th scope="col">Quantity</th>
+									<th scope="col">Purchased Date</th>
 									<th scope="col">Status</th>
-									{{-- <th scope="col">Approval</th> --}}
 									<th scope="col">Action</th>
 								</tr>
 							</thead>
@@ -126,11 +125,11 @@
 								<tr>
 									<td>{{$purchase->id}}</td>
 									<td>{{$purchase->user->first_name}}</td>
-									{{-- <td>{{$purchase->eventTitle}}</td> --}}
 									<td>{{$purchase->event_name}}</td>
 										<td>{{$purchase->ticket_type}}</td>
 									<td>{{$purchase->price}}</td>
 									<td>{{$purchase->quantity}}</td>
+									<td>{{ date('Y-M-d') }}</td>
 									<td><button class="btn btn-success" disabled="disabled">SOLD</button></td>
 								{{-- s --}}
 									<td>

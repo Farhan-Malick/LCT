@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/style.css') }}" />
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <title>Sell Tickets - LAST CHANCE TICKET</title>
     <style>
@@ -210,45 +211,48 @@
                                                     <div class="col-12" id="error-ticket-number" style="display:none;color: red;margin-bottom: 10px;font-size: 14px;">
                                                         <span>Please select number of tickets.</span>
                                                     </div>
+                                                    <style>
+                                                       
+                                                    </style>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
-                                                        <div class="card mb-3">
-                                                            <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="1">
-                                                                <h5>1</h5>
+                                                        <div class=" card mb-3">
+                                                            <div class="card-body  btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="1">
+                                                                <h5 class="text-light">1</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div class="card-body  ticket-num-card cursor-pointer shadow-sm" data-tickets-val="2">
-                                                                <h5>2</h5>
+                                                            <div class="card-body  btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="2">
+                                                                <h5 class="text-light">2</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="3">
-                                                                <h5>3</h5>
+                                                            <div class="card-body btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="3">
+                                                                <h5 class="text-light">3</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="4">
-                                                                    <h5>4</h5>
+                                                            <div class="card-body btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="4">
+                                                                    <h5 class="text-light">4</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="5">
-                                                                <h5>5</h5>
+                                                            <div class="card-body btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="5">
+                                                                <h5 class="text-light">5</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div class="card-body ticket-num-card cursor-pointer shadow-sm" data-tickets-val="6">
-                                                                <h5>6+</h5>
+                                                            <div class="card-body btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="6">
+                                                                <h5 class="text-light">6+</h5>
                                                             </div>
                                                         </div>
                                                     </div>

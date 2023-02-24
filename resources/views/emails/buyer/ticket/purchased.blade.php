@@ -11,7 +11,11 @@ Section : {{ $data->type_sec }}, Category : {{ $data->type_cat }}, Row : {{ $dat
 Event: {{ $data->event_name }} <br>
 Venue: {{ $data->venue_name }} <br>
 Date: {{ $data->event_date }} <br><br>
-<b>You will shortly receive an email from us about delivery of the tickets.</b><br><br>
+    @if($data->ticket_type === "Paper-Ticket")
+        <b>The Buyer's Address to ship the tickets will be communicated to you shortly.</b><br><br>
+        @elseif($data->ticket_type === "Mobile-Ticket")
+        <b>The Mobile Ticket attendees information will be communicated to you shortly.</b><br><br>
+    @endif
 <b>Price Information: </b><br>
 Number of Tickets: {{$purchase->quantity}}<br>
 Price per Ticket: USD {{$data->price}} <br>

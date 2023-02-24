@@ -69,13 +69,15 @@ Default CSS
 html,
 body {
     height: 100%;
+    font-family: 'Nunito', sans-serif;
+    background-color: #f6f8f9;
 }
 
 body {
     padding: 0;
     margin: 0;
     font-size: 13px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 .logo img {
     width: 50%;
@@ -2995,10 +2997,10 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 
 .form-control {
-    height: 55px;
+    height: 45px;
     border: 2px dashed #dddddd75;
     padding: 10px 22px;
-    font-size: 16px;
+    font-size: 13px;
 }
 
 .bg_input {

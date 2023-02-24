@@ -55,7 +55,7 @@ class PurchasesController extends Controller
         // dd($purchase);
         $purchase->save();
         MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase);
-        MailController::sellerticketpurchased($seller->email, $ticket);
+        MailController::sellerticketpurchased($seller->email, $ticket, $purchase);
         return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
     }
     public function downloadPdf(){
@@ -248,7 +248,6 @@ class PurchasesController extends Controller
     }
 
     public function Pdf_template(TicketListing $ticket, Event $event,$id ){
-
         $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $id)->first();
         $eventListings = EventListing::where('status', 1)->where('event_id', $id)->select('id', 'event_name','venue_name')->first();
         // dd($events);

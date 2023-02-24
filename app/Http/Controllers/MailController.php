@@ -49,10 +49,10 @@ class MailController extends Controller
     }
 
 
-    public static function ticketpurchased($email, $data) {
+    public static function ticketpurchased($email, $data, $purchase) {
 
         try{
-            $mail = Mail::to($email)->send(new Ticketpurchased($data));
+            $mail = Mail::to($email)->send(new Ticketpurchased($data, $purchase));
             return $mail;
         }catch(Exception $th){
             dd($th);

@@ -30,7 +30,7 @@ class PurchasesController extends Controller
         if(!auth()->check()){
             return redirect('/login');
         }
-        $ticket = TicketListing::select('ticket_listings.*','users.last_name', 'event_listings.event_name', 
+        $ticket = TicketListing::select('ticket_listings.*','users.last_name', 'event_listings.event_name',
         'event_listings.event_date', 'event_listings.start_time',
         'event_listings.venue_name','categories.id as cat_id',
         // 'purchases.quantity as ticketQuantity',
@@ -54,14 +54,14 @@ class PurchasesController extends Controller
         $purchase->country_id = Request::get('country_id');
         // dd($purchase);
         $purchase->save();
-        MailController::ticketpurchased(auth()->user()->email, $ticket);
+        MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase);
         MailController::sellerticketpurchased($seller->email, $ticket);
         return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
     }
     public function downloadPdf(){
         $pdf = Pdf::loadView('download.PDF');
         return $pdf->download('ticket.pdf');
-    } 
+    }
 
     public function buyer_ticket_show(Request $request, $id){
         // dd($request->qty);
@@ -95,12 +95,12 @@ class PurchasesController extends Controller
         ->orderBy('type_cat','asc')
         ->where('ticket_listings.eventlisting_id',$id)->get();
         // dd($colors);
-        
+
         $restrictionsFromTicketListing = TicketListing::select('ticket_listings.ticket_restrictions')
         ->groupBy('ticket_restrictions')
         ->where('ticket_listings.eventlisting_id',$id)
         ->get();
-        
+
         $quantityFromTicketListing = TicketListing::select('ticket_listings.quantity')
         ->groupBy('quantity')
         ->where('approve','1')
@@ -138,7 +138,7 @@ class PurchasesController extends Controller
             ->orderBy('created_at','desc')
             ->where('approve','1')
             ->where('ticket_listings.eventlisting_id',$id);
-          
+
         }
         elseif(Request::get('sort') == 'best_value'){
             $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id')
@@ -176,7 +176,7 @@ class PurchasesController extends Controller
         }
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
-        
+
         $tickets = $tickets->get();
         // dd($tickets);
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
@@ -261,17 +261,17 @@ class PurchasesController extends Controller
             // ->where('ticket_listings.id',$id)
             ->where('events.id',$id)
             ->first();
-            
+
         $pdf = Pdf::loadView('downloadPDF',[
             'tickets'=>$tickets,
             'events'=>$events,
             'eventListings'=>$eventListings
         ]);
         return $pdf->download('ticket.pdf');
-        
+
         return view('downloadPDF',compact('tickets','events','sellers'));
     }
 
 
-   
+
 }

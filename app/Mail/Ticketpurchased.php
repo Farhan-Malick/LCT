@@ -13,14 +13,16 @@ class Ticketpurchased extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
+    public $purchase;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data, $purchase)
     {
         $this->data = $data;
+        $this->purchase = $purchase;
     }
 
     /**

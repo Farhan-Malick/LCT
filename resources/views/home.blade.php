@@ -74,10 +74,10 @@
           <div class="banner-inner-wrapper header-text">
             <div class="main-caption">
               <div class="container">
-                <h1 class="mb-5" style="font-size: 20px; color: #58e6f3; text-shadow: 2px 2px #000000;"><b>Here is the last chance to be the member of world largest marketplace for tickets to live events.
+                <h1 class="mb-5" style="font-size: 22px; color: #58e6f3; text-shadow: 2px 2px #000000;"><b>Here is the last chance to be the member of world largest marketplace for tickets to live events.
                   Prices are set by sellers and may be below or above face value.</b></h1>
                   <marquee behavior="" direction="">
-                    <h2 class="" style="color: #fff; text-shadow: 2px 2px #6e14dc;"><b>Hurray! You are in the right place  <span class="text-warning" style=" text-shadow: 2px 2px #33f122;">*  100% customer satisfaction  *</span>  We value every customers <span  style=" text-shadow: 2px 2px #9ffa27;" class="text-warning">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
+                    <h2 class="" style="color: #ebd6f9; text-shadow: 2px 2px #040009;"><b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customers <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
                   </marquee>
                   <div class="container ">
                     <form method="get" id="qty-form">

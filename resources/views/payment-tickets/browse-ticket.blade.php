@@ -547,8 +547,8 @@
                                                                         <p>Tickets</p>
                                                                         <h6>No of Tickets {{$ticket->quantity}}</h6>
                                                                         <p class="m-0">Restriction</p>
-                                                                        {{-- <h6 class="fw-700 ">{{implode(',', json_decode($ticket->ticket_restrictions, true))}}</h6> --}}
-                                                                        <h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>
+                                                                        <h6 class="fw-700 ">{{implode(',', json_decode($ticket->ticket_restrictions, true))}}</h6> 
+                                                                        <!--<h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>-->
                                                                     
                                                                     </div>
                                                                 </div>

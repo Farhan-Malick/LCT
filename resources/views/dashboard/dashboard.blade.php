@@ -119,6 +119,7 @@
                                                                <th scope="col">seat from</th>
                                                                <th scope="col">seat to</th>
                                                                <th scope="col">ticket type</th>
+                                                               <th scope="col">Created At</th>
                                                                <th scope="col">ticket restrictions</th>
                                                                <th scope="col">Action</th>
                                                                </tr>
@@ -138,6 +139,7 @@
                                                                            <td>{{$ticket->seat_from}}</td>
                                                                            <td>{{$ticket->seat_to}}</td>
                                                                               <td>{{$ticket->ticket_type}}</td>
+                                                                              <td>{{$ticket->created_at}}</td>
                                                                            <td>  {{implode(',', json_decode($ticket->ticket_restrictions, true))}}</td>
                                                                            {{-- <td>{{$ticket->status}}</td> --}}
                                                                            <td>
@@ -311,6 +313,7 @@
                                                    {{-- <th >Ticket Name</th> --}}
                                                    {{-- <th >Ticket Type</th> --}}
                                                    <th >Quantity</th>
+                                                   <th >Sales Date</th>
                                                    <th >Price</th>
                                                  </tr>
                                                </thead>
@@ -323,6 +326,7 @@
                                                      <td>{{$sale->event_name}}</td>
                                                      {{-- <td>{{$sale->ticket_type}}</td> --}}
                                                      <td>{{$sale->quantity}}</td>
+                                                     <td>{{$sale->created_at}}</td>
                                                      <td>{{$sale->price}}</td>
                                                      
                                                    </tr>
@@ -403,6 +407,7 @@
                                                    <th >Ticket Name</th>
                                                    <th >Quantity</th>
                                                    <th>Start Date</th>
+                                                   <th>Purchased Date</th>
                                                    <th >Price</th>
                                                  </tr>
                                                </thead>
@@ -414,6 +419,7 @@
                                                    <td>{{$purchase->event_name}}</td>
                                                    <td>{{$purchase->quantity}}</td>
                                                    <td>{{$data->start_date}}</td>
+                                                   <td>{{$data->created_at}}</td>
                                                    <td>{{$purchase->price}}</td>
                                                    
                                                  </tr>

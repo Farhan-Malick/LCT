@@ -466,11 +466,11 @@
                                 <h4 class="fw-700 m-0">About Your Tickets</h4>
                             </div>
                             <div class="card-body">
-                                <p> <i class="fa fa-ban me-2 text-danger"></i>RESTRICTIONS :{{$tickets->ticket_restrictions}}</p>
-                                <p> <i class="fa fa-handshake  me-2 text-success"></i> BENEFITS : {{$tickets->ticket_benefits}}</p>
+                                <!--<p> <i class="fa fa-ban me-2 text-danger"></i>RESTRICTIONS :{{$tickets->ticket_restrictions}}</p>-->
+                                <!--<p> <i class="fa fa-handshake  me-2 text-success"></i> BENEFITS : {{$tickets->ticket_benefits}}</p>-->
                                
-                                {{-- <p> <i class="fa fa-ban me-2 text-danger"></i>RESTRICTIONS : {{implode(',', json_decode($tickets->ticket_restrictions, true))}}</p>
-                                <p> <i class="fa fa-handshake  me-2 text-success"></i> BENEFITS : {{implode(',' , json_decode($tickets->ticket_benefits, true))}}</p> --}}
+                                 <p> <i class="fa fa-ban me-2 text-danger"></i>RESTRICTIONS : {{implode(',', json_decode($tickets->ticket_restrictions, true))}}</p>
+                                <p> <i class="fa fa-handshake  me-2 text-success"></i> BENEFITS : {{implode(',' , json_decode($tickets->ticket_benefits, true))}}</p> 
                                 <p> <i class="bi bi-hand-thumbs-up-fill me-2 primary-text"></i>FANS SECTION : {{$tickets->fan_section}}</p>
                             </div>
                         </div>

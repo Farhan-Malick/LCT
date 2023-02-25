@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\EventListing;
+use App\Models\Event;
+
 
 class ContactController extends Controller
 {

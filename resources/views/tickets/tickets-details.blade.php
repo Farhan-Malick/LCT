@@ -388,7 +388,8 @@
                                                                 $myName = $EventListing->event_name;
                                                                 $arr = explode(' ',trim($myName));
                                                                 echo $arr[2];
-                                                            @endphp">
+                                                            @endphp
+                                                            ">
                                                                     @php
                                                                         $myName = $EventListing->event_name;
                                                                         $arr = explode(' ',trim($myName));
@@ -424,14 +425,14 @@
 
                                                 <div class="form-group">
                                                     <select class="form-select" name = "currency">
-                                                        <option selected disabled>Please Select Currency</option>
+                                                        <!--<option selected disabled>Please Select Currency</option>-->
                                                         @foreach($currencies as $currency)
                                                         <option value="{{$currency->id}}">{{$currency->currency_type}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group mt-3">
-                                                    <label for="" class="mb-3">Amount per ticket</label>
+                                                    <label for="" class="mb-3">Price per ticket</label>
                                                     <div class="input-group mb-3">
                                                         {{-- <span class="input-group-text">$</span> --}}
                                                         <input  type="text" class="form-control inputstyle"
@@ -463,7 +464,7 @@
                                                 </select>
                                             </div>
                                                 <div class="form-group mt-3">
-                                                    <label for="" class="mb-4">Amount per ticket</label>
+                                                    <label for="" class="mb-4">Price per ticket</label>
                                         <div class="input-group mb-4">
                                             <span class="input-group-text">$</span>
                                             <input type="text" id="price-field" name="price" style="height:40px" class="form-control "
@@ -1017,7 +1018,6 @@
   <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
-
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <script>

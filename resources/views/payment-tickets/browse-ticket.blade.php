@@ -442,6 +442,21 @@
                               @if ($key === 4)
                                 <span style='border-left:20px solid grey;'></span> &nbsp; {{$dbValues->type_cat}} 
                             @endif
+                            @if ($key === 5)
+                            <span style='border-left:20px solid chartreuse;'></span> &nbsp; {{$dbValues->type_cat}} 
+                        @endif
+                          @if ($key === 6)
+                            <span style='border-left:20px solid tomato;'></span> &nbsp; {{$dbValues->type_cat}} 
+                        @endif
+                          @if ($key === 7)
+                            <span style='border-left:20px solid salmon;'></span> &nbsp; {{$dbValues->type_cat}} 
+                        @endif
+                          @if ($key === 8)
+                            <span style='border-left:20px solid crimson;'></span> &nbsp; {{$dbValues->type_cat}} 
+                        @endif
+                          @if ($key === 9)
+                            <span style='border-left:20px solid darkgoldenrod;'></span> &nbsp; {{$dbValues->type_cat}} 
+                        @endif
                         @endforeach
                     </span> 
                 </div>
@@ -529,6 +544,31 @@
                                                                     if ($key === 4){ 
                                                                       if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                               border-left:7px solid grey;
+                                                                        <?php   }
+                                                                    }
+                                                                    if ($key === 5){ 
+                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                              border-left:7px solid chartreuse;
+                                                                        <?php   }
+                                                                    }
+                                                                    if ($key === 6){ 
+                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                              border-left:7px solid tomato;
+                                                                        <?php   }
+                                                                    }
+                                                                    if ($key === 7){ 
+                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                              border-left:7px solid salmon;
+                                                                        <?php   }
+                                                                    }
+                                                                    if ($key === 8){ 
+                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                              border-left:7px solid crimson;
+                                                                        <?php   }
+                                                                    }
+                                                                    if ($key === 9){ 
+                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                              border-left:7px solid darkgoldenrod;
                                                                         <?php   }
                                                                     }
                                                                   }

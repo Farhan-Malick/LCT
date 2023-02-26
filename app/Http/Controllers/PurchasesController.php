@@ -16,6 +16,7 @@ use Auth;
 use App\Http\Controllers\MailController;
 // use Illuminate\Http\Request;
 use Request;
+use Carbon\Carbon;
 
 class PurchasesController extends Controller
 {
@@ -42,6 +43,23 @@ class PurchasesController extends Controller
         ->join( 'categories','categories.id', '=','events.category_id')
         ->where('ticket_listings.id',$id)
         ->first();
+        $sub_dateForPaper = '';$sub_dateForMobile = '';$sub_dateForE = '';
+        $ticket->msg=''; $ticket->msg2=''; $ticket->msg3='';
+        if($ticket->ticket_type === "Paper-Ticket") {
+            $sub_dateForPaper = Carbon::parse($ticket->event_date)->subDays(10)->toDateString();
+            $ticket->msg = 'Must Ship The Paper Ticket by Date: ' .$sub_dateForPaper;
+            $ticket->msg2 = '(10days before the event is the deadline to ship the Paper Tickets).';
+            $ticket->msg3 = 'The Buyers Address to ship the tickets will be communicated to you shortly.';
+        }elseif($ticket->ticket_type === "Mobile-Ticket"){
+            $sub_dateForMobile = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
+            $ticket->msg = 'Must Transfer The Mobile Ticket by Date: ' .$sub_dateForMobile;
+            $ticket->msg2 = '(5days before the event is the deadline to transfer the mobile).';
+            $ticket->msg3 = 'The Mobile Ticket attendees information will be communicated to you shortly.';
+        }elseif($ticket->ticket_type === "E-Ticket"){
+            $sub_dateForE = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
+            $ticket->msg = 'Must Upload The E-Ticket by Date: ' .$sub_dateForE;
+            $ticket->msg2 = ' (5days before the event is the deadline to Upload the E-Tickets if the tickets are not pre uploaded).';
+        }
         // dd($ticket);
         $seller = User::find($ticket->user_id);
         $purchase = new Purchases();

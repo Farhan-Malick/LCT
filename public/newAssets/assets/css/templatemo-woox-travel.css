@@ -49,10 +49,11 @@ figure, header, nav, section, article, aside, footer, figcaption {
   border: 0;
   outline: 0;
 }
-.btn_theme {
+.btn_theme2 {
+  text-align: center;
   color: var(--white-color);
   background-color: var(--main-color);
-  transition: var(--transition);
+  /* transition: var(--transition); */
   box-shadow: none;
   overflow: hidden;
   white-space: nowrap;
@@ -61,7 +62,19 @@ figure, header, nav, section, article, aside, footer, figcaption {
   border: none
 }
 
-.btn_theme:before {
+.btn_theme2:active {
+  color:#2B2540;
+  background-color: var(--black-color);
+  transition: var(--transition);
+  box-shadow: none;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  z-index: 0;
+  border: none
+} 
+
+.btn_theme2:before {
   content: '';
   position: absolute;
   top: 0;
@@ -81,7 +94,7 @@ figure, header, nav, section, article, aside, footer, figcaption {
 
 }
 
-.btn_theme:hover:before {
+.btn_theme2:hover:before {
   -webkit-transition: -webkit-transform 1s;
   transition: -webkit-transform 1s;
   transition: transform 1s;
@@ -93,7 +106,7 @@ figure, header, nav, section, article, aside, footer, figcaption {
   border: none;
 }
 
-.btn_theme_white {
+/* .btn_theme2_white {
   color: var(--black-color);
   background-color: var(--white-color);
   transition: var(--transition);
@@ -103,9 +116,9 @@ figure, header, nav, section, article, aside, footer, figcaption {
   position: relative;
   z-index: 0;
   border: 1px solid var(--white-color);
-}
-
-.btn_theme_white:before {
+} */
+/* 
+.btn_theme2_white:before {
   content: '';
   position: absolute;
   top: 0;
@@ -123,9 +136,9 @@ figure, header, nav, section, article, aside, footer, figcaption {
   transform: translateX(-50%) translateY(-5%) scale(.4);
   transition: var(--transition);
 
-}
+} */
 
-.btn_theme_white:hover:before {
+/* .btn_theme2_white:hover:before {
   -webkit-transition: -webkit-transform 1s;
   transition: -webkit-transform 1s;
   transition: transform 1s;
@@ -135,9 +148,9 @@ figure, header, nav, section, article, aside, footer, figcaption {
   -webkit-transform-origin: bottom center;
   transform-origin: bottom center;
   border: none;
-}
-
-.btn_theme_transparent {
+} */
+/* 
+.btn_theme2_transparent {
   color: var(--white-color);
   background-color: transparent;
   transition: var(--transition);
@@ -147,10 +160,10 @@ figure, header, nav, section, article, aside, footer, figcaption {
   position: relative;
   z-index: 0;
   border: 1px solid var(--white-color);
-}
+} */
 
 
-.btn_theme_transparent:before {
+/* .btn_theme_transparent:before {
   content: '';
   position: absolute;
   top: 0;
@@ -168,8 +181,8 @@ figure, header, nav, section, article, aside, footer, figcaption {
   transform: translateX(-50%) translateY(-5%) scale(.4);
   transition: var(--transition);
 
-}
-
+} */
+/* 
 .btn_theme_transparent:hover:before {
   -webkit-transition: -webkit-transform 1s;
   transition: -webkit-transform 1s;
@@ -180,7 +193,7 @@ figure, header, nav, section, article, aside, footer, figcaption {
   -webkit-transform-origin: bottom center;
   transform-origin: bottom center;
   border: none;
-}
+} */
 
 .flight_categories_search .nav-tabs {
   border-bottom: none;

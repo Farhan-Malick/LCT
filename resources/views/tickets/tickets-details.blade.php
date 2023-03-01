@@ -17,12 +17,12 @@
     <!-- Additional CSS Files -->
     {{-- <link rel="stylesheet" href="{{ asset('assets/styles/index.css') }}" /> --}}
     <link rel="stylesheet" href="{{asset('assets/styles/common.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/styles/sellticket.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('assets/styles/sellticket.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
-    {{-- <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/style.css') }}" /> --}}
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/style.css') }}" />
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <title>Sell Tickets - LAST CHANCE TICKET</title>
     <style>
@@ -217,42 +217,42 @@
                                                     </style>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class=" card mb-3">
-                                                            <div class="card-body  btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="1">
+                                                            <div  id="textcolor1" class="card-body  btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="1" onclick="makeActive()">
                                                                 <h5 class="text-light">1</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div class="card-body  btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="2">
+                                                            <div  id="textcolor2" class="card-body  btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="2" onclick="makeActive2()">
                                                                 <h5 class="text-light">2</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div class="card-body btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="3">
+                                                            <div  id="textcolor3" class="card-body btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="3" onclick="makeActive3()">
                                                                 <h5 class="text-light">3</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div class="card-body btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="4">
+                                                            <div  id="textcolor4" class="card-body btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="4" onclick="makeActive4()">
                                                                     <h5 class="text-light">4</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div class="card-body btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="5">
+                                                            <div  id="textcolor5" class="card-body btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="5" onclick="makeActive5()">
                                                                 <h5 class="text-light">5</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div class="card-body btn_theme ticket-num-card cursor-pointer shadow-sm" data-tickets-val="6">
+                                                            <div  id="textcolor6" class="card-body btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="6">
                                                                 <h5 class="text-light">6+</h5>
                                                             </div>
                                                         </div>
@@ -267,6 +267,60 @@
                                     </div>
                                 </div>
                             </div>
+                            <style>
+                                 .active1 {
+                                    /* padding: 5px; */
+                                    background-color: #2B2540;
+                                    color: white;
+                                    }
+                                    .active2 {
+                                    /* padding: 5px; */
+                                    background-color: #2B2540;
+                                    color: white;
+                                    }
+                                    .active3 {
+                                    /* padding: 5px; */
+                                    background-color: #2B2540;
+                                    color: white;
+                                    }
+                                    .active4 {
+                                    /* padding: 5px; */
+                                    background-color: #2B2540;
+                                    color: white;
+                                    }
+                                    .active5 {
+                                    /* padding: 5px; */
+                                    background-color: #2B2540;
+                                    color: white;
+                                    }
+                                    .active6 {
+                                    /* padding: 5px; */
+                                    background-color: #2B2540;
+                                    color: white;
+                                    }
+                            </style>
+                            <script>    
+                                function makeActive() {
+                                    var element1 = document.getElementById("textcolor1");
+                                    element1.classList.add("active1");
+                                }
+                                function makeActive2() {
+                                     var element2 = document.getElementById("textcolor2");
+                                     element2.classList.add("active2");
+                                }
+                                function makeActive3() {
+                                     var element3 = document.getElementById("textcolor3");
+                                     element3.classList.add("active3");
+                                }
+                                function makeActive4() {
+                                     var element4 = document.getElementById("textcolor4");
+                                     element4.classList.add("active4");
+                                }
+                                function makeActive5() {
+                                     var element5 = document.getElementById("textcolor5");
+                                     element5.classList.add("active5");
+                                }
+                            </script>
                             <div class="col-lg-12">
 
                                 <h4 class="fw-700"> Enter Seating Details<span style="color: red">*</span></h4>
@@ -452,7 +506,6 @@
                                 <div class="card mb-3 shadow-sm p-4 main-card br-10">
                                     <div class="row">
                                         <div class="col-md-12 mb-4">
-
                                             <p> <i class="bi bi-info-circle-fill me-2"></i>Set your actual price for the ticket
                                             </p>
                                         </div>
@@ -921,24 +974,37 @@
                                             </p>
                                         </div>
                                     </div>
+                                    <style>
+                                        .err{
+                                            color: red;
+                                            font-size: 16px;
+                                            display: none;
+                                        }
+                                        
+                                        .hide{
+                                            display: none;
+                                        }
+                                    </style>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="err">
+                                                        Select At least 1 Restriction
+                                                    </div>
+                                                </div>
+                                            </div>
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="mb-2"><strong>Restrictions :</strong></label><br>
-                                                <label class="m-2"><input type="checkbox" name="ticket_restrictions[]" value="No Restrictions" id="resCheck"  onClick="ckChange(this)"> No Restrictions</label>
-                                                <label class="m-2" id="res1"><input type="checkbox" name="ticket_restrictions[]" value="Restricted View" > Restricted View</label>
-                                                <label class="m-2" id="res2"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 14+" > Age Limit 14+</label>
-                                                <label class="m-2" id="res3"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 18+"  > Age Limit 18+</label>
-                                                <label class="m-2" id="res4"><input type="checkbox" name="ticket_restrictions[]" value="Age Limit 21+" > Age Limit 21+</label>
+                                                <label class="m-2"> No Restrictions</label>
+                                                <label class="m-2" id="res1"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Restricted View" > Restricted View</label>
+                                                <label class="m-2" id="res2"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Age Limit 14+" > Age Limit 14+</label>
+                                                <label class="m-2" id="res3"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Age Limit 18+"  > Age Limit 18+</label>
+                                                <label class="m-2" id="res4"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Age Limit 21+" > Age Limit 21+</label>
                                                 <label class="m-2"><input type="checkbox" name="" id="myCheck" onclick="myFunction()"> Other</label>
                                             </div>
-                                           <style>
-                                            .hide{
-                                                display: none;
-                                            }
-                                           </style>
                                             <div class="form-group">
-                                                <input type="text" id="text" name="ticket_restrictions[]" class="form-control inputstyle hide" placeholder="Type Restriction">
+                                                <input type="text" id="text" name="ticket_restrictions[]"  class="form-control inputstyle hide" placeholder="Type Restriction">
                                             </div>
                                         </div>
                                         <script>
@@ -1016,29 +1082,6 @@
                         </div>
                     </form>
                 </div>
-
-                {{-- <div class="col-lg-3 order-md-last order-first">
-                    <div class="card shadow-sm mb-3 type-card main-card br-10">
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h2 class="mb-3">{{$EventListing->event_name}}</h2>
-                            </div>
-                            <p style="font-size: 12px">
-                               <b>TIME : </b> <strong>{{$EventListing->start_time}} AM - {{$EventListing->end_time}} PM</strong><br>
-                               <b>DATE : </b><strong>{{$EventListing->event_date}}</strong><br>
-                               <b>VENUE : </b><strong>{{$EventListing->venue_name}}</strong><br>
-                            </p>
-                            <p style="font-size: 14px" class="p_type p-1 rounded-3" id="ticket-type-box">
-                            </p>
-                        </div>
-                    </div>
-                    <div class=" alert alert-primary br-10">
-                        <div class="card-body">
-                            <h6>2 buyers are currently searching for tickets for this event. Now is a good time to
-                                sell!</h6>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </section>
@@ -1099,10 +1142,20 @@
                 }, 2000);
                 event.preventDefault();
             }
+            // else if($("input[type='checkbox']")){
+            //     $(".err").show();
+            //     $('body').animate({
+            //         scrollTop: $(".err").offset().top
+            //     }, 2000);
+            //     event.preventDefault();
+            // }
         });
         $(".ticket-num-card").click(() => {
             $("#error-ticket-number").hide();
         });
+        // $(".check").click(() => {
+        //     $(".err").hide();
+        // });
     </script>
 </body>
 

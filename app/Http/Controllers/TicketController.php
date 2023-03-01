@@ -117,9 +117,10 @@ class TicketController extends Controller
             'face_price'                  => 'required',
             'type_cat'                    => 'required',  
             'type_sec'                    => 'required',
-            'type_row'                    => 'required',
+            // 'type_row'                    => 'required',
             'currency'                    => 'required',
         ]);
+
         if($request->ticket_type === "Paper-Ticket"){
             $request->validate([
                 'country'        => 'required',
@@ -129,6 +130,10 @@ class TicketController extends Controller
         if($request->ticket_type === "Mobile-Ticket"){
             $request->validate([
                 'simple_pdfForMobileTicket'        => 'required',
+            ]);
+        }if($request->ticket_type === "E-Ticket"){
+            $request->validate([
+                'book_eticket'        => 'required',
             ]);
         }if($request->book_eticket === "No"){
             $request->validate([

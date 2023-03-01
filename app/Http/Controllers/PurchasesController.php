@@ -61,6 +61,11 @@ class PurchasesController extends Controller
             // $ticket->msg2 = ' (5days before the event is the deadline to Upload the E-Tickets if the tickets are not pre uploaded).';
         }
         // dd($ticket); 
+        if($ticket->ticket_type === "Paper-Ticket"){
+            Request::validate([
+                'country_id'        => 'required',
+            ]);
+        }
         $seller = User::find($ticket->user_id);
         $purchase = new Purchases();
         $purchase->user_id = auth()->id();

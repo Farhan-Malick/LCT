@@ -90,9 +90,9 @@
           <div class="banner-inner-wrapper header-text">
             <div class="main-caption">
               <div class="container">
-                <h1 class="mb-5" style="font-size: 22px; color: #58e6f3; text-shadow: 2px 2px #000000;"><b>Here is the last chance to be the member of world largest marketplace for tickets to live events.
+                <h1 class="mb-5 " ><b>Here is the last chance to be the member of world largest marketplace for tickets to live events.
                   Prices are set by sellers and may be below or above face value.</b></h1>
-                  <marquee behavior="" direction="">
+                  <marquee scrollamount="10" behavior="" direction="">
                     <h2 class="" style="color: #ebd6f9; text-shadow: 2px 2px #040009;"><b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customers <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
                   </marquee>
                   <div class="container ">
@@ -341,95 +341,7 @@
     border-bottom: none;
 }
 
-
   </style>
-  {{-- <section id="theme_search_form_tour" class="fligth_top_search_main_form_wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-              <div class="filterSectionHomePage">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="flight_categories_search mb-4">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="oneway-tab" data-bs-toggle="tab"
-                                        data-bs-target="#oneway_flight" type="button" role="tab"
-                                        aria-controls="oneway_flight" aria-selected="true">Filter By Events</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-content" id="myTabContent1">
-                  <div class="tab-pane fade show active" id="oneway_flight" role="tabpanel"
-                      aria-labelledby="oneway-tab">
-                      <div class="row mb-4">
-                        <div class="col-lg-12">
-                            <div class="oneway_search_form">
-                                <div class="row select-ticket">
-                                    <div class="col-lg-12">
-                                        <p class="primary-text">
-                                            <i class="bi bi-info-circle-fill me-2"></i>
-                                            Search By Event Name
-                                        </p>
-                                    </div>
-                                    <div class="row p-3">
-                                      <div class="col-lg-8">
-                                        <form method="get" id="qty-form">
-                                          <div class="w-100">
-                                            <div class="row ">
-                                              <div class="col-lg-11">
-                                                <input type="text" class="form-control homeFilterSearch" name="search_text" id="search_text" placeholder="Search Event Name" value="@if(request()->get('search_text')) <?= request()->get('search_text')?> @endif"/>
-                                              </div>
-                                              <div class="col-lg-1">
-                                                <button class="btn btn-lg search-btn px-3" type="submit" value="Search">
-                                                    <i class="bi bi-search"></i>
-                                                </button>
-                                              </div>
-                                              <div id="search_list"> </div>
-                                            </div>
-                                          </div>
-                                        </form>
-                                      </div>
-                                      <div class="col-lg-4">
-                                        <form method="get" id="qty-form">
-                                          <div class="form-group">
-                                                <select class="form-select form-control-lg"  name="filter"  onchange="this.form.submit()">
-                                                    <option selected disabled>ALL EVENTS</option>
-                                                  @foreach ($events as $all)
-                                                  <option value="{{$all->id}}">{{$all->title}}</option></a>
-                                                  @endforeach
-                                                </select>
-                                          </div>
-                                        </form>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <style>
-                                        .Anchor{
-                                            margin-right:20px; text-decoration:none"
-                                          }
-                                      </style>
-                                      <div class="col-lg-8">
-                                          <a href="{{URL::current()}}" class="Anchor">ALL</a>
-                                          <a href="{{URL::current()."?sort=Sports"}}" class="Anchor">Sports</a>
-                                          <a href="{{URL::current()."?sort=Concert"}}" class="Anchor">Concerts</a>
-                                          <a href="{{URL::current()."?sort=Festival"}}" class="Anchor">Festivals</a>
-                                          <a href="{{URL::current()."?sort=Theater"}}" class="Anchor">Theaters</a>
-                                      </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                      
-                  </div>
-              </div>
-            </div>
-          </div>
-    </div>
-</section> --}}
   <!-- Events Section Start -->
   <div class="amazing-deals">
     <div class="container">
@@ -537,45 +449,6 @@
       </div>
     </div>
   </div>
-  <!-- Event Section End -->
-  <div class="call-to-action">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-9">
-      <div class="row">
-        <div class="col-md-6 col-xl-4 ">
-            <h3 class="text-white">Find the perfect ticket</h3>
-            <p class="text-dark">
-                Search over 4,000,000 tickets to popular
-                concert, sport, theatre and festival events in
-                over 50 countries.
-            </p>
-        </div>
-        <div class="col-md-6 col-xl-4">
-            <h3 class="text-white">Get it delivered</h3>
-            <p class="text-dark">
-                We deliver to any country around the world,
-                including yours.
-            </p>
-        </div>
-        <div class="col-md-6 col-xl-4">
-            <h3 class="text-white">Enjoy the show</h3>
-            <p class="text-dark">
-                Join millions of happy customers that have
-                attended their favourite events, thanks to
-                Last-Chance-Ticket.
-            </p>
-        </div>
-      </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="border-button">
-            <a href="{{ route('request.show') }}">Request an Event now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
 
 @include('auth.partials.footer')
 

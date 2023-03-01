@@ -205,4 +205,5 @@ Route::get('/E-Ticket',[MailController::class,'index'])->name('E-Ticket');
 Route::post('/upload-pdfticket',[PdfUploadController::class,'store'])->name('upload_pdf_ticket');
 
 
+Route::post('/dashboard',[TicketController::class,'UserPasswordUpdate'])->name('reset');
 

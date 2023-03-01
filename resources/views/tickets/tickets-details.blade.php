@@ -22,10 +22,11 @@
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
-    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/style.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/style.css') }}" /> --}}
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <title>Sell Tickets - LAST CHANCE TICKET</title>
     <style>
+        
         .track-line {
             height: 2px !important;
             background-color: #61c3e3;
@@ -159,7 +160,7 @@
                                                 <i class="bi bi-info-circle-fill"></i>
                                                 Please Choose Ticket Type. Paper Ticket, Electronic tickets in PDF format, and You'll have Mobile Ticket via App<br>
                                             </p>
-                                        <div class="form-group text-center "  name="ticket_type"  style="font-size: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                                        <div class="form-group text-center "  name="ticket_type"  style=" font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
                                            <div class="container">
                                             <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px " data-ticket="Paper-Ticket" value="Paper-Ticket" name="ticket_type" id="progress1"> Paper Ticket <sup class="checked"></sup>
                                             <input type="checkbox" onClick="ckChange(this)"  onchange="E_Ticket()"class="E_Ticket m-2 select-card p-4 border 1px"  data-ticket="E-Ticket" value="E-Ticket" name="ticket_type" id="progress2"> E-Ticket <sup class="checked"></sup>
@@ -498,8 +499,8 @@
                                                 <div class="col-md-8" >
                                                          <div class="form-group row m-b-10">
                                                             <label class="col-lg-12 text-lg-right col-form-label">Select Country :</label>
-                                                                <select name="country" class="form-control" id="country" >
-                                                                    <option >Select Country</option>
+                                                                <select name="country"  autocomplete="country" autofocus class="form-control @error('country') is-invalid @enderror" id="country" >
+                                                                    <option selected disabled>Select Country</option>
                                                                     <option name="country">Afghanistan</option>
                                                                     <option name="country">Åland Islands</option>
                                                                     <option  name="country" >Albania</option>
@@ -762,7 +763,7 @@
                                       function E_Ticket()
                                         {
                                             if($('.E_Ticket').is(":checked")) 
-                                            $(".eticket").hide();  
+                                            $(".pTicket").hide();  
                                             if($('.E_Ticket').is(":checked")) 
                                             $(".answer").hide();  
                                             if($('.E_Ticket').is(":checked")) 
@@ -772,8 +773,10 @@
                                         {
                                             if($('.MobileTicket').is(":checked")) 
                                             $(".answer").hide();  
-                                            else
-                                            $(".answer").show();
+                                            if($('.MobileTicket').is(":checked")) 
+                                            $(".pTicket").hide();
+                                            if($('.MobileTicket').is(":checked")) 
+                                            $(".mTicket").show(); 
                                         }
                                         function valueChanged()
                                         {
@@ -783,8 +786,8 @@
                                             $(".answer").show();
                                         }
                                     </script>
-                                    <div class="col-lg-6 eticket" >
-                                        <h4 class="fw-700">Booking Confirmation PDF<span style="color: red">*</span></h4>
+                                    <div class="col-lg-6 pTicket" >
+                                        <h4 class="fw-700">Booking Confirmation PDF For Paper Ticket<span style="color: red">*</span></h4>
                                         <div class="card mb-3 shadow-sm p-4 main-card br-10">
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -799,11 +802,11 @@
                                                             <div class="pr-2" style="float: left">
                                                                 {{-- <label for="simage"><i class="bi bi-folder-plus"></i></label> --}}
                                                                 <input value=""
-                                                                    class="@error('simple_pdfForMobileAndPaper') is-invalid @enderror inputstyle" type="file"
-                                                                    name="simple_pdfForMobileAndPaper" id="simage"
+                                                                    class="@error('simple_pdfForPaper') is-invalid @enderror inputstyle" type="file"
+                                                                    name="simple_pdfForPaper" id="simage"
                                                                    >  
                                                             </div>
-                                                          @error('simple_pdfForMobileAndPaper')
+                                                          @error('simple_pdfForPaper')
                                                               <span class="invalid-feedback" role="alert">
                                                                   <strong>{{ $message }}</strong>
                                                               </span>
@@ -815,6 +818,41 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                </div>
+                                <div class="row">
+                                        <div class="col-lg-6 mTicket" style="display: none">
+                                            <h4 class="fw-700">Booking Confirmation PDF For Mobile Ticket<span style="color: red">*</span></h4>
+                                            <div class="card mb-3 shadow-sm p-4 main-card br-10">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+        
+                                                        <p> <i class="bi bi-info-circle-fill me-2"></i>Please upload the PDF file for Booking Confirmation.
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-12" >
+                                                        <div class="">
+                                                            <label class="col-lg-12 text-lg-right col-form-label">Booking Confirmation :</label>
+                                                            <div class="input-group">
+                                                                <div class="pr-2" style="float: left">
+                                                                    {{-- <label for="simage"><i class="bi bi-folder-plus"></i></label> --}}
+                                                                    <input value=""
+                                                                        class="@error('simple_pdfForMobileTicket') is-invalid @enderror inputstyle" type="file"
+                                                                        name="simple_pdfForMobileTicket" id="simage"
+                                                                       >  
+                                                                </div>
+                                                              @error('simple_pdfForMobileTicket')
+                                                                  <span class="invalid-feedback" role="alert">
+                                                                      <strong>{{ $message }}</strong>
+                                                                  </span>
+                                                              @enderror
+                                                              <div class="text-center text-dark" id="displayDocs">
+                                                              </div>
+                                                          </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 doYouHaveATicket"  style="display: none">

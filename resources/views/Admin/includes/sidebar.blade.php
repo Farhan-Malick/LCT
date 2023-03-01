@@ -10,11 +10,11 @@
                     <a href="javascript:;" data-toggle="nav-profile">
                         <div class="cover with-shadow"></div>
                         <div class="image">
-                            <img src="{{asset("AdminAssets/img/user/user-13.jpg")}}" alt="" />
+                            <img src="{{asset("AdminAssets/img/user/download.png")}}" alt="" />
                         </div>
                         <div class="info">
-                            <b class="caret pull-right"></b>Farhan Malik
-                            <small>Front End Dev</small>
+                            <b class="caret pull-right"></b>Last Chance Ticket
+                            <small>All rights reserved</small>
                         </div>
                     </a>
                 </li>

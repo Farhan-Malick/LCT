@@ -421,9 +421,9 @@
             </div>
     </section>
 
-    <section id="explore_area" class="section_padding">
+    <section id="explore_area" class="">
         <div class="container">
-            <div class="row mb-2">
+            <div class="row mb-2 section_padding">
                 <div class="col-lg-12">
                     <span style="font-size: 18px"><b>Categories : </b>  
                         @foreach ($colors as $key => $dbValues) 
@@ -503,19 +503,7 @@
                                                 @endif
                                               
                                                 @foreach ($tickets as $ticket)
-                                                
-                                                    {{-- <?php 
-                                                        $catClass0 = ["<span style='border-left:20px solid red;'></span>"];
-                                                        $catClass1 = ["<span style='border-left:20px solid yellow;'></span>"];  
-                                                        $catClass2 = ["<span style='border-left:20px solid blue;'></span>"]; 
-                                                        $catClass3 = ["<span style='border-left:20px solid green;'></span>"]; 
-                                                        $catClass4 = ["<span style='border-left:20px solid grey;'></span>"]; 
-                                                        
-                                                        $key0 = array_rand($catClass0); 
-                                                        $key1 = array_rand($catClass1); 
-                                                        $key2 = array_rand($catClass2); 
-                                                        $key3 = array_rand($catClass3); 
-                                                    ?> --}}
+                                                    @if ($ticket->quantity > 0)
                                                     <div class="flight_search_items border text-dark"  style="border-radius: 12px; margin-bottom:20px ;">
                                                         <div class="multi_city_flight_lists" 
                                                         style="
@@ -579,7 +567,7 @@
                                                                 <div class="flight_search_left" >
                                                                     <div class="ticket" >
                                                                         <img src="" width="" alt="">
-                                                                        {{-- <img src="{{asset('F_Assets/assets/img/common/biman_bangla.png')}}" alt="img"> --}}
+                                                                        <img src="{{asset('F_Assets/assets/img/common/biman_bangla.png')}}" alt="img">
                                                                     </div>
                                                                     <div class="flight_search_destination" >
                                                                         <p>Event</p>
@@ -617,7 +605,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="flight_search_right">
-                                                            <h2>${{$ticket->price}}<sup style="font-size: 10px">Per Ticket</sup></h2>
+                                                            <h2 style="font-size: 20px"><b>${{$ticket->price}}</b><sup style="font-size: 8px">Per Ticket</sup></h2>
                                                             {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.detail',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}">View Ticket Detail</a> --}}
                                                             <a class="@if($ticket->quantity != 0) btn btn_theme btn_sm mb-2 @else btn btn-danger w-100  @endif" href="@if($ticket->quantity > 0)
                                                                 {{ route('buyer.ticket.checkout',['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif " >
@@ -636,6 +624,7 @@
                                                                     class="fas fa-chevron-down"></i></h6> --}}
                                                         </div>
                                                     </div>
+                                                    @endif
                                                 @endforeach
                                         </div>
                                     </div>

@@ -42,10 +42,10 @@
     <div class="container foot__con">
         <div class="row  pt-5 ">
             <div class="col-md-3 ">
-                <ul>
-                        <h4 class="text-dark">COMPANY INFO</h4>
+                <ul style="  margin-bottom: 0px;">
+                        <h4 class="text-dark mt-3">COMPANY INFO</h4>
                        
-                        <li class=" mt-5"> <a type="button" class="text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                        <li class=" mt-3"> <a type="button" class="text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal3">
                             About Us
                         </a> 
                         </li>
@@ -54,29 +54,35 @@
                         </a> </li>
                         <li class=" mt-3"><a href=""
                                 class="text-dark">Connect</a>
-                        </li>
+                        </li> 
                     <div class="__social d-flex mt-3">
-                        <li class=""><i class="bi bi-facebook"></i></li>
-                        <li class="pl-4"><i class="bi bi-twitter"></i></li>
-                        <li class="pl-4"><i class="bi bi-linkedin"></i></li>
+                        <li class=""><i class="bi bi-facebook "></i> </li>&nbsp;&nbsp;&nbsp;
+                        <li class="pl-4"><i class="bi bi-twitter"></i></li>&nbsp;&nbsp;&nbsp;
+                        <li class="pl-4"><i class="bi bi-linkedin"></i></li>&nbsp;&nbsp;&nbsp;
                         <li class="pl-4"><i class="bi bi-instagram"></i></li>
                     </div>
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-3">
                 <ul>
                     <h4 class="text-dark">SAFE AND SECURE</h4>
-                    <li class=" mt-5"><p  class="ml-3 text-dark" style="align-content: justify"><i class="fa fa-check " style="font-size: 18px"></i> Buying 100% safe, Only from approvals sellers.</p>
+                    <li class="mt-3"><p style="font-size: 12px;line-height: 25px;color: #afafaf;"  class="ml-3 text-dark" style="align-content: justify">
+                        <!--<i class="fa fa-check " style="font-size: 18px"></i>-->
+                        Buying 100% safe, Only from approvals sellers.</p>
                     </li>
-                    <li class=" mt-3"> <p  class="text-dark"><i class="fa-dark fa fa-circle-info" style="font-size: 18px"></i> Best Customer service before and after purchasing.</p>
+                    <li class="mt-3"> <p style="font-size: 12px;line-height: 25px;color: #afafaf;"  class="text-dark">
+                        <!--<i class="fa-dark fa fa-circle-info" style="font-size: 18px"></i>-->
+                        Best Customer service before and after purchasing.</p>
                     </li>
-                    <li class=" mt-3"><p  class="text-dark"><i class="fa-regular fa-credit-card"  style="font-size: 18px"></i> 100% Secure Payment System</p>
+                    <li class="mt-3"><p style="font-size: 12px;line-height: 25px;color: #afafaf;"  class="text-dark">
+                        <!--<i class="fa-regular fa-credit-card"  style="font-size: 18px"></i>-->
+                        100% Secure Payment System</p>
                     </li>
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-3">
                 <ul>
-                    <h4 class="text-dark mb-5">POPULAR EVENTS</h4>
+                    <h4 class="text-dark mb-3">POPULAR EVENTS</h4>
                     @foreach ($Footerevents as $event)
                         @if ($event->Footerapprove === 1)
                             <li class="mt-3"><a href="#" class="text-dark">{{$event->title}}</a>
@@ -84,9 +90,9 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="col-md-3 foot__iconss ">
+            <div class="col-md-3 mt-3 foot__iconss ">
                 <ul>
-                    <h4 class="text-dark mb-5">HOT TICKETS</h4>
+                    <h4 class="text-dark mb-3">HOT TICKETS</h4>
                     @foreach ($FooterEventListing as $ticket)
                         @if ($ticket->Footerapprove === 1)
                             <li class="mt-3"><a href="#" class="text-dark">{{$ticket->event_name}}</a>

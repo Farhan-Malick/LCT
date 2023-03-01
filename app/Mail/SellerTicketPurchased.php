@@ -24,6 +24,7 @@ class SellerTicketPurchased extends Mailable
     {
         $this->data = $data;
         $this->purchase = $purchase;
+        
     }
 
     /**

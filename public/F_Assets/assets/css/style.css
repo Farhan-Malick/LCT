@@ -68,25 +68,34 @@ Default CSS
 
 html,
 body {
-    height: 100%;
-    font-family: 'Nunito', sans-serif;
-    background-color: #f6f8f9;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    background-color: #fff;
+    font-size: 12px;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
     padding: 0;
     margin: 0;
-    font-size: 13px;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    background-color: #fff;
+    font-size: 12px;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 .logo img {
     width: 50%;
+    margin-top: auto;
     float: left;
   }
   .ticket img {
     width: 50%;
   }
-
   @media (max-width: 1366px) {
     .ticket img {
         display: none;
@@ -182,9 +191,9 @@ section {
 
 .section_padding {
     padding-top: 30px;
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-bottom: 100px;
+    /* padding-left: 100px;
+    padding-right: 100px; */
+    padding-bottom: 30px;
 }
 
 .section_padding_top {

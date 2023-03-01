@@ -11,8 +11,9 @@ Section : {{ $data->type_sec }}, Category : {{ $data->type_cat }}, Row : {{ $dat
 Event: {{ $data->event_name }} <br>
 Venue: {{ $data->venue_name }} <br>
 Date: {{ $data->event_date }} <br><br>
-<b>{{$data->msg}}</b><b style="color:red">{{$data->msg2}}</b><br>
-<b>{{$data->msg3}}</b><br><br>
+
+<b>You will shortly receive an email from us about delivery of the tickets.</b><br>
+
 <b>Price Information: </b><br>
 Number of Tickets: {{$purchase->quantity}}<br>
 Price per Ticket: USD {{$data->price}} <br>

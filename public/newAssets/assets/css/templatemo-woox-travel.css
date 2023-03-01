@@ -30,6 +30,16 @@ font & reset css
 reset
 --------------------------------------------- 
 */
+:root {
+  --main-color: #22b3c1;
+  --white-color: #ffffff;
+  --black-color: #2B2540;
+  --black-color-opacity: #2b2540c4;
+  --paragraph-color: #818090;
+  --bg-color: #F3F6FD;
+  --transition: .4s all ease-in-out;
+}
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
 pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
 s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
@@ -38,6 +48,138 @@ figure, header, nav, section, article, aside, footer, figcaption {
   padding: 0;
   border: 0;
   outline: 0;
+}
+.btn_theme {
+  color: var(--white-color);
+  background-color: var(--main-color);
+  transition: var(--transition);
+  box-shadow: none;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  z-index: 0;
+  border: none
+}
+
+.btn_theme:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 580px;
+  height: 550px;
+  margin: auto;
+  background: var(--black-color);
+  border-radius: 50%;
+  z-index: -1;
+  -webkit-transform-origin: top center;
+  transform-origin: top center;
+  -webkit-transform: translateX(-50%) translateY(-5%) scale(.4);
+  transform: translateX(-50%) translateY(-5%) scale(.4);
+  transition: var(--transition);
+
+}
+
+.btn_theme:hover:before {
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+  -webkit-transform: translateX(-45%) translateY(0) scale(1);
+  transform: translateX(-50%) translateY(0) scale(1);
+  -webkit-transform-origin: bottom center;
+  transform-origin: bottom center;
+  border: none;
+}
+
+.btn_theme_white {
+  color: var(--black-color);
+  background-color: var(--white-color);
+  transition: var(--transition);
+  box-shadow: none;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  z-index: 0;
+  border: 1px solid var(--white-color);
+}
+
+.btn_theme_white:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 580px;
+  height: 550px;
+  margin: auto;
+  background: var(--black-color);
+  border-radius: 50%;
+  z-index: -1;
+  -webkit-transform-origin: top center;
+  transform-origin: top center;
+  -webkit-transform: translateX(-50%) translateY(-5%) scale(.4);
+  transform: translateX(-50%) translateY(-5%) scale(.4);
+  transition: var(--transition);
+
+}
+
+.btn_theme_white:hover:before {
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+  -webkit-transform: translateX(-45%) translateY(0) scale(1);
+  transform: translateX(-50%) translateY(0) scale(1);
+  -webkit-transform-origin: bottom center;
+  transform-origin: bottom center;
+  border: none;
+}
+
+.btn_theme_transparent {
+  color: var(--white-color);
+  background-color: transparent;
+  transition: var(--transition);
+  box-shadow: none;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  z-index: 0;
+  border: 1px solid var(--white-color);
+}
+
+
+.btn_theme_transparent:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 580px;
+  height: 550px;
+  margin: auto;
+  background: var(--black-color);
+  border-radius: 50%;
+  z-index: -1;
+  -webkit-transform-origin: top center;
+  transform-origin: top center;
+  -webkit-transform: translateX(-50%) translateY(-5%) scale(.4);
+  transform: translateX(-50%) translateY(-5%) scale(.4);
+  transition: var(--transition);
+
+}
+
+.btn_theme_transparent:hover:before {
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+  -webkit-transform: translateX(-45%) translateY(0) scale(1);
+  transform: translateX(-50%) translateY(0) scale(1);
+  -webkit-transform-origin: bottom center;
+  transform-origin: bottom center;
+  border: none;
 }
 
 .flight_categories_search .nav-tabs {
@@ -65,10 +207,10 @@ figure, header, nav, section, article, aside, footer, figcaption {
   top: 25px;
 }
 
-
 .sec-2{
   background-color: #22b3c1;
 }
+
 .clearfix:after {
   content: ".";
   display: block;
@@ -105,6 +247,7 @@ header, nav, section, article, aside, footer, hgroup {
 }
 
 html, body {
+
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
   background-color: #fff;
@@ -146,7 +289,14 @@ img {
 Global Styles
 --------------------------------------------- 
 */
+
 html,
+
+::-webkit-body{
+  background: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
 body {
   background: #fff;
   font-family: 'Poppins', sans-serif;
@@ -343,8 +493,6 @@ Pre-loader Style
   border-radius: 50%;
 }
 
-
-
 /* 
 ---------------------------------------------
 Header Style
@@ -379,10 +527,12 @@ Header Style
   transition: all .5s ease 0s;
 }
 
+
 .header-area .main-nav {
   background: transparent;
   display: flex;
   padding: 0px 30px;
+  margin:0;
 }
 
 .background-header .main-nav {
@@ -391,7 +541,7 @@ Header Style
 }
 
 .header-area .main-nav .logo {
-  flex-basis: 30%;
+  flex-basis: 40%;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -829,10 +979,7 @@ Banner Style
   margin-bottom: 30px;
 }
 #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
-  font-size: 50px;
-  color: #fff;
-  font-weight: 700;
-  margin-bottom: 30px;
+  font-size: 22px; color: #58e6f3; text-shadow: 2px 2px #000000;
 }
 #section-1 .content-slider .slider .banner .banner-inner-wrapper .learn-more-button a:hover {
   color: #22b3c1;
@@ -2384,11 +2531,11 @@ body {
   overflow-x: hidden;
 }
 
-@media (max-width: 575px) {
-
+@media (max-width: 375px) {
+  #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
+    font-size: 16px; color: #58e6f3; text-shadow: 2px 2px #000000;
+  }
 }
-
-
 @media (max-width: 767px) {
   #section-1 .content-slider .slider .banner .banner-inner-wrapper {
     padding-top: 120px;
@@ -2396,9 +2543,9 @@ body {
   #section-1 .content-slider .slider .banner .banner-inner-wrapper h2 {
     font-size: 15px;
   }
-  #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
+  /* #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
     font-size: 36px;
-  }
+  } */
   #section-1 .more-info {
     padding: 30px;
     margin-top: 30px !important;

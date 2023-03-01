@@ -17,6 +17,7 @@ use App\Models\Purchases;
 use App\Models\SellerCategory;
 use App\Http\Controllers\Auth\LoginController;
 use Mail;
+use Illuminate\Support\Facades\Hash;
 use App\Mail\Seller as SellerMail;
 use Illuminate\Support\Facades\Auth;
 use Exception;
@@ -117,9 +118,23 @@ class TicketController extends Controller
             'type_cat'                    => 'required',  
             'type_sec'                    => 'required',
             'type_row'                    => 'required',
-            'currency'                    => 'required'
-        ]
-    );
+            'currency'                    => 'required',
+        ]);
+        if($request->ticket_type === "Paper-Ticket"){
+            $request->validate([
+                'country'        => 'required',
+                'simple_pdfForPaper'        => 'required',
+            ]);
+        }
+        if($request->ticket_type === "Mobile-Ticket"){
+            $request->validate([
+                'simple_pdfForMobileTicket'        => 'required',
+            ]);
+        }if($request->book_eticket === "No"){
+            $request->validate([
+                'simple_pdf'        => 'required',
+            ]);
+        }
         $guestUser = LoginController::guestLogin();
         $ticketListing = new TicketListing();
         $sellerCategories = SellerCategory::first();
@@ -150,25 +165,32 @@ class TicketController extends Controller
         $ticketListing->book_eticket = $request->book_eticket;
         $ticketListing->quantity = $request->total_tickets;
         $ticketListing->reason_seating_unable = $request->reason_seating_unable;
-        
-        // if($ticketListing->ticket_type == "Paper-Ticket"){
+
             $ticketListing->country = $request->country;
-            if($request->hasfile('simple_pdfForMobileAndPaper'))
+            if($request->hasfile('simple_pdfForPaper'))
             {
-                $simple_pdfForMobileAndPaper=$request->file('simple_pdfForMobileAndPaper');
-                $ext = $simple_pdfForMobileAndPaper->GetClientOriginalExtension();
+                $simple_pdfForPaper=$request->file('simple_pdfForPaper');
+                $ext = $simple_pdfForPaper->GetClientOriginalExtension();
                 $file2=time().'.'.$ext;
-                $simple_pdfForMobileAndPaper->storeAs('public/post',$file2);
-                $ticketListing['simple_pdf']=$file2;
+                $simple_pdfForPaper->storeAs('public/post',$file2);
+                $ticketListing['simple_pdfForPaper']=$file2;
+            }
+            if($request->hasfile('simple_pdfForMobileTicket'))
+            {
+                $simple_pdfForMobileTicket=$request->file('simple_pdfForMobileTicket');
+                $ext = $simple_pdfForMobileTicket->GetClientOriginalExtension();
+                $file2=time().'.'.$ext;
+                $simple_pdfForMobileTicket->storeAs('public/post',$file2);
+                $ticketListing['simple_pdfForMobileTicket']=$file2;
             }
           if($request->hasfile('simple_pdf'))
-        {
-            $simple_pdf=$request->file('simple_pdf');
-            $ext = $simple_pdf->GetClientOriginalExtension();
-            $file2=time().'.'.$ext;
-            $simple_pdf->storeAs('public/post',$file2);
-            $ticketListing['simple_pdf']=$file2;
-        }
+            {
+                $simple_pdf=$request->file('simple_pdf');
+                $ext = $simple_pdf->GetClientOriginalExtension();
+                $file2=time().'.'.$ext;
+                $simple_pdf->storeAs('public/post',$file2);
+                $ticketListing['simple_pdf']=$file2;
+            }
         // dd($ticketListing); 
         $ticketListing->save();
         if ($request->book_eticket === "Yes") {
@@ -201,12 +223,11 @@ class TicketController extends Controller
         return redirect()->route('seller.complete_ticket.address.save', ['id' => $tickets->id]);
        
     }
-    public function UserPasswordUpdate(){
-         if(!Auth::check()) {
-            $user->password = $request->password;
-            $user->update();
-        } 
-        return redirect()->back()->with('msg','Your Password has been Reset');
+    public function UserPasswordUpdate(Request $request,User $user){
+        $user = User::find(auth()->user()->id);
+        $user->password =  Hash::make( $request->password);
+        $user->update();
+        return redirect()->back()->with('msg','Your Password has been Reset');  
 
     }
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)

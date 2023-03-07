@@ -62,30 +62,15 @@
 				<!-- begin breadcrumb -->
 				<ol class="breadcrumb float-xl-right">
 					<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-					<li class="breadcrumb-item"><a href="javascript:;">Tickets</a></li>
-					<li class="breadcrumb-item active">Mobile Ticket Tables</li>
+					<li class="breadcrumb-item"><a href="javascript:;">Visitor Analytics</a></li>
+					<li class="breadcrumb-item active">Visitor Analytics Tables</li>
 				</ol>
 				<!-- end breadcrumb -->
 				<!-- begin page-header -->
 				<div class="row">
 					<div class="col-lg-12">
 						   <!-- begin panel -->
-							<h4 class="">Mobile Tickets</h4>
-							@if ($message = Session::get('msg2'))
-									<div class="alert alert-primary alert-block">
-										<strong>{{ $message }}</strong>
-									</div>
-							@endif
-							@if ($message = Session::get('approve'))
-							<div class="alert alert-primary alert-block">
-								<strong>{{ $message }}</strong>
-							</div>
-							@endif
-							@if ($message = Session::get('update'))
-							<div class="alert alert-success alert-block">
-								<strong>{{ $message }}</strong>
-							</div>
-							@endif
+							<h4 class="">Visitor Analytics</h4>
 					</div>
 				</div>
 				<!-- end page-header -->
@@ -93,7 +78,7 @@
 				<div class="panel panel-inverse">
 					<!-- begin panel-heading -->
 					<div class="panel-heading">
-						<h4 class="panel-title">Data Table - Mobile Ticket</h4>
+						<h4 class="panel-title">Visitor Analytics</h4>
 						<div class="panel-heading-btn">
 							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
@@ -106,94 +91,23 @@
 					<!-- begin panel-body -->
 					<div class="panel-body">
 						<table id="data-table-default" class="table table-striped table-bordered table-td-valign-middle">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        {{-- <th scope="col">title</th> --}}
-                                        <th scope="col">Event Title</th>
-                                        <th scope="col">price</th>
-                                        {{-- <th scope="col">currency</th> --}}
-                                        <th scope="col">quantity</th>
-										<th scope="col">Category</th>
-                                        <th scope="col">section</th>
-                                        <th scope="col">row</th>
-                                        <th scope="col">seat from</th>
-                                        <th scope="col">seat to</th>
-                                        <th scope="col">Booking Confirmation</th>
-										<th scope="col">ticket restrictions</th>
-										<th scope="col">Benefits</th>
-										<th scope="col">Fans Section</th>
-										<th scope="col">status</th>
-										<th scope="col">ticket type</th>
-										<th scope="col" >Approval</th>
-										<th scope="col" >Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-									@foreach($tickets as $m_ticket)
-									@if($m_ticket->ticket_type == "Mobile-Ticket")
-										<tr>
-											<td>{{$m_ticket->id}}</td>
-											{{-- <td>{{$m_ticket->title}}</td> --}}
-											<td>{{$m_ticket->event->event_name}}</td>
-											<td>${{$m_ticket->price}}</td>
-											{{-- <td>{{$m_ticket->currency}}</td> --}}
-											{{-- <td>{{$m_ticket->Currency->currency_type}}</td> --}}
-											<td>{{$m_ticket->quantity}}</td>
-											<td>
-												{{$m_ticket->type_cat}}
-											</td>
-											<td>{{$m_ticket->type_sec}}</td>
-											<td>{{$m_ticket->type_row}}</td>
-											<td>{{$m_ticket->seat_from}}</td>
-											<td>{{$m_ticket->seat_to}}</td>
-											<td><a href="{{URL('view-PDF-File/M-Ticket/'.$m_ticket->id)}}">{{$m_ticket->simple_pdfForMobileTicket}}</a></td>
-											<td>{{$m_ticket->ticket_restrictions}}</td>
-											<td>{{$m_ticket->ticket_benefits}}</td>
-											<td>{{$m_ticket->fan_section}}</td>
-											<td>{{$m_ticket->status}}</td>
-											<td>{{$m_ticket->ticket_type}}</td>
-
-											<td>
-												@if($m_ticket->approve == null || $m_ticket->approve == 0)
-												<form action="{{ url('/toggle-approve') }}" method="POST">
-													@csrf
-													<input type="hidden" name="ticket_id" id=""
-														value="{{ $m_ticket->id }}" >
-													<input type="submit" class="btn btn-primary"
-														name="" value="Approve" id="" >
-												</form>
-												@elseif ($m_ticket->approve == 2)
-												<button class="btn btn-primary" disabled="disabled">Cant Approve now</button>
-														@else
-												<button class="btn btn-success" disabled="disabled">Approved</button>
-												@endif
-											</td>
-											<td>
-													@if($m_ticket->approve == 1 || $m_ticket->approve == 2)
-														<button type="button" class="btn btn-danger" disabled="disabled" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal">
-															Reject
-														</button>	
-														@elseif ($m_ticket->approve == null )
-														<button type="button" class="btn btn-danger" data-id="{{ $m_ticket->id }}" data-toggle="modal" data-target="#rejectionModal" >
-															Reject
-														</button>
-													@endif
-													<a
-															class="btn btn-primary"
-															href="{{ URL('/Admin-Panel/Edit-MobileTicket/' . $m_ticket->id) }}"
-															><i class="fa fa-edit" aria-hidden="true"></i></a
-														>
-													<a
-														class="btn btn-danger"
-														href="{{route('admin.ticket.destroy',$m_ticket->id)}}"
-														><i class="fa fa-trash" aria-hidden="true"></i></a
-													>
-											</td>
-										</tr>
-									@endif
-								@endforeach
-                                </tbody>
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">#</th>
+									{{-- <th scope="col">title</th> --}}
+									<th scope="col">Event Name</th>
+									<th scope="col" >Total Views</th>
+								</tr>
+							</thead>
+							<tbody>
+									@foreach($eventVisitors as $visits)
+											<tr>
+												<td>{{$visits->id}}</td>
+												<td>{{$visits->title}}</td>
+												<td>{{$visits->views}}</td>
+											</tr>
+									@endforeach
+							</tbody>
 						</table>
 					</div>
 					<!-- end panel-body -->

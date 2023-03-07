@@ -114,7 +114,7 @@
                                                       <div class="card shadow-sm mt-3">
                                                          <div class="card-body">
                                                              <h5 class="card-title fw-600">All Listings Here</h5>
-                                                             <table id="data-table-default"  class="table  table-sm table-bordered table-td-valign-middle">
+                                                             <table id="data-table-default"  class="table  table-sm table-bordered ">
                                                                <thead>
                                                                   <tr>
                                                                   <th scope="col">#</th>

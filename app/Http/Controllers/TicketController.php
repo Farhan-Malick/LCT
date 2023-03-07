@@ -110,14 +110,13 @@ class TicketController extends Controller
     public function store(Request $request, $id)
     {
         $request->validate([
-            'ticket_restrictions'        => 'required',
+            'ticket_restrictions.0' => 'required',
             'seated_area'                 => 'required',
             'ticket_type'                 => 'required',
             'price'                       => 'required',
             'face_price'                  => 'required',
             'type_cat'                    => 'required',  
             'type_sec'                    => 'required',
-            // 'type_row'                    => 'required',
             'currency'                    => 'required',
         ]);
 
@@ -176,25 +175,25 @@ class TicketController extends Controller
             {
                 $simple_pdfForPaper=$request->file('simple_pdfForPaper');
                 $ext = $simple_pdfForPaper->GetClientOriginalExtension();
-                $file2=time().'.'.$ext;
-                $simple_pdfForPaper->storeAs('public/post',$file2);
-                $ticketListing['simple_pdfForPaper']=$file2;
+                $file1=time().'.'.$ext;
+                $simple_pdfForPaper->storeAs('public/post/PaperTicket',$file1);
+                $ticketListing['simple_pdfForPaper']=$file1;
             }
             if($request->hasfile('simple_pdfForMobileTicket'))
             {
                 $simple_pdfForMobileTicket=$request->file('simple_pdfForMobileTicket');
                 $ext = $simple_pdfForMobileTicket->GetClientOriginalExtension();
                 $file2=time().'.'.$ext;
-                $simple_pdfForMobileTicket->storeAs('public/post',$file2);
+                $simple_pdfForMobileTicket->storeAs('public/post/MobileTicket',$file2);
                 $ticketListing['simple_pdfForMobileTicket']=$file2;
             }
           if($request->hasfile('simple_pdf'))
             {
                 $simple_pdf=$request->file('simple_pdf');
                 $ext = $simple_pdf->GetClientOriginalExtension();
-                $file2=time().'.'.$ext;
-                $simple_pdf->storeAs('public/post',$file2);
-                $ticketListing['simple_pdf']=$file2;
+                $file3=time().'.'.$ext;
+                $simple_pdf->storeAs('public/post',$file3);
+                $ticketListing['simple_pdf']=$file3;
             }
         // dd($ticketListing); 
         $ticketListing->save();
@@ -204,7 +203,33 @@ class TicketController extends Controller
             return redirect()->route('seller.complete_ticket.address.save', ['id' => $ticketListing->id]);
         }
     }
-    public function viewPdf($id)
+    public function viewPdfForPaperticket($id)
+    {
+        $Listing = TicketListing::find($id);
+        // return File::get(storage_path('app/public/post/'.$Listing->simple_pdf));
+
+        $filename = $Listing->simple_pdfForPaper;
+        $path = storage_path('app/public/post/PaperTicket/'.$filename);
+
+        return Response::make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.$filename.'"'
+            ]);
+    }
+    public function viewPdfForMobileticket($id)
+    {
+        $Listing = TicketListing::find($id);
+        // return File::get(storage_path('app/public/post/'.$Listing->simple_pdf));
+
+        $filename = $Listing->simple_pdfForMobileTicket;
+        $path = storage_path('app/public/post/MobileTicket/'.$filename);
+
+        return Response::make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.$filename.'"'
+            ]);
+    }
+    public function viewPdfForEticket($id)
         {
             $Listing = TicketListing::find($id);
             // return File::get(storage_path('app/public/post/'.$Listing->simple_pdf));
@@ -246,7 +271,7 @@ class TicketController extends Controller
         $tickets->completed = 1;
         $tickets->update();
         MailController::ticketlistingadded($user->email);
-        return redirect()->back()->with('msg','Your tickets has been created, Your ticket will be in the Listings when Admin will Approve.');
+        return redirect()->back()->with('msg','Your Listing has been created and your ticket will be available for purchase after the approval of Admin.');
     }
 
     public function showAddressPage(Currency $currencies, TicketListing $tickets, $id, EventListing $event)
@@ -392,7 +417,7 @@ class TicketController extends Controller
 
     public function event_category_ticket(TicketListing $TicketListing,EventListing $event,$id){
         //return $id;
-
+        Event::find($id)->increment('views');
         $eventListings = EventListing::where('event_id',$id)->get();
         $events = Event::where('id',$id)->get();
         $FooterEventListing = EventListing::get();
@@ -459,9 +484,11 @@ class TicketController extends Controller
         $tickets = TicketListing::select('ticket_listings.*')
         ->where('completed', 1)->get();
         $price = Purchases::sum('price');
+        $totalprofitDivision = $price / 100;
+        $totalCompanyProfit =  $totalprofitDivision * 20;
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
-        return view('Admin/pages/index',compact('tickets','price','userCount','total_no_sold_tickets'));
+        return view('Admin/pages/index',compact('totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
     }
     public function editPaperTicket($id){
         $paper_ticket = TicketListing::find($id);
@@ -487,9 +514,11 @@ class TicketController extends Controller
         $tickets = TicketListing::select('ticket_listings.*')
         ->where('completed', 1)->get();
         $price = Purchases::sum('price');
+        $totalprofitDivision = $price / 100;
+        $totalCompanyProfit =  $totalprofitDivision * 20;
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
-        return view('Admin/pages/e_TicketListing',compact('tickets','price','userCount','total_no_sold_tickets'));
+        return view('Admin/pages/e_TicketListing',compact('totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
     }
     public function editE_Ticket($id){
         $e_ticket = TicketListing::find($id);
@@ -512,9 +541,10 @@ class TicketController extends Controller
         $tickets = TicketListing::select('ticket_listings.*')
         ->where('completed', 1)->get();
         $price = Purchases::sum('price');
-        $userCount = User::count();
+        $totalprofitDivision = $price / 100;
+        $totalCompanyProfit =  $totalprofitDivision * 20;
         $total_no_sold_tickets = Purchases::sum('quantity');
-        return view('Admin/pages/mobileTicket',compact('tickets','price','userCount','total_no_sold_tickets'));
+        return view('Admin/pages/mobileTicket',compact('totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
     }
     public function editMobileTicket($id){
         $mobile_ticket = TicketListing::find($id);

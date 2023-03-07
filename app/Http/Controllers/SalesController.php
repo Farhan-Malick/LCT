@@ -21,9 +21,11 @@ class SalesController extends Controller
         $events = Event::all();
         
         $price = Purchases::sum('price');
+        $totalprofitDivision = $price / 100;
+        $totalCompanyProfit =  $totalprofitDivision * 20;
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
-        return view('Admin/pages/all_sales',compact('purchases','events','tickets','price','userCount','total_no_sold_tickets'));
+        return view('Admin/pages/all_sales',compact('totalCompanyProfit','purchases','events','tickets','price','userCount','total_no_sold_tickets'));
 
         // return view('/Admin/pages/all_sales',compact('purchases','tickets','events'));
     }

@@ -90,11 +90,11 @@
           <div class="banner-inner-wrapper header-text">
             <div class="main-caption">
               <div class="container">
-                <h1 class="mb-5 " ><b>Here is the last chance to be the member of world largest marketplace for tickets to live events.
-                  Prices are set by sellers and may be below or above face value.</b></h1>
+                <h1 class="mb-5 " ><b>Here is the last chance to be the member of world’s leading ticket marketplace for live events around the globe</b></h1>
                   <marquee scrollamount="10" behavior="" direction="">
                     <h2 class="" style="color: #ebd6f9; text-shadow: 2px 2px #040009;"><b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customers <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
                   </marquee>
+                <h6 style="font-size: 8px" class="mb-5 " ><b>Prices are set by sellers may be above or below face value</b></h6>
                   <div class="container ">
                     <form method="get" id="qty-form">
                       <div class="row height d-flex justify-content-center align-items-center">
@@ -437,15 +437,6 @@
             </div>
             </div>
             @endforeach
-        <div class="col-lg-12">
-          <ul class="page-numbers">
-            <li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
-            <li><a href="#">1</a></li>
-            <li class="active"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>

@@ -197,8 +197,8 @@
                                             </tr>
                                             <tr>
                                                 <td align="left">
-                                                    <select name="country_id" autocomplete="country_id" autofocus class="form-control @error('country_id') is-invalid @enderror" id="country_id" >
-                                                        <option >Select Country</option>
+                                                    <select name="country_id" class="form-control @error('country_id') is-invalid @enderror" id="country_id" >
+                                                        <option selected disabled>Select Country</option>
                                                         <option name="country_id">Afghanistan</option>
                                                         <option name="country_id">Åland Islands</option>
                                                         <option  name="country_id" >Albania</option>

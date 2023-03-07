@@ -160,7 +160,7 @@
                                                 <i class="bi bi-info-circle-fill"></i>
                                                 Please Choose Ticket Type. Paper Ticket, Electronic tickets in PDF format, and You'll have Mobile Ticket via App<br>
                                             </p>
-                                        <div class="form-group text-center "  name="ticket_type"  style=" font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                                        <div class="form-group text-center "  name="ticket_type"  style="font-size:20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
                                            <div class="container">
                                             <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px " data-ticket="Paper-Ticket" value="Paper-Ticket" name="ticket_type" id="progress1"> Paper Ticket <sup class="checked"></sup>
                                             <input type="checkbox" onClick="ckChange(this)"  onchange="E_Ticket()"class="E_Ticket m-2 select-card p-4 border 1px"  data-ticket="E-Ticket" value="E-Ticket" name="ticket_type" id="progress2"> E-Ticket <sup class="checked"></sup>
@@ -336,7 +336,7 @@
                                             <div class="form">
                                                 <div class="form-group">
                                                     <label for="row">Seating Area</label>
-                                                      <select class="form-select "   autocomplete="seated_area" autofocus name="seated_area">
+                                                      <select class="form-select " value="{{ old('seated_area') }}"   autocomplete="seated_area" autofocus name="seated_area">
                                                         <option selected disabled>Please Select Row</option>
                                                         <option value="Seated Tickets">Seated Tickets</option>
                                                         <option value="Standing Tickets">Standing Tickets</option>
@@ -359,10 +359,9 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Category</label>
-                                                            <input  type="text" class="form-control inputstyle" placeholder="Type Category" name="type_cat" >
+                                                            <input  type="text" value="{{ old('type_cat') }}" class="form-control inputstyle" placeholder="Type Category" name="type_cat" >
                                                         </div>
                                                     </div>
-
                                                 </div>
                                                 <div class="row">
                                                     {{-- <div class="col-md-6">
@@ -381,7 +380,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="section">Section</label>
-                                                                <input  type="text" class="form-control inputstyle" placeholder="Type Section" name="type_sec" >
+                                                                <input  type="text" value="{{ old('type_sec') }}"  class="form-control inputstyle" placeholder="Type Section" name="type_sec" >
                                                             </div>
                                                         </div>
                                                 </div>
@@ -402,7 +401,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Rows</label>
-                                                            <input  type="text" class="form-control inputstyle" placeholder="Type Row" name="type_row">
+                                                            <input  type="text" value="{{ old('type_row') }}"  class="form-control inputstyle" placeholder="Type Row" name="type_row">
                                                         </div>
                                                     </div>
                                                </div>
@@ -411,10 +410,10 @@
                                                     <label for="seats">Seats</label>
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <input  type="text" class="form-control inputstyle" placeholder="From First seat" name="seat_from">
+                                                            <input  type="text" class="form-control inputstyle" value="{{ old('seat_from') }}"   placeholder="From First seat" name="seat_from">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input  type="text" class="form-control inputstyle" placeholder="To Last seat" name="seat_to">
+                                                            <input  type="text" class="form-control inputstyle" placeholder="To Last seat" value="{{ old('seat_to') }}"  name="seat_to">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -482,7 +481,7 @@
                                                     <select class="form-select" name = "currency">
                                                         <!--<option selected disabled>Please Select Currency</option>-->
                                                         @foreach($currencies as $currency)
-                                                        <option value="{{$currency->id}}">{{$currency->currency_type}}</option>
+                                                        <option value="{{$currency->id}}" >{{$currency->currency_type}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -490,7 +489,7 @@
                                                     <label for="" class="mb-3">Price per ticket</label>
                                                     <div class="input-group mb-3">
                                                         {{-- <span class="input-group-text">$</span> --}}
-                                                        <input  type="text" class="form-control inputstyle"
+                                                        <input  type="text" value="{{ old('face_price') }}"  class="form-control inputstyle"
                                                             aria-label="Amount (to the nearest dollar)"
                                                             name="face_price" value="">
                                                         {{-- <span class="input-group-text">.00</span> --}}
@@ -521,7 +520,7 @@
                                                     <label for="" class="mb-4">Price per ticket</label>
                                         <div class="input-group mb-4">
                                             <span class="input-group-text">$</span>
-                                            <input type="text" id="price-field" name="price" style="height:40px" class="form-control "
+                                            <input type="text" value="{{ old('price') }}"  id="price-field" name="price" style="height:40px" class="form-control "
                                                 aria-label="Amount (to the nearest dollar)" value = "">
                                             <span class="input-group-text">.00</span>
                                         </div>
@@ -552,7 +551,7 @@
                                                 <div class="col-md-8" >
                                                          <div class="form-group row m-b-10">
                                                             <label class="col-lg-12 text-lg-right col-form-label">Select Country :</label>
-                                                                <select name="country"  autocomplete="country" autofocus class="form-control @error('country') is-invalid @enderror" id="country" >
+                                                                <select name="country"  value="{{ old('country') }}" autocomplete="country" autofocus class="form-control @error('country') is-invalid @enderror" id="country" >
                                                                     <option selected disabled>Select Country</option>
                                                                     <option name="country">Afghanistan</option>
                                                                     <option name="country">Åland Islands</option>
@@ -819,6 +818,12 @@
                                             $(".pTicket").hide();  
                                             if($('.E_Ticket').is(":checked")) 
                                             $(".answer").hide();  
+                                            if(!$('.E_Ticket').is(":checked")) 
+                                            $(".pTicket").show(); 
+                                            if(!$('.E_Ticket').is(":checked")) 
+                                            $(".answer").show();  
+                                            if(!$('.E_Ticket').is(":checked")) 
+                                            $(".doYouHaveATicket").hide(); 
                                             if($('.E_Ticket').is(":checked")) 
                                             $(".doYouHaveATicket").show(); 
                                         }
@@ -828,6 +833,12 @@
                                             $(".answer").hide();  
                                             if($('.MobileTicket').is(":checked")) 
                                             $(".pTicket").hide();
+                                            if(!$('.MobileTicket').is(":checked")) 
+                                            $(".pTicket").show();
+                                            if(!$('.MobileTicket').is(":checked")) 
+                                            $(".answer").show();
+                                            if(!$('.MobileTicket').is(":checked")) 
+                                            $(".mTicket").hide();
                                             if($('.MobileTicket').is(":checked")) 
                                             $(".mTicket").show(); 
                                         }
@@ -916,7 +927,7 @@
     
                                                   
                                                     <p >
-                                                        <input type="checkbox"  id="yesCheck" class="yes" name="book_eticket" id="" value="Yes" onClick="ckChange(this)"> YES i have a ticket.
+                                                        <input type="checkbox"  id="yesCheck"  class="yes" name="book_eticket" id="" value="Yes" onClick="ckChange(this)"> YES i have a ticket.
                                                     </p>
                                                     <p onchange="checkBoxValidation()"> 
                                                         <input type="checkbox" id="noCheck" class="no" name="book_eticket" id="" value="No" onClick="ckChange(this)"> No i dont have.
@@ -996,7 +1007,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="mb-2"><strong>Restrictions :</strong></label><br>
-                                                <label class="m-2"> No Restrictions</label>
+                                                <label class="m-2"><input class="check" type="checkbox" name="ticket_restrictions[]"  value="No Restrictions" id="resCheck"  onClick="ckChange(this)"> No Restrictions</label>
                                                 <label class="m-2" id="res1"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Restricted View" > Restricted View</label>
                                                 <label class="m-2" id="res2"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Age Limit 14+" > Age Limit 14+</label>
                                                 <label class="m-2" id="res3"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Age Limit 18+"  > Age Limit 18+</label>

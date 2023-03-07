@@ -238,10 +238,16 @@
                                                                     <div class="form-group">
                                                                           <select class="form-control"  name="Restriction_filter"  onchange="this.form.submit()">
                                                                               <option selected disabled>Filter by Restrictions</option>
+                                                                              
                                                                                 @foreach ($restrictionsFromTicketListing as $all)
-                                                                                    <option value="{{$all->ticket_restrictions}}">{{$all->ticket_restrictions}}</option></a>
+                                                                                    <option value="{{$all->ticket_restrictions}}" 
+                                                                                        @if(request()->get('Restriction_filter') && request()->get('Restriction_filter') == $all->ticket_restrictions) 
+                                                                                        selected @endif
+                                                                                        >{{implode(' ', json_decode($all->ticket_restrictions, true))}}</option></a>
                                                                                     {{-- <option value="{{$all->ticket_restrictions}}">{{implode(',', json_decode($all->ticket_restrictions, true))}}</option></a> --}}
                                                                                 @endforeach
+                                                                                <option value=""  @if(request()->get('Restriction_filter') && request()->get('Restriction_filter') == 'all-tickets') 
+                                                                                    selected @endif  >  <a href="{{URL::current()}}"style=" margin-right:20px; text-decoration:none">All Tickets</a></option>
                                                                           </select>
                                                                     </div>
                                                                   </form>
@@ -251,9 +257,17 @@
                                                                     <div class="form-group">
                                                                           <select class="form-control"  name="qty"  onchange="this.form.submit()">
                                                                               <option selected disabled>No. of Tickets in Listing</option>
-                                                                              @foreach ($quantityFromTicketListing as $all)
-                                                                                    <option value="{{$all->quantity}}">{{$all->quantity}}</option></a>
+                                                                              {{-- @foreach ($tickets as $all) --}}
+                                                                                @foreach ($quantityFromTicketListing as $all)
+                                                                                    @if ($all->quantity != 0)
+                                                                                    <option value="{{$all->quantity}}"
+                                                                                        @if(request()->get('qty') && request()->get('qty') == $all->quantity) 
+                                                                                            selected @endif
+                                                                                        >{{$all->quantity}}</option></a>
+                                                                                    @endif
                                                                                 @endforeach
+                                                                                <option value="" >
+                                                                                    <a href="{{URL('ticket/{id}/view')}}"style=" margin-right:20px; text-decoration:none">All Tickets</a></option>
                                                                           </select>
                                                                     </div>
                                                                   </form>
@@ -479,7 +493,10 @@
                                                           <select class="form-select form-control-lg"  name="Cat_filter"  onchange="this.form.submit()">
                                                               <option selected disabled>SEACH BY CATEGORY</option>
                                                                 @foreach ($categoriesFromTicketListing as $all)
-                                                                    <option value="{{$all->type_cat}}">{{$all->type_cat}}</option></a>
+                                                                    <option value="{{$all->type_cat}}"
+                                                                        @if(request()->get('Cat_filter') && request()->get('Cat_filter') == $all->type_cat) 
+                                                                        selected @endif
+                                                                        >{{$all->type_cat}}</option></a>
                                                                 @endforeach
                                                           </select>
                                                     </div>
@@ -565,17 +582,20 @@
                                                         ">
                                                             <div class="flight_multis_area_wrapper" >
                                                                 <div class="flight_search_left" >
-                                                                    <div class="ticket" >
-                                                                        <img src="" width="" alt="">
-                                                                        <img src="{{asset('F_Assets/assets/img/common/biman_bangla.png')}}" alt="img">
+                                                                    <div class="ticket text-center" style="width:50%">
+                                                                        {{-- <img src="" width="" alt=""> --}}
+                                                                        <img src="{{asset('assets/images/t1.webp')}}" class="" alt="img">
                                                                     </div>
                                                                     <div class="flight_search_destination" >
-                                                                        <p>Event</p>
-                                                                        <p class="text-dark"><b>{{$ticket->event_name}}</b></p>
+                                                                        
+                                                                        {{-- <p>Event</p>
+                                                                        <p class="text-dark"><b>{{$ticket->event_name}}</b></p> --}}
                                                                         <p>Tickets</p>
                                                                         <h6>No of Tickets {{$ticket->quantity}}</h6>
+                                                                        <p class="m-0">Benefits</p>
+                                                                        <h6 class="fw-700 ">{{implode(' ', json_decode($ticket->ticket_benefits, true))}}</h6> 
                                                                         <p class="m-0">Restriction</p>
-                                                                        <h6 class="fw-700 ">{{implode(',', json_decode($ticket->ticket_restrictions, true))}}</h6> 
+                                                                        <h6>{{implode(' ', json_decode($ticket->ticket_restrictions, true))}}</h6> 
                                                                         <!--<h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>-->
                                                                     
                                                                     </div>
@@ -592,8 +612,8 @@
                                                                     <div class="flight_search_destination">
                                                                         <p>Ticket : </p>
                                                                         <h6>{{$ticket->ticket_type}}</h6>
-                                                                        <p>Seating Area</p>
-                                                                        <h6 class="fw-700 ">{{$ticket->seated_area}}</h6>
+                                                                        {{-- <p>Seating Area</p>
+                                                                        <h6 class="fw-700 ">{{$ticket->seated_area}}</h6> --}}
                                                                         @if($ticket->cat_id == 1)
                                                                         <h6 class="fw-700 ">
                                                                             <p class="m-0">Fans Section</p>
@@ -605,23 +625,23 @@
                                                             </div>
                                                         </div>
                                                         <div class="flight_search_right">
-                                                            <h2 style="font-size: 20px"><b>${{$ticket->price}}</b><sup style="font-size: 8px">Per Ticket</sup></h2>
+                                                            <div class="row">
+                                                                <div class="col-lg-6"><h2 style="font-size: 20px"><b>${{$ticket->price}}</b></h2> </div>
+                                                                <div class="col-lg-6"><h2><sup style="font-size: 8px">Per Ticket</sup></h2></div>
+                                                            </div>
+                                                            {{-- <h2 style="font-size: 20px"><b>${{$ticket->price}}</b><sup style="font-size: 8px">Per Ticket</sup></h2> --}}
                                                             {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.detail',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}">View Ticket Detail</a> --}}
                                                             <a class="@if($ticket->quantity != 0) btn btn_theme btn_sm mb-2 @else btn btn-danger w-100  @endif" href="@if($ticket->quantity > 0)
                                                                 {{ route('buyer.ticket.checkout',['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif " >
                                                                 @if($ticket->quantity == 0) SOLD @else Select Ticket
                                                                     @endif 
                                                             </a>
-                                                        
-                                                            <p> @if ($ticket->ticket_type === "E-Ticket")
+                                                            <p> @if ($ticket->book_eticket === "Yes")
                                                                 @if ($ticket->quantity != 0)
                                                                 <a href="#" class="text-danger" >Instant Download</a>
                                                                     {{-- <a href="{{ route('Pdftemplate',['eventlisting_id' => $events->id,'ticketid' => $ticket->id] ) }}" class="text-danger" >Ticket PDF</a> --}}
                                                                 @endif
                                                             @endif</p>
-                                                            {{-- <h6 data-bs-toggle="collapse" data-bs-target="#collapseExample"
-                                                                aria-expanded="false" aria-controls="collapseExample">Show more <i
-                                                                    class="fas fa-chevron-down"></i></h6> --}}
                                                         </div>
                                                     </div>
                                                     @endif

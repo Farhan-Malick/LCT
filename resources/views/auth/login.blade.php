@@ -58,7 +58,7 @@
         <div class="card" style="border-radius: 1rem;">
           <div class="row g-0">
             <div class="col-md-6 col-lg-5 d-none d-md-block">
-              <img src="{{asset('assets/images/img1.webp')}}"
+              <img src="{{asset('assets/images/LoginGirl.jpg')}}"
                 alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
@@ -75,22 +75,26 @@
 
                   <div class="form-outline mb-4">
                     {{-- <input type="email" id="form2Example17" class="form-control form-control-lg" /> --}}
-                    <input type="email" id="email" placeholder="email@example.com" class="form-control form-control-lg" name="email">
-                                @error('email')
-                                <p style="color: red">{{ $message }}</p>
-                                @enderror
+                    <input type="email" id="email" placeholder="email@example.com" class="form-control form-control-lg  @error('email') is-invalid @enderror"value="{{ old('email') }}" required autocomplete="email" name="email">
                     <label class="form-label" for="form2Example17">Email address</label>
                   </div>
 
                   <div class="form-outline mb-4">
                     {{-- <input type="password" id="form2Example27" class="form-control form-control-lg" /> --}}
-                    
-                    <input type="password" id="password" placeholder="password" class="form-control form-control-lg" name="password">
-                    @error('password')
-                    <p style="color: red">{{ $message }}</p>
-                    @enderror
+                    <input type="password" id="password" placeholder="password" class=" @error('password') is-invalid @enderror form-control form-control-lg" value="{{ old('password') }}" required autocomplete="password" name="password">
                     <label class="form-label" for="form2Example27">Password</label>
+                   
                   </div>
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                      @if ($message = Session::get('error'))
+                      <div class="alert alert-danger">
+                          <center><strong>{{ $message }}</strong></center>
+                      </div>
+                      @endif
+                    </div>
+                </div>
 
                   <div class="pt-1 mb-4">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color: #22b3c1" type="button">Login</button>

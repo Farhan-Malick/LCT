@@ -23,7 +23,7 @@ class EventController extends Controller
         // get categories
         $categories = Category::all();
         $venues = Venues::all();
-        $allevents = allevents::get();
+        $allevents = EventListing::get();
         $events = Event::get();
         return view('Admin.pages.add_event', compact('allevents','events','categories', 'venues'));
     }
@@ -156,6 +156,7 @@ class EventController extends Controller
     {
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
+        
         return view('event_request',compact('FooterEventListing','Footerevents'));
     }
     public function admin_show_request(EventRequest $eventRequest)
@@ -233,10 +234,12 @@ class EventController extends Controller
     public function footerEvents(Request $request){
        
         $price = Purchases::sum('price');
+        $totalprofitDivision = $price / 100;
+        $totalCompanyProfit =  $totalprofitDivision * 20;
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
         $events = Event::all();
-        return view('Admin.pages.footerEvents',compact('events','price','userCount','total_no_sold_tickets'));
+        return view('Admin.pages.footerEvents',compact('totalCompanyProfit','events','price','userCount','total_no_sold_tickets'));
     }
     public function Approval(Request $request)
     {

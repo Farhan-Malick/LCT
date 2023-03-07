@@ -39,6 +39,7 @@ class WebController extends Controller
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
         $events = Event::all();
+        
         $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
         ->join('events', 'events.id', '=', 'event_listings.event_id')
         ->join('venues', 'venues.id', '=', 'events.venue_id');

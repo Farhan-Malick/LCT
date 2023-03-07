@@ -29,12 +29,12 @@
                                 <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My Listings</a></li> --}}
                                 <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">Settings</a></li>
                                 <li class="nav-item">
-                                    <form
+                                    <form 
                                         action="{{ route('logout') }}"
                                         method="POST"
                                     >
                                         @csrf
-                                        <button type="submit" class="btn btn-link">Logout</button>
+                                        <button type="submit" class="dropdown-item text-dark pl-3">Logout</button>
 
                                     </form>
                                 </li>

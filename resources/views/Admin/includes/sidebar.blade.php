@@ -177,6 +177,18 @@
                         <li><a href="{{URL('/Admin-Panel/HotTickets')}}">Hot Tickets</a></li>
                     </ul>
                 </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        <b class="caret"></b>
+                        <i class="fa fa-align-left"></i>
+                        <span>Visitors Analytic</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{ URL('/Admin-Panel/Event-Visitors') }}">Event Visitors</a></li>
+                        <li><a href="{{ URL('/Admin-Panel/EventListing-Visitors') }}">Event Listing Visitors</a></li>
+                        <li><a href="{{ URL('/Admin-Panel/Ticket-Visitors') }}">Tickets Visitors</a></li>
+                    </ul>
+                </li>
               
                 <!-- begin sidebar minify button -->
                 <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>

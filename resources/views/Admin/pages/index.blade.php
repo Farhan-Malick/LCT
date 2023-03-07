@@ -119,6 +119,7 @@
 									<th scope="col">price</th>
 									{{-- <th scope="col">currency</th> --}}
 									<th scope="col">quantity</th>
+									<th scope="col">Country</th>
 									<th scope="col">category</th>
 									<th scope="col">section</th>
 									<th scope="col">row</th>
@@ -143,12 +144,13 @@
 												<td>{{$ticket->event->event_name}}</td>
 												<td>${{$ticket->price}}</td>
 												<td>{{$ticket->quantity}}</td>
+												<td>{{$ticket->country}}</td>
 												<td>{{$ticket->type_cat}}</td>
 												<td>{{$ticket->type_sec}}</td>
 												<td>{{$ticket->type_row}}</td>
 												<td>{{$ticket->seat_from}}</td>
 												<td>{{$ticket->seat_to}}</td>
-												<td><a href="{{URL('view-PDF-File/'.$ticket->id)}}">{{$ticket->simple_pdf}}</a></td>
+												<td><a href="{{URL('view-PDF-File/P-Ticket/'.$ticket->id)}}">{{$ticket->simple_pdfForPaper}}</a></td>
 												<td>{{$ticket->ticket_restrictions}}</td>
 												<td>{{$ticket->ticket_benefits}}</td>
 												{{-- <td>{{$ticket->fan_section}}</td> --}}

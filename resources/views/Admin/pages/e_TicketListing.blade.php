@@ -157,7 +157,7 @@
 											@if ($e_ticket->simple_pdf === null)
 											 <p class="text-success">I have a ticket</p>
 											 @else
-											 <a class="text-primary" href="{{URL('view-PDF-File/'.$e_ticket->id)}}">{{$e_ticket->simple_pdf}}</a>
+											 <a class="text-primary" href="{{URL('view-PDF-File/E-Ticket/'.$e_ticket->id)}}">{{$e_ticket->simple_pdf}}</a>
 											@endif
 										</td>
 										<td>{{$e_ticket->ticket_restrictions}}</td>

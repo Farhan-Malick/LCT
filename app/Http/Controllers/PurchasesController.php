@@ -28,9 +28,6 @@ class PurchasesController extends Controller
     // }
     public function buyer_ticket_purchase(Request $request, $id)
     {
-        if(!auth()->check()){
-            return redirect('/login');
-        }
         $ticket = TicketListing::select('ticket_listings.*','users.last_name', 'event_listings.event_name',
         'event_listings.event_date', 'event_listings.start_time',
         'event_listings.venue_name','categories.id as cat_id',
@@ -43,29 +40,36 @@ class PurchasesController extends Controller
         ->join( 'categories','categories.id', '=','events.category_id')
         ->where('ticket_listings.id',$id)
         ->first();
+
+        if($ticket->ticket_type === "Paper-Ticket"){
+            Request::validate([
+                'country_id'  => 'required',
+            ]);
+        }
+
+        if(!auth()->check()){
+            return redirect('/login');
+        }
+       
         $sub_dateForPaper = '';$sub_dateForMobile = '';$sub_dateForE = '';
         $ticket->msg=''; $ticket->msg2=''; $ticket->msg3='';
         if($ticket->ticket_type === "Paper-Ticket") {
             $sub_dateForPaper = Carbon::parse($ticket->event_date)->subDays(10)->toDateString();
             $ticket->msg = 'Must Ship The Paper Ticket by Date: ' .$sub_dateForPaper;
-            // $ticket->msg2 = '(10days before the event is the deadline to ship the Paper Tickets).';
             $ticket->msg3 = 'The Buyers Address to ship the tickets will be communicated to you shortly.';
         }elseif($ticket->ticket_type === "Mobile-Ticket"){
             $sub_dateForMobile = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
             $ticket->msg = 'Must Transfer The Mobile Ticket by Date: ' .$sub_dateForMobile;
-            // $ticket->msg2 = '(5days before the event is the deadline to transfer the mobile).';
             $ticket->msg3 = 'The Mobile Ticket attendees information will be communicated to you shortly.';
-        }elseif($ticket->ticket_type === "E-Ticket"){
-            $sub_dateForE = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
-            $ticket->msg = 'Must Upload The E-Ticket by Date: ' .$sub_dateForE;
-            // $ticket->msg2 = ' (5days before the event is the deadline to Upload the E-Tickets if the tickets are not pre uploaded).';
+        }elseif($ticket->book_eticket === "No"){
+                $sub_dateForE = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
+                $ticket->msg = 'Must Upload The E-Ticket by Date: ' .$sub_dateForE;
+        }elseif($ticket->book_eticket === "Yes"){
+                $sub_dateForE = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
+                $ticket->msg3 = 'There is nothing you need to do. We will send the pre uploaded tickets to the buyer soon';
         }
         // dd($ticket); 
-        if($ticket->ticket_type === "Paper-Ticket"){
-            Request::validate([
-                'country_id'        => 'required',
-            ]);
-        }
+        
         $seller = User::find($ticket->user_id);
         $purchase = new Purchases();
         $purchase->user_id = auth()->id();
@@ -75,7 +79,6 @@ class PurchasesController extends Controller
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
         $purchase->quantity = Request::get('quantity');
         $purchase->country_id = Request::get('country_id');
-        // dd($purchase);
         $purchase->save();
         MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase);
         MailController::sellerticketpurchased($seller->email, $ticket, $purchase);
@@ -87,7 +90,8 @@ class PurchasesController extends Controller
     }
 
     public function buyer_ticket_show(Request $request, $id){
-        // dd($request->qty);
+
+        EventListing::find($id)->increment('views');
 
         $events = EventListing::select('*','venues.title as vTitle', 'venues.image as vImage')
         ->join('events', 'events.id', '=', 'event_listings.event_id')
@@ -103,9 +107,17 @@ class PurchasesController extends Controller
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
             ->join( 'categories','categories.id', '=','events.category_id')
+            // ->groupBy('quantity')
             ->orderBy('price','asc')
             ->where('approve','1')
             ->where('ticket_listings.eventlisting_id',$id);
+
+        $ticketNo = TicketListing::select('ticket_listings.quantity')
+        ->groupBy('quantity')
+        ->where('approve','1')
+        ->where('ticket_listings.eventlisting_id',$id)
+        ->get();
+
         $categoriesFromTicketListing = TicketListing::select('ticket_listings.type_cat')
             ->groupBy('type_cat')
             ->orderBy('type_cat','asc')
@@ -129,6 +141,7 @@ class PurchasesController extends Controller
         ->where('approve','1')
         ->where('ticket_listings.eventlisting_id',$id)
         ->get();
+        
         if (Request::get('Restriction_filter') !== null) {
             $tickets = $tickets->where('ticket_restrictions', '=',Request::get('Restriction_filter'));
         }
@@ -185,6 +198,9 @@ class PurchasesController extends Controller
         if (Request::get('ticket_restrictions') !== null) {
             $tickets = $tickets->where('ticket_restrictions', '=', Request::get('ticket_restrictions,'));
         }
+        if(Request::get('ticket_restrictions') == 'all-tickets'){
+            $tickets = $tickets->all();
+        }
         if (Request::get('ticket_event') !== null) {
             $tickets = $tickets->where('eventlisting_id', '>=', Request::get('ticket_event'));
         }
@@ -203,7 +219,7 @@ class PurchasesController extends Controller
         $tickets = $tickets->get();
         // dd($tickets);
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
-        return view('payment-tickets/browse-ticket',compact('Footerevents','FooterEventListing','quantityFromTicketListing','restrictionsFromTicketListing','events','tickets', 'eventListings','categoriesFromTicketListing','colors'));
+        return view('payment-tickets/browse-ticket',compact('ticketNo','Footerevents','FooterEventListing','quantityFromTicketListing','restrictionsFromTicketListing','events','tickets', 'eventListings','categoriesFromTicketListing','colors'));
     }
 
     public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid){
@@ -230,6 +246,7 @@ class PurchasesController extends Controller
         ->where('event_listings.id', $eventlisting_id)
         ->first();
         // dd($events);
+        TicketListing::find($ticketid)->increment('views');
         $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')

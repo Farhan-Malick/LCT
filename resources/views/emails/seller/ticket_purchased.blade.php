@@ -1,5 +1,6 @@
 <x-mail::message>
-    
+
+Hello {{$data->last_name}},<br>
 Congratulations, You sold your tickets for the event <b>{{ $data->event_name }}</b> on {{ date('Y-M-d') }}.<br><br>
 <b>Sales Information</b> <br>
 Order Number: {{$data->id}}  <br>
@@ -7,7 +8,7 @@ Ticket Type: {{$data->ticket_type}} <br>
 Section : {{ $data->type_sec }}, Category : {{ $data->type_cat }}, Row : {{ $data->type_row }} <br><br>
 Event: {{ $data->event_name }} <br>
 Venue: {{ $data->venue_name }} <br>
-Date: {{ $data->event_date }} <br><br>
+Date: {{ $data->event_date }} <br>
 
 <b>{{$data->msg}}</b><br>
 <b>{{$data->msg3}}</b><br>

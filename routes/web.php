@@ -16,6 +16,7 @@ use App\Http\Controllers\VenueSectionRowsController;
 use App\Http\Controllers\TicketListingController;
 use App\Http\Controllers\SellerCategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Middleware\AdminAuth;
 
 /*
@@ -30,11 +31,7 @@ use App\Http\Middleware\AdminAuth;
 */
 
 Route::get('/',  [WebController::class, 'index'])->name('home');
-Route::get('/login', function () {
-    $FooterEventListing = App\Models\EventListing::get();
-    $Footerevents = App\Models\Event::get();
-    return view('auth.login',compact('FooterEventListing','Footerevents'));
-})->name("login");
+Route::get('/login', [LoginController::class])->name("login");
 Route::get('/signup', function () {
     $FooterEventListing = App\Models\EventListing::get();
     $Footerevents = App\Models\Event::get();

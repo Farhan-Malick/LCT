@@ -16,6 +16,7 @@ use App\Http\Controllers\EventListingController;
 use App\Http\Controllers\MisController;
 use App\Http\Controllers\SellerCategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\VisitorAnalyticsController;
 use App\Http\Middleware\AdminAuth;
 
 /*
@@ -43,14 +44,21 @@ Route::group(['middleware' => 'web'], function () {
         ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
         ->where('completed', 1)->get();
         $price = App\Models\Purchases::sum('price');
+        $totalprofitDivision = $price / 100;
+        $totalCompanyProfit =  $totalprofitDivision * 20;
         $userCount = App\Models\User::count();
         $total_no_sold_tickets = App\Models\Purchases::sum('quantity');
-        return view('Admin/pages/dashboard',compact('tickets','price','userCount','total_no_sold_tickets'));
+        return view('Admin/pages/dashboard',compact('totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
     });
     Route::middleware('adminauth')->group(function () {
-        Route::get('/view-PDF-File/{id}', [TicketController::class, 'viewPdf']);
+        Route::get('/view-PDF-File/P-Ticket/{id}', [TicketController::class, 'viewPdfForPaperticket']);
+        Route::get('/view-PDF-File/M-Ticket/{id}', [TicketController::class, 'viewPdfForMobileticket']);
+        Route::get('/view-PDF-File/E-Ticket/{id}', [TicketController::class, 'viewPdfForEticket']);
 
         Route::get('/Admin-Panel/Contact-Us', [ContactController::class, 'contactDetailForAdmin']);
+        Route::get('/Admin-Panel/EventListing-Visitors', [VisitorAnalyticsController::class, 'visitors']);
+        Route::get('/Admin-Panel/Event-Visitors', [VisitorAnalyticsController::class, 'eventVisitors']);
+        Route::get('/Admin-Panel/Ticket-Visitors', [VisitorAnalyticsController::class, 'TicketVisitors']);
                 //paperTicket
         Route::get('/Admin-Panel/Edit-PaperTicket/{id}', [TicketController::class, 'editPaperTicket']);
         Route::post('/Admin-Panel/PaperTicket/update/{id}', [TicketController::class, 'updatePaperTicket']);

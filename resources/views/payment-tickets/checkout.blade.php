@@ -128,12 +128,14 @@
                 <input type="hidden" id="pricetotal" value="{{ $tickets->price }}" name="price">
                 {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
               </div>
-             
+              <form method="post" action="{{ route('buyer.ticket.purchase', $tickets->id) }}">
+                @csrf
                     <div class="row d-flex flex-row justify-content-between align-items-center" id="v2">
                         {{-- <input  type="hidden" id="" name="shipcharges" value="" /> --}}
                         @if ($tickets->ticket_type == "Paper-Ticket")
-                        
-                            <div class="col-md-4 d-flex flex-column " name="shipcharges"  id="shipment-charges"></div>
+                            <div class="col-md-4 d-flex flex-column "  name="shipingCharges"  id="shipment-charges" >
+                                {{-- <input type="text" class="form-control" style="border: none"  name="shipingCharges"  id="shipment-charges" value=""> --}}
+                            </div>
                         @endif
                         {{-- <div class="col-md-2 d-flex flex-column "><span><b>TOTAL-PRICE :</b><br>${{ $tickets->price }}</span></div>
                   --}}
@@ -148,8 +150,7 @@
                         <strong>{{ $message }}</strong>
                     </div>
             @endif
-            <form method="post" action="{{ route('buyer.ticket.purchase', $tickets->id) }}">
-                @csrf
+         
                 <div class="card p-3 shadow-sm br-10 mb-3">
                   <div class="row">
                     <div class="col-md-4 ">

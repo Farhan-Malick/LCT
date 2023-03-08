@@ -79,10 +79,17 @@ class PurchasesController extends Controller
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
         $purchase->quantity = Request::get('quantity');
         $purchase->country_id = Request::get('country_id');
+
         $webCharge = $purchase->price / 10;
+        $purchase->webCharge = $webCharge;
+
         $divide = $purchase->price / 100;
         $percentage = $divide * 10;
+
         $grand_total = $purchase->price - $percentage;
+        $purchase->grand_total = $grand_total;
+        $purchase->shipingCharges = Request::get('shipingCharges');
+
         $purchase->save();
         MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge);
         MailController::sellerticketpurchased($seller->email, $ticket, $purchase,$webCharge,$grand_total);

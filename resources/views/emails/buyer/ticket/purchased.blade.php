@@ -17,7 +17,8 @@ Date: {{ $data->event_date }} <br><br>
 <b>Price Information: </b><br>
 Number of Tickets: {{$purchase->quantity}}<br>
 Price per Ticket: USD {{$data->price}} <br>
-Service Charges : USD {{$webCharge}} <br>
+Service Charges : USD {{$purchase->webCharge}} <br>
+Shipping and handling fee: USD {{$purchase->shipingCharges}}
 Total Price : USD {{$purchase->price}}<br> <br>
 If you need any further information on your order, please feel free to contact the support at
 support@lastchanceticket.com <br><br><br>

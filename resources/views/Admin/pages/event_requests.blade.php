@@ -88,6 +88,8 @@
                                     <th scope="col">End Time</th>
                                     <th scope="col">Venue Name Event</th>
                                     <th scope="col">Location</th>
+									<th scope="col">Country</th>
+									<th scope="col">URL</th>
                                     <th scope="col">Delete</th>
                                 </tr>
                             </thead>
@@ -102,6 +104,8 @@
                                     <td>{{$request->end_time}}</td>
                                     <td>{{$request->venue_name}}</td>
                                     <td>{{$request->location}}</td>
+									<td>{{$request->country}}</td>
+									<td><a href="{{$request->url}}"  target="_blank">{{$request->url}}</a></td>
                                     <td>
                                         <a
                                             class="btn btn-danger"

@@ -2,7 +2,7 @@
     {{-- #  [LCT] Congratulations!!! You have successfully purchased the tickets for the Event <b>{{ $data->event_name }}</b> --}}
 {{-- # Ticket Purchased --}}
 
-Hello {{auth()->user()->last_name}},<br>
+Hello {{auth()->user()->first_name}},<br>
 Congratulations, You have successfully purchased tickets for the event <b>{{ $data->event_name }}</b> on {{ date('Y-M-d') }}.<br><br>
 <b>Order Information</b><br>
 Order Number: {{$data->id}}  <br>
@@ -17,6 +17,7 @@ Date: {{ $data->event_date }} <br><br>
 <b>Price Information: </b><br>
 Number of Tickets: {{$purchase->quantity}}<br>
 Price per Ticket: USD {{$data->price}} <br>
+Service Charges : USD {{$webCharge}} <br>
 Total Price : USD {{$purchase->price}}<br> <br>
 If you need any further information on your order, please feel free to contact the support at
 support@lastchanceticket.com <br><br><br>

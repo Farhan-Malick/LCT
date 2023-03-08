@@ -14,15 +14,17 @@ class Ticketpurchased extends Mailable
     use Queueable, SerializesModels;
     public $data;
     public $purchase;
+    public $webCharge;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data, $purchase)
+    public function __construct($data, $purchase,$webCharge)
     {
         $this->data = $data;
         $this->purchase = $purchase;
+        $this->webCharge = $webCharge;
     }
 
     /**

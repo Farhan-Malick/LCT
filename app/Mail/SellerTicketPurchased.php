@@ -20,13 +20,13 @@ class SellerTicketPurchased extends Mailable
      *
      * @return void
      */
-    public function __construct($data, $purchase)
+    public function __construct($data, $purchase,$webCharge,$grand_total)
     {
         $this->data = $data;
         $this->purchase = $purchase;
-        
+        $this->webCharge = $webCharge;
+        $this->grand_total = $grand_total;
     }
-
     /**
      * Get the message envelope.
      *

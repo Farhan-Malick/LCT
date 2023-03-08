@@ -109,36 +109,85 @@ class TicketController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $request->validate([
-            'ticket_restrictions.0' => 'required',
-            'seated_area'                 => 'required',
-            'ticket_type'                 => 'required',
-            'price'                       => 'required',
-            'face_price'                  => 'required',
-            'type_cat'                    => 'required',  
-            'type_sec'                    => 'required',
-            'currency'                    => 'required',
-        ]);
-
+        
+        if($request->input()){
+            $request->validate([
+                
+                'seated_area'                 => 'required',
+                'ticket_type'                 => 'required',
+                'price'                       => 'required',
+                'face_price'                  => 'required',
+                'type_cat'                    => 'required',  
+                'type_sec'                    => 'required',
+                'ticket_restrictions.0' => 'required',
+            ]);
+        }
         if($request->ticket_type === "Paper-Ticket"){
             $request->validate([
                 'country'        => 'required',
                 'simple_pdfForPaper'        => 'required',
+            ]);
+        }else{
+            $request->validate([
+                'ticket_restrictions.0' => 'required',
+                'seated_area'                 => 'required',
+                'ticket_type'                 => 'required',
+                'price'                       => 'required',
+                'face_price'                  => 'required',
+                'type_cat'                    => 'required',  
+                'type_sec'                    => 'required',
+                'currency'                    => 'required',
             ]);
         }
         if($request->ticket_type === "Mobile-Ticket"){
             $request->validate([
                 'simple_pdfForMobileTicket'        => 'required',
             ]);
-        }if($request->ticket_type === "E-Ticket"){
+        }else{
+            $request->validate([
+                'ticket_restrictions.0' => 'required',
+                'seated_area'                 => 'required',
+                'ticket_type'                 => 'required',
+                'price'                       => 'required',
+                'face_price'                  => 'required',
+                'type_cat'                    => 'required',  
+                'type_sec'                    => 'required',
+                'currency'                    => 'required',
+            ]);
+        }
+        if($request->ticket_type === "E-Ticket"){
             $request->validate([
                 'book_eticket'        => 'required',
             ]);
-        }if($request->book_eticket === "No"){
+        }else{
+            $request->validate([
+                'ticket_restrictions.0' => 'required',
+                'seated_area'                 => 'required',
+                'ticket_type'                 => 'required',
+                'price'                       => 'required',
+                'face_price'                  => 'required',
+                'type_cat'                    => 'required',  
+                'type_sec'                    => 'required',
+                'currency'                    => 'required',
+            ]);
+        }
+        if($request->book_eticket === "No"){
             $request->validate([
                 'simple_pdf'        => 'required',
             ]);
+        }else{
+            $request->validate([
+                'ticket_restrictions.0' => 'required',
+                'seated_area'                 => 'required',
+                'ticket_type'                 => 'required',
+                'price'                       => 'required',
+                'face_price'                  => 'required',
+                'type_cat'                    => 'required',  
+                'type_sec'                    => 'required',
+                'currency'                    => 'required',
+            ]);
         }
+       
         $guestUser = LoginController::guestLogin();
         $ticketListing = new TicketListing();
         $sellerCategories = SellerCategory::first();
@@ -262,6 +311,7 @@ class TicketController extends Controller
     }
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)
     {
+       
         $tickets = TicketListing::find($id);
         $user = User::find($tickets->user_id);
         $seller = new Seller();
@@ -270,7 +320,7 @@ class TicketController extends Controller
         $seller->save();
         $tickets->completed = 1;
         $tickets->update();
-        MailController::ticketlistingadded($user->email);
+        // MailController::ticketlistingadded($user->email);
         return redirect()->back()->with('msg','Your Listing has been created and your ticket will be available for purchase after the approval of Admin.');
     }
 
@@ -282,7 +332,6 @@ class TicketController extends Controller
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
         $ticketCurrency = Currency::find($tickets->currency);
-        // dd($ticketCurrency, $tickets);
         $price = $tickets->price * $tickets->quantity;
         $divide = $price / 100;
         $percentage = $divide * 10;
@@ -482,7 +531,9 @@ class TicketController extends Controller
     public function admin_tickets_show(TicketListing $TicketListing)
     {
         $tickets = TicketListing::select('ticket_listings.*')
-        ->where('completed', 1)->get();
+        ->orderBy('created_at', 'desc')
+        ->where('completed', 1)
+        ->get();
         $price = Purchases::sum('price');
         $totalprofitDivision = $price / 100;
         $totalCompanyProfit =  $totalprofitDivision * 20;
@@ -512,7 +563,9 @@ class TicketController extends Controller
     public function admin_e_tickets_show(TicketListing $TicketListing)
     {
         $tickets = TicketListing::select('ticket_listings.*')
-        ->where('completed', 1)->get();
+        ->orderBy('created_at', 'desc')
+        ->where('completed', 1)
+        ->get();
         $price = Purchases::sum('price');
         $totalprofitDivision = $price / 100;
         $totalCompanyProfit =  $totalprofitDivision * 20;
@@ -539,6 +592,7 @@ class TicketController extends Controller
     public function admin_mobile_tickets_show(TicketListing $TicketListing)
     {
         $tickets = TicketListing::select('ticket_listings.*')
+        ->orderBy('id','desc')
         ->where('completed', 1)->get();
         $price = Purchases::sum('price');
         $totalprofitDivision = $price / 100;

@@ -37,7 +37,30 @@
       position:absolute; z-index:1; width:76.5%;
       }
     }
-   
+    /* @keyframes slide {
+  from { left: 100%;}
+  to { left: -100%;}
+}
+@-webkit-keyframes slide {
+  from { left: 100%;}
+  to { left: -100%;}
+}
+    #textofMarquee {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:120px;
+  font-size:30px;
+  animation-name: slide;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: slide;
+  -webkit-animation-duration: 10s;
+  -webkit-animation-timing-function:linear;
+  -webkit-animation-iteration-count: infinite;
+} */
     </style>
   </head>
 
@@ -91,8 +114,8 @@
             <div class="main-caption">
               <div class="container">
                 <h1 class="mb-5 " ><b>Here is the last chance to be the member of world’s leading ticket marketplace for live events around the globe</b></h1>
-                  <marquee scrollamount="10" behavior="" direction="">
-                    <h2 class="" style="color: #ebd6f9; text-shadow: 2px 2px #040009;"><b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customers <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
+                  <marquee scrollamount="10" behavior="scroll" direction="left">
+                    <h2 id="textofMarquee" class="" style="color: #ebd6f9; text-shadow: 2px 2px #040009;"><b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customers <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
                   </marquee>
                 <h6 style="font-size: 8px" class="mb-5 " ><b>Prices are set by sellers may be above or below face value</b></h6>
                   <div class="container ">
@@ -101,7 +124,7 @@
                         <div class="col-md-10">
                           <div class="search ">
                             <i class="fa fa-search"></i>
-                            <input type="text"  name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
+                            <input type="text" onkeyup="mySearchFunction()" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
                             <button class="btn btn-primary">Search</button>
                           </div>
                         </div>
@@ -109,12 +132,33 @@
                       
                       <div class="row height d-flex justify-content-center align-items-center">
                         <div class="col-md-10">
-                          <div  id="search_list" style=""> </div>
+                          <div  id="search_list" style=""></div>
                         </div>
                       </div>
                     </form>
                      
                 </div>
+                <script>
+                  function mySearchFunction() {
+                      var query = document.querySelector('#search_text').value;
+
+                      // this wil grab all <li> elements from all <ul> elements on the page
+                      // however, you will want to specify a unique attribute for only the elements you wish to include
+                      var elements = document.querySelector('#list');
+
+                      let status = query==="" ? "none" : "block"
+                      document.querySelector("#myUL").style.display = status;
+
+                      for (var i = 0; i < elements.length; i++) {
+                        var el = elements[i];
+                        if (el.innerText.indexOf(query) !== -1)
+                          el.style.display = 'block';
+                        else
+                          el.style.display = 'none';
+                      }
+
+                    }
+                </script>
                 <style>
                   .search{
                           position: relative;
@@ -415,7 +459,7 @@
                 </div>
                 <div class="col-lg-6 align-self-center">
                     <div class="content">
-                    <span class="info">*Limited Offer Today</span>
+                    {{-- <span class="info">*Limited Offer Today</span> --}}
                     <h4>{{ $event->event_name }}</h4>
                     <div class="row">
                         <div class="col-6" >

@@ -46,10 +46,10 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h4>LAST CHANCE TICKET</h4>
+          <h4 class="text-light">LAST CHANCE TICKET</h4>
           <h2>Create Your Event Request</h2>
-          <p> Here is the last chance to be the member of world largest marketplace for tickets to live events.
-            Prices are set by sellers and may be below or above face value.</p>
+          {{-- <p> Here is the last chance to be the member of world largest marketplace for tickets to live events.
+            Prices are set by sellers and may be below or above face value.</p> --}}
           <div class="main-button"><a href="#">Discover More</a></div>
         </div>
       </div>
@@ -63,7 +63,7 @@
           <div class="info-item">
             <i class="fa fa-phone"></i>
             <h4>Make a Phone Call</h4>
-            <a href="#">+123 456 789 (0)</a>
+            <a href="#">+276 329 3991</a>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
@@ -135,7 +135,7 @@
               </div>
               <div class="col-lg-6">
                   <fieldset>
-                    <label class="text-dark" for="InputVenue">Veunue Name</label>
+                    <label class="text-dark" for="InputVenue">Venue Name</label>
                     <input
                         type="text"
                         class="form-control"

@@ -109,41 +109,43 @@
                         <div class="col-lg-12">
                           <h2 class="mb-4 text-center"><strong>PLEASE CHECK YOUR TICKET DETAILS ABOVE IN THE MILESTONE AND SUBMIT</strong></h2>
                           <div class="form-group row m-b-10">
+                          @if ($tickets->completed == 1)
+                            <a  
+                            style=" font-size: 14px;
+                                    color: #fff;
+                                    background-color: #2254c1;
+                                    border: 1px solid #2254c1;
+                                    padding: 12px 30px;
+                                    width: 100%;
+                                    text-align: center;
+                                    display: inline-block;
+                                    border-radius: 25px;
+                                    font-weight: 500;
+                                    text-transform: capitalize;
+                                    letter-spacing: 0.5px;
+                                    transition: all .3s;
+                                    position: relative;
+                                    overflow: hidden;
+                            " 
+                            class="btn primary-btn w-100 mt-3"
+                            type="" id=""><strong>Submitted</strong></a>
+                          @else
                           <fieldset>
                             <button class="btn primary-btn w-100 mt-3"
                             type="submit" id="btn-submit"><strong>Submit Ticket</strong></button>
                           </fieldset>
+                          @endif
+                         
                           </div>
                         </div>
-                      </div>
-                      <div class="col-lg-6">
-                        
-                    </div>
-                     
                   </form>
-              
                 </div>
-             
             </div>
            </div>
           </div>
         </div>
      </div>
-     <script type="text/javascript">
-
-      $(document).ready(function () {
-  
-          $("#reservation-form").submit(function (e) {
-  
-              $("#btn-submit").attr("disabled", true);
-  
-              return true;
-  
-          });
-  
-      });
-  
-  </script>
+   
 
     <!-- Optional JavaScript; choose one of the two! -->
     @include("auth.partials.footer")

@@ -52,7 +52,7 @@
                               <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>Phone</span>{{ Auth::user()->phone }}</a>
                            </div>
                            <div class="user-description">
-                              <p>Hey I am a {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
+                              <p>Hey I am {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
                            </div>
                            <div class="user-btns">
                               <a href="#" class="co-main-btn co-btn-width min-width d-inline-block h_40">My Profile<i class="fa-solid fa-right-left ms-3"></i></a>
@@ -65,11 +65,11 @@
                            <div class="profile-tabs">
                               <ul class="nav nav-pills nav-fill p-2 garren-line-tab" id="myTab" role="tablist">
                                  <li class="nav-item">
-                                    <a class="nav-link active" id="feed-tab" data-bs-toggle="tab" href="#feed" role="tab" aria-controls="feed" aria-selected="true"><i class="fa-solid fa-house"></i>Listings</a>
+                                    <a class="nav-link " id="feed-tab" data-bs-toggle="tab" href="#feed" role="tab" aria-controls="feed" aria-selected="true"><i class="fa-solid fa-house"></i>Listings</a>
                                  </li>
                                  
                                  <li class="nav-item">
-                                  <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fa-solid fa-box"></i>My Orders</a>
+                                  <a class="nav-link active" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fa-solid fa-box"></i>My Orders</a>
                                </li>
                                  <li class="nav-item">
                                     <a class="nav-link" id="about-tab" data-bs-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false"><i class="fa-solid fa-circle-info"></i>My Sales</a>
@@ -100,7 +100,63 @@
                             <div class="row">
                               <div class="col-lg-12">
                                  <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade active show" id="feed" role="tabpanel" aria-labelledby="feed-tab">
+                                    <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                                  
+                                       <div class="card shadow-sm mt-3">
+                                          <div class="card-body">
+                                              <h5 class="card-title fw-600">All Orders Here</h5>
+                                              <table class="table">
+                                                  <thead class="thead-light">
+                                                    <tr>
+                                                      <th>#</th>
+                                                      <th >Ticket Name</th>
+                                                      <th >Quantity</th>
+                                                      <th>Start Date</th>
+                                                      <th>Purchased Date</th>
+                                                      <th >Price</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      @foreach($purchases as $purchase)
+                                                    <tr>
+                                                      
+                                                      <td>{{$purchase->id}}</td>
+                                                      <td>{{$purchase->event_name}}</td>
+                                                      <td>{{$purchase->quantity}}</td>
+                                                      <td>{{$data->start_date}}</td>
+                                                      <td>{{$data->created_at}}</td>
+                                                      <td>{{$purchase->price}}</td>
+                                                      
+                                                    </tr>
+                                                    
+                                                    @endforeach
+                                                  </tbody>
+                                                </table>
+                                              <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                  <!-- <div class="accordion-item">
+                                                      <h2 class="accordion-header" id="flush-headingOne">
+                                                          <button class="accordion-button collapsed fw-700" type="button"
+                                                              data-bs-toggle="collapse"
+                                                              data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                                              aria-controls="flush-collapseOne">
+                                                              You need an access code to view your order
+                                                          </button>
+                                                      </h2>
+                                                      <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                                          aria-labelledby="flush-headingOne"
+                                                          data-bs-parent="#accordionFlushExample">
+                                                          <div class="accordion-body">
+                                                              <p>If you do, we already sent your code to the email address
+                                                                  you used to buy your tickets. Check your inbox.</p>
+                                                          </div>
+                                                      </div>
+                                                  </div> -->
+                                                  
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <div class="tab-pane fade " id="feed" role="tabpanel" aria-labelledby="feed-tab">
                                        <div class="nav my-event-tabs mt-4" role="tablist">
                                           <button class="event-link active" data-bs-toggle="tab" data-bs-target="#saved" type="button" role="tab" aria-controls="saved" aria-selected="true"><span class="event-count">1</span><span>Active</span></button>
                                           <button class="event-link" data-bs-toggle="tab" data-bs-target="#organised" type="button" role="tab" aria-controls="organised" aria-selected="false"><span class="event-count">2</span><span>De-Activated</span></button>
@@ -122,15 +178,15 @@
                                                                   <th scope="col">Event</th>
                                                                   <th scope="col">price</th>
                                                                   {{-- <th scope="col">currency</th> --}}
-                                                                  <th scope="col">quantity</th>
-                                                                  <th scope="col">section</th>
+                                                                  <th scope="col">Qty</th>
+                                                                  <th scope="col">Sec</th>
                                                                   <th scope="col">row</th>
-                                                                  <th scope="col">seat from</th>
-                                                                  <th scope="col">seat to</th>
-                                                                  <th scope="col">ticket type</th>
-                                                                  <th scope="col">Created At</th>
-                                                                  <th scope="col">ticket restrictions</th>
-                                                                  <th scope="col">Action</th>
+                                                                  <th scope="col">S.From</th>
+                                                                  <th scope="col">S.To</th>
+                                                                  <th scope="col">Ticket</th>
+                                                                  <th scope="col">Created</th>
+                                                                  <th scope="col">Restrictions</th>
+                                                                  <th scope="col">DeActive</th>
                                                                   </tr>
                                                                </thead>
                                                                <tbody class="table-group-divider">
@@ -156,8 +212,7 @@
                                                                                     @csrf
                                                                                     <input type="hidden" name="ticket_id" id=""
                                                                                        value="{{ $ticket->id }}" >
-                                                                                    <input type="submit" class="btn btn-danger"
-                                                                                       name="" value="Deactivate" id="" >
+                                                                                       <a href="" type="submit"class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                                                                  </form>
                                                                                  {{-- <a class="btn btn-danger" href="{{route('dashboard.ticket.Deactivate',$ticket->id)}}">Deactivate</a> --}}
                                                                               </td>
@@ -383,8 +438,8 @@
                                                                <div class="form-group mt-4">
                                                                   <label class="form-label">New password*</label>
                                                                   <div class="loc-group position-relative">
-                                                                     <input class="form-control h_50" type="password" name="password" placeholder="Enter your password">
-                                                                     <span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span>
+                                                                     <input class="form-control h_50" type="password" id="password" name="password" placeholder="Enter your password">
+                                                                     <span class="pass-show-eye"><i class="fas fa-eye-slash" id="togglePassword"></i></span>
                                                                   </div>
                                                                </div>
                                                                {{-- <div class="form-group mt-4">
@@ -405,62 +460,7 @@
                                           </div>
                                        </div>
                                     </div>
-                                    <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                   
-                                       <div class="card shadow-sm mt-3">
-                                          <div class="card-body">
-                                              <h5 class="card-title fw-600">All Orders Here</h5>
-                                              <table class="table">
-                                                  <thead class="thead-light">
-                                                    <tr>
-                                                      <th>#</th>
-                                                      <th >Ticket Name</th>
-                                                      <th >Quantity</th>
-                                                      <th>Start Date</th>
-                                                      <th>Purchased Date</th>
-                                                      <th >Price</th>
-                                                    </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                      @foreach($purchases as $purchase)
-                                                    <tr>
-                                                      
-                                                      <td>{{$purchase->id}}</td>
-                                                      <td>{{$purchase->event_name}}</td>
-                                                      <td>{{$purchase->quantity}}</td>
-                                                      <td>{{$data->start_date}}</td>
-                                                      <td>{{$data->created_at}}</td>
-                                                      <td>{{$purchase->price}}</td>
-                                                      
-                                                    </tr>
-                                                    
-                                                    @endforeach
-                                                  </tbody>
-                                                </table>
-                                              <div class="accordion accordion-flush" id="accordionFlushExample">
-                                                  <!-- <div class="accordion-item">
-                                                      <h2 class="accordion-header" id="flush-headingOne">
-                                                          <button class="accordion-button collapsed fw-700" type="button"
-                                                              data-bs-toggle="collapse"
-                                                              data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                                              aria-controls="flush-collapseOne">
-                                                              You need an access code to view your order
-                                                          </button>
-                                                      </h2>
-                                                      <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                                          aria-labelledby="flush-headingOne"
-                                                          data-bs-parent="#accordionFlushExample">
-                                                          <div class="accordion-body">
-                                                              <p>If you do, we already sent your code to the email address
-                                                                  you used to buy your tickets. Check your inbox.</p>
-                                                          </div>
-                                                      </div>
-                                                  </div> -->
-                                                  
-                                              </div>
-                                          </div>
-                                      </div>
-                                    </div>
                                  </div>
                               </div>
                             </div>
@@ -494,6 +494,29 @@
       <script src="{{asset('profile/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
       <script src="{{asset('profile/js/custom.js')}}"></script>
       <script src="{{asset('profile/js/night-mode.js')}}"></script>
+
+      <script>
+         const togglePassword = document
+             .querySelector('#togglePassword');
+   
+         const password = document.querySelector('#password');
+   
+         togglePassword.addEventListener('click', () => {
+   
+             // Toggle the type attribute using
+             // getAttribure() method
+             const type = password
+                 .getAttribute('type') === 'password' ?
+                 'text' : 'password';
+                   
+             password.setAttribute('type', type);
+   
+             // Toggle the eye and bi-eye icon
+             this.classList.toggle('bi-eye');
+         });
+     </script>
+
+
    </body>
    <!-- Mirrored from www.gambolthemes.net/html-items/barren-html/disable-demo-link/organiser_profile_view.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 08 Feb 2023 14:26:58 GMT -->
 </html>

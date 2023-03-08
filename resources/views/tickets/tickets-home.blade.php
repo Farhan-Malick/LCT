@@ -76,7 +76,7 @@
                       {{$event->title}}
                       @endforeach
                   </h1>
-                  <p>Hurray! You are in the right place. 100% customer satisfaction. We value every single customers. We guarantee your entry. Secured payout.</p>
+                  {{-- <p>Hurray! You are in the right place. 100% customer satisfaction. We value every single customers. We guarantee your entry. Secured payout.</p> --}}
                 </div>
               </div>
             </div>
@@ -104,7 +104,13 @@
                   @foreach($eventListings as $eventListing)
                   <div class="item">
                     <div class="thumb">
-                      <img src="{{asset('assets/images/1673434292_cricket2.png')}}" alt="">
+                      <a href="{{ route('buyer.ticket.show',$eventListing->id) }}" class="thumbnail-img">
+                        <img src="{{ asset('uploads/eventListing/' . $eventListing->layoutImage) }}" height="350px" alt="" style="
+                        background-position: center center;
+                        background-size: cover;
+                        background-repeat: no-repeat; ">
+                      </a>
+                      {{-- <img src="{{asset('assets/images/1673434292_cricket2.png')}}" alt=""> --}}
                       <div class="text">
                         <h4>{{$eventListing->event_name}}<br><span><i class="fa fa-volleyball"></i> {{$eventListing->category_event}}</span></h4>
                         <h6>LCT<br><span style="font-size: 10px">Last Chance Ticket</span></h6>

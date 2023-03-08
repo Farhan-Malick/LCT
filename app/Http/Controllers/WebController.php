@@ -24,10 +24,10 @@ class WebController extends Controller
             $output = '';
             if(count($data) > 0)
             {
-                $output = '<ul class="list-group" style="display:block;position:relative; z-index:1">';
+                $output = '<ul id="myUL" class="list-group" style="display:block;position:relative; z-index:1">';
                     foreach($data as $row)
                     {  
-                        $output .= '<li class="list-group-item">'.$row->event_name.'</li>';
+                        $output .= '<li id="list" class="list-group-item">'.$row->event_name.'</li>';
                     }
                 $output .= '</ul>';
             }else{

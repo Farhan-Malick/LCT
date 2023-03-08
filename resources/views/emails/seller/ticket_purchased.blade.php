@@ -16,10 +16,13 @@ Date: {{ $data->event_date }} <br>
 <b>Price Information: </b><br>
 Number of Tickets: {{$purchase->quantity}}<br>
 Price per Ticket: USD {{$data->price}} <br>
+Service charges: {{$webCharge}} <br>
+You will receive: {{$grand_total}} <br>
 Total Price : USD {{$purchase->price}}<br> <br>
 If you need any further information on your order, please feel free to contact the support at
 support@lastchanceticket.com <br><br><br>
 Thank you for using {{ config('app.name') }}
+
 
 {{-- You have successfully purchased the ticket for <b>{{ $data->event_name }}</b> event, being held on <b>{{ $data->event_date }}</b> at <b>{{ $data->start_time }}</b>. You will recieve your tickets soon the admin approve. --}}
 

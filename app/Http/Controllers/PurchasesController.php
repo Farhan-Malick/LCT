@@ -79,15 +79,15 @@ class PurchasesController extends Controller
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
         $purchase->quantity = Request::get('quantity');
         $purchase->country_id = Request::get('country_id');
-
+        // Service Charges
         $webCharge = $purchase->price / 10;
         $purchase->webCharge = $webCharge;
-
         $divide = $purchase->price / 100;
         $percentage = $divide * 10;
-
+        // Seller gonna receive
         $grand_total = $purchase->price - $percentage;
         $purchase->grand_total = $grand_total;
+        //Shipping Charges
         $purchase->shipingCharges = Request::get('shipingCharges');
 
         $purchase->save();

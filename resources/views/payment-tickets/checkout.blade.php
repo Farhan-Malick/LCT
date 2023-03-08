@@ -133,9 +133,7 @@
                     <div class="row d-flex flex-row justify-content-between align-items-center" id="v2">
                         {{-- <input  type="hidden" id="" name="shipcharges" value="" /> --}}
                         @if ($tickets->ticket_type == "Paper-Ticket")
-                            <div class="col-md-4 d-flex flex-column "  name="shipingCharges"  id="shipment-charges" >
-                                {{-- <input type="text" class="form-control" style="border: none"  name="shipingCharges"  id="shipment-charges" value=""> --}}
-                            </div>
+                            <div class="col-md-4 d-flex flex-column "  name="shipingCharges"  id="shipment-charges" ></div>
                         @endif
                         {{-- <div class="col-md-2 d-flex flex-column "><span><b>TOTAL-PRICE :</b><br>${{ $tickets->price }}</span></div>
                   --}}

@@ -47,7 +47,6 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        
         if(!session()->has('url.intended'))
         {
             session(['url.intended' => url()->previous()]);
@@ -60,22 +59,34 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+
+        $input = $request->all();
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        $input = $request->all();
+
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {          
-           if (auth()->user()->account_type == 'admin'){
+           if (auth()->user()->account_type == 'admin')
+            {
                 return redirect()->route('admin.home');
-            }else{
-                return redirect(session()->get('url.intended'));
             }
+            else
+            {
+            return redirect(session()->get('url.intended'));
+            }
+          
         }
         else{
+
             return redirect()->back()->with('error','Email-Address / Password Does Not Match.');
+
         }
+
+
+
     }
 
     public static function guestLogin()
@@ -87,10 +98,8 @@ class LoginController extends Controller
             $guest = User::create([
                 'first_name' => "Guest{$randomNumbers}",
             ]);
-
             // Auth::loginUsingId($guest->id);
             return $guest->id;
         }
     }
 }
-?>

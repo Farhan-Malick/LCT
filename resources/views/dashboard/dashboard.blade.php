@@ -34,6 +34,15 @@
             <div class="user-dt-block">
                <div class="container">
                   <div class="row">
+                     <div class="col-lg-12">
+                        @if ($message = Session::get('SuccssMessage'))
+                        <div class="alert alert-primary">
+                            <center><strong>{{ $message }}</strong></center>
+                        </div>
+                        @endif
+                     </div>
+                  </div>
+                  <div class="row">
                      <div class="col-xl-4 col-lg-5 col-md-12">
                         <div class="main-card user-left-dt" style="margin-top: 1px">
                            <div class="user-avatar-img">
@@ -55,7 +64,7 @@
                               <p>Hey I am {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
                            </div>
                            <div class="user-btns">
-                              <a href="#" class="co-main-btn co-btn-width min-width d-inline-block h_40">My Profile<i class="fa-solid fa-right-left ms-3"></i></a>
+                              <a href="{{URL('User-Edit/' . Auth::user()->id ) }}" class="co-main-btn co-btn-width min-width d-inline-block h_40">Edit Profile<i class="fa-solid fa-right-left ms-3"></i></a>
                            </div>
                          
                         </div>

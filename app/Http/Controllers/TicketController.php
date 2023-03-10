@@ -493,6 +493,7 @@ class TicketController extends Controller
         // return back();
     }
     public function dashboard_listing(Category $category, EventListing $event, TicketListing $TicketListing){
+        $user = User::get();
         $categories = Category::all();
         $events = EventListing::all();
         $FooterEventListing = EventListing::get();
@@ -523,7 +524,7 @@ class TicketController extends Controller
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->where('seller_id',auth()->user()->id)->get();
-        return view('dashboard/dashboard',compact('FooterEventListing','Footerevents','categories','active_tickets','events','purchases','data','sales'));
+        return view('dashboard/dashboard',compact('user','FooterEventListing','Footerevents','categories','active_tickets','events','purchases','data','sales'));
     }
 
     // Paper Ticket in Admin Panel

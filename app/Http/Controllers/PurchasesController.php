@@ -89,7 +89,6 @@ class PurchasesController extends Controller
         $purchase->grand_total = $grand_total;
         //Shipping Charges
         $purchase->shipingCharges = Request::get('shipingCharges');
-
         $purchase->save();
         MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge);
         MailController::sellerticketpurchased($seller->email, $ticket, $purchase,$webCharge,$grand_total);

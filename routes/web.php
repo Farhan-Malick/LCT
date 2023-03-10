@@ -35,6 +35,12 @@ Route::get('/',  [WebController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class])->name("login");
 Route::get('/User-Edit/{id}', [UserEditController::class, 'userProfileEdit']);
 Route::post('/User-Update/{id}', [UserEditController::class, 'userProfileUpdate']);
+
+Route::get('/Forget-Password', [UserEditController::class, 'forgetpass']);
+Route::post('/Password-Reset', [UserEditController::class, 'updateForgottenPassword']);
+
+// Route::get('/New-password', [UserEditController::class, 'EnterNewPassword']);
+
 Route::get('/signup', function () {
     $FooterEventListing = App\Models\EventListing::get();
     $Footerevents = App\Models\Event::get();

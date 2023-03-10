@@ -593,7 +593,7 @@ class TicketController extends Controller
     public function admin_mobile_tickets_show(TicketListing $TicketListing)
     {
         $tickets = TicketListing::select('ticket_listings.*')
-        ->orderBy('id','desc')
+        ->orderBy('created_at', 'desc')
         ->where('completed', 1)->get();
         $price = Purchases::sum('price');
         $totalprofitDivision = $price / 100;

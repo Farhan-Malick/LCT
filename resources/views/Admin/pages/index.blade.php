@@ -269,6 +269,7 @@
 	
 	<script src="{{asset("AdminAssets/js/demo/dashboard-v2.js")}}"></script>
     <script>
+	
         $('#rejectionModal').on('show.bs.modal', function (e) {
             $("#ticket_id").val($(e.relatedTarget).data('id'));
         });

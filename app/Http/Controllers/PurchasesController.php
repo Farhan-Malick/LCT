@@ -17,6 +17,8 @@ use App\Http\Controllers\MailController;
 // use Illuminate\Http\Request;
 use Request;
 use Carbon\Carbon;
+use Stripe\Stripe;
+use Stripe\Charge;
 
 class PurchasesController extends Controller
 {
@@ -68,6 +70,7 @@ class PurchasesController extends Controller
                 $sub_dateForE = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
                 $ticket->msg3 = 'There is nothing you need to do. We will send the pre uploaded tickets to the buyer soon';
         }
+
         // dd($ticket); 
         
         $seller = User::find($ticket->user_id);
@@ -90,6 +93,14 @@ class PurchasesController extends Controller
         //Shipping Charges
         $purchase->shipingCharges = Request::get('shipingCharges');
         $purchase->save();
+       
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Charge::create ([
+                "amount" => $grand_total * 150,
+                "currency" => "usd",
+                "source" => Request::get('stripeToken'),
+                "description" => "Making test payment." 
+        ]);
         MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge);
         MailController::sellerticketpurchased($seller->email, $ticket, $purchase,$webCharge,$grand_total);
         return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');

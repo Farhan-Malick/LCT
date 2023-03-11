@@ -19,8 +19,11 @@ class WebController extends Controller
     {
         
         if($request->ajax()){
-            $data=EventListing::where('event_name','LIKE','%'.$request->search_text.'%')->get();
-
+            $data = [];
+            if(!empty($request->search_text)){
+                $data=EventListing::where('event_name','LIKE','%'.$request->search_text.'%')->get();
+            }
+            
             $output = '';
             if(count($data) > 0)
             {

@@ -82,7 +82,7 @@
         <div class="col-lg-12 mb-3">
           <div class="card card-stepper" style="border-radius: 10px;">
             <div class="card-body p-4">
-  
+
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex flex-column">
                   <span class="lead fw-normal">Your Order Details</span>
@@ -134,7 +134,7 @@
                id="payment-form">
                 @csrf
                     <div class="row d-flex flex-row justify-content-between align-items-center" id="v2">
-                        {{-- <input  type="hidden" id="" name="shipcharges" value="" /> --}}
+                        {{-- <input  type="hidden" id="" name="shipingCharges" value="" /> --}}
                         @if ($tickets->ticket_type == "Paper-Ticket")
                             <div class="col-md-4 d-flex flex-column "  name="shipingCharges"  id="shipment-charges" ></div>
                         @endif
@@ -592,8 +592,10 @@
 $("#country_id").on('change', function (e) {
     var countrySelected = $(this).val();
     if(sellerCountry !== countrySelected){
+        <input  type="hidden" id="" name="shipingCharges" value="$50" />
         $("#shipment-charges").html("<span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$50</span>")
     } else {
+        <input  type="hidden" id="" name="shipingCharges" value="$20" />
         $("#shipment-charges").html("<span><b>LOCAL SHIPMENT CHARGES :</b><br>$20</span>")
     }
 });

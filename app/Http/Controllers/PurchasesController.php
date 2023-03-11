@@ -80,6 +80,7 @@ class PurchasesController extends Controller
         $purchase->ticket_id = $ticket->id;
         $purchase->seller_id = $ticket->user_id;
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
+        $purchasePrice = (int) $ticket->price * (int) Request::get('quantity');
         $purchase->quantity = Request::get('quantity');
         $purchase->country_id = Request::get('country_id');
         // Service Charges
@@ -96,7 +97,7 @@ class PurchasesController extends Controller
        
         Stripe::setApiKey(env('STRIPE_SECRET'));
         Charge::create ([
-                "amount" => $grand_total * 150,
+                "amount" => $purchasePrice * 150,
                 "currency" => "usd",
                 "source" => Request::get('stripeToken'),
                 "description" => "Making test payment." 

@@ -24,6 +24,10 @@ class WebController extends Controller
                 $data=EventListing::where('event_name','LIKE','%'.$request->search_text.'%')->get();
             }
             
+
+
+
+            
             $output = '';
             if(count($data) > 0)
             {

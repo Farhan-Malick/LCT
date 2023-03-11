@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\EventListing;
 use App\Models\Event;
-
 use App\Models\TicketListing;
 
 use App\Models\Purchases;
@@ -93,11 +92,12 @@ class PurchasesController extends Controller
         $purchase->grand_total = $grand_total;
         //Shipping Charges
         $purchase->shipingCharges = Request::get('shipingCharges');
+        // dd($purchase->price);
         $purchase->save();
        
         Stripe::setApiKey(env('STRIPE_SECRET'));
         Charge::create ([
-                "amount" => $purchasePrice * 150,
+                "amount" => $purchasePrice * 100,
                 "currency" => "usd",
                 "source" => Request::get('stripeToken'),
                 "description" => "Making test payment." 

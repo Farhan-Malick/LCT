@@ -32,8 +32,7 @@ class UserEditController extends Controller
         return view('auth.forgotpass',compact('FooterEventListing','Footerevents'));
     }
     public function updateForgottenPassword(Request $request, User $user)
-    { 
-        
+    {
         if (User::where('email', '=', $request->email)->exists()) {
             $user = User::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
             return redirect()->back()->with('success','Your Password has been Created successfully.Your Email Is In Our Database.');

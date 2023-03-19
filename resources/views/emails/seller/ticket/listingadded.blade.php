@@ -11,5 +11,6 @@ If you need any further information on your listing, please feel free to contact
 support@lastchanceticket.com
 <br>
 Thanks,<br>
+<img width="50%" height="40px" src="{{asset('assets/images/logo1.png')}}" alt="">
 {{ config('app.name') }}
 </x-mail::message>

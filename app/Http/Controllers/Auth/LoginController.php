@@ -15,6 +15,7 @@ use Illuminate\Contacts\Session\Session;
 
 class LoginController extends Controller
 {
+    
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -66,7 +67,6 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {          
            if (auth()->user()->account_type == 'admin')

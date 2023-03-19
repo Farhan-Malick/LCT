@@ -222,14 +222,17 @@
                                                             <div class="col-md-4">
                                                                 <select class="form-control" name="ticket_type"  placeholder="Select Ticket Type" onchange="this.form.submit()">
                                                                     <option disabled @if(request()->get('ticket_type') == null)selected @endif>Filter By Ticket Type</option>
-                            
-                                                                    <option value="paper-ticket"  @if(request()->get('ticket_type') && request()->get('ticket_type') == 'paper-ticket') 
+                                                                    <option 
+                                                                    value=""  @if(request()->get('ticket_type') && request()->get('ticket_type') !== 'Paper-Ticket' && request()->get('ticket_type') && request()->get('ticket_type') !== 'E-Ticket' && request()->get('ticket_type') && request()->get('ticket_type') !== 'Mobile-Ticket') 
+                                                                                    selected @endif 
+                                                                    ><a href="{{URL::current()}}"style=" margin-right:20px; text-decoration:none">All Tickets</a></option>
+                                                                    <option value="Paper-Ticket"  @if(request()->get('ticket_type') && request()->get('ticket_type') == 'Paper-Ticket') 
                                                                         selected @endif  >Paper Ticket</option>
                             
-                                                                    <option value="e-ticket" @if(request()->get('ticket_type') && request()->get('ticket_type') == 'e-ticket') 
+                                                                    <option value="E-Ticket" @if(request()->get('ticket_type') && request()->get('ticket_type') == 'E-Ticket') 
                                                                         selected @endif>E-Ticket</option>
                             
-                                                                    <option value="mobile-ticket" @if(request()->get('ticket_type') && request()->get('ticket_type') == 'mobile-ticket') 
+                                                                    <option value="Mobile-Ticket" @if(request()->get('ticket_type') && request()->get('ticket_type') == 'Mobile-Ticket') 
                                                                         selected @endif>Mobile Ticket</option>
                                                                 </select>
                                                             </div>
@@ -492,6 +495,8 @@
                                                     <div class="form-group">
                                                           <select class="form-select form-control-lg"  name="Cat_filter"  onchange="this.form.submit()">
                                                               <option selected disabled>SEACH BY CATEGORY</option>
+                                                              <option value=""  @if(request()->get('Cat_filter') && request()->get('Cat_filter')) 
+                                                                selected @endif  >  <a href="{{URL::current()}}"style=" margin-right:20px; text-decoration:none">All Tickets</a></option>
                                                                 @foreach ($categoriesFromTicketListing as $all)
                                                                     <option value="{{$all->type_cat}}"
                                                                         @if(request()->get('Cat_filter') && request()->get('Cat_filter') == $all->type_cat) 

@@ -14,6 +14,7 @@ use App\Models\VanueSections;
 use App\Models\VenueSectionRows;
 use App\Models\ETicket;
 use App\Models\Purchases;
+use App\Models\BankDetail;
 use App\Models\SellerCategory;
 use App\Http\Controllers\Auth\LoginController;
 use Mail;
@@ -126,6 +127,7 @@ class TicketController extends Controller
             $request->validate([
                 'country'        => 'required',
                 'simple_pdfForPaper'        => 'required',
+                // 'simple_pdfForPaper'        => 'required|mimes:pdf|max:10000',
             ]);
         }else{
             $request->validate([
@@ -309,6 +311,17 @@ class TicketController extends Controller
         return redirect()->back()->with('msg','Your Password has been Reset');  
 
     }
+    public function BankDetailsFrom(Request $request,BankDetail $bank_detail){
+
+        $bank_detail = new BankDetail();
+        $bank_detail->user_id = auth()->id();
+        $bank_detail->bank_name = $request->bank_name;
+        $bank_detail->iban = $request->iban;
+        $bank_detail->swift_number = $request->swift_number;
+        $bank_detail->save();
+        return redirect()->back()->with('msg','Your Bank Details has been Saved');  
+
+    }
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)
     {
        
@@ -320,7 +333,7 @@ class TicketController extends Controller
         $seller->save();
         $tickets->completed = 1;
         $tickets->update();
-        // MailController::ticketlistingadded($user->email);
+        MailController::ticketlistingadded($user->email);
         return redirect()->back()->with('msg','Your Listing has been created and your ticket will be available for purchase after the approval of Admin.');
     }
 
@@ -516,7 +529,6 @@ class TicketController extends Controller
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->where('purchases.user_id',auth()->user()->id)
         ->first();
-       
       
         // dd ($active_tickets);
 
@@ -528,7 +540,18 @@ class TicketController extends Controller
     }
 
     // Paper Ticket in Admin Panel
-    
+    public function Approval(Request $request)
+    {
+        $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')
+        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->where('ticket_listings.id', $request->ticket_id)
+        ->first();
+        $user = User::find($tickets->user_id);
+        $tickets->approve=1;
+        $tickets->update();
+        MailController::ticketlistingapproved($user->email, $tickets);
+        return redirect()->back()->with('approve','Ticket has been Approved Successfully');
+    }
     public function admin_tickets_show(TicketListing $TicketListing)
     {
         $tickets = TicketListing::select('ticket_listings.*')
@@ -556,7 +579,7 @@ class TicketController extends Controller
         $request->session()->flash('msg2','Data Has Been Updated Successfully'); 
         return redirect('Admin-Panel/');
     }
-//END OF PAPER TICKET
+    //END OF PAPER TICKET
 
 
      // E-Ticket in Admin Panel
@@ -615,18 +638,7 @@ class TicketController extends Controller
         $request->session()->flash('msg2','Data Has Been Updated Successfully'); 
         return redirect('Admin-Panel/Mobile_tickets');
     }
-    public function Approval(Request $request)
-    {
-        $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')
-        ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
-        ->where('ticket_listings.id', $request->ticket_id)
-        ->first();
-        $user = User::find($tickets->user_id);
-        $tickets->approve=1;
-        $tickets->update();
-        MailController::ticketlistingapproved($user->email, $tickets);
-        return redirect()->back()->with('approve','Ticket has been Approved Successfully');
-    }
+   
 
     public function Rejection(Request $request)
     {
@@ -650,7 +662,10 @@ class TicketController extends Controller
     }
     public function ticket_Activation(Request $request)
     {
-            $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')->where('ticket_listings.id', $request->ticket_id)->first();
+            $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')
+            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+            ->where('ticket_listings.id', $request->ticket_id)
+            ->first();
             $user = User::find($tickets->user_id);
             $tickets->approve=1;
             $tickets->update();
@@ -668,20 +683,6 @@ class TicketController extends Controller
         return back()->with('msg',"Ticket has been Deleted Successfully");
 
     }
-    //buyer functions
-
-    // public function buyer_tickets_index(EventListing $event,$id){
-
-    //     $events = EventListing::find($id);
-    //     return view('payment-tickets/browse-tickets',compact('events'));
-    // }
-
-    // public function buyer_ticket_show(EventListing $event,TicketListing $TicketListing,$id){
-
-    //     $events = EventListing::find($id);
-    //     $tickets = TicketListing::where('event_id',$id)->get();
-    //     return view('payment-tickets/browse-TicketListing',compact('events','tickets'));
-    // }
 
     public function buyer_ticket_checkout( TicketListing $TicketListing,$id){
         $FooterEventListing = EventListing::get();
@@ -690,4 +691,50 @@ class TicketController extends Controller
         return view('payment-tickets/checkout',compact('FooterEventListing','Footerevents','tickets'));
     }
 
+    public function downloadTicket(TicketListing $TicketListing , Event $event,$id ){
+
+        $etickets = TicketListing::select('ticket_listings.*','purchases.seller_id')
+        ->join('purchases', 'purchases.ticket_id', '=', 'ticket_listings.id')   
+        ->orderBy('id','desc')
+        ->get();
+        $price = Purchases::sum('price');
+        $totalprofitDivision = $price / 100;
+        $totalCompanyProfit =  $totalprofitDivision * 20;
+        $userCount = User::count();
+        $total_no_sold_tickets = Purchases::sum('quantity');
+        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $id)->first();
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name')
+            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+            ->join('events', 'events.id', '=', 'event_listings.event_id')
+            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
+            ->where('approve','1')
+            // ->where('ticket_listings.id',$id)
+            ->where('events.id',$id)
+            ->first();
+        return view('Admin.pages.eTicketDownload',compact('tickets','events','totalCompanyProfit','etickets','price','userCount','total_no_sold_tickets'));
+    }
+    public function eTicket_Pdf_template(TicketListing $ticket, Event $event,$id ){
+        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $id)->first();
+        $eventListings = EventListing::where('status', 1)->where('event_id', $id)->select('id', 'event_name','venue_name')->first();
+        // dd($events);
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name')
+            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+            ->join('events', 'events.id', '=', 'event_listings.event_id')
+            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
+            ->where('approve','1')
+            // ->where('ticket_listings.id',$id)
+            ->where('events.id',$id)
+            ->first();
+
+        $pdf = Pdf::loadView('downloadPDF',[
+            'tickets'=>$tickets,
+            'events'=>$events,
+            'eventListings'=>$eventListings
+        ]);
+        return $pdf->download('ticket.pdf');
+
+        return view('downloadPDF',compact('tickets','events','sellers'));
+    }
 }

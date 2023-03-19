@@ -8,5 +8,6 @@ Button Text
 </x-mail::button> --}}
 
 Thanks,<br>
-{{ config('app.name') }}
+{{ config('app.name') }}<br>
+<img width="50%" height="40px" src="{{asset('assets/images/logo1.png')}}" alt="">
 </x-mail::message>

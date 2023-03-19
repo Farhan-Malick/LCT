@@ -42,30 +42,12 @@
             <div class="row">
               <div class="col-lg-12 p-5 text-center mt-5">
                 <h2> Sell your tickets on Last Chance Ticket</h2>
-                <h4>  Reach millions of buyers around the world
-                  through the world's largest ticket marketplace</h4>
+                <h4>Last chance ticket helps you to sell the tickets quickly by making your listing available to millions of customers around the world.</h4>
               </div>
              
             </div>
           </div>
         </div>
-        {{-- <section class="section-two primary-bg p-sm-5 p-2" style="margin-top: 80px; height:250px">
-            <div class="container" style="margin-top: 60px">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center text-light">
-                            <h1 class="fw-700 text-light">
-                                Sell your tickets on Last Chance Ticket
-                            </h1>
-                            <p class="text-dark">
-                                Reach millions of buyers around the world
-                                through the world's largest ticket marketplace
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
         <div class="weekly-offers">
           <div class="container">
             <div class="row">
@@ -86,14 +68,8 @@
               <div class="col-12 ">
                 <div class="alert alert-primary "  role="alert" >
                   <p class="text-dark">
-                   <strong>Only
-                     {{-- {{$eventListing->quantity}} --}}
-                     available
-                     tickets.
+                   <strong>Easily sell your tickets with last chance ticket.
                    </strong>
-                   Creating a listing now will
-                   increase the chances of your
-                   tickets selling.
                   </p>
                </div>
               </div>

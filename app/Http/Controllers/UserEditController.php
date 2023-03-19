@@ -20,7 +20,10 @@ class UserEditController extends Controller
         $user = User::find($id);
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
+        $user->primary_phone = $request->primary_phone;
         $user->phone = $request->phone;
+        $user->country = $request->country;
+        
         $user->update();
         $request->session()->flash('error','Data Has Been Updated Successfully'); 
         return redirect('/dashboard')->with('SuccssMessage','You Have Updated Yout Profile Successfully');
@@ -29,7 +32,7 @@ class UserEditController extends Controller
     {
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
-        return view('auth.forgotpass',compact('FooterEventListing','Footerevents'));
+        return view('auth.passwords.email',compact('FooterEventListing','Footerevents'));
     }
     public function updateForgottenPassword(Request $request, User $user)
     {
@@ -44,7 +47,7 @@ class UserEditController extends Controller
     {
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
-        return view('auth.resetPass',compact('FooterEventListing','Footerevents'));
+        return view('auth.passwords.reset',compact('FooterEventListing','Footerevents'));
     }
 }
 

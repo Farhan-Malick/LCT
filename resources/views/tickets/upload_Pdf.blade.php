@@ -393,7 +393,7 @@
     <script src="../../js/web-vitals.js"></script>
     <script type="text/javascript">
 
-        viagogo.viagogoTicketUploader.init({
+        LCT.LCTTicketUploader.init({
             content: {
                 uploadingText: "Uploading",
                 processingText: "Processing",
@@ -459,14 +459,14 @@
                 });
             });
 
-     $(function(){$("[data-user-setting]").click(function(b){b.preventDefault();var c=$(this).data("user-setting")||"1";var a={};$.modal.post(VGPage.mergeUrlElements("https://www.viagogo.com/secure/Browse/DefaultMaster/LocationSettings","?selected="+c+"&hide=True"),a)})});$(function(){$("#js-toggle-footer").on("click",function(a){a.preventDefault();$("#ftr, #btn-footer-inact, #btn-footer-act").toggleClass("hide");var b=[{LanguageCurrencyCallout:!$("#ftr").hasClass("hide")}];var a=window.VGPageEvent.createPageEvent("Click",b);window.VGPageEvent.insertPageEvent(a)})});(function(a,m){var k=a.tagId;var c=a.conversionEventDedupeKey;var d=a.conversionParameters;if(d==null){d=[]}if(!window.uetq){window.uetq=window.uetq||[];var h=function(){var i={ti:k};i.q=window.uetq;window.uetq=new UET(i);window.uetq.push("pageLoad")};var j=document.createElement("script");j.src="//bat.bing.com/bat.js";j.async=true;j.onload=j.onreadystatechange=function(){var i=this.readyState;if(!i||i==="loaded"||i==="complete"){j.onload=j.onreadystatechange=null;h()}};var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(j,e);if(c!=null&&d!=null){if(c&&m.vgLocalStorage&&m.vgLocalStorage.get(c,"bingads-tag")){return}var b={ecomm_pagetype:"PURCHASE"};for(var f=0;f<d.length;f++){var g=d[f]["key"];var l=d[f]["value"];b[g]=l}window.uetq.push("event","PRODUCT_PURCHASE",b);if(c&&m.vgLocalStorage){m.vgLocalStorage.set(c,"bingads-tag",{})}}}})({tagId:"23001275"},window.viagogo=window.viagogo||{});
+     $(function(){$("[data-user-setting]").click(function(b){b.preventDefault();var c=$(this).data("user-setting")||"1";var a={};$.modal.post(VGPage.mergeUrlElements("https://www.LCT.com/secure/Browse/DefaultMaster/LocationSettings","?selected="+c+"&hide=True"),a)})});$(function(){$("#js-toggle-footer").on("click",function(a){a.preventDefault();$("#ftr, #btn-footer-inact, #btn-footer-act").toggleClass("hide");var b=[{LanguageCurrencyCallout:!$("#ftr").hasClass("hide")}];var a=window.VGPageEvent.createPageEvent("Click",b);window.VGPageEvent.insertPageEvent(a)})});(function(a,m){var k=a.tagId;var c=a.conversionEventDedupeKey;var d=a.conversionParameters;if(d==null){d=[]}if(!window.uetq){window.uetq=window.uetq||[];var h=function(){var i={ti:k};i.q=window.uetq;window.uetq=new UET(i);window.uetq.push("pageLoad")};var j=document.createElement("script");j.src="//bat.bing.com/bat.js";j.async=true;j.onload=j.onreadystatechange=function(){var i=this.readyState;if(!i||i==="loaded"||i==="complete"){j.onload=j.onreadystatechange=null;h()}};var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(j,e);if(c!=null&&d!=null){if(c&&m.vgLocalStorage&&m.vgLocalStorage.get(c,"bingads-tag")){return}var b={ecomm_pagetype:"PURCHASE"};for(var f=0;f<d.length;f++){var g=d[f]["key"];var l=d[f]["value"];b[g]=l}window.uetq.push("event","PRODUCT_PURCHASE",b);if(c&&m.vgLocalStorage){m.vgLocalStorage.set(c,"bingads-tag",{})}}}})({tagId:"23001275"},window.LCT=window.LCT||{});
 
             $(function() {
                 $("#menu").dropDownMenu({
                     switchOnHover: false
                 });
 
-                viagogo.events.on('header.menu.open', function(data) {
+                LCT.events.on('header.menu.open', function(data) {
                     var valueName = $(data.menu).data('trackingdatavaluename');
                     if(valueName) {
                         VGPageEvent.insertPageEvent({
@@ -559,7 +559,7 @@ function _arrayWithHoles(e) {
   }), webVitals.getTTFB(function(e) {
       r(u, e)
   })
-}(window.viagogo = window.viagogo || {});
+}(window.LCT = window.LCT || {});
 
 function _defineProperty(e, t, n) {
   return t in e ? Object.defineProperty(e, t, {
@@ -626,7 +626,7 @@ var _js = function(i) {
           return setTimeout(e, t)
       })
   }, i.jshelpers = i.jshelpers || r.once, r
-}(window.viagogo = window.viagogo || {});
+}(window.LCT = window.LCT || {});
 
 function _createForOfIteratorHelper(e, r) {
   var t = "undefined" != typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
@@ -752,7 +752,7 @@ function _arrayWithHoles(e) {
   })), !s && window.performance.timing && (t = function() {
       "interactive" !== document.readyState && "complete" !== document.readyState || (_js.recordPageEvent(o, u, Number(window.performance.getEntriesByType("navigation")[0].domInteractive.toFixed(2))), document.removeEventListener("readystatechange", t))
   }, "complete" === document.readyState ? _js.recordPageEvent(o, u, Number(window.performance.getEntriesByType("navigation")[0].domInteractive.toFixed(2))) : document.addEventListener("readystatechange", t))
-}(window.viagogo = window.viagogo || {});
+}(window.LCT = window.LCT || {});
 
 function _defineProperty(e, t, n) {
   return t in e ? Object.defineProperty(e, t, {
@@ -782,7 +782,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }), n(document))
 });
 </script>
-<div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon311809122921"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon833998061291" alt="" src="https://bat.bing.com/action/0?ti=23001275&amp;Ver=2&amp;mid=f3e38324-5d5f-44c6-a51b-784876c3a052&amp;sid=b95fc7307edd11edb13ddb84302bba18&amp;vid=b95fdb407edd11ed9baae3d720f577a2&amp;vids=0&amp;msclkid=N&amp;pi=918639831&amp;lg=en-US&amp;sw=1600&amp;sh=900&amp;sc=24&amp;tl=Sell%20Tickets%20-%20Sell%20Concert,%20Sports,%20Theatre%20tickets%20%7C%20viagogo%20Ticket%20Exchange&amp;kw=viagogo,%20buy%20tickets,%20sell%20tickets,%20concert%20tickets,%20sport%20tickets,%20theatre%20tickets&amp;p=https%3A%2F%2Fwww.viagogo.com%2FSecure%2FPipeline%2FSell%2FETicketUpload%3FID%3D4e00d30c-3483-4e1e-9532-8e06939c8b4d&amp;r=https%3A%2F%2Fwww.viagogo.com%2FSecure%2FPipeline%2FSell%2FTicketDetails%3FID%3D4e00d30c-3483-4e1e-9532-8e06939c8b4d&amp;lt=3819&amp;mtp=256&amp;evt=pageLoad&amp;sv=1&amp;rn=88174" width="0" height="0"></div> --}}
+<div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon311809122921"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon833998061291" alt="" src="https://bat.bing.com/action/0?ti=23001275&amp;Ver=2&amp;mid=f3e38324-5d5f-44c6-a51b-784876c3a052&amp;sid=b95fc7307edd11edb13ddb84302bba18&amp;vid=b95fdb407edd11ed9baae3d720f577a2&amp;vids=0&amp;msclkid=N&amp;pi=918639831&amp;lg=en-US&amp;sw=1600&amp;sh=900&amp;sc=24&amp;tl=Sell%20Tickets%20-%20Sell%20Concert,%20Sports,%20Theatre%20tickets%20%7C%20LCT%20Ticket%20Exchange&amp;kw=LCT,%20buy%20tickets,%20sell%20tickets,%20concert%20tickets,%20sport%20tickets,%20theatre%20tickets&amp;p=https%3A%2F%2Fwww.LCT.com%2FSecure%2FPipeline%2FSell%2FETicketUpload%3FID%3D4e00d30c-3483-4e1e-9532-8e06939c8b4d&amp;r=https%3A%2F%2Fwww.LCT.com%2FSecure%2FPipeline%2FSell%2FTicketDetails%3FID%3D4e00d30c-3483-4e1e-9532-8e06939c8b4d&amp;lt=3819&amp;mtp=256&amp;evt=pageLoad&amp;sv=1&amp;rn=88174" width="0" height="0"></div> --}}
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

@@ -7,6 +7,7 @@ use App\Mail\TicketListingAdded;
 use App\Mail\TicketListingRejected;
 use App\Mail\Ticketpurchased;
 use App\Mail\SellerTicketPurchased;
+use App\Mail\UserRegisteredSuccessfully;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,16 @@ use Illuminate\Http\Request;
 class MailController extends Controller
 {
     //
+    public static function UserRegisteredSuccessfully($email,$data) {
+
+        try{
+            $mail = Mail::to($email)->send(new UserRegisteredSuccessfully());
+            return $mail;
+        }catch(Exception $th){
+            dd($th);
+            return response()->json(['Mail not sent']);
+        }
+    }
 
     public static function ticketlistingadded($email) {
 

@@ -4481,8 +4481,9 @@ textarea {
 }
 
 .flight_search_middel {
+   
     display: flex;
-    align-items: center;
+    align-items: left;
     padding-left: 47px;
 }
 
@@ -4515,7 +4516,7 @@ textarea {
 }
 
 .flight_right_arrow {
-    text-align: center;
+    text-align: left;
 }
 
 .flight_right_arrow img {

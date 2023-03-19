@@ -43,4 +43,12 @@ class ContactController extends Controller
          $contact->save();
          return back()->with('msg',"Your request has been sent to the Admin center");
     }
+
+    public function contactDelete($id){
+        //return $id;
+        $contact = Contact::find($id);
+        $contact->delete();
+        return redirect()->back()->with('delete', 'Data has been Deleted successfully');
+    }
+
 }

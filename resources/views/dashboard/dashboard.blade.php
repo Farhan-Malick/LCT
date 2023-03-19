@@ -57,8 +57,12 @@
                               <span class="user-email">{{ Auth::user()->email }}</span>
                            </div>
                            <div class="ff-block">
-                              <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>Country</span>{{ Auth::user()->primary_phone }} </a>
+                              <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>Country Code</span>{{ Auth::user()->primary_phone }} </a>
                               <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>Phone</span>{{ Auth::user()->phone }}</a>
+                           </div>
+                           <div class="ff-block">
+                              <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>Nationality</span>{{ Auth::user()->nationality }} </a>
+                              <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>Country</span>{{ Auth::user()->country }}</a>
                            </div>
                            <div class="user-description">
                               <p>Hey I am {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
@@ -82,6 +86,9 @@
                                </li>
                                  <li class="nav-item">
                                     <a class="nav-link" id="about-tab" data-bs-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false"><i class="fa-solid fa-circle-info"></i>My Sales</a>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" id="payment-tab" data-bs-toggle="tab" href="#payment" role="tab" aria-controls="payment" aria-selected="false"><i class="fa-solid fa-circle-info"></i>Payment Section</a>
                                  </li>
                                  <li class="nav-item">
                                     <a class="nav-link" id="setting-tab" data-bs-toggle="tab" href="#setting" role="tab" aria-controls="setting" aria-selected="false"><i class="fa-solid fa-gear"></i>Setting</a>
@@ -410,6 +417,72 @@
                                                 </table>
                                           </div>
                                       </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                                       <div class="row">
+                                          <div class="col-lg-12">
+                                             <div class="main-card mt-4 p-0">
+                                                <div class="nav custom-tabs" role="tablist">
+                                                   {{-- <button class="tab-link active" data-bs-toggle="tab" data-bs-target="#tab-01" type="button" role="tab" aria-controls="tab-01" aria-selected="true"><i class="fa-solid fa-envelope me-3"></i>Email Preferences</button> --}}
+                                                   <button class="tab-link active" data-bs-toggle="tab" data-bs-target="#tab-02" type="button" role="tab" aria-controls="tab-02" aria-selected="true"><i class="fa-solid fa-key me-3"></i>Add Bank Details</button>
+                                                   {{-- <button class="tab-link" data-bs-toggle="tab" data-bs-target="#tab-03" type="button" role="tab" aria-controls="tab-03" aria-selected="false"><i class="fa-solid fa-gear me-3"></i>Privacy Settings</button> --}}
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="col-lg-12">
+                                             <div class="main-card mt-4">
+                                                <div class="tab-content">
+                                                   <div class="tab-pane fade show active" id="tab-02" role="tabpanel">
+                                                      <div class="bp-title">
+                                                         <h4>Payment Section</h4>
+                                                      </div>
+                                                      <div class="password-setting p-4">
+                                                         <div class="password-des">
+                                                            <h4>Add Details</h4>
+                                                            <p>You can add your bank details here for the payments.</p>
+                                                         </div>
+                                                         <div class="change-password-form">
+                                                            <form action="{{ URL('bank_details') }}" method="POST">
+                                                               @csrf
+                                                               <div class="form-group mt-4">
+                                                                  <label class="form-label">Bank Name*</label>
+                                                                  <div class="loc-group position-relative">
+                                                                     <input class="form-control h_50" type="text" id="bank_name" name="bank_name" placeholder="Enter Bank Name.">
+                                                                     {{-- <span class="pass-show-eye"><i class="fas fa-eye-slash" id="togglePassword"></i></span> --}}
+                                                                  </div>
+                                                               </div>
+                                                               <div class="form-group mt-4">
+                                                                  <label class="form-label">IBAN*</label>
+                                                                  <div class="loc-group position-relative">
+                                                                     <input class="form-control h_50" type="text" id="iban" name="iban" placeholder="Enter IBAN.">
+                                                                     {{-- <span class="pass-show-eye"><i class="fas fa-eye-slash" id="togglePassword"></i></span> --}}
+                                                                  </div>
+                                                               </div>
+                                                               <div class="form-group mt-4">
+                                                                  <label class="form-label">Swift Number*</label>
+                                                                  <div class="loc-group position-relative">
+                                                                     <input class="form-control h_50" type="text" id="swift_number" name="swift_number" placeholder="Enter Swift Number.">
+                                                                     {{-- <span class="pass-show-eye"><i class="fas fa-eye-slash" id="togglePassword"></i></span> --}}
+                                                                  </div>
+                                                               </div>
+                                                               
+                                                               {{-- <div class="form-group mt-4">
+                                                                  <label class="form-label">Confirm new password*</label>
+                                                                  <div class="loc-group position-relative">
+                                                                     <input class="form-control h_50" type="password" placeholder="Enter your password">
+                                                                     <span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span>
+                                                                  </div>
+                                                               </div> --}}
+                                                               <button class="main-btn btn-hover w-100 mt-5" type="submit">Submit Info</button>
+                                                         </form>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                  
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
                                     </div>
                                     <div class="tab-pane fade" id="setting" role="tabpanel" aria-labelledby="setting-tab">
                                        <div class="row">

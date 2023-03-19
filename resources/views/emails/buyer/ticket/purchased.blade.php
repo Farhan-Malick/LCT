@@ -22,7 +22,9 @@ Shipping and handling fee: USD {{$purchase->shipingCharges}}
 Total Price : USD {{$purchase->price}}<br> <br>
 If you need any further information on your order, please feel free to contact the support at
 support@lastchanceticket.com <br><br><br>
-Thank you for using {{ config('app.name') }}
+Thank you for using {{ config('app.name') }}<br>
+<img width="50%" height="40px" src="{{asset('assets/images/logo1.png')}}" alt="">
+
 
 {{-- You have successfully purchased the ticket for <b>{{ $data->event_name }}</b> event, being held on <b>{{ $data->event_date }}</b> at <b>{{ $data->start_time }}</b>. You will recieve your tickets soon the admin approve. --}}
 

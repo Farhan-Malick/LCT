@@ -43,7 +43,8 @@ class VisitorAnalyticsController extends Controller
         $ticketVisitors = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->join('events', 'events.id', '=', 'event_listings.event_id')
-        ->join( 'categories','categories.id', '=','events.category_id')->get();
+        ->join( 'categories','categories.id', '=','events.category_id')
+        ->get();
         return view('Admin/pages/ticketVisitors',compact('totalCompanyProfit','ticketVisitors','price','userCount','total_no_sold_tickets'));
     }
 }

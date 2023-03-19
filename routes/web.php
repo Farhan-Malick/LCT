@@ -88,7 +88,9 @@ Route::post('/dashboard/create/listings' , [TicketController::class,'dashboard_a
 Route::get('/dashboard/sales' , [SalesController::class,'dashboard_sales_show'])->name('dashboard.sales_show');
 
 Route::get('/dashboard/my-payments', function () {
-    return view('dashboard/my-payments');
+    $FooterEventListing = App\Models\EventListing::get();
+    $Footerevents = App\Models\Event::get();
+return view('dashboard/my-payments',compact('FooterEventListing','Footerevents'));
 });
 Route::get('/dashboard/settings', function () {
     return view('dashboard/settings');
@@ -164,7 +166,6 @@ Route::get('/ticket/{eventlisting_id}/{ticketid}/{sellerid}/TicketDetail' , [Pur
 //     return view('payment-tickets.checkout');
 // })->name("tickets.checkout");
 
-
 // Route::get('/ticket/checkout/pages', function () {
     //     return view('tickets.checkout');
     // });
@@ -210,6 +211,6 @@ Route::get('/E-Ticket',[MailController::class,'index'])->name('E-Ticket');
 
 Route::post('/upload-pdfticket',[PdfUploadController::class,'store'])->name('upload_pdf_ticket');
 
-
 Route::post('/dashboard',[TicketController::class,'UserPasswordUpdate'])->name('reset');
+Route::post('/bank_details',[TicketController::class,'BankDetailsFrom']);
 

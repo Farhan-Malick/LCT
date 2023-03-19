@@ -43,8 +43,7 @@
                 <div class="col-lg-12">
                   <h4>Sell your tickets on LAST CHANCE TICKET</h4>
                   <h2>Select Your Event</h2>
-                  <p> Reach millions of buyers around the world
-                    through the world's largest ticket marketplace.</p>
+                  <p>Last chance ticket helps you to sell the tickets quickly by making your listing available to millions of customers around the world.</p>
                   <div class="main-button"><a href="#">Discover More</a></div>
                 </div>
               </div>

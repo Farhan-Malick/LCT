@@ -288,9 +288,10 @@
                                     background-color: #2B2540;
                                     color: white;
                                     }
-                                    .active4 {
+                                    .active4,.select-active {
                                     /* padding: 5px; */
                                     background-color: #2B2540;
+                                    transition: .3s;
                                     color: white;
                                     }
                                     .active5 {
@@ -305,26 +306,26 @@
                                     }
                             </style>
                             <script>    
-                                function makeActive() {
-                                    var element1 = document.getElementById("textcolor1");
-                                    element1.classList.add("active1");
-                                }
-                                function makeActive2() {
-                                     var element2 = document.getElementById("textcolor2");
-                                     element2.classList.add("active2");
-                                }
-                                function makeActive3() {
-                                     var element3 = document.getElementById("textcolor3");
-                                     element3.classList.add("active3");
-                                }
-                                function makeActive4() {
-                                     var element4 = document.getElementById("textcolor4");
-                                     element4.classList.add("active4");
-                                }
-                                function makeActive5() {
-                                     var element5 = document.getElementById("textcolor5");
-                                     element5.classList.add("active5");
-                                }
+                                // function makeActive() {
+                                //     var element1 = document.getElementById("textcolor1");
+                                //     element1.classList.add("active1");
+                                // }
+                                // function makeActive2() {
+                                //      var element2 = document.getElementById("textcolor2");
+                                //      element2.classList.add("active2");
+                                // }
+                                // function makeActive3() {
+                                //      var element3 = document.getElementById("textcolor3");
+                                //      element3.classList.add("active3");
+                                // }
+                                // function makeActive4() {
+                                //      var element4 = document.getElementById("textcolor4");
+                                //      element4.classList.add("active4");
+                                // }
+                                // function makeActive5() {
+                                //      var element5 = document.getElementById("textcolor5");
+                                //      element5.classList.add("active5");
+                                // }
                             </script>
                             <div class="col-lg-12">
 
@@ -1014,9 +1015,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <p class="mb-3"><i class="bi bi-info-circle-fill me-2"></i>
-                                                If any of the following conditions apply to your tickets, please select them
-                                                from the list below. If there is a restriction on the use of your ticket not
-                                                shown here, please stop listing and <a href="">contact us</a>
+                                               If your ticket has any restrictions that are not listed here, please type them manually in the 'other' field. <a href="">contact us</a>
                                             </p>
                                         </div>
                                     </div>
@@ -1042,17 +1041,18 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="mb-2"><strong>Restrictions :</strong></label><br>
+                                                @error('ticket_restrictions[]')
+                                                <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                                 <label class="m-2 @error('ticket_restrictions[]') is-invalid @enderror"><input class="check " type="checkbox" name="ticket_restrictions[]"  value="No Restrictions" id="resCheck"  onClick="ckChange(this)"> No Restrictions</label>
                                                 <label class="m-2 @error('ticket_restrictions[]') is-invalid @enderror" id="res1"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Restricted View" > Restricted View</label>
                                                 <label class="m-2 @error('ticket_restrictions[]') is-invalid @enderror" id="res2"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Age Limit 14+" > Age Limit 14+</label>
                                                 <label class="m-2 @error('ticket_restrictions[]') is-invalid @enderror" id="res3"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Age Limit 18+"  > Age Limit 18+</label>
                                                 <label class="m-2 @error('ticket_restrictions[]') is-invalid @enderror" id="res4"><input class="check" type="checkbox" name="ticket_restrictions[]" value="Age Limit 21+" > Age Limit 21+</label>
                                                 <label class="m-2"><input type="checkbox" name="" id="myCheck" onclick="myFunction()"> Other</label>
-                                                @error('ticket_restrictions[]')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                               
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" id="text" name="ticket_restrictions[]"  class="form-control inputstyle hide" placeholder="Type Restriction">

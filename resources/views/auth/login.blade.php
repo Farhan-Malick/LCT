@@ -100,7 +100,7 @@
                     <button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color: #22b3c1" type="button">Login</button>
                   </div>
 
-                  <a class="small text-muted" href="{{URL('Forget-Password')}}">Forgot password?</a>
+                  <a class="small text-muted" href="{{route('password.request')}}">Forgot password?</a>
                   <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="{{ route("signup") }}"
                       style="color: #22b3c1;">Register here</a></p>
                   <a href="#!" class="small text-muted">Terms of use.</a>

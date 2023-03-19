@@ -12,5 +12,6 @@ If you need any further information on the listing rejection, please feel free t
 at support@lastchanceticket.com <br>
 
 Thanks<br>
+<img width="50%" height="40px" src="{{asset('assets/images/logo1.png')}}" alt="">
 {{ config('app.name') }}
 </x-mail::message>

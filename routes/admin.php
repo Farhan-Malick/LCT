@@ -51,11 +51,16 @@ Route::group(['middleware' => 'web'], function () {
         return view('Admin/pages/dashboard',compact('totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
     });
     Route::middleware('adminauth')->group(function () {
+
+       
+
         Route::get('/view-PDF-File/P-Ticket/{id}', [TicketController::class, 'viewPdfForPaperticket']);
         Route::get('/view-PDF-File/M-Ticket/{id}', [TicketController::class, 'viewPdfForMobileticket']);
         Route::get('/view-PDF-File/E-Ticket/{id}', [TicketController::class, 'viewPdfForEticket']);
 
         Route::get('/Admin-Panel/Contact-Us', [ContactController::class, 'contactDetailForAdmin']);
+        Route::get('/Admin-Panel/Contact-Us/delete/{id}', [ContactController::class, 'contactDelete']);
+
         Route::get('/Admin-Panel/EventListing-Visitors', [VisitorAnalyticsController::class, 'visitors']);
         Route::get('/Admin-Panel/Event-Visitors', [VisitorAnalyticsController::class, 'eventVisitors']);
         Route::get('/Admin-Panel/Ticket-Visitors', [VisitorAnalyticsController::class, 'TicketVisitors']);
@@ -69,6 +74,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/Admin-Panel/Edit-MobileTicket/{id}', [TicketController::class, 'editMobileTicket']);
         Route::post('/Admin-Panel/MobileTicket/update/{id}', [TicketController::class, 'updateMobileTicket']);
 
+        Route::get('/Admin-Panel/SellerPurchasing', [SalesController::class, 'sellerTicketsPurchased']);
 
         Route::get('/Admin-Panel/add-event', [EventController::class, 'index']);
         Route::post('/Admin-Panel/add-event', [EventController::class, 'store']);
@@ -128,11 +134,17 @@ Route::group(['middleware' => 'web'], function () {
 
         //Admin Ticket Routes
 
+        Route::get('/eTicket_Pdf_template/{eventlisting_id}/{ticketid}',[TicketController::class,'eTicket_Pdf_template'])->name('Pdftemplate');
+
         Route::get('/Admin-Panel', [TicketController::class, 'admin_tickets_show'])->name('admin.home');
         Route::get('/Admin-Panel/E_tickets', [TicketController::class, 'admin_e_tickets_show']);
+        Route::get('/Admin-Panel/Download-eTickets', [TicketController::class, 'downloadTicket']);
         Route::get('/Admin-Panel/Mobile_tickets', [TicketController::class, 'admin_mobile_tickets_show']);
         Route::post('/toggle-approve', [TicketController::class, 'Approval']);
         Route::post('/toggle-reject', [TicketController::class, 'Rejection']);
+
+        Route::post('/toggle-Paid', [SalesController::class, 'Pain_Unpaid']);
+        Route::post('/toggle-release_ticket', [SalesController::class, 'release_ticket']);
         
         Route::post('/toggle-approve/purchase', [TicketController::class, 'ApprovalForPurchase']);
         Route::get('/Admin-Panel/{id}/destroy', [TicketController::class, 'ticket_destroy'])->name('admin.ticket.destroy');

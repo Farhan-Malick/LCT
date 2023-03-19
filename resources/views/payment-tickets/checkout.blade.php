@@ -134,7 +134,7 @@
                id="payment-form">
                 @csrf
                     <div class="row d-flex flex-row justify-content-between align-items-center" id="v2">
-                        {{-- <input  type="hidden" id="" name="shipingCharges" value="" /> --}}
+                        {{-- <input  type="hidden" id="" name="shipcharges" value="" /> --}}
                         @if ($tickets->ticket_type == "Paper-Ticket")
                             <div class="col-md-4 d-flex flex-column "  name="shipingCharges"  id="shipment-charges" ></div>
                         @endif
@@ -163,33 +163,34 @@
                                 <i class="bi bi-link-45deg"></i>
                             </div> --}}
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @if ($errors->any())
+                                <div class="alert alert-danger" role="alert">
+                                    <div class="alert-icon">
+                                        <i class="flaticon-warning "></i>
+                                    </div>
+                                    <div class="alert-text">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div><br />
+                            @endif
+                            </div>
+                        </div>
                             <div class="number-of-tickets mb-5">
-                                <h6>Number of tickets</h6>
+                                <h6>Select The Number Of Tickets</h6>
                                 <select class="form-select" id="#ticket" name="quantity" required>
-                                    <option disabled>Select Number of Tickets</option>
+                                    <option selected disabled>Select Number of Tickets</option>
                                     @for ($i = 1; $i <= $tickets->quantity; $i++)
-                                        <option value="{{ $i }}"    >{{ $i }} Tickets</option>
+                                        <option value="{{ $i }}">{{ $i }} Tickets</option>
                                     @endfor
                                 </select>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    @if ($errors->any())
-                                    <div class="alert alert-danger" role="alert">
-                                        <div class="alert-icon">
-                                            <i class="flaticon-warning "></i>
-                                        </div>
-                                        <div class="alert-text">
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div><br />
-                                @endif
-                                </div>
-                            </div>
+                           
                           <div class="mt-2">
                             @if ($tickets->ticket_type == "Paper-Ticket")
                                     <div id="v1">
@@ -592,10 +593,8 @@
 $("#country_id").on('change', function (e) {
     var countrySelected = $(this).val();
     if(sellerCountry !== countrySelected){
-        <input  type="hidden" id="" name="shipingCharges" value="$50" />
         $("#shipment-charges").html("<span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$50</span>")
     } else {
-        <input  type="hidden" id="" name="shipingCharges" value="$20" />
         $("#shipment-charges").html("<span><b>LOCAL SHIPMENT CHARGES :</b><br>$20</span>")
     }
 });

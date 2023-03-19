@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Mail\UserRegisteredSuccessfully;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\MailController;
+use Illuminate\Mail\Mailable;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -53,10 +58,11 @@ class RegisterController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'primary_phone' => ['required'],
+            'country' => ['required'],
+            'nationality' => ['required'],
             'phone' => ['required','min:6'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'confirmed'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            
+            'password' => ['required', 'string', 'min:8', 'confirmed'],   
         ]);
     }
 
@@ -68,14 +74,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+       $data =  User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'primary_phone' => $data['primary_phone'],  
+            'country' => $data['country'],  
+            'nationality' => $data['nationality'],      
             'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        // MailController::UserRegisteredSuccessfully($data['email'],$data);
+        Mail::to($data['email'])->send(new UserRegisteredSuccessfully($data));
+        return $data;
     }
 }
 ?>

@@ -144,14 +144,36 @@
                     </li>
                 </ul>
              </li>
+             <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fa fa-align-left"></i>
+                    <span>Download E-Tickets</span>
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="{{URL('Admin-Panel/Download-eTickets')}}">E-Tickets</a></li>
+                   
+                </ul>
+            </li>
                 <li class="has-sub">
                     <a href="javascript:;">
                         <b class="caret"></b>
                         <i class="fa fa-align-left"></i>
-                        <span>Sales</span>
+                        <span>Buyer Ticket Purchases</span>
                     </a>
                     <ul class="sub-menu">
                         <li><a href="{{route('admin.sales.show')}}">All Sales</a></li>
+                       
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        <b class="caret"></b>
+                        <i class="fa fa-align-left"></i>
+                        <span>Seller Ticket Purchases</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{URL('Admin-Panel/SellerPurchasing')}}">All Sales</a></li>
                        
                     </ul>
                 </li>

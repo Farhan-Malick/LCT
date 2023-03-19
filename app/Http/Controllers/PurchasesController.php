@@ -41,7 +41,9 @@ class PurchasesController extends Controller
         ->join( 'categories','categories.id', '=','events.category_id')
         ->where('ticket_listings.id',$id)
         ->first();
-
+        Request::validate([
+            'quantity'  => 'required',
+        ]);
         if($ticket->ticket_type === "Paper-Ticket"){
             Request::validate([
                 'country_id'  => 'required',
@@ -79,7 +81,6 @@ class PurchasesController extends Controller
         $purchase->ticket_id = $ticket->id;
         $purchase->seller_id = $ticket->user_id;
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
-        $purchasePrice = (int) $ticket->price * (int) Request::get('quantity');
         $purchase->quantity = Request::get('quantity');
         $purchase->country_id = Request::get('country_id');
         // Service Charges
@@ -92,12 +93,11 @@ class PurchasesController extends Controller
         $purchase->grand_total = $grand_total;
         //Shipping Charges
         $purchase->shipingCharges = Request::get('shipingCharges');
-        // dd($purchase->price);
         $purchase->save();
        
         Stripe::setApiKey(env('STRIPE_SECRET'));
         Charge::create ([
-                "amount" => $purchasePrice * 100,
+                "amount" => $purchase->price * 100,
                 "currency" => "usd",
                 "source" => Request::get('stripeToken'),
                 "description" => "Making test payment." 
@@ -211,7 +211,7 @@ class PurchasesController extends Controller
             $tickets = $tickets->where('quantity', '>=', Request::get('qty'));
         }
         if (Request::get('search-no-of-tickets') !== null) {
-            $tickets = $tickets->where('quantity', '>=', Request::get('search-no-of-tickets'));
+            $tickets = $tickets->where('quantity', '>', Request::get('search-no-of-tickets'));
         }
         if (Request::get('no_of_tickets') == '1') {
             // $tickets = $tickets->get(0)->name;

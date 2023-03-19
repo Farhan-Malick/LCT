@@ -32,10 +32,12 @@
       position:absolute; z-index:1; width:76.5%;
       }
     }
+  
     @media (max-width: 1200px) {
     #search_list {
       position:absolute; z-index:1; width:76.5%;
       }
+      
     }
     /* @keyframes slide {
   from { left: 100%;}
@@ -117,14 +119,14 @@
                   <marquee scrollamount="10" behavior="scroll" direction="left">
                     <h2 id="textofMarquee" class="" style="color: #ebd6f9; text-shadow: 2px 2px #040009;"><b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customers <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
                   </marquee>
-                <h6 style="font-size: 8px" class="mb-5 " ><b>Prices are set by sellers may be above or below face value</b></h6>
+                <h6 style="font-size: 14px lessNotice" class="mb-5 " ><b>Prices are set by sellers may be above or below face value</b></h6>
                   <div class="container ">
                     <form method="get" id="qty-form">
                       <div class="row height d-flex justify-content-center align-items-center">
                         <div class="col-md-10">
                           <div class="search ">
                             <i class="fa fa-search"></i>
-                            <input type="text" onkeyup="mySearchFunction()" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
+                            <input type="text" onkeyup="mySearchFunction()" href="#search_text" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
                             <button class="btn btn-primary">Search</button>
                           </div>
                         </div>
@@ -187,203 +189,35 @@
                             background:  rgb(74, 185, 226);;
                           }
                 </style>
-                  {{-- <form method="get" id="qty-form">
-                    <div class="w-100">
-                      <div class="row ">
-                        <div class="col-lg-12">
-                          <input type="text" class="form-control" name="search_text" id="search_text" placeholder="Search Event Name" value="@if(request()->get('search_text')) <?= request()->get('search_text')?> @endif"/>
-                        </div>
-                        <div id="search_list"> </div>
-                      </div>
-                    </div>
-                  </form> --}}
-              </div>
-                      
-            </div>
-            {{-- <div class="container" style="position:relative;">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                     <div class="row">
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-user"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Sports"}}" class="Anchor2">Sports</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-globe"></i>
-                        <h4><span> <a href="{{URL::current()."?sort=Concert"}}" class="Anchor2">Concerts</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Theater"}}" class="Anchor2">Theaters</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Festival"}}" class="Anchor2">Festivals</a></span><br>Events</h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> --}}
-          </div>
-        </div>
-        {{-- <div id="top-banner-2" class="banner">
-          <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
-              <div class="container">
-                <h2> Here is the last chance to be the member of world largest marketplace for tickets to live events.
-                  Prices are set by sellers and may be below or above face value.</h2>
-                  <marquee behavior="" direction="">
-                    <h2 class="text-primary" style=" text-shadow: 2px 2px #9ffa27;"><b>Hurray! You are in the right place  <span class="text-warning" style=" text-shadow: 2px 2px #9ffa27;">*  100% customer satisfaction  *</span>  We value every customers <span   style=" text-shadow: 2px 2px #9ffa27;" class="text-warning">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
-                  </marquee>
-              </div>
-
-              
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                     <div class="row">
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-user"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Sports"}}" class="Anchor2">Sports</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-globe"></i>
-                        <h4><span> <a href="{{URL::current()."?sort=Concert"}}" class="Anchor2">Concerts</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Theater"}}" class="Anchor2">Theaters</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Festival"}}" class="Anchor2">Festivals</a></span><br>Events</h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
-        <div id="top-banner-3" class="banner">
-          <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
-              <div class="container">
-                <h2> Here is the last chance to be the member of world largest marketplace for tickets to live events.
-                  Prices are set by sellers and may be below or above face value.</h2>
-                  <marquee behavior="" direction="">
-                    <h2 class="text-primary" style=" text-shadow: 2px 2px #9ffa27;"><b>Hurray! You are in the right place  <span class="text-warning" style=" text-shadow: 2px 2px #9ffa27;">*  100% customer satisfaction  *</span>  We value every customers <span   style=" text-shadow: 2px 2px #9ffa27;" class="text-warning">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
-                  </marquee>
-              </div>
-
-              
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                     <div class="row">
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-user"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Sports"}}" class="Anchor2">Sports</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-globe"></i>
-                        <h4><span> <a href="{{URL::current()."?sort=Concert"}}" class="Anchor2">Concerts</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Theater"}}" class="Anchor2">Theaters</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Festival"}}" class="Anchor2">Festivals</a></span><br>Events</h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="top-banner-4" class="banner">
-          <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
-              <div class="container">
-                <h2> Here is the last chance to be the member of world largest marketplace for tickets to live events.
-                  Prices are set by sellers and may be below or above face value.</h2>
-                  <marquee behavior="" direction="">
-                    <h2 class="text-primary" style=" text-shadow: 2px 2px #9ffa27;"><b>Hurray! You are in the right place  <span class="text-warning" style=" text-shadow: 2px 2px #9ffa27;">*  100% customer satisfaction  *</span>  We value every customers <span   style=" text-shadow: 2px 2px #9ffa27;" class="text-warning">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
-                  </marquee>
-              </div>
-
-              
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                    <div class="row">
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-user"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Sports"}}" class="Anchor2">Sports</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-globe"></i>
-                        <h4><span> <a href="{{URL::current()."?sort=Concert"}}" class="Anchor2">Concerts</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Theater"}}" class="Anchor2">Theaters</a></span><br>Events</h4>
-                      </div>
-                      <div class="col-lg-3 col-sm-6 col-6">
-                        <i class="fa fa-home"></i>
-                        <h4><span><a href="{{URL::current()."?sort=Festival"}}" class="Anchor2">Festivals</a></span><br>Events</h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> --}}
       </div>
-      {{-- <nav>
-        <div class="controls">
-          <label for="banner1"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">1</span></label>
-          <label for="banner2"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">2</span></label>
-          <label for="banner3"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">3</span></label>
-          <label for="banner4"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">4</span></label>
-        </div>
-      </nav> --}}
     </div>
   </section>
   <!-- ***** Main Banner Area End ***** -->
   <style>
     
-.theme_search_form_area {
-    background: #f7f4f4;
-    box-shadow: 4px 14px 28px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    padding: 30px 30px;
-    position: relative;
-}
+      .theme_search_form_area {
+          background: #f7f4f4;
+          box-shadow: 4px 14px 28px rgba(0, 0, 0, 0.1);
+          border-radius: 20px;
+          padding: 30px 30px;
+          position: relative;
+      }
 
-.theme_search_form_tabbtn .nav-item {
-    margin-right: 20px;
-}
+      .theme_search_form_tabbtn .nav-item {
+          margin-right: 20px;
+      }
 
-.theme_search_form_tabbtn .nav-item:last-child {
-    margin-right: 0px;
-}
+      .theme_search_form_tabbtn .nav-item:last-child {
+          margin-right: 0px;
+      }
 
-.theme_search_form_tabbtn .nav-tabs {
-    border-bottom: none;
-}
+      .theme_search_form_tabbtn .nav-tabs {
+          border-bottom: none;
+      }
 
   </style>
   <!-- Events Section Start -->
@@ -396,11 +230,10 @@
             <h3>Last chance to explore world top events</h3>
           </div>
         </div>
-       
           @if(count($allevents) == 0)
-          <div>
-              <h5>Browse the <b>EVENTS</b> according to your serach to see more.</h5>
-          </div>
+            <div>
+                <h5>Browse the <b>EVENTS</b> according to your serach to see more.</h5>
+            </div>
           @endif
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
@@ -444,7 +277,8 @@
               </div>
             </div>
         @foreach ($allevents as $event)
-            <div class="col-lg-6 col-sm-6">
+            <div class="col-lg-6 col-sm-6" id="search_text"
+            >
             <div class="item">
                 <div class="row">
                 <div class="col-lg-6">

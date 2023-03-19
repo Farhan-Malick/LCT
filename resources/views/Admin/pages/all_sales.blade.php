@@ -115,7 +115,7 @@
 									<th scope="col">Ticket Type</th>
 									<th scope="col">Total price</th>
 									<th scope="col">Quantity</th>
-									<th scope="col">Purchased Date</th>
+									{{-- <th scope="col">Purchased Date</th> --}}
 									<th scope="col">Status</th>
 									<th scope="col">Action</th>
 								</tr>
@@ -127,10 +127,22 @@
 									<td>{{$purchase->user->first_name}}</td>
 									<td>{{$purchase->event_name}}</td>
 										<td>{{$purchase->ticket_type}}</td>
-									<td>{{$purchase->price}}</td>
+									<td>${{$purchase->price}}</td>
 									<td>{{$purchase->quantity}}</td>
-									<td>{{ date('Y-M-d') }}</td>
-									<td><button class="btn btn-success" disabled="disabled">SOLD</button></td>
+									{{-- <td>{{ date('Y-M-d') }}</td> --}}
+									<td>
+										@if($purchase->release_ticket == null || $purchase->release_ticket == 0)
+													<form action="{{ url('/toggle-release_ticket') }}" method="POST">
+														@csrf
+														<input type="hidden" name="buyer_id" id=""
+															value="{{ $purchase->id }}" >
+														<input type="submit" class="btn btn-primary"
+															name="" value="Release Ticket" id="" >
+													</form>
+													@elseif ($purchase->release_ticket == 1)
+														<button class="btn btn-success" disabled="disabled">Released</button>
+													@endif
+									</td>
 								{{-- s --}}
 									<td>
 										{{-- <a

@@ -185,6 +185,7 @@
                                             for="inputTitle4"
                                             >Event Category</label
                                         >
+                                        <small>If there's an event for Sports. Event Category must be "Sports" Or "SPORTS"</small>
                                         <input
                                             type="text"
                                             class="form-control"

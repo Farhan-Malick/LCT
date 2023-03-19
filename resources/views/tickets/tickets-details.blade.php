@@ -443,7 +443,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @if ($EventListing->event_id == "1" || $EventListing->event_id == "10")
+                                                @if ($EventListing->category_event == "Sports" || $EventListing->category_event == "SPORTS" )
                                                         <div class="row">
                                                             <div class="col-md-8">
                                                                 <div class="form-group">

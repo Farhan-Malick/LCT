@@ -183,7 +183,7 @@
                         </div>
                             <div class="number-of-tickets mb-5">
                                 <h6>Select The Number Of Tickets</h6>
-                                <select class="form-select" id="#ticket" name="quantity" required>
+                                <select class="form-select  @error('quantity') is-invalid @enderror" id="#ticket" name="quantity" required>
                                     <option selected disabled>Select Number of Tickets</option>
                                     @for ($i = 1; $i <= $tickets->quantity; $i++)
                                         <option value="{{ $i }}">{{ $i }} Tickets</option>
@@ -593,9 +593,9 @@
 $("#country_id").on('change', function (e) {
     var countrySelected = $(this).val();
     if(sellerCountry !== countrySelected){
-        $("#shipment-charges").html("<span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$50</span>")
-    } else {
-        $("#shipment-charges").html("<span><b>LOCAL SHIPMENT CHARGES :</b><br>$20</span>")
+        $("#shipment-charges").html("<input type='hidden' value='50' name='shipingCharges'><span><b>INTERNATIONAL SHIPMENT CHARGES :</b><br>$50</span>")
+    }else{
+        $("#shipment-charges").html("<input type='hidden' value='20' name='shipingCharges'><span><b>LOCAL SHIPMENT CHARGES :</b><br>$20</span>")
     }
 });
 

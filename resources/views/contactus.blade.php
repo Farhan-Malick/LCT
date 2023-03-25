@@ -63,7 +63,7 @@
           <div class="info-item">
             <i class="fa fa-phone"></i>
             <h4>Make a Phone Call</h4>
-            <a href="#">+123 456 789 (0)</a><br>
+            <a href="#">+276 329 3991</a><br>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
@@ -79,7 +79,7 @@
           <div class="info-item">
             <i class="fa fa-map-marker"></i>
             <h4>Visit Our Offices</h4>
-            <a href="#">30 N Gould St Ste R Sheridan,<br> WY 82801, United States</a>
+            <a href="#">30 N Gould St Ste R Sheridan,<br> Wyoming 82801, United States</a>
           </div>
         </div>
       </div>
@@ -401,8 +401,7 @@
                           <option  name="country" >Western Sahara</option>
                           <option  name="country" >Yemen</option>
                           <option  name="country" >Zambia</option>
-                      <option  name="country" >Zimbabwe</option>
-                       
+                      <option  name="country" >Zimbabwe</option>      
                   </select>
                 </fieldset>
             </div>

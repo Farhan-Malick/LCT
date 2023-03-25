@@ -121,9 +121,9 @@
 									{{-- <th scope="col">quantity</th> --}}
 									<th scope="col">category</th>
 									<th scope="col">section</th>
-									<th scope="col">Fans Section</th>
 									<th scope="col">ticket type</th>
-									<th scope="col" >Action</th>
+									<th scope="col">Fans Section :</th>
+									{{-- <th scope="col" >Action</th> --}}
 								</tr>
 							</thead>
 							<tbody>
@@ -138,15 +138,21 @@
 										{{-- <td>{{$e_ticket->quantity}}</td> --}}
 										<td>{{$e_ticket->type_cat}}</td>
 										<td>{{$e_ticket->type_sec}}</td>
-										<td>{{$e_ticket->fan_section}}</td>
 										<td>{{$e_ticket->ticket_type}}</td>
 										<td>
+											@if ($e_ticket->fan_section === null)
+												<b class="text-success">No Fan Section in <span class="text-primary">{{$e_ticket->event->event_name}}</span></b>
+												@else
+												{{$e_ticket->fan_section}}
+											@endif
+										</td>
+										{{-- <td>
 														@if ($e_ticket->book_eticket === "Yes")
 														<a
-														class="btn btn-primary"
-														href="{{route('admin.ticket.view',$e_ticket->id)}}"
-														><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a
-													>
+															class="btn btn-primary"
+															href="{{route('admin.ticket.view',$e_ticket->id)}}"
+															><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; View</a
+														>
 														@endif
                                                         <a href="{{ route('Pdftemplate',
                                                             ['eventlisting_id' => $events->id,'ticketid' => $ticket->id] ) }}"
@@ -154,23 +160,7 @@
                                                                 <i class="fa fa-download" aria-hidden="true"></i>&nbsp; 
                                                                 Download
                                                         </a>
-                                                        <a
-                                                            class="btn btn-danger"
-                                                            href="{{URL('admin.ticket.download',$e_ticket->id)}}"
-                                                            ><i class="fa fa-download" aria-hidden="true"></i>&nbsp; Download</a
-                                                        >
-											{{-- <a
-												class="btn btn-success"
-												href="{{URL('/Admin-Panel/Edit-E_Ticket',$e_ticket->id)}}"
-												><i class="fa fa-edit" aria-hidden="true"></i></a
-											>
-											<a
-												class="btn btn-danger"
-												href="{{route('admin.ticket.destroy',$e_ticket->id)}}"
-												><i class="fa fa-trash" aria-hidden="true"></i></a
-											> --}}
-											
-										</td>
+										</td> --}}
 									</tr>
 								@endif
 							@endforeach

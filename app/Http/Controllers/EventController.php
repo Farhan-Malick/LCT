@@ -243,16 +243,16 @@ class EventController extends Controller
     }
     public function Approval(Request $request)
     {
-        $events=Event::find($request->ad_id);
-        $approval=$request->Footerapprove;
-        if ($approval=='on') {
-            $approval=1;
-        }else {
-            $approval=null;
-        }
-        $events->Footerapprove=$approval;
-        $events->save();
-
+        $events = Event::where('events.id', $request->buyer_id)->first();
+        $events->Footerapprove=1;
+        $events->update();
+        return redirect()->back()->with('approve','Event has been Set to the Footer Successfully');
+    }
+    public function Removal(Request $request)
+    {
+        $events = Event::where('events.id', $request->buyer_id)->first();
+        $events->Footerapprove=null;
+        $events->update();
         return redirect()->back()->with('approve','Event has been Set to the Footer Successfully');
     }
     public function HotTickets(Request $request){
@@ -264,16 +264,16 @@ class EventController extends Controller
     }
     public function HotTicketsApproval(Request $request)
     {
-        $listing=EventListing::find($request->ad_id);
-        $approval=$request->Footerapprove;
-        if ($approval=='on') {
-            $approval=1;
-        }else {
-            $approval=null;
-        }
-        $listing->Footerapprove=$approval;
-        $listing->save();
-
+        $events = EventListing::where('event_listings.id', $request->buyer_id)->first();
+        $events->Footerapprove=1;
+        $events->update();
+        return redirect()->back()->with('approve','Event has been Set to the Footer Successfully');
+    }
+    public function HotRemoval(Request $request)
+    {
+        $events = EventListing::where('event_listings.id', $request->buyer_id)->first();
+        $events->Footerapprove=null;
+        $events->update();
         return redirect()->back()->with('approve','Event has been Set to the Footer Successfully');
     }
 }

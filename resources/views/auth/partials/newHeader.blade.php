@@ -9,7 +9,7 @@
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
+                    <ul style="" class="nav">
                         <li>
                             <a
                             class="nav-link"
@@ -69,6 +69,8 @@
                     </a>
                     <!-- ***** Menu End ***** -->
                 </nav>
+
+               
             </div>
         </div>
     </div>

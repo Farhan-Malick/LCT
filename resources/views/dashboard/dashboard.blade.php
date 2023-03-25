@@ -142,7 +142,6 @@
                                                       <td>{{$data->start_date}}</td>
                                                       <td>{{$data->created_at}}</td>
                                                       <td>{{$purchase->price}}</td>
-                                                      
                                                     </tr>
                                                     
                                                     @endforeach
@@ -180,71 +179,90 @@
                                        </div>
                                        <div class="tab-content">
                                           <div class="tab-pane fade show active" id="saved" role="tabpanel">
-                                             <div class="row">
-                                                <div class="col-md-12">
-                                                   <div class="main-card mt-4">
-                                                      <div class="card shadow-sm mt-3">
-                                                         <div class="card-body">
-                                                             <h5 class="card-title fw-600">All Listings Here</h5>
-                                                             <table id="data-table-default"  class="table  table-sm table-bordered ">
-                                                               <thead>
-                                                                  <tr>
-                                                                  <th scope="col">#</th>
-                                                                  {{-- <th scope="col">title</th> --}}
-                                                                  <th scope="col">Event</th>
-                                                                  <th scope="col">price</th>
-                                                                  {{-- <th scope="col">currency</th> --}}
-                                                                  <th scope="col">Qty</th>
-                                                                  <th scope="col">Sec</th>
-                                                                  <th scope="col">row</th>
-                                                                  <th scope="col">S.From</th>
-                                                                  <th scope="col">S.To</th>
-                                                                  <th scope="col">Ticket</th>
-                                                                  <th scope="col">Created</th>
-                                                                  <th scope="col">Restrictions</th>
-                                                                  <th scope="col">DeActive</th>
-                                                                  </tr>
-                                                               </thead>
-                                                               <tbody class="table-group-divider">
-                                                                  @foreach ($active_tickets as $ticket)
-                                                                        @if ($ticket->approve == 1)
-                                                                           <tr>
-                                                                              <th>{{$ticket->id}}</th>
-                                                                              {{-- <td>{{$ticket->title}}</td> --}}
-                                                                              <td>{{$ticket->event->event_name}}</td>
-                                                                              <td>{{$ticket->price}}</td>
-                                                                              {{-- <td>{{$ticket->currency}}</td> --}}
-                                                                              <td>{{$ticket->quantity}}</td>
-                                                                              <td>{{$ticket->type_sec}}</td>
-                                                                              <td>{{$ticket->type_row}}</td>
-                                                                              <td>{{$ticket->seat_from}}</td>
-                                                                              <td>{{$ticket->seat_to}}</td>
-                                                                                 <td>{{$ticket->ticket_type}}</td>
-                                                                                 <td>{{$ticket->created_at}}</td>
-                                                                              <td>  {{implode(',', json_decode($ticket->ticket_restrictions, true))}}</td>
-                                                                              {{-- <td>{{$ticket->status}}</td> --}}
-                                                                              <td>
-                                                                                 <form action="{{ url('/toggle-deactivate') }}" method="POST">
-                                                                                    @csrf
-                                                                                    <input type="hidden" name="ticket_id" id=""
-                                                                                       value="{{ $ticket->id }}" >
-                                                                                       <a href="" type="submit"class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                                                                 </form>
-                                                                                 {{-- <a class="btn btn-danger" href="{{route('dashboard.ticket.Deactivate',$ticket->id)}}">Deactivate</a> --}}
-                                                                              </td>
-                                                                           </tr>
-                                                                        @endif
-                                                                  @endforeach
-                                                               </tbody>
-                                                            </table>
-                                                            </div>
-                                                     </div>
-                                                 
-                                                            
+                                                <div class="card shadow-sm mt-3">
+                                                   <div class="card-body">
+                                                      <div class="row mb-4">
+                                                         <div class="col-lg-12">  <a class="btn btn-success ml-5 " style="text-decoration: none; float-right" href="{{route('dashboard/ticket/Deactivation-view')}}">View All Listing In Detail</a></div>
+                                                      </div>
+                                                      <table id=""  class="table  table-sm  ">
+                                                        <thead>
+                                                           <tr>
+                                                           <th scope="col">#</th>
+                                                           {{-- <th scope="col">title</th> --}}
+                                                           <th scope="col">Event</th>
+                                                           <th scope="col">price</th>
+                                                           {{-- <th scope="col">currency</th> --}}
+                                                           {{-- <th scope="col">Qty</th>
+                                                           <th scope="col">Sec</th>
+                                                           <th scope="col">row</th>
+                                                           <th scope="col">S.From</th>
+                                                           <th scope="col">S.To</th> 
+                                                           <th scope="col">Restrictions</th> --}}
+                                                           <th scope="col">Ticket</th>
+                                                           <th scope="col">Created</th>
+                                                           <th scope="col">Action</th>
+                                                           </tr>
+                                                        </thead>
+                                                        <tbody class="table-group-divider">
+                                                           @foreach ($active_tickets as $ticket)
+                                                                 @if ($ticket->approve == 1)
+                                                                    <tr>
+                                                                       <th>{{$ticket->id}}</th>
+                                                                       {{-- <td>{{$ticket->title}}</td> --}}
+                                                                       <td>{{$ticket->event->event_name}}</td>
+                                                                       <td>{{$ticket->price}}</td>
+                                                                       {{-- <td>{{$ticket->currency}}</td> --}}
+                                                                       {{-- <td>{{$ticket->quantity}}</td>
+                                                                       <td>{{$ticket->type_sec}}</td>
+                                                                       <td>{{$ticket->type_row}}</td>
+                                                                       <td>{{$ticket->seat_from}}</td>
+                                                                       <td>{{$ticket->seat_to}}</td> 
+                                                                       <td>  {{implode(',', json_decode($ticket->ticket_restrictions, true))}}</td> --}}
+                                                                          <td>{{$ticket->ticket_type}}</td>
+                                                                          <td>{{$ticket->created_at}}</td>
+                                                                       {{-- <td>{{$ticket->status}}</td> --}}
+                                                                       <td>
+                                                                          <form action="{{ url('/toggle-deactivate') }}" method="POST">
+                                                                             @csrf
+                                                                             <input type="hidden" name="ticket_id" id=""
+                                                                                value="{{ $ticket->id }}" >
+                                                                                <input type="submit" class="btn btn-danger"
+                                                                                name="" value="Deactive" id="" >
+                                                                          </form>
+                                                                          
+                                                                         
+                                                                          {{-- <a class="btn btn-danger" href="{{route('dashboard.ticket.Deactivate',$ticket->id)}}">Deactivate</a> --}}
+                                                                       </td>
+                                                                    </tr>
+                                                                 @endif
+                                                           @endforeach
+                                                        </tbody>
+                                                     </table>
+
+                                                       <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                           <!-- <div class="accordion-item">
+                                                               <h2 class="accordion-header" id="flush-headingOne">
+                                                                   <button class="accordion-button collapsed fw-700" type="button"
+                                                                       data-bs-toggle="collapse"
+                                                                       data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                                                       aria-controls="flush-collapseOne">
+                                                                       You need an access code to view your order
+                                                                   </button>
+                                                               </h2>
+                                                               <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                                                   aria-labelledby="flush-headingOne"
+                                                                   data-bs-parent="#accordionFlushExample">
+                                                                   <div class="accordion-body">
+                                                                       <p>If you do, we already sent your code to the email address
+                                                                           you used to buy your tickets. Check your inbox.</p>
+                                                                   </div>
+                                                               </div>
+                                                           </div> -->
+                                                           
+                                                       </div>
                                                    </div>
-                                                </div>
+                                               </div>
                                              </div>
-                                          </div>
                                           
                                           <div class="tab-pane fade" id="organised" role="tabpanel">
                                              <div class="row">

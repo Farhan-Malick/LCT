@@ -47,14 +47,14 @@
     border: 2px solid #61c3e3;
     background-color: #cfe2ff;
 }
-.select-card{
+/* .select-card{
     border-radius: 10px;
     cursor:pointer;
-}
-.select-card:hover{
+} */
+/* .select-card:hover{
     border: 2px solid #61c3e3;
     background-color: #cfe2ff;
-}
+} */
 .ticket-num-card{
     background-color: #efefef;
     text-align: center;

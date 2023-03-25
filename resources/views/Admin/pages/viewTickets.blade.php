@@ -73,6 +73,15 @@
         </ol>
         <!-- end breadcrumb -->
         <!-- begin page-header -->
+        
+        {{-- @foreach ($Download as $download)
+        <a
+        class="btn btn-danger"
+        href="{{URL('admin.ticket.download',$download->id)}}"
+        ><i class="fa fa-download" aria-hidden="true"></i>&nbsp; Download</a
+    >
+        @endforeach --}}
+      
         <h1 class="page-header">E-Tickets Detail</h1>
         <!-- end page-header -->
         <div class="row">

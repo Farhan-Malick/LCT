@@ -38,7 +38,7 @@
     /* font-size: 13px; */
 }
 </style>
-<div class="footer  mt-5">
+<div class="footer  mt-5" >
     <div class="container foot__con">
         <div class="row  pt-5 ">
             <div class="col-md-3 ">
@@ -84,7 +84,7 @@
                 <ul>
                     <h4 class="text-dark mb-3">POPULAR EVENTS</h4>
                     @foreach ($Footerevents as $event)
-                        @if ($event->Footerapprove === 1)
+                        @if ($event->Footerapprove == 1)
                             <li class="mt-3"><a href="#" class="text-dark">{{$event->title}}</a>
                         @endif
                     @endforeach
@@ -94,7 +94,7 @@
                 <ul>
                     <h4 class="text-dark mb-3">HOT TICKETS</h4>
                     @foreach ($FooterEventListing as $ticket)
-                        @if ($ticket->Footerapprove === 1)
+                        @if ($ticket->Footerapprove == 1)
                             <li class="mt-3"><a href="#" class="text-dark">{{$ticket->event_name}}</a>
                         @endif
                     @endforeach

@@ -113,16 +113,12 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
-                                    {{-- <th scope="col">Slug</th> --}}
                                     <th scope="col">Title</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Thumbnail</th>
                                     <th scope="col">Poster</th>
-                                    {{-- <th scope="col">Venue_id</th> --}}
                                     <th scope="col">Start Date</th>
                                     <th scope="col">End Date</th>
-                                    {{-- <th scope="col">Start Time</th>
-                                    <th scope="col">End Time</th> --}}
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -131,7 +127,6 @@
                                 <tr>
                                     
                                     <td>{{$event->id}}</td>
-                                    {{-- <td>{{$event->slug}}</td> --}}
                                     <td>{{$event->title}}</td>
                                     <td>{{$event->description}}</td>
                                     <td><img
@@ -140,30 +135,27 @@
                                         <td><img
                                             src="{{ asset('uploads/events/poster/' . $event->poster) }}"
                                             class="img-rounded height-30 width-30" /></td>
-                                    {{-- <td>{{$event->venue_id}}</td> --}}
                                     <td>{{$event->start_date}}</td>
                                     <td>{{$event->end_date}}</td>
-                                    {{-- <td>{{$event->start_time}}</td>
-                                    <td>{{$event->end_time}}</td> --}}
-                                    
                                     <td>
+										@if($event->Footerapprove == null || $event->Footerapprove == 0)
                                                 <form action="{{ url('/toggle-Footerapprove-for-footer') }}" method="POST">
-                                                    @csrf
-                                                    <input <?php if ($event->Footerapprove == 1){echo 'checked';}?> type="checkbox"
-                                                        name="Footerapprove" class="mr-2">
-
-                                                    <input type="hidden" name="ad_id" id=""
-                                                        value="{{ $event->id }}">
-													@if ($event->Footerapprove == null)
-														<input type="submit" class="btn btn-primary"
-														name="" value="Add To Popular Events" id="">
-														@elseif($event->Footerapprove == 1)
-														<input type="submit" class="btn btn-danger"
-														name="" value="Remove From Popular Events" id="">
-													@endif
-                                                   
-                                                </form>
-                                       
+													@csrf
+													<input type="hidden" name="buyer_id" id=""
+														value="{{ $event->id }}" >
+													<input type="submit" class="btn btn-primary"
+														name="" value="Add to Popular Events" id="" >
+												</form>
+                                       @endif
+									   @if($event->Footerapprove == 1)
+                                                <form action="{{ url('/toggle-Footerapprove-for-footer-remove') }}" method="POST">
+													@csrf
+													<input type="hidden" name="buyer_id" id=""
+														value="{{ $event->id }}" >
+													<input type="submit" class="btn btn-danger"
+														name="" value="Remove From Popular Events" id="" >
+												</form>
+                                       @endif
                                     </td>
         
                                 </tr>

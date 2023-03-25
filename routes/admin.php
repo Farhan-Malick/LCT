@@ -166,9 +166,11 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/Admin-Panel/EventsForFooter', [EventController::class, 'footerEvents']);
         Route::post('/toggle-Footerapprove-for-footer', [EventController::class, 'Approval']);
+        Route::post('/toggle-Footerapprove-for-footer-remove', [EventController::class, 'Removal']);
 
         
         Route::get('/Admin-Panel/HotTickets', [EventController::class, 'HotTickets']);
         Route::post('/toggle-Footerapprove-HotTickets', [EventController::class, 'HotTicketsApproval']);
+        Route::post('/toggle-Footerapprove-HotTickets-remove', [EventController::class, 'HotRemoval']);
     });
 });

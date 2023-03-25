@@ -162,11 +162,11 @@
                                                 <i class="bi bi-info-circle-fill"></i>
                                                 Please Choose Ticket Type. Paper Ticket, Electronic tickets in PDF format, and You'll have Mobile Ticket via App<br>
                                             </p>
-                                        <div class="form-group text-center @error('ticket_type') is-invalid @enderror"  name="ticket_type"  style="font-size:20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                                        <div class="form-group text-center @error('ticket_type') is-invalid @enderror"  name="ticket_type"  style="font-size:18px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
                                            <div class="container">
-                                            <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card p-4 border 1px " data-ticket="Paper-Ticket" value="Paper-Ticket" name="ticket_type" id="progress1"> Paper Ticket <sup class="checked"></sup>
-                                            <input type="checkbox" onClick="ckChange(this)"  onchange="E_Ticket()"class="E_Ticket m-2 select-card p-4 border 1px"  data-ticket="E-Ticket" value="E-Ticket" name="ticket_type" id="progress2"> E-Ticket <sup class="checked"></sup>
-                                            <input type="checkbox" onClick="ckChange(this)" onchange="MobileTicket()" class="MobileTicket m-2 select-card p-4 border 1px"  data-ticket="Mobile-Ticket" value="Mobile-Ticket" name="ticket_type" id="progress3">   Mobile Ticket <sup class="checked"></sup>
+                                            <input type="checkbox" onClick="ckChange(this)" class="m-2 select-card  border 1px " data-ticket="Paper-Ticket" value="Paper-Ticket" name="ticket_type" id="progress1"> Paper Ticket <sup class="checked"></sup>
+                                            <input type="checkbox" onClick="ckChange(this)"  onchange="E_Ticket()"class="E_Ticket m-2 select-card  border 1px"  data-ticket="E-Ticket" value="E-Ticket" name="ticket_type" id="progress2"> E-Ticket <sup class="checked"></sup>
+                                            <input type="checkbox" onClick="ckChange(this)" onchange="MobileTicket()" class="MobileTicket m-2 select-card  border 1px"  data-ticket="Mobile-Ticket" value="Mobile-Ticket" name="ticket_type" id="progress3">   Mobile Ticket <sup class="checked"></sup>
                                            </div>
                                            @error('ticket_type')
                                                 <span class="invalid-feedback" role="alert">

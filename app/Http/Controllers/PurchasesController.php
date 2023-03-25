@@ -29,7 +29,7 @@ class PurchasesController extends Controller
     // }
     public function buyer_ticket_purchase(Request $request, $id)
     {
-        $ticket = TicketListing::select('ticket_listings.*','users.last_name', 'event_listings.event_name',
+        $ticket = TicketListing::select('ticket_listings.*','users.first_name', 'event_listings.event_name',
         'event_listings.event_date', 'event_listings.start_time',
         'event_listings.venue_name','categories.id as cat_id',
         // 'purchases.quantity as ticketQuantity',
@@ -80,19 +80,28 @@ class PurchasesController extends Controller
         $purchase->event_id = $ticket->eventlisting_id;
         $purchase->ticket_id = $ticket->id;
         $purchase->seller_id = $ticket->user_id;
-        $purchase->price = (int) $ticket->price * (int) Request::get('quantity');
+         // Service Charges
+         
+        $purchase->price = (int) $ticket->price * (int) Request::get('quantity') + (int) $purchase->webCharge;
         $purchase->quantity = Request::get('quantity');
         $purchase->country_id = Request::get('country_id');
-        // Service Charges
+       
         $webCharge = $purchase->price / 10;
-        $purchase->webCharge = $webCharge;
+         $purchase->webCharge = $webCharge;
+         
         $divide = $purchase->price / 100;
         $percentage = $divide * 10;
-        // Seller gonna receive
-        $grand_total = $purchase->price - $percentage;
-        $purchase->grand_total = $grand_total;
         //Shipping Charges
         $purchase->shipingCharges = Request::get('shipingCharges');
+        
+        // Seller gonna receive
+        $grand_total = $purchase->price - $percentage;
+        $grand_total2 = $purchase->price + $webCharge + (int) Request::get('shipingCharges');
+        
+        // dd( $grand_total2 );
+        
+        $purchase->grand_total = $grand_total;
+        $purchase->grand_total2 = $grand_total2;
         $purchase->save();
        
         Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -102,7 +111,7 @@ class PurchasesController extends Controller
                 "source" => Request::get('stripeToken'),
                 "description" => "Making test payment." 
         ]);
-        MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge);
+        MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge,$grand_total2);
         MailController::sellerticketpurchased($seller->email, $ticket, $purchase,$webCharge,$grand_total);
         return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
     }
@@ -134,12 +143,12 @@ class PurchasesController extends Controller
             ->where('approve','1')
             ->where('ticket_listings.eventlisting_id',$id);
 
-        $ticketNo = TicketListing::select('ticket_listings.quantity')
-        ->groupBy('quantity')
-        ->where('approve','1')
-        ->where('ticket_listings.eventlisting_id',$id)
-        ->get();
-
+        $ticketsNoFilter = TicketListing::select('ticket_listings.*')
+            // ->groupBy('quantity')
+            ->orderBy('price','asc')
+            ->where('approve','1')
+            ->where('ticket_listings.eventlisting_id',$id)
+            ->get();
         $categoriesFromTicketListing = TicketListing::select('ticket_listings.type_cat')
             ->groupBy('type_cat')
             ->orderBy('type_cat','asc')
@@ -147,11 +156,11 @@ class PurchasesController extends Controller
             ->where('ticket_listings.eventlisting_id',$id)
             ->get();
         $colors = TicketListing::select('ticket_listings.type_cat')
-        ->groupBy('type_cat')
-        ->where('approve','1')
-        ->orderBy('type_cat','asc')
-        ->where('ticket_listings.eventlisting_id',$id)->get();
-        // dd($colors);
+            ->groupBy('type_cat')
+            ->where('approve','1')
+            ->orderBy('type_cat','asc')
+            ->where('ticket_listings.eventlisting_id',$id)->get();
+            // dd($colors);
 
         $restrictionsFromTicketListing = TicketListing::select('ticket_listings.ticket_restrictions')
         ->groupBy('ticket_restrictions')
@@ -211,7 +220,7 @@ class PurchasesController extends Controller
             $tickets = $tickets->where('quantity', '>=', Request::get('qty'));
         }
         if (Request::get('search-no-of-tickets') !== null) {
-            $tickets = $tickets->where('quantity', '>', Request::get('search-no-of-tickets'));
+            $tickets = $tickets->where('quantity', '>=', Request::get('search-no-of-tickets'));
         }
         if (Request::get('no_of_tickets') == '1') {
             // $tickets = $tickets->get(0)->name;
@@ -241,7 +250,7 @@ class PurchasesController extends Controller
         $tickets = $tickets->get();
         // dd($tickets);
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
-        return view('payment-tickets/browse-ticket',compact('ticketNo','Footerevents','FooterEventListing','quantityFromTicketListing','restrictionsFromTicketListing','events','tickets', 'eventListings','categoriesFromTicketListing','colors'));
+        return view('payment-tickets/browse-ticket',compact('ticketsNoFilter','Footerevents','FooterEventListing','quantityFromTicketListing','restrictionsFromTicketListing','events','tickets', 'eventListings','categoriesFromTicketListing','colors'));
     }
 
     public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid){

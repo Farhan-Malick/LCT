@@ -35,8 +35,8 @@ class PdfUploadController extends Controller
             for ($i = 1; $i <= $sourceFilePages; $i++) {
                 $file_name_out = basename($filename, '.pdf').'_'.$i.'.jpg';
                 array_push($fileNames, ["filename" => $file_name_out]);
-                // exec('gs -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 "-sDEVICE=pngalpha" -dTextAlphaBits=4 -dGraphicsAlphaBits=4 "-r300x300" -dPrinted=false -dFirstPage='.$i.' -dLastPage='.$i.' -sOutputFile='.$savePath.$file_name_out.' '.$filename, $output);
-                exec('"C:\Program Files\gs\gs10.00.0\bin\gswin64c.exe" -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 "-sDEVICE=pngalpha" -dTextAlphaBits=4 -dGraphicsAlphaBits=4 "-r300x300" -dPrinted=false -dFirstPage=1 -dLastPage=1 -sOutputFile='.$savePath.'Pic-%d.png '.$filename, $output);
+                exec('gs -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 "-sDEVICE=pngalpha" -dTextAlphaBits=4 -dGraphicsAlphaBits=4 "-r300x300" -dPrinted=false -dFirstPage='.$i.' -dLastPage='.$i.' -sOutputFile='.$savePath.$file_name_out.' '.$filename, $output);
+                // exec('"C:\Program Files\gs\gs10.00.0\bin\gswin64c.exe" -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 "-sDEVICE=pngalpha" -dTextAlphaBits=4 -dGraphicsAlphaBits=4 "-r300x300" -dPrinted=false -dFirstPage=1 -dLastPage=1 -sOutputFile='.$savePath.'Pic-%d.png '.$filename, $output);
             }
             // exec('"C:\Program Files\gs\gs10.00.0\bin\gswin64c.exe" -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 "-sDEVICE=pngalpha" -dTextAlphaBits=4 -dGraphicsAlphaBits=4 "-r300x300" -dPrinted=false -dFirstPage=1 -dLastPage=1 -sOutputFile='.$savePath.'Pic-%d.png '.$filename, $output);
             return response()->json($fileNames);
@@ -46,6 +46,8 @@ class PdfUploadController extends Controller
     public function view_tickets($id, Request $request)
     {
         $e_tickets = ETicket::where('ticketlisting_id',$id)->get();
-        return view('/Admin/pages/viewTickets',compact('e_tickets'));
+        $Download = ETicket::where('ticketlisting_id',$id)->get();
+        // dd($Download);
+        return view('/Admin/pages/viewTickets',compact('e_tickets','Download'));
     }
 }

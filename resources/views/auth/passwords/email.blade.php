@@ -29,15 +29,15 @@
                 <div class="col-lg-12">
                     <h2 class="text-center">Why can't you sign in?</h2>
                 </div>
-                <div class="row">
+                <div class="row ">
                     <div class="col-lg-12">
                         @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success mt-5">
                             <center><strong>{{ $message }}</strong> <b class="text-primary"></center>
                         </div>
                         @endif
                         @if ($message = Session::get('danger'))
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger mt-5">
                             <center><strong>{{ $message }}</strong></center>
                         </div>
                         @endif

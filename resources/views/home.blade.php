@@ -126,8 +126,9 @@
                         <div class="col-md-10">
                           <div class="search ">
                             <i class="fa fa-search"></i>
-                            <input type="text" onkeyup="mySearchFunction()" href="#search_text" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
-                            <button class="btn btn-primary">Search</button>
+                            <input type="text" onkeyup="mySearchFunction()" href="" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
+                            <button class="btn btn-primary">Search </button>
+                           
                           </div>
                         </div>
                       </div>
@@ -227,7 +228,7 @@
         <div class="col-lg-6 offset-lg-3">
           <div class="mb-5  text-center">
             {{-- section-heading --}}
-            <h3>Last chance to explore world top events</h3>
+            <h3  id="searchMe" >Last chance to explore world top events</h3>
           </div>
         </div>
           @if(count($allevents) == 0)
@@ -277,12 +278,12 @@
               </div>
             </div>
         @foreach ($allevents as $event)
-            <div class="col-lg-6 col-sm-6" id="search_text"
+            <div class="col-lg-6 col-sm-12"
             >
             <div class="item">
                 <div class="row">
-                <div class="col-lg-6">
-                    <div class="">
+                <div class="col-lg-6 ">
+                    <div class="image">
                         <a href="{{ route('buyer.ticket.show',$event->id) }}" class="thumbnail-img">
                             <img src="{{ asset('uploads/eventListing/' . $event->layoutImage) }}" height="350px" alt="" style="
                             background-position: center center;
@@ -292,9 +293,9 @@
                     </div>
                 </div>
                 <div class="col-lg-6 align-self-center">
-                    <div class="content">
+                    <div class="content" >
                     {{-- <span class="info">*Limited Offer Today</span> --}}
-                    <h4>{{ $event->event_name }}</h4>
+                    <h4 >{{ $event->event_name }}</h4>
                     <div class="row">
                         <div class="col-6" >
                         <i class="fa fa-clock"></i>
@@ -306,7 +307,7 @@
                         </div>
                     </div>
                     <p>Venue : <b>{{ $event->venue_name }}</b></p>
-                    <div class="main-button">
+                    <div class="main-button" >
                         <a href="{{ route('buyer.ticket.show',$event->id) }}">View Tickets</a>
                     </div>
                     </div>

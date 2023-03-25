@@ -621,6 +621,7 @@ class TicketController extends Controller
         $price = Purchases::sum('price');
         $totalprofitDivision = $price / 100;
         $totalCompanyProfit =  $totalprofitDivision * 20;
+        $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
         return view('Admin/pages/mobileTicket',compact('totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
     }
@@ -660,6 +661,14 @@ class TicketController extends Controller
             // MailController::ticketlistingapproved($user->email, $tickets);
             return redirect()->back()->with('deactivate','Ticket has been De-Activated Successfully');
     }
+    public function ticket_deActivationView(Request $request)
+    {
+        $active_tickets = TicketListing::select('ticket_listings.*')
+        ->where([['user_id',auth()->user()->id],['status',1]])
+        ->where('completed', 1)->get();
+        
+            return view('dashboard.DeactivationView',compact('active_tickets'));
+    }
     public function ticket_Activation(Request $request)
     {
             $tickets=TicketListing::select('ticket_listings.*', 'event_listings.event_name')
@@ -691,10 +700,11 @@ class TicketController extends Controller
         return view('payment-tickets/checkout',compact('FooterEventListing','Footerevents','tickets'));
     }
 
-    public function downloadTicket(TicketListing $TicketListing , Event $event,$id ){
+    public function downloadTicket( ){
 
         $etickets = TicketListing::select('ticket_listings.*','purchases.seller_id')
         ->join('purchases', 'purchases.ticket_id', '=', 'ticket_listings.id')   
+        // ->join('e_tickets', 'e_tickets.ticketlisting_id', '=', 'ticket_listings.id')   
         ->orderBy('id','desc')
         ->get();
         $price = Purchases::sum('price');
@@ -702,17 +712,11 @@ class TicketController extends Controller
         $totalCompanyProfit =  $totalprofitDivision * 20;
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
-        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $id)->first();
-        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name')
-            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
-            ->join('events', 'events.id', '=', 'event_listings.event_id')
-            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-            ->join('venue_section_rows', 'venue_section_rows.id', '=', 'ticket_listings.row')
-            ->where('approve','1')
-            // ->where('ticket_listings.id',$id)
-            ->where('events.id',$id)
-            ->first();
-        return view('Admin.pages.eTicketDownload',compact('tickets','events','totalCompanyProfit','etickets','price','userCount','total_no_sold_tickets'));
+        $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')
+        // ->where('events.id', $id)
+        ->first();
+      
+        return view('Admin.pages.eTicketDownload',compact('events','totalCompanyProfit','etickets','price','userCount','total_no_sold_tickets'));
     }
     public function eTicket_Pdf_template(TicketListing $ticket, Event $event,$id ){
         $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')->where('events.id', $id)->first();

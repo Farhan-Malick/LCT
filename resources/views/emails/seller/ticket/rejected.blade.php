@@ -11,7 +11,6 @@ Button Text
 If you need any further information on the listing rejection, please feel free to contact the support 
 at support@lastchanceticket.com <br>
 
-Thanks<br>
-<img width="50%" height="40px" src="{{asset('assets/images/logo1.png')}}" alt="">
-{{ config('app.name') }}
+Thank you for using {{ config('app.name') }}<br><br>
+<img width="100%" height="55px" src="{{asset('assets/images/logo1.png')}}" alt="">
 </x-mail::message>

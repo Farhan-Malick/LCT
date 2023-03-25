@@ -43,7 +43,8 @@ class WebController extends Controller
         
         $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
         ->join('events', 'events.id', '=', 'event_listings.event_id')
-        ->join('venues', 'venues.id', '=', 'events.venue_id');
+        ->join('venues', 'venues.id', '=', 'events.venue_id')
+        ->orderBy('views','desc');
         
         if($request->sort == 'Sports'){
             $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')

@@ -1,6 +1,6 @@
 <x-mail::message>
 
-Hello {{$data->last_name}},<br>
+Hello {{$data->first_name}},<br>
 Congratulations, You sold your tickets for the event <b>{{ $data->event_name }}</b> on {{ date('Y-M-d') }}.<br><br>
 <b>Sales Information</b> <br>
 Order Number: {{$data->id}}  <br>
@@ -16,29 +16,17 @@ Date: {{ $data->event_date }} <br>
 <b>Price Information: </b><br>
 Number of Tickets: {{$purchase->quantity}}<br>
 Price per Ticket: USD {{$data->price}} <br>
+Total Price : USD {{$purchase->price}}<br> <br>
 Service Charges : USD {{$purchase->webCharge}} <br>
 You will receive: USD {{$purchase->grand_total}} <br>
-Total Price : USD {{$purchase->price}}<br> <br>
+
 If you need any further information on your order, please feel free to contact the support at
 support@lastchanceticket.com <br><br><br>
-Thank you for using {{ config('app.name') }}<br>
-<img width="50%" height="40px" src="{{asset('assets/images/logo1.png')}}" alt="">
-
-
-{{-- You have successfully purchased the ticket for <b>{{ $data->event_name }}</b> event, being held on <b>{{ $data->event_date }}</b> at <b>{{ $data->start_time }}</b>. You will recieve your tickets soon the admin approve. --}}
+Thank you for using {{ config('app.name') }}<br><br>
+<img width="100%" height="55px" src="{{asset('assets/images/logo1.png')}}" alt="">
 
 {{-- <x-mail::button :url="''">
 Button Text
 </x-mail::button> --}}
 </x-mail::message>
 
-{{-- <x-mail::message>
-# Ticket Purchased
-# Congratulations
-
-Your ticket for <b>{{ $data->event_name }}</b> event, being held on <b>{{ $data->event_date }}</b> at <b>{{ $data->start_time }}</b> has been purchased.
-
-
-Thanks,<br>
-{{ config('app.name') }}
-</x-mail::message> --}}

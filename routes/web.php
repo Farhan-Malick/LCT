@@ -75,7 +75,8 @@ Route::get('/dashboard/orders' , [PurchasesController::class,'dashboard_orders_s
 // });
 
 Route::get('/dashboard' , [TicketController::class,'dashboard_listing'])->name('dashboard.listing');
-// Route::get('/dashboard/listings/{id}/destroy', [TicketController::class, 'ticket_deActivation'])->name('dashboard.ticket.Deactivate');
+Route::get('/dashboard/listings/{id}/destroy', [TicketController::class, 'ticket_deActivation'])->name('dashboard.ticket.Deactivate');
+Route::get('/dashboard/ticket/view', [TicketController::class, 'ticket_deActivationView'])->name('dashboard/ticket/Deactivation-view');
 Route::post('/toggle-deactivate', [TicketController::class, 'ticket_deActivation']);
 Route::post('/toggle-Active', [TicketController::class, 'ticket_Activation']);
 

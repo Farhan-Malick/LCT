@@ -123,25 +123,24 @@
                                     <td>{{$ticket->category_event}}</td>
                                     {{-- <td>{{$ticket->status}}</td> --}}
                                     <td>
-                                        <form action="{{ url('/toggle-Footerapprove-HotTickets') }}" method="POST">
-                                            @csrf
-                                            <input <?php
-                                            if ($ticket->Footerapprove == 1) {
-                                                echo 'checked';
-                                            }
-                                            ?> type="checkbox"
-                                                name="Footerapprove" class="mr-2">
-                                            <input type="hidden" name="ad_id" id=""
-                                                value="{{ $ticket->id }}">
-
-												@if ($ticket->Footerapprove == null)
-												<input type="submit" class="btn btn-primary"
-												name="" value="Add To Hot Tickets" id="">
-												@else
-												<input type="submit" class="btn btn-danger"
-												name="" value="Remove From Hot Tickets" id="">
-											@endif
-                                        </form>
+										@if($ticket->Footerapprove == null || $ticket->Footerapprove == 0)
+                                                <form action="{{ url('/toggle-Footerapprove-HotTickets') }}" method="POST">
+													@csrf
+													<input type="hidden" name="buyer_id" id=""
+														value="{{ $ticket->id }}" >
+													<input type="submit" class="btn btn-primary"
+														name="" value="Add to Hot Tickets" id="" >
+												</form>
+                                       @endif
+									   @if($ticket->Footerapprove == 1)
+                                                <form action="{{ url('/toggle-Footerapprove-HotTickets-remove') }}" method="POST">
+													@csrf
+													<input type="hidden" name="buyer_id" id=""
+														value="{{ $ticket->id }}" >
+													<input type="submit" class="btn btn-danger"
+														name="" value="Remove From Hot Tickets" id="" >
+												</form>
+                                       @endif
                                     </td>
                                 </tr>
                                 @endforeach

@@ -7,7 +7,6 @@ You ticket listing no {{ $ticket->id }} for event {{ $ticket->event_name }} has 
 Button Text
 </x-mail::button> --}}
 
-Thanks,<br>
-{{ config('app.name') }}<br>
-<img width="50%" height="40px" src="{{asset('assets/images/logo1.png')}}" alt="">
+Thank you for using {{ config('app.name') }}<br><br>
+<img width="100%" height="55px" src="{{asset('assets/images/logo1.png')}}" alt="">
 </x-mail::message>

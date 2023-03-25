@@ -84,7 +84,7 @@
                     <div class="main-responsive-menu">
                         <div class="">
                             <a class="logo" href="{{URL('/')}}">
-                                <img width="30%" src="{{asset('F_Assets/assets/img/logo1.png')}}" alt="logo">
+                                <img style="width:270px" src="{{asset('F_Assets/assets/img/logo1.png')}}" alt="logo">
                             </a>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                     <nav class="navbar navbar-expand-md navbar-light">
                         <div style="width:50%;">
                             <a class="logo" href="{{URL('/')}}">
-                                <img src="{{asset('F_Assets/assets/img/logo1.png')}}" alt="logo" style="width:60%">
+                                <img src="{{asset('F_Assets/assets/img/logo1.png')}}" alt="logo" style="width:270px">
                             </a>
                         </div>
                         <div class="navUL collapse navbar-collapse mean-menu" id="navbarSupportedContent">
@@ -261,8 +261,8 @@
                                                                           <select class="form-control"  name="qty"  onchange="this.form.submit()">
                                                                               <option selected disabled>No. of Tickets in Listing</option>
                                                                               {{-- @foreach ($tickets as $all) --}}
-                                                                                @foreach ($quantityFromTicketListing as $all)
-                                                                                    @if ($all->quantity != 0)
+                                                                                @foreach ($ticketsNoFilter as $all)
+                                                                                    @if ($all->quantity > 0)
                                                                                     <option value="{{$all->quantity}}"
                                                                                         @if(request()->get('qty') && request()->get('qty') == $all->quantity) 
                                                                                             selected @endif
@@ -318,7 +318,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-3 col-md-3 col-lg-3 mt-3">
                                                                                     <div class="cardNew btn_theme btn_md mb-3">
-                                                                                        <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 3 ) <?php echo 'select-active' ?> @endif" data-tickets-val="3">
+                                                                                        <div id="button1" class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 3 ) <?php echo 'select-active' ?> @endif" data-tickets-val="3">
                                                                                             <h4>3</h4>
                                                                                         </div>
                                                                                     </div>
@@ -523,78 +523,72 @@
                                                         <h4>No Tickets Available for this event</h4>
                                                     </div>
                                                 @endif
-                                              
                                                 @foreach ($tickets as $ticket)
                                                     @if ($ticket->quantity > 0)
                                                     <div class="flight_search_items border text-dark"  style="border-radius: 12px; margin-bottom:20px ;">
-                                                        <div class="multi_city_flight_lists" 
-                                                        style="
-                                                            <?php 
-                                                                  foreach ($colors as $key => $dbValues) {
-                                                                    if ($key === 0){ 
-                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
-                                                                              border-left:7px solid red;
-                                                                        <?php   }
+                                                        <div class="multi_city_flight_lists" style="
+                                                                <?php 
+                                                                    foreach ($colors as $key => $dbValues) {
+                                                                        if ($key === 0){ 
+                                                                        if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                                border-left:7px solid red;
+                                                                            <?php   }
+                                                                        }
+                                                                        if ($key === 1){ 
+                                                                        if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                                border-left:7px solid yellow;
+                                                                            <?php   }
+                                                                        }
+                                                                        if ($key === 2){ 
+                                                                        if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                                border-left:7px solid blue;
+                                                                            <?php   }
+                                                                        }
+                                                                        if ($key === 3){ 
+                                                                        if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                                border-left:7px solid green;
+                                                                            <?php   }
+                                                                        }
+                                                                        if ($key === 4){ 
+                                                                        if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                                border-left:7px solid grey;
+                                                                            <?php   }
+                                                                        }
+                                                                        if ($key === 5){ 
+                                                                        if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                                border-left:7px solid chartreuse;
+                                                                            <?php   }
+                                                                        }
+                                                                        if ($key === 6){ 
+                                                                        if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                                border-left:7px solid tomato;
+                                                                            <?php   }
+                                                                        }
+                                                                        if ($key === 7){ 
+                                                                        if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                                border-left:7px solid salmon;
+                                                                            <?php   }
+                                                                        }
+                                                                        if ($key === 8){ 
+                                                                        if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                                border-left:7px solid crimson;
+                                                                            <?php   }
+                                                                        }
+                                                                        if ($key === 9){ 
+                                                                        if ($dbValues->type_cat === $ticket->type_cat) {  ?>
+                                                                                border-left:7px solid darkgoldenrod;
+                                                                            <?php   }
+                                                                        }
                                                                     }
-                                                                    if ($key === 1){ 
-                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
-                                                                              border-left:7px solid yellow;
-                                                                        <?php   }
-                                                                    }
-                                                                    if ($key === 2){ 
-                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
-                                                                              border-left:7px solid blue;
-                                                                        <?php   }
-                                                                    }
-                                                                    if ($key === 3){ 
-                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
-                                                                              border-left:7px solid green;
-                                                                        <?php   }
-                                                                    }
-                                                                    if ($key === 4){ 
-                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
-                                                                              border-left:7px solid grey;
-                                                                        <?php   }
-                                                                    }
-                                                                    if ($key === 5){ 
-                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
-                                                                              border-left:7px solid chartreuse;
-                                                                        <?php   }
-                                                                    }
-                                                                    if ($key === 6){ 
-                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
-                                                                              border-left:7px solid tomato;
-                                                                        <?php   }
-                                                                    }
-                                                                    if ($key === 7){ 
-                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
-                                                                              border-left:7px solid salmon;
-                                                                        <?php   }
-                                                                    }
-                                                                    if ($key === 8){ 
-                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
-                                                                              border-left:7px solid crimson;
-                                                                        <?php   }
-                                                                    }
-                                                                    if ($key === 9){ 
-                                                                      if ($dbValues->type_cat === $ticket->type_cat) {  ?>
-                                                                              border-left:7px solid darkgoldenrod;
-                                                                        <?php   }
-                                                                    }
-                                                                  }
-                                                                
-                                                            ?>
-                                                        ">
+                                                                    
+                                                                ?>
+                                                            ">
                                                             <div class="flight_multis_area_wrapper" >
                                                                 <div class="flight_search_left" >
                                                                     <div class="ticket text-center" style="width:50%">
-                                                                        {{-- <img src="" width="" alt=""> --}}
                                                                         <img src="{{asset('assets/images/t1.webp')}}" class="" alt="img">
                                                                     </div>
                                                                     <div class="flight_search_destination" >
-                                                                        
-                                                                        {{-- <p>Event</p>
-                                                                        <p class="text-dark"><b>{{$ticket->event_name}}</b></p> --}}
                                                                         <p>Tickets</p>
                                                                         <h6>No of Tickets {{$ticket->quantity}}</h6>
                                                                         <p class="m-0">Benefits</p>
@@ -693,9 +687,10 @@
     
     <script src="{{asset('F_Assets/assets/js/add-form.js')}}"></script>
     
-    <script src="{{asset('F_Assets/assets/js/form-dropdown.js')}}"></script>
+  <script src="{{asset('F_Assets/assets/js/form-dropdown.js')}}"></script>
     
     <script>
+       
         document.addEventListener("DOMContentLoaded", () => {
 
             document.querySelectorAll('.ticket-num-card').forEach(function(element) {

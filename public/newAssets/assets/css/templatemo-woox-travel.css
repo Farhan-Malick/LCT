@@ -195,6 +195,8 @@ figure, header, nav, section, article, aside, footer, figcaption {
   border: none;
 } */
 
+
+
 .flight_categories_search .nav-tabs {
   border-bottom: none;
 }
@@ -317,7 +319,7 @@ html,
 }
 
 body {
-  background: #fff;
+  background: #883a3a;
   background-color: rgb(255,255,255);
   font-family: 'Poppins', sans-serif;
 }
@@ -519,6 +521,7 @@ Header Style
 --------------------------------------------- 
 */
 
+
 .background-header {
   background-color: #22b3c1 !important;
   height: 70px!important;
@@ -547,12 +550,10 @@ Header Style
   transition: all .5s ease 0s;
 }
 
-
 .header-area .main-nav {
   background: transparent;
   display: flex;
   padding: 0px 30px;
-  margin:0;
 }
 
 .background-header .main-nav {
@@ -561,7 +562,7 @@ Header Style
 }
 
 .header-area .main-nav .logo {
-  flex-basis: 40%;
+  flex-basis: 30%;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -570,6 +571,7 @@ Header Style
 
 .header-area .main-nav .logo img {
   width: 270px;
+  margin-top: 15px;
 }
 
 .background-header .main-nav .logo img {
@@ -580,7 +582,7 @@ Header Style
   flex-basis: 70%;
   justify-content: flex-end;
   vertical-align: middle;
-  margin-top: 15px;
+  margin-top: 15px; 
   margin-right: 0px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -706,6 +708,7 @@ Header Style
 }
 
 .header-area .main-nav .menu-trigger span {
+  top: 16px;
 }
 
 .header-area .main-nav .menu-trigger span:before {
@@ -757,7 +760,7 @@ Header Style
 }
 
 .header-area.header-sticky {
-  min-height: 60px;
+  min-height: 70px;
 }
 
 .header-area.header-sticky .nav li a.active {
@@ -786,8 +789,14 @@ Header Style
     height: auto;
     flex-basis: 100%;
   }
- 
- 
+  .header-area .main-nav .logo {
+    position: absolute;
+    left: 30px;
+    top: 15px;
+  }
+  .background-header .main-nav .logo {
+    top: 0px;
+  }
   .background-header .main-nav .border-button {
     top: 0px !important;
   }
@@ -814,7 +823,9 @@ Header Style
   .header-area .container {
     padding: 0px;
   }
-  
+  .header-area .logo {
+    margin-left: 0px;
+  }
   .header-area .menu-trigger {
     display: block !important;
   }
@@ -891,6 +902,7 @@ Header Style
     height: 0px;
   }
 }
+
 
 /* 
 ---------------------------------------------
@@ -1766,7 +1778,7 @@ body #user-button .u-icons a[href="https://twitter.com/Osorpenke"] div {
   color: #1da1f2;
 }
 body #user-button .u-icons a[href="https://codepen.io/z-"] div {
-  background: black;
+  /* background: black; */
   color: white;
 }
 body #user-button .u-icons a.u-random div {
@@ -1859,12 +1871,12 @@ body #user-button:hover .u-icons, body #user-button:focus-within .u-icons {
   height: 300% !important;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   body:not(.light) {
-    background: #232223;
-    color: white;
+    background: #fff;
+    color: black;
   }
-}
+} */
 body .credit {
   position: absolute;
   bottom: 20px;
@@ -2550,10 +2562,24 @@ Responsive Style
 body {
   overflow-x: hidden;
 }
-
+@media (max-width: 500px) {
+  img {
+    /* width: 100%; */
+    height: auto;
+    overflow: hidden;
+}
+} 
 @media (max-width: 375px) {
   #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
-    font-size: 12px; color: #58e6f3; text-shadow: 2px 2px #000000;
+    font-size: 10px; color: #58e6f3; text-shadow: 2px 2px #000000;
+  }
+  #section-1 .content-slider .slider .banner .banner-inner-wrapper h6 {
+    font-size: 10px; 
+  }
+}
+@media (max-width: 390px) {
+  #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
+    font-size: 10px; color: #58e6f3; text-shadow: 2px 2px #000000;
   }
   #section-1 .content-slider .slider .banner .banner-inner-wrapper h6 {
     font-size: 10px; 

@@ -32,12 +32,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success mt-5">
                             <center><strong>{{ $message }}</strong> <b class="text-primary"></center>
                         </div>
                         @endif
                         @if ($message = Session::get('danger'))
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger mt-5">
                             <center><strong>{{ $message }}</strong></center>
                         </div>
                         @endif

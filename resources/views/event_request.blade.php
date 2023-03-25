@@ -77,7 +77,7 @@
           <div class="info-item">
             <i class="fa fa-map-marker"></i>
             <h4>Visit Our Offices</h4>
-            <a href="#">30 N Gould St Ste R Sheridan, WY 82801</a>
+            <a href="#">30 N Gould St Ste R Sheridan,<br> Wyoming 82801, United States</a>
           </div>
         </div>
       </div>

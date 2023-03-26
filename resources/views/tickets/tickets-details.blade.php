@@ -213,7 +213,6 @@
                                                         </p>
                                                     </div>
                                                     <input  type="hidden" id="no_of_ticket1" name="total_tickets" value="0" />
-                                                 
                                                     <div class="col-12" id="error-ticket-number" style="display:none;color: red;margin-bottom: 10px;font-size: 14px;">
                                                         <span>Please select number of tickets.</span>
                                                     </div>
@@ -222,35 +221,35 @@
                                                     </style>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class=" card mb-3">
-                                                            <div  id="textcolor1" class="card-body  btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="1" onclick="makeActive()">
+                                                            <div  id="textcolor1" class="card-body  btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="1" 
                                                                 <h5 class="text-light">1</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div  id="textcolor2" class="card-body  btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="2" onclick="makeActive2()">
+                                                            <div  id="textcolor2" class="card-body  btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="2" >
                                                                 <h5 class="text-light">2</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div  id="textcolor3" class="card-body btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="3" onclick="makeActive3()">
+                                                            <div  id="textcolor3" class="card-body btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="3" >
                                                                 <h5 class="text-light">3</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div  id="textcolor4" class="card-body btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="4" onclick="makeActive4()">
+                                                            <div  id="textcolor4" class="card-body btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="4" >
                                                                     <h5 class="text-light">4</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-2">
                                                         <div class="card mb-3">
-                                                            <div  id="textcolor5" class="card-body btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="5" onclick="makeActive5()">
+                                                            <div  id="textcolor5" class="card-body btn_theme2 ticket-num-card cursor-pointer shadow-sm" data-tickets-val="5" >
                                                                 <h5 class="text-light">5</h5>
                                                             </div>
                                                         </div>
@@ -305,28 +304,7 @@
                                     color: white;
                                     }
                             </style>
-                            <script>    
-                                // function makeActive() {
-                                //     var element1 = document.getElementById("textcolor1");
-                                //     element1.classList.add("active1");
-                                // }
-                                // function makeActive2() {
-                                //      var element2 = document.getElementById("textcolor2");
-                                //      element2.classList.add("active2");
-                                // }
-                                // function makeActive3() {
-                                //      var element3 = document.getElementById("textcolor3");
-                                //      element3.classList.add("active3");
-                                // }
-                                // function makeActive4() {
-                                //      var element4 = document.getElementById("textcolor4");
-                                //      element4.classList.add("active4");
-                                // }
-                                // function makeActive5() {
-                                //      var element5 = document.getElementById("textcolor5");
-                                //      element5.classList.add("active5");
-                                // }
-                            </script>
+                           
                             <div class="col-lg-12">
 
                                 <h4 class="fw-700"> Enter Seating Details<span style="color: red">*</span></h4>
@@ -342,7 +320,6 @@
                                             <div class="form">
                                                 <div class="form-group">
                                                     <label for="row">Seating Area</label>
-                                                   
                                                       <select class="form-select @error('ticket_type') is-invalid @enderror" value="{{ old('seated_area') }}"   autocomplete="seated_area" autofocus name="seated_area">
                                                         <option selected disabled>Please Select Row</option>
                                                         <option value="Seated Tickets">Seated Tickets</option>
@@ -356,18 +333,6 @@
                                                 @enderror
                                                 </div>
                                                 <div class="row">
-                                                    {{-- <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="section">Select Category</label>
-                                                            <select class="form-select "
-                                                                name="categories" value="">
-                                                                <option selected disabled>Please Select Category</option>
-                                                                @foreach($sellerCategories as $sellerCategory)
-                                                                <option value="{{$sellerCategory->categories}}">{{$sellerCategory->categories}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div> --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="section">Category</label>

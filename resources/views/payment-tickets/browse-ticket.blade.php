@@ -304,41 +304,40 @@
                                                                                 </div>
                                                                                 <div class="col-sm-3 col-md-3 col-lg-3 mt-3 mt-3">
                                                                                     <div class="cardNew btn_theme btn_md mb-3">
-                                                                                        <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 1 ) <?php echo 'select-active' ?> @endif" data-tickets-val="1">
+                                                                                        <div class="text-center card-body  ticket-num-card cursor-pointer shadow-sm " style="@if(request()->get('qty') == 1 ) <?php echo 'background-color: #2B2540' ?> @endif" data-tickets-val="1">
                                                                                             <h4>1</h4>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-sm-3 col-md-3 col-lg-3 mt-3">
                                                                                     <div class="cardNew btn_theme btn_md mb-3">
-                                                                                        <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 2 ) <?php echo 'select-active' ?> @endif" data-tickets-val="2">
+                                                                                        <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm " style="@if(request()->get('qty') == 2 ) <?php echo 'background-color: #2B2540' ?> @endif" data-tickets-val="2">
                                                                                             <h4>2</h4>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-sm-3 col-md-3 col-lg-3 mt-3">
                                                                                     <div class="cardNew btn_theme btn_md mb-3">
-                                                                                        <div id="button1" class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 3 ) <?php echo 'select-active' ?> @endif" data-tickets-val="3">
+                                                                                        <div id="button1" class="text-center card-body ticket-num-card cursor-pointer shadow-sm " style="@if(request()->get('qty') == 3 ) <?php echo 'background-color: #2B2540' ?> @endif" data-tickets-val="3">
                                                                                             <h4>3</h4>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-sm-3 col-md-3 col-lg-3 mt-3">
                                                                                     <div class="cardNew btn_theme btn_md mb-3">
-                                                                                        <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm @if(request()->get('qty') == 4 ) <?php echo 'select-active' ?> @endif" data-tickets-val="4">
+                                                                                        <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm " style="@if(request()->get('qty') == 4 ) <?php echo 'background-color: #2B2540' ?> @endif" data-tickets-val="4">
                                                                                             <h4>4</h4>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </form>
-
                                                                     </div>
                                                                 </div>
                                                             <div class="col-lg-2">
                                                                 <div class="col-lg-12 mt-3">
                                                                     <div class="cardNew btn_theme btn_md mb-3">
-                                                                        <div class="text-center card-body ticket-card  cursor-pointer shadow-sm" data-tickets-val="5" >
+                                                                        <div class="text-center card-body ticket-card cursor-pointer shadow-sm"  data-tickets-val="5" >
                                                                             <h4>5 +</h4>
                                                                         </div>
                                                                     </div>

@@ -79,7 +79,82 @@
                 @endif
           <div class="col-lg-8 ">
              <div class="checkout-block">
-                <div class="main-card mt-5">
+               <div class="row">
+                  <div class="col-md-12 ">
+                      <div class="card" style="padding: 13px;">
+                          <div class="panel-heading">
+                              <div class="row text-center">
+                                  {{-- <h3 class="panel-heading">Payment Details</h3> --}}
+                              </div>                    
+                          </div>
+                          <div class="card-body">
+                           <form method="post" action="{{ route('payment.checkout.finalize',
+                           ['eventlisting_id' => $eventlisting_id,'ticketid' => $ticket_id, 'sellerid' => $seller_id])}} " role="form"  method="post" class="validation"   data-cc-on-file="false"
+                              data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
+                              id="payment-form">
+                              @csrf
+                              <input type="hidden" name="ticketid" value="{{ $ticket_id }}">
+                              <input type="hidden" name="country_id" value="{{ $country }}"> 
+                              <input type="hidden" name="quantity" value="{{ $quantity }}"> 
+                              <input type="hidden" name="shipingCharges" value="{{ $shipping_charges }}"> 
+                               @if (Session::has('success'))
+                                  <div class="alert alert-success text-center">
+                                      <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                      <p>{{ Session::get('success') }}</p>
+                                  </div>
+                              @endif
+                                  <div class='form-row row'>
+                                      <div class='col-xs-12 form-group required'>
+                                          <label class='control-label'>Name on Card</label> <input
+                                              class='form-control' size='4' type='text'>
+                                      </div>
+                                  </div>
+                                  <div class='form-row row'>
+                                      <div class='col-xs-12 form-group  required'>
+                                          <label class='control-label'>Card Number</label> <input
+                                              autocomplete='off' class='form-control card-num' size='20'
+                                              type='text'>
+                                      </div>
+                                  </div>
+                                  <div class='form-row row'>
+                                      <div class='col-xs-12 col-md-4 form-group cvc required'>
+                                          <label class='control-label'>CVC</label> 
+                                          <input autocomplete='off' class='form-control card-cvc' placeholder='e.g 415' size='4'
+                                              type='text'>
+                                      </div>
+                                      <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                          <label class='control-label'>Expiration Month</label> <input
+                                              class='form-control card-expiry-month' placeholder='MM' size='2'
+                                              type='text'>
+                                      </div>
+                                      <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                          <label class='control-label'>Expiration Year</label> <input
+                                              class='form-control card-expiry-year' placeholder='YYYY' size='4'
+                                              type='text'>
+                                      </div>
+                                  </div>
+                                  <div class='form-row row'>
+                                      <div class='col-md-12 hide error form-group'>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-xs-12 mt-5" >
+                                         <button type="submit" class="btn btn-primary">Finish & Check your Ticket</button>
+                                      </div>
+                                  </div>
+                                  {{-- <button type="submit" class="btn btn-primary">Finish & Check your Ticket</button> --}}
+                                  {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.proceedToCheckout',
+                                      ['eventlisting_id' => $tickets->eventlisting_id,'ticketid' => $tickets->id, 'sellerid' => $tickets->user_id]) }}" 
+                                  >
+                                     Proceed to checkout
+                                  </a> --}}
+                              </form>
+                          </div>
+                      </div>        
+                  </div>
+              </div>
+
+                {{-- <div class="main-card mt-5">
                     <div class="bp-title">
                        <h4>Total Payable Amount : AUD $50.00</h4>
                     </div>
@@ -129,7 +204,7 @@
                            </div>
                     </form>
                     </div>
-                 </div>
+                 </div> --}}
                
              </div>
           </div>
@@ -137,6 +212,22 @@
              <div class="main-card order-summary">
                 <div class="bp-title">
                    <h4>Billing information</h4>
+                   <div class="col-lg-12">
+                     @if ($errors->any())
+                     <div class="alert alert-danger" role="alert">
+                         <div class="alert-icon">
+                             <i class="flaticon-warning "></i>
+                         </div>
+                         <div class="alert-text">
+                             <ul>
+                                 @foreach ($errors->all() as $error)
+                                 <li>{{ $error }}</li>
+                                 @endforeach
+                             </ul>
+                         </div>
+                     </div><br />
+                 @endif
+                 </div>
                 </div>
                 <div class="order-summary-content p_30">
                    <div class="event-order-dt">

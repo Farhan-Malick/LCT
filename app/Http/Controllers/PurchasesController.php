@@ -22,11 +22,33 @@ use Stripe\Charge;
 class PurchasesController extends Controller
 {
     //
-    // public function buyer_tickets_index(Event $event,$id){
+    public function ProceedToCheckout( TicketListing $ticket, EventListing $event, $eventlisting_id, $ticketid, $sellerid){
 
-    //     $events = Event::find($id);
-    //     return view('payment-tickets/browse-tickets',compact('events'));
-    // }
+        $events = EventListing::select('*','venues.title as vTitle', 'venues.image as vImage')
+        ->join('events', 'events.id', '=', 'event_listings.event_id')
+        // ->join('venues', 'venues.id', '=', 'events.venue_id')
+        ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
+        ->where('event_listings.id', $eventlisting_id)
+        ->first();
+        // dd($events);
+        TicketListing::find($ticketid)->increment('views');
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id',
+        'purchases.shipingCharges as shipment','purchases.webCharge','purchases.grand_total','purchases.grand_total2','purchases.quantity as qty','purchases.price as PurchasePrice'
+        )
+            ->join('purchases', 'purchases.ticket_id', '=', 'ticket_listings.eventlisting_id')
+            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+            ->join('events', 'events.id', '=', 'event_listings.event_id')
+            ->join( 'categories','categories.id', '=','events.category_id')
+            // ->where('approve','1')
+            ->where('ticket_listings.id',$ticketid)
+            ->first();
+        // dd($tickets);
+        $sellers = User::find($sellerid);
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
+        $sellerCountry = Seller::where('user_id',$sellerid)->first();
+        return view('payment-tickets/proceedToCheckout',compact('Footerevents','FooterEventListing','tickets','events','sellers','sellerCountry'));
+    }
     public function buyer_ticket_purchase(Request $request, $id)
     {
         $ticket = TicketListing::select('ticket_listings.*','users.first_name', 'event_listings.event_name',

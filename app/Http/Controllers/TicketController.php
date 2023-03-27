@@ -324,12 +324,10 @@ class TicketController extends Controller
     }
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)
     {
-       
         $tickets = TicketListing::find($id);
         $user = User::find($tickets->user_id);
         $seller = new Seller();
         $seller->user_id = $user->id;
-
         $seller->save();
         $tickets->completed = 1;
         $tickets->update();

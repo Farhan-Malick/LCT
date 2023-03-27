@@ -380,21 +380,81 @@
     }
 
     .flight_search_left {
-        display: inherit;
+        float: left;
+        width: 50%;
+        /* display: inherit; */
         padding: 0;
-        text-align: center;
+        margin-left: 10px;
+        /* text-align: center; */
     }
 
+    .flight_search_right {
+        background: #fff7f7;
+        padding: 25px 16px 20px 25px;
+    }
+    
+    .flight_search_right h5 {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--paragraph-color);
+    }
+    
+    .flight_search_right h2 {
+        padding-top: 10px;
+        padding-left: 40px;
+    }
+    
+    .flight_search_right h2 sup {
+        font-size: 13px;
+        color: var(--main-color);
+        font-weight: 600;
+        top: -19px;
+        padding-left: 5px;
+    }
+    
+    .flight_search_right a {
+        margin-top: -48px;
+        margin-left: 228px;
+    }
+    
+    .flight_search_right .instact{
+        margin-left: 113px;
+    }
+    .flight_search_right p {
+        font-size: 12px;
+        padding-top: 2px;
+        font-weight: 500;
+        color: var(--black-color);
+    }
+    .flight_search_destination .type {
+    margin-right: 84px;
+    padding-right: 128px;
+        font-size: 14px;
+        line-height: 16px;
+    }
+    .flight_search_destination .type2 {
+        margin-left: 114px;
+        /* margin-right: 84px; */
+        }
+    
+    .flight_search_right h6 {
+        font-size: 16px;
+        font-weight: 500;
+        padding-top: 7px;
+        cursor: pointer;
+    }
     .flight_search_middel {
+        
         display: inherit;
         padding-left: 0;
         text-align: center;
     }
 
     .flight_search_destination h6 {
-        padding-top: 10px;
-        margin: 0 auto;
-        padding-bottom: 15px;
+     
+        /* padding-top: 10px; */
+        /* margin: 0 auto; */
+        /* padding-bottom: 15px; */
     }
 
     .flight_search_destination {

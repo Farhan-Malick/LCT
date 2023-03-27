@@ -68,6 +68,39 @@
                 .footer .nav-link{
                     color: grey;
                 }
+                @media only screen and (max-width: 576px){
+                    
+                    .flight_multis_area_wrapper .flight_search_destination.d-none-mobile{
+                        /* display:none; */
+                    }
+                    .d-none-mobile{
+                        display:none;
+                    }
+                    .flight_right_arrow{
+                        padding-bottom: 0px;
+                    }
+                    .flight_search_right{
+                        padding: 0px;
+                    }
+                    .type{
+                        display:none;
+                    }
+                    .type2{
+                        display:block;
+                    }
+                    .benefits2{
+                        display: none;
+                    }
+                    .benefits{
+                        display: none;
+                    }
+                    .spen{
+                        margin-bottom: 20px
+                    }
+                    .rowstyle{
+                        height: 60px;
+                    }
+                }
         </style>
         <title>Last Chance Ticket - Buyer</title>
        
@@ -332,7 +365,6 @@
                                                                                 </div>
                                                                             </div>
                                                                         </form>
-
                                                                     </div>
                                                                 </div>
                                                             <div class="col-lg-2">
@@ -591,8 +623,8 @@
                                                                     <div class="flight_search_destination" >
                                                                         <p>Tickets</p>
                                                                         <h6>No of Tickets {{$ticket->quantity}}</h6>
-                                                                        <p class="m-0">Benefits</p>
-                                                                        <h6 class="fw-700 ">{{implode(' ', json_decode($ticket->ticket_benefits, true))}}</h6> 
+                                                                        <p class="m-0 benefits">Benefits</p>
+                                                                        <h6 class="fw-700 benefits2">{{implode(' ', json_decode($ticket->ticket_benefits, true))}}</h6> 
                                                                         <p class="m-0">Restriction</p>
                                                                         <h6>{{implode(' ', json_decode($ticket->ticket_restrictions, true))}}</h6> 
                                                                         <!--<h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>-->
@@ -609,12 +641,12 @@
                                                                         <h6>Row: {{$ticket->type_row}}</h6>
                                                                     </div>
                                                                     <div class="flight_search_destination">
-                                                                        <p>Ticket : </p>
-                                                                        <h6>{{$ticket->ticket_type}}</h6>
+                                                                        <p class="type">Ticket : </p>
+                                                                        <h6 class="type2">{{$ticket->ticket_type}}</h6>
                                                                         {{-- <p>Seating Area</p>
                                                                         <h6 class="fw-700 ">{{$ticket->seated_area}}</h6> --}}
                                                                         @if($ticket->cat_id == 1)
-                                                                        <h6 class="fw-700 ">
+                                                                        <h6 class="fw-700  d-none-mobile">
                                                                             <p class="m-0">Fans Section</p>
                                                                             {{$ticket->fan_section}}
                                                                         </h6>
@@ -624,7 +656,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="flight_search_right">
-                                                            <div class="row">
+                                                            <div class="row p-3  rowstyle">
                                                                 <div class="col-lg-6"><h2 style="font-size: 20px"><b>${{$ticket->price}}</b></h2> </div>
                                                                 <div class="col-lg-6"><h2><sup style="font-size: 8px">Per Ticket</sup></h2></div>
                                                             </div>
@@ -634,13 +666,13 @@
                                                                 {{ route('buyer.ticket.checkout',['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif " >
                                                                 @if($ticket->quantity == 0) SOLD @else Select Ticket
                                                                     @endif 
-                                                            </a>
-                                                            <p> @if ($ticket->book_eticket === "Yes")
+                                                            </a><br>
+                                                            <span class="spen"> @if ($ticket->book_eticket === "Yes")
                                                                 @if ($ticket->quantity != 0)
-                                                                <a href="#" class="text-danger" >Instant Download</a>
+                                                                <a href="#" class="text-danger instact" >Instant Download</a>
                                                                     {{-- <a href="{{ route('Pdftemplate',['eventlisting_id' => $events->id,'ticketid' => $ticket->id] ) }}" class="text-danger" >Ticket PDF</a> --}}
                                                                 @endif
-                                                            @endif</p>
+                                                            @endif</span>
                                                         </div>
                                                     </div>
                                                     @endif
@@ -700,9 +732,27 @@
                     const value =event.currentTarget.attributes['data-tickets-val'].value;
                     document.getElementById('total-tickets').value = value;
                     document.getElementById('qty-form').submit();
+                    
                 });
             });
         });
+        
+        $(document).ready(function(){
+        //   $(".cardNew > div").click(function(){
+        //     $(this).addcss('background', '#2B2540')
+        //   });
+        $(".cardNew > div").click(function() {
+            $(".cardNew > div").css("background-color", "#22b3c1");
+            $(this).css("background-color", "#2B2540");
+        });
+        });
+        
+        // $(function() {
+        //   $('.button').on('click', function() {
+        //     $('.button').removeClass('active'); // reset *all* buttons to the default state
+        //     $(this).addClass('active'); // mark only the click-target as active
+        //   })
+        // });
     </script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

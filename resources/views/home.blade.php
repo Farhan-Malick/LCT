@@ -47,7 +47,7 @@
   from { left: 100%;}
   to { left: -100%;}
 }
-    #textofMarquee {
+  #textofMarquee {
   position:absolute;
   top:0;
   left:0;

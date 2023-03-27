@@ -161,6 +161,8 @@ Route::post('/ticket/{ticketid}/purchase' , [PurchasesController::class,'buyer_t
 Route::post('/tickets/{eventlisting_id}/{ticketid}/{sellerid}/view' , [PurchasesController::class,'buyer_ticket_create'])->name('buyer.ticket.create');
 
 Route::get('/ticket/{eventlisting_id}/{ticketid}/{sellerid}/checkout' , [PurchasesController::class,'buyer_ticket_checkout'])->name('buyer.ticket.checkout');
+Route::get('ticket/{eventlisting_id}/{ticketid}/{sellerid}/ProceedToCheckout', [PurchasesController::class,'ProceedToCheckout']);
+Route::post('ticket/{eventlisting_id}/{ticketid}/{sellerid}/ProceedToCheckout', [PurchasesController::class,'buyer_ticket_purchase_CheckOut'])->name('payment.checkout.finalize');
 
 Route::get('/ticket/{eventlisting_id}/{ticketid}/{sellerid}/TicketDetail' , [PurchasesController::class,'buyer_ticket_detail'])->name('buyer.ticket.detail');
 // Route::get('/ticket/checkout', function () {

@@ -97,39 +97,34 @@
                               <input type="hidden" name="country_id" value="{{ $country }}"> 
                               <input type="hidden" name="quantity" value="{{ $quantity }}"> 
                               <input type="hidden" name="shipingCharges" value="{{ $shipping_charges }}"> 
-                               @if (Session::has('success'))
-                                  <div class="alert alert-success text-center">
-                                      <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                      <p>{{ Session::get('success') }}</p>
-                                  </div>
-                              @endif
+                            
                                   <div class='form-row row'>
                                       <div class='col-xs-12 form-group required'>
                                           <label class='control-label'>Name on Card</label> <input
-                                              class='form-control' size='4' type='text'>
+                                              class='form-control h_50' size='4' type='text'>
                                       </div>
                                   </div>
                                   <div class='form-row row'>
                                       <div class='col-xs-12 form-group  required'>
                                           <label class='control-label'>Card Number</label> <input
-                                              autocomplete='off' class='form-control card-num' size='20'
+                                              autocomplete='off' class='form-control card-num h_50' size='20'
                                               type='text'>
                                       </div>
                                   </div>
                                   <div class='form-row row'>
                                       <div class='col-xs-12 col-md-4 form-group cvc required'>
                                           <label class='control-label'>CVC</label> 
-                                          <input autocomplete='off' class='form-control card-cvc' placeholder='e.g 415' size='4'
+                                          <input autocomplete='off' class='form-control card-cvc h_50' placeholder='e.g 415' size='4'
                                               type='text'>
                                       </div>
                                       <div class='col-xs-12 col-md-4 form-group expiration required'>
                                           <label class='control-label'>Expiration Month</label> <input
-                                              class='form-control card-expiry-month' placeholder='MM' size='2'
+                                              class='form-control card-expiry-month h_50' placeholder='MM' size='2'
                                               type='text'>
                                       </div>
                                       <div class='col-xs-12 col-md-4 form-group expiration required'>
                                           <label class='control-label'>Expiration Year</label> <input
-                                              class='form-control card-expiry-year' placeholder='YYYY' size='4'
+                                              class='form-control card-expiry-year h_50' placeholder='YYYY' size='4'
                                               type='text'>
                                       </div>
                                   </div>
@@ -139,7 +134,7 @@
                                   </div>
                                   <div class="row">
                                       <div class="col-xs-12 mt-5" >
-                                         <button type="submit" class="btn btn-primary">Finish & Check your Ticket</button>
+                                         <button type="submit" class="btn btn-primary">Finish</button>
                                       </div>
                                   </div>
                                   {{-- <button type="submit" class="btn btn-primary">Finish & Check your Ticket</button> --}}
@@ -267,22 +262,26 @@
                      </div>
                       <div class="order-total-dt">
                          <div class="order-text">Total Tickets</div>
-                         <div class="order-number">{{ $tickets->qty }}</div>
+                         <div class="order-number"><small>x</small>{{ $quantity }}</div>
                       </div>
+                      <div class="order-total-dt">
+                        <div class="order-text">Total Tickets Price</div>
+                        <div class="order-number">${{$ticketPrice}}</div>
+                     </div>
                       @if ($tickets->ticket_type === "Paper-Ticket")
                       <div class="order-total-dt">
                         <div class="order-text">Shipping Charges</div>
-                        <div class="order-number">{{ $tickets->shipment }}</div>
+                        <div class="order-number">+ ${{$shipping_charges }}</div>
                      </div>
                       @endif
                       <div class="order-total-dt">
                         <div class="order-text">Service Charges</div>
-                        <div class="order-number">{{ $tickets->webCharges }}</div>
+                        <div class="order-number">+ ${{$webCharge }}</div>
                      </div>
                       <div class="divider-line"></div>
                       <div class="order-total-dt">
-                         <div class="order-text">Total</div>
-                         <div class="order-number ttl-clr">{{ $tickets->grand_total2 }}</div>
+                         <div class="order-text" style="font-size: 18px"><b>Total</b></div>
+                         <div class="order-number ttl-clr"style="font-size: 18px;"><b>= {{ $grand_total2 }}</b></div>
                       </div>
                    </div>
                   

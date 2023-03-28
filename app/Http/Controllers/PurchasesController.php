@@ -45,7 +45,7 @@ class PurchasesController extends Controller
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
         $sellerCountry = Seller::where('user_id',$sellerid)->first();
-        return view('payment-tickets/proceedToCheckout',compact('Footerevents','FooterEventListing','tickets','events','sellers','sellerCountry'));
+        return view('payment-tickets/proceedTocheckout',compact('Footerevents','FooterEventListing','tickets','events','sellers','sellerCountry'));
     }
 
     public function buyer_ticket_purchase(Request $request, $id)
@@ -70,7 +70,6 @@ class PurchasesController extends Controller
                 'country_id'  => 'required',
             ]);
         }
-
         if(!auth()->check()){
             return redirect('/login');
         }
@@ -78,73 +77,44 @@ class PurchasesController extends Controller
         $quantity = Request::get('quantity');
         $country = Request::get('country_id');
         $shipping_charges = Request::get('shipingCharges');
-        // // $sub_dateForPaper = '';$sub_dateForMobile = '';$sub_dateForE = '';
-        // // $ticket->msg=''; $ticket->msg2=''; $ticket->msg3='';
-        // // if($ticket->ticket_type === "Paper-Ticket") {
-        // //     $sub_dateForPaper = Carbon::parse($ticket->event_date)->subDays(10)->toDateString();
-        // //     $ticket->msg = 'Must Ship The Paper Ticket by Date: ' .$sub_dateForPaper;
-        // //     $ticket->msg3 = 'The Buyers Address to ship the tickets will be communicated to you shortly.';
-        // // }elseif($ticket->ticket_type === "Mobile-Ticket"){
-        // //     $sub_dateForMobile = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
-        // //     $ticket->msg = 'Must Transfer The Mobile Ticket by Date: ' .$sub_dateForMobile;
-        // //     $ticket->msg3 = 'The Mobile Ticket attendees information will be communicated to you shortly.';
-        // // }elseif($ticket->book_eticket === "No"){
-        // //         $sub_dateForE = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
-        // //         $ticket->msg = 'Must Upload The E-Ticket by Date: ' .$sub_dateForE;
-        // // }elseif($ticket->book_eticket === "Yes"){
-        // //         $sub_dateForE = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
-        // //         $ticket->msg3 = 'There is nothing you need to do. We will send the pre uploaded tickets to the buyer soon';
-        // // }
-
-        // // dd($ticket); 
-        
-        // $seller = User::find($ticket->user_id);
-        // $purchase = new Purchases();
-        // $purchase->user_id = auth()->id();
-        // $purchase->event_id = $ticket->eventlisting_id;
-        // $purchase->ticket_id = $ticket->id;
-        // $purchase->seller_id = $ticket->user_id;
-        //  // Service Charges
-         
-        // $purchase->price = (int) $ticket->price * (int) Request::get('quantity') + (int) $purchase->webCharge;
-        // $purchase->quantity = Request::get('quantity');
-        // $purchase->country_id = Request::get('country_id');
-       
-        // $webCharge = $purchase->price / 10;
-        //  $purchase->webCharge = $webCharge;
-         
-        // $divide = $purchase->price / 100;
-        // $percentage = $divide * 10;
-        // //Shipping Charges
-        // $purchase->shipingCharges = Request::get('shipingCharges');
-        
-        // // Seller gonna receive
-        // $grand_total = $purchase->price - $percentage;
-        // $grand_total2 = $purchase->price + $webCharge + (int) Request::get('shipingCharges');
-        
-        // // dd( $grand_total2 );
-        
-        // $purchase->grand_total = $grand_total;
-        // $purchase->grand_total2 = $grand_total2;
-        // $purchase->save();
-       
-        // // Stripe::setApiKey(env('STRIPE_SECRET'));
-        // // Charge::create ([
-        // //         "amount" => $purchase->price * 100,
-        // //         "currency" => "usd",
-        // //         "source" => Request::get('stripeToken'),
-        // //         "description" => "Making test payment." 
-        // // ]);
-        // // MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge,$grand_total2);
-        // // MailController::sellerticketpurchased($seller->email, $ticket, $purchase,$webCharge,$grand_total);
         $eventlisting_id = $ticket->eventlisting_id;
+        
+        $ticketPrice = (int) $ticket->price * (int) Request::get('quantity');
+
+        $seller = User::find($ticket->user_id);
+        $purchase = new Purchases();
+        $purchase->user_id = auth()->id();
+        $purchase->event_id = $ticket->eventlisting_id;
+        $purchase->ticket_id = $ticket->id;
+        $purchase->seller_id = $ticket->user_id;
+         // Service Charges
+         
+        $purchase->price = (int) $ticket->price * (int) Request::get('quantity') + (int) $purchase->webCharge;
+
+        $webCharge = $purchase->price / 10;
+         $purchase->webCharge = $webCharge;
+         
+        $divide = $purchase->price / 100;
+        $percentage = $divide * 10;
+        //Shipping Charges
+        $purchase->shipingCharges = Request::get('shipingCharges');
+        
+        // Seller gonna receive
+        $grand_total = $purchase->price - $percentage;
+        $grand_total2 = $purchase->price + $webCharge + (int) Request::get('shipingCharges');
+        
+        // dd( $grand_total2 );
+        
+        $purchase->grand_total = $grand_total;
+        $purchase->grand_total2 = $grand_total2;
+
         $ticket_id = $ticket->id;
         $seller_id = $ticket->user_id;
         $events = EventListing::select('*','venues.title as vTitle', 'venues.image as vImage')
-        ->join('events', 'events.id', '=', 'event_listings.event_id')
-        // ->join('venues', 'venues.id', '=', 'events.venue_id')
-        ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
-        ->where('event_listings.id', $ticket->eventlisting_id)
+            ->join('events', 'events.id', '=', 'event_listings.event_id')
+            // ->join('venues', 'venues.id', '=', 'events.venue_id')
+            ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
+            ->where('event_listings.id', $ticket->eventlisting_id)
         ->first();
         // dd($events);
         TicketListing::find($ticket->id)->increment('views');
@@ -160,10 +130,14 @@ class PurchasesController extends Controller
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
         $sellerCountry = Seller::where('user_id',$ticket->user_id)->first();
-        return view('payment-tickets/proceedToCheckout',compact('Footerevents','FooterEventListing','tickets','events','sellers','sellerCountry','quantity','country','shipping_charges','eventlisting_id','seller_id','ticket_id'));
+
+         return view('payment-tickets.proceedTocheckout',compact(
+            'ticketPrice','grand_total2','Footerevents','FooterEventListing','tickets','events',
+            'sellers','sellerCountry','webCharge',
+            'quantity','country','shipping_charges','eventlisting_id','seller_id','ticket_id'));
             // return redirect()->route('buyer.ticket.proceedToCheckout', ['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]);
         
-        // return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
+        
     }
 
     public function buyer_ticket_purchase_CheckOut(Request $request, $id)
@@ -267,8 +241,8 @@ class PurchasesController extends Controller
         MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge,$grand_total2);
         MailController::sellerticketpurchased($seller->email, $ticket, $purchase,$webCharge,$grand_total);
             //  dd($purchase);
-       
-        return redirect()->route('home');
+            return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
+        // return redirect()->route('home');
     }
     public function downloadPdf(){
         $pdf = Pdf::loadView('download.PDF');

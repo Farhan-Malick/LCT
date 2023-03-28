@@ -271,13 +271,6 @@ class PurchasesController extends Controller
             ->orderBy('price','asc')
             ->where('approve','1')
             ->where('ticket_listings.eventlisting_id',$id);
-
-        $ticketsNoFilter = TicketListing::select('ticket_listings.*')
-            // ->groupBy('quantity')
-            ->orderBy('price','asc')
-            ->where('approve','1')
-            ->where('ticket_listings.eventlisting_id',$id)
-            ->get();
         $categoriesFromTicketListing = TicketListing::select('ticket_listings.type_cat')
             ->groupBy('type_cat')
             ->orderBy('type_cat','asc')
@@ -295,13 +288,13 @@ class PurchasesController extends Controller
         ->groupBy('ticket_restrictions')
         ->where('ticket_listings.eventlisting_id',$id)
         ->get();
-
-        $quantityFromTicketListing = TicketListing::select('ticket_listings.quantity')
-        ->groupBy('quantity')
+        
+        $ticketsNoFilter = TicketListing::select('ticket_listings.*')
+        // ->groupBy('quantity')
+        ->orderBy('price','asc')
         ->where('approve','1')
         ->where('ticket_listings.eventlisting_id',$id)
         ->get();
-        
         if (Request::get('Restriction_filter') !== null) {
             $tickets = $tickets->where('ticket_restrictions', '=',Request::get('Restriction_filter'));
         }
@@ -346,6 +339,7 @@ class PurchasesController extends Controller
             ->where('ticket_listings.eventlisting_id',$id);
         }
         if (Request::get('qty') !== null) {
+            $qty = $ticketsNoFilter->quantity;
             $tickets = $tickets->where('quantity', '>=', Request::get('qty'));
         }
         if (Request::get('search-no-of-tickets') !== null) {
@@ -379,7 +373,7 @@ class PurchasesController extends Controller
         $tickets = $tickets->get();
         // dd($tickets);
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
-        return view('payment-tickets/browse-ticket',compact('ticketsNoFilter','Footerevents','FooterEventListing','quantityFromTicketListing','restrictionsFromTicketListing','events','tickets', 'eventListings','categoriesFromTicketListing','colors'));
+        return view('payment-tickets/browse-ticket',compact('ticketsNoFilter','Footerevents','FooterEventListing','restrictionsFromTicketListing','events','tickets', 'eventListings','categoriesFromTicketListing','colors'));
     }
 
     public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid){

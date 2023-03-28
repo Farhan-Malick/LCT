@@ -42,7 +42,7 @@
     <div class="container foot__con">
         <div class="row  pt-5 ">
             <div class="col-md-3 ">
-                <ul style="  margin-bottom: 0px;">
+                <ul style="  ">
                         <h4 class="text-dark mt-3">COMPANY INFO</h4>
                        
                         <li class=" mt-3"> <a type="button" class="text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal3">

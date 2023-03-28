@@ -68,26 +68,107 @@
 @include("auth.partials.newHeader")
 
 
-<div class="event-dt-block p-80" style="margin-top: 75px">
+<div class="event-dt-block p-80" >
     <div class="container">
        <div class="row">
                 @if (Session::has('message'))
-                    <div class="alert alert-success text-center">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                        <p>{{ Session::get('message') }}</p>
+                    <div class="alert alert-primary text-center mt-5">
+                        <p class="text-dark">{{ Session::get('message') }}</p>
                     </div>
                 @endif
+                <div class="col-lg-4 ">
+                    <div class="main-card order-summary">
+                       <div class="bp-title">
+                          <h4>Order Summary</h4>
+                       </div>
+                       <div class="order-summary-content p_30">
+                          <div class="event-order-dt">
+                             <div class="event-thumbnail-img">
+                               <img src="{{asset('assets/images/t1.webp')}}" class="" alt="img">
+                             </div>
+                             <div class="event-order-dt-content">
+                                <h5>{{ $events->event_name }}</h5>
+                                <span>{{ $events->start_date }} - {{ $events->start_time }}</span>
+                                <div class="category-type"><b>{{ $tickets->ticket_type }}</b></div>
+                             </div>
+                          </div>
+                          <div class="order-total-block">
+                           <div class="order-total-dt">
+                               <div class="order-text">Venue</div>
+                               <div class="order-number">{{ $events->vTitle }}</div>
+                            </div>
+                            <div class="order-total-dt">
+                               <div class="order-text">Category</div>
+                               <div class="order-number">{{$tickets->type_cat}}</div>
+                            </div>
+                            <div class="order-total-dt">
+                               <div class="order-text">Section</div>
+                               <div class="order-number">{{$tickets->type_sec}}</div>
+                            </div>
+                            <div class="order-total-dt">
+                               <div class="order-text">Row</div>
+                               <div class="order-number">{{$tickets->type_row}}</div>
+                            </div>
+                            <div class="order-total-dt">
+                               <div class="order-text">Seating Area</div>
+                               <div class="order-number">{{ $tickets->seated_area }}</div>
+                            </div>
+                            <div class="order-total-dt">
+                               <div class="order-text">Per-Ticket</div>
+                               <div class="order-number">${{ $tickets->price }}</div>
+                            </div>
+                             <div class="order-total-dt">
+                                <div class="order-text">Total Tickets</div>
+                                <div class="order-number"><small>x</small>{{ $quantity }}</div>
+                             </div>
+                             <div class="order-total-dt">
+                               <div class="order-text">Total Tickets Price</div>
+                               <div class="order-number">${{$ticketPrice}}</div>
+                            </div>
+                            
+                             <div class="order-total-dt">
+                               <div class="order-text">Shipping and Handling Fee</div>
+                               @if ($tickets->ticket_type === "Paper-Ticket")
+                               <div class="order-number">+ ${{$shipping_charges }}</div>
+                               @else
+                               <div class="order-number">$0.00</div>
+                             @endif
+                            </div>
+                             <div class="order-total-dt">
+                               <div class="order-text">Service Charges</div>
+                               <div class="order-number">+ ${{$webCharge }}</div>
+                            </div>
+                             <div class="divider-line"></div>
+                             <div class="order-total-dt">
+                                <div class="order-text" style="font-size: 18px"><b>Total</b></div>
+                                <div class="order-number ttl-clr"style="font-size: 18px;"><b>${{ $grand_total2 }}</b></div>
+                             </div>
+                          </div>
+                         
+                       </div>
+                    </div>
+                 </div>
           <div class="col-lg-8 ">
+            
              <div class="checkout-block">
                <div class="row">
                   <div class="col-md-12 ">
+                      
                       <div class="card" style="padding: 13px;">
                           <div class="panel-heading">
                               <div class="row text-center">
                                   {{-- <h3 class="panel-heading">Payment Details</h3> --}}
                               </div>                    
                           </div>
+
                           <div class="card-body">
+                            <div class="">
+                                <h4 class="">Payment Details </h4>
+                                <hr>
+                            </div>
+                                <div class="mt-4 mb-3">
+<h4>Total Payable Amount : ${{ $grand_total2 }}</h4>
+</div>
                            <form method="post" action="{{ route('payment.checkout.finalize',
                            ['eventlisting_id' => $eventlisting_id,'ticketid' => $ticket_id, 'sellerid' => $seller_id])}} " role="form"  method="post" class="validation"   data-cc-on-file="false"
                               data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
@@ -99,33 +180,37 @@
                               <input type="hidden" name="shipingCharges" value="{{ $shipping_charges }}"> 
                             
                                   <div class='form-row row'>
-                                      <div class='col-xs-12 form-group required'>
+                                      <div class='col-xs-12 form-group required p-4'>
                                           <label class='control-label'>Name on Card</label> <input
                                               class='form-control h_50' size='4' type='text'>
                                       </div>
                                   </div>
                                   <div class='form-row row'>
-                                      <div class='col-xs-12 form-group  required'>
+                                      <div class='col-xs-12 form-group  required p-4'>
                                           <label class='control-label'>Card Number</label> <input
                                               autocomplete='off' class='form-control card-num h_50' size='20'
                                               type='text'>
                                       </div>
                                   </div>
                                   <div class='form-row row'>
-                                      <div class='col-xs-12 col-md-4 form-group cvc required'>
+                                      <div class='col-xs-12 col-md-4 form-group cvc required p-4'>
                                           <label class='control-label'>CVC</label> 
                                           <input autocomplete='off' class='form-control card-cvc h_50' placeholder='e.g 415' size='4'
                                               type='text'>
                                       </div>
-                                      <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                      <div class='col-xs-12 col-md-4 form-group expiration required p-4'>
                                           <label class='control-label'>Expiration Month</label> <input
                                               class='form-control card-expiry-month h_50' placeholder='MM' size='2'
                                               type='text'>
                                       </div>
-                                      <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                      <div class='col-xs-12 col-md-4 form-group expiration required p-4'>
                                           <label class='control-label'>Expiration Year</label> <input
                                               class='form-control card-expiry-year h_50' placeholder='YYYY' size='4'
                                               type='text'>
+                                      </div>
+                                      <div class='col-lg-12 form-group p-4'>
+                                          <label class="m-2 "><input class=" check " type="checkbox" name=""  value="" id="" required>&nbsp; I agree with the LCT Terms & Conditions</label>
+                                        
                                       </div>
                                   </div>
                                   <div class='form-row row'>
@@ -133,8 +218,8 @@
                                       </div>
                                   </div>
                                   <div class="row">
-                                      <div class="col-xs-12 mt-5" >
-                                         <button type="submit" class="btn btn-primary">Finish</button>
+                                      <div class="col-xs-12 mt-4" >
+                                         <button type="submit" class=" main-btn btn-hover h_50 w-100 ">Pay ${{$grand_total2}}</button>
                                       </div>
                                   </div>
                                   {{-- <button type="submit" class="btn btn-primary">Finish & Check your Ticket</button> --}}
@@ -203,96 +288,13 @@
                
              </div>
           </div>
-          <div class="col-lg-4 ">
-             <div class="main-card order-summary">
-                <div class="bp-title">
-                   <h4>Billing information</h4>
-                   <div class="col-lg-12">
-                     @if ($errors->any())
-                     <div class="alert alert-danger" role="alert">
-                         <div class="alert-icon">
-                             <i class="flaticon-warning "></i>
-                         </div>
-                         <div class="alert-text">
-                             <ul>
-                                 @foreach ($errors->all() as $error)
-                                 <li>{{ $error }}</li>
-                                 @endforeach
-                             </ul>
-                         </div>
-                     </div><br />
-                 @endif
-                 </div>
-                </div>
-                <div class="order-summary-content p_30">
-                   <div class="event-order-dt">
-                      <div class="event-thumbnail-img">
-                        <img src="{{asset('assets/images/t1.webp')}}" class="" alt="img">
-                      </div>
-                      <div class="event-order-dt-content">
-                         <h5>{{ $events->event_name }}</h5>
-                         <span>{{ $events->start_date }} - {{ $events->start_time }}</span>
-                         <div class="category-type"><b>{{ $tickets->ticket_type }}</b></div>
-                      </div>
-                   </div>
-                   <div class="order-total-block">
-                    <div class="order-total-dt">
-                        <div class="order-text">Venue</div>
-                        <div class="order-number">{{ $events->vTitle }}</div>
-                     </div>
-                     <div class="order-total-dt">
-                        <div class="order-text">Category</div>
-                        <div class="order-number">{{$tickets->type_cat}}</div>
-                     </div>
-                     <div class="order-total-dt">
-                        <div class="order-text">Section</div>
-                        <div class="order-number">{{$tickets->type_sec}}</div>
-                     </div>
-                     <div class="order-total-dt">
-                        <div class="order-text">Row</div>
-                        <div class="order-number">{{$tickets->type_row}}</div>
-                     </div>
-                     <div class="order-total-dt">
-                        <div class="order-text">Seating Area</div>
-                        <div class="order-number">{{ $tickets->seated_area }}</div>
-                     </div>
-                     <div class="order-total-dt">
-                        <div class="order-text">Per-Ticket</div>
-                        <div class="order-number">${{ $tickets->price }}</div>
-                     </div>
-                      <div class="order-total-dt">
-                         <div class="order-text">Total Tickets</div>
-                         <div class="order-number"><small>x</small>{{ $quantity }}</div>
-                      </div>
-                      <div class="order-total-dt">
-                        <div class="order-text">Total Tickets Price</div>
-                        <div class="order-number">${{$ticketPrice}}</div>
-                     </div>
-                      @if ($tickets->ticket_type === "Paper-Ticket")
-                      <div class="order-total-dt">
-                        <div class="order-text">Shipping Charges</div>
-                        <div class="order-number">+ ${{$shipping_charges }}</div>
-                     </div>
-                      @endif
-                      <div class="order-total-dt">
-                        <div class="order-text">Service Charges</div>
-                        <div class="order-number">+ ${{$webCharge }}</div>
-                     </div>
-                      <div class="divider-line"></div>
-                      <div class="order-total-dt">
-                         <div class="order-text" style="font-size: 18px"><b>Total</b></div>
-                         <div class="order-number ttl-clr"style="font-size: 18px;"><b>= {{ $grand_total2 }}</b></div>
-                      </div>
-                   </div>
-                  
-                </div>
-             </div>
-          </div>
+         
        </div>
     </div>
  </div>
 
 @include("auth.partials.footer")
+
 <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>

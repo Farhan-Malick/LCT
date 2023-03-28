@@ -456,14 +456,13 @@
                                             </tr>
                                         </table>
                                     </div>
-                                  
                             @endif
                           </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card p-3 shadow-sm br-10 mb-5">
-                            <div class="card-header primary-bg text-light">
-                                <h4 class="fw-700 m-0">About Your Tickets</h4>
+                            <div class="card-header  text-light" style="background: #22b3c1;">
+                                <h4 class="fw-700 m-0 text-white">About Your Tickets</h4>
                             </div>
                             <div class="card-body">
                                 <!--<p> <i class="fa fa-ban me-2 text-danger"></i>RESTRICTIONS :{{$tickets->ticket_restrictions}}</p>-->
@@ -482,59 +481,28 @@
                                             {{-- <h3 class="panel-heading">Payment Details</h3> --}}
                                         </div>                    
                                     </div>
-                                    <div class="card-body">
-                      
-                                         {{-- @if (Session::has('success'))
-                                            <div class="alert alert-success text-center">
-                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                                <p>{{ Session::get('success') }}</p>
-                                            </div>
-                                        @endif
-                                            <div class='form-row row'>
-                                                <div class='col-xs-12 form-group required'>
-                                                    <label class='control-label'>Name on Card</label> <input
-                                                        class='form-control' size='4' type='text'>
-                                                </div>
-                                            </div>
-                                            <div class='form-row row'>
-                                                <div class='col-xs-12 form-group  required'>
-                                                    <label class='control-label'>Card Number</label> <input
-                                                        autocomplete='off' class='form-control card-num' size='20'
-                                                        type='text'>
-                                                </div>
-                                            </div>
-                                            <div class='form-row row'>
-                                                <div class='col-xs-12 col-md-4 form-group cvc required'>
-                                                    <label class='control-label'>CVC</label> 
-                                                    <input autocomplete='off' class='form-control card-cvc' placeholder='e.g 415' size='4'
-                                                        type='text'>
-                                                </div>
-                                                <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                                    <label class='control-label'>Expiration Month</label> <input
-                                                        class='form-control card-expiry-month' placeholder='MM' size='2'
-                                                        type='text'>
-                                                </div>
-                                                <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                                    <label class='control-label'>Expiration Year</label> <input
-                                                        class='form-control card-expiry-year' placeholder='YYYY' size='4'
-                                                        type='text'>
-                                                </div>
-                                            </div>
-                                            <div class='form-row row'>
-                                                <div class='col-md-12 hide error form-group'>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-12 mt-5" >
-                                                   <button type="submit" class="btn btn-primary">Finish & Check your Ticket</button>
-                                                </div>
-                                            </div> --}}
-                                            <button type="submit" class="btn btn-primary">Finish & Check your Ticket</button>
-                                            {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.proceedToCheckout',
-                                                ['eventlisting_id' => $tickets->eventlisting_id,'ticketid' => $tickets->id, 'sellerid' => $tickets->user_id]) }}" 
-                                            >
-                                               Proceed to checkout
-                                            </a> --}}
+                                    <div class="">
+                                            <style>
+                                                .btn-hover:hover {
+                                                        color: #fff !important;
+                                                        background: #1b5e64;
+                                                        border: 1px solid #1b5e64;
+                                                    }
+                                                    .main-btn {
+                                                        font-size: 16px;
+                                                        color: #fff;
+                                                        font-weight: 400;
+                                                        text-align: center;
+                                                        background: #22b3c1;
+                                                        height: 50px;
+                                                        display: inline-block;
+                                                        line-height: 49px;
+                                                        padding: 0 30px;
+                                                        border-radius: 3px;
+                                                        border: 1px solid #22b3c1;
+                                                    }
+                                            </style>
+                                            <button type="submit" class="main-btn btn-hover h_50 w-100 ">Proceed to Checkout</button>
                                         </form>
                                     </div>
                                 </div>        

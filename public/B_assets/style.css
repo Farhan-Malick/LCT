@@ -552,10 +552,6 @@ body {
 	border: 2px solid #1b5e64;
 }
 
-.offcanvas-footer {
-    border-top: 1px solid #efefef;
-}
-
 .offcanvas-social {
     padding: 30px 20px;
 }
@@ -634,107 +630,6 @@ body {
 
 /* --- Footer --- */
 
-.footer {
-    background: #1c2131;
-    color: #fff;
-}
-
-.footer-top {
-    padding: 24px 0 64px;
-    border-bottom: 1px solid rgba(255,255,255,.1);
-}
-
-.footer-content {
-    margin-top: 38px;
-}
-
-.footer-content h4 {
-    font-size: 18px;
-    color: #fff;
-    margin-bottom: 11px;
-    font-weight: 400;
-}
-
-.footer-link-list li {
-    display: block;
-    line-height: 32px;
-}
-
-.footer-link {
-    color: rgba(255,255,255,.8);
-}
-
-.footer-link:hover {
-    color: rgba(106,192,69,1) !important;
-}
-
-.footer-content > .social-links {
-	margin-top: 21px;
-}
-
-.footer-content > .social-links > li {
-    display: inline-block;
-	margin-right: 10px;
-	margin-bottom: 10px;
-}
-
-.footer-content > .social-links > li:last-child {
-	margin-right: 0;
-}
-
-.footer-content > .social-links li > .social-link {
-    font-size: 18px;
-    width: 40px;
-    height: 40px;
-    display: block;
-    border: 2px solid rgba(255,255,255,.7);
-    border-radius: 100%;
-    text-align: center;
-    line-height: 39px;
-    color: rgba(255,255,255,.7);
-}
-
-.footer-content > .social-links li > .social-link:hover {
-    color: #fff !important;
-	border: 2px solid rgba(106,192,69,1);
-	background-color: rgba(106,192,69,1);
-}
-
-.download-app-link {
-    display: inline-block;
-    height: 38px;
-	margin-top: 12px;
-}
-
-.download-btn {
-    transition: all 0.12s ease-in-out 0s;
-    text-decoration: none;
-    margin-right: 7px;
-    vertical-align: inherit;
-}
-
-.download-btn img {
-    height: auto;
-    max-height: 100%;
-    max-width: 100%;
-    cursor: pointer;
-    transition: all 0.12s ease-in-out 0s;
-    opacity: 1;
-}
-
-.download-btn img:hover {
-	opacity: 0.8;
-}
-
-.footer-copyright-text p {
-	color: rgba(255,255,255,.8);
-	letter-spacing: 0.3px;
-}
-
-.footer-copyright-text {
-	text-align: center;
-	padding: 30px 0;
-}
 
 /* --- Index Page --- */
 
@@ -2153,7 +2048,13 @@ body {
 	margin-bottom: 0;
     border-bottom: 1px solid #efefef;
 }
-
+.bp-title2 h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+	margin-bottom: 0;
+    border-bottom: 1px solid #efefef;
+}
 .bp-content {
     padding: 0 30px 30px;
 }
@@ -2935,10 +2836,6 @@ body {
     border-bottom: 1px solid #efefef !important;
 }
 
-.modal-footer {
-    border-top: 1px solid #efefef !important;
-}
-
 .modal-body {
     padding: 0 !important;
 }
@@ -3057,11 +2954,6 @@ body {
 .profile-event-content > .event-title:hover {
     color: #000 !important;
 }
-
-.profile-event-footer {
-    padding: 0 20px 20px;
-}
-
 .event-btn-group {
     margin-top: 20px;
 }
@@ -4462,7 +4354,7 @@ body {
 }
 
 .p_30 {
-	padding: 30px !important;
+	padding: 20px !important;
 }
 
 .pb_30 {
@@ -4665,14 +4557,7 @@ body {
 	width: 100%;
 }
 
-#add-event-tab .step-footer.step-tab-pager {
-    text-align: center;
-}
 
-.step-app > .step-footer {
-    margin-top: 40px !important;
-    margin-bottom: 0 !important;
-}
 
 .steps_btn {
 	font-size: 14px !important;

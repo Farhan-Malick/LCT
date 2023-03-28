@@ -339,7 +339,6 @@ class PurchasesController extends Controller
             ->where('ticket_listings.eventlisting_id',$id);
         }
         if (Request::get('qty') !== null) {
-            $qty = $ticketsNoFilter->quantity;
             $tickets = $tickets->where('quantity', '>=', Request::get('qty'));
         }
         if (Request::get('search-no-of-tickets') !== null) {

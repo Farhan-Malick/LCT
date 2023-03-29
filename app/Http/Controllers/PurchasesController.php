@@ -87,21 +87,28 @@ class PurchasesController extends Controller
         $purchase->event_id = $ticket->eventlisting_id;
         $purchase->ticket_id = $ticket->id;
         $purchase->seller_id = $ticket->user_id;
-         // Service Charges
+
+         // Service Charges for seller 
          
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity') + (int) $purchase->webCharge;
-
         $webCharge = $purchase->price / 10;
-         $purchase->webCharge = $webCharge;
-         
         $divide = $purchase->price / 100;
         $percentage = $divide * 10;
+        $purchase->webCharge = $percentage;  
+
+       // service Charge for buyer 
+            $webChargeforBuyer = $purchase->price / 15;
+            $divideForBuyer = $purchase->price / 100;
+            $percentageForBuyer = $divideForBuyer * 15;
+            $purchase->webChargeforBuyer = $percentageForBuyer;
+           //  dd($purchase->webChargeforBuyer);
+
         //Shipping Charges
         $purchase->shipingCharges = Request::get('shipingCharges');
         
         // Seller gonna receive
         $grand_total = $purchase->price - $percentage;
-        $grand_total2 = $purchase->price + $webCharge + (int) Request::get('shipingCharges');
+        $grand_total2 = $purchase->price + $percentageForBuyer + (int) Request::get('shipingCharges');
         
         // dd( $grand_total2 );
         
@@ -133,7 +140,7 @@ class PurchasesController extends Controller
 
          return view('payment-tickets.proceedTocheckout',compact(
             'ticketPrice','grand_total2','Footerevents','FooterEventListing','tickets','events',
-            'sellers','sellerCountry','webCharge',
+            'sellers','sellerCountry','webCharge','percentageForBuyer',
             'quantity','country','shipping_charges','eventlisting_id','seller_id','ticket_id'));
             // return redirect()->route('buyer.ticket.proceedToCheckout', ['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]);
         
@@ -152,6 +159,9 @@ class PurchasesController extends Controller
             ->join( 'categories','categories.id', '=','events.category_id')
             ->where('ticket_listings.id',Request::get('ticketid'))
         ->first();
+        $ticket->quantity =  $ticket->quantity - (int) Request::get('quantity') ;
+        $ticket->update();
+        // dd($ticket);
         if(!auth()->check()){
             return redirect('/login');
         }
@@ -180,26 +190,6 @@ class PurchasesController extends Controller
              $purchase = new Purchases();
              $purchase->approve = 1;
              $purchase->update();
-             
-                     // $sub_dateForPaper = '';$sub_dateForMobile = '';$sub_dateForE = '';
-        // $ticket->msg=''; $ticket->msg2=''; $ticket->msg3='';
-        // if($ticket->ticket_type === "Paper-Ticket") {
-        //     $sub_dateForPaper = Carbon::parse($ticket->event_date)->subDays(10)->toDateString();
-        //     $ticket->msg = 'Must Ship The Paper Ticket by Date: ' .$sub_dateForPaper;
-        //     $ticket->msg3 = 'The Buyers Address to ship the tickets will be communicated to you shortly.';
-        // }elseif($ticket->ticket_type === "Mobile-Ticket"){
-        //     $sub_dateForMobile = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
-        //     $ticket->msg = 'Must Transfer The Mobile Ticket by Date: ' .$sub_dateForMobile;
-        //     $ticket->msg3 = 'The Mobile Ticket attendees information will be communicated to you shortly.';
-        // }elseif($ticket->book_eticket === "No"){
-        //         $sub_dateForE = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
-        //         $ticket->msg = 'Must Upload The E-Ticket by Date: ' .$sub_dateForE;
-        // }elseif($ticket->book_eticket === "Yes"){
-        //         $sub_dateForE = Carbon::parse($ticket->event_date)->subDays(5)->toDateString();
-        //         $ticket->msg3 = 'There is nothing you need to do. We will send the pre uploaded tickets to the buyer soon';
-        // }
-
-        // dd($ticket); 
         
         $seller = User::find($ticket->user_id);
         $purchase = new Purchases();
@@ -212,38 +202,43 @@ class PurchasesController extends Controller
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity') + (int) $purchase->webCharge;
         $purchase->quantity = Request::get('quantity');
         $purchase->country_id = Request::get('country_id');
-       
+        // service Charge for seller
         $webCharge = $purchase->price / 10;
-         $purchase->webCharge = $webCharge;
-         
-        $divide = $purchase->price / 100;
-        $percentage = $divide * 10;
+         $divide = $purchase->price / 100;
+         $percentage = $divide * 10;
+         $purchase->webCharge = $percentage;  
+
+        // service Charge for buyer 
+             $webChargeforBuyer = $purchase->price / 15;
+             $divideForBuyer = $purchase->price / 100;
+             $percentageForBuyer = $divideForBuyer * 15;
+             $purchase->webChargeforBuyer = $percentageForBuyer;
+            //  dd($purchase->webChargeforBuyer);
+
         //Shipping Charges
         $purchase->shipingCharges = Request::get('shipingCharges');
-        
         // Seller gonna receive
         $grand_total = $purchase->price - $percentage;
-        $grand_total2 = $purchase->price + $webCharge + (int) Request::get('shipingCharges');
-        
-        // dd( $grand_total2 );
+        //buyer gonna pay
+        $grand_total2 = $purchase->price + $percentageForBuyer + (int) Request::get('shipingCharges');
         
         $purchase->grand_total = $grand_total;
         $purchase->grand_total2 = $grand_total2;
         $purchase->save();
-       
+
         Stripe::setApiKey(env('STRIPE_SECRET'));
         Charge::create ([
-                "amount" => $purchase->price * 100,
+                "amount" => $grand_total2 * 100,
                 "currency" => "usd",
                 "source" => Request::get('stripeToken'),
                 "description" => "Making test payment." 
         ]);
-        MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge,$grand_total2);
+        MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge,$percentageForBuyer,$grand_total2);
         MailController::sellerticketpurchased($seller->email, $ticket, $purchase,$webCharge,$grand_total);
-            //  dd($purchase);
             return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
-        // return redirect()->route('home');
     }
+
+
     public function downloadPdf(){
         $pdf = Pdf::loadView('download.PDF');
         return $pdf->download('ticket.pdf');
@@ -271,6 +266,7 @@ class PurchasesController extends Controller
             ->orderBy('price','asc')
             ->where('approve','1')
             ->where('ticket_listings.eventlisting_id',$id);
+            
         $categoriesFromTicketListing = TicketListing::select('ticket_listings.type_cat')
             ->groupBy('type_cat')
             ->orderBy('type_cat','asc')
@@ -289,12 +285,12 @@ class PurchasesController extends Controller
         ->where('ticket_listings.eventlisting_id',$id)
         ->get();
         
-        $ticketsNoFilter = TicketListing::select('ticket_listings.*')
-        // ->groupBy('quantity')
+        $ticketsNoFilter = TicketListing::select('ticket_listings.quantity')
+        ->groupBy('quantity')
         ->orderBy('price','asc')
         ->where('approve','1')
-        ->where('ticket_listings.eventlisting_id',$id)
-        ->get();
+        ->where('ticket_listings.eventlisting_id',$id);
+        // dd($eventListings);
         if (Request::get('Restriction_filter') !== null) {
             $tickets = $tickets->where('ticket_restrictions', '=',Request::get('Restriction_filter'));
         }
@@ -344,10 +340,6 @@ class PurchasesController extends Controller
         if (Request::get('search-no-of-tickets') !== null) {
             $tickets = $tickets->where('quantity', '>=', Request::get('search-no-of-tickets'));
         }
-        if (Request::get('no_of_tickets') == '1') {
-            // $tickets = $tickets->get(0)->name;
-            // $tickets = $tickets->where('quantity', '=', Request::get('no_of_tickets'));
-        }
         if (Request::get('ticket_restrictions') !== null) {
             $tickets = $tickets->where('ticket_restrictions', '=', Request::get('ticket_restrictions,'));
         }
@@ -370,7 +362,9 @@ class PurchasesController extends Controller
         $Footerevents = Event::get();
 
         $tickets = $tickets->get();
+        $ticketsNoFilter = $ticketsNoFilter->get();
         // dd($tickets);
+        
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
         return view('payment-tickets/browse-ticket',compact('ticketsNoFilter','Footerevents','FooterEventListing','restrictionsFromTicketListing','events','tickets', 'eventListings','categoriesFromTicketListing','colors'));
     }

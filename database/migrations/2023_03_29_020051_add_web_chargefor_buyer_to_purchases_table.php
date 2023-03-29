@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::table('purchases', function (Blueprint $table) {
-            $table->integer('grand_total2')->nullable();
+            $table->integer('shipingCharges')->nullable();
+            $table->decimal('webCharge')->nullable();
+            $table->decimal('grand_total')->nullable();
+            $table->decimal('webChargeforBuyer')->nullable();
+            $table->decimal('grand_total2')->nullable();
         });
     }
 

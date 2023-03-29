@@ -17,8 +17,12 @@ Date: {{ $data->event_date }} <br><br>
 <b>Price Information: </b><br>
 Number of Tickets: {{$purchase->quantity}}<br>
 Price per Ticket: USD {{$data->price}} <br>
-Service Charges : USD {{$purchase->webCharge}} <br>
-Shipping and handling fee: USD {{$purchase->shipingCharges}}<br>
+Service Charges : USD {{ $purchase->webChargeforBuyer }} <br>
+Shipping and handling fee: @if($data->ticket_type === 'E-Ticket' || $data->ticket_type === 'Mobile-Ticket')
+USD 0.00
+@else
+USD {{$purchase->shipingCharges}}
+@endif<br>
 Total Price : USD {{$purchase->grand_total2}}<br> <br>
 If you need any further information on your order, please feel free to contact the support at
 support@lastchanceticket.com <br><br><br>

@@ -14,34 +14,25 @@ class Purchases extends Model
     use SoftDeletes;
     use Notifiable;
 
-
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-
     protected $fillable = [
         'user_id',
         'event_id',
         'ticket_id',
         'quantity',
-        'price',
-        
-        
-        
-        
+        'price',  
     ];
-
     public function event(){
         return $this->hasOne(Event::class,'id','event_id');
     }
-
     // public function ticket(){
     //     return $this->hasOne(Purchases::class,'id','ticket_id');
     // }
-
     public function user(){
         return $this->hasOne(User::class,'id','user_id');
     }

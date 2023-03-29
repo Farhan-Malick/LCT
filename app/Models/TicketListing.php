@@ -24,13 +24,13 @@ class TicketListing extends Model
         );
     }
 
-    protected function quantity(): Attribute
-    {
-        $sum = Purchases::where('ticket_id', $this->id)->sum('quantity');
-        return Attribute::make(
-            get: fn ($value) => $value - $sum,
-        );
-    }
+    // protected function quantity(): Attribute
+    // {
+    //     $sum = Purchases::where('ticket_id', $this->id)->sum('quantity');
+    //     return Attribute::make(
+    //         get: fn ($value) => $value - $sum,
+    //     );
+    // }
 
     public function get_event_tickets($params = [])
     {

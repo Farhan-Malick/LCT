@@ -136,7 +136,7 @@
                             </div>
                              <div class="order-total-dt">
                                <div class="order-text">Service Charges</div>
-                               <div class="order-number">+ ${{$webCharge }}</div>
+                               <div class="order-number">+ ${{$percentageForBuyer }}</div>
                             </div>
                              <div class="divider-line"></div>
                              <div class="order-total-dt">

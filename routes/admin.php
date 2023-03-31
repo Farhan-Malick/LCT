@@ -17,6 +17,7 @@ use App\Http\Controllers\MisController;
 use App\Http\Controllers\SellerCategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VisitorAnalyticsController;
+use App\Http\Controllers\AdminController;
 use App\Http\Middleware\AdminAuth;
 
 /*
@@ -57,6 +58,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/view-PDF-File/P-Ticket/{id}', [TicketController::class, 'viewPdfForPaperticket']);
         Route::get('/view-PDF-File/M-Ticket/{id}', [TicketController::class, 'viewPdfForMobileticket']);
         Route::get('/view-PDF-File/E-Ticket/{id}', [TicketController::class, 'viewPdfForEticket']);
+
+        Route::get('/Admin-Panel/Registered-Users', [AdminController::class, 'Users']);
 
         Route::get('/Admin-Panel/Contact-Us', [ContactController::class, 'contactDetailForAdmin']);
         Route::get('/Admin-Panel/Contact-Us/delete/{id}', [ContactController::class, 'contactDelete']);

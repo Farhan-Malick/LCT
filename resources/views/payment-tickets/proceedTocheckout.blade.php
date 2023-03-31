@@ -144,7 +144,6 @@
                                 <div class="order-number ttl-clr"style="font-size: 18px;"><b>${{ $grand_total2 }}</b></div>
                              </div>
                           </div>
-                         
                        </div>
                     </div>
                  </div>
@@ -182,7 +181,7 @@
                                   <div class='form-row row'>
                                       <div class='col-xs-12 form-group required p-4'>
                                           <label class='control-label'>Name on Card</label> <input
-                                              class='form-control h_50' size='4' type='text'>
+                                              class='form-control h_50' style="outline:thick" size='4' type='text'>
                                       </div>
                                   </div>
                                   <div class='form-row row'>
@@ -209,7 +208,7 @@
                                               type='text'>
                                       </div>
                                       <div class='col-lg-12 form-group p-4'>
-                                          <label class="m-2 "><input class=" check " type="checkbox" name=""  value="" id="" required>&nbsp; I agree with the LCT Terms & Conditions</label>
+                                          <label class="m-2 "><input style=""class="" type="checkbox" name=""  value="" id="" required>&nbsp; I agree with the LCT Terms & Conditions</label>
                                         
                                       </div>
                                   </div>
@@ -219,7 +218,7 @@
                                   </div>
                                   <div class="row">
                                       <div class="col-xs-12 mt-4" >
-                                         <button type="submit" class=" main-btn btn-hover h_50 w-100 ">Pay ${{$grand_total2}}</button>
+                                         <button type="submit" id="submit_button" class=" main-btn btn-hover h_50 w-100 ">Pay ${{$grand_total2}}</button>
                                       </div>
                                   </div>
                                   {{-- <button type="submit" class="btn btn-primary">Finish & Check your Ticket</button> --}}
@@ -234,58 +233,6 @@
                   </div>
               </div>
 
-                {{-- <div class="main-card mt-5">
-                    <div class="bp-title">
-                       <h4>Total Payable Amount : AUD $50.00</h4>
-                    </div>
-                    <div class="bp-content bp-form">
-                    <form method="post" action="{{ route('payment.checkout.finalize',
-                    ['eventlisting_id' => $tickets->eventlisting_id,'ticketid' => $tickets->id, 'sellerid' => $tickets->user_id])}} " role="form"  method="post" class="validation"
-                        data-cc-on-file="false"
-                        data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
-                        id="payment-form">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group mt-4 required ">
-                                   <label class="form-label">Holder Name*</label>
-                                   <input class='form-control h_50' size='4' type='text'>
-                                </div>
-                             </div>
-                              <div class="col-lg-12 col-md-12">
-                                 <div class="form-group mt-4 required">
-                                    <label class="form-label">Card number*</label>
-                                    <input 
-                                    autocomplete='off' class='form-control card-num h_50' size='20' type="text" placeholder="" value="">
-                                 </div>
-                              </div>
-                              <div class="col-lg-6 col-md-12">
-                                 <div class="form-group mt-4 required">
-                                    <label class="form-label">Expiry date*</label>
-                                    <input class='form-control card-expiry-month h_50' placeholder='MM' size='2' type="text" placeholder="MM/YY" value="">
-                                 </div>
-                              </div>
-                              <div class="col-lg-6 col-md-12">
-                                 <div class="form-group mt-4 required">
-                                    <label class="form-label">CVV*</label>
-                                    <input autocomplete='off' class='form-control card-cvc h_50' type="text" placeholder='e.g 415' size='4'  value="">
-                                 </div>
-                              </div>
-                              <div class=' col-lg=12 form-group expiration required'>
-                               <div class="form-group mt-4 required">
-                                <label class='control-label'>Expiration Year</label> <input
-                                class='form-control card-expiry-year h_50' placeholder='YYYY' size='4'
-                                type='text'>
-                               </div>
-                            </div>
-                              <div class="col-lg-12 col-md-12">
-                                 <button class="main-btn btn-hover h_50 w-100 mt-5" type="submit">Confirm & Pay</button>
-                              </div>
-                           </div>
-                    </form>
-                    </div>
-                 </div> --}}
-               
              </div>
           </div>
          

@@ -21,6 +21,7 @@
 
 .foot__con {
     margin-top: 50px;
+    margin-bottom: -48px;
     font-size: 13px;
 }
 .foot {
@@ -68,11 +69,11 @@
                     <h4 class="text-dark">SAFE AND SECURE</h4>
                     <li class="mt-3"><p style="font-size: 12px;line-height: 25px;color: #afafaf;"  class="ml-3 text-dark" style="align-content: justify">
                         <!--<i class="fa fa-check " style="font-size: 18px"></i>-->
-                        Buying 100% safe, Only from approvals sellers.</p>
+                        Buying 100% safe, Only from approved sellers.</p>
                     </li>
                     <li class="mt-3"> <p style="font-size: 12px;line-height: 25px;color: #afafaf;"  class="text-dark">
                         <!--<i class="fa-dark fa fa-circle-info" style="font-size: 18px"></i>-->
-                        Best Customer service before and after purchasing.</p>
+                        Best Customer service before and after Purchase.</p>
                     </li>
                     <li class="mt-3"><p style="font-size: 12px;line-height: 25px;color: #afafaf;"  class="text-dark">
                         <!--<i class="fa-regular fa-credit-card"  style="font-size: 18px"></i>-->

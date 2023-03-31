@@ -48,8 +48,7 @@
         <div class="col-lg-12">
           <h4>LAST CHANCE TICKET</h4>
           <h2>Contact Us</h2>
-          <p> Here is the last chance to be the member of world largest marketplace for tickets to live events.
-            Prices are set by sellers and may be below or above face value.</p>
+          <p>Here is the last chance to be the member of world’s leading ticket marketplace for live events around the globe.</p>
           <div class="main-button"><a href="#">Discover More</a></div>
         </div>
       </div>

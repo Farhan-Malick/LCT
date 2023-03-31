@@ -198,7 +198,7 @@ class PurchasesController extends Controller
         $purchase->ticket_id = $ticket->id;
         $purchase->seller_id = $ticket->user_id;
          // Service Charges
-         
+        
         $purchase->price = (int) $ticket->price * (int) Request::get('quantity') + (int) $purchase->webCharge;
         $purchase->quantity = Request::get('quantity');
         $purchase->country_id = Request::get('country_id');
@@ -235,7 +235,7 @@ class PurchasesController extends Controller
         ]);
         MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge,$percentageForBuyer,$grand_total2);
         MailController::sellerticketpurchased($seller->email, $ticket, $purchase,$webCharge,$grand_total);
-            return redirect()->back()->with('message', 'Admin will approve your purchase and will notify you.');
+            return redirect()->route('dashboard.listing')->with('message', 'Congratulations!! You have successfully purchased the tickets. You will shortly receive an email from us about the delivery of the tickets.');
     }
 
 
@@ -431,6 +431,7 @@ class PurchasesController extends Controller
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->where('purchases.user_id',auth()->user()->id)->get();
+        
         return view('dashboard/orders',compact('purchases'));
     }
 

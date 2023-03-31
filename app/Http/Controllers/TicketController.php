@@ -515,24 +515,29 @@ class TicketController extends Controller
         // ->where('completed', 1)->get();
         $active_tickets = TicketListing::select('ticket_listings.*')
         ->where([['user_id',auth()->user()->id],['status',1]])
+        ->orderBy('id','desc')
         ->where('completed', 1)->get();
         
-        $purchases = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date')
+        $purchases = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date','ticket_listings.ticket_type as Type')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->orderBy('id','desc')
         ->where('purchases.user_id',auth()->user()->id)->get();
       
         $data = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->where('purchases.user_id',auth()->user()->id)
+        ->orderBy('id','desc')
         ->first();
       
         // dd ($active_tickets);
 
-        $sales = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date')
+        $sales = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date','users.first_name','users.last_name')
+        ->join('users', 'users.id', '=', 'purchases.user_id')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+        ->orderBy('id','desc')
         ->where('seller_id',auth()->user()->id)->get();
         return view('dashboard/dashboard',compact('user','FooterEventListing','Footerevents','categories','active_tickets','events','purchases','data','sales'));
     }

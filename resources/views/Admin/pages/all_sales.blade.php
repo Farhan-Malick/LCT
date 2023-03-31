@@ -111,10 +111,15 @@
 									
 									<th scope="col">#</th>
 									<th scope="col">Purchaser</th>
+									<th scope="col">Email</th>
+									<th scope="col">Phone</th>
 									<th scope="col">Ticket name</th>
 									<th scope="col">Ticket Type</th>
-									<th scope="col">Total price</th>
+									<th scope="col">Ticket price</th>
 									<th scope="col">Quantity</th>
+									<th scope="col">Service Charges</th>
+									<th scope="col">Shipping Charges</th>
+									<th scope="col">Total Price</th>
 									{{-- <th scope="col">Purchased Date</th> --}}
 									<th scope="col">Status</th>
 									<th scope="col">Action</th>
@@ -125,10 +130,21 @@
 								<tr>
 									<td>{{$purchase->id}}</td>
 									<td>{{$purchase->user->first_name}}</td>
+									<td>{{$purchase->user->email}}</td>
+									<td>{{$purchase->user->phone}}</td>
 									<td>{{$purchase->event_name}}</td>
 										<td>{{$purchase->ticket_type}}</td>
 									<td>${{$purchase->price}}</td>
 									<td>{{$purchase->quantity}}</td>
+									<td>${{$purchase->webChargeforBuyer}}</td>
+									<td>
+										@if ($purchase->ticket_type === 'Paper-Ticket')
+										${{$purchase->shipingCharges}}
+										@else
+										$00
+										@endif
+									</td>
+									<td>${{$purchase->grand_total2}}</td>
 									{{-- <td>{{ date('Y-M-d') }}</td> --}}
 									<td>
 										@if($purchase->release_ticket == null || $purchase->release_ticket == 0)

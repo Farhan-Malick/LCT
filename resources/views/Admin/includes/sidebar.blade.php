@@ -42,6 +42,16 @@
                 <li class="has-sub">
                     <a href="javascript:;">
                         <b class="caret"></b>
+                        <i class="fa fa-gem"></i>
+                        <span>Registered Users</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{ URL('/Admin-Panel/Registered-Users') }}">Users</a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        <b class="caret"></b>
                         <i class="fa fa-hdd"></i>
                         <span>Events</span>
                     </a>

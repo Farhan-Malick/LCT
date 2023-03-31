@@ -62,30 +62,15 @@
 				<!-- begin breadcrumb -->
 				<ol class="breadcrumb float-xl-right">
 					<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-					<li class="breadcrumb-item"><a href="javascript:;">Tickets</a></li>
-					<li class="breadcrumb-item active">Seller Ticket Tables</li>
+					<li class="breadcrumb-item"><a href="javascript:;">Registered Users</a></li>
+					<li class="breadcrumb-item active">Registered Users Tables</li>
 				</ol>
 				<!-- end breadcrumb -->
 				<!-- begin page-header -->
 				<div class="row">
 					<div class="col-lg-12">
 						   <!-- begin panel -->
-							<h4 class="">Seller Tickets</h4>
-							@if ($message = Session::get('msg2'))
-									<div class="alert alert-primary alert-block">
-										<strong>{{ $message }}</strong>
-									</div>
-							@endif
-							@if ($message = Session::get('approve'))
-							<div class="alert alert-primary alert-block">
-								<strong>{{ $message }}</strong>
-							</div>
-							@endif
-							@if ($message = Session::get('update'))
-							<div class="alert alert-success alert-block">
-								<strong>{{ $message }}</strong>
-							</div>
-							@endif
+							<h4 class="">Registered Users</h4>
 					</div>
 				</div>
 				<!-- end page-header -->
@@ -93,7 +78,7 @@
 				<div class="panel panel-inverse">
 					<!-- begin panel-heading -->
 					<div class="panel-heading">
-						<h4 class="panel-title">Data Table - Seller Tickets Purchased</h4>
+						<h4 class="panel-title">Registered Users</h4>
 						<div class="panel-heading-btn">
 							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
@@ -106,52 +91,32 @@
 					<!-- begin panel-body -->
 					<div class="panel-body">
 						<table id="data-table-default" class="table table-striped table-bordered table-td-valign-middle">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">User </th>
-										<th scope="col">Email </th>
-										<th scope="col">Phone </th>
-                                        <th scope="col">Event </th>
-                                        <th scope="col">Ticket_ID</th>
-                                        <th scope="col">Total Quantity</th>
-										<th scope="col">Purchased Quantity</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Service Charge</th>
-                                        <th scope="col">Seller Receives</th>
-										<th scope="col" >Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-									@foreach($ticket as $m_ticket)
-										<tr>
-											<td>{{$m_ticket->id}}</td>
-                                            <td>{{$m_ticket->seller->first_name}}</td>
-											<td>{{$m_ticket->seller->email}}</td>
-											<td>{{$m_ticket->seller->phone}}</td>
-											<td>{{$m_ticket->event_name}}</td>
-											<td>{{$m_ticket->ticket_id}}</td>
-                                            <td>{{$m_ticket->totalQty}}</td>
-											<td>{{$m_ticket->quantity}}</td>
-											<td>${{$m_ticket->price}}</td>
-											<td>${{$m_ticket->webCharge}}</td>
-											<td>${{$m_ticket->grand_total}}</td>
-											<td>
-												@if($m_ticket->approve == null || $m_ticket->approve == 0)
-													<form action="{{ url('/toggle-Paid') }}" method="POST">
-														@csrf
-														<input type="hidden" name="seller_id" id=""
-															value="{{ $m_ticket->id }}" >
-														<input type="submit" class="btn btn-primary"
-															name="" value="UN-PAID" id="" >
-													</form>
-													@elseif ($m_ticket->approve == 1)
-														<button class="btn btn-success" disabled="disabled">P A I D</button>
-													@endif
-											</td>
-										</tr>
-								@endforeach
-                                </tbody>
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+									<th scope="col" >Phone</th>
+                                    <th scope="col">Primary Phone</th>
+                                    <th scope="col">country</th>
+                                    <th scope="col">Nationality</th>
+								</tr>
+							</thead>
+							<tbody>
+									@foreach($users as $user)
+											<tr>
+												<td>{{$user->id}}</td>
+												<td>{{$user->first_name}}</td>
+												<td>{{$user->last_name}}</td>
+                                                <td>{{$user->email}}</td>
+                                                <td>{{$user->phone}}</td>
+                                                <td>{{$user->primary_phone}}</td>
+                                                <td>{{$user->country}}</td>
+                                                <td>{{$user->nationality}}</td>
+											</tr>
+									@endforeach
+							</tbody>
 						</table>
 					</div>
 					<!-- end panel-body -->

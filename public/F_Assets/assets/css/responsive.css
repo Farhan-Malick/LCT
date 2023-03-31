@@ -20,7 +20,14 @@
         font-size: 18px;
     }
 }
-
+@media (min-width:990px) and (max-width:1199px) {
+    .flight_search_right h2 {
+        font-size: 16px;
+    }
+    .flight_search_right h2 sup{
+        font-size: 8px;
+    }
+}
 @media (max-width: 1199px) {
     .flight_show_down_wrapper {
         display: inherit;
@@ -418,7 +425,7 @@
     }
     
     .flight_search_right .instact{
-        margin-left: 113px;
+        margin-left: 234px;
     }
     .flight_search_right p {
         font-size: 12px;

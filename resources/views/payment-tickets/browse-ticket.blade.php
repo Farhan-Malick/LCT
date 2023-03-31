@@ -370,7 +370,7 @@
                                                             <div class="col-lg-2">
                                                                 <div class="col-lg-12 mt-3">
                                                                     <div class="cardNew btn_theme btn_md mb-3">
-                                                                        <div class="text-center card-body ticket-card  cursor-pointer shadow-sm"  data-tickets-val="5" >
+                                                                        <div class="text-center card-body ticket-card  cursor-pointer shadow-sm" style="@if(request()->get('search-no-of-tickets')) <?php echo 'background-color: #2B2540' ?> @endif"  data-tickets-val="5" >
                                                                             <h4>5 +</h4>
                                                                         </div>
                                                                     </div>
@@ -656,11 +656,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="flight_search_right">
-                                                            <div class="row p-3  rowstyle">
-                                                                <div class="col-lg-6"><h2 style="font-size: 20px"><b>${{$ticket->price}}</b></h2> </div>
-                                                                <div class="col-lg-6"><h2><sup style="font-size: 8px">Per Ticket</sup></h2></div>
-                                                            </div>
-                                                            {{-- <h2 style="font-size: 20px"><b>${{$ticket->price}}</b><sup style="font-size: 8px">Per Ticket</sup></h2> --}}
+                                                                {{-- <h2 style="font-size: 20px"><b>${{$ticket->price}}</b></h2>
+                                                                <h2><sup style="font-size: 8px">Per Ticket</sup></h2> --}}
+                                                            <h2 ><b>${{$ticket->price}}</b><sup >Per Ticket</sup></h2>
                                                             {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.detail',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}">View Ticket Detail</a> --}}
                                                             <a class="@if($ticket->quantity != 0) btn btn_theme btn_sm mb-2 @else btn btn-danger w-100  @endif" href="@if($ticket->quantity > 0)
                                                                 {{ route('buyer.ticket.checkout',['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif " >
@@ -678,6 +676,14 @@
                                                     @endif
                                                 @endforeach
                                         </div>
+                                        <style>
+                                            @media (max-width: 990px) {
+                                                .rowstyle {
+                                                    font-size: 20px;
+                                                }
+                                            }
+
+                                        </style>
                                     </div>
                         </div>
                     </div>

@@ -35,6 +35,11 @@
                <div class="container">
                   <div class="row">
                      <div class="col-lg-12">
+                        @if (Session::has('message'))
+                           <div class="alert alert-primary text-center ">
+                                 <p class="text-dark">{{ Session::get('message') }}</p>
+                           </div>
+                        @endif
                         @if ($message = Session::get('SuccssMessage'))
                         <div class="alert alert-primary">
                             <center><strong>{{ $message }}</strong></center>
@@ -125,11 +130,13 @@
                                                   <thead class="thead-light">
                                                     <tr>
                                                       <th>#</th>
-                                                      <th >Ticket Name</th>
-                                                      <th >Quantity</th>
-                                                      <th>Start Date</th>
+                                                      <th >Event</th>
+                                                      <th >Qty</th>
+                                                      <th>S.Date</th>
+                                                      {{-- <th >Price</th> --}}
+                                                      {{-- <th>Shiping & Service</th> --}}
+                                                      <th >Total</th>
                                                       <th>Purchased Date</th>
-                                                      <th >Price</th>
                                                     </tr>
                                                   </thead>
                                                   <tbody>
@@ -140,8 +147,14 @@
                                                       <td>{{$purchase->event_name}}</td>
                                                       <td>{{$purchase->quantity}}</td>
                                                       <td>{{$data->start_date}}</td>
+                                                      {{-- <td>{{$purchase->price}}</td> --}}
+                                                      {{-- <td>@if ($purchase->Type === 'Paper-Ticket')
+                                                         ${{$purchase->shipingCharges}} +
+                                                         @else
+                                                         $00 +
+                                                      @endif ${{$purchase->webChargeforBuyer}}</td> --}}
+                                                      <td>${{$purchase->grand_total2}}</td>
                                                       <td>{{$data->created_at}}</td>
-                                                      <td>{{$purchase->price}}</td>
                                                     </tr>
                                                     
                                                     @endforeach
@@ -166,7 +179,6 @@
                                                           </div>
                                                       </div>
                                                   </div> -->
-                                                  
                                               </div>
                                           </div>
                                       </div>
@@ -182,7 +194,7 @@
                                                 <div class="card shadow-sm mt-3">
                                                    <div class="card-body">
                                                       <div class="row mb-4">
-                                                         <div class="col-lg-12">  <a class="btn btn-success ml-5 " style="text-decoration: none; float-right" href="{{route('dashboard/ticket/Deactivation-view')}}">View All Listing In Detail</a></div>
+                                                         <div class="col-lg-12">  <a class="btn btn-secondary ml-5 " style="text-decoration: none; float-right" href="{{route('dashboard/ticket/Deactivation-view')}}">View All Listing In Detail</a></div>
                                                       </div>
                                                       <table id=""  class="table  table-sm  ">
                                                         <thead>
@@ -406,26 +418,27 @@
                                                   <thead class="thead-light">
                                                     <tr>
                                                       <th>#</th>
-                                                      
+                                                      <th >Purchaser</th>
                                                       <th >Event Name</th>
                                                       {{-- <th >Ticket Name</th> --}}
                                                       {{-- <th >Ticket Type</th> --}}
-                                                      <th >Quantity</th>
+                                                      <th >Qty</th>
+                                                      <th >Total</th>
                                                       <th >Sales Date</th>
-                                                      <th >Price</th>
-                                                    </tr>
+                                                   </tr>
                                                   </thead>
                                                   <tbody>
                                                       @foreach($sales as $sale)
                                                       <tr>
                                                         
                                                         <td>{{$sale->id}}</td>
+                                                        <td>{{$sale->first_name}}</td>
                                                         {{-- <td>{{$sale->event->title}}</td> --}}
                                                         <td>{{$sale->event_name}}</td>
                                                         {{-- <td>{{$sale->ticket_type}}</td> --}}
                                                         <td>{{$sale->quantity}}</td>
+                                                        <td>{{$sale->grand_total}}</td>
                                                         <td>{{$sale->created_at}}</td>
-                                                        <td>{{$sale->price}}</td>
                                                         
                                                       </tr>
                                                       

@@ -61,7 +61,8 @@ class SalesController extends Controller
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
 
-        $ticket = Purchases::select('purchases.*', 'event_listings.event_name as event_name','ticket_listings.quantity as totalQty')
+        $ticket = Purchases::select('purchases.*', 'event_listings.event_name as event_name',
+        'ticket_listings.quantity as totalQty')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->orderBy('id','desc')

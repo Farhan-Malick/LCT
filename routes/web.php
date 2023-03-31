@@ -64,7 +64,6 @@ Route::get('/contact-us', function () {
 // Route::get('/dashboard/orders', function () {
 //     return view('dashboard/orders');
 // });
-
 Route::get('show/request', [EventController::class, 'show_request'])->name('request.show');
 Route::post('request/event', [EventController::class, 'store_request'])->name('request.event');
 Route::post('contact-us', [ContactController::class, 'Store'])->name('contact-us');
@@ -73,7 +72,6 @@ Route::get('/dashboard/orders' , [PurchasesController::class,'dashboard_orders_s
 // Route::get('/dashboard/listings', function () {
 //     return view('dashboard/listings');
 // });
-
 Route::get('/dashboard' , [TicketController::class,'dashboard_listing'])->name('dashboard.listing');
 Route::get('/dashboard/listings/{id}/destroy', [TicketController::class, 'ticket_deActivation'])->name('dashboard.ticket.Deactivate');
 Route::get('/dashboard/ticket/view', [TicketController::class, 'ticket_deActivationView'])->name('dashboard/ticket/Deactivation-view');

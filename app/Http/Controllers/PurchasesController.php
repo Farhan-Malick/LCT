@@ -9,6 +9,7 @@ use App\Models\TicketListing;
 
 use App\Models\Purchases;
 use App\Models\Seller;
+use DB;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 use Auth;
@@ -159,14 +160,15 @@ class PurchasesController extends Controller
         ->first();
         
         $ticket->quantity =  $ticket->quantity - (int) Request::get('quantity');
+
         if(!$ticket->update()){
-            return redirect()->back()->with('ticketSold','Ticket has been sold');
+            return redirect()->back()->with('ticketSold','Oops.! Someone Purchased the Ticket.');
         }
         // dd($ticket);
         if(!auth()->check()){
             return redirect('/login');
         }
-        
+
         $sub_dateForPaper = '';$sub_dateForMobile = '';$sub_dateForE = '';
         if($ticket){
 
@@ -227,13 +229,52 @@ class PurchasesController extends Controller
         $purchase->grand_total2 = $grand_total2;
         $purchase->save();
 
-        Stripe::setApiKey(env('STRIPE_SECRET'));
-        Charge::create ([
-                "amount" => $grand_total2 * 100,
-                "currency" => "usd",
-                "source" => Request::get('stripeToken'),
-                "description" => "Making test payment." 
-        ]);
+        DB::beginTransaction();
+        try {
+            // Lock the ticket record for update
+            $ticket = TicketListing::where('id', $id)->lockForUpdate()->first();
+
+            // Check if enough tickets are available
+            if ($ticket->quantity >= Request::get('quantity')) {
+                // Make a Stripe charge for the ticket purchase
+                $stripeCharge = Stripe::charges()->create([
+                    "amount" => $grand_total2 * 100,
+                    'currency' => 'USD',
+                    'source' => $stripeToken,
+                    'description' => 'Ticket purchase',
+                    // 'receipt_email' => $email,
+                ]);
+
+                // Reduce the ticket quantity
+                $ticket->quantity -= Request::get('quantity');
+                $ticket->save();
+
+                // Commit the transaction
+                DB::commit();
+
+                // Send a success response
+                return response()->json(['message' => 'Ticket purchase successful']);
+                } else {
+                    // Roll back the transaction
+                    DB::rollBack();
+
+                    // Send an error response
+                    return response()->json(['error' => 'Not enough tickets available'], 400);
+                }
+            } catch (Exception $e) {
+                // Roll back the transaction
+                DB::rollBack();
+
+                // Handle the exception
+                return response()->json(['error' => 'Ticket purchase failed'], 500);
+            }
+        // Stripe::setApiKey(env('STRIPE_SECRET'));
+        // Charge::create ([
+        //         "amount" => $grand_total2 * 100,
+        //         "currency" => "usd",
+        //         "source" => Request::get('stripeToken'),
+        //         "description" => "Making test payment." 
+        // ]);
         MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase,$webCharge,$percentageForBuyer,$grand_total2);
         MailController::sellerticketpurchased($seller->email, $ticket, $purchase,$webCharge,$grand_total);
             return redirect()->route('dashboard.listing')->with('message', 'Congratulations!! You have successfully purchased the tickets. You will shortly receive an email from us about the delivery of the tickets.');

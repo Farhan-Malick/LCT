@@ -67,13 +67,17 @@
 <body >
 @include("auth.partials.newHeader")
 
-
 <div class="event-dt-block p-80" >
     <div class="container">
        <div class="row">
+            @if (Session::has('ticketSold'))
+                <div class="alert alert-warning text-center mt-5">
+                    <p class="text-dark" style="font-size: 17px">{{ Session::get('ticketSold') }}</p>
+                </div>
+            @endif
                 @if (Session::has('message'))
                     <div class="alert alert-primary text-center mt-5">
-                        <p class="text-dark">{{ Session::get('message') }}</p>
+                        <p class="text-dark" style="font-size: 15px">{{ Session::get('message') }}</p>
                     </div>
                 @endif
                 <div class="col-lg-4 ">

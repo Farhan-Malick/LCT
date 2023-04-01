@@ -123,11 +123,11 @@
                             </div>
                              <div class="order-total-dt">
                                 <div class="order-text">Total Tickets</div>
-                                <div class="order-number"><small>x</small>{{ $quantity }}</div>
+                                <div class="order-number"><small>x</small>{{ $quantity ?? '' }}</div>
                              </div>
                              <div class="order-total-dt">
                                <div class="order-text">Total Tickets Price</div>
-                               <div class="order-number">${{$ticketPrice}}</div>
+                               <div class="order-number">${{$ticketPrice ?? ''}}</div>
                             </div>
                             
                              <div class="order-total-dt">
@@ -140,12 +140,12 @@
                             </div>
                              <div class="order-total-dt">
                                <div class="order-text">Service Charges</div>
-                               <div class="order-number">+ ${{$percentageForBuyer }}</div>
+                               <div class="order-number">+ ${{$percentageForBuyer ?? ''}}</div>
                             </div>
                              <div class="divider-line"></div>
                              <div class="order-total-dt">
                                 <div class="order-text" style="font-size: 18px"><b>Total</b></div>
-                                <div class="order-number ttl-clr"style="font-size: 18px;"><b>${{ $grand_total2 }}</b></div>
+                                <div class="order-number ttl-clr"style="font-size: 18px;"><b>${{ $grand_total2  ?? ''}}</b></div>
                              </div>
                           </div>
                        </div>
@@ -170,10 +170,10 @@
                                 <hr>
                             </div>
                                 <div class="mt-4 mb-3">
-<h4>Total Payable Amount : ${{ $grand_total2 }}</h4>
+<h4>Total Payable Amount : ${{ $grand_total2 ?? '' }}</h4>
 </div>
                            <form method="post" action="{{ route('payment.checkout.finalize',
-                           ['eventlisting_id' => $eventlisting_id,'ticketid' => $ticket_id, 'sellerid' => $seller_id])}} " role="form"  method="post" class="validation"   data-cc-on-file="false"
+                           ['eventlisting_id' => $eventlisting_id ?? '','ticketid' => $ticket_id ?? '', 'sellerid' => $seller_id ?? ''])}} " role="form"  method="post" class="validation"   data-cc-on-file="false"
                               data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
                               id="payment-form">
                               @csrf

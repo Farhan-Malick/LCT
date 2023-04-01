@@ -231,9 +231,9 @@ class PurchasesController extends Controller
 
         DB::beginTransaction();
         try {
+           
             // Lock the ticket record for update
-            $ticket = TicketListing::where('id', $id)->lockForUpdate()->first();
-
+            $ticket = TicketListing::where('id', Request::get('ticketid'))->lockForUpdate()->first(); 
             // Check if enough tickets are available
             if ($ticket->quantity >= Request::get('quantity')) {
                 // Make a Stripe charge for the ticket purchase

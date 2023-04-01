@@ -157,13 +157,14 @@ class PurchasesController extends Controller
             ->join('events', 'events.id', '=', 'event_listings.event_id')
             ->join( 'categories','categories.id', '=','events.category_id')
             ->where('ticket_listings.id',Request::get('ticketid'))
-        ->first();
+            ->lockForUpdate()
+            ->first();
+        //  // Lock the ticket record for update
+        //  $ticket = TicketListing::where('id', Request::get('ticketid'))->lockForUpdate()->first(); 
         
         $ticket->quantity =  $ticket->quantity - (int) Request::get('quantity');
-
-        if(!$ticket->update()){
-            return redirect()->back()->with('ticketSold','Oops.! Someone Purchased the Ticket.');
-        }
+        $ticket->update();
+        
         // dd($ticket);
         if(!auth()->check()){
             return redirect('/login');
@@ -232,8 +233,7 @@ class PurchasesController extends Controller
         DB::beginTransaction();
         try {
            
-            // Lock the ticket record for update
-            $ticket = TicketListing::where('id', Request::get('ticketid'))->lockForUpdate()->first(); 
+           
             // Check if enough tickets are available
             if ($ticket->quantity >= Request::get('quantity')) {
                 // Make a Stripe charge for the ticket purchase
@@ -246,26 +246,29 @@ class PurchasesController extends Controller
                 ]);
 
                 // Reduce the ticket quantity
-                $ticket->quantity -= Request::get('quantity');
-                $ticket->save();
+                // $ticket->quantity -= Request::get('quantity');
+                // $ticket->save();
 
                 // Commit the transaction
                 DB::commit();
 
                 // Send a success response
-                return response()->json(['message' => 'Ticket purchase successful']);
+                return redirect()->route('dashboard.listing')->with('message', 'Congratulations!! You have successfully purchased the tickets. You will shortly receive an email from us about the delivery of the tickets.');
+                // return response()->json(['message' => 'Ticket purchase successful']);
                 } else {
                     // Roll back the transaction
                     DB::rollBack();
                     // Send an error response
-                    return response()->json(['error' => 'Not enough tickets available'], 400);
+                    return redirect()->back()->with('message', 'Not enough tickets available');
+                    // return response()->json(['error' => 'Not enough tickets available'], 400);
                 }
             } catch (Exception $e) {
                 // Roll back the transaction
                 DB::rollBack();
-
                 // Handle the exception
-                return response()->json(['error' => 'Ticket purchase failed'], 500);
+                return redirect()->back()->with('message', 'Ticket purchase failed');
+                // return response()->json(['error' => 'Ticket purchase failed'], 500);
+
             }
         // Stripe::setApiKey(env('STRIPE_SECRET'));
         // Charge::create ([

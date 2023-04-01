@@ -237,12 +237,12 @@ class PurchasesController extends Controller
             // Check if enough tickets are available
             if ($ticket->quantity >= Request::get('quantity')) {
                 // Make a Stripe charge for the ticket purchase
-                $stripeCharge = Stripe::charges()->create([
-                    "amount" => $grand_total2 * 100,
-                    'currency' => 'USD',
-                    'source' => $stripeToken,
-                    'description' => 'Ticket purchase',
-                    // 'receipt_email' => $email,
+                Stripe::setApiKey(env('STRIPE_SECRET'));
+                Charge::create ([
+                        "amount" => $grand_total2 * 100,
+                        "currency" => "usd",
+                        "source" => Request::get('stripeToken'),
+                        "description" => "Making test payment." 
                 ]);
 
                 // Reduce the ticket quantity
@@ -257,7 +257,6 @@ class PurchasesController extends Controller
                 } else {
                     // Roll back the transaction
                     DB::rollBack();
-
                     // Send an error response
                     return response()->json(['error' => 'Not enough tickets available'], 400);
                 }

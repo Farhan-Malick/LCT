@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
+
     <!-- Bootstrap icons CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link
@@ -70,14 +74,44 @@
 <div class="event-dt-block p-80" >
     <div class="container">
        <div class="row">
+        @if(session('message'))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: '{{ session('message') }}',
+                    showConfirmButton: false,
+                    timer: 5000
+                });
+            </script>
+        @endif
+        @if(session('ticketSold'))
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: '{{ session('ticketSold') }}',
+                    showConfirmButton: false,
+                    timer: 5000
+                });
+            </script>
+        @endif
+        @if(session('NotEnough'))
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: '{{ session('NotEnough') }}',
+                    showConfirmButton: false,
+                    timer: 5000
+                });
+            </script>
+        @endif
             @if (Session::has('ticketSold'))
                 <div class="alert alert-warning text-center mt-5">
                     <p class="text-dark" style="font-size: 17px">{{ Session::get('ticketSold') }}</p>
                 </div>
             @endif
-                @if (Session::has('message'))
-                    <div class="alert alert-primary text-center mt-5">
-                        <p class="text-dark" style="font-size: 15px">{{ Session::get('message') }}</p>
+                @if (Session::has('NotEnough'))
+                    <div class="alert alert-warning text-center mt-5">
+                        <p class="text-dark" style="font-size: 15px">{{ Session::get('NotEnough') }}</p>
                     </div>
                 @endif
                 <div class="col-lg-4 ">

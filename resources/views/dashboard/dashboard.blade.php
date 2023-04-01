@@ -24,6 +24,10 @@
       <link href="{{asset('profile/vendor/OwlCarousel/assets/owl.theme.default.min.css')}}" rel="stylesheet">
       <link href="{{asset('profile/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
       <link href="{{asset('profile/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
+
+      
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
    </head>
    <body class="d-flex flex-column h-100">
     
@@ -35,6 +39,16 @@
                <div class="container">
                   <div class="row">
                      <div class="col-lg-12">
+                        @if(session('message'))
+                              <script>
+                                 Swal.fire({
+                                    icon: 'success',
+                                    title: '{{ session('message') }}',
+                                    showConfirmButton: false,
+                                    timer: 5000
+                                 });
+                              </script>
+                        @endif
                         @if (Session::has('message'))
                            <div class="alert alert-primary text-center ">
                                  <p class="text-dark">{{ Session::get('message') }}</p>

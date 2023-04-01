@@ -159,8 +159,8 @@
                                     <div class="col-md-12 card p-4 mb-3 shadow-sm main-card br-10">
                                         <h1 class="fw-700 mb-2 mt-3 text-center">Choose Ticket Type <span style="color: red">*</span></h1>
                                             <p style="none" class="text-center mb-2">
-                                                {{-- <i class="bi bi-info-circle-fill"></i> --}}
-                                                <i class="fa-solid fa-square-info"></i>
+                                                <i class="bi bi-info-circle-fill"></i>
+                                                {{-- <i class="fa-solid fa-square-info"></i> --}}
                                                 Please Choose Ticket Type. Paper Ticket, Electronic tickets in PDF format, and You'll have Mobile Ticket via App<br>
                                             </p>
                                         <div class="form-group text-center @error('ticket_type') is-invalid @enderror"  name="ticket_type"  style="font-size:18px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">

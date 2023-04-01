@@ -243,7 +243,6 @@ class PurchasesController extends Controller
                 $purchase->grand_total = $grand_total;
                 $purchase->grand_total2 = $grand_total2;
                 $purchase->save();
-
                 // Check if enough tickets are available
                 // Make a Stripe charge for the ticket purchase
                 Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -253,11 +252,6 @@ class PurchasesController extends Controller
                     'source' => Request::get('stripeToken'),
                     'description' => 'Making test payment.',
                 ]);
-
-                // Reduce the ticket quantity
-                // $ticket->quantity -= Request::get('quantity');
-                // $ticket->save();
-
                 // Commit the transaction
                 DB::commit();
 
@@ -272,7 +266,7 @@ class PurchasesController extends Controller
                 // Send an error response
                 return redirect()
                     ->back()
-                    ->with('message', 'Not enough tickets available');
+                    ->with('NotEnough', 'Not enough tickets available. Someone purchased selected tickets');
                 // return response()->json(['error' => 'Not enough tickets available'], 400);
             }
         } catch (Exception $e) {

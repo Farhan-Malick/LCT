@@ -97,11 +97,11 @@ class PurchasesController extends Controller
         $purchase->webCharge = $percentage;  
 
        // service Charge for buyer 
-            $webChargeforBuyer = $purchase->price / 15;
-            $divideForBuyer = $purchase->price / 100;
-            $percentageForBuyer = $divideForBuyer * 15;
-            $purchase->webChargeforBuyer = $percentageForBuyer;
-           //  dd($purchase->webChargeforBuyer);
+        $webChargeforBuyer = $purchase->price / 15;
+        $divideForBuyer = $purchase->price / 100;
+        $percentageForBuyer = $divideForBuyer * 15;
+        $purchase->webChargeforBuyer = $percentageForBuyer;
+        //  dd($purchase->webChargeforBuyer);
 
         //Shipping Charges
         $purchase->shipingCharges = Request::get('shipingCharges');
@@ -111,19 +111,21 @@ class PurchasesController extends Controller
         $grand_total2 = $purchase->price + $percentageForBuyer + (int) Request::get('shipingCharges');
         
         // dd( $grand_total2 );
-        
+
         $purchase->grand_total = $grand_total;
         $purchase->grand_total2 = $grand_total2;
 
         $ticket_id = $ticket->id;
         $seller_id = $ticket->user_id;
+        
         $events = EventListing::select('*','venues.title as vTitle', 'venues.image as vImage')
-            ->join('events', 'events.id', '=', 'event_listings.event_id')
-            // ->join('venues', 'venues.id', '=', 'events.venue_id')
-            ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
-            ->where('event_listings.id', $ticket->eventlisting_id)
+        ->join('events', 'events.id', '=', 'event_listings.event_id')
+        // ->join('venues', 'venues.id', '=', 'events.venue_id')
+        ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
+        ->where('event_listings.id', $ticket->eventlisting_id)
         ->first();
         // dd($events);
+
         TicketListing::find($ticket->id)->increment('views');
         $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','categories.id as cat_id')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
@@ -142,35 +144,34 @@ class PurchasesController extends Controller
             'ticketPrice','grand_total2','Footerevents','FooterEventListing','tickets','events',
             'sellers','sellerCountry','webCharge','percentageForBuyer',
             'quantity','country','shipping_charges','eventlisting_id','seller_id','ticket_id'));
-            // return redirect()->route('buyer.ticket.proceedToCheckout', ['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]);
-        
-        
+            // return redirect()->route('buyer.ticket.proceedToCheckout', ['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]);   
     }
-
     public function buyer_ticket_purchase_CheckOut(Request $request, $id)
     {
         $ticket = TicketListing::select('ticket_listings.*','users.first_name', 'event_listings.event_name',
             'event_listings.event_date', 'event_listings.start_time',
-            'event_listings.venue_name','categories.id as cat_id',
-            )
+            'event_listings.venue_name','categories.id as cat_id',)
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('users','users.id','=','ticket_listings.user_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
             ->join( 'categories','categories.id', '=','events.category_id')
             ->where('ticket_listings.id',Request::get('ticketid'))
         ->first();
-        $ticket->quantity =  $ticket->quantity - (int) Request::get('quantity') ;
-        $ticket->update();
+        
+        $ticket->quantity =  $ticket->quantity - (int) Request::get('quantity');
+        if(!$ticket->update()){
+            return redirect()->back()->with('ticketSold','Ticket has been sold');
+        }
         // dd($ticket);
         if(!auth()->check()){
             return redirect('/login');
         }
+        
         $sub_dateForPaper = '';$sub_dateForMobile = '';$sub_dateForE = '';
         if($ticket){
 
             $ticket->msg =''; $ticket->msg2=''; $ticket->msg3='';
         }
-        
         if($ticket->ticket_type === "Paper-Ticket") {
             $sub_dateForPaper = Carbon::parse($ticket->event_date)->subDays(10)->toDateString();
             $ticket->msg = 'Must Ship The Paper Ticket by Date: ' .$sub_dateForPaper;

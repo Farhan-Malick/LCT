@@ -15,6 +15,16 @@ class TicketListing extends Model
     use HasFactory;
     protected $guarded = [];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::saving(function ($ticket) {
+                $existingQuantity = self::find($ticket->id)->quantity;
+                if ($existingQuantity == 0) {
+                    return false; // prevent the model from saving
+                }
+        });
+    }
     public function add_tickets($params = [], $ticket_id = null)
     {
         // if ticket_id exist then update otherwise create
@@ -23,7 +33,7 @@ class TicketListing extends Model
             $params
         );
     }
-
+    
     // protected function quantity(): Attribute
     // {
     //     $sum = Purchases::where('ticket_id', $this->id)->sum('quantity');

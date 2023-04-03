@@ -53,7 +53,8 @@
 			<div class="row">
                 @include('Admin.includes.misPoints')
 			</div>
-			<!-- end row -->
+		
+				<!-- end row -->
 			<!-- begin row -->
 			<div class="row">
 				<!-- begin col-8 -->
@@ -111,6 +112,19 @@
 			</div>
 			<!-- end row -->
 			<!-- begin row -->
+			<div class="panel panel-inverse">
+				<!-- begin panel-heading -->
+				<div class="panel-heading">
+					<h4 class="panel-title">Data Table - Paper Ticket</h4>
+					<div class="panel-heading-btn">
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+					</div>
+				</div>
+				
+			</div>
 			<div class="row">
 			  <!-- begin col-4 -->
 			  <div class="col-xl-4 col-lg-6">
@@ -267,6 +281,7 @@
 				</div>
 				<!-- end col-4 -->
 			</div>
+
 			<!-- end row -->
 		</div>
 		<!-- end #content -->
@@ -282,7 +297,11 @@
     <script src="{{asset('AdminAssets/js/app.min.js')}}"></script>
 	<script src="{{asset('AdminAssets/js/theme/google.min.js')}}"></script>
 	<!-- ================== END BASE JS ================== -->
-	
+	<script src="{{asset('AdminAssets/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+	<script src="{{asset('AdminAssets/js/demo/table-manage-default.demo.js')}}"></script>
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
 	<script src="{{asset('AdminAssets/plugins/d3/d3.min.js')}}"></script>
 	<script src="{{asset('AdminAssets/plugins/nvd3/build/nv.d3.min.js')}}"></script>

@@ -18,7 +18,10 @@ use App\Http\Controllers\SellerCategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VisitorAnalyticsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\VisitorController;
 use App\Http\Middleware\AdminAuth;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,21 +43,20 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/Admin-Register', function () {
         return view('Admin.pages.register_v3');
     });
-    Route::get('/Admin-Panel/Dashboard', function () {
-        $tickets = App\Models\TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
-        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-        ->where('completed', 1)->get();
-        $price = App\Models\Purchases::sum('price');
-        $totalprofitDivision = $price / 100;
-        $totalCompanyProfit =  $totalprofitDivision * 20;
-        $userCount = App\Models\User::count();
-        $total_no_sold_tickets = App\Models\Purchases::sum('quantity');
-        return view('Admin/pages/dashboard',compact('totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
-    });
+    // Route::get('/Admin-Panel/Dashboard', function () {
+    //     $tickets = App\Models\TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
+    //     ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+    //     ->where('completed', 1)->get();
+    //     $visitors =  App\Models\Visitor::get();
+    //     $price = App\Models\Purchases::sum('price');
+    //     $totalprofitDivision = $price / 100;
+    //     $totalCompanyProfit =  $totalprofitDivision * 20;
+    //     $userCount = App\Models\User::count();
+    //     $total_no_sold_tickets = App\Models\Purchases::sum('quantity');
+    //     return view('Admin/pages/dashboard',compact('visitors','totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
+    // });
     Route::middleware('adminauth')->group(function () {
-
        
-
         Route::get('/view-PDF-File/P-Ticket/{id}', [TicketController::class, 'viewPdfForPaperticket']);
         Route::get('/view-PDF-File/M-Ticket/{id}', [TicketController::class, 'viewPdfForMobileticket']);
         Route::get('/view-PDF-File/E-Ticket/{id}', [TicketController::class, 'viewPdfForEticket']);

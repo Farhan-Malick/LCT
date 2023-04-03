@@ -254,7 +254,9 @@ class PurchasesController extends Controller
                 ]);
                 // Commit the transaction
                 DB::commit();
-
+                
+                MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase, $webCharge, $percentageForBuyer, $grand_total2);
+                MailController::sellerticketpurchased($seller->email, $ticket, $purchase, $webCharge, $grand_total);
                 // Send a success response
                 return redirect()
                     ->route('dashboard.listing')
@@ -285,11 +287,11 @@ class PurchasesController extends Controller
         //         "source" => Request::get('stripeToken'),
         //         "description" => "Making test payment."
         // ]);
-        MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase, $webCharge, $percentageForBuyer, $grand_total2);
-        MailController::sellerticketpurchased($seller->email, $ticket, $purchase, $webCharge, $grand_total);
-        return redirect()
-            ->route('dashboard.listing')
-            ->with('message', 'Congratulations!! You have successfully purchased the tickets. You will shortly receive an email from us about the delivery of the tickets.');
+        // MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase, $webCharge, $percentageForBuyer, $grand_total2);
+        // MailController::sellerticketpurchased($seller->email, $ticket, $purchase, $webCharge, $grand_total);
+        // return redirect()
+        //     ->route('dashboard.listing')
+        //     ->with('message', 'Congratulations!! You have successfully purchased the tickets. You will shortly receive an email from us about the delivery of the tickets.');
     }
 
     public function downloadPdf()

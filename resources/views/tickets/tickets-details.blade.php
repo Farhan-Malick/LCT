@@ -6,7 +6,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link
         rel="stylesheet"
@@ -61,6 +63,14 @@
 
             .card-stepper {
             z-index: 0
+            }
+            .custom_info_icon .fa-info{
+                color: #fff;
+                background: #818090;
+                width: 15px;
+                height: 15px;
+                border-radius: 4px;
+                padding: 3px;
             }
     </style>
 
@@ -159,8 +169,10 @@
                                     <div class="col-md-12 card p-4 mb-3 shadow-sm main-card br-10">
                                         <h1 class="fw-700 mb-2 mt-3 text-center">Choose Ticket Type <span style="color: red">*</span></h1>
                                             <p style="none" class="text-center mb-2">
-                                                <i class="bi bi-info-circle-fill"></i>
-                                                {{-- <i class="fa-solid fa-square-info"></i> --}}
+                                                <span class="custom_info_icon">
+                                                    <i class="fas fa-info"></i>
+                                                </span>
+                                                
                                                 Please Choose Ticket Type. Paper Ticket, Electronic tickets in PDF format, and You'll have Mobile Ticket via App<br>
                                             </p>
                                         <div class="form-group text-center @error('ticket_type') is-invalid @enderror"  name="ticket_type"  style="font-size:18px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
@@ -209,7 +221,10 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <p class="mb-2">
-                                                            <i class="bi bi-info-circle-fill"></i>
+                                                            <span class="custom_info_icon">
+                                                    <i class="fas fa-info"></i>
+                                                </span>
+                                                            <!--<i class="bi bi-info-circle-fill"></i>-->
                                                             Seating should be consecutive for the listing of more than one ticket. Please create separate listing for single tickets.
                                                         </p>
                                                     </div>
@@ -313,7 +328,10 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <p class="mb-3">
-                                                <i class="bi bi-info-circle-fill "></i>
+                                                <span class="custom_info_icon">
+                                                    <i class="fas fa-info"></i>
+                                                </span>
+                                                <!--<i class="bi bi-info-circle-fill "></i>-->
                                                     Provide seating information
                                             </p>
                                         </div>
@@ -461,7 +479,12 @@
                                     <div class="row">
                                         <div class="col-md-12">
 
-                                            <p> <i class="bi bi-info-circle-fill me-2"></i>Face value is the original price of the ticket
+                                            <p> 
+                                            <span class="custom_info_icon">
+                                                    <i class="fas fa-info"></i>
+                                                </span>
+                                            <!--<i class="bi bi-info-circle-fill me-2"></i>-->
+                                            Face value is the original price of the ticket
                                             </p>
                                         </div>
                                         <div class="col-md-6">
@@ -500,7 +523,12 @@
                                 <div class="card mb-3 shadow-sm p-4 main-card br-10">
                                     <div class="row">
                                         <div class="col-md-12 mb-4">
-                                            <p> <i class="bi bi-info-circle-fill me-2"></i>Set your price
+                                            <p> 
+                                            <span class="custom_info_icon">
+                                                    <i class="fas fa-info"></i>
+                                                </span>
+                                            <!--<i class="bi bi-info-circle-fill me-2"></i>-->
+                                            Set your price
                                             </p>
                                         </div>
                                         <div class="col-md-6">
@@ -546,7 +574,12 @@
                                             <div class="row">
                                                 <div class="col-md-12">
     
-                                                    <p> <i class="bi bi-info-circle-fill me-2"></i>Select the country where ticket is located and ready to ship.
+                                                    <p> 
+                                                    <span class="custom_info_icon">
+                                                    <i class="fas fa-info"></i>
+                                                </span>
+                                                    <!--<i class="bi bi-info-circle-fill me-2"></i>-->
+                                                    Select the country where ticket is located and ready to ship.
                                                     </p>
                                                 </div>
                                                 <div class="col-md-8" >
@@ -864,7 +897,12 @@
                                             <div class="row">
                                                 <div class="col-md-12">
     
-                                                    <p> <i class="bi bi-info-circle-fill me-2"></i>Please upload the PDF file for Booking Confirmation.
+                                                    <p> 
+                                                    <span class="custom_info_icon">
+                                                    <i class="fas fa-info"></i>
+                                                </span>
+                                                    <!--<i class="bi bi-info-circle-fill me-2"></i>-->
+                                                    Please upload the PDF file for Booking Confirmation.
                                                     </p>
                                                 </div>
                                                 <div class="col-md-12" >
@@ -897,7 +935,12 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
         
-                                                        <p> <i class="bi bi-info-circle-fill me-2"></i>Please upload the PDF file for Booking Confirmation.
+                                                        <p> 
+                                                        <span class="custom_info_icon">
+                                                    <i class="fas fa-info"></i>
+                                                </span>
+                                                        <!--<i class="bi bi-info-circle-fill me-2"></i>-->
+                                                        Please upload the PDF file for Booking Confirmation.
                                                         </p>
                                                     </div>
                                                     <div class="col-md-12" >
@@ -980,7 +1023,11 @@
                                 <div class="card p-4 main-card mb-3 br-10">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <p class="mb-3"><i class="bi bi-info-circle-fill me-2"></i>
+                                            <p class="mb-3">
+                                                <span class="custom_info_icon">
+                                                    <i class="fas fa-info"></i>
+                                                </span>
+                                                <!--<i class="bi bi-info-circle-fill me-2"></i>-->
                                                If your ticket has any restrictions that are not listed here, please type them manually in the 'other' field. <a href="">contact us</a>
                                             </p>
                                         </div>
@@ -1122,6 +1169,8 @@
   <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/solid.js" integrity="sha384-/BxOvRagtVDn9dJ+JGCtcofNXgQO/CCCVKdMfL115s3gOgQxWaX/tSq5V8dRgsbc" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/fontawesome.js" integrity="sha384-dPBGbj4Uoy1OOpM4+aRGfAOc0W37JkROT+3uynUgTHZCHZNMHfGXsmmvYTffZjYO" crossorigin="anonymous"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <script>

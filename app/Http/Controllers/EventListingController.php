@@ -51,6 +51,20 @@ class EventListingController extends Controller
         $listing = EventListing::all();
         return view("Admin/pages/event_Listing",compact('listing'));
     }
+    public function EnableEventListing(Request $request)
+    {
+        $events = EventListing::where('event_listings.id', $request->buyer_id)->first();
+        $events->status=1;
+        $events->update();
+        return redirect()->back()->with('msg','Event has been Enable Successfully ');
+    }
+    public function DisableEventListing(Request $request)
+    {
+        $events = EventListing::where('event_listings.id', $request->buyer_id)->first();
+        $events->status=0;
+        $events->update();
+        return redirect()->back()->with('msg','Event has been Disable Successfully');
+    }
     public function editListing($id){
         $events = Event::all();
         $listings = EventListing::find($id);

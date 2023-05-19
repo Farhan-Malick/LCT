@@ -69,12 +69,17 @@ Route::post('request/event', [EventController::class, 'store_request'])->name('r
 Route::post('contact-us', [ContactController::class, 'Store'])->name('contact-us');
 
 Route::get('/dashboard/orders' , [PurchasesController::class,'dashboard_orders_show'])->name('dashboard.orders_show');
+
 // Route::get('/dashboard/listings', function () {
 //     return view('dashboard/listings');
 // });
 Route::get('/dashboard' , [TicketController::class,'dashboard_listing'])->name('dashboard.listing');
+Route::get('/dashboard/Set-Price/{id}' , [PurchasesController::class,'setPriceFromProfile']);
+Route::post('/dashboard/update-Price/{id}' , [PurchasesController::class,'updatePriceFromProfile']);
+
 Route::get('/dashboard/listings/{id}/destroy', [TicketController::class, 'ticket_deActivation'])->name('dashboard.ticket.Deactivate');
 Route::get('/dashboard/ticket/view', [TicketController::class, 'ticket_deActivationView'])->name('dashboard/ticket/Deactivation-view');
+
 Route::post('/toggle-deactivate', [TicketController::class, 'ticket_deActivation']);
 Route::post('/toggle-Active', [TicketController::class, 'ticket_Activation']);
 
@@ -215,4 +220,6 @@ Route::post('/upload-pdfticket',[PdfUploadController::class,'store'])->name('upl
 
 Route::post('/dashboard',[TicketController::class,'UserPasswordUpdate'])->name('reset');
 Route::post('/bank_details',[TicketController::class,'BankDetailsFrom']);
+
+
 

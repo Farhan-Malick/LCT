@@ -74,15 +74,15 @@
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                   <div class="form-outline mb-4">
-                    {{-- <input type="email" id="form2Example17" class="form-control form-control-lg" /> --}}
-                    <input type="email" id="email" placeholder="email@example.com" class="form-control form-control-lg  @error('email') is-invalid @enderror"value="{{ old('email') }}" required autocomplete="email" name="email">
                     <label class="form-label" for="form2Example17">Email address</label>
+                    <input type="email" id="email" placeholder="email@example.com" class="form-control form-control-lg  @error('email') is-invalid @enderror"value="{{ old('email') }}" required autocomplete="email" name="email">
+               
                   </div>
 
                   <div class="form-outline mb-4">
-                    {{-- <input type="password" id="form2Example27" class="form-control form-control-lg" /> --}}
-                    <input type="password" id="password" placeholder="password" class=" @error('password') is-invalid @enderror form-control form-control-lg" value="{{ old('password') }}" required autocomplete="password" name="password">
                     <label class="form-label" for="form2Example27">Password</label>
+
+                    <input type="password" id="password" placeholder="password" class=" @error('password') is-invalid @enderror form-control form-control-lg" value="{{ old('password') }}" required autocomplete="password" name="password">
                    
                   </div>
 

@@ -20,7 +20,9 @@
     {{-- <link rel="stylesheet" href="{{ asset('assets/styles/index.css') }}" /> --}}
     <link rel="stylesheet" href="{{asset('assets/styles/common.css')}}">
     {{-- <link rel="stylesheet" href="{{asset('assets/styles/sellticket.css')}}"> --}}
-    <link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">
+    <!--<link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
@@ -492,9 +494,10 @@
                                                 <div class="form-group">
                                                     <select class="form-select" name = "currency">
                                                         <!--<option selected disabled>Please Select Currency</option>-->
-                                                        @foreach($currencies as $currency)
+                                                        <option value="$" >$</option>
+                                                        {{-- @foreach($currencies as $currency)
                                                         <option value="{{$currency->id}}" >{{$currency->currency_type}}</option>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                     </select>
                                                 </div>
                                                 <div class="form-group mt-3">
@@ -534,9 +537,10 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <select class="form-select" aria-label="Default select example" name="currency" required>
-                                                    @foreach($currencies as $currency)
+                                                    <option value="$" >$</option>
+                                                    {{-- @foreach($currencies as $currency)
                                                     <option value="{{$currency->id}}">{{$currency->currency_type}}</option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>
                                                 <div class="form-group mt-3">

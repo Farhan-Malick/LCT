@@ -93,16 +93,31 @@ body {
     margin-top: auto;
     float: left;
   }
-  .ticket img {
-    width: 50%;
-  }
-  
-  @media (max-width: 1366px) {
     .ticket img {
-        display: none;
+    width: 90%;
+  }
+  @media (max-width: 540px) {
+    .ticket img {
+        padding-right: 10px;
+        width: 100%;
+        height: auto;
       }
+    }
+/*  .ticket img {*/
+/*    width: 50%;*/
+/*  }*/
+  
+/*  @media (max-width: 540px) {*/
+/*    .ticket img {*/
+/*         display: block;*/
+         
+/*      }*/
+/*}*/
+@media (min-width: 1366px) and (max-width: 3000px) {
+  .ticket img {
+   width: 70%;
+  }
 }
-
   .img img{
     max-width: 60%;
     height: auto;
@@ -110,7 +125,7 @@ body {
 
 img {
     max-width: 100%;
-    height: auto;
+    /* height: auto; */
 }
 
 .ptb-100 {
@@ -4485,7 +4500,7 @@ textarea {
 }
 
 .flight_right_arrow {
-    text-align: left;
+    text-align: center;
 }
 
 .flight_right_arrow img {

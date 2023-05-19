@@ -27,20 +27,30 @@
         <div class="container my-5">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="text-center">Why can't you sign in?</h2>
+                    <h2 class="text-center">Why can't you sign in?</h2><br>
                 </div>
                 <div class="row ">
                     <div class="col-lg-12">
+                        @if($errors->has('email'))
+                            <div class="alert alert-danger">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </div>
+                        @endif
+                        {{-- @if ($message = Session::get('email'))
+                        <div class="alert alert-danger mt-5">
+                            <center><strong>{{ $message }}</strong> <b class="text-light"></center>
+                        </div>
+                        @endif --}}
                         @if ($message = Session::get('success'))
                         <div class="alert alert-success mt-5">
                             <center><strong>{{ $message }}</strong> <b class="text-primary"></center>
                         </div>
                         @endif
-                        @if ($message = Session::get('danger'))
+                       {{--  @if ($message = Session::get('danger'))
                         <div class="alert alert-danger mt-5">
                             <center><strong>{{ $message }}</strong></center>
                         </div>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
                 <div class="col-lg-12 mt-5">
@@ -61,7 +71,7 @@
                                         <div class="form-group">
                                             <small class="pb-3">Enter your account Email Address<br>
                                                 {{-- Please ensure your 'Spam' filters do not block this mail.</small> --}}
-                                            <input type="email" name="email" value="{{ old('email') }}" required autocomplete="email" class="form-control">
+                                            <input type="email" name="email" value="{{ old('email') }}" required autocomplete="email" class="form-control pb-3">
                                         </div>
                                         <button class="btn primary-btn my-3">Proceed with passwrod reset</button>
                                     </form>

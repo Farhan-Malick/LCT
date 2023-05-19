@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Event;
@@ -14,11 +13,11 @@ class SalesController extends Controller
 
     public function admin_purchase_show(TicketListing $ticket,Event $event,Purchases $purchases)
     {
-        $purchases = Purchases::select('purchases.*', 'event_listings.event_name as event_name','ticket_listings.ticket_type','users.first_name')
+        $purchases = Purchases::selectRaw('purchases.*, event_listings.event_name as event_name, ticket_listings.ticket_type, users.first_name')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->join('users', 'users.id', '=', 'purchases.user_id')
-        ->orderBy('id','desc')
+        ->orderBy('id', 'desc')
         ->get();
 
         $tickets = TicketListing::all();
@@ -45,7 +44,6 @@ class SalesController extends Controller
         return view('dashboard/sales',compact('sales'));
     }
 
-
     public function ticket_destroy($id){
         //return $id;
         $tickets = Purchases::find($id);
@@ -62,25 +60,12 @@ class SalesController extends Controller
         $total_no_sold_tickets = Purchases::sum('quantity');
 
         $ticket = Purchases::select('purchases.*', 'event_listings.event_name as event_name',
-        'ticket_listings.quantity as totalQty')
+        'ticket_listings.quantity as totalQty','users.first_name')
+        ->join('users', 'users.id', '=', 'purchases.user_id')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->orderBy('id','desc')
         ->get();
-
-        // $ticket = TicketListing::select('ticket_listings.*','users.last_name', 'event_listings.event_name',
-        // 'event_listings.event_date', 'event_listings.start_time',
-        // 'event_listings.venue_name','categories.id as cat_id',
-        // // 'purchases.quantity as ticketQuantity',
-        // )
-        // ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
-        // ->join('users','users.id','=','ticket_listings.user_id')
-        // // ->join('purchases','purchases.ticket_id','=','ticket_listings.id')
-        // ->join('events', 'events.id', '=', 'event_listings.event_id')
-        // ->join( 'categories','categories.id', '=','events.category_id')
-        // // ->where('ticket_listings.id',$id)
-        // ->get();
-        
         return view('Admin.pages.SellerPurchasing',compact('userCount','price','totalCompanyProfit','total_no_sold_tickets','ticket'));
        
     }

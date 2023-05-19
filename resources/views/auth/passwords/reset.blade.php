@@ -28,18 +28,24 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="text-center">Why can't you sign in?</h2>
+                    <br>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        @if ($message = Session::get('success'))
-                        <div class="alert alert-success mt-5">
-                            <center><strong>{{ $message }}</strong> <b class="text-primary"></center>
-                        </div>
-                        @endif
-                        @if ($message = Session::get('danger'))
+                        @if ($errors->any())
                         <div class="alert alert-danger mt-5">
-                            <center><strong>{{ $message }}</strong></center>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
+                    @endif
+                     
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success mt-5">
+                                <strong>{{ $message }}</strong>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -60,27 +66,28 @@
                                         @csrf
                                         <input type="hidden" value="{{$token}}" name="token" id="">
                                         <div class="form-group">
-                                            <small class="pb-3">Enter your account Email Address<br>
+                                            <small class="pb-3"><b>Enter your account Email Address</b><br>
                                                 {{-- Please ensure your 'Spam' filters do not block this mail.</small> --}}
                                             <input type="email" name="email" value="{{$email ?? old('email')}}" required autocomplete="email" class="form-control">
                                             <span class="text-danger">@error('email')
                                                 {{$message}}
                                             @enderror</span>
                                         </div>
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline mt-4 mb-4">
+                                            <label for="password">Enter New Password</label>
+
                                             <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                              <label for="password">Enter New Password</label>
                                           </div>
                                           <div class="form-outline mb-4">
+                                            <label for="confirmpass">Re-Type Password</label>
                                             <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" required autocomplete="new-password">
-                                              <label for="confirmpass">Re-Type Password</label>
                                           </div>
-                                        <button class="btn primary-btn my-3">Proceed with passwrod reset</button>
+                                        <button class="btn primary-btn my-3">Update Password</button>
                                     </form>
                                 </div>
                             </div>

@@ -154,7 +154,7 @@
                     </li>
                 </ul>
              </li>
-             <li class="has-sub">
+             {{-- <li class="has-sub">
                 <a href="javascript:;">
                     <b class="caret"></b>
                     <i class="fa fa-align-left"></i>
@@ -164,7 +164,7 @@
                     <li><a href="{{URL('Admin-Panel/Download-eTickets')}}">E-Tickets</a></li>
                    
                 </ul>
-            </li>
+            </li> --}}
                 <li class="has-sub">
                     <a href="javascript:;">
                         <b class="caret"></b>
@@ -184,6 +184,17 @@
                     </a>
                     <ul class="sub-menu">
                         <li><a href="{{URL('Admin-Panel/SellerPurchasing')}}">All Sales</a></li>
+                       
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        <b class="caret"></b>
+                        <i class="fa fa-cubes"></i>
+                        <span>Buyer | Seller Charges</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{URL('Admin-Panel/Buyer-Seller-Charges')}}">Manage Charges</a></li>
                        
                     </ul>
                 </li>
@@ -219,6 +230,8 @@
                         <li><a href="{{ URL('/Admin-Panel/Event-Visitors') }}">Event Visitors</a></li>
                         <li><a href="{{ URL('/Admin-Panel/EventListing-Visitors') }}">Event Listing Visitors</a></li>
                         <li><a href="{{ URL('/Admin-Panel/Ticket-Visitors') }}">Tickets Visitors</a></li>
+                        <li><a href="{{ URL('/Admin-Panel/Country-Visitors') }}">Country Visitors</a></li>
+                        <li><a href="{{ URL('/Admin-Panel/Country-Visitors') }}">Countries Summary</a></li>
                     </ul>
                 </li>
               

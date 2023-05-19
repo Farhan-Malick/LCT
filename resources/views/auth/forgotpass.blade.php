@@ -31,6 +31,11 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
+                        @if ($errors->has('email'))
+                            <div class="alert alert-danger">
+                                {{ $errors->first('email') }}
+                            </div>
+                        @endif
                         @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             <center><strong>{{ $message }}</strong> <b class="text-primary"></center>
@@ -73,83 +78,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <strong> I don't know the email I registered with</strong>
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <form action="">
-                                        <small>Please provide as much information as possible to help us locate your
-                                            account</small>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="name">Your Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="email">Email Address<span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="email" name="email">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="phone">Primary Phone<span
-                                                        class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="phone" name="phone">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="event">Event<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="event" name="event">
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="payment">Payment Method</label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios"
-                                                        id="exampleRadios1" value="option1" checked>
-                                                    <label class="form-check-label" for="exampleRadios1">
-                                                        Credit or Debit Card
-                                                    </label>
-                                                    <div id="myDIV">
-                                                        <div class="form-row">
-                                                            <div class="form-group col-md-3">
-                                                                <label for="creditcard">Last 4 digits of card used <span
-                                                                        class="text-danger">*</span></label>
-                                                                <input type="number" class="form-control"
-                                                                    name="creditcard">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios"
-                                                        id="exampleRadios2" value="option2">
-                                                    <label class="form-check-label" for="exampleRadios2">PayPal</label>
-                                                    <div id="paypal">
-                                                        <div class="form-row">
-                                                            <div class="form-group col-md-6">
-                                                                <label for="paypalemail">PayPal Email Address<span
-                                                                        class="text-danger">*</span></label>
-                                                                <input type="email" class="form-control"
-                                                                    placeholder="paypal@email.com" name="paypalemail">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="order">Order ID</label>
-                                                <input type="number" class="form-control" name="order" id="order">
-                                            </div>
-                                        </div>
-                                        <button class="btn primary-btn float-right mb-4 px-5 my-3">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +30,8 @@
     #search_list {
       position:absolute; z-index:1; width:76.5%;
       }
-    }
+    }   
+    
   
     @media (max-width: 1200px) {
     #search_list {
@@ -67,6 +67,42 @@
   </head>
 
 <body>
+  <script>
+    var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?75859';
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = url;
+    var options = {
+  "enabled":true,
+  "chatButtonSetting":{
+      "backgroundColor":"#22b3c1",
+      "ctaText":"",
+      "borderRadius":"25",
+      "marginLeft":"10",
+      "marginBottom":"25",
+      "marginRight":"90",
+      "position":"left"
+  },
+  "brandSetting":{
+      "brandName":"Last Chance Ticket",
+      "brandSubTitle":"We are here for customer support",
+      "brandImg":"https://cdn.clare.ai/wati/images/WATI_logo_square_2.png",
+      "welcomeText":"Hi there!\nHow can I help you?",
+      "messageText":"Hello, I have a question.",
+      "backgroundColor":"#22b3c1",
+      "ctaText":"Start Chat",
+      "borderRadius":"25",
+      "autoShow":false,
+      "phoneNumber":"12763293991"
+  }
+  };
+    s.onload = function() {
+        CreateWhatsappChatWidget(options);
+    };
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+  </script>
 <!--Start of Tawk.to Script-->
 <!--Start of Tawk.to Script-->
 <!--Start of Tawk.to Script-->
@@ -115,10 +151,102 @@
           <div class="banner-inner-wrapper header-text">
             <div class="main-caption">
               <div class="container">
-                <h1 class="mb-5 " ><b>Here is the last chance to be the member of world’s leading ticket marketplace for live events around the globe</b></h1>
-                  <marquee scrollamount="10" behavior="scroll" direction="left">
+                <h1 class="mb-5 " ><b>Here is the last chance to be a member of world’s leading ticket marketplace for live events around the globe</b></h1>
+               
+                <div id="marquee-container"></div>
+                <style>
+                
+                  #marquee-container {
+                    width: 100%;
+                    height: 50px;
+                    overflow: hidden;
+                  }
+                  #marquee {
+                    white-space: nowrap;
+                    display: inline-block;
+                     transition: transform 0.5s ease; /* Add transition property with duration and easing function */
+                    }
+                    
+                    #marquee:hover {
+                      animation-play-state: paused;
+                      transform: translateX(0%); /* Add this line to reset the transform on hover */
+                    }
+                  @media (max-width: 1920px) {
+                     #marquee {
+                    white-space: nowrap;
+                    display: inline-block;
+                    animation: marquee 11.5s linear infinite;
+                  }
+                    }
+                   @keyframes marquee-web {
+                        0% {
+                          transform: translateX(100%);
+                        }
+                        100% {
+                          transform: translateX(-100%);
+                        }
+                      }
+                    
+                      @keyframes marquee-mobile {
+                        0% {
+                          transform: translateX(100%);
+                        }
+                        100% {
+                          transform: translateX(-100%);
+                        }
+                      }
+                   /* Media query for mobile devices with max-width of 767px */
+                   @media (max-width: 540px) {
+                      #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
+                        font-size: 13px; color: #58e6f3; text-shadow: 2px 2px #000000;
+                      }
+                    }
+                      @media (max-width: 428px) {
+                   
+                     #marquee {
+                    white-space: nowrap;
+                    display: inline-block;
+                     transition: transform 0.5s ease; /* Add transition property with duration and easing function */
+                    }
+                    
+                    #marquee:hover {
+                      animation-play-state: paused;
+                      transform: translateX(0%); /* Add this line to reset the transform on hover */
+                    }
+                  }
+                  @media (max-width: 767px) {
+                    #marquee {
+                      animation: marquee-mobile 30s linear infinite;
+                    }
+                  }
+                    @media (max-width: 1920px) {
+                    #marquee {
+                      animation: marquee-web 20s linear infinite;
+                    }
+                  }
+                   @media (max-width: 1366px) {
+                    #marquee {
+                      animation: marquee-web 13.5s linear infinite;
+                    }
+                  }
+                </style>
+                
+                <script>
+                  const marqueeContainer = document.getElementById('marquee-container');
+                  const marquee = document.createElement('div');
+                  marquee.id = 'marquee';
+                
+                  const h2 = document.createElement('h2');
+                  h2.id = 'textofMarquee';
+                  h2.style.color = '#ebd6f9';
+                  h2.style.textShadow = '2px 2px #040009';
+                  h2.innerHTML = '<b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customer <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b>';
+                  marquee.appendChild(h2);
+                  marqueeContainer.appendChild(marquee);
+                </script>
+                  {{-- <marquee scrollamount="10" behavior="scroll" direction="left">
                     <h2 id="textofMarquee" class="" style="color: #ebd6f9; text-shadow: 2px 2px #040009;"><b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customers <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
-                  </marquee>
+                  </marquee> --}}
                 <h6 style="font-size: 14px lessNotice" class="mb-5 " ><b>Prices are set by sellers may be above or below face value</b></h6>
                   <div class="container ">
                     <form method="get" id="qty-form">
@@ -196,6 +324,10 @@
         </div>
       </div>
     </div>
+    <!--<div id="marquee-container"></div>-->
+
+
+
   </section>
   <!-- ***** Main Banner Area End ***** -->
   <style>
@@ -277,7 +409,8 @@
                 </form>
               </div>
             </div>
-        @foreach ($allevents as $event)
+       @foreach ($allevents as $event)
+          @if($event->status == 1)
             <div class="col-lg-6 col-sm-12"
             >
             <div class="item">
@@ -315,7 +448,8 @@
                 </div>
             </div>
             </div>
-            @endforeach
+          @endif
+        @endforeach
       </div>
     </div>
   </div>

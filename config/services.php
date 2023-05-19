@@ -36,5 +36,9 @@ return [
         'client_secret' => '3e9f786c0acb8ab19eca73dee56bacb1',
         'redirect' => 'http://localhost:8000/auth/facebook/callback',
     ],
+    'google_translate' => [
+        'api_key' => env('GOOGLE_TRANSLATE_API_KEY'),
+    ],
+    
 
 ];

@@ -454,7 +454,7 @@
         
         display: inherit;
         padding-left: 0;
-        text-align: center;
+        text-align: left;
     }
 
     .flight_search_destination h6 {
@@ -469,7 +469,7 @@
     }
 
     .flight_right_arrow {
-        text-align: center;
+        text-align: left;
         padding-bottom: 20px;
     }
 

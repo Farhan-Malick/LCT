@@ -125,7 +125,7 @@
     
                             <div class="price-tag d-sm-flex d-block justify-content-between mb-2">
                                 <span> <strong>Price/Ticket: </strong></span>
-                                <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$tickets->price}}</span></strong></span>
+                                <span><strong> $ <span class="price">{{$tickets->price}}</span></strong></span>
                             </div>
     
                             <div class="price-tag d-sm-flex d-block justify-content-between tags mb-2">
@@ -138,21 +138,21 @@
                             </div>
                             <div class="price-tag d-sm-flex mb-2 d-block justify-content-between">
                                 <span> <strong>Website Price: </strong></span>
-                                <span><strong> {{$ticketCurrency->currency_type}} <span class="price">{{$price}}</span></strong></span>
+                                <span><strong> $ <span class="price">{{$price}}</span></strong></span>
                             </div>
                             <div class="price-tag d-sm-flex mb-2 d-block justify-content-between">
                                 <span> <strong> Seller Fees: </strong></span>
-                                <span><strong> {{$ticketCurrency->currency_type}} <span class="percentage">{{$percentage}}</span></strong></span>
+                                <span><strong> $ <span class="percentage">{{$percentage}}</span></strong></span>
                             </div>
                             <div class="price-tag d-sm-flex mb-2 d-block justify-content-between">
-                                <span> <strong>VAT {{$ticketCurrency->currency_type}}: </strong></span>
+                                <span> <strong>VAT $: </strong></span>
                                 <span><strong> 1.86</strong></span>
                             </div>
                             <div class="small tags mb-2" > VAT amount can change depending on your location.
-                                YOU'LL RECEIVE {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></div>
+                                YOU'LL RECEIVE $ <span class="grandTotal">{{$grand_total}}</span></div>
                             <div class="price-tag mb-2 d-sm-flex d-block justify-content-between">
                                 <span> <strong>YOU'LL RECEIVE: </strong></span>
-                                <span><strong> {{$ticketCurrency->currency_type}} <span class="grandTotal">{{$grand_total}}</span></strong></span>
+                                <span><strong> $ <span class="grandTotal">{{$grand_total}}</span></strong></span>
                             </div>
                         </div>
                     </div>

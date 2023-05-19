@@ -19,6 +19,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VisitorAnalyticsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\BuyerSellerChargesController;
 use App\Http\Middleware\AdminAuth;
 use Illuminate\Http\Request;
 
@@ -43,20 +44,53 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/Admin-Register', function () {
         return view('Admin.pages.register_v3');
     });
-    // Route::get('/Admin-Panel/Dashboard', function () {
-    //     $tickets = App\Models\TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
-    //     ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
-    //     ->where('completed', 1)->get();
-    //     $visitors =  App\Models\Visitor::get();
-    //     $price = App\Models\Purchases::sum('price');
-    //     $totalprofitDivision = $price / 100;
-    //     $totalCompanyProfit =  $totalprofitDivision * 20;
-    //     $userCount = App\Models\User::count();
-    //     $total_no_sold_tickets = App\Models\Purchases::sum('quantity');
-    //     return view('Admin/pages/dashboard',compact('visitors','totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
-    // });
+    Route::get('/Admin-Panel/Dashboard', function () {
+        $tickets = App\Models\TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
+        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        ->where('completed', 1)->get();
+        $visitors =  App\Models\Visitor::get();
+        $price = App\Models\Purchases::sum('price');
+        $totalprofitDivision = $price / 100;
+        $totalCompanyProfit =  $totalprofitDivision * 20;
+        $userCount = App\Models\User::count();
+        $total_no_sold_tickets = App\Models\Purchases::sum('quantity');
+        return view('Admin/pages/dashboard',compact('visitors','totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
+    });
+       Route::get('/Admin-Panel/Country-Visitors', function () {
+        $tickets = App\Models\TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
+        ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+        ->where('completed', 1)->get();
+        $visitors =  App\Models\Visitor::get();
+        $price = App\Models\Purchases::sum('price');
+        $totalprofitDivision = $price / 100;
+        $totalCompanyProfit =  $totalprofitDivision * 20;
+        $userCount = App\Models\User::count();
+        $total_no_sold_tickets = App\Models\Purchases::sum('quantity');
+        return view('Admin/pages/CountryVisitors',compact('visitors','totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
+    });
+    
+     Route::get('/Admin-Panel/Country-Summary', function () {
+            $tickets = App\Models\TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
+            ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
+            ->where('completed', 1)->get();
+            $visitors =  App\Models\Visitor::get();
+            $price = App\Models\Purchases::sum('price');
+            $totalprofitDivision = $price / 100;
+            $totalCompanyProfit =  $totalprofitDivision * 20;
+            $userCount = App\Models\User::count();
+            $total_no_sold_tickets = App\Models\Purchases::sum('quantity');
+            return view('Admin/pages/CountrySummary',compact('visitors','totalCompanyProfit','tickets','price','userCount','total_no_sold_tickets'));
+     });
+            
     Route::middleware('adminauth')->group(function () {
-       
+         Route::get('/Admin-Panel/Country-Visitors', function(Request $request) {
+            $ipAddress = $request->ip();
+            // $city= $request->city();
+            $visitorController = new VisitorController();
+            return $visitorController->getVisitorCountry($ipAddress);
+        });
+           Route::get('/Admin-Panel/Country-Summary', [VisitorController::class, 'countrySummary']);
+        
         Route::get('/view-PDF-File/P-Ticket/{id}', [TicketController::class, 'viewPdfForPaperticket']);
         Route::get('/view-PDF-File/M-Ticket/{id}', [TicketController::class, 'viewPdfForMobileticket']);
         Route::get('/view-PDF-File/E-Ticket/{id}', [TicketController::class, 'viewPdfForEticket']);
@@ -143,6 +177,10 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/Admin-Panel', [TicketController::class, 'admin_tickets_show'])->name('admin.home');
         Route::get('/Admin-Panel/E_tickets', [TicketController::class, 'admin_e_tickets_show']);
+        // Route::get('/download/{filename}', [TicketController::class, 'downloadE_TICKET'])->name('download');
+        Route::get('/Admin-Panel/Ticket//download/{filename}', [PdfUploadController::class, 'Download_view_tickets'])->name('admin.ticket.download');
+        Route::get('/Admin-Panel/Ticket/view-tickets/{id}', [PdfUploadController::class, 'view_tickets'])->name('admin.ticket.view');
+
         Route::get('/Admin-Panel/Download-eTickets', [TicketController::class, 'downloadTicket']);
         Route::get('/Admin-Panel/Mobile_tickets', [TicketController::class, 'admin_mobile_tickets_show']);
         Route::post('/toggle-approve', [TicketController::class, 'Approval']);
@@ -154,7 +192,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/toggle-approve/purchase', [TicketController::class, 'ApprovalForPurchase']);
         Route::get('/Admin-Panel/{id}/destroy', [TicketController::class, 'ticket_destroy'])->name('admin.ticket.destroy');
         Route::get('/Admin-Panel/Ticket/Edit/{id}', [TicketController::class, 'edit_tickets']);
-        Route::get('/Admin-Panel/Ticket/view-tickets/{id}', [PdfUploadController::class, 'view_tickets'])->name('admin.ticket.view');
 
         Route::get('Admin-Panel/event-listing-form', [EventListingController::class, 'EventListingForm']);
         Route::get('Admin-Panel/event-listing', [EventListingController::class, 'showListing']);
@@ -177,5 +214,13 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/Admin-Panel/HotTickets', [EventController::class, 'HotTickets']);
         Route::post('/toggle-Footerapprove-HotTickets', [EventController::class, 'HotTicketsApproval']);
         Route::post('/toggle-Footerapprove-HotTickets-remove', [EventController::class, 'HotRemoval']);
+
+        Route::post('/toggle-EventLisiting-enable', [EventListingController::class, 'EnableEventListing']);
+        Route::post('/toggle-EventLisiting-disable', [EventListingController::class, 'DisableEventListing']);
+
+        // BUYER SELLER CHARGES
+        Route::get('/Admin-Panel/Buyer-Seller-Charges', [BuyerSellerChargesController::class, 'BuyerSellerChargesForm']);
+        Route::post('Admin-Panel/Buyer-Charges-post', [BuyerSellerChargesController::class, 'BuyerCharges']);
+        Route::post('Admin-Panel/Seller-Charges-post', [BuyerSellerChargesController::class, 'SellerCharges']);
     });
 });

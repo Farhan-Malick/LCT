@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\EventListing;
 use App\Models\Event;
 use App\Models\TicketListing;
-
+use App\Models\BuyerSellerCharges;
 use App\Models\Purchases;
 use App\Models\Seller;
 use DB;
@@ -51,6 +51,7 @@ class PurchasesController extends Controller
 
     public function buyer_ticket_purchase(Request $request, $id)
     {
+        $buyerCharges = BuyerSellerCharges::first();
         $ticket = TicketListing::select(
             'ticket_listings.*',
             'users.first_name',
@@ -103,9 +104,10 @@ class PurchasesController extends Controller
         $purchase->webCharge = $percentage;
 
         // service Charge for buyer
-        $webChargeforBuyer = $purchase->price / 15;
+        $webChargeforBuyer = $purchase->price / $buyerCharges->buyer_charges;
         $divideForBuyer = $purchase->price / 100;
-        $percentageForBuyer = $divideForBuyer * 15;
+        $percentageForBuyer = $divideForBuyer *  $buyerCharges->buyer_charges;
+        // dd($percentageForBuyer);
         $purchase->webChargeforBuyer = $percentageForBuyer;
         //  dd($purchase->webChargeforBuyer);
 
@@ -146,13 +148,26 @@ class PurchasesController extends Controller
         $Footerevents = Event::get();
         $sellerCountry = Seller::where('user_id', $ticket->user_id)->first();
 
-        return view('payment-tickets.proceedTocheckout', compact('ticketPrice', 'grand_total2', 'Footerevents', 'FooterEventListing', 'tickets', 'events', 'sellers', 'sellerCountry', 'webCharge', 'percentageForBuyer', 'quantity', 'country', 'shipping_charges', 'eventlisting_id', 'seller_id', 'ticket_id'));
+        return view('payment-tickets.proceedTocheckout', compact('buyerCharges','ticketPrice', 'grand_total2', 'Footerevents', 'FooterEventListing', 'tickets', 'events', 'sellers', 'sellerCountry', 'webCharge', 'percentageForBuyer', 'quantity', 'country', 'shipping_charges', 'eventlisting_id', 'seller_id', 'ticket_id'));
         // return redirect()->route('buyer.ticket.proceedToCheckout', ['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]);
+    }
+     public function setPriceFromProfile(Request $request,$id){
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
+        $active_tickets = TicketListing::find($id);
+        return view('dashboard/setticketprice',compact('active_tickets','FooterEventListing','Footerevents'));
+    }
+    public function updatePriceFromProfile(Request $request,$id){
+        DB::table('ticket_listings')
+        ->where('id', $id)
+        ->update(['price' => Request::get('price')]);
+        return redirect('/dashboard')->with('priceSuccess','Your Ticket price has been updated successfully');
     }
     public function buyer_ticket_purchase_CheckOut(Request $request, $id)
     {
         DB::beginTransaction();
         try {
+            $buyerCharges = BuyerSellerCharges::first();
             $ticket = TicketListing::select('ticket_listings.*', 'users.first_name', 'event_listings.event_name', 'event_listings.event_date', 'event_listings.start_time', 'event_listings.venue_name', 'categories.id as cat_id')
                 ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
                 ->join('users', 'users.id', '=', 'ticket_listings.user_id')
@@ -161,10 +176,9 @@ class PurchasesController extends Controller
                 ->where('ticket_listings.id', Request::get('ticketid'))
                 ->lockForUpdate()
                 ->first();
-            if ($ticket->quantity >= Request::get('quantity')) {
+                
+            if ($ticket->quantity >= Request::get('quantity') && $ticket->approve < 4 ) {
                 //  // Lock the ticket record for update
-                //  $ticket = TicketListing::where('id', Request::get('ticketid'))->lockForUpdate()->first();
-
                 $ticket->quantity = $ticket->quantity - (int) Request::get('quantity');
                 $ticket->update();
 
@@ -227,9 +241,10 @@ class PurchasesController extends Controller
                 $purchase->webCharge = $percentage;
 
                 // service Charge for buyer
-                $webChargeforBuyer = $purchase->price / 15;
+                $webChargeforBuyer = $purchase->price / $buyerCharges->buyer_charges;
+               
                 $divideForBuyer = $purchase->price / 100;
-                $percentageForBuyer = $divideForBuyer * 15;
+                $percentageForBuyer = $divideForBuyer *  $buyerCharges->buyer_charges;
                 $purchase->webChargeforBuyer = $percentageForBuyer;
                 //  dd($purchase->webChargeforBuyer);
 
@@ -250,15 +265,15 @@ class PurchasesController extends Controller
                     'amount' => $grand_total2 * 100,
                     'currency' => 'usd',
                     'source' => Request::get('stripeToken'),
-                    'description' => 'Making test payment.',
+                    'description' => 'LCT - Order-ID : '. $purchase->id ,
                 ]);
                 // Commit the transaction
                 DB::commit();
+                self::ticketPurchased(auth()->user()->email,$ticket,$purchase, $webCharge, $percentageForBuyer, $grand_total2);
+                // MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase, $webCharge, $percentageForBuyer, $grand_total2);
+                self::sellerticketpurchased($seller->email, $ticket, $purchase, $webCharge, $grand_total);
                 
-                MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase, $webCharge, $percentageForBuyer, $grand_total2);
-                MailController::sellerticketpurchased($seller->email, $ticket, $purchase, $webCharge, $grand_total);
-                // Send a success response
-                return redirect()
+                    return redirect()
                     ->route('dashboard.listing')
                     ->with('message', 'Congratulations!! You have successfully purchased the tickets. You will shortly receive an email from us about the delivery of the tickets.');
                 // return response()->json(['message' => 'Ticket purchase successful']);
@@ -266,34 +281,228 @@ class PurchasesController extends Controller
                 // Roll back the transaction
                 DB::rollBack();
                 // Send an error response
-                return redirect()
-                    ->back()
-                    ->with('NotEnough', 'Not enough tickets available. Someone purchased selected tickets');
+                if($ticket->approve == 4){
+                    return redirect()
+                     ->route('buyer.ticket.show', ['id' => $id])
+                    ->with('deactivate', 'Oops.! User Deactivated his ticket');
+                }elseif($ticket->quantity == 0){
+                     return redirect()
+                     ->route('buyer.ticket.show', ['id' => $id])
+                    ->with('NotEnough', 'Not enough tickets available. Someone purchased the selected tickets');
+                }
+                elseif($this->updatePriceFromProfile($ticket->price !== Request::get('price'))){
+                     return redirect()
+                     ->route('buyer.ticket.show', ['id' => $id])
+                    ->with('TicketPrice', 'User changed the ticket price. You can buy again.');
+                }
                 // return response()->json(['error' => 'Not enough tickets available'], 400);
             }
         } catch (Exception $e) {
             // Roll back the transaction
             DB::rollBack();
+            dd($e->getMessage());
             // Handle the exception
             return redirect()
                 ->back()
                 ->with('message', 'Ticket purchase failed');
             // return response()->json(['error' => 'Ticket purchase failed'], 500);
         }
-        // Stripe::setApiKey(env('STRIPE_SECRET'));
-        // Charge::create ([
-        //         "amount" => $grand_total2 * 100,
-        //         "currency" => "usd",
-        //         "source" => Request::get('stripeToken'),
-        //         "description" => "Making test payment."
-        // ]);
-        // MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase, $webCharge, $percentageForBuyer, $grand_total2);
-        // MailController::sellerticketpurchased($seller->email, $ticket, $purchase, $webCharge, $grand_total);
-        // return redirect()
-        //     ->route('dashboard.listing')
-        //     ->with('message', 'Congratulations!! You have successfully purchased the tickets. You will shortly receive an email from us about the delivery of the tickets.');
-    }
+       }
+    
+    public function ticketPurchased($email,$ticket,$purchase, $webCharge, $percentageForBuyer, $grand_total2){
+  try{
+        $ticket_id = '';
+        $first_name = $ticket->first_name;
+        $date = date('Y-m-d');
+        $name = 'test';
+        $order_id = $purchase->id;
+        $ticket_type = $ticket->ticket_type;
+        $type_sec = $ticket->type_sec;
+        $type_cat = $ticket->type_cat;
+        $type_row = $ticket->type_row;
+        $event_name = $ticket->event_name;
+        $venue_name = $ticket->venue_name;
+        $event_date = $ticket->event_date;
+        $msg = $ticket->msg;
+        $msg3 = $ticket->msg3;
+        $unit = $purchase->quantity;
+        $price = $ticket->price;
+        $webCharge = $percentageForBuyer;
+        $shipping = 0;
+        if($ticket->ticket_type === 'E-Ticket' || $ticket->ticket_type === 'Mobile-Ticket'){
+            $shipping = 0;
+        }
+        else{
+          $shipping =   $purchase->shipingCharges;
+        }
+        $grand_total2 = $purchase->grand_total2;
+        
+      $curl = curl_init();
 
+      curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://api.sendgrid.com/v3/mail/send',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS =>'
+                {
+                    "personalizations": [           
+                        {
+                            "to": [
+                                {
+                                    "email": "'.$email.'",
+                                    "name": "'.$name.'"
+                                }
+                            ],
+                            "subject": "Welcome to Ignite!",
+                            "dynamic_template_data":{
+                                "order_id":"'.$order_id.'",
+                                "date":"'.$date.'",
+                                "ticket_type":"'.$ticket_type.'",
+                                "type_sec":"'.$type_sec.'",
+                                "type_cat":"'.$type_cat.'",
+                                "type_row":"'.$type_row.'",
+                                "event_name":"'.$event_name.'",
+                                "venue_name":"'.$venue_name.'",
+                                "event_date":"'.$event_date.'",
+                                "msg":"'.$msg.'",
+                                "msg3":"'.$msg3.'",
+                                "unit":"'.$unit.'",
+                                "price":"'.$price.'",
+                                "webCharge":"'.$percentageForBuyer.'",
+                                "grand_total2":"'.$grand_total2.'",
+                                "first_name":"'.$first_name.'",
+                                "shipping":"'.$shipping.'",
+                            }
+                        }
+                    ],
+                    "template_id":"d-f67c54c76214436080dadfb2899637ba",
+                    "from": {
+                        "email": "noreply@lastchanceticket.com",
+                        "name": "Last Chance Ticket"
+                    }
+                }',
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Bearer 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',
+                    'Content-Type: application/json'
+                ),
+                ));
+                $response = curl_exec($curl);
+
+                curl_close($curl);
+        } catch (Exception $e) {
+            // Roll back the transaction
+          
+            dd($e->getMessage());
+            // Handle the exception
+            return redirect()
+                ->back()
+                ->with('message', 'Ticket purchase failed');
+            // return response()->json(['error' => 'Ticket purchase failed'], 500);
+        }
+  
+               
+     }
+
+
+   public function sellerticketpurchased($email,$ticket, $purchase, $webCharge, $grand_total){
+        
+try{
+        $ticket_id = '';
+        $first_name = $ticket->first_name;
+        $date = date('Y-m-d');
+        $name = 'test';
+        $order_id = $purchase->id;
+        $ticket_type = $ticket->ticket_type;
+        $type_sec = $ticket->type_sec;
+        $type_cat = $ticket->type_cat;
+         $type_row = $ticket->type_row;
+        $event_name = $ticket->event_name;
+        $venue_name = $ticket->venue_name;
+        $event_date = $ticket->event_date;
+        $msg = $ticket->msg;
+        $msg3 = $ticket->msg3;
+        $unit = $purchase->quantity;
+        $price = $ticket->price;
+        $webCharge = $purchase->webCharge;
+        $grand_total = $purchase->grand_total;
+        
+        
+       $curl = curl_init();
+
+       curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://api.sendgrid.com/v3/mail/send',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS =>'
+                {
+                    "personalizations": [           
+                        {
+                            "to": [
+                                {
+                                    "email": "'.$email.'",
+                                    "name": "'.$name.'"
+                                }
+                            ],
+                            "subject": "Welcome to Ignite!",
+                            "dynamic_template_data":{
+                                "order_id":"'.$order_id.'",
+                                "date":"'.$date.'",
+                                "ticket_type":"'.$ticket_type.'",
+                                "type_sec":"'.$type_sec.'",
+                                "type_cat":"'.$type_cat.'",
+                                "type_row":"'.$type_row.'",
+                                "event_name":"'.$event_name.'",
+                                "venue_name":"'.$venue_name.'",
+                                "event_date":"'.$event_date.'",
+                                "msg":"'.$msg.'",
+                                "msg3":"'.$msg3.'",
+                                "unit":"'.$unit.'",
+                                "price":"'.$price.'",
+                                "webCharge":"'.$webCharge.'",
+                                "grand_total":"'.$grand_total.'",
+                                "first_name":"'.$first_name.'",
+        
+                            }
+                        }
+                    ],
+                    "template_id":"d-a78c57c1f22243b5922ea571fb47f714",
+                    "from": {
+                        "email": "noreply@lastchanceticket.com",
+                        "name": "Last Chance Ticket"
+                    }
+                }',
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Bearer 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',
+                    'Content-Type: application/json'
+                ),
+                ));
+                $response = curl_exec($curl);
+
+                curl_close($curl);
+} catch (Exception $e) {
+            // Roll back the transaction
+          
+            dd($e->getMessage());
+            // Handle the exception
+            return redirect()
+                ->back()
+                ->with('message', 'Ticket purchase failed');
+            // return response()->json(['error' => 'Ticket purchase failed'], 500);
+        }
+  
+  
+               
+    }
     public function downloadPdf()
     {
         $pdf = Pdf::loadView('download.PDF');
@@ -390,6 +599,7 @@ class PurchasesController extends Controller
                 ->where('approve', '1')
                 ->where('ticket_listings.eventlisting_id', $id);
         }
+       
         if (Request::get('qty') !== null) {
             $tickets = $tickets->where('quantity', '>=', Request::get('qty'));
         }
@@ -414,6 +624,7 @@ class PurchasesController extends Controller
         if (Request::get('homeFilters') !== null) {
             $events = $events->where('events.title', 'like', '%' . Request::get('homeFilters') . '%');
         }
+        $selectedQuantity = Request::get('qty');
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
 
@@ -422,7 +633,7 @@ class PurchasesController extends Controller
         // dd($tickets);
 
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
-        return view('payment-tickets/browse-ticket', compact('ticketsNoFilter', 'Footerevents', 'FooterEventListing', 'restrictionsFromTicketListing', 'events', 'tickets', 'eventListings', 'categoriesFromTicketListing', 'colors'));
+        return view('payment-tickets/browse-ticket', compact('selectedQuantity','ticketsNoFilter', 'Footerevents', 'FooterEventListing', 'restrictionsFromTicketListing', 'events', 'tickets', 'eventListings', 'categoriesFromTicketListing', 'colors'));
     }
 
     public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid)
@@ -458,11 +669,12 @@ class PurchasesController extends Controller
             ->where('ticket_listings.id', $ticketid)
             ->first();
         // dd($tickets);
+        $selectedQuantity = session('selectedQuantity');
         $sellers = User::find($sellerid);
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
         $sellerCountry = Seller::where('user_id', $sellerid)->first();
-        return view('payment-tickets/checkout', compact('Footerevents', 'FooterEventListing', 'tickets', 'events', 'sellers', 'sellerCountry'));
+        return view('payment-tickets/checkout', compact('selectedQuantity','Footerevents', 'FooterEventListing', 'tickets', 'events', 'sellers', 'sellerCountry'));
     }
 
     public function buyer_ticket_detail(TicketListing $ticket, EventListing $event, $eventid, $ticketid, $sellerid)

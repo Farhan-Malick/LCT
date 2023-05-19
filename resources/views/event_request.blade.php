@@ -16,7 +16,9 @@
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/styles/index.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/styles/common.css') }}" />
-    <link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">
+    <!--<link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
@@ -63,7 +65,7 @@
           <div class="info-item">
             <i class="fa fa-phone"></i>
             <h4>Make a Phone Call</h4>
-            <a href="#">+276 329 3991</a>
+            <a href="#">+1 276 329 3991</a>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">

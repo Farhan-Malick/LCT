@@ -18,7 +18,16 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        PasswordReset::class => [
+            SendPasswordResetNotification::class,
+        ],
     ];
+    
+    // protected $listen = [
+    //     Registered::class => [
+    //         SendEmailVerificationNotification::class,
+    //     ],
+    // ];
 
     /**
      * Register any events for your application.

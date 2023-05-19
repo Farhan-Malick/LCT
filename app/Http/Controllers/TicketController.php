@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Seller;
 use Illuminate\Http\Request;
 use App\Models\VanueSections;
+use App\Models\BuyerSellerCharges;
 use App\Models\VenueSectionRows;
 use App\Models\ETicket;
 use App\Models\Purchases;
@@ -35,7 +36,7 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-    public function index( TicketListing $tickets,VanueSections $vanuesections,VenueSectionRows $venuesectionrows, EventListing $EventListing,Currency $currency,$id)
+    public function index( TicketListing $tickets,VanueSections $vanuesections,VenueSectionRows $venuesectionrows, EventListing $EventListing,$id)
     {
         //
         if(!auth()->check()){
@@ -44,8 +45,7 @@ class TicketController extends Controller
         $maxValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->max('price');
         $minValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->min('price');
        
-        $currencies = Currency::all();
-        $ticketCurrency = Currency::find($tickets->currency);
+        //= Currency::find($tickets->currency);
         $EventListing = EventListing::find($id);
         $venue_section_rows = VenueSectionRows::all();
         $venue_sections = VanueSections::all();
@@ -55,7 +55,7 @@ class TicketController extends Controller
         $sec = VanueSections::first();
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
-        return view('tickets/tickets-details',compact('FooterEventListing','Footerevents','maxValue','minValue','Listing','sec','cat','venue_section_rows','venue_sections','EventListing','currencies','sellerCategories','ticketCurrency'));
+        return view('tickets/tickets-details',compact('FooterEventListing','Footerevents','maxValue','minValue','Listing','sec','cat','venue_section_rows','venue_sections','EventListing','sellerCategories'));
     }
 
     public function sendAwienMail(){
@@ -324,6 +324,7 @@ class TicketController extends Controller
     }
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)
     {
+        
         $tickets = TicketListing::find($id);
         $user = User::find($tickets->user_id);
         $seller = new Seller();
@@ -334,21 +335,22 @@ class TicketController extends Controller
         MailController::ticketlistingadded($user->email);
         return redirect()->back()->with('msg','Your Listing has been created and your ticket will be available for purchase after the approval of Admin.');
     }
-
-    public function showAddressPage(Currency $currencies, TicketListing $tickets, $id, EventListing $event)
+    public function showAddressPage(TicketListing $tickets, $id, EventListing $event)
     {
+        $sellerCharges = BuyerSellerCharges::first();
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
         $currencies = Currency::all();
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
-        $ticketCurrency = Currency::find($tickets->currency);
+        //= Currency::find($tickets->currency);
         $price = $tickets->price * $tickets->quantity;
-        $divide = $price / 100;
-        $percentage = $divide * 10;
+        $divide = $price /100;
+        $percentage = $divide * $sellerCharges->seller_charges;
         $grand_total = $price - $percentage;
-        $webCharge = $price / 10;
-        return view('tickets/set-ticket-address',compact('FooterEventListing','Footerevents','currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency','webCharge'));
+        $webCharge = $price / $grand_total;
+        // dd($webCharge);
+        return view('tickets/set-ticket-address',compact('FooterEventListing','Footerevents','tickets','events','price','percentage','grand_total','sellerCharges'));
 
     }
 
@@ -401,55 +403,57 @@ class TicketController extends Controller
 
     public function show_price(Currency $currencies, TicketListing $tickets, $id, EventListing $event)
     {
+        $sellerCharges = BuyerSellerCharges::first();
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
         $maxValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->max('price');
         $minValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->min('price');
-        $currencies = Currency::all();
-        $ticketCurrency = Currency::find($tickets->currency);
+        // $currencies = Currency::all();
+        // $ticketCurrency = Currency::find($tickets->currency);
         $price = $tickets->price * $tickets->quantity;
-        $divide = $price / 100;
-        $percentage = $divide * 10;
+        $divide = $price /100;
+        $percentage = $divide * $sellerCharges->seller_charges;
         $grand_total = $price - $percentage;
-        $webCharge = $price / 10;
+        $webCharge = $price / $sellerCharges->seller_charges;
         return view('tickets/setticketprice',compact('FooterEventListing','Footerevents',
-            'currencies','tickets','events','price','percentage','grand_total', 'ticketCurrency', 'maxValue', 'minValue','webCharge'
+            'currencies','tickets','events','price','percentage','grand_total', 'maxValue', 'minValue','webCharge'
         ));
     }
 
     public function show_ticket(Currency $currencies, TicketListing $tickets, $id, EventListing $event){
-
         dd();
+        $sellerCharges = BuyerSellerCharges::first();
         $FooterEventListing = EventListing::get();
-        $Footerevents = Event::get();
+        $Footerevents = Event::get(); 
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
-        $currencies = Currency::all();
+        // $currencies = Currency::all();
         $price = $tickets->price * $tickets->quantity;
-        $divide = $price / 100;
-        $percentage = $divide * 10;
+        $divide = $price /100;
+        $percentage = $divide * $sellerCharges->seller_charges;
        $grand_total = $price - $percentage;
-       $webCharge = $price / 10;
-        return view('tickets/set-ticket-address',compact('FooterEventListing','Footerevents','currencies','tickets','events','price','percentage','grand_total',''));
+       $webCharge = $price / $sellerCharges->seller_charges;
+        return view('tickets/set-ticket-address',compact('FooterEventListing','Footerevents','tickets','events','price','percentage','grand_total',''));
 
     }
 
     public function upload_tickets($ticketlistingid){
+        $sellerCharges = BuyerSellerCharges::first();
             $events = EventListing::all();
             $ticket_listing = TicketListing::find($ticketlistingid);
-            $currencies = Currency::all();
-            $ticketCurrency = Currency::find($ticket_listing->currency);
+            // $currencies = Currency::all();
+            // $ticketCurrency = Currency::find($ticket_listing->currency);
             // dd($ticketCurrency, $tickets);
             $price = $ticket_listing->price * $ticket_listing->quantity;
-            $divide = $price / 100;
-            $percentage = $divide * 10;
+            $divide = $price /100;
+            $percentage = $divide * $sellerCharges->seller_charges;
             $grand_total = $price - $percentage;
-            $webCharge = $price / 10;
+            $webCharge = $price / $sellerCharges->seller_charges;
             $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
-            return view('tickets/upload_Pdf',compact('FooterEventListing','Footerevents','currencies','ticket_listing','events','price','percentage','grand_total', 'ticketCurrency','webCharge'));
+            return view('tickets/upload_Pdf',compact('FooterEventListing','Footerevents','ticket_listing','events','price','percentage','grand_total','webCharge'));
         //dd($ticketlistingid);
         // $ticket_listing = TicketListing::find($ticketlistingid);
         // return view('tickets/upload_Pdf', compact('ticket_listing'));
@@ -562,7 +566,7 @@ class TicketController extends Controller
         ->where('completed', 1)
         ->get();
         $price = Purchases::sum('price');
-        $totalprofitDivision = $price / 100;
+        $totalprofitDivision = $price /100;
         $totalCompanyProfit =  $totalprofitDivision * 20;
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
@@ -594,7 +598,7 @@ class TicketController extends Controller
         ->where('completed', 1)
         ->get();
         $price = Purchases::sum('price');
-        $totalprofitDivision = $price / 100;
+        $totalprofitDivision = $price /100;
         $totalCompanyProfit =  $totalprofitDivision * 20;
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
@@ -622,7 +626,7 @@ class TicketController extends Controller
         ->orderBy('created_at', 'desc')
         ->where('completed', 1)->get();
         $price = Purchases::sum('price');
-        $totalprofitDivision = $price / 100;
+        $totalprofitDivision = $price /100;
         $totalCompanyProfit =  $totalprofitDivision * 20;
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');
@@ -711,7 +715,7 @@ class TicketController extends Controller
         ->orderBy('id','desc')
         ->get();
         $price = Purchases::sum('price');
-        $totalprofitDivision = $price / 100;
+        $totalprofitDivision = $price /100;
         $totalCompanyProfit =  $totalprofitDivision * 20;
         $userCount = User::count();
         $total_no_sold_tickets = Purchases::sum('quantity');

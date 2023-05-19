@@ -74,6 +74,8 @@ top: 13px;
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                 <div class="form-outline">
+                                  <label class="form-label" for="form3Example1m">First name</label>
+
                                   <input id="first_name" type="text" class="form-control form-control-lg @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name">
 
                                 @error('first_name')
@@ -85,11 +87,12 @@ top: 13px;
                                     @error('first_name')
                                     <p style="color: red">{{ $message }}</p>
                                     @enderror --}}
-                                    <label class="form-label" for="form3Example1m">First name</label>
                                 </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                 <div class="form-outline">
+                                  <label class="form-label" for="form3Example1n">Last name</label>
+
                                   <input id="last_name" type="text" class="form-control form-control-lg @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name">
 
                                   @error('last_name')
@@ -97,7 +100,6 @@ top: 13px;
                                           <strong>{{ $message }}</strong>
                                       </span>
                                   @enderror
-                                    <label class="form-label" for="form3Example1n">Last name</label>
                                 </div>
                                 </div>
                             </div>
@@ -105,6 +107,8 @@ top: 13px;
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                 <div class="form-outline">
+                                  <label class="form-label" for="form3Example1m1">Email Address</label>
+
                                   <input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                   @error('email')
@@ -112,11 +116,12 @@ top: 13px;
                                           <strong>{{ $message }}</strong>
                                       </span>
                                   @enderror
-                                    <label class="form-label" for="form3Example1m1">Email Address</label>
                                 </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                 <div class="form-outline">
+                                  <label class="form-label" for="emailrepeat">Re enter email address</label>
+
                                   <input id="emailrepeat" type="email" class="form-control form-control-lg @error('email_confirmation') is-invalid @enderror" name="email_confirmation" value="{{ old('email_confirmation') }}" required autocomplete="email_confirmation">
 
                                 @error('email_confirmation')
@@ -124,27 +129,30 @@ top: 13px;
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                    <label class="form-label" for="emailrepeat">Re enter email address</label>
                                    
                                 </div>
                                 </div>
                             </div>
             
                             <div class="form-outline mb-4">
+                              <label for="password">Enter New Password</label>
+
                               <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                               @error('password')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
                                   </span>
                               @enderror
-                                <label for="password">Enter New Password</label>
                             </div>
                             <div class="form-outline mb-4">
+                              <label for="confirmpass">Re-Type Password</label>
+
                               <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" required autocomplete="new-password">
-                                <label for="confirmpass">Re-Type Password</label>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-4">
+                                <label for="primary_phone" >Primary Phone</label>
+
                                   <select name="primary_phone" class="form-control form-control-lg  @error('primary_phone') is-invalid @enderror" id="primary_phone" >
                                     <option >Select</option>
                                     <option name="primary_phone">Afghanistan +93</option>
@@ -404,19 +412,21 @@ top: 13px;
                                 @error('primary_phone')
                                     <p style="color: red">{{ $message }}</p>
                                 @enderror
-                                <label for="primary_phone" >Primary Phone</label>
                                 </div>
                                 <div class="col-md-6 mb-4">
+                                  <label for="phone">Phone Number</label>
+
                                   <input id="phone" type="number" class="form-control form-control-lg @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
                                     @error('phone')
                                         <p style="color: red">{{ $message }}</p>
                                     @enderror
-                                    <label for="phone">Phone Number</label>
             
                                 </div>
                             </div>
                             <div class="row">
                               <div class="col-lg-6">
+                              <label for="phone">Nationality</label>
+
                                 <select name="nationality"  value="{{ old('nationality') }}" autocomplete="nationality" autofocus class="form-control @error('nationality') is-invalid @enderror" id="nationality" >
                                   <option selected disabled>Nationality</option>
                                       <option name="nationality">Afghanistan</option>
@@ -673,7 +683,6 @@ top: 13px;
                                   <option  name="nationality" >Zimbabwe</option>
                                   
                               </select>
-                              <label for="phone">Nationality</label>
                               @error('nationality')
                               <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -681,6 +690,8 @@ top: 13px;
                               @enderror
                               </div>
                               <div class="col-lg-6">
+                              <label for="phone">Country of residence</label>
+
                                 <select name="country"  value="" autocomplete="country" autofocus class="form-control @error('country') is-invalid @enderror" id="country" >
                                     <option selected disabled>Select Country</option>
                                         <option name="country">Afghanistan</option>
@@ -936,7 +947,6 @@ top: 13px;
                                         <option  name="country" >Zambia</option>
                                     <option  name="country" >Zimbabwe</option>
                                 </select>
-                              <label for="phone">Country</label>
                               @error('country')
                               <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>

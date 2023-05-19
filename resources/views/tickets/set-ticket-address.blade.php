@@ -57,7 +57,6 @@
                           </div>
                         </div>
                         <hr class="my-4">
-            
                         <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
                           <span class="dot"></span>
                           <hr class="flex-fill track-line"><span class="dot"></span>
@@ -68,14 +67,12 @@
                             <i class="fa fa-check text-white"></i></span>
                         </div>
                         <div class="row d-flex flex-row justify-content-between align-items-center">
-                          
                           <div class="col-md-2 d-flex flex-column align-items-start"><span><b>EVENT : </b> <br>{{$tickets->event->event_name}}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span></span><b>TIME :</b>{{$tickets->event->start_time}} - {{$tickets->event->end_time}}<span></div>
                           <div class="col-md-2 d-flex  flex-column  "><span><b>DATE : </b><br>({{$tickets->event->event_date}})</span></div>
                           <div class="col-md-2 d-flex flex-column "><span><b>VENUE : </b><br>{{$tickets->event->venue_name}} , {{$tickets->event->location}}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>{{$tickets->type_cat}}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span><b>SECTION : ROW</b><br>{{$tickets->type_sec}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $tickets->type_row }}</span></div>
-
                           {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}
                         </div><br>
                         <div class="row d-flex flex-row justify-content-between align-items-center">
@@ -83,7 +80,7 @@
                           <div class="col-md-2 d-flex flex-column "><span><b>TICKET : </b><br>{{ $tickets->ticket_type }}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span id="noticket"><b>NO.OF TICKETS : </b><br>{{ $tickets->quantity }}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span><b>PER-TICKET :</b><br>${{ $tickets->price }}</span></div>
-                          <div class="col-md-2 d-flex flex-column "><span><b>Service Charges : </b><br>${{$webCharge}}</span></div>
+                          <div class="col-md-2 d-flex flex-column "><span><b>Service Charges : </b><br>${{$sellerCharges->seller_charges}}</span></div>
                           <div class="col-md-2 d-flex flex-column "><span><b>TOTAL TICKET PRICE:</b><br>${{$price}}</span></div>
                           <input type="hidden" id="pricetotal" value="{{ $tickets->price }}" name="price">
                           {{-- <div class="d-flex flex-column align-items-end"><span></span></div> --}}

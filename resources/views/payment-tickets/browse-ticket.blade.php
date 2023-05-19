@@ -9,7 +9,9 @@
         <!-- animate css -->
         <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/animate.min.css') }}" />
         <!-- Fontawesome css -->
-        <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/fontawesome.all.min.css') }}" />
+        <!--<link rel="stylesheet" href="{{ asset('F_Assets/assets/css/fontawesome.all.min.css') }}" />-->
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         {{-- <link rel="stylesheet" href="../../../../../cdn.jsdelivr.net/npm/bootstrap-icons%401.8.2/font/bootstrap-icons.css"> --}}
         <!-- owl.carousel css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/owl.carousel.min.css') }}" />
         <!-- Rangeslider css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/nouislider.css') }}" />
@@ -25,6 +27,8 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
         />
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
         <style>
                             /* section five starts here  */
                 .footer{
@@ -472,6 +476,45 @@
 
     <section id="explore_area" class="">
         <div class="container">
+              <div class="row mt-3">
+        <div class="col-lg-12">
+              @if(session('TicketPrice'))
+                              <script>
+                                 Swal.fire({
+                                    icon: 'success',
+                                    title: '{{ session('TicketPrice') }}',
+                                    showConfirmButton: false,
+                                    timer: 5000
+                                 });
+                              </script>
+                        @endif
+                         @if(session('NotEnough'))
+                              <script>
+                                 Swal.fire({
+                                    icon: 'success',
+                                    title: '{{ session('NotEnough') }}',
+                                    showConfirmButton: false,
+                                    timer: 5000
+                                 });
+                              </script>
+                        @endif
+             @if(session('deactivate'))
+                              <script>
+                                 Swal.fire({
+                                    icon: 'success',
+                                    title: '{{ session('deactivate') }}',
+                                    showConfirmButton: false,
+                                    timer: 5000
+                                 });
+                              </script>
+                        @endif
+            @if ($message = Session::get('deactivate'))
+            <div class="alert alert-warning alert-block">
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
+        </div>
+       </div>
             <div class="row mb-2 section_padding">
                 <div class="col-lg-12">
                     <span style="font-size: 18px"><b>Categories : </b>  
@@ -620,28 +663,43 @@
                                                                     <div class="ticket text-center" style="width:50%">
                                                                         <img src="{{asset('assets/images/t1.webp')}}" class="" alt="img">
                                                                     </div>
+                                                                    <div class="flight_right_arrow">
+                                                                        <p>Category:</p>
+                                                                        <h6>
+                                                                            {{$ticket->type_cat}}
+                                                                        </h6>
+                                                                        <p>Section: </p>
+                                                                        <h6>{{$ticket->type_sec}}</h6>
+                                                                        @if ($ticket->type_row !== null)
+                                                                            <h6> <span style="      font-size: 16px; 
+                                                                                line-height: 28px; 
+                                                                                color: var(--paragraph-color);
+                                                                                font-weight: 400;
+                                                                                font-family: 'Poppins', sans-serif;
+                                                                                margin-bottom: 0;
+                                                                                font-size: 11px;
+                                                                                line-height: 18px;">Row:</span> {{$ticket->type_row}}</h6>
+                                                                        @endif
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                <div class="flight_search_middel">
                                                                     <div class="flight_search_destination" >
                                                                         <p>Tickets</p>
-                                                                        <h6>No of Tickets {{$ticket->quantity}}</h6>
+                                                                        <h6 class="text-right">No of Tickets {{$ticket->quantity}}</h6>
+                                                                        @if ($ticket->ticket_benefits !== "[null]")
                                                                         <p class="m-0 benefits">Benefits</p>
-                                                                        <h6 class="fw-700 benefits2">{{implode(' ', json_decode($ticket->ticket_benefits, true))}}</h6> 
+                                                                        <h6 class="fw-700 benefits2">
+                                                                            {{implode(' ', json_decode($ticket->ticket_benefits))}}
+                                                                        </h6> 
+                                                                        @endif
                                                                         <p class="m-0">Restriction</p>
                                                                         <h6>{{implode(' ', json_decode($ticket->ticket_restrictions, true))}}</h6> 
                                                                         <!--<h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>-->
                                                                     
                                                                     </div>
-                                                                </div>
-                                                                <div class="flight_search_middel">
-                                                                    <div class="flight_right_arrow">
-                                                                        <h6>
-                                                                            Category:
-                                                                            {{$ticket->type_cat}}
-                                                                        </h6>
-                                                                        <h6>Section: {{$ticket->type_sec}}</h6>
-                                                                        <h6>Row: {{$ticket->type_row}}</h6>
-                                                                    </div>
                                                                     <div class="flight_search_destination">
-                                                                        <p class="type">Ticket : </p>
+                                                                        <p class="type pt-3">Ticket-Type : </p>
                                                                         <h6 class="type2">{{$ticket->ticket_type}}</h6>
                                                                         {{-- <p>Seating Area</p>
                                                                         <h6 class="fw-700 ">{{$ticket->seated_area}}</h6> --}}
@@ -658,13 +716,25 @@
                                                         <div class="flight_search_right">
                                                                 {{-- <h2 style="font-size: 20px"><b>${{$ticket->price}}</b></h2>
                                                                 <h2><sup style="font-size: 8px">Per Ticket</sup></h2> --}}
-                                                            <h2 ><b>${{$ticket->price}}</b><sup >Per Ticket</sup></h2>
+                                                            <h2 ><b>${{$ticket->price}}</b></h2>
                                                             {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.detail',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}">View Ticket Detail</a> --}}
-                                                            <a class="@if($ticket->quantity != 0) btn btn_theme btn_sm mb-2 @else btn btn-danger w-100  @endif" href="@if($ticket->quantity > 0)
-                                                                {{ route('buyer.ticket.checkout',['eventlisting_id' => $ticket->eventlisting_id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}@endif " >
-                                                                @if($ticket->quantity == 0) SOLD @else Select Ticket
-                                                                    @endif 
-                                                            </a><br>
+                                                            @if($ticket->quantity != 0)
+    <?php
+        $route = route('buyer.ticket.checkout', [
+            'eventlisting_id' => $ticket->eventlisting_id,
+            'ticketid' => $ticket->id,
+            'sellerid' => $ticket->user_id,
+        ]);
+        $url = $route . '?selectedQuantity=' . $selectedQuantity;
+        $redirectResponse = redirect()->to($url);
+    ?>
+    <a class="btn btn_theme btn_sm mb-2" href="{{ $redirectResponse->getTargetUrl() }}">
+        Select Ticket
+    </a>
+@else
+    <a class="btn btn-danger w-100">SOLD</a>
+@endif
+                                                            <br>
                                                             <span class="spen"> @if ($ticket->book_eticket === "Yes")
                                                                 @if ($ticket->quantity != 0)
                                                                 <a href="#" class="text-danger instact" >Instant Download</a>

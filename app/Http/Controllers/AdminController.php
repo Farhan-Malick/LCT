@@ -14,7 +14,7 @@ class AdminController extends Controller
     {
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
-        $users = User::get();
+        $users = User::orderBy('id','desc')->get();
         $price = Purchases::sum('price');
         $totalprofitDivision = $price / 100;
         $totalCompanyProfit =  $totalprofitDivision * 20;

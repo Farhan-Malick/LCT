@@ -18,6 +18,7 @@ use App\Http\Controllers\SellerCategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserEditController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Middleware\AdminAuth;
 
 /*
@@ -220,6 +221,7 @@ Route::post('/upload-pdfticket',[PdfUploadController::class,'store'])->name('upl
 
 Route::post('/dashboard',[TicketController::class,'UserPasswordUpdate'])->name('reset');
 Route::post('/bank_details',[TicketController::class,'BankDetailsFrom']);
+Route::post('language/change',[LanguageController::class,'change'])->name('language.change');
 
 
 

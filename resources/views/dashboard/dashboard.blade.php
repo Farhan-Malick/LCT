@@ -490,6 +490,13 @@
                                                             <form action="{{ URL('bank_details') }}" method="POST">
                                                                @csrf
                                                                <div class="form-group mt-4">
+                                                                  <label class="form-label">Card Holder*</label>
+                                                                  <div class="loc-group position-relative">
+                                                                     <input class="form-control h_50" type="text" id="card_holder" name="card_holder" placeholder="Enter Card Holder Name.">
+                                                                     {{-- <span class="pass-show-eye"><i class="fas fa-eye-slash" id="togglePassword"></i></span> --}}
+                                                                  </div>
+                                                               </div>
+                                                               <div class="form-group mt-4">
                                                                   <label class="form-label">Bank Name*</label>
                                                                   <div class="loc-group position-relative">
                                                                      <input class="form-control h_50" type="text" id="bank_name" name="bank_name" placeholder="Enter Bank Name.">

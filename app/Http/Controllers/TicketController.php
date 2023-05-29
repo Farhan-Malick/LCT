@@ -315,6 +315,7 @@ class TicketController extends Controller
 
         $bank_detail = new BankDetail();
         $bank_detail->user_id = auth()->id();
+        $bank_detail->card_holder = $request->card_holder;
         $bank_detail->bank_name = $request->bank_name;
         $bank_detail->iban = $request->iban;
         $bank_detail->swift_number = $request->swift_number;
@@ -536,7 +537,6 @@ class TicketController extends Controller
         ->first();
       
         // dd ($active_tickets);
-
         $sales = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date','users.first_name','users.last_name')
         ->join('users', 'users.id', '=', 'purchases.user_id')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
@@ -587,7 +587,6 @@ class TicketController extends Controller
         return redirect('Admin-Panel/');
     }
     //END OF PAPER TICKET
-
 
      // E-Ticket in Admin Panel
 

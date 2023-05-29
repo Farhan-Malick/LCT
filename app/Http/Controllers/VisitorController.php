@@ -12,7 +12,7 @@ use DB;
 
 class VisitorController extends Controller
 {
-    
+        
 function getVisitorCountry($ipAddress)
 {
    $databaseFile = storage_path('app/GeoLite2-Country_20230331/GeoLite2-Country.mmdb');
@@ -37,7 +37,6 @@ function getVisitorCountry($ipAddress)
     $visitor->country = $country;
     $visitor->save();
 
-    // Retrieve other data and return the view
     $tickets = TicketListing::select('ticket_listings.*', 'vanue_sections.sections as section_name')
         ->join('vanue_sections', 'vanue_sections.id', '=', 'ticket_listings.section')
         ->where('completed', 1)->get();

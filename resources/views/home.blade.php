@@ -23,46 +23,207 @@
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <title>LCT - Last Chance Ticket</title>
     <style>
-      #search_list{
-        position:absolute; z-index:1; width:68%;
-      }
-      @media (max-width: 1001px) {
-    #search_list {
-      position:absolute; z-index:1; width:76.5%;
-      }
-    }   
-    
-  
-    @media (max-width: 1200px) {
-    #search_list {
-      position:absolute; z-index:1; width:76.5%;
-      }
-      
-    }
-    /* @keyframes slide {
-  from { left: 100%;}
-  to { left: -100%;}
-}
-@-webkit-keyframes slide {
-  from { left: 100%;}
-  to { left: -100%;}
-}
-  #textofMarquee {
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:120px;
-  font-size:30px;
-  animation-name: slide;
-  animation-duration: 10s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  -webkit-animation-name: slide;
-  -webkit-animation-duration: 10s;
-  -webkit-animation-timing-function:linear;
-  -webkit-animation-iteration-count: infinite;
-} */
+          @media (max-width: 560px) {
+                                    .example-element{
+                                        inset: auto auto 0px 0px;
+                                            margin: 0px;
+
+                                    }
+                                    #example-element2{
+                                        padding-left: 20px;
+
+                                    }
+                                        a.mean-expand {
+                                            /* margin-top: 3px; */
+                                            width: 100%;
+                                            height: 24px;
+                                            padding: 12px !important;
+                                            /* text-align: right; */
+                                            /* position: absolute; */
+                                            right: 0;
+                                            top: 0;
+                                            z-index: 2;
+                                            font-weight: 700;
+                                            background: 0 0;
+                                            border: none !important;
+                                        }
+                                    .dropdown-menu{
+                                        --bs-dropdown-min-width: 10rem;
+                                            --bs-dropdown-padding-x: 0;
+                                            --bs-dropdown-padding-y: 0.5rem;
+                                            --bs-dropdown-spacer: 0.125rem;
+                                            --bs-dropdown-font-size: 1rem;
+                                            --bs-dropdown-color: #212529;
+                                            --bs-dropdown-bg: #fff;
+                                            --bs-dropdown-border-color: var(--bs-border-color-translucent);
+                                            --bs-dropdown-border-radius: 0.375rem;
+                                            --bs-dropdown-border-width: 1px;
+                                            --bs-dropdown-inner-border-radius: calc(0.375rem - 1px);
+                                            --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
+                                            --bs-dropdown-divider-margin-y: 0.5rem;
+                                            --bs-dropdown-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                                            --bs-dropdown-link-color: #212529;
+                                            --bs-dropdown-link-hover-color: #1e2125;
+                                            --bs-dropdown-link-hover-bg: #e9ecef;
+                                            --bs-dropdown-link-active-color: #fff;
+                                            --bs-dropdown-link-active-bg: #0d6efd;
+                                            --bs-dropdown-link-disabled-color: #adb5bd;
+                                            --bs-dropdown-item-padding-x: 1rem;
+                                            --bs-dropdown-item-padding-y: 0.25rem;
+                                            --bs-dropdown-header-color: #6c757d;
+                                            --bs-dropdown-header-padding-x: 1rem;
+                                        --bs-dropdown-header-padding-y: 0.5rem;
+                                        /* position: relative; */
+                                        z-index: 1000;
+                                        display: none;
+                                        min-width: var(--bs-dropdown-min-width);
+                                        padding: var(--bs-dropdown-padding-y) var(--bs-dropdown-padding-x);
+                                        margin: 0;
+                                        font-size: var(--bs-dropdown-font-size);
+                                        color: var(--bs-dropdown-color);
+                                        text-align: center;
+                                        list-style: none;
+                                        background-color: var(--bs-dropdown-bg);
+                                        background-clip: padding-box;
+                                        border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
+                                        border-radius: var(--bs-dropdown-border-radius);
+                                    }
+                                    }
+            #search_list{
+              position:absolute; z-index:1; width:68%;
+            }
+            @media (max-width: 1001px) {
+          #search_list {
+            position:absolute; z-index:1; width:76.5%;
+            }
+          }   
+          
+        
+          @media (max-width: 1200px) {
+          #search_list {
+            position:absolute; z-index:1; width:76.5%;
+            }
+            
+          }
+          #marquee-container {
+                          width: 100%;
+                          height: 50px;
+                          overflow: hidden;
+                        }
+                        #marquee {
+                          white-space: nowrap;
+                          display: inline-block;
+                          transition: transform 0.5s ease; /* Add transition property with duration and easing function */
+                          }
+                          
+                          #marquee:hover {
+                            animation-play-state: paused;
+                            transform: translateX(0%); /* Add this line to reset the transform on hover */
+                          }
+                        @media (max-width: 1920px) {
+                          #marquee {
+                          white-space: nowrap;
+                          display: inline-block;
+                          animation: marquee 11.5s linear infinite;
+                        }
+                          }
+                        @keyframes marquee-web {
+                              0% {
+                                transform: translateX(100%);
+                              }
+                              100% {
+                                transform: translateX(-100%);
+                              }
+                            }
+                          
+                            @keyframes marquee-mobile {
+                              0% {
+                                transform: translateX(100%);
+                              }
+                              100% {
+                                transform: translateX(-100%);
+                              }
+                            }
+                        /* Media query for mobile devices with max-width of 767px */
+                        @media (max-width: 540px) {
+                            #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
+                              font-size: 13px; color: #58e6f3; text-shadow: 2px 2px #000000;
+                            }
+                          }
+                            @media (max-width: 428px) {
+                        
+                          #marquee {
+                          white-space: nowrap;
+                          display: inline-block;
+                          transition: transform 0.5s ease; /* Add transition property with duration and easing function */
+                          }
+                          
+                          #marquee:hover {
+                            animation-play-state: paused;
+                            transform: translateX(0%); /* Add this line to reset the transform on hover */
+                          }
+                        }
+                        @media (max-width: 767px) {
+                          #marquee {
+                            animation: marquee-mobile 30s linear infinite;
+                          }
+                        }
+                          @media (max-width: 1920px) {
+                          #marquee {
+                            animation: marquee-web 20s linear infinite;
+                          }
+                        }
+                        @media (max-width: 1366px) {
+                          #marquee {
+                            animation: marquee-web 13.5s linear infinite;
+                          }
+                        }
+                        .search{
+                                position: relative;
+                                box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+                                }
+                                .search input{
+                                  height: 60px;
+                                  text-indent: 25px;
+                                  border: 2px solid #d6d4d4;
+                                }
+                                .search input:focus{
+                                  box-shadow: none;
+                                  border: 2px solid rgb(74, 185, 226);
+                                }
+                                .search .fa-search{
+                                  position: absolute;
+                                  top: 20px;
+                                  left: 16px;
+                                }
+                                .search button{
+                                  position: absolute;
+                                  top: 5px;
+                                  right: 5px;
+                                  height: 50px;
+                                  width: 110px;
+                                  background:  rgb(74, 185, 226);
+                                }
+                                
+            .theme_search_form_area {
+                background: #f7f4f4;
+                box-shadow: 4px 14px 28px rgba(0, 0, 0, 0.1);
+                border-radius: 20px;
+                padding: 30px 30px;
+                position: relative;
+            }
+
+            .theme_search_form_tabbtn .nav-item {
+                margin-right: 20px;
+            }
+
+            .theme_search_form_tabbtn .nav-item:last-child {
+                margin-right: 0px;
+            }
+
+            .theme_search_form_tabbtn .nav-tabs {
+                border-bottom: none;
+            }
     </style>
   </head>
 
@@ -117,7 +278,7 @@
   s1.setAttribute('crossorigin','*');
   s0.parentNode.insertBefore(s1,s0);
   })();
-  </script>
+</script>
   <!--End of Tawk.to Script-->
   <!--End of Tawk.to Script-->
   <!--End of Tawk.to Script-->
@@ -154,82 +315,7 @@
                 <h1 class="mb-5 " ><b>Here is the last chance to be a member of world’s leading ticket marketplace for live events around the globe</b></h1>
                
                 <div id="marquee-container"></div>
-                <style>
-                
-                  #marquee-container {
-                    width: 100%;
-                    height: 50px;
-                    overflow: hidden;
-                  }
-                  #marquee {
-                    white-space: nowrap;
-                    display: inline-block;
-                     transition: transform 0.5s ease; /* Add transition property with duration and easing function */
-                    }
-                    
-                    #marquee:hover {
-                      animation-play-state: paused;
-                      transform: translateX(0%); /* Add this line to reset the transform on hover */
-                    }
-                  @media (max-width: 1920px) {
-                     #marquee {
-                    white-space: nowrap;
-                    display: inline-block;
-                    animation: marquee 11.5s linear infinite;
-                  }
-                    }
-                   @keyframes marquee-web {
-                        0% {
-                          transform: translateX(100%);
-                        }
-                        100% {
-                          transform: translateX(-100%);
-                        }
-                      }
-                    
-                      @keyframes marquee-mobile {
-                        0% {
-                          transform: translateX(100%);
-                        }
-                        100% {
-                          transform: translateX(-100%);
-                        }
-                      }
-                   /* Media query for mobile devices with max-width of 767px */
-                   @media (max-width: 540px) {
-                      #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
-                        font-size: 13px; color: #58e6f3; text-shadow: 2px 2px #000000;
-                      }
-                    }
-                      @media (max-width: 428px) {
-                   
-                     #marquee {
-                    white-space: nowrap;
-                    display: inline-block;
-                     transition: transform 0.5s ease; /* Add transition property with duration and easing function */
-                    }
-                    
-                    #marquee:hover {
-                      animation-play-state: paused;
-                      transform: translateX(0%); /* Add this line to reset the transform on hover */
-                    }
-                  }
-                  @media (max-width: 767px) {
-                    #marquee {
-                      animation: marquee-mobile 30s linear infinite;
-                    }
-                  }
-                    @media (max-width: 1920px) {
-                    #marquee {
-                      animation: marquee-web 20s linear infinite;
-                    }
-                  }
-                   @media (max-width: 1366px) {
-                    #marquee {
-                      animation: marquee-web 13.5s linear infinite;
-                    }
-                  }
-                </style>
+               
                 
                 <script>
                   const marqueeContainer = document.getElementById('marquee-container');
@@ -254,7 +340,7 @@
                         <div class="col-md-10">
                           <div class="search ">
                             <i class="fa fa-search"></i>
-                            <input type="text" onkeyup="mySearchFunction()" href="" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
+                            <input type="text" onclick="mySearchFunction()" href="" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
                             <button class="btn btn-primary">Search </button>
                            
                           </div>
@@ -272,10 +358,7 @@
                 <script>
                   function mySearchFunction() {
                       var query = document.querySelector('#search_text').value;
-
-                      // this wil grab all <li> elements from all <ul> elements on the page
-                      // however, you will want to specify a unique attribute for only the elements you wish to include
-                      var elements = document.querySelector('#list');
+                      var elements = document.querySelector('#list li');
 
                       let status = query==="" ? "none" : "block"
                       document.querySelector("#myUL").style.display = status;
@@ -290,34 +373,7 @@
 
                     }
                 </script>
-                <style>
-                  .search{
-                          position: relative;
-                          box-shadow: 0 0 40px rgba(51, 51, 51, .1);
-                          }
-                          .search input{
-                            height: 60px;
-                            text-indent: 25px;
-                            border: 2px solid #d6d4d4;
-                          }
-                          .search input:focus{
-                            box-shadow: none;
-                            border: 2px solid rgb(74, 185, 226);
-                          }
-                          .search .fa-search{
-                            position: absolute;
-                            top: 20px;
-                            left: 16px;
-                          }
-                          .search button{
-                            position: absolute;
-                            top: 5px;
-                            right: 5px;
-                            height: 50px;
-                            width: 110px;
-                            background:  rgb(74, 185, 226);;
-                          }
-                </style>
+
               </div>
             </div>
           </div>
@@ -329,40 +385,11 @@
 
 
   </section>
-  <!-- ***** Main Banner Area End ***** -->
-  <style>
-    
-      .theme_search_form_area {
-          background: #f7f4f4;
-          box-shadow: 4px 14px 28px rgba(0, 0, 0, 0.1);
-          border-radius: 20px;
-          padding: 30px 30px;
-          position: relative;
-      }
-
-      .theme_search_form_tabbtn .nav-item {
-          margin-right: 20px;
-      }
-
-      .theme_search_form_tabbtn .nav-item:last-child {
-          margin-right: 0px;
-      }
-
-      .theme_search_form_tabbtn .nav-tabs {
-          border-bottom: none;
-      }
-
-  </style>
   <!-- Events Section Start -->
   <div class="amazing-deals">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-          <div class="mb-5  text-center">
-            {{-- section-heading --}}
-            <h3  id="searchMe" >Last chance to explore world top events</h3>
-          </div>
-        </div>
+      
           @if(count($allevents) == 0)
             <div>
                 <h5>Browse the <b>EVENTS</b> according to your serach to see more.</h5>
@@ -411,7 +438,7 @@
             </div>
        @foreach ($allevents as $event)
           @if($event->status == 1)
-            <div class="col-lg-6 col-sm-12"
+            <div class="col-lg-6 col-sm-12 event-item"
             >
             <div class="item">
                 <div class="row">
@@ -468,7 +495,19 @@
   <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
-
+<script>
+  function mySearchFunctionForEvents() {
+    var searchText = $('#search_text').val().toLowerCase();
+    $('.event-item').each(function () {
+      var eventName = $(this).find('h4').text().toLowerCase();
+      if (eventName.includes(searchText)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  }
+</script>
     <script>
         $(document).ready(function(){
           $("#search_text").on('keyup',function(){

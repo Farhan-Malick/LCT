@@ -313,9 +313,9 @@
             <div class="main-caption">
               <div class="container">
                 <h1 class="mb-5 " ><b>Here is the last chance to be a member of world’s leading ticket marketplace for live events around the globe</b></h1>
-               
+              
                 <div id="marquee-container"></div>
-               
+              
                 
                 <script>
                   const marqueeContainer = document.getElementById('marquee-container');
@@ -333,7 +333,7 @@
                   {{-- <marquee scrollamount="10" behavior="scroll" direction="left">
                     <h2 id="textofMarquee" class="" style="color: #ebd6f9; text-shadow: 2px 2px #040009;"><b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customers <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
                   </marquee> --}}
-                <h6 style="font-size: 14px lessNotice" class="mb-5 " ><b>Prices are set by sellers may be above or below face value</b></h6>
+                <h6 style="font-size: 14px lessNotice" class="mb-5 text-light" ><b>Prices are set by sellers may be above or below face value</b></h6>
                   <div class="container ">
                     <form method="get" id="qty-form">
                       <div class="row height d-flex justify-content-center align-items-center">
@@ -342,7 +342,7 @@
                             <i class="fa fa-search"></i>
                             <input type="text" onclick="mySearchFunction()" href="" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
                             <button class="btn btn-primary">Search </button>
-                           
+                          
                           </div>
                         </div>
                       </div>
@@ -353,7 +353,7 @@
                         </div>
                       </div>
                     </form>
-                     
+                    
                 </div>
                 <script>
                   function mySearchFunction() {
@@ -436,7 +436,7 @@
                 </form>
               </div>
             </div>
-       @foreach ($allevents as $event)
+      @foreach ($allevents as $event)
           @if($event->status == 1)
             <div class="col-lg-6 col-sm-12 event-item"
             >
@@ -496,17 +496,17 @@
   <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
 <script>
-  function mySearchFunctionForEvents() {
-    var searchText = $('#search_text').val().toLowerCase();
-    $('.event-item').each(function () {
-      var eventName = $(this).find('h4').text().toLowerCase();
-      if (eventName.includes(searchText)) {
-        $(this).show();
-      } else {
-        $(this).hide();
-      }
-    });
-  }
+  // function mySearchFunctionForEvents() {
+  //   var searchText = $('#search_text').val().toLowerCase();
+  //   $('.event-item').each(function () {
+  //     var eventName = $(this).find('h4').text().toLowerCase();
+  //     if (eventName.includes(searchText)) {
+  //       $(this).show();
+  //     } else {
+  //       $(this).hide();
+  //     }
+  //   });
+  // }
 </script>
     <script>
         $(document).ready(function(){
@@ -521,7 +521,7 @@
               }
             });
           });
-          $(document).on('click','li',function(){
+          $(document).on('click','#list',function(){
             var value = $(this).text();
             $("#search_text").val(value);
             $("#search_list").html("");

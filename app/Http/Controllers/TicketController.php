@@ -341,7 +341,7 @@ class TicketController extends Controller
         $sellerCharges = BuyerSellerCharges::first();
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
-        $currencies = Currency::all();
+        // $currencies = Currency::all();
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
         //= Currency::find($tickets->currency);

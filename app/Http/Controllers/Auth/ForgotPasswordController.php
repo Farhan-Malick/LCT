@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use App\Models\EventListing;
+use App\Models\Event;
 
 use Illuminate\Support\Facades\Password;
 
@@ -37,7 +39,6 @@ class ForgotPasswordController extends Controller
  * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
  */
  
- 
     /**
      * Display the form to request a password reset link.
      *
@@ -45,7 +46,9 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
-        return view('auth.passwords.email');
+        $FooterEventListing = EventListing::get();
+        $Footerevents = Event::get();
+        return view('auth.passwords.email',compact('FooterEventListing','Footerevents'));
     }
     
     protected function validateEmail(Request $request)
@@ -54,25 +57,19 @@ class ForgotPasswordController extends Controller
 }
 public function sendResetLinkEmail(Request $request)
 {
-      
     $this->validateEmail($request);
 
     $response = $this->broker()->sendResetLink(
         $request->only('email')
     );
-   
-     $this->email = $request->only('email');
+
     if ($response == Password::RESET_LINK_SENT) {
-        $token = $response;
-      
-                $this->getResetEmail($token);
+        Session::flash('success', 'Password reset link has been sent to your email.');
         return back()->with('status', trans($response));
     }
 
     // If an error occurs, customize the error message here.
-    return back()->withErrors(
-        ['email' => trans($response)]
-    );
+    return back()->withErrors(['email' => trans($response)]);
 }
 
 /**
@@ -123,64 +120,64 @@ public function getResetEmail($token)
     // Check if the user exists in the database
     $userExists = User::where('email', $email)->exists();
 
-    if ($userExists) {
-        try {
-            $curl = curl_init();
+    // if ($userExists) {
+    //     try {
+    //         $curl = curl_init();
 
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.sendgrid.com/v3/mail/send',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => '
-                {
-                    "personalizations": [
-                        {
-                            "to": [
-                                {
-                                    "email": "'.$email.'"
-                                }
-                            ],
-                            "subject": "Welcome to Ignite!",
-                            "dynamic_template_data": {
-                                "username": "'.$resetlink.'",
-                                "email": "'.$email.'"
-                            }
-                        }
-                    ],
-                    "template_id": "d-7dca342eeded42d4b4d5e726731de275",
-                    "from": {
-                        "email": "noreply@lastchanceticket.com",
-                        "name": "Last Chance Ticket"
-                    }
-                }',
-                CURLOPT_HTTPHEADER => array(
-                    'Authorization: Bearer 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',
-                    'Content-Type: application/json'
-                ),
-            ));
+    //         curl_setopt_array($curl, array(
+    //             CURLOPT_URL => 'https://api.sendgrid.com/v3/mail/send',
+    //             CURLOPT_RETURNTRANSFER => true,
+    //             CURLOPT_ENCODING => '',
+    //             CURLOPT_MAXREDIRS => 10,
+    //             CURLOPT_TIMEOUT => 0,
+    //             CURLOPT_FOLLOWLOCATION => true,
+    //             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //             CURLOPT_CUSTOMREQUEST => 'POST',
+    //             CURLOPT_POSTFIELDS => '
+    //             {
+    //                 "personalizations": [
+    //                     {
+    //                         "to": [
+    //                             {
+    //                                 "email": "'.$email.'"
+    //                             }
+    //                         ],
+    //                         "subject": "Welcome to Ignite!",
+    //                         "dynamic_template_data": {
+    //                             "username": "'.$resetlink.'",
+    //                             "email": "'.$email.'"
+    //                         }
+    //                     }
+    //                 ],
+    //                 "template_id": "d-7dca342eeded42d4b4d5e726731de275",
+    //                 "from": {
+    //                     "email": "noreply@lastchanceticket.com",
+    //                     "name": "Last Chance Ticket"
+    //                 }
+    //             }',
+    //             CURLOPT_HTTPHEADER => array(
+    //                 'Authorization: Bearer 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',
+    //                 'Content-Type: application/json'
+    //             ),
+    //         ));
 
-            $response = curl_exec($curl);
+    //         $response = curl_exec($curl);
 
-            if (curl_errno($curl)) {
-                throw new Exception('Curl error: ' . curl_error($curl));
-            }
+    //         if (curl_errno($curl)) {
+    //             throw new Exception('Curl error: ' . curl_error($curl));
+    //         }
 
-            curl_close($curl);
+    //         curl_close($curl);
 
-            Session::flash('success', 'Password reset link has been sent to your email.');
-        } catch (Exception $e) {
-            Session::flash('error', 'An error occurred while sending the password reset email.');
-            // Handle the exception here, for example log it or display an error message to the user
-            return back()->withErrors(['email' => 'An error occurred while sending the email']);
-        }
-    } else {
-        Session::flash('error', 'This email does not exist in our records.');
-    }
+    //         Session::flash('success', 'Password reset link has been sent to your email.');
+    //     } catch (Exception $e) {
+    //         Session::flash('error', 'An error occurred while sending the password reset email.');
+    //         // Handle the exception here, for example log it or display an error message to the user
+    //         return back()->withErrors(['email' => 'An error occurred while sending the email']);
+    //     }
+    // } else {
+    //     Session::flash('error', 'This email does not exist in our records.');
+    // }
 }
 
 

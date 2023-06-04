@@ -272,7 +272,6 @@ class PurchasesController extends Controller
                 self::ticketPurchased(auth()->user()->email,$ticket,$purchase, $webCharge, $percentageForBuyer, $grand_total2);
                 // MailController::ticketpurchased(auth()->user()->email, $ticket, $purchase, $webCharge, $percentageForBuyer, $grand_total2);
                 self::sellerticketpurchased($seller->email, $ticket, $purchase, $webCharge, $grand_total);
-                
                     return redirect()
                     ->route('dashboard.listing')
                     ->with('message', 'Congratulations!! You have successfully purchased the tickets. You will shortly receive an email from us about the delivery of the tickets.');
@@ -312,7 +311,7 @@ class PurchasesController extends Controller
     public function ticketPurchased($email,$ticket,$purchase, $webCharge, $percentageForBuyer, $grand_total2){
   try{
         $ticket_id = '';
-        $first_name = $ticket->first_name;
+        $first_name = auth()->user()->first_name;
         $date = date('Y-m-d');
         $name = 'test';
         $order_id = $purchase->id;

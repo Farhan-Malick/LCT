@@ -224,3 +224,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('Admin-Panel/Seller-Charges-post', [BuyerSellerChargesController::class, 'SellerCharges']);
     });
 });
+
+
+Route::get('/users/2/update-password', [AdminController::class, 'updatePasswordForm'])->name('users.updatePasswordForm');
+
+
+Route::get('/users/{id}/password/edit', [AdminController::class, 'editPassword'])->name('users.editPassword');
+
+Route::put('/users/{id}/password', [AdminController::class, 'updatePassword'])->name('users.updatePassword');

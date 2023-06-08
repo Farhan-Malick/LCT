@@ -2225,7 +2225,7 @@ font-weight: 500;
 /* --Common Banner-- */
 #common_banner {
     background-image: url('../img/banner-two-bg-2.png');
-    padding: 260px 0 130px 0;
+    padding: 130px 0 130px 0;
     background-repeat: no-repeat;
     background-size: cover;
 }   
@@ -2237,6 +2237,7 @@ font-weight: 500;
 .common_bannner_text h2 {
     color: var(--white-color);
     font-weight: 400;
+    padding-top: 30px;
 }
 
 .common_bannner_text ul {
@@ -4467,7 +4468,7 @@ textarea {
 .flight_search_middel {
    
     display: flex;
-    align-items: left;
+    align-items: center;
     padding-left: 47px;
 }
 

@@ -106,7 +106,7 @@
                     }
                 }
         </style>
-        <title>Last Chance Ticket - Buyer</title>
+        <title>Last Chance Ticket</title>
        
     </head>
 
@@ -202,21 +202,35 @@
             </div>
         </div>
     </header>
-    <section id="common_banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="common_bannner_text">
-                        <h2>{{$events->title }}</h2>
-                        <ul>
-                            <li><a href="{{URL('/')}}">Home</a></li>
-                            <li><span><i class="fas fa-circle"></i></span>Browse Events</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+ <section id="common_banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="common_bannner_text">
+          <p class="text-light"><b class="banner-text">Last Chance Ticket is a ticket reselling marketplace and not the primary ticket provider. Our website enables sellers to resell tickets, which may be priced above or below face value.</b></p>
+          <h2>{{$events->title }}</h2>
+          <ul>
+            <li><a href="{{URL('/')}}">Home</a></li>
+            <li><span><i class="fas fa-circle"></i></span>Browse Events</li>
+          </ul>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .banner-text {
+    text-shadow: 2px 2px #000000;
+  }
+
+  @media (min-width: 541px) {
+    .banner-text {
+      font-size: 18px;
+    }
+  }
+</style>
+
 
     <!-- Form Area -->
     <section id="theme_search_form_tour" class="fligth_top_search_main_form_wrapper">
@@ -569,7 +583,7 @@
                                                 <form method="get" id="qty-form">
                                                     <div class="form-group">
                                                           <select class="form-select form-control-lg"  name="Cat_filter"  onchange="this.form.submit()">
-                                                              <option selected disabled>SEACH BY CATEGORY</option>
+                                                              <option selected disabled>SEARCH BY CATEGORY</option>
                                                               <option value=""  @if(request()->get('Cat_filter') && request()->get('Cat_filter')) 
                                                                 selected @endif  >  <a href="{{URL::current()}}"style=" margin-right:20px; text-decoration:none">All Tickets</a></option>
                                                                 @foreach ($categoriesFromTicketListing as $all)
@@ -686,7 +700,7 @@
                                                                 <div class="flight_search_middel">
                                                                     <div class="flight_search_destination" >
                                                                         <p>Tickets</p>
-                                                                        <h6 class="text-right">No of Tickets {{$ticket->quantity}}</h6>
+                                                                        <h6>No of Tickets {{$ticket->quantity}}</h6>
                                                                         @if ($ticket->ticket_benefits !== "[null]")
                                                                         <p class="m-0 benefits">Benefits</p>
                                                                         <h6 class="fw-700 benefits2">

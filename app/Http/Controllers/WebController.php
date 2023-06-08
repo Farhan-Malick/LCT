@@ -17,26 +17,43 @@ class WebController extends Controller
     
     public function index(Request $request)
     {
-        
-        if($request->ajax()){
-            if(!empty($request->search_text)){
-                $data=EventListing::where('event_name','LIKE','%'.$request->search_text.'%')->get();
+        if ($request->ajax()) {
+            if (!empty($request->search_text)) {
+                $data = EventListing::where('event_name', 'LIKE', '%' . $request->search_text . '%')->get();
             }
+            
             $output = '';
-            if(count($data) > 0)
-            {
+            if (count($data) > 0) {
                 $output = '<ul id="myUL" class="list-group" style="display:block;position:relative; z-index:1">';
-                    foreach($data as $row)
-                    {  
-                        $output .= '<li id="list" class="list-group-item">'.$row->event_name.'</li>';
-                    }
+                foreach ($data as $row) {
+                    $output .= '<li id="list" class="list-group-item" data-event-id="' . $row->id . '">' . $row->event_name . '</li>';
+                }
                 $output .= '</ul>';
-            }else{
-                $output .= '<li class="list-group-item">No Data Found </li>';
-            }
-            return $output;
-           
+        } else {
+            $output .= '<li class="list-group-item">No Data Found </li>';
         }
+        return $output;
+    }
+
+        // if($request->ajax()){
+        //     if(!empty($request->search_text)){
+        //         $data=EventListing::where('event_name','LIKE','%'.$request->search_text.'%')->get();
+        //     }
+        //     $output = '';
+        //     if(count($data) > 0)
+        //     {
+        //         $output = '<ul id="myUL" class="list-group" style="display:block;position:relative; z-index:1">';
+        //             foreach($data as $row)
+        //             {  
+        //                 $output .= '<li id="list" class="list-group-item">'.$row->event_name.'</li>';
+        //             }
+        //         $output .= '</ul>';
+        //     }else{
+        //         $output .= '<li class="list-group-item">No Data Found </li>';
+        //     }
+        //     return $output;
+           
+        // }
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
         $events = Event::all();

@@ -208,7 +208,8 @@
       <div class="col-lg-12">
         <div class="common_bannner_text">
           <p class="text-light"><b class="banner-text">Last Chance Ticket is a ticket reselling marketplace and not the primary ticket provider. Our website enables sellers to resell tickets, which may be priced above or below face value.</b></p>
-          <h2>{{$events->title }}</h2>
+                      <h2><b style="font-size:23px" class="banner-text">{{$events->event_name}}</b></h2>
+          <p class="text-light" ><b class="banner-text">{{$events->title }}</b></p>
           <ul>
             <li><a href="{{URL('/')}}">Home</a></li>
             <li><span><i class="fas fa-circle"></i></span>Browse Events</li>
@@ -717,11 +718,11 @@
                                                                         <h6 class="type2">{{$ticket->ticket_type}}</h6>
                                                                         {{-- <p>Seating Area</p>
                                                                         <h6 class="fw-700 ">{{$ticket->seated_area}}</h6> --}}
-                                                                        @if($ticket->cat_id == 1)
-                                                                        <h6 class="fw-700  d-none-mobile">
-                                                                            <p class="m-0">Fans Section</p>
-                                                                            {{$ticket->fan_section}}
-                                                                        </h6>
+                                                                        @if($ticket->eTitle == "Football" || $ticket->eTitle == "Cricket")
+                                                                            <h6 class="fw-700  d-none-mobile">
+                                                                                <p class="m-0">Fans Section</p>
+                                                                                {{$ticket->fan_section}}
+                                                                            </h6>
                                                                         @endif
                                                                     </div>
                                                                 </div>

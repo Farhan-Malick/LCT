@@ -46,7 +46,10 @@ class TicketController extends Controller
         $minValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->min('price');
        
         //= Currency::find($tickets->currency);
-        $EventListing = EventListing::find($id);
+        $EventListing = EventListing::select('event_listings.*','events.title as tit')
+        ->join('events', 'events.id', '=', 'event_listings.event_id')
+        ->find($id);
+        
         $venue_section_rows = VenueSectionRows::all();
         $venue_sections = VanueSections::all();
         $sellerCategories = SellerCategory::all();
@@ -468,13 +471,39 @@ class TicketController extends Controller
      */
     public function destroy(TicketListing $TicketListing)
     {
-        //
+        
     }
     public function sell_category_show(Event $event,Category $category){
-        $events_concert = Event::where('category_id', '1')->get();
-        $events_sports = Event::where('category_id', '2')->get();
-        $events_theatre = Event::where('category_id', '3')->get();
-        $events_festival = Event::where('category_id', '4')->get();
+
+        $events_concert = Event::select('events.*', 'event_listings.status')
+        ->join('event_listings', 'event_listings.event_id', '=', 'events.id')
+        ->where('event_listings.status', 1)
+        ->where('category_id', '1')
+        ->distinct()
+        ->get();
+        // $events_concert = Event::where('category_id', '1')->get();
+        $events_sports =  Event::select('events.*', 'event_listings.status')
+        ->join('event_listings', 'event_listings.event_id', '=', 'events.id')
+        ->where('event_listings.status', 1)
+        ->where('category_id', '2')
+        ->distinct()
+        ->get();
+        // $events_sports = Event::where('category_id', '2')->get();
+        $events_theatre = Event::select('events.*', 'event_listings.status')
+        ->join('event_listings', 'event_listings.event_id', '=', 'events.id')
+        ->where('event_listings.status', 1)
+        ->where('category_id', '3')
+        ->distinct()
+        ->get();
+        // $events_theatre = Event::where('category_id', '3')->get();
+        $events_festival = Event::select('events.*', 'event_listings.status')
+        ->join('event_listings', 'event_listings.event_id', '=', 'events.id')
+        ->where('event_listings.status', 1)
+        ->where('category_id', '4')
+        ->distinct()
+        ->get();
+        // $events_festival = Event::where('category_id', '4')->get();
+        
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
         return view('tickets/selltickets',compact('FooterEventListing','Footerevents','events_sports','events_concert','events_theatre','events_festival'));

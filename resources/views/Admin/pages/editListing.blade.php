@@ -213,35 +213,6 @@
                                 </div>
                                 <div class="form-row">
                                     
-                                     {{-- <div
-                                        class="form-group col-md-4"
-                                    >
-                                        <label
-                                            for="inputState"
-                                            >Category</label
-                                        >
-                                        <select
-                                            id="inputState"
-                                            class="form-control"
-                                            name="category"
-                                        >
-                                            <option
-                                                selected
-                                            >
-                                                Select
-                                                Category
-                                            </option>
-                                            @foreach($categories
-                                            as $category) 
-                                            <option
-                                                value="{{$category->name}}"
-                                            >
-                                                {{$category->name}}
-                                            </option>
-                                         @endforeach
-                                        </select>
-                                    </div> --}}
-                    
                                     <div
                                         class="form-group col-md-4"
                                     >

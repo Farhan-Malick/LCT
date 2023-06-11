@@ -429,46 +429,28 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @if ($EventListing->category_event == "Sports" || $EventListing->category_event == "SPORTS" )
-                                                        <div class="row">
-                                                            <div class="col-md-8">
-                                                                <div class="form-group">
-                                                                    <h5 class="mb-4">FANS SECTION</h5>
-                                                                    <hr>
-                                                                    <label for="row" class="mb-2">{{$EventListing->event_name}}</label>
-                                                                    <select class="form-select" name="fan_section">
-                                                                        <option selected disabled>Please Select Fans Section</option>
-
-                                                                        <option value=" @php
-                                                                        $myName = $EventListing->event_name;
-                                                                        $arr = explode(' ',trim($myName));
-                                                                        echo $arr[0];
-                                                                    @endphp">
-                                                                            @php
-                                                                                $myName = $EventListing->event_name;
-                                                                                $arr = explode(' ',trim($myName));
-                                                                                echo $arr[0];
-                                                                            @endphp
-                                                                        </option>
-                                                                        <option value="  @php
-                                                                        $myName = $EventListing->event_name;
-                                                                        $arr = explode(' ',trim($myName));
-                                                                        echo $arr[2];
-                                                                    @endphp
-                                                                    ">
-                                                                            @php
-                                                                                $myName = $EventListing->event_name;
-                                                                                $arr = explode(' ',trim($myName));
-                                                                                echo $arr[2];
-                                                                            @endphp
-                                                                        </option>
-                                                                        <option value="Dont know">Dont Know</option>
-
-                                                                    </select>
-                                                                </div>
-                                                            </div>
+                                                @if ($EventListing->tit == "Football" || $EventListing->tit == "Cricket")
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <h5 class="mb-4">FANS SECTION</h5>
+                                                            <hr>
+                                                            <label for="row" class="mb-2">{{$EventListing->event_name}}</label>
+                                                            <select class="form-select" name="fan_section">
+                                                                <option selected disabled>Please Select Fans Section</option>
+                                                                @php
+                                                                $arr = explode(' vs ', $EventListing->event_name);
+                                                                @endphp
+                                                                @foreach ($arr as $item)
+                                                                    <option value="{{ $item }}">{{ $item }}</option>
+                                                                @endforeach
+                                                                <option value="Dont know">Dont Know</option>
+                                                            </select>
                                                         </div>
-                                                @endif
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            
                                             </div>
                                         </div>
                                     </div>

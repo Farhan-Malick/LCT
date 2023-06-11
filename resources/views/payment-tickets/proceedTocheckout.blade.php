@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="{{asset('assets/styles/sellticket.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/styles/index.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/styles/common.css') }}" />
-    <link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">
+    <!--<link rel="stylesheet" href="{{asset('newAssets/assets/css/fontawesome.css')}}">-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/templatemo-woox-travel.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/owl.css')}}">
     <link rel="stylesheet" href="{{asset('newAssets/assets/css/animate.css')}}">
@@ -126,8 +128,9 @@
                              </div>
                              <div class="event-order-dt-content">
                                 <h5>{{ $events->event_name }}</h5>
-                                <span>{{ $events->start_date }} - {{ $events->start_time }}</span>
-                                <div class="category-type"><b>{{ $tickets->ticket_type }}</b></div>
+                                    <div class=""><b>Date : {{ $events->event_date }}</b></div>
+                                <div class=""><b>Event Time : {{ $events->start_time }} - {{ $events->end_time }}</b></div>
+                                <div class=""><b>Ticket Type : {{ $tickets->ticket_type }}</b></div>
                              </div>
                           </div>
                           <div class="order-total-block">

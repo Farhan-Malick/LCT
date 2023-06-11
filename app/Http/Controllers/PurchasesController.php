@@ -26,7 +26,7 @@ class PurchasesController extends Controller
     //
     public function ProceedToCheckout(TicketListing $ticket, EventListing $event, $eventlisting_id, $ticketid, $sellerid)
     {
-        $events = EventListing::select('*', 'venues.title as vTitle', 'venues.image as vImage')
+        $events = EventListing::select('event_listings.*', 'venues.title as vTitle', 'venues.image as vImage')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
             // ->join('venues', 'venues.id', '=', 'events.venue_id')
             ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
@@ -119,19 +119,18 @@ class PurchasesController extends Controller
         $grand_total2 = $purchase->price + $percentageForBuyer + (int) Request::get('shipingCharges');
 
         // dd( $grand_total2 );
-
         $purchase->grand_total = $grand_total;
         $purchase->grand_total2 = $grand_total2;
 
         $ticket_id = $ticket->id;
         $seller_id = $ticket->user_id;
 
-        $events = EventListing::select('*', 'venues.title as vTitle', 'venues.image as vImage')
-            ->join('events', 'events.id', '=', 'event_listings.event_id')
-            // ->join('venues', 'venues.id', '=', 'events.venue_id')
-            ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
-            ->where('event_listings.id', $ticket->eventlisting_id)
-            ->first();
+        $events = EventListing::select('event_listings.*', 'venues.title as vTitle', 'venues.image as vImage')
+        ->join('events', 'events.id', '=', 'event_listings.event_id')
+        // ->join('venues', 'venues.id', '=', 'events.venue_id')
+        ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
+        ->where('event_listings.id', $ticket->eventlisting_id)
+        ->first();
         // dd($events);
 
         TicketListing::find($ticket->id)->increment('views');
@@ -525,7 +524,7 @@ try{
             ->get();
         // dd($events);
 
-        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'categories.id as cat_id')
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'categories.id as cat_id', 'events.title as eTitle')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
             ->join('categories', 'categories.id', '=', 'events.category_id')
@@ -652,7 +651,7 @@ try{
 
     public function buyer_ticket_checkout(TicketListing $ticket, EventListing $event, $eventlisting_id, $ticketid, $sellerid)
     {
-        $events = EventListing::select('*', 'venues.title as vTitle', 'venues.image as vImage')
+        $events = EventListing::select('event_listings.*', 'venues.title as vTitle', 'venues.image as vImage')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
             // ->join('venues', 'venues.id', '=', 'events.venue_id')
             ->join('venues', 'venues.title', '=', 'event_listings.venue_name')

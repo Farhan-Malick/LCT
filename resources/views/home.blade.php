@@ -252,25 +252,45 @@
                     <h2 id="textofMarquee" class="" style="color: #ebd6f9; text-shadow: 2px 2px #040009;"><b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customers <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
                   </marquee> --}}
                 
-                <div class="container searchPadd">
-  <form method="get" id="qty-form">
-    <div class="row height d-flex justify-content-center align-items-center">
-      <div class="col-md-10">
-        <div class="search">
-          <i class="fa fa-search"></i>
-          <input type="text" onkeyup="mySearchFunction()" href="" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
-          <button class="btn btn-primary">Search</button>
-        </div>
-      </div>
-    </div>
+                 <div class="container searchPad">
+                      <form method="get" id="qty-form">
+                        <div class="row height d-flex justify-content-center align-items-center">
+                          <div class="col-md-10">
+                            <div class="search ">
+                              <i class="fa fa-search"></i>
+                              <input type="text" onclick="mySearchFunction()" href="" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
+                              <button class="btn btn-primary">Search </button>
+                            
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="row height d-flex justify-content-center align-items-center">
+                          <div class="col-md-10">
+                            <div  id="search_list" style=""></div>
+                          </div>
+                        </div>
+                      </form>
+                      
+                  </div>
+                  <script>
+                    function mySearchFunction() {
+                        var query = document.querySelector('#search_text').value;
+                        var elements = document.querySelector('#list li');
 
-    <div class="row height d-flex justify-content-center align-items-center">
-      <div class="col-md-10">
-        <div id="search_list"></div>
-      </div>
-    </div>
-  </form>
-</div>
+                        let status = query==="" ? "none" : "block"
+                        document.querySelector("#myUL").style.display = status;
+
+                        for (var i = 0; i < elements.length; i++) {
+                          var el = elements[i];
+                          if (el.innerText.indexOf(query) !== -1)
+                            el.style.display = 'block';
+                          else
+                            el.style.display = 'none';
+                        }
+
+                      }
+                  </script>
 
 <style>
   @media (max-width: 540px) {
@@ -285,27 +305,21 @@
     }
   }
 </style>
- <script>
-                  function mySearchFunction() {
-                      var query = document.querySelector('#search_text').value;
-
-                      // this wil grab all <li> elements from all <ul> elements on the page
-                      // however, you will want to specify a unique attribute for only the elements you wish to include
-                      var elements = document.querySelector('#list');
-
-                      let status = query==="" ? "none" : "block"
-                      document.querySelector("#myUL").style.display = status;
-
-                      for (var i = 0; i < elements.length; i++) {
-                        var el = elements[i];
-                        if (el.innerText.indexOf(query) !== -1)
-                          el.style.display = 'block';
-                        else
-                          el.style.display = 'none';
-                      }
-
-                    }
-                </script>
+//  <script>
+//                   function mySearchFunction() {
+//                       var query = document.querySelector('#search_text').value;
+//                       var elements = document.querySelector('#list');
+//                       let status = query==="" ? "none" : "block"
+//                       document.querySelector("#myUL").style.display = status;
+//                       for (var i = 0; i < elements.length; i++) {
+//                         var el = elements[i];
+//                         if (el.innerText.indexOf(query) !== -1)
+//                           el.style.display = 'block';
+//                         else
+//                           el.style.display = 'none';
+//                       }
+//                     }
+//                 </script>
                 <style>
                   .search{
                           position: relative;
@@ -486,40 +500,40 @@
   <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
 
     <script>
-        $(document).ready(function(){
-          $("#search_text").on('keyup',function(){
-            var value = $(this).val();
-            $.ajax({
-              url: "{{ route('home') }}",
-              type: 'GET',
-              data: {'search_text':value},
-              success:function(data){
-                $("#search_list").html(data);
-              }
+          $(document).ready(function(){
+            $("#search_text").on('keyup',function(){
+              var value = $(this).val();
+              $.ajax({
+                url: "{{ route('home') }}",
+                type: 'GET',
+                data: {'search_text':value},
+                success:function(data){
+                  $("#search_list").html(data);
+                }
+              });
+            });
+            $(document).on('click','#list',function(){
+              var value = $(this).text();
+              $("#search_text").val(value);
+              $("#search_list").html("");
             });
           });
-          $(document).on('click','li',function(){
-            var value = $(this).text();
-            $("#search_text").val(value);
-            $("#search_list").html("");
-          });
-        });
+      </script>
+    <script>
+      function bannerSwitcher() {
+        next = $('.sec-1-input').filter(':checked').next('.sec-1-input');
+        if (next.length) next.prop('checked', true);
+        else $('.sec-1-input').first().prop('checked', true);
+      }
+
+      var bannerTimer = setInterval(bannerSwitcher, 5000);
+
+      $('nav .controls label').click(function() {
+        clearInterval(bannerTimer);
+        bannerTimer = setInterval(bannerSwitcher, 5000)
+      });
     </script>
-  <script>
-    function bannerSwitcher() {
-      next = $('.sec-1-input').filter(':checked').next('.sec-1-input');
-      if (next.length) next.prop('checked', true);
-      else $('.sec-1-input').first().prop('checked', true);
-    }
 
-    var bannerTimer = setInterval(bannerSwitcher, 5000);
+    </body>
 
-    $('nav .controls label').click(function() {
-      clearInterval(bannerTimer);
-      bannerTimer = setInterval(bannerSwitcher, 5000)
-    });
-  </script>
-
-  </body>
-
-</html>
+  </html>

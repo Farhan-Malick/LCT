@@ -111,8 +111,8 @@
               <div class="row d-flex flex-row justify-content-between align-items-center">
                 
                 <div class="col-md-2 d-flex flex-column align-items-start"><span><b>EVENT : </b> <br>{{ $events->event_name }}</span></div>
-                <div class="col-md-2 d-flex flex-column "><span></span><b>TIME :</b>{{ $events->start_time }}-{{ $events->end_time }}<span></div>
-                <div class="col-md-2 d-flex  flex-column  "><span><b>DATE : </b><br>{{ $events->start_date }}</span></div>
+                <div class="col-md-2 d-flex flex-column "><span></span><b>EVENT TIME :</b>{{ $events->start_time }}-{{ $events->end_time }}<span></div>
+                <div class="col-md-2 d-flex  flex-column  "><span><b>DATE : </b><br>{{ $events->event_date }}</span></div>
                 <div class="col-md-2 d-flex flex-column "><span><b>VENUE : </b><br>{{ $events->vTitle }}</span></div>
                 <div class="col-md-2 d-flex flex-column "><span><b>CATEGORY : </b><br>
                     {{$tickets->type_cat}}</span></div>
@@ -180,10 +180,14 @@
                         </div>
                             <div class="number-of-tickets mb-5">
                                 <h6>Select The Number Of Tickets</h6>
-                                <select class="form-select  @error('quantity') is-invalid @enderror" id="#ticket" name="quantity" required>
+                               @php
+                                    $selectedQuantity = request()->get('selectedQuantity');
+                                @endphp
+                                
+                                <select class="form-select @error('quantity') is-invalid @enderror" id="ticket" name="quantity" required>
                                     <option selected disabled>Select Number of Tickets</option>
                                     @for ($i = 1; $i <= $tickets->quantity; $i++)
-                                        <option value="{{ $i }}">{{ $i }} Tickets</option>
+                                        <option value="{{ $i }}" @if($selectedQuantity == $i) selected @endif>{{ $i }} Tickets</option>
                                     @endfor
                                 </select>
                             </div>

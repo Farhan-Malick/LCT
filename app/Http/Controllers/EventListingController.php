@@ -67,8 +67,9 @@ class EventListingController extends Controller
     }
     public function editListing($id){
         $events = Event::all();
+        $categories = Category::get();
         $listings = EventListing::find($id);
-        return view('Admin/pages/editListing',compact('listings','events'));
+        return view('Admin/pages/editListing',compact('categories','listings','events'));
     }
 
     public function updateListing(Request $request,$id){

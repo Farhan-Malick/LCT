@@ -72,17 +72,12 @@
                   <div class="info-item">
                     <i class="fa fa-music"></i>
                     <h4>Concerts Tickets</h4>
-                        
-                            @foreach($events_sports as $event)
-                            <a
-                                href="{{
-                                    route('event.category.ticket',$event->id)
-                                }}"
-                            >
-                                    {{$event->title}}
-                                <hr>
-                            </a>
-                            @endforeach
+                        @foreach($events_sports as $event)
+                                  <a href="{{ route('event.category.ticket', $event->id) }}">
+                                      {{$event->title}}
+                                      <hr>
+                                  </a>
+                        @endforeach
                   </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">

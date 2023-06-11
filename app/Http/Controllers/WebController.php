@@ -19,9 +19,9 @@ class WebController extends Controller
     {
         if ($request->ajax()) {
             if (!empty($request->search_text)) {
-                $data = EventListing::where('event_name', 'LIKE', '%' . $request->search_text . '%')->get();
+                $data = EventListing::where('event_name', 'LIKE', '%' . $request->search_text . '%')
+                ->where('status',1)->get();
             }
-            
             $output = '';
             if (count($data) > 0) {
                 $output = '<ul id="myUL" class="list-group" style="display:block;position:relative; z-index:1">';
@@ -56,7 +56,12 @@ class WebController extends Controller
         // }
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
-        $events = Event::all();
+          $events = Event::select('events.*', 'event_listings.status')
+            ->join('event_listings', 'event_listings.event_id', '=', 'events.id')
+            ->where('event_listings.status', 1)
+            ->distinct()
+            ->get();
+
         
         $allevents=EventListing::select('event_listings.*', 'venues.title as vTitle', 'events.poster as poster')
         ->join('events', 'events.id', '=', 'event_listings.event_id')

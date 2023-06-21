@@ -244,7 +244,7 @@
                   h2.id = 'textofMarquee';
                   h2.style.color = '#ebd6f9';
                   h2.style.textShadow = '2px 2px #040009';
-                  h2.innerHTML = '<b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customer <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b>';
+                  h2.innerHTML = '<b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customer <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support. </b>';
                   marquee.appendChild(h2);
                   marqueeContainer.appendChild(marquee);
                 </script>
@@ -390,7 +390,7 @@
         <div class="col-lg-6 offset-lg-3">
           <div class="mb-5  text-center">
             {{-- section-heading --}}
-            <h3  id="searchMe" >Last chance to explore world top events</h3>
+            <h3  id="searchMe" >Last chance to explore world's top events</h3>
           </div>
         </div>
           @if(count($allevents) == 0)

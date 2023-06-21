@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\EventListing;
 use App\Models\Event;
 use App\Models\Purchases;
+use App\Models\Purchased;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 

@@ -207,6 +207,7 @@
             <div class="row">
                 <div class="col-lg-12">
                 <div class="common_bannner_text">
+                    <h1>tatti laptop</h1>
                         <p class="text-light"><b class="banner-text">Last Chance Ticket is a ticket reselling
                                 marketplace and not the primary ticket provider. Our website enables sellers to resell
                                 tickets, which may be priced above or below face value.</b></p>
@@ -764,6 +765,7 @@
             </div>
         </div>
     </section>
+
 @include('auth.partials.footer')
     {{-- @include("auth.partials.footer") --}}
     {{-- <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script> --}}

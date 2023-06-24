@@ -456,20 +456,18 @@
                                                                             <option selected disabled>Filter by
                                                                                 Restrictions</option>
 
-                                                                            {{-- @foreach
-                                                                            ($restrictionsFromTicketListing as
-                                                                            $all)
-                                                                            <option
-                                                                                value="{{$all->ticket_restrictions}}"
-                                                                                @if(request()->get('Restriction_filter')
-                                                                                && request()->get('Restriction_filter')
-                                                                                == $all->ticket_restrictions)
-                                                                                selected @endif
-                                                                                >{{implode(' ',
-                                                                                json_decode($all->ticket_restrictions,
-                                                                                true))}}</option></a>
+                                                    @foreach ($restrictionsFromTicketListing as $all)
+                                                    <option
+                                                        value="{{$all->ticket_restrictions}}"
+                                                        @if(request()->get('Restriction_filter')
+                                                        && request()->get('Restriction_filter')
+                                                        == $all->ticket_restrictions)
+                                                        selected @endif
+                                                        >{{implode(' ',
+                                                        json_decode($all->ticket_restrictions,
+                                                        true))}}</option>
 
-                                                                            @endforeach --}}
+                                                    @endforeach
                                                                             <option value="" @if(request()->
                                                                                 get('Restriction_filter') &&
                                                                                 request()->get('Restriction_filter') ==

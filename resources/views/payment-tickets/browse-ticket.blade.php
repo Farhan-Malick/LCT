@@ -106,7 +106,7 @@
                     }
                 }
         </style>
-        <title>Last Chance Ticket - Buyer</title>
+        <title>Last Chance Ticket</title>
        
     </head>
 
@@ -160,7 +160,7 @@
                                         <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My Profile</a></li>
                                         {{-- <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/orders') }}">My Order</a></li>
                                         <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/listings') }}">My Listings</a></li> --}}
-                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/settings') }}">Settings</a></li>
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">Settings</a></li>
                                         <li class="nav-item">
                                             <form
                                                 action="{{ route('logout') }}"
@@ -202,26 +202,37 @@
             </div>
         </div>
     </header>
-    <section id="common_banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                <div class="common_bannner_text">
-                    <h1>2222</h1>
-                        <p class="text-light"><b class="banner-text">Last Chance Ticket is a ticket reselling
-                                marketplace and not the primary ticket provider. Our website enables sellers to resell
-                                tickets, which may be priced above or below face value.</b></p>
-                        <h2><b style="font-size:23px" class="banner-text">{{$events->event_name}}</b></h2>
-                        <p class="text-light"><b class="banner-text">{{$events->title }}</b></p>
-                        <ul>
-                            <li><a href="{{URL('/')}}">Home</a></li>
-                            <li><span><i class="fas fa-circle"></i></span>Browse Events</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+ <section id="common_banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="common_bannner_text">
+          <p class="text-light"><b class="banner-text">Last Chance Ticket is a ticket reselling marketplace and not the primary ticket provider. Our website enables sellers to resell tickets, which may be priced above or below face value.</b></p>
+
+            <h2><b style="font-size:23px" class="banner-text">{{$events->event_name}}</b></h2>
+              <p class="text-light"><b class="banner-text">{{$events->title }}</b></p>
+          <ul>
+            <li><a href="{{URL('/')}}">Home</a></li>
+            <li><span><i class="fas fa-circle"></i></span>Browse Events</li>
+          </ul>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .banner-text {
+    text-shadow: 2px 2px #000000;
+  }
+
+  @media (min-width: 541px) {
+    .banner-text {
+      font-size: 18px;
+    }
+  }
+</style>
+
 
     <!-- Form Area -->
     <section id="theme_search_form_tour" class="fligth_top_search_main_form_wrapper">
@@ -574,7 +585,7 @@
                                                 <form method="get" id="qty-form">
                                                     <div class="form-group">
                                                           <select class="form-select form-control-lg"  name="Cat_filter"  onchange="this.form.submit()">
-                                                              <option selected disabled>SEACH BY CATEGORY</option>
+                                                              <option selected disabled>SEARCH BY CATEGORY</option>
                                                               <option value=""  @if(request()->get('Cat_filter') && request()->get('Cat_filter')) 
                                                                 selected @endif  >  <a href="{{URL::current()}}"style=" margin-right:20px; text-decoration:none">All Tickets</a></option>
                                                                 @foreach ($categoriesFromTicketListing as $all)
@@ -691,7 +702,7 @@
                                                                 <div class="flight_search_middel">
                                                                     <div class="flight_search_destination" >
                                                                         <p>Tickets</p>
-                                                                        <h6 class="text-right">No of Tickets {{$ticket->quantity}}</h6>
+                                                                        <h6>No of Tickets {{$ticket->quantity}}</h6>
                                                                         @if ($ticket->ticket_benefits !== "[null]")
                                                                         <p class="m-0 benefits">Benefits</p>
                                                                         <h6 class="fw-700 benefits2">
@@ -708,11 +719,11 @@
                                                                         <h6 class="type2">{{$ticket->ticket_type}}</h6>
                                                                         {{-- <p>Seating Area</p>
                                                                         <h6 class="fw-700 ">{{$ticket->seated_area}}</h6> --}}
-                                                                        @if($ticket->cat_id == 1)
-                                                                        <h6 class="fw-700  d-none-mobile">
-                                                                            <p class="m-0">Fans Section</p>
-                                                                            {{$ticket->fan_section}}
-                                                                        </h6>
+                                                                         @if($ticket->eTitle == "Football" || $ticket->eTitle == "Cricket")
+                                                                            <h6 class="fw-700  d-none-mobile">
+                                                                                <p class="m-0">Fans Section</p>
+                                                                                {{$ticket->fan_section}}
+                                                                            </h6>
                                                                         @endif
                                                                     </div>
                                                                 </div>
@@ -765,7 +776,6 @@
             </div>
         </div>
     </section>
-
 @include('auth.partials.footer')
     {{-- @include("auth.partials.footer") --}}
     {{-- <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script> --}}

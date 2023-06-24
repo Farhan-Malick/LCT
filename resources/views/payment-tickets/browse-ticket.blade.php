@@ -830,7 +830,7 @@
                             updateViewerCount();
                         
                             // Update the viewer count every 1 second (1000 milliseconds)
-                            setInterval(updateViewerCount, 1000);
+                            setInterval(updateViewerCount, 5000);
                         </script>
 
                         <div class="card mb-3 shadow-sm br-10">

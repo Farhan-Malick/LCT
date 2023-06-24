@@ -384,7 +384,7 @@ class PurchasesController extends Controller
                         "name": "Last Chance Ticket"
                     }
                 }',
-                CURLOPT_HTTPHEADER => array(
+                CURLOPT_HTTPHEADER => array(    
                     'Authorization: Bearer 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',
                     'Content-Type: application/json'
                 ),

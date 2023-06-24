@@ -44,6 +44,7 @@
             /* background-color: #61c3e3; */
             background-color: #22b3c1;
 
+<<<<<<< HEAD
         }
 
         .footer ul {
@@ -139,6 +140,82 @@
     <title>Last Chance Ticket - Buyer</title>
 
 </head>
+=======
+                }
+                .footer ul{
+                    padding: 0px;
+                }
+                .footer ul li{
+                    list-style: none;
+                }
+                .footer ul li a{
+                    text-decoration: none;
+                    color: #fff;
+                }
+                .footer a{
+                    color: #fff;
+                }
+                .social-links i{
+                    margin-left: 10px;
+                    font-size: 30px;
+                }
+                .bi-facebook:hover{
+                    color: #3f77f3;
+                }
+                .bi-twitter:hover{
+                    color: #52a2f3;
+                }
+                .bi-google:hover{
+                    color: #e74235;
+                }
+                .footer-btn{
+                    background-color: #fff;
+                    color: grey;
+                }
+                .footer-btn:hover{
+                    color: #61c3e3;
+                }
+                .footer .nav-link{
+                    color: grey;
+                }
+                @media only screen and (max-width: 576px){
+                    
+                    .flight_multis_area_wrapper .flight_search_destination.d-none-mobile{
+                        /* display:none; */
+                    }
+                    .d-none-mobile{
+                        display:none;
+                    }
+                    .flight_right_arrow{
+                        padding-bottom: 0px;
+                    }
+                    .flight_search_right{
+                        padding: 0px;
+                    }
+                    .type{
+                        display:none;
+                    }
+                    .type2{
+                        display:block;
+                    }
+                    .benefits2{
+                        display: none;
+                    }
+                    .benefits{
+                        display: none;
+                    }
+                    .spen{
+                        margin-bottom: 20px
+                    }
+                    .rowstyle{
+                        height: 60px;
+                    }
+                }
+        </style>
+        <title>Last Chance Ticket</title>
+       
+    </head>
+>>>>>>> 63ef1629fcb4798a2d2d2c623c9a5a7cb7839b9e
 
 <body>
     <header class="main_header_arae">
@@ -183,6 +260,7 @@
                                         My Account
                                     </a>
                                     <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+<<<<<<< HEAD
                                         <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My
                                                 Profile</a></li>
                                         {{-- <li><a class="dropdown-item text-dark"
@@ -191,6 +269,12 @@
                                                 href="{{ URL('/dashboard/listings') }}">My Listings</a></li> --}}
                                         <li><a class="dropdown-item text-dark"
                                                 href="{{ URL('/dashboard/settings') }}">Settings</a></li>
+=======
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My Profile</a></li>
+                                        {{-- <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/orders') }}">My Order</a></li>
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/listings') }}">My Listings</a></li> --}}
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">Settings</a></li>
+>>>>>>> 63ef1629fcb4798a2d2d2c623c9a5a7cb7839b9e
                                         <li class="nav-item">
                                             <form action="{{ route('logout') }}" method="POST">
                                                 @csrf
@@ -220,6 +304,7 @@
             </div>
         </div>
     </header>
+<<<<<<< HEAD
     <section id="common_banner">
         <div class="container">
             <div class="row">
@@ -237,8 +322,39 @@
                     </div>
                 </div>
             </div>
+=======
+ <section id="common_banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="common_bannner_text">
+          <p class="text-light"><b class="banner-text">Last Chance Ticket is a ticket reselling marketplace and not the primary ticket provider. Our website enables sellers to resell tickets, which may be priced above or below face value.</b></p>
+
+            <h2><b style="font-size:23px" class="banner-text">{{$events->event_name}}</b></h2>
+              <p class="text-light"><b class="banner-text">{{$events->title }}</b></p>
+          <ul>
+            <li><a href="{{URL('/')}}">Home</a></li>
+            <li><span><i class="fas fa-circle"></i></span>Browse Events</li>
+          </ul>
+>>>>>>> 63ef1629fcb4798a2d2d2c623c9a5a7cb7839b9e
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .banner-text {
+    text-shadow: 2px 2px #000000;
+  }
+
+  @media (min-width: 541px) {
+    .banner-text {
+      font-size: 18px;
+    }
+  }
+</style>
+
 
     <!-- Form Area -->
     <section id="theme_search_form_tour" class="fligth_top_search_main_form_wrapper">
@@ -650,6 +766,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="left_side_search_area">
+<<<<<<< HEAD
                         <div class="card mb-3 shadow-sm br-10">
                             <div class="card-body shadow-sm">
                                 <img src="{{ asset('uploads/venues').'/'.$events->vImage }}" class="img-fluid" alt="">
@@ -680,6 +797,35 @@
                                             </div>
                                         </form>
                                     </div>
+=======
+                            <div class="card mb-3 shadow-sm br-10">
+                                <div class="card-body shadow-sm">
+                                    <img src="{{ asset('uploads/venues').'/'.$events->vImage }}" class="img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div  class="card mb-3 shadow-sm br-10">
+                                <div class="card-body shadow-sm" >
+                                    <h5 class="mb-3">Filter By Category</h5>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <form method="get" id="qty-form">
+                                                    <div class="form-group">
+                                                          <select class="form-select form-control-lg"  name="Cat_filter"  onchange="this.form.submit()">
+                                                              <option selected disabled>SEARCH BY CATEGORY</option>
+                                                              <option value=""  @if(request()->get('Cat_filter') && request()->get('Cat_filter')) 
+                                                                selected @endif  >  <a href="{{URL::current()}}"style=" margin-right:20px; text-decoration:none">All Tickets</a></option>
+                                                                @foreach ($categoriesFromTicketListing as $all)
+                                                                    <option value="{{$all->type_cat}}"
+                                                                        @if(request()->get('Cat_filter') && request()->get('Cat_filter') == $all->type_cat) 
+                                                                        selected @endif
+                                                                        >{{$all->type_cat}}</option></a>
+                                                                @endforeach
+                                                          </select>
+                                                    </div>
+                                                  </form>
+                                             </div>
+                                        </div>
+>>>>>>> 63ef1629fcb4798a2d2d2c623c9a5a7cb7839b9e
                                 </div>
                             </div>
                         </div>
@@ -777,6 +923,7 @@
                                                                                 font-family: 'Poppins', sans-serif;
                                                                                 margin-bottom: 0;
                                                                                 font-size: 11px;
+<<<<<<< HEAD
                                                                                 line-height: 18px;">Row:</span>
                                                         {{$ticket->type_row}}</h6>
                                                     @endif
@@ -823,6 +970,50 @@
                                             Ticket Detail</a> --}}
                                         @if($ticket->quantity != 0)
                                         <?php
+=======
+                                                                                line-height: 18px;">Row:</span> {{$ticket->type_row}}</h6>
+                                                                        @endif
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                <div class="flight_search_middel">
+                                                                    <div class="flight_search_destination" >
+                                                                        <p>Tickets</p>
+                                                                        <h6>No of Tickets {{$ticket->quantity}}</h6>
+                                                                        @if ($ticket->ticket_benefits !== "[null]")
+                                                                        <p class="m-0 benefits">Benefits</p>
+                                                                        <h6 class="fw-700 benefits2">
+                                                                            {{implode(' ', json_decode($ticket->ticket_benefits))}}
+                                                                        </h6> 
+                                                                        @endif
+                                                                        <p class="m-0">Restriction</p>
+                                                                        <h6>{{implode(' ', json_decode($ticket->ticket_restrictions, true))}}</h6> 
+                                                                        <!--<h6 class="fw-700 ">{{$ticket->ticket_restrictions}}</h6>-->
+                                                                    
+                                                                    </div>
+                                                                    <div class="flight_search_destination">
+                                                                        <p class="type pt-3">Ticket-Type : </p>
+                                                                        <h6 class="type2">{{$ticket->ticket_type}}</h6>
+                                                                        {{-- <p>Seating Area</p>
+                                                                        <h6 class="fw-700 ">{{$ticket->seated_area}}</h6> --}}
+                                                                         @if($ticket->eTitle == "Football" || $ticket->eTitle == "Cricket")
+                                                                            <h6 class="fw-700  d-none-mobile">
+                                                                                <p class="m-0">Fans Section</p>
+                                                                                {{$ticket->fan_section}}
+                                                                            </h6>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight_search_right">
+                                                                {{-- <h2 style="font-size: 20px"><b>${{$ticket->price}}</b></h2>
+                                                                <h2><sup style="font-size: 8px">Per Ticket</sup></h2> --}}
+                                                            <h2 ><b>${{$ticket->price}}</b></h2>
+                                                            {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.detail',['eventlisting_id' => $events->id,'ticketid' => $ticket->id, 'sellerid' => $ticket->user_id]) }}">View Ticket Detail</a> --}}
+                                                            @if($ticket->quantity != 0)
+    <?php
+>>>>>>> 63ef1629fcb4798a2d2d2c623c9a5a7cb7839b9e
         $route = route('buyer.ticket.checkout', [
             'eventlisting_id' => $ticket->eventlisting_id,
             'ticketid' => $ticket->id,
@@ -865,8 +1056,12 @@
             </div>
         </div>
     </section>
+<<<<<<< HEAD
 
     @include('auth.partials.footer')
+=======
+@include('auth.partials.footer')
+>>>>>>> 63ef1629fcb4798a2d2d2c623c9a5a7cb7839b9e
     {{-- @include("auth.partials.footer") --}}
     {{-- <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"

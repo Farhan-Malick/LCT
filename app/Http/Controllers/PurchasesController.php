@@ -524,7 +524,7 @@ try{
             ->get();
         // dd($events);
 
-        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name', 'categories.id as cat_id', 'events.title as eTitle')
+        $tickets = TicketListing::select('ticket_listings.*', 'event_listings.event_name','event_listings.event_date', 'categories.id as cat_id', 'events.title as eTitle')
             ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
             ->join('categories', 'categories.id', '=', 'events.category_id')
@@ -532,6 +532,10 @@ try{
             ->orderBy('price', 'asc')
             ->where('approve', '1')
             ->where('ticket_listings.eventlisting_id', $id);
+
+            $tickets2 = TicketListing::select('ticket_listings.*','event_listings.event_date')
+            ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
+            ->where('ticket_listings.eventlisting_id', $id)->first();
 
         $categoriesFromTicketListing = TicketListing::select('ticket_listings.type_cat')
             ->groupBy('type_cat')
@@ -631,7 +635,7 @@ try{
         // dd($tickets);
 
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
-        return view('payment-tickets/browse-ticket', compact('selectedQuantity','ticketsNoFilter', 'Footerevents', 'FooterEventListing', 'events', 'tickets', 'eventListings', 'categoriesFromTicketListing', 'colors'));
+        return view('payment-tickets/browse-ticket', compact('tickets2','selectedQuantity','ticketsNoFilter', 'Footerevents', 'FooterEventListing', 'events', 'tickets', 'eventListings', 'categoriesFromTicketListing', 'colors'));
     }
 
     public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid)

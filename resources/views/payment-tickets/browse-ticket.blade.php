@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/bootstrap.min.css') }}" />
     <!-- animate css -->
     <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/animate.min.css') }}" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Fontawesome css -->
     <!--<link rel="stylesheet" href="{{ asset('F_Assets/assets/css/fontawesome.all.min.css') }}" />-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -223,6 +225,120 @@
     <section id="common_banner">
         <div class="container">
             <div class="row">
+
+                {{-- marquee --}}
+                <div id="marquee-container"></div>
+                <style>
+                    #marquee-container {
+                        width: 100%;
+                        height: 50px;
+                        overflow: hidden;
+                    }
+
+                    #marquee {
+                        white-space: nowrap;
+                        display: inline-block;
+                        transition: transform 0.5s ease;
+                        /* Add transition property with duration and easing function */
+                    }
+
+                    #marquee:hover {
+                        animation-play-state: paused;
+                        transform: translateX(0%);
+                        /* Add this line to reset the transform on hover */
+                    }
+
+                    @media (max-width: 1920px) {
+                        #marquee {
+                            white-space: nowrap;
+                            display: inline-block;
+                            animation: marquee 11.5s linear infinite;
+                        }
+                    }
+
+                    @keyframes marquee-web {
+                        0% {
+                            transform: translateX(100%);
+                        }
+
+                        100% {
+                            transform: translateX(-100%);
+                        }
+                    }
+
+                    @keyframes marquee-mobile {
+                        0% {
+                            transform: translateX(100%);
+                        }
+
+                        100% {
+                            transform: translateX(-100%);
+                        }
+                    }
+
+                    /* Media query for mobile devices with max-width of 767px */
+                    @media (max-width: 540px) {
+                        #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
+                            font-size: 13px;
+                            color: #58e6f3;
+                            text-shadow: 2px 2px #000000;
+                        }
+
+                        #hia {
+                            font-size: 14px;
+                        }
+                    }
+
+                    @media (max-width: 428px) {
+
+                        #marquee {
+                            white-space: nowrap;
+                            display: inline-block;
+                            transition: transform 0.5s ease;
+                            /* Add transition property with duration and easing function */
+                        }
+
+                        #marquee:hover {
+                            animation-play-state: paused;
+                            transform: translateX(0%);
+                            /* Add this line to reset the transform on hover */
+                        }
+                    }
+
+                    @media (max-width: 767px) {
+                        #marquee {
+                            animation: marquee-mobile 30s linear infinite;
+                        }
+                    }
+
+                    @media (max-width: 1920px) {
+                        #marquee {
+                            animation: marquee-web 20s linear infinite;
+                        }
+                    }
+
+                    @media (max-width: 1366px) {
+                        #marquee {
+                            animation: marquee-web 13.5s linear infinite;
+                        }
+                    }
+                </style>
+
+                <script>
+                    const marqueeContainer = document.getElementById('marquee-container');
+                  const marquee = document.createElement('div');
+                  marquee.id = 'marquee';
+                
+                  const h2 = document.createElement('h2');
+                  h2.id = 'textofMarquee';
+                  h2.style.color = '#ebd6f9';
+                  h2.style.textShadow = '2px 2px #040009';
+                  h2.innerHTML = '<b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customer <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support. </b>';
+                  marquee.appendChild(h2);
+                  marqueeContainer.appendChild(marquee);
+                </script>
+
+                {{-- end of marquee section --}}
                 <div class="col-lg-12">
                     <div class="common_bannner_text">
                         <p class="text-light"><b class="banner-text">Last Chance Ticket is a ticket reselling
@@ -670,6 +786,53 @@
                                 <img src="{{ asset('uploads/venues').'/'.$events->vImage }}" class="img-fluid" alt="">
                             </div>
                         </div>
+                        <div class="mb-2">
+                            <i class="fa-solid fa-eye" style="color: blue; font-size: 18px;"></i>
+                            <span id="viewerCount" style="font-weight: bold; "></span> looking Now
+                        </div>
+
+
+
+                        <script>
+                            // Function to update the viewer count
+                            function updateViewerCount() {
+                                var viewers;
+                                
+                                // Check if it's before 4 days of the event
+                                var currentDate = new Date();
+                                var eventDate = new Date("{{ $tickets2->event_date }}"); // Replace with your event date variable
+                                var timeDifference = eventDate.getTime() - currentDate.getTime();
+                                var daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
+                        
+                                // Check if it's during the night of the event
+                                var currentHour = currentDate.getHours();
+                                var eventHour = eventDate.getHours();
+                                var isNight = currentHour >= eventHour && currentHour < eventHour + 8; // Assumes 8 hours as the duration of the night
+                                
+                                if (daysDifference <= 4) {
+                                    if (isNight) {
+                                        // Generate a random number of viewers between 50 and 100
+                                        viewers = Math.floor(Math.random() * 51) + 50;
+                                    } else {
+                                        // Generate a random number of viewers between 125 and 300
+                                        viewers = Math.floor(Math.random() * 176) + 125;
+                                    }
+                                } else {
+                                    // Generate a random number of viewers between 50 and 125
+                                    viewers = Math.floor(Math.random() * 76) + 50;
+                                }
+                        
+                                // Update the viewer count element with the new count
+                                document.getElementById("viewerCount").innerHTML = viewers + " viewers";
+                            }
+                        
+                            // Initial update
+                            updateViewerCount();
+                        
+                            // Update the viewer count every 1 second (1000 milliseconds)
+                            setInterval(updateViewerCount, 1000);
+                        </script>
+
                         <div class="card mb-3 shadow-sm br-10">
                             <div class="card-body shadow-sm">
                                 <h5 class="mb-3">Filter By Category</h5>

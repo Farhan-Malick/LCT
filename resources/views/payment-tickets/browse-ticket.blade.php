@@ -456,7 +456,7 @@
                                                                             <option selected disabled>Filter by
                                                                                 Restrictions</option>
 
-                                                    @foreach ($restrictionsFromTicketListing as $all)
+                                                    @foreach($restrictions as $all)
                                                     <option
                                                         value="{{$all->ticket_restrictions}}"
                                                         @if(request()->get('Restriction_filter')

@@ -456,18 +456,18 @@
                                                                             <option selected disabled>Filter by
                                                                                 Restrictions</option>
 
-                                                    @foreach($restrictions as $all)
-                                                    <option
-                                                        value="{{$all->ticket_restrictions}}"
-                                                        @if(request()->get('Restriction_filter')
-                                                        && request()->get('Restriction_filter')
-                                                        == $all->ticket_restrictions)
-                                                        selected @endif
-                                                        >{{implode(' ',
-                                                        json_decode($all->ticket_restrictions,
-                                                        true))}}</option>
+                                                                            @foreach($restrictions as $all)
+                                                                            <option
+                                                                                value="{{$all->ticket_restrictions}}"
+                                                                                @if(request()->get('Restriction_filter')
+                                                                                && request()->get('Restriction_filter')
+                                                                                == $all->ticket_restrictions)
+                                                                                selected @endif
+                                                                                >{{implode(' ',
+                                                                                json_decode($all->ticket_restrictions,
+                                                                                true))}}</option>
 
-                                                    @endforeach
+                                                                            @endforeach
                                                                             <option value="" @if(request()->
                                                                                 get('Restriction_filter') &&
                                                                                 request()->get('Restriction_filter') ==
@@ -547,7 +547,7 @@
                                                                         <div
                                                                             class="col-sm-3 col-md-3 col-lg-3 mt-3 mt-3">
                                                                             <div class="cardNew btn_theme btn_md mb-3">
-                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm "
+                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm"
                                                                                     style="@if(request()->get('qty') == 1 ) <?php echo 'background-color: #2B2540' ?> @endif"
                                                                                     data-tickets-val="1">
                                                                                     <h4 class="text-white">1</h4>
@@ -556,7 +556,7 @@
                                                                         </div>
                                                                         <div class="col-sm-3 col-md-3 col-lg-3 mt-3">
                                                                             <div class="cardNew btn_theme btn_md mb-3">
-                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm "
+                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm"
                                                                                     style="@if(request()->get('qty') == 2 ) <?php echo 'background-color: #2B2540' ?> @endif"
                                                                                     data-tickets-val="2">
                                                                                     <h4 class="text-white">2</h4>
@@ -566,7 +566,7 @@
                                                                         <div class="col-sm-3 col-md-3 col-lg-3 mt-3">
                                                                             <div class="cardNew btn_theme btn_md mb-3">
                                                                                 <div id="button1"
-                                                                                    class="text-center card-body ticket-num-card cursor-pointer shadow-sm "
+                                                                                    class="text-center card-body ticket-num-card cursor-pointer shadow-sm"
                                                                                     style="@if(request()->get('qty') == 3 ) <?php echo 'background-color: #2B2540' ?> @endif"
                                                                                     data-tickets-val="3">
                                                                                     <h4 class="text-white">3</h4>
@@ -575,7 +575,7 @@
                                                                         </div>
                                                                         <div class="col-sm-3 col-md-3 col-lg-3 mt-3">
                                                                             <div class="cardNew btn_theme btn_md mb-3">
-                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm "
+                                                                                <div class="text-center card-body ticket-num-card cursor-pointer shadow-sm"
                                                                                     style="@if(request()->get('qty') == 4 ) <?php echo 'background-color: #2B2540' ?> @endif"
                                                                                     data-tickets-val="4">
                                                                                     <h4 class="text-white">4</h4>
@@ -583,7 +583,16 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+
                                                                 </form>
+
+                                                                <style>
+                                                                    @media only screen and (max-width: 575px) {
+                                                                        .select-ticket .col-sm-3 {
+                                                                            width: 25%;
+                                                                        }
+                                                                    }
+                                                                </style>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-2">

@@ -635,7 +635,7 @@ try{
         // dd($tickets);
 
         // $tickets = TicketListing::where('eventlisting_id',$id)->get();
-        return view('payment-tickets/browse-ticket', compact('restrictionsg','tickets2','selectedQuantity','ticketsNoFilter', 'Footerevents', 'FooterEventListing', 'events', 'tickets', 'eventListings', 'categoriesFromTicketListing', 'colors'));
+        return view('payment-tickets/browse-ticket', compact('restrictions','tickets2','selectedQuantity','ticketsNoFilter', 'Footerevents', 'FooterEventListing', 'events', 'tickets', 'eventListings', 'categoriesFromTicketListing', 'colors'));
     }
 
     public function buyer_ticket_create(Request $request, $eventlisting_id, $ticketid, $sellerid)

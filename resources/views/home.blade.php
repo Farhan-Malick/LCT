@@ -30,14 +30,14 @@
     #search_list {
       position:absolute; z-index:1; width:76.5%;
       }
-    }   
-    
-  
+    }
+
+
     @media (max-width: 1200px) {
     #search_list {
       position:absolute; z-index:1; width:76.5%;
       }
-      
+
     }
     /* @keyframes slide {
   from { left: 100%;}
@@ -153,10 +153,10 @@
               <div class="container">
                   <h4 id="hia"style="" class="mb-5 mt-5 text-light" ><b style="padding-top:100px; text-shadow: 2px 2px #000000;">Last Chance Ticket is a ticket reselling marketplace and not the primary ticket provider. Our website enables sellers to resell tickets, which may be priced above or below face value.</b></h4>
                 <h1 class="mb-5 " style="margin-bottom: 100px"><b>Here is the last chance to be a member of world’s leading ticket marketplace for live events around the globe</b></h1>
-               
+
                 <div id="marquee-container"></div>
                 <style>
-                
+
                   #marquee-container {
                     width: 100%;
                     height: 50px;
@@ -167,7 +167,7 @@
                     display: inline-block;
                      transition: transform 0.5s ease; /* Add transition property with duration and easing function */
                     }
-                    
+
                     #marquee:hover {
                       animation-play-state: paused;
                       transform: translateX(0%); /* Add this line to reset the transform on hover */
@@ -187,7 +187,7 @@
                           transform: translateX(-100%);
                         }
                       }
-                    
+
                       @keyframes marquee-mobile {
                         0% {
                           transform: translateX(100%);
@@ -199,20 +199,20 @@
                    /* Media query for mobile devices with max-width of 767px */
                    @media (max-width: 540px) {
                       #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
-                              font-size: 13px; color: #58e6f3; text-shadow: 2px 2px #000000; 
+                              font-size: 13px; color: #58e6f3; text-shadow: 2px 2px #000000;
                             }
                             #hia{
                                 font-size: 14px ;
                             }
                     }
                       @media (max-width: 428px) {
-                   
+
                      #marquee {
                     white-space: nowrap;
                     display: inline-block;
                      transition: transform 0.5s ease; /* Add transition property with duration and easing function */
                     }
-                    
+
                     #marquee:hover {
                       animation-play-state: paused;
                       transform: translateX(0%); /* Add this line to reset the transform on hover */
@@ -234,12 +234,12 @@
                     }
                   }
                 </style>
-                
+
                 <script>
                   const marqueeContainer = document.getElementById('marquee-container');
                   const marquee = document.createElement('div');
                   marquee.id = 'marquee';
-                
+
                   const h2 = document.createElement('h2');
                   h2.id = 'textofMarquee';
                   h2.style.color = '#ebd6f9';
@@ -251,7 +251,7 @@
                   {{-- <marquee scrollamount="10" behavior="scroll" direction="left">
                     <h2 id="textofMarquee" class="" style="color: #ebd6f9; text-shadow: 2px 2px #040009;"><b>Hurray! You are in the right place  <span class="" style="color: #f3589e; text-shadow: 2px 2px #000000;">*  100% customer satisfaction  *</span>  We value every customers <span  style="color: #f3589e; text-shadow: 2px 2px #000000;" class="">* We guarantee your entry *</span> 24/7 Customer Support</b> </h2>
                   </marquee> --}}
-                
+
                  <div class="container searchPad">
                       <form method="get" id="qty-form">
                         <div class="row height d-flex justify-content-center align-items-center">
@@ -260,18 +260,18 @@
                               <i class="fa fa-search"></i>
                               <input type="text" onclick="mySearchFunction()" href="" name="search_text" id="search_text" class="form-control" placeholder="Search For An Event Here">
                               <button class="btn btn-primary">Search </button>
-                            
+
                             </div>
                           </div>
                         </div>
-                        
+
                         <div class="row height d-flex justify-content-center align-items-center">
                           <div class="col-md-10">
                             <div  id="search_list" style=""></div>
                           </div>
                         </div>
                       </form>
-                      
+
                   </div>
                   <script>
                     function mySearchFunction() {
@@ -298,7 +298,7 @@
       padding-bottom: 140px;
     }
   }
-  
+
   @media (min-width: 541px) {
     .searchPadd {
       padding-bottom: 86px;
@@ -361,7 +361,7 @@
   </section>
   <!-- ***** Main Banner Area End ***** -->
   <style>
-    
+
       .theme_search_form_area {
           background: #f7f4f4;
           box-shadow: 4px 14px 28px rgba(0, 0, 0, 0.1);
@@ -491,7 +491,7 @@
   <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
   <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/owl-carousel.js')}}"></script>

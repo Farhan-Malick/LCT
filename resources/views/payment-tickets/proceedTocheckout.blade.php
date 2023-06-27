@@ -166,7 +166,7 @@
                                <div class="order-text">Total Tickets Price</div>
                                <div class="order-number">${{$ticketPrice ?? ''}}</div>
                             </div>
-                            
+
                              <div class="order-total-dt">
                                <div class="order-text">Shipping and Handling Fee</div>
                                @if ($tickets->ticket_type === "Paper-Ticket")
@@ -189,16 +189,16 @@
                     </div>
                  </div>
           <div class="col-lg-8 ">
-            
+
              <div class="checkout-block">
                <div class="row">
                   <div class="col-md-12 ">
-                      
+
                       <div class="card" style="padding: 13px;">
                           <div class="panel-heading">
                               <div class="row text-center">
                                   {{-- <h3 class="panel-heading">Payment Details</h3> --}}
-                              </div>                    
+                              </div>
                           </div>
 
                           <div class="card-body">
@@ -215,10 +215,10 @@
                               id="payment-form">
                               @csrf
                               <input type="hidden" name="ticketid" value="{{ $ticket_id }}">
-                              <input type="hidden" name="country_id" value="{{ $country }}"> 
-                              <input type="hidden" name="quantity" value="{{ $quantity }}"> 
-                              <input type="hidden" name="shipingCharges" value="{{ $shipping_charges }}"> 
-                            
+                              <input type="hidden" name="country_id" value="{{ $country }}">
+                              <input type="hidden" name="quantity" value="{{ $quantity }}">
+                              <input type="hidden" name="shipingCharges" value="{{ $shipping_charges }}">
+
                                   <div class='form-row row'>
                                       <div class='col-xs-12 form-group required p-4'>
                                           <label class='control-label'>Name on Card</label> <input
@@ -234,7 +234,7 @@
                                   </div>
                                   <div class='form-row row'>
                                       <div class='col-xs-12 col-md-4 form-group cvc required p-4'>
-                                          <label class='control-label'>CVC</label> 
+                                          <label class='control-label'>CVC</label>
                                           <input autocomplete='off' class='form-control card-cvc h_50' placeholder='e.g 415' size='4'
                                               type='text'>
                                       </div>
@@ -250,7 +250,7 @@
                                       </div>
                                       <div class='col-lg-12 form-group p-4'>
                                           <label class="m-2 "><input style=""class="" type="checkbox" name=""  value="" id="" required>&nbsp; I agree with the LCT Terms & Conditions</label>
-                                        
+
                                       </div>
                                   </div>
                                   <div class='form-row row'>
@@ -264,19 +264,19 @@
                                   </div>
                                   {{-- <button type="submit" class="btn btn-primary">Finish & Check your Ticket</button> --}}
                                   {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.proceedToCheckout',
-                                      ['eventlisting_id' => $tickets->eventlisting_id,'ticketid' => $tickets->id, 'sellerid' => $tickets->user_id]) }}" 
+                                      ['eventlisting_id' => $tickets->eventlisting_id,'ticketid' => $tickets->id, 'sellerid' => $tickets->user_id]) }}"
                                   >
                                      Proceed to checkout
                                   </a> --}}
                               </form>
                           </div>
-                      </div>        
+                      </div>
                   </div>
               </div>
 
              </div>
           </div>
-         
+
        </div>
     </div>
  </div>
@@ -315,7 +315,7 @@ $(function() {
         $errorStatus = $form.find('div.error'),
         valid         = true;
         $errorStatus.addClass('hide');
- 
+
         $('.has-error').removeClass('has-error');
     $inputs.each(function(i, el) {
       var $input = $(el);
@@ -325,7 +325,7 @@ $(function() {
         e.preventDefault();
       }
     });
-  
+
     if (!$form.data('cc-on-file')) {
       e.preventDefault();
       Stripe.setPublishableKey($form.data('stripe-publishable-key'));
@@ -336,9 +336,9 @@ $(function() {
         exp_year: $('.card-expiry-year').val()
       }, stripeHandleResponse);
     }
-  
+
   });
-  
+
   function stripeHandleResponse(status, response) {
         if (response.error) {
             $('.error')
@@ -352,7 +352,7 @@ $(function() {
             $form.get(0).submit();
         }
     }
-  
+
 });
 </script>
 </body>

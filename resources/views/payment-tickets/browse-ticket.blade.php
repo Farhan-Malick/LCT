@@ -328,7 +328,7 @@
                     const marqueeContainer = document.getElementById('marquee-container');
                   const marquee = document.createElement('div');
                   marquee.id = 'marquee';
-                
+
                   const h2 = document.createElement('h2');
                   h2.id = 'textofMarquee';
                   h2.style.color = '#ebd6f9';
@@ -410,11 +410,11 @@
                                                         <div class="row">
 
                                                             <input type="hidden" class="form-control" id="total-tickets"
-                                                                placeholder="Total Tickets" name="qty"
+                                                                name="qty"
                                                                 value="@if(request()->get('qty')) <?= request()->get('qty')?> @endif">
                                                             <div class="col-md-4">
                                                                 <select class="form-control" name="ticket_type"
-                                                                    placeholder="Select Ticket Type"
+
                                                                     onchange="this.form.submit()">
                                                                     <option disabled @if(request()->get('ticket_type')
                                                                         == null)selected @endif>Filter By Ticket Type
@@ -615,7 +615,7 @@
                                                                                 name="search-no-of-tickets"
                                                                                 value="@if(request()->get('search-no-of-tickets')) <?= request()->get('search-no-of-tickets')?> @endif"
                                                                                 class="form-control"
-                                                                                placeholder="Search Ticket Number Here">
+                                                                               >
                                                                             <i class="fa fa-search"></i>
                                                                             <button type="submit" value="Search"
                                                                                 class="btn btn-primary">Search</button>
@@ -691,7 +691,7 @@
                                                                         });
                                                                     });
                                                                     });
-                                                                
+
                                                         </script>
                                                     </div>
                                                 </div>
@@ -804,18 +804,18 @@
                             // Function to update the viewer count
                             function updateViewerCount() {
                                 var viewers;
-                                
+
                                 // Check if it's before 4 days of the event
                                 var currentDate = new Date();
                                 var eventDate = new Date("{{ $tickets2->event_date }}"); // Replace with your event date variable
                                 var timeDifference = eventDate.getTime() - currentDate.getTime();
                                 var daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
-                        
+
                                 // Check if it's during the night of the event
                                 var currentHour = currentDate.getHours();
                                 var eventHour = eventDate.getHours();
                                 var isNight = currentHour >= eventHour && currentHour < eventHour + 8; // Assumes 8 hours as the duration of the night
-                                
+
                                 if (daysDifference <= 4) {
                                     if (isNight) {
                                         // Generate a random number of viewers between 50 and 100
@@ -828,14 +828,14 @@
                                     // Generate a random number of viewers between 50 and 125
                                     viewers = Math.floor(Math.random() * 76) + 50;
                                 }
-                        
+
                                 // Update the viewer count element with the new count
                                 document.getElementById("viewerCount").innerHTML = viewers + " viewers";
                             }
-                        
+
                             // Initial update
                             updateViewerCount();
-                        
+
                             // Update the viewer count every 1 second (1000 milliseconds)
                             setInterval(updateViewerCount, 5000);
                         </script>
@@ -886,60 +886,60 @@
                                 <div class="flight_search_items border text-dark"
                                     style="border-radius: 12px; margin-bottom:20px ;">
                                     <div class="multi_city_flight_lists" style="
-                                                                <?php 
+                                                                <?php
                                                                     foreach ($colors as $key => $dbValues) {
-                                                                        if ($key === 0){ 
+                                                                        if ($key === 0){
                                                                         if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                                 border-left:7px solid red;
                                                                             <?php   }
                                                                         }
-                                                                        if ($key === 1){ 
+                                                                        if ($key === 1){
                                                                         if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                                 border-left:7px solid yellow;
                                                                             <?php   }
                                                                         }
-                                                                        if ($key === 2){ 
+                                                                        if ($key === 2){
                                                                         if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                                 border-left:7px solid blue;
                                                                             <?php   }
                                                                         }
-                                                                        if ($key === 3){ 
+                                                                        if ($key === 3){
                                                                         if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                                 border-left:7px solid green;
                                                                             <?php   }
                                                                         }
-                                                                        if ($key === 4){ 
+                                                                        if ($key === 4){
                                                                         if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                                 border-left:7px solid grey;
                                                                             <?php   }
                                                                         }
-                                                                        if ($key === 5){ 
+                                                                        if ($key === 5){
                                                                         if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                                 border-left:7px solid chartreuse;
                                                                             <?php   }
                                                                         }
-                                                                        if ($key === 6){ 
+                                                                        if ($key === 6){
                                                                         if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                                 border-left:7px solid tomato;
                                                                             <?php   }
                                                                         }
-                                                                        if ($key === 7){ 
+                                                                        if ($key === 7){
                                                                         if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                                 border-left:7px solid salmon;
                                                                             <?php   }
                                                                         }
-                                                                        if ($key === 8){ 
+                                                                        if ($key === 8){
                                                                         if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                                 border-left:7px solid crimson;
                                                                             <?php   }
                                                                         }
-                                                                        if ($key === 9){ 
+                                                                        if ($key === 9){
                                                                         if ($dbValues->type_cat === $ticket->type_cat) {  ?>
                                                                                 border-left:7px solid darkgoldenrod;
                                                                             <?php   }
                                                                         }
                                                                     }
-                                                                    
+
                                                                 ?>
                                                             ">
                                         <div class="flight_multis_area_wrapper">
@@ -955,8 +955,8 @@
                                                     <p>Section: </p>
                                                     <h6>{{$ticket->type_sec}}</h6>
                                                     @if ($ticket->type_row !== null)
-                                                    <h6> <span style="      font-size: 16px; 
-                                                                                line-height: 28px; 
+                                                    <h6> <span style="      font-size: 16px;
+                                                                                line-height: 28px;
                                                                                 color: var(--paragraph-color);
                                                                                 font-weight: 400;
                                                                                 font-family: 'Poppins', sans-serif;
@@ -1099,11 +1099,11 @@
                     const value =event.currentTarget.attributes['data-tickets-val'].value;
                     document.getElementById('total-tickets').value = value;
                     document.getElementById('qty-form').submit();
-                    
+
                 });
             });
         });
-        
+
         $(document).ready(function(){
         //   $(".cardNew > div").click(function(){
         //     $(this).addcss('background', '#2B2540')
@@ -1113,7 +1113,7 @@
             $(this).css("background-color", "#2B2540");
         });
         });
-        
+
         // $(function() {
         //   $('.button').on('click', function() {
         //     $('.button').removeClass('active'); // reset *all* buttons to the default state

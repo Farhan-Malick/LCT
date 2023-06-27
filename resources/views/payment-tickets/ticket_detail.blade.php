@@ -22,7 +22,7 @@
         <!-- Style css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/style.css') }}" />
         <!-- Responsive css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/responsive.css') }}" />
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="assets/img/favicon.png">
+        {{-- <link rel="icon" type="image/png" href="assets/img/favicon.png"> --}}
         <!-- Bootstrap icons CDN -->
         <link
             rel="stylesheet"
@@ -73,13 +73,13 @@
                 }
         </style>
         <title>Last Chance Ticket - Buyer</title>
-       
+
     </head>
 
 <body>
     <header class="main_header_arae">
         <!-- Top Bar -->
-       
+
         <!-- Navbar Bar -->
         <div class="navbar-area">
             <div class="main-responsive-nav">
@@ -101,7 +101,7 @@
                         </a>
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
-                              
+
                                 <li class="nav-item">
                                     <a
                                     class="nav-link"
@@ -127,12 +127,12 @@
                                             >
                                                 @csrf
                                                 <button type="submit" class="btn btn-link">Logout</button>
-        
+
                                             </form>
                                         </li>
                                     </ul>
                                 </li>
-        
+
                                 @endauth @guest
                                 <li class="nav-item">
                                     <a
@@ -310,7 +310,7 @@
             </div>
         </div>
     </section>
-    
+
 
 
 <section class="section-five mt-5">
@@ -431,26 +431,26 @@
     <script src="{{asset('newAssets/assets/js/custom.js')}}"></script> --}}
 
     <script src="{{asset('F_Assets/assets/js/jquery-3.6.0.min.js')}}"></script>
-    
+
     <!-- Bootstrap js -->
     <script src="{{asset('F_Assets/assets/js/bootstrap.bundle.js')}}"></script>
-    
+
     <!-- Meanu js -->
     <script src="{{asset('F_Assets/assets/js/jquery.meanmenu.js')}}"></script>
-    
-   
+
+
     <!-- owl carousel js -->
     <script src="{{asset('F_Assets/assets/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('F_Assets/assets/js/slick.min.js')}}"></script>
     <script src="{{asset('F_Assets/assets/js/slick-slider.js')}}"></script>
     <!-- wow.js -->
     <script src="{{asset('F_Assets/assets/js/wow.min.js')}}"></script>
-    
+
     <!-- Custom js -->
     <script src="{{asset('F_Assets/assets/js/custom.js')}}"></script>
-    
+
     <script src="{{asset('F_Assets/assets/js/add-form.js')}}"></script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 

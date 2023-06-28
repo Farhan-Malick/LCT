@@ -35,7 +35,7 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/responsive.css') }}" />
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    {{-- <link rel="icon" type="image/png" href="assets/img/favicon.png"> --}}
     <!-- Bootstrap icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">

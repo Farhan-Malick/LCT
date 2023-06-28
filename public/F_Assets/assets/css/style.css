@@ -46,7 +46,7 @@ This files table contents are outlined below>>>>>
 36. tour-search Page
 37. verify-otp Page
 38. wallet Page
-39. Footer 
+39. Footer
 40. Preloader
 
 
@@ -106,11 +106,11 @@ body {
 /*  .ticket img {*/
 /*    width: 50%;*/
 /*  }*/
-  
+
 /*  @media (max-width: 540px) {*/
 /*    .ticket img {*/
 /*         display: block;*/
-         
+
 /*      }*/
 /*}*/
 @media (min-width: 1366px) and (max-width: 3000px) {
@@ -1331,7 +1331,7 @@ section {
 }
 
 /* --Footer Area-- */
-    
+
     .footer {
 
     background-color: #22b3c1;
@@ -1625,74 +1625,7 @@ section {
     padding-top: 6px;
 }
 
-/* --Partner Aarea-- */
-.partner_area_bg {
-    background-image: url('../img/common/video_bg.png');
-    padding: 70px 0;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 
-.partner_area_left {
-    padding-left: 115px;
-}
-
-.partner_area_left h5 {
-    color: var(--main-color);
-    font-weight: 500;
-}
-
-.partner_area_left h2 {
-    padding-top: 15px;
-    line-height: 45px;
-}
-
-.partner_area_left p {
-    padding-top: 10px;
-}
-
-.partner_video_area {
-    padding-top: 35px;
-    padding-left: 30px;
-}
-
-.video_play_area i {
-    color: var(--white-color);
-    position: relative;
-    z-index: 99;
-    font-size: 18px;
-}
-
-
-.video_play_area:before {
-    content: "";
-    position: absolute;
-    z-index: 0;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    display: block;
-    width: 50px;
-    height: 50px;
-    background: var(--main-color);
-    border-radius: 50%;
-    animation: pulse-border 1500ms ease-out infinite;
-}
-
-.video_play_area:after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    display: block;
-    width: 50px;
-    height: 50px;
-    background: var(--main-color);
-    border-radius: 50%;
-    transition: all 200ms;
-}
 
 @keyframes pulse-border {
     0% {
@@ -1973,7 +1906,7 @@ section {
     font-weight: 500;
 }
 /* --We Offer-- */
-#three_We_area{
+/* #three_We_area{
     background-image: url('../img/common/bg.png');
 }
 .we_offer_area_three h2{
@@ -2010,7 +1943,7 @@ font-weight: 500;
     right: 0;
     top: -50px;
 }
-#three_We_area .owl-carousel .owl-nav button.owl-next, 
+#three_We_area .owl-carousel .owl-nav button.owl-next,
 #three_We_area .owl-carousel .owl-nav button.owl-prev {
     background: var(--black-color);
     color: var(--white-color);
@@ -2020,11 +1953,11 @@ font-weight: 500;
     height: 40px;
     border-radius: 50%;
 }
-#three_We_area .owl-carousel .owl-nav button.owl-next:hover, 
+#three_We_area .owl-carousel .owl-nav button.owl-next:hover,
 #three_We_area .owl-carousel .owl-nav button.owl-prev:hover {
     background: var(--main-color);
     color: var(--white-color);
-}
+} */
 
 /* --Trending Tour Area-- */
 .arrow_style.owl-theme .owl-nav{
@@ -2034,7 +1967,7 @@ font-weight: 500;
     top: 50%;
     transform: translateY(-50%);
 }
-.arrow_style.owl-carousel .owl-nav button.owl-next, 
+.arrow_style.owl-carousel .owl-nav button.owl-next,
 .arrow_style.owl-carousel .owl-nav button.owl-prev {
     position: absolute;
     background: var(--black-color);
@@ -2045,7 +1978,7 @@ font-weight: 500;
     height: 40px;
     border-radius: 50%;
 }
-.arrow_style.owl-carousel .owl-nav button.owl-next:hover, 
+.arrow_style.owl-carousel .owl-nav button.owl-next:hover,
 .arrow_style.owl-carousel .owl-nav button.owl-prev:hover{
     background: var(--main-color);
     color: var(--white-color);
@@ -2228,7 +2161,7 @@ font-weight: 500;
     padding: 130px 0 130px 0;
     background-repeat: no-repeat;
     background-size: cover;
-}   
+}
 
 .common_bannner_text {
     text-align: center;
@@ -3181,26 +3114,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .about_offer_banner {
     height: 400px;
-}
-
-#consultation_area {
-    background-image: url('../img/common/counter_bg.png');
-    padding: 150px 0 220px 0;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.consultation_area_text {
-    text-align: center;
-}
-
-.consultation_area_text h2 {
-    color: var(--white-color);
-}
-
-.consultation_area_text p {
-    color: var(--white-color);
-    padding-top: 20px;
 }
 
 .counter_area_wrapper {
@@ -4448,7 +4361,7 @@ textarea {
 
 .flight_search_items {
     /* border-color: #22b3c1; */
-   
+
     background: #F3EFF9;
     display: flex;
     justify-content: space-between;
@@ -4466,7 +4379,7 @@ textarea {
 }
 
 .flight_search_middel {
-   
+
     display: flex;
     align-items: center;
     padding-left: 47px;

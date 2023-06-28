@@ -319,6 +319,9 @@
                 <p align="justify">Whether you're a seasoned ticket buyer or seller, or new to the ticket marketplace, LCT is here to help. We
                     are dedicated to providing a seamless ticket buying and selling experience, and look forward to serving
                     you.</p>
+                    <p><b>Email : </b>info@lastchanceticket.com</p>
+                    <p><b>Address : </b>30 N Gould St Ste R Sheridan, Wyoming 82801, United States</p>
+                    <p><b>Contact Us : </b>+1 276 329 3991</p>
 
            </div>
         </div>

@@ -447,11 +447,11 @@
                         <option  name="country" >Yemen</option>
                         <option  name="country" >Zambia</option>
                     <option  name="country" >Zimbabwe</option>
-                     
+
                 </select>
               </fieldset>
           </div>
-            
+
             <div class="col-lg-12">
               <fieldset>
                   <label class="text-dark text-center" for="InputLocation">URL</label>
@@ -463,7 +463,7 @@
                       />
               </fieldset>
           </div>
-              <div class="col-lg-12">                        
+              <div class="col-lg-12">
                   <fieldset>
                       <button type="submit" class="main-button">Create Your Event Request Now</button>
                   </fieldset>
@@ -486,7 +486,7 @@
 
   <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/owl-carousel.js')}}"></script>
-  <script src="{{asset('newAssets/assets/js/wow.js')}}"></script>
+  {{-- <script src="{{asset('newAssets/assets/js/wow.js')}}"></script> --}}
   <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
@@ -494,7 +494,7 @@
   <script>
     $(".option").click(function(){
       $(".option").removeClass("active");
-      $(this).addClass("active"); 
+      $(this).addClass("active");
     });
   </script>
 

@@ -109,7 +109,7 @@
                             </div>
                            <div class="row">
                             <?php
-                                      $catClasses = ['btn-danger', 'btn-success', 'btn-warning', 'btn-primary','btn-secondary'];    
+                                      $catClasses = ['btn-danger', 'btn-success', 'btn-warning', 'btn-primary','btn-secondary'];
                             ?>
                             @foreach ($categories as $cat)
                             <?php $key = array_rand($catClasses); ?>
@@ -117,7 +117,7 @@
                                     <a href="{{ route("tickets.category", ['id'=>$cat->id]) }}" class="btn btn-sm <?= $catClasses[$key] ?> w-100">{{ $cat->name }}</a>
                                 </div>
                             @endforeach
-                            
+
                             {{-- <div class="col-sm-6 col-xl-3 my-3">
                                 <a href="{{ route("tickets") }}" class="d-block btn btn-sm  w-100">Sports Tickets</a>
                             </div>
@@ -179,7 +179,7 @@
                                             {{ $event->title }}
                                         </h6>
                                         <span class="text-danger card-span">
-                                            {{ $event->start_time }} - 
+                                            {{ $event->start_time }} -
                                             {{ $event->start_date }}</span
                                         >
                                         <p class="card-text">
@@ -191,7 +191,7 @@
                         </div>
                         @endforeach
 
-                        
+
                         {{-- <div class="col-md-6 col-lg-3">
                             <a href="{{ URL('/tickets') }}">
                                 <div class="card mb-4">
@@ -345,7 +345,7 @@
                                         type="email"
                                         class="form-control"
                                         id="exampleInputEmail2"
-                                        placeholder="Email Address"
+
                                     />
                                     <small
                                         >Be the first to know about the latest

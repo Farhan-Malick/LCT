@@ -1,6 +1,6 @@
 
 <style>
-    
+
     .footer {
 
     background-color: #22b3c1;
@@ -45,17 +45,21 @@
             <div class="col-md-3 ">
                 <ul style="  ">
                         <h4 class="text-dark mt-3">COMPANY INFO</h4>
-                       
+
                         <li class=" mt-3"> <a type="button" class="text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal3">
                             About Us
-                        </a> 
+                        </a>
                         </li>
                         <li class=" mt-3"> <a href="{{URL('/contact-us')}}" class="text-dark">
                             Contact Us
                         </a> </li>
                         <li class=" mt-3"><a href=""
                                 class="text-dark">Connect</a>
-                        </li> 
+                        </li>
+                        <li class=" mt-3">
+                            <a href="#" class="text-dark">    +1 276 329 3991</a><br>
+                            <a href="#" class="text-dark">30 N Gould St Ste R Sheridan,<br> Wyoming 82801, United States</a>
+                        </li>
                     <div class="__social d-flex mt-3">
                         <li class=""><i class="bi bi-facebook "></i> </li>&nbsp;&nbsp;&nbsp;
                         <li class="pl-4"><i class="bi bi-twitter"></i></li>&nbsp;&nbsp;&nbsp;
@@ -99,7 +103,7 @@
                             <li class="mt-3"><a href="#" class="text-dark">{{$ticket->event_name}}</a>
                         @endif
                     @endforeach
-                   
+
                 </ul>
             </div>
         </div>
@@ -113,7 +117,9 @@
                     <li><a type="button" class="text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Terms & Conditions
                     </a> </li>
-                    <li class="text-dark"> Careers </li>
+                    <li><a type="button" class="text-dark" data-bs-toggle="modal" data-bs-target="#exampleModalDisclaimer">
+                        Disclaimer
+                    </a> </li>
                     <li><a type="button" class="text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                         Privacy Policy
                     </a></li>
@@ -207,8 +213,8 @@
                 full force and effect.
                 </p>
                 <h5> Contact Information </h5>
-                <p align="justify"> 
-                   
+                <p align="justify">
+
                     If you have any questions or concerns about these Terms, please contact us at <a href="#">info@lastchanceticket.com</a>
                 </p>
            </div>
@@ -234,7 +240,7 @@
                 the United States</p>
             <h5>Information Collection and Use </h5>
             <p align="justify">
-                
+
                 LCT collects personal information from our users in order to provide our ticket marketplace services. This
                 personal information may include your name, email address, billing and shipping information, and other
                 information related to your ticket purchases.
@@ -257,7 +263,7 @@
             </p>
             <h5>Cookies </h5>
             <p align="justify">
-                
+
                 LCT uses cookies to store information about your use of our website and services. Cookies are small text
                 files stored on your device that help us provide a more personalized experience. You can choose to disable
                 cookies in your browser, but this may limit your ability to use our website and services.
@@ -270,7 +276,7 @@
                 </p>
             <h5>   International Users</h5>
             <p align="justify">
-              
+
                 LCT is based in the United States and personal information may be transferred to, processed, and stored in
                 the United States. By using our website and services, you consent to the transfer of your personal
                 information to the United States and its storage and processing in accordance with this Privacy Policy.
@@ -281,10 +287,10 @@
                 our website and services after any changes to this Privacy Policy constitutes your acceptance of the revised
                 Privacy Policy.</p>
            <h5> Contact Information</h5>
-            <p align="justify">If you have any questions or concerns about this Privacy Policy, please contact us at 
-                <a href="#">info@lastchanceticket.com</a> 
+            <p align="justify">If you have any questions or concerns about this Privacy Policy, please contact us at
+                <a href="#">info@lastchanceticket.com</a>
             </p>
-            
+
            </div>
         </div>
         <div class="modal-footer">
@@ -313,7 +319,10 @@
                 <p align="justify">Whether you're a seasoned ticket buyer or seller, or new to the ticket marketplace, LCT is here to help. We
                     are dedicated to providing a seamless ticket buying and selling experience, and look forward to serving
                     you.</p>
-                
+                    <p><b>Email : </b>info@lastchanceticket.com</p>
+                    <p><b>Address : </b>30 N Gould St Ste R Sheridan, Wyoming 82801, United States</p>
+                    <p><b>Contact Us : </b>+1 276 329 3991</p>
+
            </div>
         </div>
         <div class="modal-footer">
@@ -336,6 +345,63 @@
                   If you have any questions or concerns about this Privacy Policy, please contact us at
                 <a href="#">info@lastchanceticket.com</a>
                 </p>
+           </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-lg" id="exampleModalDisclaimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel"><span>Last Chance Ticket Disclaimer</span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           <div class="container">
+            <p align="justify">Welcome to Last Chance Ticket LLC's website. By accessing and using this website, you agree to the terms and conditions outlined in this disclaimer. Please read this disclaimer carefully before proceeding. If you do not agree with any part of this disclaimer, please refrain from using this website.
+            </p>
+            <h5>Accuracy of Information </h5>
+            <p align="justify">
+
+                Last Chance Ticket LLC (referred to as "the Company") makes every effort to provide accurate and up-to-date information on this website. However, the Company does not guarantee the accuracy, completeness, reliability, or timeliness of the information presented. The information provided on this website is for general informational purposes only and should not be relied upon for making any financial, legal, or other decisions. Users are advised to seek professional advice or verify information before taking any actions based on the content of this website.
+
+
+            </p>
+            <h5>
+                Ticket Sales </h5>
+            <p align="justify">This website may provide information and services related to ticket sales for various events. The Company does not guarantee the availability of tickets or the accuracy of the ticket pricing, seating arrangements, event schedules, or any other details related to the events. The Company is not responsible for any errors, omissions, or discrepancies regarding ticket availability, pricing, or event information. Users are encouraged to independently verify all details and terms related to ticket purchases before making any transactions.
+
+            </p>
+            <h5>Liability Limitation </h5>
+            <p align="justify">
+                The Company shall not be held liable for any direct, indirect, incidental, consequential, or punitive damages arising out of the use or inability to use this website or the information provided herein. This includes, but is not limited to, damages for loss of profits, business interruption, loss of data, or any other tangible or intangible losses. Users acknowledge that they use this website and its content at their own risk.
+            </p>
+            <h5>External Links </h5>
+            <p align="justify">
+                This website may contain links to external websites or resources that are not owned or controlled by the Company. The Company does not endorse, guarantee, or have control over the content, products, or services offered on these external sites. The inclusion of any external links does not imply endorsement or responsibility by the Company. Users are advised to review the terms and policies of these external sites before engaging with them.
+
+                </p>
+            <h5>  Intellectual Property</h5>
+            <p align="justify">
+
+                All content, including but not limited to text, images, logos, trademarks, and other materials displayed on this website, are the property of the Company or its respective owners. Users are prohibited from using, reproducing, distributing, or modifying any content from this website without prior written permission from the Company.
+
+            </p>
+            <h5> Governing Law and Jurisdiction
+            </h5>
+            <p align="justify">This disclaimer shall be governed by and construed in accordance with the laws of the jurisdiction in which the Company operates. Any legal actions or disputes arising out of the use of this website shall be subject to the exclusive jurisdiction of the courts in that jurisdiction.
+            </p>
+           <h5>By using this website</h5>
+            <p align="justify">you acknowledge that you have read, understood, and agreed to the terms and conditions of this disclaimer. This disclaimer may be updated or modified at any time without prior notice. It is your responsibility to review this disclaimer periodically for any changes. If you continue to use this website after any modifications to this disclaimer, it will signify your acceptance of the updated terms.
+
+            </p>
+            <p align="justify">If you have any questions or concerns regarding this disclaimer, please contact Last Chance Ticket LLC using the contact information provided on the website.
+            </p>
            </div>
         </div>
         <div class="modal-footer">

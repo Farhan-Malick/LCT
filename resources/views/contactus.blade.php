@@ -446,7 +446,7 @@
 
   <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/owl-carousel.js')}}"></script>
-  <script src="{{asset('newAssets/assets/js/wow.js')}}"></script>
+  {{-- <script src="{{asset('newAssets/assets/js/wow.js')}}"></script> --}}
   <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
   <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
@@ -454,7 +454,7 @@
   <script>
     $(".option").click(function(){
       $(".option").removeClass("active");
-      $(this).addClass("active"); 
+      $(this).addClass("active");
     });
   </script>
 

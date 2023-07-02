@@ -1,85 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/bootstrap.min.css') }}" />
-        <!-- animate css -->
-        <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/animate.min.css') }}" />
-        <!-- Fontawesome css -->
-        <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/fontawesome.all.min.css') }}" />
-        {{-- <link rel="stylesheet" href="../../../../../cdn.jsdelivr.net/npm/bootstrap-icons%401.8.2/font/bootstrap-icons.css"> --}}
-        <link rel="stylesheet" type="text/css" href="{{asset('F_Assets/assets/css/slick.min.css')}}" />
-        <!--slick-theme.css-->
-        <link rel="stylesheet" type="text/css" href="{{asset('F_Assets/assets/css/slick-theme.min.css')}}" />
-        <!-- owl.carousel css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/owl.carousel.min.css') }}" />
-        <!-- Rangeslider css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/nouislider.css') }}" />
-        <!-- owl.theme.default css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/owl.theme.default.min.css') }}" />
-        <!-- navber css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/navber.css') }}" />
-        <!-- meanmenu css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/meanmenu.css') }}" />
-        <!-- Style css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/style.css') }}" />
-        <!-- Responsive css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/responsive.css') }}" />
-        <!-- Favicon -->
-        <link rel="icon" type="image/png" href="assets/img/favicon.png">
-        <!-- Bootstrap icons CDN -->
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
-        />
-        <style>
-                            /* section five starts here  */
-                .footer{
-                    /* background-color: #61c3e3; */
-                    background-color: #22b3c1;
 
-                }
-                .footer ul{
-                    padding: 0px;
-                }
-                .footer ul li{
-                    list-style: none;
-                }
-                .footer ul li a{
-                    text-decoration: none;
-                    color: #fff;
-                }
-                .footer a{
-                    color: #fff;
-                }
-                .social-links i{
-                    margin-left: 10px;
-                    font-size: 30px;
-                }
-                .bi-facebook:hover{
-                    color: #3f77f3;
-                }
-                .bi-twitter:hover{
-                    color: #52a2f3;
-                }
-                .bi-google:hover{
-                    color: #e74235;
-                }
-                .footer-btn{
-                    background-color: #fff;
-                    color: grey;
-                }
-                .footer-btn:hover{
-                    color: #61c3e3;
-                }
-                .footer .nav-link{
-                    color: grey;
-                }
-        </style>
-        <title>Last Chance Ticket - Buyer</title>
-       
-    </head>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/bootstrap.min.css') }}" />
+    <!-- animate css -->
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/animate.min.css') }}" />
+    <!-- Fontawesome css -->
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/fontawesome.all.min.css') }}" />
+    {{--
+    <link rel="stylesheet" href="../../../../../cdn.jsdelivr.net/npm/bootstrap-icons%401.8.2/font/bootstrap-icons.css">
+    --}}
+    <link rel="stylesheet" type="text/css" href="{{asset('F_Assets/assets/css/slick.min.css')}}" />
+    <!--slick-theme.css-->
+    <link rel="stylesheet" type="text/css" href="{{asset('F_Assets/assets/css/slick-theme.min.css')}}" />
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/owl.carousel.min.css') }}" />
+    <!-- Rangeslider css -->
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/nouislider.css') }}" />
+    <!-- owl.theme.default css -->
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/owl.theme.default.min.css') }}" />
+    <!-- navber css -->
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/navber.css') }}" />
+    <!-- meanmenu css -->
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/meanmenu.css') }}" />
+    <!-- Style css -->
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/style.css') }}" />
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/responsive.css') }}" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <!-- Bootstrap icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+    <style>
+        /* section five starts here  */
+        .footer {
+            /* background-color: #61c3e3; */
+            background-color: #22b3c1;
+
+        }
+
+        .footer ul {
+            padding: 0px;
+        }
+
+        .footer ul li {
+            list-style: none;
+        }
+
+        .footer ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .footer a {
+            color: #fff;
+        }
+
+        .social-links i {
+            margin-left: 10px;
+            font-size: 30px;
+        }
+
+        .bi-facebook:hover {
+            color: #3f77f3;
+        }
+
+        .bi-twitter:hover {
+            color: #52a2f3;
+        }
+
+        .bi-google:hover {
+            color: #e74235;
+        }
+
+        .footer-btn {
+            background-color: #fff;
+            color: grey;
+        }
+
+        .footer-btn:hover {
+            color: #61c3e3;
+        }
+
+        .footer .nav-link {
+            color: grey;
+        }
+    </style>
+    <title>Last Chance Ticket - Buyer</title>
+
+</head>
 
 <body>
     <header class="main_header_arae">
         <!-- Top Bar -->
-       
+
         <!-- Navbar Bar -->
         <div class="navbar-area">
             <div class="main-responsive-nav">
@@ -101,13 +119,9 @@
                         </a>
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
-                              
+
                                 <li class="nav-item">
-                                    <a
-                                    class="nav-link"
-                                    href="{{ route('request.show') }}"
-                                    >Request_Event</a
-                                >
+                                    <a class="nav-link" href="{{ route('request.show') }}">Request_Event</a>
                                 </li>
                                 @auth
                                 <li class="dropdown nav-item">
@@ -116,43 +130,35 @@
                                         My Account
                                     </a>
                                     <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My Dashboard</a></li>
-                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/orders') }}">My Order</a></li>
-                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/listings') }}">My Listings</a></li>
-                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/settings') }}">Settings</a></li>
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My
+                                                Dashboard</a></li>
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard/orders') }}">My
+                                                Order</a></li>
+                                        <li><a class="dropdown-item text-dark"
+                                                href="{{ URL('/dashboard/listings') }}">My Listings</a></li>
+                                        <li><a class="dropdown-item text-dark"
+                                                href="{{ URL('/dashboard/settings') }}">Settings</a></li>
                                         <li class="nav-item">
-                                            <form
-                                                action="{{ route('logout') }}"
-                                                method="POST"
-                                            >
+                                            <form action="{{ route('logout') }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="btn btn-link">Logout</button>
-        
+
                                             </form>
                                         </li>
                                     </ul>
                                 </li>
-        
+
                                 @endauth @guest
                                 <li class="nav-item">
-                                    <a
-                                         class="nav-link"
-                                        href="{{ route('login') }}"
-                                        >Login</a
-                                    >
+                                    <a class="nav-link" href="{{ route('login') }}">Login</a>
                                 </li>
                                 @endguest
                                 {{-- <li class="nav-item">
-                                    <a class="nav-link" href="#"
-                                        >Help Center</a
-                                    >
+                                    <a class="nav-link" href="#">Help Center</a>
                                 </li> --}}
                                 <li class="nav-item">
-                                    <a
-                                        class="nav-link btn btn-sm primary-btn px-3"
-                                        href="{{ URL('Sell-tickets') }}"
-                                        >Sell Tickets</a
-                                    >
+                                    <a class="nav-link btn btn-sm primary-btn px-3"
+                                        href="{{ URL('Sell-tickets') }}">Sell Tickets</a>
                                 </li>
                             </ul>
                         </div>
@@ -239,7 +245,9 @@
                                 </div>
                                 <div class="tour_details_top_bottom_text">
                                     <h5>Sec - Row</h5>
-                                    <p>{{$tickets->sections}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$tickets->rows}}</p>
+                                    <p>{{$tickets->sections}}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{$tickets->rows}}</p>
                                 </div>
                             </div>
                             <div class="toru_details_top_bottom_item">
@@ -252,7 +260,7 @@
                                         {{$tickets->type_cat}}
                                         @else
                                         {{$tickets->categories}}
-                                    @endif </p>
+                                        @endif </p>
                                 </div>
                             </div>
                         </div>
@@ -285,7 +293,7 @@
                                 <div class="tour_package_details_bar_list">
                                     <h5>More details</h5>
                                     <ul>
-                                        <li><i class="fas fa-circle"></i>Seating Area :  {{ $tickets->seated_area }}</li>
+                                        <li><i class="fas fa-circle"></i>Seating Area : {{ $tickets->seated_area }}</li>
                                         <li><i class="fas fa-circle"></i>Number of Tickets : {{ $tickets->quantity }}
                                         </li>
                                         <li><i class="fas fa-circle"></i>Per Ticket : ${{ $tickets->price }}</li>
@@ -310,120 +318,96 @@
             </div>
         </div>
     </section>
-    
 
 
-<section class="section-five mt-5">
-    <div class="footer ">
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-xl-3">
-                    <h5 class="mb-4 text-white">Regional Settings</h5>
-                    <!-- Button trigger modal -->
-                    <button
-                        type="button"
-                        class="btn footer-btn mb-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#"
-                    >
-                        <i class="bi bi-globe me-2"></i>Country:
-                        world-wide
-                    </button>
-                    <!-- Button trigger modal -->
-                    <button
-                        type="button"
-                        class="btn footer-btn mb-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#"
-                    >
-                        <i class="bi bi-chat-fill me-2"></i> Language:
-                        English (US)
-                    </button>
-                    <!-- Button trigger modal -->
-                    <button
-                        type="button"
-                        class="btn footer-btn mb-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#"
-                    >
-                        <i class="bi bi-cash-coin me-2"></i> Currency:
-                        US$
-                    </button>
-                    <!-- Modal -->
-                    <div
-                        class="modal fade"
-                        id=""
-                        tabindex="-1"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                    >
-                        <div class="modal-dialog text-white">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4>Modal title here</h4>
-                                    <button
-                                        type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"
-                                    ></button>
-                                </div>
-                                <div class="modal-body">
-                                    <h4>modal content here</h4>
+
+    <section class="section-five mt-5">
+        <div class="footer ">
+            <div class="container p-5">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <h5 class="mb-4 text-white">Regional Settings</h5>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn footer-btn mb-2" data-bs-toggle="modal" data-bs-target="#">
+                            <i class="bi bi-globe me-2"></i>Country:
+                            world-wide
+                        </button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn footer-btn mb-2" data-bs-toggle="modal" data-bs-target="#">
+                            <i class="bi bi-chat-fill me-2"></i> Language:
+                            English (US)
+                        </button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn footer-btn mb-2" data-bs-toggle="modal" data-bs-target="#">
+                            <i class="bi bi-cash-coin me-2"></i> Currency:
+                            US$
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog text-white">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4>Modal title here</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4>modal content here</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3">
-                    <h5 class="mb-4 text-white">More</h5>
-                    <ul>
-                        <li><a href="" class="text-white">Help Center</a></li>
-                        <li><a href="" class="text-white">About Us</a></li>
-                        <li><a href="" class="text-white">Affiliates</a></li>
-                        <li><a href="" class="text-white">Careers</a></li>
-                        <li><a href="" class="text-white">How do i contact?</a></li>
-                        <li><a href="" class="text-white">Event Organizers</a></li>
-                    </ul>
-                </div>
-                <div class="col-xl-3">
-                    <h5 class="mb-4 text-white">Popular Events</h5>
-                </div>
-                <div class="col-xl-3">
-                    <h5 class="mb-4 text-white">Stay Up to Date</h5>
-                    <ul class="d-flex social-links text-center">
-                        <li>
-                            <a href=""
-                                ><i class="bi bi-facebook"></i
-                            ></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="bi bi-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="bi bi-google"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-xl-12 mt-4">
-                    <p class="text-white">
-                        Copyright © Last-Chance-Ticket AG 2022
-                        Company Details<br />
-                        Use of this web site constitutes acceptance of
-                        the Terms and Conditions and
-                        Privacy Policy
-                        and Cookies Policy and
-                        Mobile Privacy Policy
-                    </p>
+                    <div class="col-xl-3">
+                        <h5 class="mb-4 text-white">More</h5>
+                        <ul>
+                            <li><a href="" class="text-white">Help Center</a></li>
+                            <li><a href="" class="text-white">About Us</a></li>
+                            <li><a href="" class="text-white">Affiliates</a></li>
+                            <li><a href="" class="text-white">Careers</a></li>
+                            <li><a href="" class="text-white">How do i contact?</a></li>
+                            <li><a href="" class="text-white">Event Organizers</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-3">
+                        <h5 class="mb-4 text-white">Popular Events</h5>
+                    </div>
+                    <div class="col-xl-3">
+                        <h5 class="mb-4 text-white">Stay Up to Date</h5>
+                        <ul class="d-flex social-links text-center">
+                            <li>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href=""><i class="bi bi-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href=""><i class="bi bi-google"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-12 mt-4">
+                        <p class="text-white">
+                            Copyright © Last-Chance-Ticket AG 2022
+                            Company Details<br />
+                            Use of this web site constitutes acceptance of
+                            the Terms and Conditions and
+                            Privacy Policy
+                            and Cookies Policy and
+                            Mobile Privacy Policy
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     {{-- @include("auth.partials.footer") --}}
     {{-- <script src="{{asset('newAssets/vendor/jquery/jquery.min.js')}}"></script> --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"
+        integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
     {{-- <script src="{{asset('newAssets/assets/js/isotope.min.js')}}"></script>
     <script src="{{asset('newAssets/assets/js/owl-carousel.js')}}"></script>
     <script src="{{asset('newAssets/assets/js/tabs.js')}}"></script>
@@ -431,26 +415,26 @@
     <script src="{{asset('newAssets/assets/js/custom.js')}}"></script> --}}
 
     <script src="{{asset('F_Assets/assets/js/jquery-3.6.0.min.js')}}"></script>
-    
+
     <!-- Bootstrap js -->
     <script src="{{asset('F_Assets/assets/js/bootstrap.bundle.js')}}"></script>
-    
+
     <!-- Meanu js -->
     <script src="{{asset('F_Assets/assets/js/jquery.meanmenu.js')}}"></script>
-    
-   
+
+
     <!-- owl carousel js -->
     <script src="{{asset('F_Assets/assets/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('F_Assets/assets/js/slick.min.js')}}"></script>
     <script src="{{asset('F_Assets/assets/js/slick-slider.js')}}"></script>
     <!-- wow.js -->
     <script src="{{asset('F_Assets/assets/js/wow.min.js')}}"></script>
-    
+
     <!-- Custom js -->
     <script src="{{asset('F_Assets/assets/js/custom.js')}}"></script>
-    
+
     <script src="{{asset('F_Assets/assets/js/add-form.js')}}"></script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 

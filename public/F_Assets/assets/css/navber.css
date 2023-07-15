@@ -1273,6 +1273,7 @@
 }
 
 @media only screen and (min-width:325px) {
+
     .others-option-for-responsive .dot-menu {
         top: -46px;
         right: 80px;
@@ -1280,6 +1281,11 @@
 }
 
 @media only screen and (min-width:768px) and (max-width:991px) {
+    .navbar-area{
+        background-color: var(--main-color);
+        padding-top: 15px;
+        padding-bottom: 60px
+    }
     .others-option-for-responsive .container .container {
         max-width: 190px
     }
@@ -1341,6 +1347,11 @@
 }
 
 @media only screen and (min-width:992px) and (max-width:1199px) {
+    .navbar-area{
+        background-color: var(--main-color);
+        padding-top: 15px;
+        padding-bottom: 60px
+    }
     .others-option-for-responsive .container .container {
         max-width: 190px
     }

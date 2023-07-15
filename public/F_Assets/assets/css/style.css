@@ -4460,6 +4460,7 @@ textarea {
 
 .flight_search_right a {
     margin-top: 13px;
+
 }
 
 .flight_search_right p {
@@ -5150,4 +5151,372 @@ textarea {
     opacity: 1;
     visibility: visible;
     top: 50%
+}
+
+
+/* /////////////////////////////////// */
+
+
+.red{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left:20px solid red;
+}
+.yellow{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left:20px solid yellow;
+}
+.blue{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left:20px solid blue;
+}
+.green{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left:20px solid green;
+}
+.grey{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left:20px solid grey;
+}
+.chartreuse{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left:20px solid chartreuse;
+}
+.tomato{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left:20px solid tomato;
+}
+.salmon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left:20px solid salmon;
+}
+.crimson{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left:20px solid crimson;
+}
+.darkgoldenrod{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-left:20px solid darkgoldenrod;
+}
+.category-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px; /* Optional: Add spacing between category items */
+    }
+.category-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    }
+.category-text {
+    margin-left: 5px;
+    }
+/* section five starts here  */
+.footer {
+/* background-color: #61c3e3; */
+background-color: #22b3c1;
+
+}
+
+.footer ul {
+padding: 0px;
+}
+
+.footer ul li {
+list-style: none;
+}
+
+.footer ul li a {
+text-decoration: none;
+color: #fff;
+}
+
+.footer a {
+color: #fff;
+}
+
+.social-links i {
+margin-left: 10px;
+font-size: 30px;
+}
+
+.bi-facebook:hover {
+color: #3f77f3;
+}
+
+.bi-twitter:hover {
+color: #52a2f3;
+}
+
+.bi-google:hover {
+color: #e74235;
+}
+
+.footer-btn {
+background-color: #fff;
+color: grey;
+}
+
+.footer-btn:hover {
+color: #61c3e3;
+}
+
+.footer .nav-link {
+color: grey;
+}
+
+@media only screen and (max-width: 576px) {
+
+.restrictionsDropdown{
+display: none;
+}
+.flight_multis_area_wrapper .flight_search_destination.d-none-mobile {
+/* display:none; */
+}
+
+.d-none-mobile {
+display: none;
+}
+
+.flight_right_arrow {
+padding-bottom: 0px;
+}
+
+.flight_search_right {
+padding: 0px;
+}
+
+.type {
+display: none;
+}
+
+.type2 {
+display: block;
+}
+
+.benefits2 {
+display: none;
+}
+
+.benefits {
+display: none;
+}
+
+.spen {
+margin-bottom: 20px
+}
+
+.rowstyle {
+height: 60px;
+}
+}
+
+
+#marquee-container {
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+}
+
+#marquee {
+    white-space: nowrap;
+    display: inline-block;
+    transition: transform 0.5s ease;
+    /* Add transition property with duration and easing function */
+}
+
+#marquee:hover {
+    animation-play-state: paused;
+    transform: translateX(0%);
+    /* Add this line to reset the transform on hover */
+}
+
+@media (max-width: 1920px) {
+    #marquee {
+        white-space: nowrap;
+        display: inline-block;
+        animation: marquee 11.5s linear infinite;
+    }
+}
+
+@keyframes marquee-web {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes marquee-mobile {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Media query for mobile devices with max-width of 767px */
+@media (max-width: 540px) {
+    #section-1 .content-slider .slider .banner .banner-inner-wrapper h1 {
+        font-size: 13px;
+        color: #58e6f3;
+        text-shadow: 2px 2px #000000;
+    }
+
+    #hia {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 428px) {
+
+    #marquee {
+        white-space: nowrap;
+        display: inline-block;
+        transition: transform 0.5s ease;
+        /* Add transition property with duration and easing function */
+    }
+
+    #marquee:hover {
+        animation-play-state: paused;
+        transform: translateX(0%);
+        /* Add this line to reset the transform on hover */
+    }
+}
+
+@media (max-width: 767px) {
+    #marquee {
+        animation: marquee-mobile 30s linear infinite;
+    }
+}
+
+@media (max-width: 1920px) {
+    #marquee {
+        animation: marquee-web 20s linear infinite;
+    }
+}
+
+@media (max-width: 1366px) {
+    #marquee {
+        animation: marquee-web 13.5s linear infinite;
+    }
+}
+
+
+.TicketRow{
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--paragraph-color);
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0;
+    font-size: 11px;
+    line-height: 18px;
+}
+
+
+
+.search {
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+
+}
+
+.search input {
+
+    height: 60px;
+    text-indent: 25px;
+    border: 2px solid #d6d4d4;
+
+
+}
+
+
+.search input:focus {
+
+    box-shadow: none;
+    border: 2px solid rgb(74, 185, 226);
+
+
+}
+
+.search .fa-search {
+
+    position: absolute;
+    top: 20px;
+    left: 16px;
+
+}
+
+.search button {
+
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 50px;
+    width: 110px;
+    background: rgb(74, 185, 226);
+    ;
+
+}
+
+
+@media only screen and (max-width: 575px) {
+    .select-ticket .col-sm-2 {
+        width: 20%;
+    }
+    .btn5{
+        width: 25%;
+    }
+
+}
+
+.banner-text {
+    text-shadow: 2px 2px #000000;
+}
+
+@media (min-width: 541px) {
+    .banner-text {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 990px) {
+    .rowstyle {
+        font-size: 20px;
+    }
 }

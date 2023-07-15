@@ -35,7 +35,7 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
+
     public function index( TicketListing $tickets,VanueSections $vanuesections,VenueSectionRows $venuesectionrows, EventListing $EventListing,$id)
     {
         //
@@ -44,12 +44,12 @@ class TicketController extends Controller
         }
         $maxValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->max('price');
         $minValue = TicketListing::where(['eventlisting_id' => $tickets->eventlisting_id, 'section' => $tickets->section, 'row' => $tickets->row])->where('id', '!=', $tickets->id)->min('price');
-       
+
         //= Currency::find($tickets->currency);
         $EventListing = EventListing::select('event_listings.*','events.title as tit')
         ->join('events', 'events.id', '=', 'event_listings.event_id')
         ->find($id);
-        
+
         $venue_section_rows = VenueSectionRows::all();
         $venue_sections = VanueSections::all();
         $sellerCategories = SellerCategory::all();
@@ -113,15 +113,15 @@ class TicketController extends Controller
      */
     public function store(Request $request, $id)
     {
-        
+
         if($request->input()){
             $request->validate([
-                
+
                 'seated_area'                 => 'required',
                 'ticket_type'                 => 'required',
                 'price'                       => 'required',
                 'face_price'                  => 'required',
-                'type_cat'                    => 'required',  
+                'type_cat'                    => 'required',
                 'type_sec'                    => 'required',
                 'ticket_restrictions.0' => 'required',
             ]);
@@ -139,7 +139,7 @@ class TicketController extends Controller
                 'ticket_type'                 => 'required',
                 'price'                       => 'required',
                 'face_price'                  => 'required',
-                'type_cat'                    => 'required',  
+                'type_cat'                    => 'required',
                 'type_sec'                    => 'required',
                 'currency'                    => 'required',
             ]);
@@ -155,7 +155,7 @@ class TicketController extends Controller
                 'ticket_type'                 => 'required',
                 'price'                       => 'required',
                 'face_price'                  => 'required',
-                'type_cat'                    => 'required',  
+                'type_cat'                    => 'required',
                 'type_sec'                    => 'required',
                 'currency'                    => 'required',
             ]);
@@ -171,7 +171,7 @@ class TicketController extends Controller
                 'ticket_type'                 => 'required',
                 'price'                       => 'required',
                 'face_price'                  => 'required',
-                'type_cat'                    => 'required',  
+                'type_cat'                    => 'required',
                 'type_sec'                    => 'required',
                 'currency'                    => 'required',
             ]);
@@ -187,18 +187,18 @@ class TicketController extends Controller
                 'ticket_type'                 => 'required',
                 'price'                       => 'required',
                 'face_price'                  => 'required',
-                'type_cat'                    => 'required',  
+                'type_cat'                    => 'required',
                 'type_sec'                    => 'required',
                 'currency'                    => 'required',
             ]);
         }
-       
+
         $guestUser = LoginController::guestLogin();
         $ticketListing = new TicketListing();
         $sellerCategories = SellerCategory::first();
         $Listing = TicketListing::first();
         $venue_sections = VanueSections::first();
-    
+
         $ticketListing->user_id = $guestUser;
         $ticketListing->eventlisting_id = $id;
         $ticketListing->currency = $request->currency;
@@ -218,7 +218,7 @@ class TicketController extends Controller
         $ticketListing->face_price = $request->face_price;
         $ticketListing->price = $request->price;
         $ticketListing->ticket_restrictions = json_encode($request->ticket_restrictions);
-        
+
         $ticketListing->ticket_type = $request->ticket_type;
         $ticketListing->book_eticket = $request->book_eticket;
         $ticketListing->quantity = $request->total_tickets;
@@ -249,7 +249,7 @@ class TicketController extends Controller
                 $simple_pdf->storeAs('public/post',$file3);
                 $ticketListing['simple_pdf']=$file3;
             }
-        // dd($ticketListing); 
+        // dd($ticketListing);
         $ticketListing->save();
         if ($request->book_eticket === "Yes") {
             return redirect()->route('event.ticketlisting.ticket.upload', ['ticket_listing' => $ticketListing->id]);
@@ -303,15 +303,15 @@ class TicketController extends Controller
         $tickets->price = $request->price;
         $tickets->currency = $request->currency;
         $tickets->update();
-       
+
         return redirect()->route('seller.complete_ticket.address.save', ['id' => $tickets->id]);
-       
+
     }
     public function UserPasswordUpdate(Request $request,User $user){
         $user = User::find(auth()->user()->id);
         $user->password =  Hash::make( $request->password);
         $user->update();
-        return redirect()->back()->with('msg','Your Password has been Reset');  
+        return redirect()->back()->with('msg','Your Password has been Reset');
 
     }
     public function BankDetailsFrom(Request $request,BankDetail $bank_detail){
@@ -323,12 +323,12 @@ class TicketController extends Controller
         $bank_detail->iban = $request->iban;
         $bank_detail->swift_number = $request->swift_number;
         $bank_detail->save();
-        return redirect()->back()->with('msg','Your Bank Details has been Saved');  
+        return redirect()->back()->with('msg','Your Bank Details has been Saved');
 
     }
     public function storeAddress(Request $request, $id, TicketListing $tickets, User $user, Seller $seller)
     {
-        
+
         $tickets = TicketListing::find($id);
         $user = User::find($tickets->user_id);
         $seller = new Seller();
@@ -430,7 +430,7 @@ class TicketController extends Controller
         dd();
         $sellerCharges = BuyerSellerCharges::first();
         $FooterEventListing = EventListing::get();
-        $Footerevents = Event::get(); 
+        $Footerevents = Event::get();
         $events = EventListing::all();
         $tickets = TicketListing::find($id);
         // $currencies = Currency::all();
@@ -471,7 +471,7 @@ class TicketController extends Controller
      */
     public function destroy(TicketListing $TicketListing)
     {
-        
+
     }
     public function sell_category_show(Event $event,Category $category){
 
@@ -503,7 +503,7 @@ class TicketController extends Controller
         ->distinct()
         ->get();
         // $events_festival = Event::where('category_id', '4')->get();
-        
+
         $FooterEventListing = EventListing::get();
         $Footerevents = Event::get();
         return view('tickets/selltickets',compact('FooterEventListing','Footerevents','events_sports','events_concert','events_theatre','events_festival'));
@@ -551,20 +551,20 @@ class TicketController extends Controller
         ->where([['user_id',auth()->user()->id],['status',1]])
         ->orderBy('id','desc')
         ->where('completed', 1)->get();
-        
+
         $purchases = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date','ticket_listings.ticket_type as Type')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->orderBy('id','desc')
         ->where('purchases.user_id',auth()->user()->id)->get();
-      
+
         $data = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date')
         ->join('ticket_listings', 'ticket_listings.id', '=', 'purchases.ticket_id')
         ->join('event_listings', 'event_listings.id', '=', 'ticket_listings.eventlisting_id')
         ->where('purchases.user_id',auth()->user()->id)
         ->orderBy('id','desc')
         ->first();
-      
+
         // dd ($active_tickets);
         $sales = Purchases::select('purchases.*', 'event_listings.event_name as event_name','event_listings.event_date as start_date','users.first_name','users.last_name')
         ->join('users', 'users.id', '=', 'purchases.user_id')
@@ -612,7 +612,7 @@ class TicketController extends Controller
         $paper_ticket->type_sec = $request->type_sec;
         $paper_ticket->type_cat = $request->type_cat;
         $paper_ticket->update();
-        $request->session()->flash('msg2','Data Has Been Updated Successfully'); 
+        $request->session()->flash('msg2','Data Has Been Updated Successfully');
         return redirect('Admin-Panel/');
     }
     //END OF PAPER TICKET
@@ -642,7 +642,7 @@ class TicketController extends Controller
         $e_ticket->type_sec = $request->type_sec;
         $e_ticket->type_cat = $request->type_cat;
         $e_ticket->update();
-        $request->session()->flash('msg2','Data Has Been Updated Successfully'); 
+        $request->session()->flash('msg2','Data Has Been Updated Successfully');
         return redirect('Admin-Panel/E_tickets');
     }
 
@@ -671,10 +671,10 @@ class TicketController extends Controller
         $mobile_ticket->type_sec = $request->type_sec;
         $mobile_ticket->type_cat = $request->type_cat;
         $mobile_ticket->update();
-        $request->session()->flash('msg2','Data Has Been Updated Successfully'); 
+        $request->session()->flash('msg2','Data Has Been Updated Successfully');
         return redirect('Admin-Panel/Mobile_tickets');
     }
-   
+
 
     public function Rejection(Request $request)
     {
@@ -701,7 +701,7 @@ class TicketController extends Controller
         $active_tickets = TicketListing::select('ticket_listings.*')
         ->where([['user_id',auth()->user()->id],['status',1]])
         ->where('completed', 1)->get();
-        
+
             return view('dashboard.DeactivationView',compact('active_tickets'));
     }
     public function ticket_Activation(Request $request)
@@ -738,8 +738,8 @@ class TicketController extends Controller
     public function downloadTicket( ){
 
         $etickets = TicketListing::select('ticket_listings.*','purchases.seller_id')
-        ->join('purchases', 'purchases.ticket_id', '=', 'ticket_listings.id')   
-        // ->join('e_tickets', 'e_tickets.ticketlisting_id', '=', 'ticket_listings.id')   
+        ->join('purchases', 'purchases.ticket_id', '=', 'ticket_listings.id')
+        // ->join('e_tickets', 'e_tickets.ticketlisting_id', '=', 'ticket_listings.id')
         ->orderBy('id','desc')
         ->get();
         $price = Purchases::sum('price');
@@ -750,7 +750,7 @@ class TicketController extends Controller
         $events = Event::join('venues', 'venues.id', '=', 'events.venue_id')->select('events.*', 'venues.title as vTitle', 'venues.image as vImage')
         // ->where('events.id', $id)
         ->first();
-      
+
         return view('Admin.pages.eTicketDownload',compact('events','totalCompanyProfit','etickets','price','userCount','total_no_sold_tickets'));
     }
     public function eTicket_Pdf_template(TicketListing $ticket, Event $event,$id ){

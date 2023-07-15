@@ -18,10 +18,12 @@
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
+        "mcamara/laravel-localization": "^1.8",
         "org_heigl/ghostscript": "^2.3",
         "predis/predis": "^2.1",
         "setasign/fpdf": "1.8.*",
         "setasign/fpdi": "^2.0",
+        "stichoza/google-translate-php": "^5.1",
         "stripe/stripe-php": "^10.9",
         "torann/geoip": "^3.0"
     },

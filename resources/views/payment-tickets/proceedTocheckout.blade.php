@@ -166,7 +166,8 @@
                                 </div>
                                 <div class="event-order-dt-content">
                                     <h5>{{ $events->event_name }}</h5>
-                                    <div class=""><b>Date : {{ $events->event_date }}</b></div>
+                                    {{-- <div class=""><b>Date : {{ $events->event_date }}</b></div> --}}
+                                    <div class=""><b>Date: {{ date('d-m-Y', strtotime($events->event_date)) }}</b></div>
                                     <div class=""><b>Event Time : {{ $events->start_time }} - {{ $events->end_time
                                             }}</b></div>
                                     <div class=""><b>Ticket Type : {{ $tickets->ticket_type }}</b></div>

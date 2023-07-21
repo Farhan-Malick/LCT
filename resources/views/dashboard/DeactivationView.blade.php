@@ -46,7 +46,8 @@
                      <th scope="col">Ticket</th>
                      <th scope="col">Created</th>
                      <th scope="col">Restrictions</th>
-                     <th scope="col">Action</th>
+                     <th scope="col">Deactive</th>
+                     <th scope="col">Set Price</th>
                      </tr>
                   </thead>
                   <tbody class="table-group-divider">
@@ -77,22 +78,25 @@
                                     </form>
                                     {{-- <a class="btn btn-danger" href="{{route('dashboard.ticket.Deactivate',$ticket->id)}}">Deactivate</a> --}}
                                  </td>
+                                 <td>
+                                    <a href="{{URL('/dashboard/Set-Price/'.$ticket->id)}}" class="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                 </td>
                               </tr>
                            @endif
                      @endforeach
                   </tbody>
                </table>
-            </div>        
-        </div>    
-    
+            </div>
+        </div>
+
          {{-- @include('auth.partials.footer'); --}}
-            
-    </div>    
+
+    </div>
 
     <script src="{{asset("AdminAssets/js/app.min.js")}}"></script>
     <script src="{{asset("AdminAssets/js/theme/google.min.js")}}"></script>
     <!-- ================== END BASE JS ================== -->
-    
+
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script src="{{asset('AdminAssets/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('AdminAssets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>

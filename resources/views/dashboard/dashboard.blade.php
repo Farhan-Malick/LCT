@@ -19,7 +19,9 @@
       <link href="{{asset('profile/css/style.css')}}" rel="stylesheet">
       <link href="{{asset('profile/css/responsive.css')}}" rel="stylesheet">
       <link href="{{asset('profile/css/night-mode.css')}}" rel="stylesheet">
-      <link href="{{asset('profile/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+      <!--<link href="{{asset('profile/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet">-->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
       <link href="{{asset('profile/vendor/OwlCarousel/assets/owl.carousel.css')}}" rel="stylesheet">
       <link href="{{asset('profile/vendor/OwlCarousel/assets/owl.theme.default.min.css')}}" rel="stylesheet">
       <link href="{{asset('profile/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -81,8 +83,7 @@
                            </div>
                            <div class="ff-block">
                               <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>Nationality</span>{{ Auth::user()->nationality }} </a>
-                              <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span> Country of residence
-                            </span>{{ Auth::user()->country }}</a>
+                              <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>Country of Residence</span>{{ Auth::user()->country }}</a>
                            </div>
                            <div class="user-description">
                               <p>Hey I am {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
@@ -114,8 +115,13 @@
                                     <a class="nav-link" id="setting-tab" data-bs-toggle="tab" href="#setting" role="tab" aria-controls="setting" aria-selected="false"><i class="fa-solid fa-gear"></i>Setting</a>
                                  </li>
                               </ul>
-                              <div class="row">
+                              <div class="row mt-2">
                                  <div class="col-lg-12">
+                                    @if ($message = Session::get('priceSuccess'))
+                                    <div class="alert alert-primary alert-block">
+                                       <strong>{{ $message }}</strong>
+                                    </div>
+                                    @endif
                                     @if ($message = Session::get('msg'))
                                     <div class="alert alert-primary alert-block">
                                        <strong>{{ $message }}</strong>
@@ -127,9 +133,9 @@
                                        </div>
                                        @endif
                                        @if ($message = Session::get('activate'))
-                                        <div class="alert alert-primary alert-block">
-                                            <strong>{{ $message }}</strong>
-                                        </div>
+                                       <div class="alert alert-primary alert-block">
+                                          <strong>{{ $message }}</strong>
+                                       </div>
                                        @endif
                                  </div>
                               </div>
@@ -144,7 +150,7 @@
                                               <table class="table">
                                                   <thead class="thead-light">
                                                     <tr>
-                                                      <th>#</th>
+                                                      <th>Order ID</th>
                                                       <th >Event</th>
                                                       <th >Qty</th>
                                                       <th>S.Date</th>
@@ -214,7 +220,7 @@
                                                       <table id=""  class="table  table-sm  ">
                                                         <thead>
                                                            <tr>
-                                                           <th scope="col">#</th>
+                                                           <th scope="col">Listing ID</th>
                                                            {{-- <th scope="col">title</th> --}}
                                                            <th scope="col">Event</th>
                                                            <th scope="col">price</th>
@@ -227,7 +233,8 @@
                                                            <th scope="col">Restrictions</th> --}}
                                                            <th scope="col">Ticket</th>
                                                            <th scope="col">Created</th>
-                                                           <th scope="col">Action</th>
+                                                           <th scope="col">Deactive</th>
+                                                           <th scope="col">Set Price</th>
                                                            </tr>
                                                         </thead>
                                                         <tbody class="table-group-divider">
@@ -256,9 +263,10 @@
                                                                                 <input type="submit" class="btn btn-danger"
                                                                                 name="" value="Deactive" id="" >
                                                                           </form>
-
-
                                                                           {{-- <a class="btn btn-danger" href="{{route('dashboard.ticket.Deactivate',$ticket->id)}}">Deactivate</a> --}}
+                                                                       </td>
+                                                                       <td>
+                                                                        <a href="{{URL('/dashboard/Set-Price/'.$ticket->id)}}" class="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                                                        </td>
                                                                     </tr>
                                                                  @endif
@@ -306,7 +314,7 @@
                                                             <table id="data-table-default2"  class="table  table-sm table-bordered table-td-valign-middle">
                                                                 <thead>
                                                                   <tr>
-                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Listing ID	</th>
                                                                     {{-- <th scope="col">title</th> --}}
                                                                     <th scope="col">Event</th>
                                                                     <th scope="col">price</th>
@@ -314,8 +322,8 @@
                                                                     <th scope="col">quantity</th>
                                                                     <th scope="col">section</th>
                                                                     <th scope="col">row</th>
-                                                                    <th scope="col">seat from</th>
-                                                                    <th scope="col">seat to</th>
+                                                                    <!--<th scope="col">seat from</th>-->
+                                                                    <!--<th scope="col">seat to</th>-->
                                                                     <th scope="col">ticket type</th>
                                                                     <th scope="col">ticket restrictions</th>
                                                                     <th scope="col">Action</th>
@@ -333,8 +341,8 @@
                                                                               <td>{{$ticket->quantity}}</td>
                                                                               <td>{{$ticket->type_sec}}</td>
                                                                               <td>{{$ticket->type_row}}</td>
-                                                                              <td>{{$ticket->seat_from}}</td>
-                                                                              <td>{{$ticket->seat_to}}</td>
+                                                                              <!--<td>{{$ticket->seat_from}}</td>-->
+                                                                              <!--<td>{{$ticket->seat_to}}</td>-->
                                                                                  <td>{{$ticket->ticket_type}}</td>
                                                                               <td>  {{implode(',', json_decode($ticket->ticket_restrictions, true))}}</td>
                                                                               {{-- <td>{{$ticket->status}}</td> --}}
@@ -344,7 +352,7 @@
                                                                                     <input type="hidden" name="ticket_id" id=""
                                                                                        value="{{ $ticket->id }}" >
                                                                                     <input type="submit" class="btn btn-success"
-                                                                                       name="" value="Reactivate" id="" >
+                                                                                       name="" value="Active" id="" >
                                                                                  </form>
                                                                                  {{-- <a class="btn btn-danger" href="{{route('dashboard.ticket.Deactivate',$ticket->id)}}">Deactivate</a> --}}
                                                                               </td>
@@ -378,7 +386,7 @@
                                                             <table id="data-table-default3"  class="table  table-sm table-bordered table-td-valign-middle" >
                                                                 <thead>
                                                                   <tr>
-                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Listing ID	</th>
                                                                     {{-- <th scope="col">title</th> --}}
                                                                     <th scope="col">Event</th>
                                                                     <th scope="col">price</th>
@@ -432,7 +440,7 @@
                                               <table class="table">
                                                   <thead class="thead-light">
                                                     <tr>
-                                                      <th>#</th>
+                                                      <th>Order ID</th>
                                                       <th >Purchaser</th>
                                                       <th >Event Name</th>
                                                       {{-- <th >Ticket Name</th> --}}
@@ -490,13 +498,6 @@
                                                          <div class="change-password-form">
                                                             <form action="{{ URL('bank_details') }}" method="POST">
                                                                @csrf
-                                                               <div class="form-group mt-4">
-                                                                  <label class="form-label">Card Holder*</label>
-                                                                  <div class="loc-group position-relative">
-                                                                     <input class="form-control h_50" type="text" id="card_holder" name="card_holder" placeholder="Enter Card Holder Name.">
-                                                                     {{-- <span class="pass-show-eye"><i class="fas fa-eye-slash" id="togglePassword"></i></span> --}}
-                                                                  </div>
-                                                               </div>
                                                                <div class="form-group mt-4">
                                                                   <label class="form-label">Bank Name*</label>
                                                                   <div class="loc-group position-relative">
@@ -655,4 +656,3 @@
    </body>
    <!-- Mirrored from www.gambolthemes.net/html-items/barren-html/disable-demo-link/organiser_profile_view.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 08 Feb 2023 14:26:58 GMT -->
 </html>
-

@@ -84,7 +84,7 @@
         @endif
     <section class="section-two" style="margin-top: 100px">
         <div class="container my-4">
-           
+
             <div class="row">
                 <div class="col-lg-12 ">
                     <div class="p-5 mb-3 "  style="background-color: #f9f9f9">
@@ -112,7 +112,7 @@
                                                 aria-label="Amount (to the nearest dollar)" value = "{{$active_tickets->price}}">
                                             <span class="input-group-text">.00</span>
                                         </div>
-                                      
+
                                     </div>
                                     <button class="btn primary-btn w-100 " style="margin-top: 22px"
                                         type="submit"><strong>CONTINUE</strong></button>
@@ -121,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
     </section>

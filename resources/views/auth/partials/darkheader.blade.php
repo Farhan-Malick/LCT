@@ -3,6 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
+
                     <!-- ***** Logo Start ***** -->
                     <a href="{{URL('/')}}" class="logo">
                         <img src="{{asset('assets/images/logo1.png')}}" style=" margin-top:13px" alt="">
@@ -29,7 +30,7 @@
                                 <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My Listings</a></li> --}}
                                 <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">Settings</a></li>
                                 <li class="nav-item">
-                                    <form 
+                                    <form
                                         action="{{ route('logout') }}"
                                         method="POST"
                                     >
@@ -62,8 +63,8 @@
                                 >Sell Tickets</a
                             >
                         </li>
-                        
-                    </ul>   
+
+                    </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>

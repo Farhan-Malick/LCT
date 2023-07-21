@@ -174,8 +174,15 @@
                             </div>
                             <div class="order-total-block">
                                 <div class="order-total-dt">
-                                    <div class="order-text">Venue</div>
-                                    <div class="order-number">{{ $events->vTitle }}</div>
+                                   <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="order-text">Venue</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="order-number">{{ $events->vTitle }}</div>
+
+                                    </div>
+                                   </div>
                                 </div>
                                 <div class="order-total-dt">
                                     <div class="order-text">Category</div>

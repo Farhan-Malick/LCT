@@ -25,16 +25,16 @@
       <link href="{{asset('profile/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
       <link href="{{asset('profile/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
 
-      
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
    </head>
    <body class="d-flex flex-column h-100">
-    
+
       @include("auth.partials.darkheader")
       <div class="wrapper">
          <div class="profile-anner">
-           
+
             <div class="user-dt-block">
                <div class="container">
                   <div class="row">
@@ -81,7 +81,8 @@
                            </div>
                            <div class="ff-block">
                               <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>Nationality</span>{{ Auth::user()->nationality }} </a>
-                              <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span>Country</span>{{ Auth::user()->country }}</a>
+                              <a href="#" class="" role="button" data-bs-toggle="modal" data-bs-target="#FFModal"><span> Country of residence
+                            </span>{{ Auth::user()->country }}</a>
                            </div>
                            <div class="user-description">
                               <p>Hey I am {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
@@ -89,7 +90,7 @@
                            <div class="user-btns">
                               <a href="{{URL('User-Edit/' . Auth::user()->id ) }}" class="co-main-btn co-btn-width min-width d-inline-block h_40">Edit Profile<i class="fa-solid fa-right-left ms-3"></i></a>
                            </div>
-                         
+
                         </div>
                      </div>
                      <div class="col-xl-8 col-lg-7 col-md-12">
@@ -99,7 +100,7 @@
                                  <li class="nav-item">
                                     <a class="nav-link " id="feed-tab" data-bs-toggle="tab" href="#feed" role="tab" aria-controls="feed" aria-selected="true"><i class="fa-solid fa-house"></i>Listings</a>
                                  </li>
-                                 
+
                                  <li class="nav-item">
                                   <a class="nav-link active" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fa-solid fa-box"></i>My Orders</a>
                                </li>
@@ -126,9 +127,9 @@
                                        </div>
                                        @endif
                                        @if ($message = Session::get('activate'))
-                                       <div class="alert alert-primary alert-block">
-                                          <strong>{{ $message }}</strong>
-                                       </div>
+                                        <div class="alert alert-primary alert-block">
+                                            <strong>{{ $message }}</strong>
+                                        </div>
                                        @endif
                                  </div>
                               </div>
@@ -136,7 +137,7 @@
                               <div class="col-lg-12">
                                  <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                                  
+
                                        <div class="card shadow-sm mt-3">
                                           <div class="card-body">
                                               <h5 class="card-title fw-600">All Orders Here</h5>
@@ -156,7 +157,7 @@
                                                   <tbody>
                                                       @foreach($purchases as $purchase)
                                                     <tr>
-                                                      
+
                                                       <td>{{$purchase->id}}</td>
                                                       <td>{{$purchase->event_name}}</td>
                                                       <td>{{$purchase->quantity}}</td>
@@ -170,7 +171,7 @@
                                                       <td>${{$purchase->grand_total2}}</td>
                                                       <td>{{$data->created_at}}</td>
                                                     </tr>
-                                                    
+
                                                     @endforeach
                                                   </tbody>
                                                 </table>
@@ -222,7 +223,7 @@
                                                            <th scope="col">Sec</th>
                                                            <th scope="col">row</th>
                                                            <th scope="col">S.From</th>
-                                                           <th scope="col">S.To</th> 
+                                                           <th scope="col">S.To</th>
                                                            <th scope="col">Restrictions</th> --}}
                                                            <th scope="col">Ticket</th>
                                                            <th scope="col">Created</th>
@@ -242,7 +243,7 @@
                                                                        <td>{{$ticket->type_sec}}</td>
                                                                        <td>{{$ticket->type_row}}</td>
                                                                        <td>{{$ticket->seat_from}}</td>
-                                                                       <td>{{$ticket->seat_to}}</td> 
+                                                                       <td>{{$ticket->seat_to}}</td>
                                                                        <td>  {{implode(',', json_decode($ticket->ticket_restrictions, true))}}</td> --}}
                                                                           <td>{{$ticket->ticket_type}}</td>
                                                                           <td>{{$ticket->created_at}}</td>
@@ -255,8 +256,8 @@
                                                                                 <input type="submit" class="btn btn-danger"
                                                                                 name="" value="Deactive" id="" >
                                                                           </form>
-                                                                          
-                                                                         
+
+
                                                                           {{-- <a class="btn btn-danger" href="{{route('dashboard.ticket.Deactivate',$ticket->id)}}">Deactivate</a> --}}
                                                                        </td>
                                                                     </tr>
@@ -284,17 +285,17 @@
                                                                    </div>
                                                                </div>
                                                            </div> -->
-                                                           
+
                                                        </div>
                                                    </div>
                                                </div>
                                              </div>
-                                          
+
                                           <div class="tab-pane fade" id="organised" role="tabpanel">
                                              <div class="row">
                                                 <div class="col-md-12">
                                                    <div class="main-card mt-4">
-                                                    
+
                                                       <div class="card shadow-sm mb-3">
                                                          <div class="card-body">
                                                             <h5
@@ -366,7 +367,7 @@
                                                          {{-- <h5
                                                             class="card-title fw-600 text-center"
                                                             >
-                                                            You don't have any pending listings 
+                                                            You don't have any pending listings
                                                          </h5> --}}
                                                          <div class="card-body">
                                                             <h5
@@ -389,7 +390,7 @@
                                                                     <th scope="col">seat to</th>
                                                                     <th scope="col">ticket type</th>
                                                                     {{-- <th scope="col">ticket restrictions</th> --}}
-                                                                    
+
                                                                     {{-- <th scope="col">status</th> --}}
                                                                   </tr>
                                                                 </thead>
@@ -427,7 +428,7 @@
                                        <div class="card shadow-sm mb-3 mt-3">
                                           <div class="card-body">
                                               <h5 class="card-title fw-600 text-center">My Sales</h5>
-   
+
                                               <table class="table">
                                                   <thead class="thead-light">
                                                     <tr>
@@ -444,7 +445,7 @@
                                                   <tbody>
                                                       @foreach($sales as $sale)
                                                       <tr>
-                                                        
+
                                                         <td>{{$sale->id}}</td>
                                                         <td>{{$sale->first_name}}</td>
                                                         {{-- <td>{{$sale->event->title}}</td> --}}
@@ -453,11 +454,11 @@
                                                         <td>{{$sale->quantity}}</td>
                                                         <td>{{$sale->grand_total}}</td>
                                                         <td>{{$sale->created_at}}</td>
-                                                        
+
                                                       </tr>
-                                                      
+
                                                       @endforeach
-                                                    
+
                                                   </tbody>
                                                 </table>
                                           </div>
@@ -517,7 +518,7 @@
                                                                      {{-- <span class="pass-show-eye"><i class="fas fa-eye-slash" id="togglePassword"></i></span> --}}
                                                                   </div>
                                                                </div>
-                                                               
+
                                                                {{-- <div class="form-group mt-4">
                                                                   <label class="form-label">Confirm new password*</label>
                                                                   <div class="loc-group position-relative">
@@ -530,7 +531,7 @@
                                                          </div>
                                                       </div>
                                                    </div>
-                                                  
+
                                                 </div>
                                              </div>
                                           </div>
@@ -588,13 +589,13 @@
                                                          </div>
                                                       </div>
                                                    </div>
-                                                  
+
                                                 </div>
                                              </div>
                                           </div>
                                        </div>
                                     </div>
-                                  
+
                                  </div>
                               </div>
                             </div>
@@ -609,7 +610,7 @@
       <script src="{{asset("AdminAssets/js/app.min.js")}}"></script>
       <script src="{{asset("AdminAssets/js/theme/google.min.js")}}"></script>
       <!-- ================== END BASE JS ================== -->
-      
+
       <!-- ================== BEGIN PAGE LEVEL JS ================== -->
       <script src="{{asset('AdminAssets/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
       <script src="{{asset('AdminAssets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -632,19 +633,19 @@
       <script>
          const togglePassword = document
              .querySelector('#togglePassword');
-   
+
          const password = document.querySelector('#password');
-   
+
          togglePassword.addEventListener('click', () => {
-   
+
              // Toggle the type attribute using
              // getAttribure() method
              const type = password
                  .getAttribute('type') === 'password' ?
                  'text' : 'password';
-                   
+
              password.setAttribute('type', type);
-   
+
              // Toggle the eye and bi-eye icon
              this.classList.toggle('bi-eye');
          });
@@ -654,3 +655,4 @@
    </body>
    <!-- Mirrored from www.gambolthemes.net/html-items/barren-html/disable-demo-link/organiser_profile_view.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 08 Feb 2023 14:26:58 GMT -->
 </html>
+

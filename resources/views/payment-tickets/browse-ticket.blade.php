@@ -444,61 +444,61 @@
                         @if ($key === 0)
                           <div class="category-item ">
                             <span class="category-circle red" ></span>
-                            <span class="category-text">{{$dbValues->type_cat}}</span>
+                            <span class="category-text"><b>{{$dbValues->type_cat}}</b></span>
                           </div>
                         @endif
                         @if ($key === 1)
                           <div class="category-item ">
                             <span class="category-circle yellow"></span>
-                            <span class="category-text">{{$dbValues->type_cat}}</span>
+                            <span class="category-text"><b>{{$dbValues->type_cat}}</b></span>
                           </div>
                         @endif
                         @if ($key === 2)
                           <div class="category-item ">
                             <span class="category-circle blue"></span>
-                            <span class="category-text">{{$dbValues->type_cat}}</span>
+                            <span class="category-text"><b>{{$dbValues->type_cat}}</b></span>
                           </div>
                         @endif
                         @if ($key === 3)
                           <div class="category-item ">
                             <span class="category-circle green"></span>
-                            <span class="category-text">{{$dbValues->type_cat}}</span>
+                            <span class="category-text"><b>{{$dbValues->type_cat}}</b></span>
                           </div>
                         @endif
                         @if ($key === 4)
                           <div class="category-item ">
                             <span class="category-circle grey"></span>
-                            <span class="category-text">{{$dbValues->type_cat}}</span>
+                            <span class="category-text"><b>{{$dbValues->type_cat}}</b></span>
                           </div>
                         @endif
                         @if ($key === 5)
                           <div class="category-item ">
                             <span class="category-circle chartreuse"></span>
-                            <span class="category-text">{{$dbValues->type_cat}}</span>
+                            <span class="category-text"><b>{{$dbValues->type_cat}}</b></span>
                           </div>
                         @endif
                         @if ($key === 6)
                           <div class="category-item ">
                             <span class="category-circle tomato"></span>
-                            <span class="category-text">{{$dbValues->type_cat}}</span>
+                            <span class="category-text"><b>{{$dbValues->type_cat}}</b></span>
                           </div>
                         @endif
                         @if ($key === 7)
                           <div class="category-item ">
                             <span class="category-circle salmon"></span>
-                            <span class="category-text">{{$dbValues->type_cat}}</span>
+                            <span class="category-text"><b>{{$dbValues->type_cat}}</b></span>
                           </div>
                         @endif
                         @if ($key === 8)
                           <div class="category-item ">
                             <span class="category-circle crimson"></span>
-                            <span class="category-text">{{$dbValues->type_cat}}</span>
+                            <span class="category-text"><b>{{$dbValues->type_cat}}</b></span>
                           </div>
                         @endif
                         @if ($key === 9)
                           <div class="category-item ">
                             <span class="category-circle darkgoldenrod"></span>
-                            <span class="category-text">{{$dbValues->type_cat}}</span>
+                            <span class="category-text"><b>{{$dbValues->type_cat}}</b></span>
                           </div>
                         @endif
                       @endforeach

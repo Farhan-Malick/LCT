@@ -305,21 +305,21 @@
     }
   }
 </style>
-//  <script>
-//                   function mySearchFunction() {
-//                       var query = document.querySelector('#search_text').value;
-//                       var elements = document.querySelector('#list');
-//                       let status = query==="" ? "none" : "block"
-//                       document.querySelector("#myUL").style.display = status;
-//                       for (var i = 0; i < elements.length; i++) {
-//                         var el = elements[i];
-//                         if (el.innerText.indexOf(query) !== -1)
-//                           el.style.display = 'block';
-//                         else
-//                           el.style.display = 'none';
-//                       }
-//                     }
-//                 </script>
+                {{-- <script>
+                   function mySearchFunction() {
+                       var query = document.querySelector('#search_text').value;
+                       var elements = document.querySelector('#list');
+                       let status = query==="" ? "none" : "block"
+                       document.querySelector("#myUL").style.display = status;
+                       for (var i = 0; i < elements.length; i++) {
+                         var el = elements[i];
+                         if (el.innerText.indexOf(query) !== -1)
+                           el.style.display = 'block';
+                         else
+                           el.style.display = 'none';
+                       }
+                     }
+                </script> --}}
                 <style>
                   .search{
                           position: relative;

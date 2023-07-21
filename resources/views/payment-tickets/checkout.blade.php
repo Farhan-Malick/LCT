@@ -28,7 +28,7 @@
         }
 
         .dot {
-            height: 50px;
+            height: 10px;
             width: 10px;
             margin-left: 3px;
             margin-right: 3px;
@@ -57,7 +57,7 @@
             z-index: 0
         }
 
-      
+
     </style>
 </head>
 
@@ -526,6 +526,142 @@
                                             </div>
                                             <div class="">
                                                 <style>
+
+                                                    @keyframes spinner {
+                                                        0% {
+                                                            transform: rotateZ(0deg);
+                                                        }
+                                                        100% {
+                                                            transform: rotateZ(359deg);
+                                                        }
+                                                    }
+                                                    * {
+                                                        box-sizing: border-box;
+                                                    }
+                                                    .wrapper {
+                                                        display: flex;
+                                                        align-items: center;
+                                                        flex-direction: column;
+                                                        justify-content: center;
+                                                        width: 100%;
+                                                        min-height: 100%;
+                                                        padding: 20px;
+                                                    }
+                                                    .login {
+                                                        border-radius: 2px 2px 5px 5px;
+                                                        padding: 10px 20px 20px 20px;
+                                                        width: 90%;
+                                                        max-width: 320px;
+                                                        background: #fff;
+                                                        position: relative;
+                                                        padding-bottom: 80px;
+                                                        /* box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3); */
+                                                    }
+                                                    .login.loading button {
+                                                        max-height: 100%;
+                                                        padding-top: 50px;
+                                                    }
+                                                    .login.loading button .spinner {
+                                                        opacity: 1;
+                                                        top: 40%;
+                                                    }
+                                                    .login.ok button {
+                                                        background-color: #8bc34a;
+                                                    }
+                                                    .login.ok button .spinner {
+                                                        border-radius: 0;
+                                                        border-top-color: transparent;
+                                                        border-right-color: transparent;
+                                                        height: 20px;
+                                                        animation: none;
+                                                        transform: rotateZ(-45deg);
+                                                    }
+                                                    .login input {
+                                                        display: block;
+                                                        padding: 15px 10px;
+                                                        margin-bottom: 10px;
+                                                        width: 100%;
+                                                        border: 1px solid #ddd;
+                                                        transition: border-width 0.2s ease;
+                                                        border-radius: 2px;
+                                                        color: #ccc;
+                                                    }
+                                                    .login input + i.fa {
+                                                        color: #fff;
+                                                        font-size: 1em;
+                                                        position: absolute;
+                                                        margin-top: -47px;
+                                                        opacity: 0;
+                                                        left: 0;
+                                                        transition: all 0.1s ease-in;
+                                                    }
+                                                    .login input:focus {
+                                                        outline: none;
+                                                        color: #444;
+                                                        border-color: #2196f3;
+                                                        border-left-width: 35px;
+                                                    }
+                                                    .login input:focus + i.fa {
+                                                        opacity: 1;
+                                                        left: 30px;
+                                                        transition: all 0.25s ease-out;
+                                                    }
+                                                    .login a {
+                                                        font-size: 0.8em;
+                                                        color: #2196f3;
+                                                        text-decoration: none;
+                                                    }
+                                                    .login .title {
+                                                        color: #444;
+                                                        font-size: 1.2em;
+                                                        font-weight: bold;
+                                                        margin: 10px 0 30px 0;
+                                                        border-bottom: 1px solid #eee;
+                                                        padding-bottom: 20px;
+                                                    }
+                                                    .login button {
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        padding: 10px 10px;
+                                                        background: #2196f3;
+                                                        color: #fff;
+                                                        display: block;
+                                                        border: none;
+                                                        margin-top: 20px;
+                                                        position: absolute;
+                                                        left: 0;
+                                                        bottom: 0;
+                                                        max-height: 60px;
+                                                        border: 0px solid rgba(0, 0, 0, 0.1);
+                                                        border-radius: 0 0 2px 2px;
+                                                        transform: rotateZ(0deg);
+                                                        transition: all 0.1s ease-out;
+                                                        border-bottom-width: 7px;
+                                                    }
+                                                    .login button .spinner {
+                                                        display: block;
+                                                        width: 40px;
+                                                        height: 40px;
+                                                        position: absolute;
+                                                        border: 4px solid #fff;
+                                                        border-top-color: rgba(255, 255, 255, 0.3);
+                                                        border-radius: 100%;
+                                                        left: 50%;
+                                                        top: 0;
+                                                        opacity: 0;
+                                                        margin-left: -20px;
+                                                        margin-top: -20px;
+                                                        animation: spinner 0.6s infinite linear;
+                                                        transition: top 0.3s 0.3s ease, opacity 0.3s 0.3s ease, border-radius 0.3s ease;
+                                                        box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+                                                    }
+                                                    .login:not(.loading) button:hover {
+                                                        box-shadow: 0px 1px 3px #2196f3;
+                                                    }
+                                                    .login:not(.loading) button:focus {
+                                                        border-bottom-width: 4px;
+                                                    }
+
                                                     .btn-hover:hover {
                                                         color: #fff !important;
                                                         background: #1b5e64;
@@ -546,10 +682,46 @@
                                                         border: 1px solid #22b3c1;
                                                     }
                                                 </style>
+                                                   @if ($message = Session::get('guest'))
+                                                   <div class="alert alert-success alert-block">
+                                                       <strong>{{ $message }}</strong>
+                                                   </div>
+                                                   @endif
                                                 <button type="submit" class="main-btn btn-hover h_50 w-100 ">Proceed to
                                                     Checkout</button>
                                                 </form>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="contactModal" class="modal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Login as Guest</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                               <div class="wrapper">
+                                               <!-- Add this code in the appropriate view where you want to display the guest login form -->
+
+                                                <form class="login" action="{{ route('guest-login') }}" method="post">
+                                                    @csrf
+                                                    <p class="title">Log in</p>
+                                                    <input type="email" name="email" placeholder="Email Address" autofocus/>
+                                                    <i class="fa fa-user"></i>
+                                                    <input type="phone" name="phone" placeholder="Phone Number" />
+                                                    <i class="fa fa-key"></i>
+                                                    {{-- <a href="#">Forgot your password?</a> --}}
+                                                    <a href="{{ URL('/login') }}" style="text-decoration: none" class="text-dark"><b style="font-size:15px">Continue with <span style="color: #2196f3">LCT</span></b></a>
+                                                    <button>
+                                                        <i class="spinner"></i>
+                                                        <span class="state">Log in</span>
+                                                    </button>
+                                                </form>
+
+                                               </div>
                                         </div>
                                     </div>
                                 </div>
@@ -593,7 +765,13 @@
     <script src="{{asset('newAssets/assets/js/popup.js')}}"></script>
     <script src="{{asset('newAssets/assets/js/custom.js')}}"></script>
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
+    <script>
+        $(document).ready(function() {
+            @if(session('show_modal'))
+                $('#contactModal').modal('show');
+            @endif
+        });
+    </script>
     <script>
         var sellerCountry = "<?php echo $tickets->country ?>";
 $("#country_id").on('change', function (e) {
@@ -612,3 +790,4 @@ $("#country_id").on('change', function (e) {
 </body>
 
 </html>
+

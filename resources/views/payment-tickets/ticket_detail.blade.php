@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
 
 <head>
     <!-- Required meta tags -->
@@ -94,83 +93,6 @@
     <title>Last Chance Ticket - Buyer</title>
 
 </head>
-=======
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/bootstrap.min.css') }}" />
-        <!-- animate css -->
-        <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/animate.min.css') }}" />
-        <!-- Fontawesome css -->
-        <link rel="stylesheet" href="{{ asset('F_Assets/assets/css/fontawesome.all.min.css') }}" />
-        {{-- <link rel="stylesheet" href="../../../../../cdn.jsdelivr.net/npm/bootstrap-icons%401.8.2/font/bootstrap-icons.css"> --}}
-        <link rel="stylesheet" type="text/css" href="{{asset('F_Assets/assets/css/slick.min.css')}}" />
-        <!--slick-theme.css-->
-        <link rel="stylesheet" type="text/css" href="{{asset('F_Assets/assets/css/slick-theme.min.css')}}" />
-        <!-- owl.carousel css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/owl.carousel.min.css') }}" />
-        <!-- Rangeslider css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/nouislider.css') }}" />
-        <!-- owl.theme.default css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/owl.theme.default.min.css') }}" />
-        <!-- navber css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/navber.css') }}" />
-        <!-- meanmenu css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/meanmenu.css') }}" />
-        <!-- Style css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/style.css') }}" />
-        <!-- Responsive css --><link rel="stylesheet" href="{{ asset('F_Assets/assets/css/responsive.css') }}" />
-        <!-- Favicon -->
-        {{-- <link rel="icon" type="image/png" href="assets/img/favicon.png"> --}}
-        <!-- Bootstrap icons CDN -->
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
-        />
-        <style>
-                            /* section five starts here  */
-                .footer{
-                    /* background-color: #61c3e3; */
-                    background-color: #22b3c1;
-
-                }
-                .footer ul{
-                    padding: 0px;
-                }
-                .footer ul li{
-                    list-style: none;
-                }
-                .footer ul li a{
-                    text-decoration: none;
-                    color: #fff;
-                }
-                .footer a{
-                    color: #fff;
-                }
-                .social-links i{
-                    margin-left: 10px;
-                    font-size: 30px;
-                }
-                .bi-facebook:hover{
-                    color: #3f77f3;
-                }
-                .bi-twitter:hover{
-                    color: #52a2f3;
-                }
-                .bi-google:hover{
-                    color: #e74235;
-                }
-                .footer-btn{
-                    background-color: #fff;
-                    color: grey;
-                }
-                .footer-btn:hover{
-                    color: #61c3e3;
-                }
-                .footer .nav-link{
-                    color: grey;
-                }
-        </style>
-        <title>Last Chance Ticket - Buyer</title>
-
-    </head>
->>>>>>> ca85068b29fd3905db2c970a4482f54555776261
 
 <body>
     <header class="main_header_arae">

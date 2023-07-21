@@ -6,13 +6,13 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-	
+
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	<link href="{{asset("AdminAssets/css/google/app.min.css")}}" rel="stylesheet" />
 	<!-- ================== END BASE CSS STYLE ================== -->
-	
+
 	<!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
 	<link href="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap.css")}}" rel="stylesheet" />
             <link href="{{asset("AdminAssets/plugins/bootstrap-calendar/css/bootstrap_calendar.css")}}" rel="stylesheet" />
@@ -53,17 +53,17 @@
 		<span class="spinner"></span>
 	</div>
 	<!-- end #page-loader -->
-	
+
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed page-with-wide-sidebar page-with-light-sidebar">
 		<!-- begin #header -->
         @include('Admin.includes.header')
 		<!-- end #header -->
-		
+
 		<!-- begin #sidebar -->
 		@include('Admin.includes.sidebar')
 		<!-- end #sidebar -->
-		
+
 		<!-- begin #content -->
 		<div id="content" class="content">
               <!-- begin breadcrumb -->
@@ -84,7 +84,7 @@
                 <div class="panel-body">
                     <div class="card shadow-sm mb-3">
                         <div class="card-body">
-                            
+
                             <h5
                                 class="card-title fw-600 text-center"
                             >
@@ -111,7 +111,7 @@
                                             name="event_name" value="{{ $listings->event_name}}"
                                         />
                                     </div>
-                                  
+
                                 </div>
                                 <div class="form-row">
                                     <div
@@ -128,7 +128,7 @@
                                             name="event_date" value="{{ $listings->event_date}}"
                                         />
                                     </div>
-                                  
+
                                 </div>
                                 <div class="form-row">
                                     <div
@@ -145,7 +145,7 @@
                                             name="venue_name"value="{{ $listings->venue_name}}"
                                         />
                                     </div>
-                                  
+
                                 </div>
                                 <div class="form-row">
                                     <div
@@ -162,7 +162,7 @@
                                             name="location" value="{{ $listings->location}}"
                                         />
                                     </div>
-                                  
+
                                 </div>
                                 <div class="form-row">
                                     <div
@@ -179,7 +179,7 @@
                                             name="category_event" value="{{ $listings->category_event}}"
                                         />
                                     </div>
-                                  
+
                                 </div>
                                 <div class="form-row">
                                     <div
@@ -212,7 +212,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    
+
                                     <div
                                         class="form-group col-md-4"
                                     >
@@ -270,7 +270,7 @@
                                             </option>
                                         </select>
                                     </div>
-                                  
+
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group row m-b-10">
@@ -280,9 +280,25 @@
                                             <img class=""
                                             src="{{ asset('uploads/eventListing/'.$listings->layoutImage) }}"
                                             width="100%" alt="" height="100px">
-        
+
                                         <div class="custom-file">
                                             <input type="file" name="layoutImage" class="custom-file-input"
+                                                id="exampleInputFile">
+                                            <label class="custom-file-label"
+                                                for="exampleInputFile">Choose file</label>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row m-b-10">
+                                        <label class="col-lg-3 text-lg-right col-form-label">Poster<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-lg-9">
+                                            <img class=""
+                                            src="{{ asset('uploads/eventListing/'.$listings->poster) }}"
+                                            width="100%" alt="" height="100px">
+
+                                        <div class="custom-file">
+                                            <input type="file" name="poster" class="custom-file-input"
                                                 id="exampleInputFile">
                                             <label class="custom-file-label"
                                                 for="exampleInputFile">Choose file</label>
@@ -308,18 +324,18 @@
     </div>
 		</div>
 		<!-- end #content -->
-	
+
 		<!-- begin scroll to top btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 		<!-- end scroll to top btn -->
 	</div>
 	<!-- end page container -->
-	
+
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{{asset("AdminAssets/js/app.min.js")}}"></script>
 	<script src="{{asset("AdminAssets/js/theme/google.min.js")}}"></script>
 	<!-- ================== END BASE JS ================== -->
-	
+
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
 	<script src="{{asset("AdminAssets/plugins/d3/d3.min.js")}}"></script>
             <script src="{{asset("AdminAssets/plugins/nvd3/build/nv.d3.min.js")}}"></script>
@@ -360,10 +376,9 @@
                 COLOR_BLUE = COLOR_INDIGO = COLOR_RED = COLOR_ORANGE = COLOR_LIME = COLOR_TEAL = 'rgba(0,0,0,0.5)';
                 COLOR_AQUA = COLOR_DARK_LIGHTER = COLOR_GREEN = 'rgba(0,0,0,0.75)';
             </script>
-	
+
 	<script src="{{asset("AdminAssets/js/demo/dashboard-v2.js")}}"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 </body>
 </html>
-    
- 
+

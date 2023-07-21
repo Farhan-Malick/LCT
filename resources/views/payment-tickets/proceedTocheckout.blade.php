@@ -113,13 +113,13 @@
 
             <div class="row">
                 @if(session('message'))
-                <script>
-                    Swal.fire({
-                    icon: 'success',
-                    title: '{{ session('message') }}',
-                    showConfirmButton: false,
-                    timer: 5000
-                });
+                    <script>
+                        Swal.fire({
+                        icon: 'success',
+                        title: '{{ session('message') }}',
+                        showConfirmButton: false,
+                        timer: 5000
+                    });
                 </script>
                 @endif
                 @if(session('ticketSold'))
@@ -225,70 +225,9 @@
                                             ''}}</b></div>
                                 </div>
                             </div>
-<<<<<<< HEAD
                         </div>
                     </div>
                 </div>
-=======
-                            <div class="order-total-dt">
-                               <div class="order-text">Section</div>
-                               <div class="order-number">{{$tickets->type_sec}}</div>
-                            </div>
-                            <div class="order-total-dt">
-                               <div class="order-text">Row</div>
-                               <div class="order-number">{{$tickets->type_row}}</div>
-                            </div>
-                            <div class="order-total-dt">
-                               <div class="order-text">Seating Area</div>
-                               <div class="order-number">{{ $tickets->seated_area }}</div>
-                            </div>
-                            <div class="order-total-dt">
-                               <div class="order-text">Per-Ticket</div>
-                               <div class="order-number">${{ $tickets->price }}</div>
-                            </div>
-                             <div class="order-total-dt">
-                                <div class="order-text">Total Tickets</div>
-                                <div class="order-number"><small>x</small>{{ $quantity ?? '' }}</div>
-                             </div>
-                             <div class="order-total-dt">
-                               <div class="order-text">Total Tickets Price</div>
-                               <div class="order-number">${{$ticketPrice ?? ''}}</div>
-                            </div>
-
-                             <div class="order-total-dt">
-                               <div class="order-text">Shipping and Handling Fee</div>
-                               @if ($tickets->ticket_type === "Paper-Ticket")
-                               <div class="order-number">+ ${{$shipping_charges }}</div>
-                               @else
-                               <div class="order-number">$0.00</div>
-                             @endif
-                            </div>
-                             <div class="order-total-dt">
-                               <div class="order-text">Service Charges</div>
-                               <div class="order-number">+ ${{$percentageForBuyer ?? ''}}</div>
-                            </div>
-                             <div class="divider-line"></div>
-                             <div class="order-total-dt">
-                                <div class="order-text" style="font-size: 18px"><b>Total</b></div>
-                                <div class="order-number ttl-clr"style="font-size: 18px;"><b>${{ $grand_total2  ?? ''}}</b></div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-          <div class="col-lg-8 ">
-
-             <div class="checkout-block">
-               <div class="row">
-                  <div class="col-md-12 ">
-
-                      <div class="card" style="padding: 13px;">
-                          <div class="panel-heading">
-                              <div class="row text-center">
-                                  {{-- <h3 class="panel-heading">Payment Details</h3> --}}
-                              </div>
-                          </div>
->>>>>>> ca85068b29fd3905db2c970a4482f54555776261
 
                 <div class="col-lg-8 ">
 
@@ -381,7 +320,6 @@
                                     </div>
                                 </div>
                             </div>
-<<<<<<< HEAD
                         </div>
 
                     </div>
@@ -389,80 +327,6 @@
 
             </div>
         </div>
-=======
-                                <div class="mt-4 mb-3">
-<h4>Total Payable Amount : ${{ $grand_total2 ?? '' }}</h4>
-</div>
-                           <form method="post" action="{{ route('payment.checkout.finalize',
-                           ['eventlisting_id' => $eventlisting_id ?? '','ticketid' => $ticket_id ?? '', 'sellerid' => $seller_id ?? ''])}} " role="form"  method="post" class="validation"   data-cc-on-file="false"
-                              data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
-                              id="payment-form">
-                              @csrf
-                              <input type="hidden" name="ticketid" value="{{ $ticket_id }}">
-                              <input type="hidden" name="country_id" value="{{ $country }}">
-                              <input type="hidden" name="quantity" value="{{ $quantity }}">
-                              <input type="hidden" name="shipingCharges" value="{{ $shipping_charges }}">
-
-                                  <div class='form-row row'>
-                                      <div class='col-xs-12 form-group required p-4'>
-                                          <label class='control-label'>Name on Card</label> <input
-                                              class='form-control h_50' style="outline:thick" size='4' type='text'>
-                                      </div>
-                                  </div>
-                                  <div class='form-row row'>
-                                      <div class='col-xs-12 form-group  required p-4'>
-                                          <label class='control-label'>Card Number</label> <input
-                                              autocomplete='off' class='form-control card-num h_50' size='20'
-                                              type='text'>
-                                      </div>
-                                  </div>
-                                  <div class='form-row row'>
-                                      <div class='col-xs-12 col-md-4 form-group cvc required p-4'>
-                                          <label class='control-label'>CVC</label>
-                                          <input autocomplete='off' class='form-control card-cvc h_50' placeholder='e.g 415' size='4'
-                                              type='text'>
-                                      </div>
-                                      <div class='col-xs-12 col-md-4 form-group expiration required p-4'>
-                                          <label class='control-label'>Expiration Month</label> <input
-                                              class='form-control card-expiry-month h_50' placeholder='MM' size='2'
-                                              type='text'>
-                                      </div>
-                                      <div class='col-xs-12 col-md-4 form-group expiration required p-4'>
-                                          <label class='control-label'>Expiration Year</label> <input
-                                              class='form-control card-expiry-year h_50' placeholder='YYYY' size='4'
-                                              type='text'>
-                                      </div>
-                                      <div class='col-lg-12 form-group p-4'>
-                                          <label class="m-2 "><input style=""class="" type="checkbox" name=""  value="" id="" required>&nbsp; I agree with the LCT Terms & Conditions</label>
-
-                                      </div>
-                                  </div>
-                                  <div class='form-row row'>
-                                      <div class='col-md-12 hide error form-group'>
-                                      </div>
-                                  </div>
-                                  <div class="row">
-                                      <div class="col-xs-12 mt-4" >
-                                         <button type="submit" id="submit_button" class=" main-btn btn-hover h_50 w-100 ">Pay ${{$grand_total2}}</button>
-                                      </div>
-                                  </div>
-                                  {{-- <button type="submit" class="btn btn-primary">Finish & Check your Ticket</button> --}}
-                                  {{-- <a class="btn btn-primary" href="{{ route('buyer.ticket.proceedToCheckout',
-                                      ['eventlisting_id' => $tickets->eventlisting_id,'ticketid' => $tickets->id, 'sellerid' => $tickets->user_id]) }}"
-                                  >
-                                     Proceed to checkout
-                                  </a> --}}
-                              </form>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-             </div>
-          </div>
-
-       </div>
->>>>>>> ca85068b29fd3905db2c970a4482f54555776261
     </div>
 
     @include("auth.partials.footer")
@@ -548,105 +412,105 @@ $(function() {
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-  var minutesElement = document.getElementById("minutes");
-  var secondsElement = document.getElementById("seconds");
+        var minutesElement = document.getElementById("minutes");
+        var secondsElement = document.getElementById("seconds");
 
-  var startTime = sessionStorage.getItem("startTime");
-  var countdownDuration = 70; // Total time in seconds (10 minutes)
-  var extendTimeShown = sessionStorage.getItem("extendTimeShown");
+        var startTime = sessionStorage.getItem("startTime");
+        var countdownDuration = 600; // Total time in seconds (10 minutes)
+        var extendTimeShown = sessionStorage.getItem("extendTimeShown");
 
-  if (startTime) {
-    var currentTime = Math.floor(Date.now() / 1000);
-    var elapsedTime = currentTime - startTime;
-    countdownDuration -= elapsedTime;
+        if (startTime) {
+            var currentTime = Math.floor(Date.now() / 1000);
+            var elapsedTime = currentTime - startTime;
+            countdownDuration -= elapsedTime;
 
-    if (countdownDuration <= 0) {
-      // Countdown is already over
-      countdownDuration = 0;
-    }
-  } else {
-    startTime = Math.floor(Date.now() / 1000);
-    sessionStorage.setItem("startTime", startTime);
-  }
+            if (countdownDuration <= 0) {
+            // Countdown is already over
+            countdownDuration = 0;
+            }
+        } else {
+            startTime = Math.floor(Date.now() / 1000);
+            sessionStorage.setItem("startTime", startTime);
+        }
 
-  function updateCountdown() {
-    var minutes = Math.floor(countdownDuration / 60);
-    var seconds = countdownDuration % 60;
+        function updateCountdown() {
+            var minutes = Math.floor(countdownDuration / 60);
+            var seconds = countdownDuration % 60;
 
-    // Add leading zero if minutes or seconds are less than 10
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+            // Add leading zero if minutes or seconds are less than 10
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    minutesElement.innerText = minutes;
-    secondsElement.innerText = seconds;
+            minutesElement.innerText = minutes;
+            secondsElement.innerText = seconds;
 
-    if (countdownDuration <= 0) {
-      // Countdown is over, perform any action you need here
+            if (countdownDuration <= 0) {
+            // Countdown is over, perform any action you need here
 
-      // Clear the sessionStorage when countdown is completed
-      sessionStorage.removeItem("startTime");
+            // Clear the sessionStorage when countdown is completed
+            sessionStorage.removeItem("startTime");
 
-      clearInterval(countdownInterval);
+            clearInterval(countdownInterval);
 
-      // Show SweetAlert and redirect to specified route
-      showTimeUpAlert();
-    } else if (countdownDuration === 60 && !extendTimeShown) {
-      // Remaining time is 1 minute and extendTimeShown is not set
-      showSweetAlert();
-    } else {
-      countdownDuration--; // Decrement the countdown duration
-    }
-  }
+            // Show SweetAlert and redirect to specified route
+            showTimeUpAlert();
+            } else if (countdownDuration === 60 && !extendTimeShown) {
+            // Remaining time is 1 minute and extendTimeShown is not set
+            showSweetAlert();
+            } else {
+            countdownDuration--; // Decrement the countdown duration
+            }
+        }
 
-  // Call updateCountdown every second
-  var countdownInterval = setInterval(updateCountdown, 1000);
+        // Call updateCountdown every second
+        var countdownInterval = setInterval(updateCountdown, 1000);
 
-  function showSweetAlert() {
-    Swal.fire({
-      title: "Remaining time is 1 minute",
-      text: "Do you want to extend the time by 1 minute?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
-    }).then(function(result) {
-      if (result.isConfirmed) {
-        // User clicked on "Yes", extend the countdown duration by 1 minute
-        countdownDuration += 60;
-        sessionStorage.setItem("startTime", Math.floor(Date.now() / 1000)); // Update the start time
-        sessionStorage.setItem("extendTimeShown", "true"); // Set extendTimeShown in sessionStorage
-        extendTimeShown = true;
+        function showSweetAlert() {
+            Swal.fire({
+            title: "Remaining time is 1 minute",
+            text: "Do you want to extend the time by 1 minute?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+            }).then(function(result) {
+            if (result.isConfirmed) {
+                // User clicked on "Yes", extend the countdown duration by 1 minute
+                countdownDuration += 60;
+                sessionStorage.setItem("startTime", Math.floor(Date.now() / 1000)); // Update the start time
+                sessionStorage.setItem("extendTimeShown", "true"); // Set extendTimeShown in sessionStorage
+                extendTimeShown = true;
 
-        // Restart the countdown
-        clearInterval(countdownInterval);
-        countdownInterval = setInterval(updateCountdown, 1000);
-      } else {
-        // User clicked on "No", redirect to the specified route
-        window.location.href = "/";
-      }
-    });
-  }
+                // Restart the countdown
+                clearInterval(countdownInterval);
+                countdownInterval = setInterval(updateCountdown, 1000);
+            } else {
+                // User clicked on "No", redirect to the specified route
+                window.location.href = "/";
+            }
+            });
+        }
 
-  function showTimeUpAlert() {
-    Swal.fire({
-      title: "Oops! Your time is up",
-      text: "Redirecting to the homepage...",
-      icon: "error",
-      timer: 3000, // Display the alert for 3 seconds
-      showConfirmButton: false,
-      timerProgressBar: true,
-      willClose: function() {
-        // Redirect to the homepage
-        window.location.href = "/";
-      }
-    });
-  }
+        function showTimeUpAlert() {
+            Swal.fire({
+            title: "Oops! Your time is up",
+            text: "Redirecting to the homepage...",
+            icon: "error",
+            timer: 3000, // Display the alert for 3 seconds
+            showConfirmButton: false,
+            timerProgressBar: true,
+            willClose: function() {
+                // Redirect to the homepage
+                window.location.href = "/";
+            }
+            });
+        }
 
-  // Check if remaining time is less than or equal to 1 minute and extendTimeShown is not set
-  if (countdownDuration <= 60 && !extendTimeShown) {
-    showSweetAlert();
-  }
-});
+        // Check if remaining time is less than or equal to 1 minute and extendTimeShown is not set
+        if (countdownDuration <= 60 && !extendTimeShown) {
+            showSweetAlert();
+        }
+        });
 
 
     </script>

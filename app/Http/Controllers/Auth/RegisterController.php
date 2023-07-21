@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Mail\UserRegisteredSuccessfully;
@@ -62,7 +63,7 @@ class RegisterController extends Controller
             'nationality' => ['required'],
             'phone' => ['required','min:6'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'confirmed'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],   
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -77,9 +78,9 @@ class RegisterController extends Controller
        $data =  User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'primary_phone' => $data['primary_phone'],  
-            'country' => $data['country'],  
-            'nationality' => $data['nationality'],      
+            'primary_phone' => $data['primary_phone'],
+            'country' => $data['country'],
+            'nationality' => $data['nationality'],
             'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -87,6 +88,27 @@ class RegisterController extends Controller
         // MailController::UserRegisteredSuccessfully($data['email'],$data);
         Mail::to($data['email'])->send(new UserRegisteredSuccessfully($data));
         return $data;
+    }
+
+
+    protected function guestLogin(Request $request)
+    {
+        // $this->validator($request->all())->validate();
+
+        $user = User::create([
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'account_type' => 'guest',
+            'password' => Hash::make('guest'), // You can set a default password for guest users
+        ]);
+
+        // Log in the user
+        auth()->login($user);
+
+        // Continue with your code here
+
+        // Redirect to the desired page after login
+        return redirect()->back()->with('guest','You are logged in successfully! Please proceed to checkout');
     }
 }
 ?>

@@ -19,7 +19,7 @@ class EventListingController extends Controller
     }
 
     public function EventListing(Request $request){
-        
+
         $ticket= new EventListing();
         $ticket->event_name=$request->event_name;
         $ticket->event_id=$request->event;
@@ -37,13 +37,22 @@ class EventListingController extends Controller
             $layoutImage=$request->file('layoutImage');
             $ext = $layoutImage->GetClientOriginalExtension();
             $file2=time().'.'.$ext;
-            
+
             $layoutImage->move(public_path('uploads/eventListing'), $file2);
             $ticket['layoutImage']=$file2;
-        } 
+        }
+        if($request->hasfile('poster'))
+        {
+            $poster=$request->file('poster');
+            $ext = $poster->GetClientOriginalExtension();
+            $file2=time().'.'.$ext;
+
+            $poster->move(public_path('uploads/eventListing/poster'), $file2);
+            $ticket['poster']=$file2;
+        }
         // dd($ticket);
         $ticket->save();
-        $request->session()->flash('msg','Listing Has Been Added Successfully'); 
+        $request->session()->flash('msg','Listing Has Been Added Successfully');
         return redirect('Admin-Panel/event-listing');
     }
     public function showListing()
@@ -91,15 +100,23 @@ class EventListingController extends Controller
             $file2=time().'.'.$ext;
             $layoutImage->move(public_path('uploads/eventListing'), $file2);
             $listings['layoutImage']=$file2;
-        } 
+        }
+        if($request->hasfile('poster'))
+        {
+            $poster=$request->file('poster');
+            $ext = $poster->GetClientOriginalExtension();
+            $file2=time().'.'.$ext;
+            $poster->move(public_path('uploads/eventListing/poster'), $file2);
+            $listings['poster']=$file2;
+        }
         $listings->update();
-        $request->session()->flash('msg','Data Has Been Updated Successfully'); 
+        $request->session()->flash('msg','Data Has Been Updated Successfully');
         return redirect('Admin-Panel/event-listing');
     }
     public function delete(Request $request,$id){
         $listings = EventListing::find($id);
         $listings->delete();
-        $request->session()->flash('msg','Data Has Been Deleted Successfully'); 
+        $request->session()->flash('msg','Data Has Been Deleted Successfully');
         return redirect()->back();
     }
 }

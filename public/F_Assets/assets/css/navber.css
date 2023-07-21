@@ -649,6 +649,7 @@
 
 .navbar-area.is-sticky {
     position: fixed;
+    padding: 8px;
     top: 0;
     left: 0;
     width: 100%;
@@ -1145,7 +1146,7 @@
     }
 
     .main-responsive-nav .mean-container a.meanmenu-reveal {
-        padding: 4px 0 0;
+        padding: 0px 0 0;
         color: var(--navber-color)
     }
 
@@ -1176,8 +1177,8 @@
 
     .navbar-area {
         background-color: var(--main-color);
-        padding-top: 15px;
-        padding-bottom: 60px
+        /* padding-top: 15px; */
+        /* padding-bottom: 60px */
     }
 
     .topbar-area {

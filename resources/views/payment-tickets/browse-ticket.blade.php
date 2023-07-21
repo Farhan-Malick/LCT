@@ -44,7 +44,6 @@
 <body>
     <header class="main_header_arae">
         <!-- Top Bar -->
-
         <!-- Navbar Bar -->
         <div class="navbar-area">
             <div class="main-responsive-nav">
@@ -52,7 +51,9 @@
                     <div class="main-responsive-menu">
                         <div class="">
                             <a class="logo" href="{{URL('/')}}">
-                                <img style="width:270px" src="{{asset('F_Assets/assets/img/logo1.png')}}" alt="logo">
+                                <img style="width:270px;
+                                margin-top: 5px;
+                            " src="{{asset('F_Assets/assets/img/logo1.png')}}" alt="logo">
                             </a>
                         </div>
                     </div>
@@ -114,7 +115,17 @@
             </div>
         </div>
     </header>
-    <section id="common_banner">
+    <section id="common_banner" @isset($events->poster)
+        style="background-image: url('{{ asset('uploads/eventListing/poster' . $events->poster) }}');
+               padding: 130px 0 130px 0;
+               background-repeat: no-repeat;
+               background-size: cover;"
+    @else
+        style="background-image: url('{{asset('F_Assets/assets/img/banner-two-bg-2.png')}}');
+               padding: 130px 0 130px 0;
+               background-repeat: no-repeat;
+               background-size: cover;"
+    @endisset>
         <div class="container">
             <div class="row">
                 <div id="marquee-container"></div>
@@ -392,7 +403,7 @@
                                     icon: 'success',
                                     title: '{{ session('TicketPrice') }}',
                                     showConfirmButton: false,
-                                    timer: 5000
+                                    timer: 115000
                                  });
                     </script>
                     @endif
@@ -402,7 +413,7 @@
                                     icon: 'success',
                                     title: '{{ session('NotEnough') }}',
                                     showConfirmButton: false,
-                                    timer: 5000
+                                    timer: 15000
                                  });
                     </script>
                     @endif
@@ -412,7 +423,7 @@
                                     icon: 'success',
                                     title: '{{ session('deactivate') }}',
                                     showConfirmButton: false,
-                                    timer: 5000
+                                    timer: 15000
                                  });
                     </script>
                     @endif
@@ -794,8 +805,8 @@
         }
         // Initial update
         updateViewerCount();
-        // Update the viewer count every 5 seconds (5000 milliseconds)
-        setInterval(updateViewerCount, 5000);
+        // Update the viewer count every 5 seconds (15000 milliseconds)
+        setInterval(updateViewerCount, 15000);
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {

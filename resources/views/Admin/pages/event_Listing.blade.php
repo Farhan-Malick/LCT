@@ -6,16 +6,16 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-	
+
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="{{asset('AdminAssets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('AdminAssets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	<link href="{{asset("AdminAssets/css/google/app.min.css")}}" rel="stylesheet" />
-	
+
 	<!-- ================== END BASE CSS STYLE ================== -->
-	
+
 	<!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
 	<link href="{{asset("AdminAssets/plugins/jvectormap-next/jquery-jvectormap.css")}}" rel="stylesheet" />
 	<link href="{{asset("AdminAssets/plugins/bootstrap-calendar/css/bootstrap_calendar.css")}}" rel="stylesheet" />
@@ -28,21 +28,21 @@
 		<span class="spinner"></span>
 	</div>
 	<!-- end #page-loader -->
-	
+
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed page-with-wide-sidebar page-with-light-sidebar">
 		<!-- begin #header -->
 		@include('Admin.includes.header')
 		<!-- end #header -->
-		
+
 		<!-- begin #sidebar -->
 		@include('Admin.includes.sidebar')
 		<!-- end #sidebar -->
-		
+
 		<!-- begin #content -->
 		<div id="content" class="content">
 			<!-- begin breadcrumb -->
-		
+
 			<!-- end breadcrumb -->
 			<!-- begin page-header -->
 			{{-- <h1 class="page-header">Last-Chance-Ticket Dashboard </h1> --}}
@@ -88,7 +88,7 @@
 						</div>
 					</div>
 					<!-- end panel-heading -->
-				
+
 					<!-- begin panel-body -->
 					<div class="panel-body">
 						<table id="data-table-default" class="table table-striped table-bordered table-td-valign-middle">
@@ -102,6 +102,8 @@
                                     <th scope="col">End Time</th>
                                     <th scope="col">Location</th>
                                     <th scope="col">Event Category</th>
+                                    <th scope="col">Event Poster</th>
+
                                     {{-- <th scope="col">Status</th> --}}
                                     <th scope="col">Action</th>
                                 </tr>
@@ -117,6 +119,9 @@
                                     <td>{{$ticket->end_time}}</td>
                                     <td>{{$ticket->location}}</td>
                                     <td>{{$ticket->category_event}}</td>
+                                    <td><img
+                                        src="{{ asset('uploads/eventListing/poster/' . $ticket->poster) }}"
+                                        class="img-rounded height-30 width-30" /></td>
                                     {{-- <td>{{$ticket->status}}</td> --}}
                                     <td>
                                         <a
@@ -124,7 +129,7 @@
                                             href="{{URL('/Admin-Panel/listing-edit',$ticket->id)}}"
                                             >edit</a
                                         >
-        
+
                                         <a
                                             class="btn btn-danger"
                                             href="{{URL('/Admin-Panel/event-listing/delete',$ticket->id)}}"
@@ -141,24 +146,24 @@
 				<!-- end panel -->
 			</div>
 			<!-- begin row -->
-            
+
 			<!-- end row -->
 		</div>
 		<!-- end #content -->
-	
+
 		<!-- begin scroll to top btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 		<!-- end scroll to top btn -->
 	</div>
 	<!-- end page container -->
 	{{-- Modal For rejection --}}
-   
+
     {{-- Modal for rejectio end --}}
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{{asset("AdminAssets/js/app.min.js")}}"></script>
 	<script src="{{asset("AdminAssets/js/theme/google.min.js")}}"></script>
 	<!-- ================== END BASE JS ================== -->
-	
+
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
 	<script src="{{asset('AdminAssets/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 	<script src="{{asset('AdminAssets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -175,7 +180,7 @@
 		COLOR_BLUE = COLOR_INDIGO = COLOR_RED = COLOR_ORANGE = COLOR_LIME = COLOR_TEAL = 'rgba(0,0,0,0.5)';
 		COLOR_AQUA = COLOR_DARK_LIGHTER = COLOR_GREEN = 'rgba(0,0,0,0.75)';
 	</script>
-	
+
 	<script src="{{asset("AdminAssets/js/demo/dashboard-v2.js")}}"></script>
     <script>
         $('#rejectionModal').on('show.bs.modal', function (e) {

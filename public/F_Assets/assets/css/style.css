@@ -2157,10 +2157,10 @@ font-weight: 500;
 =========================*/
 /* --Common Banner-- */
 #common_banner {
-    background-image: url('../img/banner-two-bg-2.png');
+    /* background-image: url('../img/banner-two-bg-2.png');
     padding: 130px 0 130px 0;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
 }
 
 .common_bannner_text {
@@ -4382,7 +4382,7 @@ textarea {
 
     display: flex;
     align-items: center;
-    padding-left: 47px;
+    padding-left: 0px;
 }
 
 .flight_multis_area_wrapper {

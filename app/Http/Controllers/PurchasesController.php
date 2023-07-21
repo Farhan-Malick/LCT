@@ -77,8 +77,11 @@ class PurchasesController extends Controller
                 'country_id' => 'required',
             ]);
         }
+        // if (!auth()->check()) {
+        //     return redirect('/login');
+        // }
         if (!auth()->check()) {
-            return redirect('/login');
+            return redirect()->back()->with('show_modal', true);
         }
 
         $quantity = Request::get('quantity');
@@ -175,7 +178,7 @@ class PurchasesController extends Controller
                 ->where('ticket_listings.id', Request::get('ticketid'))
                 ->lockForUpdate()
                 ->first();
-                
+
             if ($ticket->quantity >= Request::get('quantity') && $ticket->approve < 4 ) {
                 //  // Lock the ticket record for update
                 $ticket->quantity = $ticket->quantity - (int) Request::get('quantity');
@@ -241,7 +244,7 @@ class PurchasesController extends Controller
 
                 // service Charge for buyer
                 $webChargeforBuyer = $purchase->price / $buyerCharges->buyer_charges;
-               
+
                 $divideForBuyer = $purchase->price / 100;
                 $percentageForBuyer = $divideForBuyer *  $buyerCharges->buyer_charges;
                 $purchase->webChargeforBuyer = $percentageForBuyer;
@@ -306,7 +309,7 @@ class PurchasesController extends Controller
             // return response()->json(['error' => 'Ticket purchase failed'], 500);
         }
        }
-    
+
     public function ticketPurchased($email,$ticket,$purchase, $webCharge, $percentageForBuyer, $grand_total2){
   try{
         $ticket_id = '';
@@ -334,7 +337,7 @@ class PurchasesController extends Controller
           $shipping =   $purchase->shipingCharges;
         }
         $grand_total2 = $purchase->grand_total2;
-        
+
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
@@ -348,7 +351,7 @@ class PurchasesController extends Controller
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS =>'
                 {
-                    "personalizations": [           
+                    "personalizations": [
                         {
                             "to": [
                                 {
@@ -384,7 +387,7 @@ class PurchasesController extends Controller
                         "name": "Last Chance Ticket"
                     }
                 }',
-                CURLOPT_HTTPHEADER => array(    
+                CURLOPT_HTTPHEADER => array(
                     'Authorization: Bearer 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',
                     'Content-Type: application/json'
                 ),
@@ -394,7 +397,7 @@ class PurchasesController extends Controller
                 curl_close($curl);
         } catch (Exception $e) {
             // Roll back the transaction
-          
+
             dd($e->getMessage());
             // Handle the exception
             return redirect()
@@ -402,13 +405,13 @@ class PurchasesController extends Controller
                 ->with('message', 'Ticket purchase failed');
             // return response()->json(['error' => 'Ticket purchase failed'], 500);
         }
-  
-               
+
+
      }
 
 
    public function sellerticketpurchased($email,$ticket, $purchase, $webCharge, $grand_total){
-        
+
 try{
         $ticket_id = '';
         $first_name = $ticket->first_name;
@@ -428,8 +431,8 @@ try{
         $price = $ticket->price;
         $webCharge = $purchase->webCharge;
         $grand_total = $purchase->grand_total;
-        
-        
+
+
        $curl = curl_init();
 
        curl_setopt_array($curl, array(
@@ -443,7 +446,7 @@ try{
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS =>'
                 {
-                    "personalizations": [           
+                    "personalizations": [
                         {
                             "to": [
                                 {
@@ -469,7 +472,7 @@ try{
                                 "webCharge":"'.$webCharge.'",
                                 "grand_total":"'.$grand_total.'",
                                 "first_name":"'.$first_name.'",
-        
+
                             }
                         }
                     ],
@@ -489,7 +492,7 @@ try{
                 curl_close($curl);
 } catch (Exception $e) {
             // Roll back the transaction
-          
+
             dd($e->getMessage());
             // Handle the exception
             return redirect()
@@ -497,9 +500,9 @@ try{
                 ->with('message', 'Ticket purchase failed');
             // return response()->json(['error' => 'Ticket purchase failed'], 500);
         }
-  
-  
-               
+
+
+
     }
     public function downloadPdf()
     {
@@ -511,7 +514,7 @@ try{
     {
         EventListing::find($id)->increment('views');
 
-        $events = EventListing::select('*', 'venues.title as vTitle', 'venues.image as vImage')
+        $events = EventListing::select('event_listings.*', 'venues.title as vTitle', 'venues.image as vImage')
             ->join('events', 'events.id', '=', 'event_listings.event_id')
             // ->join('venues', 'venues.id', '=', 'events.venue_id')
             ->join('venues', 'venues.title', '=', 'event_listings.venue_name')
@@ -601,7 +604,7 @@ try{
                 ->where('approve', '1')
                 ->where('ticket_listings.eventlisting_id', $id);
         }
-       
+
         if (Request::get('qty') !== null) {
             $tickets = $tickets->where('quantity', '>=', Request::get('qty'));
         }

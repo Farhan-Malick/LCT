@@ -78,26 +78,28 @@
                                     <a class="nav-link" href="{{URL('/contact-us')}}">Contact us</a>
                                 </li>
                                 @auth
-                                <li class="dropdown nav-item">
-                                    <a style="font-size: 14px" class="nav-link dropdown-toggle" href="#"
-                                        id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
+                                @if (auth()->user()->first_name !== 'Guest')
+                                <li class="dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         My Account
                                     </a>
-                                    <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My
-                                                Profile</a></li>
-                                        <li><a class="dropdown-item text-dark"
-                                                href="{{ URL('/dashboard') }}">Settings</a></li>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My Profile</a>
+                                        </li>
+                                        {{-- <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My Order</a></li>
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">My Listings</a></li> --}}
+                                        <li><a class="dropdown-item text-dark" href="{{ URL('/dashboard') }}">Settings</a>
+                                        </li>
                                         <li class="nav-item">
                                             <form action="{{ route('logout') }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="btn btn-link">Logout</button>
-
+                                                <button type="submit" class="dropdown-item text-dark pl-3">Logout</button>
                                             </form>
                                         </li>
                                     </ul>
                                 </li>
+                            @endif
 
                                 @endauth @guest
                                 <li class="nav-item">
@@ -116,13 +118,13 @@
         </div>
     </header>
     <section id="common_banner" @isset($events->poster)
-        style="background-image: url('{{ asset('uploads/eventListing/poster' . $events->poster) }}');
-               padding: 130px 0 130px 0;
+        style="background-image: url('{{ asset('uploads/eventListing/poster/' . $events->poster) }}');
+               padding: 90px 0 130px 0;
                background-repeat: no-repeat;
                background-size: cover;"
     @else
         style="background-image: url('{{asset('F_Assets/assets/img/banner-two-bg-2.png')}}');
-               padding: 130px 0 130px 0;
+               padding: 90px 0 130px 0;
                background-repeat: no-repeat;
                background-size: cover;"
     @endisset>

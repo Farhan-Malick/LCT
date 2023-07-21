@@ -76,14 +76,24 @@
             font-size: 40px;
             font-weight: bold;
             color: #ffffff;
-            margin-left: 200px;
-            margin-top: 10px;
+            /* margin-left: 200px; */
+            margin-top: 40px;
         }
 
         .countdown span {
             display: inline-block;
             padding: 0 10px;
             background-color: #6b5d5d;
+            border-radius: 10px;
+        }
+        .text {
+            display: inline-block;
+            font-size: 11px;
+            margin-top: 30px;
+            margin-left: 25px;
+            color: black;
+            padding: 0 2px;
+            /* background-color: black; */
             border-radius: 10px;
         }
 
@@ -102,12 +112,14 @@
 
         <div class="container">
             <div class="row">
-                <div class=" offset-md-3 text-center">
+                <div class="text-center">
                     <div class="countdown">
                         <span id="minutes">10</span>
                         <span>:</span>
                         <span id="seconds">00</span>
+                        <strong class="text">left to complete purchase..!</strong>
                     </div>
+
                 </div>
             </div>
 

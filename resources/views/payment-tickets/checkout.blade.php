@@ -697,9 +697,8 @@
                                 <div id="contactModal" class="modal" tabindex="-1" role="dialog">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Login as Guest</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <div class="modal-header text-right">
+                                                <button type="button" class="close " data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -708,9 +707,11 @@
 
                                                 <form class="login" action="{{ route('guest-login') }}" method="post">
                                                     @csrf
-                                                    <p class="title">Log in</p>
+                                                    <h4 class="title"><b>Login as Guest</b></h4>
+                                                    <label for=""><b>Email Address</b></label>
                                                     <input type="email" name="email" placeholder="Email Address" autofocus/>
                                                     <i class="fa fa-user"></i>
+                                                    <label for=""><b>Phone Number</b></label>
                                                     <input type="phone" name="phone" placeholder="Phone Number" />
                                                     <i class="fa fa-key"></i>
                                                     {{-- <a href="#">Forgot your password?</a> --}}

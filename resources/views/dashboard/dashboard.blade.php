@@ -344,7 +344,7 @@
                                                                                     <input type="hidden" name="ticket_id" id=""
                                                                                        value="{{ $ticket->id }}" >
                                                                                     <input type="submit" class="btn btn-success"
-                                                                                       name="" value="Active" id="" >
+                                                                                       name="" value="Reactivate" id="" >
                                                                                  </form>
                                                                                  {{-- <a class="btn btn-danger" href="{{route('dashboard.ticket.Deactivate',$ticket->id)}}">Deactivate</a> --}}
                                                                               </td>
